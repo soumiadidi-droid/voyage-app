@@ -1,0 +1,134 @@
+{
+  "slug": "lisbonne",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9475.jpg",
+    "country": "Portugal",
+    "tags": [
+      "ville",
+      "lifestyle",
+      "gastronomie"
+    ],
+    "title": "Lisbonne",
+    "tagline": "Collines, azulejos et lumière atlantique — Lisbonne et une excursion à Sintra.",
+    "photoCount": "7 photographies"
+  },
+  "intro": "Des tramways jaunes qui grimpent des rues pavées, des façades couvertes d'azulejos qui s'illuminent la nuit, et à une heure de route le palais de Pena à Sintra, jaune vif sur fond de ciel gris. Une ville qui se parcourt entièrement à pied, quartier après quartier.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_9460.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9460.jpg",
+      "alt": "Excursion à Sintra, milieu de journée",
+      "caption": "Excursion à Sintra, milieu de journée",
+      "emotionalText": "Jaune vif et tourelles crénelées sur fond de ciel gris — le palais de Pena ne ressemble à aucun autre monument portugais, presque un décor de conte. Un escalier de pierre du même jaune mène jusqu'à l'entrée, et on s'y arrête presque malgré soi pour la photo."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_8910.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_8910.jpg",
+      "alt": "Rue en pente, matinée",
+      "caption": "Rue en pente, matinée",
+      "emotionalText": "Le jaune du tram qui tranche sur les murs ocre, les rails qui suivent une rue trop étroite pour deux voitures de front — l'image la plus reconnaissable de Lisbonne, et elle continue de fonctionner même quand on l'a vue cent fois en photo avant de venir."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_8932.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_8932.jpg",
+      "alt": "Rue résidentielle, soirée",
+      "caption": "Rue résidentielle, soirée",
+      "emotionalText": "Les azulejos qui captent la lumière d'un lampadaire et s'illuminent par endroits, les fenêtres éclairées qui ponctuent la façade — Lisbonne la nuit ralentit encore le rythme d'une ville déjà posée."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_9629.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9629.jpg",
+      "alt": "Miradouro, milieu de journée",
+      "caption": "Miradouro, milieu de journée",
+      "emotionalText": "Les toits en tuile rouge qui se superposent jusqu'à la colline du château, un ciel gris qui n'enlève rien à l'échelle du panorama — Lisbonne est une ville de points de vue, et chaque miradouro en révèle un peu plus."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_9766.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9766.jpg",
+      "alt": "Praça do Comércio, milieu de journée",
+      "caption": "Praça do Comércio, milieu de journée",
+      "emotionalText": "Une place immense ouverte sur le fleuve, l'arc monumental qui ferme la perspective côté ville — le point où Lisbonne se retourne enfin vers l'eau après des ruelles en pente qui en détournaient presque le regard."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_9097.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9097.jpg",
+      "alt": "LX Factory, après-midi",
+      "caption": "LX Factory, après-midi",
+      "emotionalText": "Un visage peint en pleine couleur sur un mur d'usine reconverti — LX Factory assume à fond son identité d'ancien site industriel devenu terrain de jeu pour artistes, cafés et boutiques indépendantes."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/hires-IMG_8958.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_8958.jpg",
+      "alt": "Brunch, matinée",
+      "caption": "Brunch, matinée",
+      "emotionalText": "Deux assiettes de pancakes garnis de fruits rouges, une terrasse en bois installée à même le pavé — le genre de brunch qu'on prend le temps de finir, sans regarder l'heure."
+    }
+  ],
+  "stays": [],
+  "eats": [
+    {
+      "name": "Art Stay Restaurant & Bar",
+      "status": "Testé",
+      "location": "Une des adresses testées à Lisbonne",
+      "review": "Une des adresses testées pendant le séjour à Lisbonne.",
+      "tags": [],
+      "link": "https://www.lisbonartstay.com/restaurant-art-stay",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Bifanas do Afonso",
+      "status": "Testé",
+      "location": "Dîner et verre en musique, ambiance animée",
+      "review": "Pour un dîner suivi d'un verre le soir — un endroit animé, avec de la musique.",
+      "tags": [],
+      "link": "https://www.tripadvisor.com/Restaurant_Review-g189158-d12125778-Reviews-The_Bifanas_of_Afonso-Lisbon_Lisbon_District_Central_Portugal.html",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Casa Portuguesa do Pastel de Bacalhau",
+      "status": "Testé",
+      "location": "Les spécialités locales, pastéis de bacalhau",
+      "review": "Pour goûter les spécialités locales — les pastéis de bacalhau, incontournables à Lisbonne.",
+      "tags": [],
+      "link": "https://www.tripadvisor.com/Restaurant_Review-g189158-d8097709-Reviews-Casa_Portuguesa_Do_Pastel_De_Bacalhau-Lisbon_Lisbon_District_Central_Portugal.html",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Heim Café Santos",
+      "status": "Testé",
+      "location": "Café, petit-déjeuner et brunch",
+      "review": "L'adresse du matin — café, petit-déjeuner et brunch, dans le quartier de Santos.",
+      "tags": [],
+      "link": "https://www.google.com/maps/search/?api=1&query=Heim%20Cafe,%20Lisboa,%20Lisboa&query_place_id=ChIJ2_J_UoM0GQ0RDDFwI9PBg24",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Nicolau Lisboa",
+      "status": "Testé",
+      "location": "Les meilleurs pancakes de Lisbonne",
+      "review": "Les meilleurs pancakes de la ville — sans discussion possible.",
+      "tags": [],
+      "link": "https://www.ilovenicolau.com/en/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Pensão Amor",
+      "status": "Testé",
+      "location": "Dîner-spectacle de fado, on y mange très bien",
+      "review": "Un dîner-spectacle de fado — et on y mange vraiment très bien, pas seulement pour le spectacle.",
+      "tags": [],
+      "link": "https://pensaoamor.com/en/home-pensao-amor/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Time Out Market",
+      "status": "Testé",
+      "location": "Marché gastronomique, pour la variété des restos",
+      "review": "Pratique pour la variété — plusieurs restos réunis au même endroit, de quoi contenter tout le monde en un seul lieu.",
+      "tags": [],
+      "link": "https://www.timeout.com/time-out-market-lisboa",
+      "linkLabel": "Voir l’adresse →"
+    }
+  ],
+  "activities": []
+}

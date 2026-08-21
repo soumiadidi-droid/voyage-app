@@ -1,0 +1,93 @@
+{
+  "slug": "dubai",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1047.jpg",
+    "country": "Émirats arabes unis",
+    "tags": [
+      "ville",
+      "luxe",
+      "désert"
+    ],
+    "title": "Dubaï",
+    "tagline": "Gratte-ciel, plages et vieux quartier — le grand écart entre skyline et Al Fahidi.",
+    "photoCount": "7 photographies"
+  },
+  "intro": "Une piscine à débordement face au Burj Khalifa, une cour ombragée du vieux quartier d'Al Fahidi, et des fins de journée sur la plage à regarder le soleil descendre sur la ville — Dubaï assume pleinement le grand écart entre démesure urbaine et pauses les pieds dans le sable.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-IMG_1047.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1047.jpg",
+      "alt": "Rooftop de l'hôtel, fin de journée",
+      "caption": "Rooftop de l'hôtel, fin de journée",
+      "emotionalText": "L'eau turquoise de la piscine à débordement qui semble se fondre dans la skyline, le Burj Khalifa minuscule mais reconnaissable entre les tours au loin — le genre de vue qui justifie à elle seule de choisir un hôtel avec rooftop à Dubaï."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-IMG_0978.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_0978.jpg",
+      "alt": "Al Fahidi, milieu de journée",
+      "caption": "Al Fahidi, milieu de journée",
+      "emotionalText": "Les tours à vent en terre battue, une cour ombragée transformée en café, des bougainvilliers qui débordent des murs — un Dubaï complètement différent de la skyline, à quelques minutes de la crique."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-IMG_1266.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1266.jpg",
+      "alt": "Plage, fin de journée",
+      "caption": "Plage, fin de journée",
+      "emotionalText": "Le soleil qui descend juste derrière les silhouettes du parc aquatique et des palmiers, la plage encore pleine de monde installé pour la fin de journée — un des rares moments où Dubaï ralentit vraiment."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-IMG_1014.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1014.jpg",
+      "alt": "Déjeuner, terrasse",
+      "caption": "Déjeuner, terrasse",
+      "emotionalText": "Un mezze de houmous, une viande grillée servie avec galette et frites — simple, généreux, et exactement le genre de plat qui cale pour l'après-midi."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-IMG_0935.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_0935.jpg",
+      "alt": "Vue urbaine, milieu de journée",
+      "caption": "Vue urbaine, milieu de journée",
+      "emotionalText": "Le Burj Khalifa qui dépasse une forêt de tours, une autoroute qui découpe la ville en larges bandes, et au premier plan des quartiers résidentiels bien plus modestes — le grand écart de Dubaï vu d'un seul regard."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-IMG_1173.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1173.jpg",
+      "alt": "Beach club, fin d'après-midi",
+      "caption": "Beach club, fin d'après-midi",
+      "emotionalText": "Une poire pochée sur un fond chocolat-noisette, mangée directement sur une serviette de plage — la pause sucrée qui ferme une après-midi au soleil."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/hires-887F9132-95F2-4E30-A053-FEE745527941.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-887F9132-95F2-4E30-A053-FEE745527941.jpg",
+      "alt": "Marina, milieu de journée",
+      "caption": "Marina, milieu de journée",
+      "emotionalText": "Une rangée de bateaux amarrés côte à côte, vue depuis un balcon en dentelle de pierre — un cadrage presque accidentel qui donne une des images les plus posées du séjour."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Element Al Mina, Dubai Jumeirah",
+      "status": "J’ai dormi ici",
+      "location": "Bur Dubai",
+      "review": "L'adresse du séjour à Dubaï — détails à compléter.",
+      "tags": [
+        "piscine",
+        "design moderne"
+      ],
+      "link": "https://www.booking.com/hotel/ae/element-al-mina-dubai.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Restore (Element Al Mina)",
+      "status": "Testé",
+      "location": "Le restaurant de l'hôtel, pratique en fin de journée",
+      "review": "Le restaurant sur place de l'hôtel Element Al Mina — testé et approuvé, pratique après une journée à arpenter la ville.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ],
+  "activities": []
+}

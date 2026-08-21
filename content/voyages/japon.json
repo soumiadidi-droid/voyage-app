@@ -1,0 +1,118 @@
+{
+  "slug": "japon",
+  "hero": {
+    "image": "https://files.catbox.moe/xwua06.jpg",
+    "country": "Japon",
+    "tags": [
+      "famille",
+      "ville",
+      "nature"
+    ],
+    "title": "Japon",
+    "tagline": "Osaka, ses rues et sa décontraction — puis une côte où plus rien ne bouge.",
+    "photoCount": "6 photographies· guide pratique complet en bas de page"
+  },
+  "intro": "On ne s'attendait pas à retrouver à Osaka l'énergie d'un Montréal ou d'un New York — des rues qui vivent tard, une nourriture de rue qui ne s'excuse jamais, une décontraction qu'aucun guide n'annonce sur le Japon. Puis la forêt de bambous d'Arashiyama, les cerfs de Nara, et pour finir une côte quasi déserte du côté de Shimoda, où le bruit s'est arrêté d'un coup.",
+  "gallery": [
+    {
+      "hiresUrl": "https://files.catbox.moe/n6q43v.jpg",
+      "webUrl": "https://files.catbox.moe/iu8l3a.jpg",
+      "alt": "Forêt de bambous, Arashiyama",
+      "caption": "Forêt de bambous, Arashiyama",
+      "emotionalText": "On lève la tête et le ciel disparaît. Le vent dans les bambous fait un bruit qu'on n'a entendu nulle part ailleurs."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/n8h1ue.jpg",
+      "webUrl": "https://files.catbox.moe/ebmv0f.jpg",
+      "alt": "Parc de Nara",
+      "caption": "Parc de Nara",
+      "emotionalText": "Il nous regarde autant qu'on le regarde. Un vieux marchand vend des friandises aux cerfs en liberté — un moment magique, surtout pour les filles."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/77ndln.jpg",
+      "webUrl": "https://files.catbox.moe/wjmr1z.jpg",
+      "alt": "Nakazakicho, Osaka — le vrai coup de cœur",
+      "caption": "Nakazakicho, Osaka — le vrai coup de cœur",
+      "emotionalText": "Cafés vintage, boutiques indépendantes, une décontraction qui n'a rien à prouver. On a reconnu quelque chose — une énergie de quartier déjà croisée à Montréal, ou dans certains coins de New York. Pas le Japon qu'on attendait. Un Japon qui traîne."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/315ni5.jpg",
+      "webUrl": "https://files.catbox.moe/e8cx74.jpg",
+      "alt": "Point de vue, Shimoda — personne autour",
+      "caption": "Point de vue, Shimoda — personne autour",
+      "emotionalText": "Après l'énergie d'Osaka et la densité des temples de Kyoto, deux bancs vides face à la mer. Aucun bruit, aucune autre silhouette. Le calme le plus total du voyage — arrivé là où on ne l'attendait pas."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/ckaa7v.jpg",
+      "webUrl": "https://files.catbox.moe/ajm0uv.jpg",
+      "alt": "Nipponbashi, Osaka — premier jour",
+      "caption": "Nipponbashi, Osaka — premier jour",
+      "emotionalText": "Premier contact avec la ville : le marché local, la chaleur, une rue qui ne ressemble à aucune photo qu'on avait vue avant de partir."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/auzdl9.jpg",
+      "webUrl": "https://files.catbox.moe/1c00ew.jpg",
+      "alt": "Coucher de soleil sur Tokyo — dernière étape",
+      "caption": "Coucher de soleil sur Tokyo — dernière étape",
+      "emotionalText": "Puis la route reprend, direction Tokyo. Le soleil descend derrière des kilomètres de toits, et la ville ne s'arrête pas une seconde pour le regarder. Osaka, les bambous, les cerfs, Shimoda — tout ce qu'on a aimé n'était pas dans le Japon qu'on attendait."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Agora Kyoto",
+      "status": "J’ai dormi ici",
+      "location": "Centre de Kyoto",
+      "review": "On a pris la chambre avec jardin intérieur sur les conseils de la réception — clairement le bon choix, beaucoup plus agréable que ce à quoi on s'attendait pour ce budget.",
+      "tags": [
+        "centre-ville",
+        "bien situé pour explorer à pied",
+        "chambre avec jardin"
+      ],
+      "link": "https://www.agora-kyoto.com/en/",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Candeo Hotels Osaka (Namba), The Tower",
+      "status": "J’ai dormi ici",
+      "location": "Namba, Osaka",
+      "review": "Notre base pour les 5 jours à Osaka — jamais besoin de prendre un taxi, tout était accessible à pied ou en une station de métro.",
+      "tags": [
+        "centre-ville",
+        "bien situé pour explorer à pied",
+        "rooftop / onsen",
+        "familial"
+      ],
+      "link": "https://www.booking.com/hotel/jp/candeo-hotels-osaka-the-tower.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "OMO5 Tokyo Gotanda by Hoshino Resorts",
+      "status": "J’ai dormi ici",
+      "location": "Gotanda, Tokyo",
+      "review": "Le food court Gotanda Shokudo littéralement au rez-de-chaussée a sauvé plusieurs soirs où personne n'avait l'énergie de ressortir chercher un resto.",
+      "tags": [
+        "bien situé pour explorer à pied",
+        "design moderne",
+        "restauration sur place"
+      ],
+      "link": "https://www.booking.com/hotel/jp/omo5-tokyo-gotanda-by-hoshino-resorts.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Shimoda Tokyu Hotel",
+      "status": "J’ai dormi ici",
+      "location": "Shimoda, péninsule d'Izu",
+      "review": "L'accès plage demande de descendre quelques escaliers et marcher un peu — ça vaut largement le détour. La piscine avec vue mer a été le meilleur moment de détente de tout le voyage.",
+      "tags": [
+        "accès plage",
+        "vue mer",
+        "piscine",
+        "calme"
+      ],
+      "link": "https://www.booking.com/hotel/jp/shimoda-tokyu.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [],
+  "activities": []
+}

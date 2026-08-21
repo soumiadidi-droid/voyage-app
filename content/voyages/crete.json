@@ -1,0 +1,163 @@
+{
+  "slug": "crete",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hero-eau-turquoise.jpg",
+    "country": "Grèce",
+    "tags": [
+      "île",
+      "mer",
+      "authentique"
+    ],
+    "title": "Crète",
+    "tagline": "Agios Nikolaos, la baie de Mirabello, et une eau d'un bleu qu'on n'attendait pas.",
+    "photoCount": "5 photographies"
+  },
+  "intro": "Cinq jours à Agios Nikolaos, sur la baie de Mirabello — l'eau la plus transparente qu'on ait vue depuis longtemps, des oliviers qui encadrent la mer comme s'ils l'avaient fait exprès, et des couchers de soleil regardés depuis la terrasse de l'hôtel sans jamais s'en lasser.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260730_055047.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260730_055047.jpg",
+      "alt": "Coucher de soleil sur la baie de Mirabello — dernière soirée",
+      "caption": "Coucher de soleil sur la baie de Mirabello — dernière soirée",
+      "emotionalText": "Le ciel passe du orange au rose en quelques minutes, les transats vides en silhouette, et la mer qui garde la lumière un peu plus longtemps que le ciel. Une des dernières images du séjour, et une des plus fortes."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260727_180253.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260727_180253.jpg",
+      "alt": "Promenade du bord de mer, Agios Nikolaos",
+      "caption": "Promenade du bord de mer, Agios Nikolaos",
+      "emotionalText": "Les branches d'olivier se referment presque en arche au-dessus du chemin, et la mer apparaît par fragments entre les feuilles — comme si le paysage avait été cadré exprès."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260728_102459.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260728_102459.jpg",
+      "alt": "Plage, après-midi — baie de Mirabello",
+      "caption": "Plage, après-midi — baie de Mirabello",
+      "emotionalText": "Des parasols en rangs serrés, une eau si claire qu'on voit les pieds des nageurs à vingt mètres, et cette lumière de fin d'après-midi qui rend tout un peu plus doré que la réalité."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260728_072400.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260728_072400.jpg",
+      "alt": "Chambre, InterContinental Crete — tôt le matin",
+      "caption": "Chambre, InterContinental Crete — tôt le matin",
+      "emotionalText": "Un thé encore fumant, la baie de Mirabello qui s'étire derrière la vitre, les transats déjà alignés en bas alors que personne n'est encore descendu. Le meilleur moment de la journée, systématiquement."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260729_161923.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260729_161923.jpg",
+      "alt": "Boutique de céramique traditionnelle, Agios Nikolaos",
+      "caption": "Boutique de céramique traditionnelle, Agios Nikolaos",
+      "emotionalText": "Des étagères pleines à craquer de céramiques peintes à la main — motifs grecs classiques, amphores miniatures, assiettes qui se déclinent en trente couleurs. Impossible de repartir les mains vides."
+    }
+  ],
+  "stays": [
+    {
+      "name": "InterContinental Crete by IHG",
+      "status": "J’ai dormi ici",
+      "location": "Agios Nikolaos, en plein centre",
+      "review": "Une expérience client incroyable — service impeccable du premier au dernier jour, et l'emplacement en plein centre d'Agios Nikolaos change tout : on marchait jusqu'aux ruelles et aux tavernes sans jamais avoir besoin d'un taxi.",
+      "tags": [
+        "centre-ville",
+        "accès plage",
+        "vue mer",
+        "piscine"
+      ],
+      "link": "https://www.booking.com/hotel/gr/intercontinental-crete.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Domes Zeen Chania",
+      "status": "Sélection recherchée",
+      "location": "Côte près de Chania",
+      "review": "Pas encore visité personnellement — retenu parce qu'il revient systématiquement dans les sélections \"meilleurs hôtels familiaux de Crète\", ce qui est rare pour un établissement au design aussi soigné (souvent l'un ou l'autre, rarement les deux).",
+      "tags": [
+        "accès plage",
+        "design moderne",
+        "familial"
+      ],
+      "link": "https://www.booking.com/hotel/gr/domes-zeen-chania.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Kapsaliana Village Hotel",
+      "status": "Sélection recherchée",
+      "location": "Colline près de Rethymnon, au milieu des oliveraies",
+      "review": "Pas encore visité personnellement — sélectionné pour son caractère unique (un vrai village restauré, pas un hôtel construit pour ressembler à un village) et sa constance dans les meilleurs classements spécialisés Crète.",
+      "tags": [
+        "calme"
+      ],
+      "link": "https://www.booking.com/hotel/gr/kapsaliana-village.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Minos Beach Art Hotel",
+      "status": "Sélection recherchée",
+      "location": "Presqu'île privée, baie de Mirabello, Agios Nikolaos",
+      "review": "Pas encore visité personnellement — c'est littéralement l'exemple qu'on avait en tête : un hôtel posé sur une presqu'île avec un accès direct à la mer, pas juste \"à distance de marche de la plage\".",
+      "tags": [
+        "accès plage",
+        "vue mer",
+        "piscine"
+      ],
+      "link": "https://www.booking.com/hotel/gr/minos-beach-art.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Arismari",
+      "status": "Testé",
+      "location": "Cuisine méditerranéenne et crétoise",
+      "review": "Cuisine méditerranéenne et crétoise, dans la lignée des tables qu'on garde en mémoire après un voyage.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Avli",
+      "status": "Testé",
+      "location": "Terrasse à la grecque, charme authentique",
+      "review": "Un charme authentique, sur une terrasse à la grecque — le genre d'endroit qu'on choisirait rien que pour le cadre, et où la cuisine suit.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Karnagio",
+      "status": "Testé",
+      "location": "Une adresse testée à Agios Nikolaos",
+      "review": "Une des adresses du séjour à Agios Nikolaos.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Piato",
+      "status": "Testé",
+      "location": "Café artisanal, vue mer",
+      "review": "Un café artisanal avec vue sur la mer — l'arrêt du matin idéal avant de repartir marcher.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Pita tou Riga",
+      "status": "Testé",
+      "location": "Meilleur gyros du coin",
+      "review": "Le meilleur gyros du coin, sans discussion possible.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "To Potiraki",
+      "status": "Testé",
+      "location": "Le meilleur du séjour côté saveurs",
+      "review": "Le meilleur du séjour côté saveurs, largement au-dessus du reste.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ],
+  "activities": []
+}

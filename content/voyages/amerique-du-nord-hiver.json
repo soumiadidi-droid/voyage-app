@@ -1,0 +1,155 @@
+{
+  "slug": "amerique-du-nord-hiver",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_222824.jpg",
+    "country": "Canada, États-Unis",
+    "tags": [
+      "villes",
+      "hiver"
+    ],
+    "title": "Amérique du Nord en hiver",
+    "tagline": "Montréal sous la neige puis New York, entre Empire State et Oculus.",
+    "photoCount": "8 photographies"
+  },
+  "intro": "Une tempête de neige à Montréal, puis l'agitation de New York — Washington Square en plein soleil, l'Oculus et sa flèche de verre, et l'Empire State Building qui change de couleur du jour à la nuit, vu depuis un appartement en hauteur.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_222824.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_222824.jpg",
+      "alt": "Vue depuis un immeuble en hauteur, New York, soirée",
+      "caption": "Vue depuis un immeuble en hauteur, New York, soirée",
+      "emotionalText": "L'Empire State Building illuminé en jaune-orange, entouré de tours plus sombres qui se fondent dans la nuit — Manhattan vue d'un appartement en hauteur donne une échelle qu'aucune photo de rue ne rend aussi bien."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_124458.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_124458.jpg",
+      "alt": "World Trade Center, milieu de journée",
+      "caption": "World Trade Center, milieu de journée",
+      "emotionalText": "Les côtes blanches de l'Oculus qui s'ouvrent comme des ailes, la flèche de One World Trade Center qui monte juste derrière, et un taxi jaune qui traverse au premier plan — impossible de faire plus new-yorkais dans un seul cadre."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_174131.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_174131.jpg",
+      "alt": "Vue depuis un immeuble en hauteur, New York, fin de journée",
+      "caption": "Vue depuis un immeuble en hauteur, New York, fin de journée",
+      "emotionalText": "Un ciel qui passe du bleu au rose juste derrière la flèche de l'Empire State — la même vue que la nuit, mais avec encore assez de lumière pour distinguer chaque tour du quartier."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250216_094458.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250216_094458.jpg",
+      "alt": "Montréal, matinée, chute de neige",
+      "caption": "Montréal, matinée, chute de neige",
+      "emotionalText": "Les flèches d'une église presque effacées par la neige qui tombe, la pierre couverte d'un centimètre de blanc frais — Montréal en pleine tempête, quelques jours avant New York."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250224_082833.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250224_082833.jpg",
+      "alt": "Rooftop, New York, matinée",
+      "caption": "Rooftop, New York, matinée",
+      "emotionalText": "Une piscine intérieure au dernier étage, avec la ville qui s'étend derrière la baie vitrée — se baigner en plein hiver new-yorkais avec cette vue-là n'a rien d'anodin."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_113258.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_113258.jpg",
+      "alt": "Washington Square, milieu de journée",
+      "caption": "Washington Square, milieu de journée",
+      "emotionalText": "L'arc de Washington Square qui ferme la perspective, un ciel bleu sans nuage malgré le froid de février — le genre de journée d'hiver new-yorkaise où la lumière compense largement la température."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250216_114135.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250216_114135.jpg",
+      "alt": "Montréal, milieu de journée, chute de neige",
+      "caption": "Montréal, milieu de journée, chute de neige",
+      "emotionalText": "Un immeuble en brique à peine visible derrière les flocons, la rue déjà recouverte malgré l'heure encore matinale — l'hiver montréalais dans toute sa franchise, sans filtre pour l'adoucir."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_105141.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_105141.jpg",
+      "alt": "SoHo, matinée",
+      "caption": "SoHo, matinée",
+      "emotionalText": "Un immeuble en brique rouge à l'angle de la rue, l'escalier de secours en fonte qui zigzague sur la façade — l'architecture industrielle de SoHo qui a fait sa réputation, vue un matin tranquille."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Appartement en centre-ville",
+      "status": "J’ai dormi ici",
+      "location": "Centre-ville de Montréal",
+      "review": "Une partie du séjour passée dans cet appartement avec vue, en plein centre-ville.",
+      "tags": [
+        "centre-ville"
+      ],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "HONEYROSE Hotel Montréal",
+      "status": "J’ai dormi ici",
+      "location": "Quartier des spectacles, centre-ville",
+      "review": "Un des plus beaux établissements testés pour ce standing et ce prix — environ 250 euros la nuit, chambres spacieuses, incroyable de bout en bout.",
+      "tags": [
+        "centre-ville",
+        "design moderne"
+      ],
+      "link": "https://www.marriott.com/en-us/hotels/yultx-honeyrose-hotel-montreal-a-tribute-portfolio-hotel/overview/",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Améa Café",
+      "status": "Testé",
+      "location": "Sympa pour du coworking, bon café",
+      "review": "Une bonne adresse pour travailler avec l'ordinateur devant un bon café.",
+      "tags": [],
+      "link": "https://www.tripadvisor.com/Restaurant_Review-g155032-d27829302-Reviews-Amea_Cafe-Montreal_Quebec.html",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Crew Collective & Café",
+      "status": "Testé",
+      "location": "Ancienne banque réaménagée en café, boîte de nuit au sous-sol",
+      "review": "Une ancienne banque magnifiquement réaménagée en café — plafonds ornés, marbre au sol, et au sous-sol une boîte de nuit installée dans l'ancienne salle des coffres.",
+      "tags": [],
+      "link": "https://crewcollectivecafe.com/en/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "La Bête à Pain",
+      "status": "Testé",
+      "location": "Meilleur café, très bonnes baguettes, excellent croissant aux amandes",
+      "review": "Le meilleur café du séjour, avec de très bonnes baguettes et un excellent croissant aux amandes.",
+      "tags": [],
+      "link": "https://labeteapain.com/succursale-de-griffintown/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "LOV",
+      "status": "Testé",
+      "location": "Cuisine végétale, cadre botanique soigné",
+      "review": "Une des adresses testées à Montréal, pour une cuisine végétale dans un cadre très soigné.",
+      "tags": [],
+      "link": "https://tastet.ca/en/reviews/lov-plant-based-cuisine-in-old-montreal/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Maman Café",
+      "status": "Testé",
+      "location": "Café dans le quartier de Griffintown",
+      "review": "Une autre bonne adresse café, dans le quartier de Griffintown.",
+      "tags": [],
+      "link": "https://www.mamanmontreal.ca/en",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Time Out Market Montréal",
+      "status": "Testé",
+      "location": "Marché gastronomique, pour la variété des restos",
+      "review": "Pratique pour la variété — plusieurs restos réunis au même endroit, en plein centre-ville.",
+      "tags": [],
+      "link": "https://www.timeout.com/time-out-market-montreal",
+      "linkLabel": "Voir l’adresse →"
+    }
+  ],
+  "activities": []
+}

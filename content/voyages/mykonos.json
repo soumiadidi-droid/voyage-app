@@ -1,0 +1,119 @@
+{
+  "slug": "mykonos",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_111432.jpg",
+    "country": "Grèce",
+    "tags": [
+      "iles",
+      "plage",
+      "entre-amies"
+    ],
+    "title": "Mykonos",
+    "tagline": "Quatre jours entre copines en juin — plages, ruelles blanches et moulins au coucher du soleil.",
+    "photoCount": "8 photographies"
+  },
+  "intro": "Quatre jours en juin, entre copines — le genre de voyage où les journées se résument à plage, déjeuner qui traîne, sieste, et une ruelle blanche de plus explorée avant le dîner.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260628_212526.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_212526.jpg",
+      "alt": "Beach club, nuit tombée",
+      "caption": "Beach club, nuit tombée",
+      "emotionalText": "La lune pleine trace une ligne argentée droit sur l'eau, les bateaux au mouillage se découpent en ombres, et les lits de plage vides attendent le lendemain. Le genre de vue qui fait qu'on reste un peu plus longtemps que prévu, sans rien dire."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260628_111432.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_111432.jpg",
+      "alt": "Chora, milieu de matinée",
+      "caption": "Chora, milieu de matinée",
+      "emotionalText": "Le bleu des volets et du balcon qui tranche sur le blanc chaulé de la façade — l'image la plus reconnaissable de Mykonos, retrouvée à peu près à chaque coin de rue de Chora."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260628_122744.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_122744.jpg",
+      "alt": "Moulins de Kato Mili, fin d'après-midi",
+      "caption": "Moulins de Kato Mili, fin d'après-midi",
+      "emotionalText": "Alignés en rang sur leur colline, blancs sur le bleu du ciel et de la mer en fond, les moulins attirent tout le monde à la même heure, pour la même photo — et pourtant l'image fonctionne à chaque fois."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260628_112146.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_112146.jpg",
+      "alt": "Petite Venise, Chora — début d'après-midi",
+      "caption": "Petite Venise, Chora — début d'après-midi",
+      "emotionalText": "Les façades colorées les pieds presque dans l'eau, les balcons en bois qui surplombent les vagues d'un mètre à peine — la carte postale la plus connue de Mykonos, et elle tient toutes ses promesses vue en vrai."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260627_182648.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_182648.jpg",
+      "alt": "Terrasse de la villa, milieu de journée",
+      "caption": "Terrasse de la villa, milieu de journée",
+      "emotionalText": "L'eau turquoise de la piscine répond à celle, plus foncée, de la mer en contrebas — la colline aride de Mykonos en fond, sans un arbre, juste de la pierre sèche et de la lumière crue de juin."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260627_165755.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_165755.jpg",
+      "alt": "Taverne en bord de mer, déjeuner",
+      "caption": "Taverne en bord de mer, déjeuner",
+      "emotionalText": "Le poulpe grillé, encore marqué par la braise, servi tel quel sur une assiette blanche avec juste un quartier de citron et un peu de salade — pas d'esbroufe, juste le produit et le feu."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260628_105030.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_105030.jpg",
+      "alt": "Chora, milieu de matinée",
+      "caption": "Chora, milieu de matinée",
+      "emotionalText": "Blanc sur blanc, avec juste une porte verte pour casser la ligne, et des pavés irréguliers qui obligent à ralentir le pas. Aucune rue ne ressemble à la précédente et pourtant elles se ressemblent toutes."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/hires-IMG_20260627_143844.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_143844.jpg",
+      "alt": "Plage, milieu de journée",
+      "caption": "Plage, milieu de journée",
+      "emotionalText": "L'eau est si transparente qu'on voit le sable onduler sous la vague au moment où elle se brise — aucun filtre, juste la couleur réelle de la mer Égée en plein été."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Mykonos No5 Suites & Villas",
+      "status": "J’ai dormi ici",
+      "location": "Kanalia, Ornos",
+      "review": "L'adresse du séjour entre copines à Mykonos — détails à compléter.",
+      "tags": [
+        "piscine",
+        "vue mer",
+        "calme"
+      ],
+      "link": "https://www.booking.com/hotel/gr/mykonosno5-luxury-residences-and-lofts.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Kiki's Tavern",
+      "status": "Testé",
+      "location": "Un vrai joyau, une heure d'attente qui vaut le détour",
+      "review": "Une heure d'attente, mais qui vaut largement le détour. Les salades fraîches à choisir soi-même au comptoir, puis le poisson grillé — le poulpe, un délice. Et pour finir, un gâteau au chocolat maison tout simplement incroyable.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Le restaurant du Mykonos No5",
+      "status": "Testé",
+      "location": "Cuisine méditerranéenne, vue sur la mer Égée",
+      "review": "Le restaurant de l'hôtel, testé et approuvé — cuisine méditerranéenne avec vue sur la mer Égée, pratique après une journée de plage sans avoir à ressortir.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "To Steki Tou Proedrou",
+      "status": "Testé",
+      "location": "Le coup de cœur local d'Ano Mera, calme et authentique",
+      "review": "Le coup de cœur du séjour à Mykonos — à Ano Mera, loin de l'agitation de Chora, une adresse locale, calme et authentique.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ],
+  "activities": []
+}

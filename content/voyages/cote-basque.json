@@ -1,0 +1,204 @@
+{
+  "slug": "cote-basque",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260429_210725.jpg",
+    "country": "France",
+    "tags": [
+      "mer",
+      "surf",
+      "gastronomie"
+    ],
+    "title": "Côte Basque",
+    "tagline": "Biarritz, Saint-Jean-de-Luz — surf, couchers de soleil et gâteau basque, en attendant Cap Breton, Seignosse et Hossegor.",
+    "photoCount": "8 photographies"
+  },
+  "intro": "Des couchers de soleil qui embrasent le ciel au-dessus de la Grande Plage, des séances de surf sur la Côte des Basques, des villas Belle Époque à colombages rouges, et une étape à Saint-Jean-de-Luz pour goûter le vrai gâteau basque — la Côte Basque assume pleinement son double visage, chic et surf. D'autres étapes doivent compléter ce carnet à l'automne.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20260429_210725.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260429_210725.jpg",
+      "alt": "Grande Plage, fin de journée",
+      "caption": "Grande Plage, fin de journée",
+      "emotionalText": "Un ciel qui vire au rose et à l'orange vif sous des nuages menaçants, la mer qui renvoie la même lumière — un des couchers de soleil les plus spectaculaires du séjour, presque trop beau pour être vrai."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251017_093757.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251017_093757.jpg",
+      "alt": "Côte des Basques, matinée",
+      "caption": "Côte des Basques, matinée",
+      "emotionalText": "Un groupe planche sous le bras qui avance vers l'eau, la Côte des Basques enveloppée dans une brume légère — le rituel du matin pour une bonne partie des visiteurs de Biarritz."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251015_191346.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251015_191346.jpg",
+      "alt": "Rocher de la Vierge, soirée",
+      "caption": "Rocher de la Vierge, soirée",
+      "emotionalText": "Le phare et le rocher qui se détachent en silhouette sur un ciel encore rosé, quelques promeneurs sur le sable — l'image la plus reconnaissable de Biarritz, vue à l'heure où elle est la plus photogénique."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251016_190958.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251016_190958.jpg",
+      "alt": "Front de mer, fin de journée",
+      "caption": "Front de mer, fin de journée",
+      "emotionalText": "Un ciel doré qui se reflète sur le sable mouillé, quelques silhouettes qui profitent des dernières minutes de lumière — le rituel du soir à Biarritz, jamais deux fois pareil."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251017_142728.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251017_142728.jpg",
+      "alt": "Crique rocheuse, milieu de journée",
+      "caption": "Crique rocheuse, milieu de journée",
+      "emotionalText": "Un petit îlot couvert de végétation posé au milieu d'une eau turquoise qu'on n'attendait pas sur la côte basque — une crique qui n'a rien à envier à des rivages bien plus au sud."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251016_122837.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251016_122837.jpg",
+      "alt": "Port Vieux, milieu de journée",
+      "caption": "Port Vieux, milieu de journée",
+      "emotionalText": "Une crique protégée entourée d'immeubles Belle Époque, la mer d'un vert turquoise malgré le ciel couvert — le Port Vieux est la version la plus abritée et la plus familiale du front de mer de Biarritz."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20260430_080545.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260430_080545.jpg",
+      "alt": "Café, matinée",
+      "caption": "Café, matinée",
+      "emotionalText": "Une vitrine bien garnie de viennoiseries et de cakes maison, en allant prendre un café avant de filer voir l'océan — le genre de rituel simple qui cadre bien une matinée à Biarritz."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251018_121110.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251018_121110.jpg",
+      "alt": "Quartier résidentiel, milieu de journée",
+      "caption": "Quartier résidentiel, milieu de journée",
+      "emotionalText": "Des colombages rouge sombre sur une façade blanche, un portail en fer forgé fermé sur un jardin — l'architecture Belle Époque et basque qui donne à Biarritz son caractère, loin des plages."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Bizipoz Hôtel",
+      "status": "J’ai dormi ici",
+      "location": "Proche de la gare, Saint-Jean-de-Luz",
+      "review": "Très bien situé, à quelques minutes de la gare, très moderne — les chambres familiales sont vastes. On a mangé au restaurant de l'hôtel, idéal pour une seule nuit.",
+      "tags": [
+        "centre-ville",
+        "familial",
+        "design moderne"
+      ],
+      "link": "https://www.booking.com/hotel/fr/bizipoz-saint-jean-de-luz.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Le Talaia Hôtel & Spa Biarritz - MGallery Collection",
+      "status": "J’ai dormi ici",
+      "location": "Front de mer, Biarritz",
+      "review": "Validé à 100% — magnifique, rien à redire.",
+      "tags": [
+        "vue mer",
+        "design moderne"
+      ],
+      "link": "https://www.booking.com/hotel/fr/radisson-blu-hotel-biarritz.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Café Loky",
+      "status": "Testé",
+      "location": "Petit café du matin en allant voir l'océan",
+      "review": "Le petit café du matin avant d'aller voir l'océan.",
+      "tags": [],
+      "link": "https://cafeloky.com/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Dunes Blanches, Chez Pascal",
+      "status": "Testé",
+      "location": "Gâteau basque, une belle découverte",
+      "review": "Le gâteau basque goûté ici est une belle découverte — vraiment spécial.",
+      "tags": [],
+      "link": "https://www.saint-jean-de-luz.com/en/sit/dunes-blanches-chez-pascal/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Eden Rock Café",
+      "status": "Testé",
+      "location": "Un verre ou un dessert, face au coucher de soleil",
+      "review": "Une bonne adresse pour un verre ou un dessert, perchée face au Rocher de la Vierge — la vue sur le coucher de soleil vaut le détour.",
+      "tags": [],
+      "link": "https://www.edenrockcafebiarritz.fr/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Le Corsaire",
+      "status": "Testé",
+      "location": "Resto de poisson en bord de port, super bon",
+      "review": "Un resto de poisson vraiment très bon, en bord de port, avec une carte délicieuse. La paella est exceptionnelle, et le menu enfant au poisson frais grillé est très réussi aussi.",
+      "tags": [],
+      "link": "https://www.tripadvisor.com/Restaurant_Review-g187080-d2702937-Reviews-Le_Corsaire-Biarritz_Basque_Country_Pyrenees_Atlantiques_Nouvelle_Aquitaine.html",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Le Surfing / Le Carlos",
+      "status": "Testé",
+      "location": "Un verre face au coucher de soleil",
+      "review": "Pour prendre un verre face au coucher de soleil — deux adresses qui font aussi bien l'affaire l'une que l'autre.",
+      "tags": [],
+      "link": "https://www.destination-biarritz.fr/restaurant/le-carlos/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Les Halles de Biarritz",
+      "status": "Testé",
+      "location": "Une mine d'or de spécialités locales à goûter",
+      "review": "Pour déjeuner — une mine d'or, plein de spécialités locales à goûter sur place.",
+      "tags": [],
+      "link": "https://www.tourisme64.com/en/activities/biarritz/PCUAQU064FS000FH-les-halles-de-biarritz/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Loco Polo",
+      "status": "Testé",
+      "location": "Cheesecake basque, une belle découverte",
+      "review": "Le cheesecake basque goûté ici est une belle découverte — ceux-là sont spéciaux.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Loco Polo",
+      "status": "Testé",
+      "location": "Cheesecake basque, le même qu'à Biarritz",
+      "review": "Le même cheesecake basque qu'à Biarritz, goûté ici à Saint-Jean-de-Luz — une belle découverte, vraiment spécial.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Marguerite",
+      "status": "Testé",
+      "location": "L'une des meilleures pizzas jamais goûtées",
+      "review": "Une très bonne pizza — l'une des meilleures que j'aie jamais goûtées.",
+      "tags": [],
+      "link": "https://www.marguerite-pizza-biarritz.fr/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Olatua",
+      "status": "Testé",
+      "location": "Le meilleur spot pour le coucher de soleil",
+      "review": "Le meilleur spot testé pour le coucher de soleil — rooftop face à l'océan et au Rocher de la Vierge.",
+      "tags": [],
+      "link": "https://www.olatua-biarritz.com/",
+      "linkLabel": "Voir l’adresse →"
+    }
+  ],
+  "activities": [
+    {
+      "name": "École de surf Lagoondy",
+      "status": "Testé",
+      "location": "Séance découverte d'une heure, combinaison et planche fournies— 45€",
+      "review": "Une superbe école — le gérant est vraiment sympa et arrangeant. Paiement par PayPal, séance découverte d'une heure avec location de combinaison et de planche sur place.",
+      "tags": [],
+      "link": "https://lagoondy.com/",
+      "linkLabel": "Voir l’adresse →"
+    }
+  ]
+}

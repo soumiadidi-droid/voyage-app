@@ -1,0 +1,91 @@
+{
+  "slug": "porto",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_152531.jpg",
+    "country": "Portugal",
+    "tags": [
+      "ville",
+      "patrimoine",
+      "gastronomie"
+    ],
+    "title": "Porto",
+    "tagline": "Toits en tuile, ruelles escarpées et la Douro en contrebas — l'autre grande ville du Portugal.",
+    "photoCount": "6 photographies"
+  },
+  "intro": "Des toits en tuile rouge qui dévalent jusqu'à la Douro, une cathédrale perchée qui domine toute la ville, et des façades couvertes de plantes qui débordent des balcons — Porto se découvre en montant et en descendant sans arrêt, jamais vraiment à plat.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/hires-IMG_20231026_152531.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_152531.jpg",
+      "alt": "Vue urbaine, milieu d'après-midi",
+      "caption": "Vue urbaine, milieu d'après-midi",
+      "emotionalText": "Une mer de toits en tuile rouge qui descend en pente jusqu'à la ville basse, la tour de la cathédrale qui dépasse à peine — Porto vue d'en haut n'a presque aucun immeuble récent pour casser la ligne."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/hires-IMG_20231026_154656.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_154656.jpg",
+      "alt": "Centre historique, milieu de journée",
+      "caption": "Centre historique, milieu de journée",
+      "emotionalText": "Des plantes qui débordent de chaque balcon en fer forgé sur plusieurs étages, une façade ancienne qui a laissé la végétation prendre le dessus — un des détails qui rendent le centre historique de Porto si photogénique."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/hires-IMG_20231026_152840.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_152840.jpg",
+      "alt": "Parvis en hauteur, fin d'après-midi",
+      "caption": "Parvis en hauteur, fin d'après-midi",
+      "emotionalText": "Un clocher qui domine une place pavée, et derrière, encore et toujours ces toits rouges qui dévalent vers la Douro — chaque point haut de Porto rejoue la même scène, sans jamais lasser."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/hires-IMG_20231024_183253.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231024_183253.jpg",
+      "alt": "Pause café, soirée",
+      "caption": "Pause café, soirée",
+      "emotionalText": "Un cœur dessiné dans la mousse, posé sur une table couverte d'azulejos gris et blancs — une pause café qui vaut la photo autant que la boisson."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/hires-IMG_20231026_152635.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_152635.jpg",
+      "alt": "Façade, milieu de journée",
+      "caption": "Façade, milieu de journée",
+      "emotionalText": "Des colonnes massives qui encadrent l'entrée, une pierre patinée par des siècles d'usure — la cathédrale de Porto impose son échelle dès qu'on s'en approche."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/hires-IMG_20231026_151819.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_151819.jpg",
+      "alt": "Parc urbain, après-midi",
+      "caption": "Parc urbain, après-midi",
+      "emotionalText": "Une pelouse bien verte, des palmiers, et en fond des façades colorées — une parenthèse végétale entre deux visites, à quelques minutes à pied du centre historique."
+    }
+  ],
+  "stays": [],
+  "eats": [
+    {
+      "name": "Restaurante Cantina 32",
+      "status": "Testé",
+      "location": "Un des meilleurs restos du séjour, fait deux fois",
+      "review": "Tellement bon qu'on y est retournées deux fois pendant le séjour — ça dit tout.",
+      "tags": [],
+      "link": "https://www.tripadvisor.com/Restaurant_Review-g189180-d6884732-Reviews-Cantina_32-Porto_Porto_District_Northern_Portugal.html",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "éLeBê Baixa",
+      "status": "Testé",
+      "location": "Resto typique, spécialité de Porto, super bon",
+      "review": "Un resto typique, pour une spécialité de Porto — vraiment très bon.",
+      "tags": [],
+      "link": "https://www.elebe.pt/",
+      "linkLabel": "Voir l’adresse →"
+    },
+    {
+      "name": "Esquires Coffee Porto",
+      "status": "Testé",
+      "location": "Pour le café",
+      "review": "L'adresse pour le café, pendant le séjour à Porto.",
+      "tags": [],
+      "link": "https://www.esquirescoffee.pt/",
+      "linkLabel": "Voir l’adresse →"
+    }
+  ],
+  "activities": []
+}
