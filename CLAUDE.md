@@ -39,35 +39,43 @@ push régulièrement au fil du travail.
   `--ember` et `--aurora`
 - Images stockées sur Vercel Blob storage sur le site original (`*.public.blob.vercel-storage.com`)
 
-## Pages à reconstruire
+## Pages — état au 21/08/2026
 
-- `/` — accueil : hero, à propos, aperçu "Mes voyages", bloc questionnaire
-- `/voyages` — liste des 9 voyages (grille photo + titre + accroche)
-- `/voyages/[slug]` — fiche voyage : galerie photo, "Mes adresses" (Où dormir / Où manger),
-  Activités. Slugs connus : `amerique-du-nord-hiver`, `cote-basque`, `crete`, `dubai`, `italie`,
-  `japon`, `lisbonne`, `mykonos`, `porto`
-- `/photos` — page photos
-- `/questionnaire` — "Trouver mon voyage", 10 questions (9 existantes + nouvelle question sport)
-  → redirige vers `/resultat?{réponses}`
-- `/resultat` — moteur de matching : profil voyageur nommé + destinations classées par % de match
-- `/partenariats` — page "Notre offre"
-- `/guides` — guides gratuits + formulaire d'inscription email (`/api/signup`)
+Faites et poussées sur GitHub :
+- `/` — accueil : hero, à propos, bloc questionnaire (fait, fidèle à l'original)
+- `/voyages` — liste des 9 voyages (fait)
+- `/voyages/[slug]` — fiche voyage complète : galerie photo, "Mes adresses" (Où dormir / Où
+  manger), Activités (fait pour les 9 : `amerique-du-nord-hiver`, `cote-basque`, `crete`, `dubai`,
+  `italie`, `japon`, `lisbonne`, `mykonos`, `porto` — contenu texte/liens exact, récupéré du site
+  en ligne via `.recovery/parse_voyages.py` → `content/voyages/*.json`)
+- `/questionnaire` — 10 questions (9 originales + nouvelle question sport), fait, testé bout en
+  bout (`app/questionnaire/`)
+- `/resultat` — moteur de matching reconstruit (pas identique à l'original, équivalent — voir
+  `lib/matching.ts`, `lib/destinations.ts`), fait, testé
 
-## Contenu récupéré (dossier `.recovery/`, à parser puis à supprimer une fois intégré)
+**Reste à faire (prochaine session)** :
+- `/photos` — page photos transverse (contenu déjà en cache : `.recovery/photos.html`)
+- `/partenariats` — page "Notre offre" (cache : `.recovery/partenariats.html`)
+- `/guides` — guides gratuits + formulaire d'inscription email `/api/signup` (cache :
+  `.recovery/guides.html`)
+- Une fois ces 3 pages faites : déploiement **preview** (jamais direct en prod), comparaison avec
+  https://voyage-app-sage.vercel.app, puis reconnexion du projet Vercel au repo GitHub
+  (`create_git_project`) — voir Phase 0.4 et Phase 4 du plan
 
-- `.recovery/questionnaire_source.js` — code exact des 9 questions du questionnaire (id, question,
-  options, attributs de scoring) + logique du composant `QuestionnaireClient`
-- `.recovery/voyages_content/*.html` — HTML complet de chaque fiche voyage (galerie, hôtels,
-  restos, activités) tel que servi par le site en ligne, à parser en contenu structuré
-- `.recovery/voyages_liste.html`, `.recovery/photos.html`, `.recovery/partenariats.html`,
-  `.recovery/guides.html` — pages annexes
+## Contenu récupéré (dossier `.recovery/`)
 
-## Question sport (tâche en cours)
+- `.recovery/questionnaire_source.js` — code exact des 9 questions originales (intégré dans
+  `lib/questionnaire.ts`)
+- `.recovery/voyages_content/*.html` + `.recovery/parse_voyages.py` — déjà parsés dans
+  `content/voyages/*.json`, intégrés. Peut être supprimé si l'espace dérange, sinon inoffensif.
+- `.recovery/photos.html`, `.recovery/partenariats.html`, `.recovery/guides.html` — **pas encore
+  parsés**, à utiliser pour les 3 pages restantes ci-dessus
 
-Ajouter une 10ᵉ question au questionnaire sur le rapport au sport en vacances, avec un nouvel
-attribut `sport` (0-100) intégré au moteur de matching. Scores `sport` par destination : première
-passe proposée par Claude à partir des indices dans le contenu récupéré (ex. surf mentionné à
-Côte Basque), à valider par Soumia avant intégration définitive — elle tranche, pas de score
-inventé sans validation.
+## Question sport — RÉSOLU
+
+10ᵉ question ajoutée (`lib/questionnaire.ts`, id `sport`), attribut `sport` (0-100) intégré au
+moteur de matching (`lib/destinations.ts`, `lib/matching.ts`). Scores `sport` par destination
+validés par Soumia le 21/08/2026 (ex. Côte Basque 80 pour le surf, Mykonos 30 farniente). Ne pas
+re-proposer de nouveaux scores sans qu'elle le demande.
 
 Voir le plan détaillé : `/Users/soumiadidi/.claude/plans/rosy-swimming-magpie.md`
