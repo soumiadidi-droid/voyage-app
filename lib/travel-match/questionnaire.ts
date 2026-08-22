@@ -47,7 +47,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     options: [
       { value: "chaleur", label: "Une vraie chaleur, soleil garanti" },
       { value: "douceur", label: "Une douceur agréable, ni trop chaud ni trop froid" },
-      { value: "hiver_cosy", label: "Un hiver cosy, quitte à sortir la doudoune" },
+      { value: "hiver_cosy", label: "Un hiver enneigé & cosy, quitte à sortir la grosse doudoune" },
     ],
   },
   {

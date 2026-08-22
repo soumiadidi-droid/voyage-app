@@ -1,9 +1,9 @@
 import type { Destination } from "./types";
 
-// Migration vers le nouveau schéma en cours — voir CLAUDE.md. Seules 5 destinations sont migrées
-// pour l'instant (Italie x3, Amérique du Nord x2, validées par Soumia le 22/08/2026). Les 7
-// restantes (Crète, Japon, Mykonos, Dubaï, Côte Basque, Lisbonne, Porto) sont encore sur l'ancien
-// moteur (lib/destinations.ts / lib/matching.ts) tant qu'elles n'ont pas été migrées.
+// Migration vers le nouveau schéma — voir CLAUDE.md. Les 12 destinations sont migrées (Italie x3,
+// Amérique du Nord x2, + Crète/Japon/Mykonos/Dubaï/Côte Basque/Lisbonne/Porto, validées par
+// Soumia le 22/08/2026). L'ancien moteur (lib/destinations.ts / lib/matching.ts / lib/questionnaire.ts)
+// n'est plus utilisé par les pages, gardé pour référence.
 export const DESTINATIONS: Destination[] = [
   {
     id: "italie-nord-culture",
@@ -182,5 +182,175 @@ export const DESTINATIONS: Destination[] = [
       family_kids_over_6: true,
     },
     tags: ["GrandesVilles", "Foodie", "HiverCosy", "SoleilDouceur"],
+  },
+  {
+    id: "crete",
+    title: "Crète",
+    status: "tested",
+    content_slug: "crete",
+    summary: "Agios Nikolaos, la baie de Mirabello, et une eau d'un bleu qu'on n'attendait pas.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hero-eau-turquoise.jpg",
+    filters: {
+      distance: ["europe"],
+      climate: ["chaleur", "douceur"],
+      transport: ["voiture_necessaire"],
+      sport_level: ["tranquille", "actif"],
+    },
+    emotions: { deconnexion: 5, emerveillement: 4, reconnexion: 5, lacher_prise: 4, inspiration: 3 },
+    vibe: { pression_horaire: 1, densite_urbaine: 2, gourmandise: 4, nature: 5 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["BordDeMer", "SoleilDouceur", "Authentique", "SlowLife"],
+  },
+  {
+    id: "japon",
+    title: "Japon",
+    status: "tested",
+    content_slug: "japon",
+    summary: "Osaka, ses rues et sa décontraction — puis une côte où plus rien ne bouge.",
+    hero_image: "https://files.catbox.moe/xwua06.jpg",
+    filters: {
+      distance: ["long_courrier"],
+      climate: ["chaleur", "douceur", "hiver_cosy"],
+      transport: ["transports_possibles"],
+      sport_level: ["actif"],
+    },
+    emotions: { deconnexion: 5, emerveillement: 5, reconnexion: 5, lacher_prise: 5, inspiration: 5 },
+    vibe: { pression_horaire: 5, densite_urbaine: 5, gourmandise: 5, nature: 5 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true, // testé à 4 ans avec succès
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "Foodie", "Authentique", "SlowLife"],
+  },
+  {
+    id: "mykonos",
+    title: "Mykonos",
+    status: "tested",
+    content_slug: "mykonos",
+    summary:
+      "Quatre jours entre copines en juin — plages, ruelles blanches et moulins au coucher du soleil.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_111432.jpg",
+    filters: {
+      distance: ["europe"],
+      climate: ["chaleur"],
+      transport: ["voiture_necessaire"],
+      sport_level: ["tranquille"],
+    },
+    emotions: { deconnexion: 5, emerveillement: 4, reconnexion: 5, lacher_prise: 5, inspiration: 5 },
+    vibe: { pression_horaire: 1, densite_urbaine: 2, gourmandise: 4, nature: 4 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: false,
+      family_kids_over_6: true,
+    },
+    tags: ["BordDeMer", "SoleilDouceur", "EntreAmies", "SlowLife"],
+  },
+  {
+    id: "dubai",
+    title: "Dubaï",
+    status: "tested",
+    content_slug: "dubai",
+    summary: "Gratte-ciel, plages et vieux quartier — le grand écart entre skyline et Al Fahidi.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1047.jpg",
+    filters: {
+      distance: ["long_courrier"],
+      climate: ["chaleur"],
+      transport: ["transports_possibles", "voiture_necessaire"],
+      sport_level: ["tranquille"],
+    },
+    emotions: { deconnexion: 3, emerveillement: 5, reconnexion: 3, lacher_prise: 4, inspiration: 4 },
+    vibe: { pression_horaire: 1, densite_urbaine: 5, gourmandise: 4, nature: 2 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "Luxe", "GrandEcart"],
+  },
+  {
+    id: "cote-basque",
+    title: "Côte Basque",
+    status: "tested",
+    content_slug: "cote-basque",
+    summary:
+      "Biarritz, Saint-Jean-de-Luz — surf, couchers de soleil et gâteau basque, en attendant Cap Breton, Seignosse et Hossegor.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260429_210725.jpg",
+    filters: {
+      distance: ["proche"],
+      climate: ["chaleur", "douceur"],
+      transport: ["voiture_necessaire", "transports_possibles"],
+      sport_level: ["tranquille", "actif"],
+    },
+    emotions: { deconnexion: 4, emerveillement: 4, reconnexion: 5, lacher_prise: 5, inspiration: 3 },
+    vibe: { pression_horaire: 1, densite_urbaine: 2, gourmandise: 5, nature: 4 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["BordDeMer", "Surf", "Foodie", "SoleilDouceur"],
+  },
+  {
+    id: "lisbonne",
+    title: "Lisbonne",
+    status: "tested",
+    content_slug: "lisbonne",
+    summary: "Collines, azulejos et lumière atlantique — Lisbonne et une excursion à Sintra.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9475.jpg",
+    filters: {
+      distance: ["europe"],
+      climate: ["chaleur", "douceur"],
+      transport: ["sans_voiture", "transports_possibles"],
+      sport_level: ["actif"],
+    },
+    emotions: { deconnexion: 3, emerveillement: 3, reconnexion: 4, lacher_prise: 4, inspiration: 5 },
+    vibe: { pression_horaire: 2, densite_urbaine: 3, gourmandise: 3, nature: 2 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "Authentique", "Foodie"],
+  },
+  {
+    id: "porto",
+    title: "Porto",
+    status: "tested",
+    content_slug: "porto",
+    summary: "Toits en tuile, ruelles escarpées et la Douro en contrebas — l'autre grande ville du Portugal.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_152531.jpg",
+    filters: {
+      distance: ["europe"],
+      climate: ["douceur", "chaleur"],
+      transport: ["sans_voiture", "transports_possibles"],
+      sport_level: ["actif"],
+    },
+    emotions: { deconnexion: 3, emerveillement: 4, reconnexion: 4, lacher_prise: 4, inspiration: 4 },
+    vibe: { pression_horaire: 3, densite_urbaine: 3, gourmandise: 5, nature: 3 },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "Authentique", "Foodie"],
   },
 ];

@@ -157,14 +157,18 @@ fourchette **70-90%**, pas un score écrasé/trop sévère. À garder en tête a
 fonction de scoring émotionnel/vibe (étape 2 de l'algo) — ne pas se contenter d'une distance brute
 non calibrée comme le fait `lib/matching.ts` actuellement.
 
-### Statut — FONCTIONNEL (22/08/2026)
+### Statut — FONCTIONNEL, 12/12 destinations migrées (22/08/2026)
 
 Moteur codé et branché en bout en bout :
 - `lib/travel-match/types.ts` — schéma complet
-- `lib/travel-match/destinations.ts` — 5 destinations migrées (Italie ×3 : `italie-nord-culture`,
-  `italie-sorrente-amalfe`, `italie-pouilles` ; Amérique du Nord ×2 : `montreal`, `new-york` — toutes
-  avec `content_slug` pointant vers une fiche contenu partagée, `italie` ou `amerique-du-nord-hiver`,
-  le split éditorial étant remis à plus tard)
+- `lib/travel-match/destinations.ts` — 12 destinations migrées :
+  - Italie ×3 (`italie-nord-culture`, `italie-sorrente-amalfe`, `italie-pouilles`) et Amérique du
+    Nord ×2 (`montreal`, `new-york`) partagent chacune un `content_slug` commun (`italie` /
+    `amerique-du-nord-hiver`), split éditorial remis à plus tard
+  - Crète, Japon, Mykonos, Dubaï, Côte Basque, Lisbonne, Porto — chacune avec son propre
+    `content_slug` (page dédiée existante). Émotions/vibe/filtres validés par Soumia le 22/08/2026 ;
+    points notables : Japon climat multi-saisons (`chaleur`/`douceur`/`hiver_cosy`, testé en famille
+    avec un enfant <6 ans), Mykonos exclut `family_kids_under_6`, Dubaï tranché en `long_courrier`
 - `lib/travel-match/engine.ts` — filtrage strict + score euclidien calibré (formule exacte de
   Soumia) + fallback (top 3 émotionnel si le filtrage élimine tout, avec badges d'avertissement
   sur les critères logistiques non respectés)
@@ -176,14 +180,11 @@ Moteur codé et branché en bout en bout :
   des 7 destinations restantes)
 
 Testé : `tsc --noEmit` propre, `npm run build` propre, smoke-test manuel via `next dev` + curl sur
-3 cas (arrivée directe sans réponses, match nominal, filtres trop restrictifs → fallback) — tous
-corrects.
+5 cas (arrivée directe sans réponses, match nominal Italie, filtres trop restrictifs → fallback,
+match exact Japon, famille avec enfant <6 ans exclue de Mykonos par `logistics`) — tous corrects.
 
 **Reste à faire** :
-- Migrer les 7 destinations restantes (Crète, Japon, Mykonos, Dubaï, Côte Basque, Lisbonne, Porto)
-  vers le nouveau schéma — tant que ce n'est pas fait, le questionnaire ne peut recommander que les
-  5 destinations migrées
 - Pas de "profil voyageur" nommé dans la nouvelle page résultat (l'ancien système de personas
   reposait sur les anciens attributs, pas repris — à voir si Soumia veut un équivalent)
 - Toujours en local, rien déployé sur Vercel — attendre validation explicite avant preview/prod
-  (voir Phase 4 du plan)
+  (voir Phase 4 du plan). Soumia a prévu un test global en local avant de valider le déploiement.
