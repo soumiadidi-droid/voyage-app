@@ -52,6 +52,10 @@ export type TransitionLogistics = {
   transport_mode: string; // ex. "Vol direct (1h30) ou train Amtrak (10h)"
   recommended_days: string; // ex. "4 à 5 jours sur place"
   practical_tip?: string; // ex. "Prendre le vol du matin pour profiter de l'après-midi au Mont-Royal"
+  // Lien vers un partenaire/agence recommandé pour ce trajet (ex. forfait vol + hébergement).
+  // Optionnel — beaucoup de combos n'auront pas de partenaire précis à recommander.
+  partner_link?: string;
+  partner_link_label?: string;
 };
 
 export type SuggestedCombo = {

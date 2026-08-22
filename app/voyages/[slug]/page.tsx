@@ -239,9 +239,20 @@ export default async function VoyagePage({
                       {combo.transition_logistics.recommended_days}
                     </p>
                     {combo.transition_logistics.practical_tip && (
-                      <p className="text-sm italic" style={{ color: "var(--text-secondary)" }}>
+                      <p className="text-sm italic mb-1" style={{ color: "var(--text-secondary)" }}>
                         {combo.transition_logistics.practical_tip}
                       </p>
+                    )}
+                    {combo.transition_logistics.partner_link && (
+                      <a
+                        href={combo.transition_logistics.partner_link}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="mono text-sm inline-block mt-1"
+                        style={{ color: "var(--ember)" }}
+                      >
+                        {combo.transition_logistics.partner_link_label || "Voir l'offre →"}
+                      </a>
                     )}
                   </div>
 

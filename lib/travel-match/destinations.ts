@@ -96,9 +96,11 @@ export const DESTINATIONS: Destination[] = [
         description:
           "Après le calme et le froid de Montréal, direction New York pour un contraste total — Manhattan, Brooklyn et Central Park.",
         transition_logistics: {
-          transport_mode: "Vol direct (1h30) ou train Amtrak (10h)",
+          transport_mode: "Avion, voiture ou bus",
           recommended_days: "3 à 4 jours sur place",
-          practical_tip: "Prendre le vol du matin pour profiter de l'après-midi à Manhattan.",
+          practical_tip:
+            "L'agence Vacances Dragon propose des forfaits pas chers avec hébergement en dehors de la ville mais transfert quotidien inclus — rapport qualité-prix imbattable.",
+          // TODO : lien exact vers Vacances Dragon à ajouter (demandé à Soumia le 23/08/2026)
         },
         min_duration_required: "semaine",
       },
