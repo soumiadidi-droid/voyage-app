@@ -310,6 +310,20 @@ reconstruit la relation dans les deux sens à partir d'une seule déclaration c�
 - `hasComboOpportunity` (badge sur `/resultat`) et `dedupeComboBadges` utilisent maintenant
   `getCombosFor` au lieu de lire `suggested_combos` directement, donc ça marche pour les deux sens.
 
+**Mise à jour du 23/08/2026** : le titre/description sont maintenant écrits neutres et réversibles
+dès la saisie (format `Combo [Thématique] : Ville A x Ville B`, description sans mots de
+départ/arrivée) — plus besoin du titre générique de secours côté "reverse", `combo.title` s'affiche
+tel quel des deux côtés. Convention documentée dans le skill `combo-voyage` (voir plus bas) pour ne
+plus la réexpliquer à chaque combo.
+
+## Skill `combo-voyage` (23/08/2026)
+
+`.claude/skills/combo-voyage/SKILL.md` — skill de ce projet (pas global) qui documente le format
+exact pour ajouter un combo/extension entre deux destinations (titre réversible, description
+neutre, transition_logistics avec durées, saisie à sens unique). Se déclenche quand Soumia demande
+d'ajouter un combo/extension/duo de destinations. Créé pour éviter de lui refaire expliquer la
+convention à chaque nouvelle paire.
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

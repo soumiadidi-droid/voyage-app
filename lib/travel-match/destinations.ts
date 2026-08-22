@@ -120,12 +120,12 @@ export const DESTINATIONS: Destination[] = [
       {
         id: "combo-nyc-montreal",
         target_destination_id: "montreal",
-        title: "Extension Nature : Montréal",
-        vibe_type: "Grands espaces & lâcher-prise québécois",
+        title: "Combo Métropole & Nature : New York x Montréal",
+        vibe_type: "Énergie urbaine & grand air",
         description:
-          "Après l'énergie de New York, une extension à Montréal pour respirer — Mont-Royal, ruelles verdoyantes ou froid extrême selon la saison.",
+          "Deux métropoles nord-américaines aux tempéraments complémentaires : l'effervescence électrique de Manhattan d'un côté, les grands espaces et la douceur québécoise de l'autre.",
         transition_logistics: {
-          transport_mode: "Avion, voiture ou bus",
+          transport_mode: "Vol direct (1h30), voiture (6h) ou train/bus Amtrak (10h)",
           recommended_days: "3 à 4 jours sur place",
           practical_tip:
             "L'agence Vacances Dragon propose des forfaits pas chers avec hébergement en dehors de la ville mais transfert quotidien inclus — rapport qualité-prix imbattable.",

@@ -234,13 +234,13 @@ export default async function VoyagePage({
               Extensions possibles
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
-              {eligibleCombos.map(({ combo, otherDestination, direction }) => (
+              {eligibleCombos.map(({ combo, otherDestination }) => (
                 <div key={combo.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
                   <h3
                     className="font-semibold mb-2"
                     style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
                   >
-                    {direction === "authored" ? combo.title : `Extension : ${otherDestination.title}`}
+                    {combo.title}
                   </h3>
                   <p className="mono mb-3" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
                     {combo.vibe_type}
