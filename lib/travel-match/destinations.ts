@@ -90,12 +90,16 @@ export const DESTINATIONS: Destination[] = [
     suggested_combos: [
       {
         id: "combo-montreal-nyc",
+        target_destination_id: "new-york",
         title: "Extension Ville : New York",
-        duration: "3 à 4 jours",
-        transport_type: "Train ou vol interne (1h30)",
         vibe_type: "Effervescence urbaine & énergie new-yorkaise",
         description:
           "Après le calme et le froid de Montréal, direction New York pour un contraste total — Manhattan, Brooklyn et Central Park.",
+        transition_logistics: {
+          transport_mode: "Vol direct (1h30) ou train Amtrak (10h)",
+          recommended_days: "3 à 4 jours sur place",
+          practical_tip: "Prendre le vol du matin pour profiter de l'après-midi à Manhattan.",
+        },
         min_duration_required: "semaine",
       },
     ],
@@ -122,12 +126,16 @@ export const DESTINATIONS: Destination[] = [
     suggested_combos: [
       {
         id: "combo-nyc-montreal",
+        target_destination_id: "montreal",
         title: "Extension Nature : Montréal",
-        duration: "3 à 4 jours",
-        transport_type: "Train ou vol interne (1h30)",
         vibe_type: "Grands espaces & lâcher-prise québécois",
         description:
           "Après l'énergie de New York, une extension à Montréal pour respirer — Mont-Royal, ruelles verdoyantes ou froid extrême selon la saison.",
+        transition_logistics: {
+          transport_mode: "Vol direct (1h30) ou train Amtrak (10h)",
+          recommended_days: "3 à 4 jours sur place",
+          practical_tip: "Prendre le vol du matin pour profiter de l'après-midi au Mont-Royal.",
+        },
         min_duration_required: "semaine",
       },
     ],

@@ -46,13 +46,26 @@ export type Scores = Record<ScoreKey, number>; // 1 à 5
 // système à 3 badges du spec Gemini du 21/08/2026 (mis de côté puis réintégré le 23/08/2026).
 export type AuthenticityBadge = "tested_approved" | "bucket_list" | "discovery";
 
+// Détails pratiques de la liaison entre les deux destinations du combo — décidé le 23/08/2026
+// pour que la carte combo soit vraiment exploitable (pas juste "il y a une extension possible").
+export type TransitionLogistics = {
+  transport_mode: string; // ex. "Vol direct (1h30) ou train Amtrak (10h)"
+  recommended_days: string; // ex. "4 à 5 jours sur place"
+  practical_tip?: string; // ex. "Prendre le vol du matin pour profiter de l'après-midi au Mont-Royal"
+};
+
 export type SuggestedCombo = {
   id: string;
-  title: string; // ex. "Extension Plage : Tulum"
-  duration: string; // ex. "4 à 5 jours" — texte libre, pas une valeur de DurationFilter
-  transport_type: string; // ex. "Vol interne (3h)"
-  vibe_type: string; // ex. "Lâcher-prise & Tropiques"
+  // Destination précise vers laquelle ce combo pointe — évite tout lien ambigu ou "effet miroir"
+  // (décidé le 23/08/2026). Doit correspondre à un `Destination.id` réel, jamais à soi-même.
+  target_destination_id: string;
+  title: string; // ex. "Extension Nature & Culture : Montréal"
+  vibe_type: string; // ex. "Plein air & Ambiance Québécoise"
   description: string;
+  transition_logistics: TransitionLogistics;
+  // Conservé en plus de la demande de Soumia du 23/08 (pas dans son dernier message, mais
+  // nécessaire pour le filtre d'affichage "seulement si la durée choisie le permet" déjà validé
+  // le 23/08/2026 — à retirer si elle préfère toujours afficher les combos dès qu'ils existent).
   min_duration_required: Extract<DurationFilter, "semaine" | "grand_voyage">;
 };
 

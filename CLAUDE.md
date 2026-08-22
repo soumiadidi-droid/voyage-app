@@ -259,6 +259,14 @@ le fallback à tort), filtre budget vérifié.
 - Combo de test ajouté : Montréal ↔ New York (`suggested_combos`), pour valider visuellement le
   badge 🔀 et la section "Extensions possibles".
 
+**Enrichissement des combos (23/08/2026, suite au test)** : `SuggestedCombo` a maintenant
+`target_destination_id` (destination réelle vers laquelle le combo pointe — jamais soi-même, garde-
+fou appliqué dans `app/voyages/[slug]/page.tsx`) et `transition_logistics` (`transport_mode`,
+`recommended_days`, `practical_tip?`), remplaçant les anciens champs `duration`/`transport_type` à
+plat. La carte "Extensions possibles" affiche maintenant un bloc "Comment faire la liaison" et un
+bouton "Voir la fiche de [destination]" qui navigue vers la vraie fiche cible. `min_duration_required`
+conservé (pas dans la dernière demande de Soumia, mais nécessaire au filtre d'affichage déjà validé).
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

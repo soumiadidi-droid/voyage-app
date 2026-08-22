@@ -109,10 +109,16 @@ export default async function VoyagePage({
   const userDurationRank = duration && duration in DURATION_ORDER
     ? DURATION_ORDER[duration as DurationFilter]
     : -1;
-  const eligibleCombos =
-    destination?.suggested_combos.filter(
-      (combo) => userDurationRank >= DURATION_ORDER[combo.min_duration_required]
-    ) ?? [];
+  // On ne garde que les combos dont la durée requise est couverte ET dont la destination cible
+  // existe réellement et n'est pas la destination courante (garde-fou contre un lien absurde,
+  // décidé le 23/08/2026).
+  const eligibleCombos = (destination?.suggested_combos ?? [])
+    .filter((combo) => userDurationRank >= DURATION_ORDER[combo.min_duration_required])
+    .flatMap((combo) => {
+      const target = DESTINATIONS.find((d) => d.id === combo.target_destination_id);
+      if (!target || target.id === destination?.id) return [];
+      return [{ combo, target }];
+    });
 
   return (
     <div>
@@ -208,7 +214,7 @@ export default async function VoyagePage({
               Extensions possibles
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
-              {eligibleCombos.map((combo) => (
+              {eligibleCombos.map(({ combo, target }) => (
                 <div key={combo.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
                   <h3
                     className="font-semibold mb-2"
@@ -216,10 +222,36 @@ export default async function VoyagePage({
                   >
                     {combo.title}
                   </h3>
-                  <p className="mono mb-2" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
-                    {combo.duration} · {combo.transport_type} · {combo.vibe_type}
+                  <p className="mono mb-3" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
+                    {combo.vibe_type}
                   </p>
-                  <p className="leading-relaxed">{combo.description}</p>
+                  <p className="leading-relaxed mb-4">{combo.description}</p>
+
+                  <div
+                    className="p-3 mb-4"
+                    style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
+                  >
+                    <p className="mono mb-1" style={{ color: "var(--text-secondary)", fontSize: "0.75rem" }}>
+                      Comment faire la liaison
+                    </p>
+                    <p className="text-sm mb-1">
+                      {combo.transition_logistics.transport_mode} —{" "}
+                      {combo.transition_logistics.recommended_days}
+                    </p>
+                    {combo.transition_logistics.practical_tip && (
+                      <p className="text-sm italic" style={{ color: "var(--text-secondary)" }}>
+                        {combo.transition_logistics.practical_tip}
+                      </p>
+                    )}
+                  </div>
+
+                  <a
+                    href={`/voyages/${target.content_slug}?id=${target.id}`}
+                    className="mono"
+                    style={{ color: "var(--ember)" }}
+                  >
+                    Voir la fiche de {target.title} →
+                  </a>
                 </div>
               ))}
             </div>
