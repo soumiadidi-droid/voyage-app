@@ -39,37 +39,37 @@ push régulièrement au fil du travail.
   `--ember` et `--aurora`
 - Images stockées sur Vercel Blob storage sur le site original (`*.public.blob.vercel-storage.com`)
 
-## Pages — état au 21/08/2026
+## Pages — état au 22/08/2026
 
-Faites et poussées sur GitHub :
-- `/` — accueil : hero, à propos, bloc questionnaire (fait, fidèle à l'original)
-- `/voyages` — liste des 9 voyages (fait)
-- `/voyages/[slug]` — fiche voyage complète : galerie photo, "Mes adresses" (Où dormir / Où
-  manger), Activités (fait pour les 9 : `amerique-du-nord-hiver`, `cote-basque`, `crete`, `dubai`,
-  `italie`, `japon`, `lisbonne`, `mykonos`, `porto` — contenu texte/liens exact, récupéré du site
-  en ligne via `.recovery/parse_voyages.py` → `content/voyages/*.json`)
-- `/questionnaire` — 10 questions (9 originales + nouvelle question sport), fait, testé bout en
-  bout (`app/questionnaire/`)
-- `/resultat` — moteur de matching reconstruit (pas identique à l'original, équivalent — voir
-  `lib/matching.ts`, `lib/destinations.ts`), fait, testé
+- `/` — accueil : hero, à propos, CTA questionnaire (fait)
+- `/questionnaire` — 7 écrans du moteur Travel Match, voir section dédiée plus bas (fait, testé)
+- `/resultat` — résultats du moteur Travel Match (fait, testé)
+- `/voyages/[slug]` — fiche voyage complète par destination : galerie photo, "Mes adresses" (Où
+  dormir / Où manger), Activités, bouton like (fait pour les 9 fiches : `amerique-du-nord-hiver`,
+  `cote-basque`, `crete`, `dubai`, `italie`, `japon`, `lisbonne`, `mykonos`, `porto`)
+- `/favoris` — destinations likées en localStorage (fait, voir section Favoris plus bas)
 
-**Reste à faire (prochaine session)** :
-- `/photos` — page photos transverse (contenu déjà en cache : `.recovery/photos.html`)
-- `/partenariats` — page "Notre offre" (cache : `.recovery/partenariats.html`)
-- `/guides` — guides gratuits + formulaire d'inscription email `/api/signup` (cache :
-  `.recovery/guides.html`)
-- Une fois ces 3 pages faites : déploiement **preview** (jamais direct en prod), comparaison avec
-  https://voyage-app-sage.vercel.app, puis reconnexion du projet Vercel au repo GitHub
-  (`create_git_project`) — voir Phase 0.4 et Phase 4 du plan
+**Pages volontairement abandonnées (décidé le 22/08/2026)** : `/photos`, `/partenariats` ("Notre
+offre"), `/guides` — jamais construites, et Soumia a tranché qu'elles ne sont plus nécessaires. Ne
+pas les reproposer. Le contenu en cache (`.recovery/photos.html`, `.recovery/partenariats.html`,
+`.recovery/guides.html`) est mort, supprimable sans risque.
+
+`/voyages` (liste ouverte de toutes les destinations) a aussi été supprimée le 22/08/2026 — la
+seule découverte des destinations passe par le questionnaire, voir section Favoris.
+
+Déployé en **preview** sur Vercel le 22/08/2026 (`ai-product5/voyage-app`, projet lié via
+`vercel link`) : https://voyage-77ioe9uw5-ai-product5.vercel.app (protégé, accessible uniquement à
+Soumia). Pas encore en prod — attendre validation explicite avant `vercel --prod` (voir Phase 4 du
+plan et section "Déploiement prudent").
 
 ## Contenu récupéré (dossier `.recovery/`)
 
-- `.recovery/questionnaire_source.js` — code exact des 9 questions originales (intégré dans
-  `lib/questionnaire.ts`)
+- `.recovery/questionnaire_source.js` — code du questionnaire original, plus utilisé (le
+  questionnaire a été entièrement refait pour Travel Match, voir plus bas). Peut être supprimé.
 - `.recovery/voyages_content/*.html` + `.recovery/parse_voyages.py` — déjà parsés dans
   `content/voyages/*.json`, intégrés. Peut être supprimé si l'espace dérange, sinon inoffensif.
-- `.recovery/photos.html`, `.recovery/partenariats.html`, `.recovery/guides.html` — **pas encore
-  parsés**, à utiliser pour les 3 pages restantes ci-dessus
+- `.recovery/photos.html`, `.recovery/partenariats.html`, `.recovery/guides.html` — mort, pages
+  abandonnées (voir ci-dessus). Supprimable.
 
 ## Question sport — RÉSOLU
 
