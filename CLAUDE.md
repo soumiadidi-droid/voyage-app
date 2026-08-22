@@ -79,3 +79,111 @@ validés par Soumia le 21/08/2026 (ex. Côte Basque 80 pour le surf, Mykonos 30 
 re-proposer de nouveaux scores sans qu'elle le demande.
 
 Voir le plan détaillé : `/Users/soumiadidi/.claude/plans/rosy-swimming-magpie.md`
+
+## Refactor moteur de matching "Travel Match" — EN COURS (depuis le 22/08/2026)
+
+Soumia veut remplacer le moteur actuel (score unique par différence pondérée sur un profil plat
+0-100) par un algo en **2 étapes**, plus fidèle à l'objectif "émotion recherchée / ambiance" plutôt
+que checklist touristique :
+
+1. **Filtrage strict (logistique)** — élimine les destinations incompatibles (via `filters` et
+   `logistics`).
+2. **Score de matching (%)** — calculé uniquement sur les destinations restantes, à partir de
+   `emotions` et `vibe`.
+
+Ça remplace `profile` (objet plat 0-100, 11 dimensions) + `context` dans `lib/destinations.ts`, et
+l'algo à une seule passe dans `lib/matching.ts`. Le contenu éditorial (`content/voyages/*.json` —
+galerie, hôtels, restos, activités) n'est pas concerné, il reste tel quel.
+
+### Nouveau schéma par destination (définitif pour le moment)
+
+```json
+{
+  "id": "cote-basque",
+  "title": "Côte Basque",
+  "status": "tested", // "tested" (voyage vécu) | "wishlist" (voyage recherché, pas encore fait) — décidé le 22/08/2026
+  "summary": "...",
+  "hero_image": "https://...",
+  "filters": {
+    "distance": ["proche"], // "proche" | "europe" | "long_courrier"
+    "climate": ["chaleur", "douceur"], // "chaleur" | "douceur" | "hiver_cosy" | "peu_importe"
+    "transport": ["voiture_necessaire", "transports_possibles"], // "sans_voiture" | "voiture_necessaire"
+    "sport_level": ["tranquille", "actif"] // "tranquille" | "actif" uniquement — pas de "sportif" (décidé le 22/08 : les 9 destinations actuelles sont lifestyle/flânerie, un 3e niveau créait du bruit sans vraie distinction dans la donnée)
+  },
+  "emotions": { // 1 à 5, ces 5 axes fixes pour toutes les destinations
+    "deconnexion": 4,
+    "emerveillement": 4,
+    "reconnexion": 5,
+    "lacher_prise": 5,
+    "inspiration": 3
+  },
+  "vibe": { // 1 à 5, ces 4 axes fixes pour toutes les destinations
+    "pression_horaire": 1, // 1 = très slow, 5 = intense
+    "densite_urbaine": 3,
+    "gourmandise": 5,
+    "nature": 4
+  },
+  "logistics": {
+    "solo_friendly": true,
+    "duo_romantic": true,
+    "friends_group": true,
+    "family_kids_under_6": true,
+    "family_kids_over_6": true
+  },
+  "tags": ["BordDeMer", "SoleilDouceur", "Foodie", "SlowLife"],
+  "content_slug": "cote-basque" // slug de content/voyages/*.json à afficher. Plusieurs destinations
+                                 // de matching peuvent partager le même content_slug (ex. Italie
+                                 // splittée en 3 destinations de matching, 1 seule fiche contenu
+                                 // pour l'instant — décidé le 22/08/2026, split du contenu éditorial
+                                 // remis à plus tard)
+}
+```
+
+### Point de vigilance — sport_level
+
+`filters.sport_level` remplace en partie l'ancien attribut `sport` (0-100, validé le 21/08). C'est
+maintenant une catégorie (pas un score), donc ça nécessite une re-traduction des 9 destinations
+existantes. **Même règle que pour le score sport initial : Claude propose une première passe,
+Soumia valide/corrige, jamais l'inverse.**
+
+Première passe validée par Soumia le 22/08/2026 : `["tranquille", "actif"]` pour les 8 destinations
+(Amérique du Nord hiver, Côte Basque, Crète, Dubaï, Italie, Japon, Lisbonne, Porto), `["tranquille"]`
+seul pour Mykonos (farniente explicite, pas de signal actif dans le contenu récupéré).
+
+### Calibrage du score de matching — à faire
+
+Objectif explicite de Soumia (22/08/2026) : les bons matchs doivent afficher un score dans la
+fourchette **70-90%**, pas un score écrasé/trop sévère. À garder en tête au moment de construire la
+fonction de scoring émotionnel/vibe (étape 2 de l'algo) — ne pas se contenter d'une distance brute
+non calibrée comme le fait `lib/matching.ts` actuellement.
+
+### Statut — FONCTIONNEL (22/08/2026)
+
+Moteur codé et branché en bout en bout :
+- `lib/travel-match/types.ts` — schéma complet
+- `lib/travel-match/destinations.ts` — 5 destinations migrées (Italie ×3 : `italie-nord-culture`,
+  `italie-sorrente-amalfe`, `italie-pouilles` ; Amérique du Nord ×2 : `montreal`, `new-york` — toutes
+  avec `content_slug` pointant vers une fiche contenu partagée, `italie` ou `amerique-du-nord-hiver`,
+  le split éditorial étant remis à plus tard)
+- `lib/travel-match/engine.ts` — filtrage strict + score euclidien calibré (formule exacte de
+  Soumia) + fallback (top 3 émotionnel si le filtrage élimine tout, avec badges d'avertissement
+  sur les critères logistiques non respectés)
+- `lib/travel-match/questionnaire.ts` — 7 écrans (5 choix simples + 2 écrans de curseurs 1-5),
+  copy validée par Soumia le 22/08/2026, curseurs positionnés au milieu (3) par défaut
+- `app/questionnaire/QuestionnaireClient.tsx` et `app/resultat/page.tsx` réécrits pour utiliser
+  ce nouveau moteur (ancien `lib/matching.ts` / `lib/destinations.ts` / `lib/questionnaire.ts`
+  laissés de côté, plus utilisés par les pages, gardés pour référence en attendant la migration
+  des 7 destinations restantes)
+
+Testé : `tsc --noEmit` propre, `npm run build` propre, smoke-test manuel via `next dev` + curl sur
+3 cas (arrivée directe sans réponses, match nominal, filtres trop restrictifs → fallback) — tous
+corrects.
+
+**Reste à faire** :
+- Migrer les 7 destinations restantes (Crète, Japon, Mykonos, Dubaï, Côte Basque, Lisbonne, Porto)
+  vers le nouveau schéma — tant que ce n'est pas fait, le questionnaire ne peut recommander que les
+  5 destinations migrées
+- Pas de "profil voyageur" nommé dans la nouvelle page résultat (l'ancien système de personas
+  reposait sur les anciens attributs, pas repris — à voir si Soumia veut un équivalent)
+- Toujours en local, rien déployé sur Vercel — attendre validation explicite avant preview/prod
+  (voir Phase 4 du plan)

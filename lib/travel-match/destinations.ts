@@ -1,0 +1,186 @@
+import type { Destination } from "./types";
+
+// Migration vers le nouveau schéma en cours — voir CLAUDE.md. Seules 5 destinations sont migrées
+// pour l'instant (Italie x3, Amérique du Nord x2, validées par Soumia le 22/08/2026). Les 7
+// restantes (Crète, Japon, Mykonos, Dubaï, Côte Basque, Lisbonne, Porto) sont encore sur l'ancien
+// moteur (lib/destinations.ts / lib/matching.ts) tant qu'elles n'ont pas été migrées.
+export const DESTINATIONS: Destination[] = [
+  {
+    id: "italie-nord-culture",
+    title: "Italie : Florence, Rome & Pise",
+    status: "tested",
+    content_slug: "italie",
+    summary:
+      "Les trésors de la Renaissance, l'histoire romaine et les ruelles animées de la Toscane au Latium.",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_201932.jpg",
+    filters: {
+      distance: ["europe"],
+      climate: ["chaleur", "douceur"],
+      transport: ["transports_possibles"],
+      sport_level: ["actif"],
+    },
+    emotions: {
+      deconnexion: 2,
+      emerveillement: 5,
+      reconnexion: 4,
+      lacher_prise: 3,
+      inspiration: 5,
+    },
+    vibe: {
+      pression_horaire: 4,
+      densite_urbaine: 4,
+      gourmandise: 5,
+      nature: 2,
+    },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "Foodie", "RuelleAuthentique"],
+  },
+  {
+    id: "italie-sorrente-amalfe",
+    title: "Italie : Sorrente & Côte Amalfitaine",
+    status: "tested",
+    content_slug: "italie",
+    summary: "Falaises escarpées, citronniers, cités perchées et douceur méditerranéenne face à la mer.",
+    hero_image: "https://...",
+    filters: {
+      distance: ["europe"],
+      climate: ["chaleur", "douceur"],
+      transport: ["transports_possibles", "voiture_necessaire"],
+      sport_level: ["actif", "tranquille"],
+    },
+    emotions: {
+      deconnexion: 4,
+      emerveillement: 5,
+      reconnexion: 4,
+      lacher_prise: 4,
+      inspiration: 4,
+    },
+    vibe: {
+      pression_horaire: 2,
+      densite_urbaine: 3,
+      gourmandise: 5,
+      nature: 4,
+    },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["BordDeMer", "SoleilDouceur", "Foodie", "SlowLife"],
+  },
+  {
+    id: "italie-pouilles",
+    title: "Italie : Les Pouilles (Bari)",
+    status: "tested",
+    content_slug: "italie",
+    summary: "Eaux turquoises, ruelles blanchies à la chaux, trulli et gastronomie authentique du Sud.",
+    hero_image: "https://...",
+    filters: {
+      distance: ["europe"],
+      climate: ["chaleur"],
+      transport: ["voiture_necessaire"],
+      sport_level: ["tranquille"],
+    },
+    emotions: {
+      deconnexion: 5,
+      emerveillement: 4,
+      reconnexion: 5,
+      lacher_prise: 5,
+      inspiration: 4,
+    },
+    vibe: {
+      pression_horaire: 1,
+      densite_urbaine: 2,
+      gourmandise: 5,
+      nature: 4,
+    },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["BordDeMer", "Foodie", "RuelleAuthentique", "SlowLife"],
+  },
+  {
+    id: "montreal",
+    title: "Montréal",
+    status: "tested",
+    content_slug: "amerique-du-nord-hiver",
+    summary:
+      "Vivre Montréal au rythme des 4 saisons — ruelles verdoyantes en été, couleurs de l'automne, Mont-Royal et froid extrême de l'hiver.",
+    hero_image: "https://...",
+    filters: {
+      distance: ["long_courrier"],
+      climate: ["chaleur", "douceur", "hiver_cosy"],
+      transport: ["sans_voiture", "transports_possibles", "voiture_necessaire"],
+      sport_level: ["actif"],
+    },
+    emotions: {
+      deconnexion: 4,
+      emerveillement: 4,
+      reconnexion: 4,
+      lacher_prise: 4,
+      inspiration: 5,
+    },
+    vibe: {
+      pression_horaire: 3,
+      densite_urbaine: 4,
+      gourmandise: 4,
+      nature: 5,
+    },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "HiverCosy", "EspacesSauvages", "Foodie"],
+  },
+  {
+    id: "new-york",
+    title: "New York",
+    status: "tested",
+    content_slug: "amerique-du-nord-hiver",
+    summary:
+      "Six voyages, mille facettes — l'énergie brute de Manhattan, la vibe de Brooklyn, Central Park et la magie de la ville en hiver.",
+    hero_image: "https://...",
+    filters: {
+      distance: ["long_courrier"],
+      climate: ["douceur", "hiver_cosy", "chaleur"],
+      transport: ["sans_voiture", "transports_possibles"],
+      sport_level: ["actif"],
+    },
+    emotions: {
+      deconnexion: 5,
+      emerveillement: 5,
+      reconnexion: 3,
+      lacher_prise: 3,
+      inspiration: 5,
+    },
+    vibe: {
+      pression_horaire: 5,
+      densite_urbaine: 5,
+      gourmandise: 5,
+      nature: 2,
+    },
+    logistics: {
+      solo_friendly: true,
+      duo_romantic: true,
+      friends_group: true,
+      family_kids_under_6: true,
+      family_kids_over_6: true,
+    },
+    tags: ["GrandesVilles", "Foodie", "HiverCosy", "SoleilDouceur"],
+  },
+];
