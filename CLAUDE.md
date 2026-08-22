@@ -218,8 +218,9 @@ favoris permet de retrouver les destinations likées sans repasser par le questi
   le header de `/voyages/[slug]`
 - `app/favoris/` — nouvelle page, remplace `/voyages` dans la nav. Liste les destinations likées,
   état vide avec message "Lâche un match ! ✨" + CTA vers `/questionnaire`
-- **Point d'attention** : les favoris sont indexés par `id` de destination Travel Match, pas par
-  `content_slug`. Le lien `/resultat` → fiche passe `?id=<id>` pour lever l'ambiguïté sur Italie et
-  Amérique du Nord (plusieurs destinations, une seule fiche). Un accès direct à `/voyages/italie`
-  sans ce paramètre retombe sur `slug` comme clé de favori, ce qui ne correspond à aucun `id` réel
-  → le like ne remontera pas dans `/favoris` dans ce cas précis (edge case mineur, pas bloquant).
+- Les favoris sont indexés par `id` de destination Travel Match. Le lien `/resultat` → fiche passe
+  `?id=<id>` pour lever l'ambiguïté sur Italie et Amérique du Nord (plusieurs destinations, une
+  seule fiche). Un accès direct à `/voyages/italie` sans ce paramètre enregistre la clé `slug`
+  (`"italie"`) — `/favoris` la résout en repêchant la fiche de contenu correspondante (`content/
+  voyages/*.json`) quand aucune destination ne matche cet id, donc rien n'est perdu, juste affiché
+  au niveau de la fiche groupée plutôt que d'une destination précise (résolu le 22/08/2026).
