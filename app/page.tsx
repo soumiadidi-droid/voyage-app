@@ -38,13 +38,6 @@ export default function Home() {
           >
             Trouver mon voyage
           </Link>
-          <Link
-            className="inline-block px-6 py-3 mono no-underline border"
-            href="/voyages"
-            style={{ borderColor: "#E8DFC8", opacity: 0.9 }}
-          >
-            Explorer mes voyages
-          </Link>
         </div>
       </div>
 
@@ -70,7 +63,7 @@ export default function Home() {
         >
           <div className="max-w-xl mx-auto">
             <p className="mono mb-2" style={{ color: "var(--aurora)" }}>
-              10 questions, 2 minutes
+              7 questions, 2 minutes
             </p>
             <h2
               className="font-extrabold mb-4"

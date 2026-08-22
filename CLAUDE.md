@@ -184,10 +184,19 @@ Testé : `tsc --noEmit` propre, `npm run build` propre, smoke-test manuel via `n
 match exact Japon, famille avec enfant <6 ans exclue de Mykonos par `logistics`) — tous corrects.
 
 **Note** : `~/Downloads/Voyage_des_Emotions_x_Travel_Match_Business_Plan.docx` et
-`..._Texte_Integral.docx` (rédigés avec Gemini le 21/08/2026) décrivent un algo différent (10
-critères à plat, 3 badges de statut, mécanisme "Top Match débloqué") — **obsolète, remplacé** par
-le moteur Travel Match ci-dessus (confirmé par Soumia le 22/08/2026). Le volet business (B2B,
-tarifs, roadmap) de ces docs reste valable, seule la partie algo/produit est dépassée.
+`..._Texte_Integral.docx` (rédigés avec Gemini le 21/08/2026) décrivent un premier algo (10
+critères à plat, score unique, 3 badges de statut, mécanisme "Top Match débloqué"). Ce n'était pas
+une mauvaise base, mais elle est **dépassée** par le moteur Travel Match ci-dessus (filtrage strict
++ score émotionnel calibré, destinations validées une par une) — confirmé par Soumia le
+22/08/2026. Le volet business (B2B, tarifs, roadmap) de ces docs reste valable tel quel.
+
+Deux idées du spec Gemini non reprises mais pas écartées, à considérer si besoin plus tard :
+- Les **3 badges de statut** (Testé & Approuvé / Bucket List / Idée à découvrir) au lieu des 2
+  valeurs actuelles (`tested` / `wishlist`) — cohérent avec un futur 3ᵉ statut type "pas encore
+  vécu mais pas repéré par Soumia non plus".
+- Le **"Top Match débloqué"** : seule la destination n°1 donnerait accès au détail complet, un
+  mécanisme d'engagement pas implémenté aujourd'hui (tous les résultats du Top 3 affichent leurs
+  infos directement).
 
 **Reste à faire** :
 - Pas de "profil voyageur" nommé dans la nouvelle page résultat (l'ancien système de personas

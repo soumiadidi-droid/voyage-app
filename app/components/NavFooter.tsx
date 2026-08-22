@@ -2,7 +2,6 @@ import Link from "next/link";
 import { Logo } from "./Logo";
 
 const NAV_LINKS = [
-  { href: "/voyages", label: "Mes voyages" },
   { href: "/questionnaire", label: "Trouver mon voyage" },
   { href: "/photos", label: "Photos" },
   { href: "/partenariats", label: "Notre offre" },
