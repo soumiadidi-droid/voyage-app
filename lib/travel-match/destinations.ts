@@ -87,7 +87,18 @@ export const DESTINATIONS: Destination[] = [
     scores: { repos: 4, exploration: 5, gastronomie: 4, nature_plage: 5, effervescence_urbaine: 4, rythme: 3 },
     logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
     tags: ["GrandesVilles", "HiverCosy", "EspacesSauvages", "Foodie"],
-    suggested_combos: [],
+    suggested_combos: [
+      {
+        id: "combo-montreal-nyc",
+        title: "Extension Ville : New York",
+        duration: "3 à 4 jours",
+        transport_type: "Train ou vol interne (1h30)",
+        vibe_type: "Effervescence urbaine & énergie new-yorkaise",
+        description:
+          "Après le calme et le froid de Montréal, direction New York pour un contraste total — Manhattan, Brooklyn et Central Park.",
+        min_duration_required: "semaine",
+      },
+    ],
   },
   {
     id: "new-york",
@@ -108,7 +119,18 @@ export const DESTINATIONS: Destination[] = [
     scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 2, effervescence_urbaine: 5, rythme: 5 },
     logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
     tags: ["GrandesVilles", "Foodie", "HiverCosy", "SoleilDouceur"],
-    suggested_combos: [],
+    suggested_combos: [
+      {
+        id: "combo-nyc-montreal",
+        title: "Extension Nature : Montréal",
+        duration: "3 à 4 jours",
+        transport_type: "Train ou vol interne (1h30)",
+        vibe_type: "Grands espaces & lâcher-prise québécois",
+        description:
+          "Après l'énergie de New York, une extension à Montréal pour respirer — Mont-Royal, ruelles verdoyantes ou froid extrême selon la saison.",
+        min_duration_required: "semaine",
+      },
+    ],
   },
   {
     id: "crete",
