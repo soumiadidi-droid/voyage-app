@@ -183,6 +183,12 @@ Testé : `tsc --noEmit` propre, `npm run build` propre, smoke-test manuel via `n
 5 cas (arrivée directe sans réponses, match nominal Italie, filtres trop restrictifs → fallback,
 match exact Japon, famille avec enfant <6 ans exclue de Mykonos par `logistics`) — tous corrects.
 
+**Note** : `~/Downloads/Voyage_des_Emotions_x_Travel_Match_Business_Plan.docx` et
+`..._Texte_Integral.docx` (rédigés avec Gemini le 21/08/2026) décrivent un algo différent (10
+critères à plat, 3 badges de statut, mécanisme "Top Match débloqué") — **obsolète, remplacé** par
+le moteur Travel Match ci-dessus (confirmé par Soumia le 22/08/2026). Le volet business (B2B,
+tarifs, roadmap) de ces docs reste valable, seule la partie algo/produit est dépassée.
+
 **Reste à faire** :
 - Pas de "profil voyageur" nommé dans la nouvelle page résultat (l'ancien système de personas
   reposait sur les anciens attributs, pas repris — à voir si Soumia veut un équivalent)
