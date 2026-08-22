@@ -1,3 +1,4 @@
+import { LikeButton } from "../components/LikeButton";
 import { matchTravel } from "@/lib/travel-match/engine";
 import { DESTINATIONS } from "@/lib/travel-match/destinations";
 import {
@@ -124,9 +125,12 @@ export default async function ResultatPage({
               >
                 {destination.title}
               </h2>
-              <span className="mono" style={{ color: "var(--ember)" }}>
-                {score}%
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="mono" style={{ color: "var(--ember)" }}>
+                  {score}%
+                </span>
+                <LikeButton id={destination.id} />
+              </div>
             </div>
             <p className="mb-3" style={{ color: "var(--text-secondary)" }}>{destination.summary}</p>
             <ul
@@ -147,7 +151,11 @@ export default async function ResultatPage({
                 ))}
               </ul>
             )}
-            <a href={`/voyages/${destination.content_slug}`} className="mono" style={{ color: "var(--ember)" }}>
+            <a
+              href={`/voyages/${destination.content_slug}?id=${destination.id}`}
+              className="mono"
+              style={{ color: "var(--ember)" }}
+            >
               Voir la fiche voyage →
             </a>
           </div>

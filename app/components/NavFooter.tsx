@@ -3,6 +3,7 @@ import { Logo } from "./Logo";
 
 const NAV_LINKS = [
   { href: "/questionnaire", label: "Trouver mon voyage" },
+  { href: "/favoris", label: "Favoris" },
   { href: "/photos", label: "Photos" },
   { href: "/partenariats", label: "Notre offre" },
 ];

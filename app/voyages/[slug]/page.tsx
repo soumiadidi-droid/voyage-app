@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { LikeButton } from "../../components/LikeButton";
 import { VOYAGES, getVoyage, type Card } from "@/content/voyages";
 
 export function generateStaticParams() {
@@ -81,10 +82,22 @@ function CardSection({ title, cards }: { title: string; cards: Card[] }) {
   );
 }
 
-export default async function VoyagePage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function VoyagePage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ id?: string }>;
+}) {
   const { slug } = await params;
   const voyage = getVoyage(slug);
   if (!voyage) notFound();
+
+  // `id` = l'identifiant précis de destination Travel Match (ex. "italie-pouilles"), transmis par
+  // le lien depuis /resultat. Sans lui (accès direct à la fiche), on retombe sur le slug de
+  // contenu — correct pour les 7 destinations à fiche dédiée, approximatif pour Italie/Amérique du
+  // Nord qui partagent une fiche entre plusieurs destinations de matching.
+  const { id: favoriteId } = await searchParams;
 
   return (
     <div>
@@ -97,10 +110,13 @@ export default async function VoyagePage({ params }: { params: Promise<{ slug: s
         }}
       >
         <div className="relative z-10 max-w-2xl" style={{ color: "#f4f8f7" }}>
-          <p className="mono mb-3 opacity-90">
-            {voyage.hero.country}
-            {voyage.hero.tags.length > 0 && ` — ${voyage.hero.tags.join(" · ")}`}
-          </p>
+          <div className="flex items-start justify-between gap-4 mb-3">
+            <p className="mono opacity-90">
+              {voyage.hero.country}
+              {voyage.hero.tags.length > 0 && ` — ${voyage.hero.tags.join(" · ")}`}
+            </p>
+            <LikeButton id={favoriteId ?? slug} />
+          </div>
           <h1
             className="font-extrabold leading-[0.95] mb-4"
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 9vw, 6.2rem)" }}

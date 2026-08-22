@@ -203,3 +203,23 @@ Deux idées du spec Gemini non reprises mais pas écartées, à considérer si b
   reposait sur les anciens attributs, pas repris — à voir si Soumia veut un équivalent)
 - Toujours en local, rien déployé sur Vercel — attendre validation explicite avant preview/prod
   (voir Phase 4 du plan). Soumia a prévu un test global en local avant de valider le déploiement.
+
+## Favoris (❤️) — FONCTIONNEL (22/08/2026)
+
+`/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les
+destinations est le questionnaire, pour ne pas spoiler la base. En complément, un système de
+favoris permet de retrouver les destinations likées sans repasser par le questionnaire :
+
+- `lib/favorites.ts` — store `useSyncExternalStore` sur `localStorage` (clé `lve-favoris`), 100%
+  navigateur, aucun compte/backend. Ne suit pas d'un appareil à l'autre — accepté pour la V1, une
+  vraie base de données est possible plus tard si besoin (comparé Supabase/Firebase/Airtable avec
+  Soumia le 22/08, Supabase recommandé le jour où ça devient nécessaire)
+- `app/components/LikeButton.tsx` — bouton ❤️/🤍, présent sur chaque carte de `/resultat` et dans
+  le header de `/voyages/[slug]`
+- `app/favoris/` — nouvelle page, remplace `/voyages` dans la nav. Liste les destinations likées,
+  état vide avec message "Lâche un match ! ✨" + CTA vers `/questionnaire`
+- **Point d'attention** : les favoris sont indexés par `id` de destination Travel Match, pas par
+  `content_slug`. Le lien `/resultat` → fiche passe `?id=<id>` pour lever l'ambiguïté sur Italie et
+  Amérique du Nord (plusieurs destinations, une seule fiche). Un accès direct à `/voyages/italie`
+  sans ce paramètre retombe sur `slug` comme clé de favori, ce qui ne correspond à aucun `id` réel
+  → le like ne remontera pas dans `/favoris` dans ce cas précis (edge case mineur, pas bloquant).
