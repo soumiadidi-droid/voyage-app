@@ -281,6 +281,15 @@ retombait pas sur `slug` en l'absence du paramètre `?id=` (contrairement au bou
 faisait déjà) — du coup `regional_transport` et les combos ne s'affichaient jamais en accès direct
 sur les 7 destinations à fiche dédiée, seulement en arrivant depuis `/resultat`. Corrigé.
 
+**Dédoublonnage du badge combo sur `/resultat` (23/08/2026)** : quand Montréal ET New York
+apparaissent tous les deux dans le même top 3, le badge 🔀 s'affichait sur les deux cartes — effet
+de doublon repéré par Soumia. `dedupeComboBadges()` dans `engine.ts` calcule une clé canonique de
+paire (ids triés + joints) et ne garde le badge que sur la première destination rencontrée (déjà
+triées par score décroissant) ; le miroir garde sa carte mais perd le badge. Appliqué sur le lot
+réellement affiché (`results.slice(0, 3)`), pas sur la liste complète — sinon le dédoublonnage ne
+correspondrait pas à ce que l'utilisateur voit vraiment. Bouton de la fiche détail renommé
+"Découvrir [destination]" (au lieu de "Voir la fiche de...").
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

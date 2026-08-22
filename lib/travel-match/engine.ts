@@ -78,6 +78,34 @@ export type MatchOutcome = {
   results: ScoredDestination[];
 };
 
+function canonicalPairKey(idA: string, idB: string): string {
+  return [idA, idB].sort().join("-");
+}
+
+// Dédoublonnage du badge combo (23/08/2026) : si Montréal ET New York apparaissent tous les deux
+// dans le même lot affiché (ex. top 3), le badge 🔀 ne doit apparaître qu'une fois pour la paire,
+// pas sur les deux cartes — sinon ça a l'air d'un doublon. On garde le badge sur le premier des
+// deux rencontré (déjà trié par score décroissant), on le retire sur le second (miroir).
+// À appliquer sur le lot réellement affiché (ex. après slice(0, 3)), pas sur la liste complète.
+export function dedupeComboBadges(displayed: ScoredDestination[]): ScoredDestination[] {
+  const shownPairs = new Set<string>();
+  return displayed.map((result) => {
+    if (!result.hasComboOpportunity) return result;
+
+    const mirroredCombo = result.destination.suggested_combos.find((combo) =>
+      displayed.some((other) => other.destination.id === combo.target_destination_id)
+    );
+    if (!mirroredCombo) return result; // pas d'autre destination du combo affichée, rien à dédoublonner
+
+    const pairKey = canonicalPairKey(result.destination.id, mirroredCombo.target_destination_id);
+    if (shownPairs.has(pairKey)) {
+      return { ...result, hasComboOpportunity: false };
+    }
+    shownPairs.add(pairKey);
+    return result;
+  });
+}
+
 export function matchTravel(user: UserAnswers, destinations: Destination[] = DESTINATIONS): MatchOutcome {
   const eligible = destinations.filter((d) => passesStrictFilters(user, d));
 

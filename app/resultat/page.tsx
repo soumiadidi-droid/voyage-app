@@ -1,5 +1,5 @@
 import { LikeButton } from "../components/LikeButton";
-import { matchTravel } from "@/lib/travel-match/engine";
+import { matchTravel, dedupeComboBadges } from "@/lib/travel-match/engine";
 import { DESTINATIONS } from "@/lib/travel-match/destinations";
 import {
   SCORE_KEYS,
@@ -98,7 +98,7 @@ export default async function ResultatPage({
   }
 
   const { fallback, results } = matchTravel(answers, DESTINATIONS);
-  const top = results.slice(0, 3);
+  const top = dedupeComboBadges(results.slice(0, 3));
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">

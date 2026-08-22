@@ -283,7 +283,7 @@ export default async function VoyagePage({
                     className="mono"
                     style={{ color: "var(--ember)" }}
                   >
-                    Voir la fiche de {target.title} →
+                    Découvrir {target.title} →
                   </a>
                 </div>
               ))}
