@@ -53,11 +53,12 @@ push régulièrement au fil du travail.
 construites, Soumia a tranché qu'elles ne sont plus nécessaires. Ne pas les reproposer. Le contenu
 en cache (`.recovery/photos.html`, `.recovery/guides.html`) est mort, supprimable sans risque.
 
-**`/partenariats` ("Notre offre") — À CONSTRUIRE, pas abandonnée** (correction de Soumia le
-22/08/2026 après une lecture trop rapide de ma part : je l'avais retirée par erreur en même temps
-que Photos). C'est la page B2B (packs Starter/Signature/Premium du Business Plan), toujours dans la
-nav mais **le lien pointe dans le vide pour l'instant** (page jamais reconstruite après la perte du
-repo). Contenu en cache prêt à parser : `.recovery/partenariats.html`. À faire prochainement.
+**`/partenariats` ("Notre offre") — FAIT (23/08/2026)**. Reconstruite à partir du contenu réel de
+l'ancien site en ligne (https://voyage-app-sage.vercel.app/partenariats, toujours accessible), pas
+depuis le Business Plan Gemini : **volontairement sans grille tarifaire publique** (pas de
+Starter/Signature/Premium affichés), juste 2 modes de collaboration + un contact direct par email
+(décidé par Soumia le 23/08/2026 — les tarifs du BP restent pour la prospection directe, pas
+publics sur le site). Contenu source : `.recovery/partenariats.html`.
 
 `/voyages` (liste ouverte de toutes les destinations) a aussi été supprimée le 22/08/2026 — la
 seule découverte des destinations passe par le questionnaire, voir section Favoris.
