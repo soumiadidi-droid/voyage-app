@@ -92,25 +92,10 @@ export const DESTINATIONS: Destination[] = [
     scores: { repos: 4, exploration: 5, gastronomie: 4, nature_plage: 5, effervescence_urbaine: 4, rythme: 3 },
     logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
     tags: ["GrandesVilles", "HiverCosy", "EspacesSauvages", "Foodie"],
-    suggested_combos: [
-      {
-        id: "combo-montreal-nyc",
-        target_destination_id: "new-york",
-        title: "Extension Ville : New York",
-        vibe_type: "Effervescence urbaine & énergie new-yorkaise",
-        description:
-          "Après le calme et le froid de Montréal, direction New York pour un contraste total — Manhattan, Brooklyn et Central Park.",
-        transition_logistics: {
-          transport_mode: "Avion, voiture ou bus",
-          recommended_days: "3 à 4 jours sur place",
-          practical_tip:
-            "L'agence Vacances Dragon propose des forfaits pas chers avec hébergement en dehors de la ville mais transfert quotidien inclus — rapport qualité-prix imbattable.",
-          partner_link: "https://vacancesdragon.com/fr",
-          partner_link_label: "Voir les forfaits Vacances Dragon →",
-        },
-        min_duration_required: "semaine",
-      },
-    ],
+    // Le combo Montréal<->New York n'est déclaré qu'une seule fois, côté New York (voir plus bas) —
+    // décidé le 23/08/2026 pour ne plus saisir la même paire deux fois. Le sens retour est déduit
+    // automatiquement par lib/travel-match/combos.ts (getCombosFor).
+    suggested_combos: [],
   },
   {
     id: "new-york",
@@ -140,9 +125,12 @@ export const DESTINATIONS: Destination[] = [
         description:
           "Après l'énergie de New York, une extension à Montréal pour respirer — Mont-Royal, ruelles verdoyantes ou froid extrême selon la saison.",
         transition_logistics: {
-          transport_mode: "Vol direct (1h30) ou train Amtrak (10h)",
+          transport_mode: "Avion, voiture ou bus",
           recommended_days: "3 à 4 jours sur place",
-          practical_tip: "Prendre le vol du matin pour profiter de l'après-midi au Mont-Royal.",
+          practical_tip:
+            "L'agence Vacances Dragon propose des forfaits pas chers avec hébergement en dehors de la ville mais transfert quotidien inclus — rapport qualité-prix imbattable.",
+          partner_link: "https://vacancesdragon.com/fr",
+          partner_link_label: "Voir les forfaits Vacances Dragon →",
         },
         min_duration_required: "semaine",
       },

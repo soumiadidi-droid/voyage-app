@@ -5,6 +5,7 @@ import {
   type UserAnswers,
 } from "./types";
 import { DESTINATIONS } from "./destinations";
+import { getCombosFor } from "./combos";
 
 // Distance euclidienne max théorique sur 6 axes (repos/exploration/gastronomie/nature_plage/
 // effervescence_urbaine/rythme), échelle 1-5 donc écart max de 4 par axe : sqrt(6 * 4^2).
@@ -60,7 +61,7 @@ const COMBO_THRESHOLD = 4;
 
 function hasComboOpportunity(user: UserAnswers, dest: Destination): boolean {
   return (
-    dest.suggested_combos.length > 0 &&
+    getCombosFor(dest.id).length > 0 &&
     user.scores.nature_plage >= COMBO_THRESHOLD &&
     user.scores.effervescence_urbaine >= COMBO_THRESHOLD
   );
@@ -92,12 +93,12 @@ export function dedupeComboBadges(displayed: ScoredDestination[]): ScoredDestina
   return displayed.map((result) => {
     if (!result.hasComboOpportunity) return result;
 
-    const mirroredCombo = result.destination.suggested_combos.find((combo) =>
-      displayed.some((other) => other.destination.id === combo.target_destination_id)
+    const mirrored = getCombosFor(result.destination.id).find((resolved) =>
+      displayed.some((other) => other.destination.id === resolved.otherDestination.id)
     );
-    if (!mirroredCombo) return result; // pas d'autre destination du combo affichée, rien à dédoublonner
+    if (!mirrored) return result; // pas d'autre destination du combo affichée, rien à dédoublonner
 
-    const pairKey = canonicalPairKey(result.destination.id, mirroredCombo.target_destination_id);
+    const pairKey = canonicalPairKey(result.destination.id, mirrored.otherDestination.id);
     if (shownPairs.has(pairKey)) {
       return { ...result, hasComboOpportunity: false };
     }

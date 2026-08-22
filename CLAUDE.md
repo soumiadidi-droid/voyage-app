@@ -290,6 +290,26 @@ réellement affiché (`results.slice(0, 3)`), pas sur la liste complète — sin
 correspondrait pas à ce que l'utilisateur voit vraiment. Bouton de la fiche détail renommé
 "Découvrir [destination]" (au lieu de "Voir la fiche de...").
 
+## Saisie unique des combos, sens inverse déduit par le code (23/08/2026)
+
+Soumia ne veut plus saisir un combo deux fois (une fois côté A→B, une fois côté B→A) — trop de
+doublons à maintenir. Nouveau : `lib/travel-match/combos.ts` (`getCombosFor(destinationId)`)
+reconstruit la relation dans les deux sens à partir d'une seule déclaration côté destination
+"phare" (celle qui porte `target_destination_id`).
+
+- Montréal n'a plus aucun `suggested_combos` saisi (`[]`) ; New York porte le seul combo
+  `target_destination_id: "montreal"`, avec tout le contenu (Vacances Dragon inclus).
+- Sur la fiche de la destination phare (New York), le combo s'affiche "authored" : titre rédigé
+  tel quel (`combo.title`, écrit dans ce sens précis).
+- Sur la fiche de l'autre destination (Montréal), le combo est "reverse" : **le titre rédigé ne
+  convient pas** (il est écrit dans l'autre sens — "après l'énergie de New York, direction
+  Montréal" n'a pas de sens affiché sur la page Montréal). Titre remplacé par un générique
+  `Extension : {otherDestination.title}`. `description`/`vibe_type`/`transition_logistics` sont en
+  revanche réutilisés tels quels des deux côtés (compromis accepté pour éviter la double saisie —
+  à surveiller si la description finit par sonner à l'envers sur le sens reverse).
+- `hasComboOpportunity` (badge sur `/resultat`) et `dedupeComboBadges` utilisent maintenant
+  `getCombosFor` au lieu de lire `suggested_combos` directement, donc ça marche pour les deux sens.
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

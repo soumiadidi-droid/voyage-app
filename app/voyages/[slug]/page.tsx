@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { LikeButton } from "../../components/LikeButton";
 import { VOYAGES, getVoyage, type Card } from "@/content/voyages";
 import { DESTINATIONS } from "@/lib/travel-match/destinations";
+import { getCombosFor } from "@/lib/travel-match/combos";
 import type { DurationFilter } from "@/lib/travel-match/types";
 
 export function generateStaticParams() {
@@ -109,16 +110,13 @@ export default async function VoyagePage({
   const userDurationRank = duration && duration in DURATION_ORDER
     ? DURATION_ORDER[duration as DurationFilter]
     : -1;
-  // On ne garde que les combos dont la durée requise est couverte ET dont la destination cible
-  // existe réellement et n'est pas la destination courante (garde-fou contre un lien absurde,
-  // décidé le 23/08/2026).
-  const eligibleCombos = (destination?.suggested_combos ?? [])
-    .filter((combo) => userDurationRank >= DURATION_ORDER[combo.min_duration_required])
-    .flatMap((combo) => {
-      const target = DESTINATIONS.find((d) => d.id === combo.target_destination_id);
-      if (!target || target.id === destination?.id) return [];
-      return [{ combo, target }];
-    });
+  // getCombosFor reconstruit aussi les combos "sens inverse" (déclarés une seule fois côté
+  // destination phare — décidé le 23/08/2026, voir lib/travel-match/combos.ts). Le titre du combo
+  // est rédigé pour le sens "authored" ; côté "reverse" on affiche un titre générique à la place
+  // pour éviter une phrase à l'envers.
+  const eligibleCombos = getCombosFor(destination?.id ?? "").filter(
+    ({ combo }) => userDurationRank >= DURATION_ORDER[combo.min_duration_required]
+  );
 
   return (
     <div>
@@ -236,13 +234,13 @@ export default async function VoyagePage({
               Extensions possibles
             </h2>
             <div className="grid gap-6 sm:grid-cols-2">
-              {eligibleCombos.map(({ combo, target }) => (
+              {eligibleCombos.map(({ combo, otherDestination, direction }) => (
                 <div key={combo.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
                   <h3
                     className="font-semibold mb-2"
                     style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
                   >
-                    {combo.title}
+                    {direction === "authored" ? combo.title : `Extension : ${otherDestination.title}`}
                   </h3>
                   <p className="mono mb-3" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
                     {combo.vibe_type}
@@ -279,11 +277,11 @@ export default async function VoyagePage({
                   </div>
 
                   <a
-                    href={`/voyages/${target.content_slug}?id=${target.id}`}
+                    href={`/voyages/${otherDestination.content_slug}?id=${otherDestination.id}`}
                     className="mono"
                     style={{ color: "var(--ember)" }}
                   >
-                    Découvrir {target.title} →
+                    Découvrir {otherDestination.title} →
                   </a>
                 </div>
               ))}
