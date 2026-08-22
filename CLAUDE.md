@@ -246,6 +246,19 @@ fait remonter 3 points corrigés avant implémentation (détection combo, archit
 Testé : `tsc`/lint/build propres, règle week-end vs long-courrier vérifiée (exclusion sans déclencher
 le fallback à tort), filtre budget vérifié.
 
+**Corrections du 23/08/2026 après test par Soumia** :
+- Le libellé du badge fallback pour le critère transport disait à tort "Nécessite une voiture" même
+  quand ce n'était pas le cas (ex. Italie, Japon) — remplacé par "Transport différent de ta
+  recherche", cohérent avec les autres libellés.
+- Amérique du Nord (Montréal + New York) : le split éditorial remis à plus tard le 22/08 a
+  finalement été fait pour cette paire, à la demande de Soumia. `content/voyages/montreal.json` et
+  `new-york.json` remplacent `amerique-du-nord-hiver.json` (supprimé), contenu réparti sans rien
+  inventer (chaque photo/hôtel/café déjà attribuable à une ville précise dans les légendes
+  existantes). `content_slug` mis à jour dans `lib/travel-match/destinations.ts`. Italie reste
+  groupée sous une seule fiche (`italie`) pour l'instant — pas demandé de la splitter.
+- Combo de test ajouté : Montréal ↔ New York (`suggested_combos`), pour valider visuellement le
+  badge 🔀 et la section "Extensions possibles".
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

@@ -26,7 +26,7 @@ function euclideanScore(user: UserAnswers, dest: Destination): number {
 type FilterCheck = { ok: boolean; label: string };
 
 // Un check par critère de filtrage strict, avec le libellé à afficher dans le badge
-// d'avertissement du mode fallback (ex. "⚠️ Nécessite une voiture").
+// d'avertissement du mode fallback (ex. "⚠️ Transport différent de ta recherche").
 function filterChecks(user: UserAnswers, dest: Destination): FilterCheck[] {
   const logisticsKey = COMPANIONS_TO_LOGISTICS_KEY[user.companions];
   // Règle produit du 23/08/2026 : un week-end élimine d'office les destinations long-courrier,
@@ -39,7 +39,7 @@ function filterChecks(user: UserAnswers, dest: Destination): FilterCheck[] {
   return [
     { ok: dest.filters.distance.includes(user.filters.distance), label: "Distance différente de ta recherche" },
     { ok: dest.filters.climate.includes(user.filters.climate), label: "Climat différent de ta recherche" },
-    { ok: dest.filters.transport.includes(user.filters.transport), label: "Nécessite une voiture" },
+    { ok: dest.filters.transport.includes(user.filters.transport), label: "Transport différent de ta recherche" },
     { ok: dest.filters.sport_level.includes(user.filters.sport_level), label: "Niveau physique différent de ta recherche" },
     { ok: dest.filters.duration.includes(user.filters.duration), label: "Durée de séjour différente de ta recherche" },
     { ok: dest.filters.budget.includes(user.filters.budget), label: "Budget différent de ta recherche" },

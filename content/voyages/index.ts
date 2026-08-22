@@ -1,4 +1,5 @@
-import amerique from "./amerique-du-nord-hiver.json";
+import montreal from "./montreal.json";
+import newYork from "./new-york.json";
 import coteBasque from "./cote-basque.json";
 import crete from "./crete.json";
 import dubai from "./dubai.json";
@@ -44,7 +45,7 @@ export type VoyageContent = {
 };
 
 export const VOYAGES: VoyageContent[] = [
-  amerique, coteBasque, crete, dubai, italie, japon, lisbonne, mykonos, porto,
+  montreal, newYork, coteBasque, crete, dubai, italie, japon, lisbonne, mykonos, porto,
 ] as VoyageContent[];
 
 export function getVoyage(slug: string): VoyageContent | undefined {

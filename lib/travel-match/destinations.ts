@@ -72,7 +72,7 @@ export const DESTINATIONS: Destination[] = [
     id: "montreal",
     title: "Montréal",
     authenticity_badge: "tested_approved",
-    content_slug: "amerique-du-nord-hiver",
+    content_slug: "montreal",
     summary:
       "Vivre Montréal au rythme des 4 saisons — ruelles verdoyantes en été, couleurs de l'automne, Mont-Royal et froid extrême de l'hiver.",
     hero_image: "https://...",
@@ -104,7 +104,7 @@ export const DESTINATIONS: Destination[] = [
     id: "new-york",
     title: "New York",
     authenticity_badge: "tested_approved",
-    content_slug: "amerique-du-nord-hiver",
+    content_slug: "new-york",
     summary:
       "Six voyages, mille facettes — l'énergie brute de Manhattan, la vibe de Brooklyn, Central Park et la magie de la ville en hiver.",
     hero_image: "https://...",

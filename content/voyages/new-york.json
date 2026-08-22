@@ -1,0 +1,62 @@
+{
+  "slug": "new-york",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_222824.jpg",
+    "country": "États-Unis",
+    "tags": [
+      "ville",
+      "hiver"
+    ],
+    "title": "New York",
+    "tagline": "L'agitation de New York, entre Empire State et Oculus.",
+    "photoCount": "6 photographies"
+  },
+  "intro": "L'agitation de New York — Washington Square en plein soleil, l'Oculus et sa flèche de verre, et l'Empire State Building qui change de couleur du jour à la nuit, vu depuis un appartement en hauteur.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_222824.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_222824.jpg",
+      "alt": "Vue depuis un immeuble en hauteur, New York, soirée",
+      "caption": "Vue depuis un immeuble en hauteur, New York, soirée",
+      "emotionalText": "L'Empire State Building illuminé en jaune-orange, entouré de tours plus sombres qui se fondent dans la nuit — Manhattan vue d'un appartement en hauteur donne une échelle qu'aucune photo de rue ne rend aussi bien."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_124458.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_124458.jpg",
+      "alt": "World Trade Center, milieu de journée",
+      "caption": "World Trade Center, milieu de journée",
+      "emotionalText": "Les côtes blanches de l'Oculus qui s'ouvrent comme des ailes, la flèche de One World Trade Center qui monte juste derrière, et un taxi jaune qui traverse au premier plan — impossible de faire plus new-yorkais dans un seul cadre."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_174131.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_174131.jpg",
+      "alt": "Vue depuis un immeuble en hauteur, New York, fin de journée",
+      "caption": "Vue depuis un immeuble en hauteur, New York, fin de journée",
+      "emotionalText": "Un ciel qui passe du bleu au rose juste derrière la flèche de l'Empire State — la même vue que la nuit, mais avec encore assez de lumière pour distinguer chaque tour du quartier."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250224_082833.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250224_082833.jpg",
+      "alt": "Rooftop, New York, matinée",
+      "caption": "Rooftop, New York, matinée",
+      "emotionalText": "Une piscine intérieure au dernier étage, avec la ville qui s'étend derrière la baie vitrée — se baigner en plein hiver new-yorkais avec cette vue-là n'a rien d'anodin."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_113258.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_113258.jpg",
+      "alt": "Washington Square, milieu de journée",
+      "caption": "Washington Square, milieu de journée",
+      "emotionalText": "L'arc de Washington Square qui ferme la perspective, un ciel bleu sans nuage malgré le froid de février — le genre de journée d'hiver new-yorkaise où la lumière compense largement la température."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250222_105141.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_105141.jpg",
+      "alt": "SoHo, matinée",
+      "caption": "SoHo, matinée",
+      "emotionalText": "Un immeuble en brique rouge à l'angle de la rue, l'escalier de secours en fonte qui zigzague sur la façade — l'architecture industrielle de SoHo qui a fait sa réputation, vue un matin tranquille."
+    }
+  ],
+  "stays": [],
+  "eats": [],
+  "activities": []
+}
