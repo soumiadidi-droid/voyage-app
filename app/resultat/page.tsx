@@ -2,13 +2,14 @@ import { LikeButton } from "../components/LikeButton";
 import { matchTravel } from "@/lib/travel-match/engine";
 import { DESTINATIONS } from "@/lib/travel-match/destinations";
 import {
-  EMOTION_KEYS,
-  VIBE_KEYS,
+  SCORE_KEYS,
   type UserAnswers,
   type DistanceFilter,
   type ClimateFilter,
   type TransportFilter,
   type SportLevelFilter,
+  type DurationFilter,
+  type BudgetFilter,
   type Companions,
 } from "@/lib/travel-match/types";
 
@@ -20,9 +21,13 @@ const DISTANCE_VALUES: DistanceFilter[] = ["proche", "europe", "long_courrier"];
 const CLIMATE_VALUES: ClimateFilter[] = ["chaleur", "douceur", "hiver_cosy"];
 const TRANSPORT_VALUES: TransportFilter[] = ["sans_voiture", "transports_possibles", "voiture_necessaire"];
 const SPORT_VALUES: SportLevelFilter[] = ["tranquille", "actif"];
+const DURATION_VALUES: DurationFilter[] = ["week_end", "semaine", "grand_voyage"];
+const BUDGET_VALUES: BudgetFilter[] = ["eco", "confort", "premium"];
 const COMPANIONS_VALUES: Companions[] = ["solo", "duo", "amis", "famille_moins_6", "famille_plus_6"];
 
-// Reconstruit les réponses depuis la query string. Si les 5 questions à choix n'ont pas toutes
+const REQUIRED_CHOICE_KEYS = ["distance", "climate", "transport", "sport_level", "duration", "budget", "companions"];
+
+// Reconstruit les réponses depuis la query string. Si les 7 questions à choix n'ont pas toutes
 // répondu (ex. arrivée directe sur /resultat sans passer par le questionnaire), `complete` est
 // false et la page affiche un message plutôt qu'un résultat basé sur des valeurs inventées.
 function parseAnswers(raw: Record<string, string>): { answers: UserAnswers; complete: boolean } {
@@ -38,28 +43,30 @@ function parseAnswers(raw: Record<string, string>): { answers: UserAnswers; comp
   const sport_level = SPORT_VALUES.includes(raw.sport_level as SportLevelFilter)
     ? (raw.sport_level as SportLevelFilter)
     : "tranquille";
+  const duration = DURATION_VALUES.includes(raw.duration as DurationFilter)
+    ? (raw.duration as DurationFilter)
+    : "semaine";
+  const budget = BUDGET_VALUES.includes(raw.budget as BudgetFilter)
+    ? (raw.budget as BudgetFilter)
+    : "confort";
   const companions = COMPANIONS_VALUES.includes(raw.companions as Companions)
     ? (raw.companions as Companions)
     : "solo";
 
-  const complete = ["distance", "climate", "transport", "sport_level", "companions"].every(
-    (key) => key in raw
-  );
+  const complete = REQUIRED_CHOICE_KEYS.every((key) => key in raw);
 
-  const emotions = {} as UserAnswers["emotions"];
-  for (const key of EMOTION_KEYS) {
-    const value = Number(raw[`emo_${key}`]);
-    emotions[key] = Number.isFinite(value) && value >= 1 && value <= 5 ? value : 3;
-  }
-
-  const vibe = {} as UserAnswers["vibe"];
-  for (const key of VIBE_KEYS) {
-    const value = Number(raw[`vibe_${key}`]);
-    vibe[key] = Number.isFinite(value) && value >= 1 && value <= 5 ? value : 3;
+  const scores = {} as UserAnswers["scores"];
+  for (const key of SCORE_KEYS) {
+    const value = Number(raw[`score_${key}`]);
+    scores[key] = Number.isFinite(value) && value >= 1 && value <= 5 ? value : 3;
   }
 
   return {
-    answers: { filters: { distance, climate, transport, sport_level }, companions, emotions, vibe },
+    answers: {
+      filters: { distance, climate, transport, sport_level, duration, budget },
+      companions,
+      scores,
+    },
     complete,
   };
 }
@@ -116,7 +123,7 @@ export default async function ResultatPage({
       )}
 
       <div className="flex flex-col gap-8">
-        {top.map(({ destination, score, brokenFilters }) => (
+        {top.map(({ destination, score, brokenFilters, hasComboOpportunity }) => (
           <div key={destination.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
             <div className="flex items-baseline justify-between gap-4 mb-2">
               <h2
@@ -133,6 +140,11 @@ export default async function ResultatPage({
               </div>
             </div>
             <p className="mb-3" style={{ color: "var(--text-secondary)" }}>{destination.summary}</p>
+            {hasComboOpportunity && (
+              <p className="mono mb-3" style={{ color: "var(--aurora)", fontSize: "0.8rem" }}>
+                🔀 Combo possible — cette destination propose une extension
+              </p>
+            )}
             <ul
               className="mono flex flex-wrap gap-x-2 gap-y-1 mb-3"
               style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}
@@ -152,7 +164,7 @@ export default async function ResultatPage({
               </ul>
             )}
             <a
-              href={`/voyages/${destination.content_slug}?id=${destination.id}`}
+              href={`/voyages/${destination.content_slug}?id=${destination.id}&duration=${answers.filters.duration}`}
               className="mono"
               style={{ color: "var(--ember)" }}
             >

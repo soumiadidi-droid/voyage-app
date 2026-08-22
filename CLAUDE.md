@@ -210,6 +210,42 @@ Deux idées du spec Gemini non reprises mais pas écartées, à considérer si b
 - Toujours en local, rien déployé sur Vercel — attendre validation explicite avant preview/prod
   (voir Phase 4 du plan). Soumia a prévu un test global en local avant de valider le déploiement.
 
+## Simplification du questionnaire — durée, budget, combos (23/08/2026)
+
+Refonte du modèle de scores et ajout de filtres, décidée avec Soumia après une relecture qui a
+fait remonter 3 points corrigés avant implémentation (détection combo, architecture, sport_level) :
+
+- **Nouveaux filtres stricts** : `duration` (week_end/semaine/grand_voyage) et `budget`
+  (eco/confort/premium), en tout début de questionnaire. Règle produit : un week-end élimine
+  d'office toute destination qui ne supporte QUE le long-courrier — appliquée comme garde-fou au
+  niveau du moteur (`engine.ts`), pas seulement comme une histoire de bonne saisie de données.
+- **`sport_level` conservé** (Mykonos exclu du niveau actif, etc. — rien n'est perdu).
+- **Scores repensés en 6 axes indépendants** (remplace l'ancien modèle émotions/vibe à 9 axes) :
+  `repos`, `exploration`, `gastronomie`, `nature_plage`, `effervescence_urbaine`, `rythme`. L'ancien
+  axe bipolaire "cadre de vie" (nature ↔ ville) a été scindé en deux curseurs indépendants
+  (`nature_plage` / `effervescence_urbaine`) précisément pour permettre de détecter qu'un
+  utilisateur veut les deux à la fois — impossible avec un seul axe bipolaire.
+- **Migration des 12 destinations** : scores migrés mécaniquement depuis l'ancien modèle
+  (`repos` = moyenne déconnexion/lâcher-prise, `exploration` = moyenne émerveillement/inspiration,
+  le reste repris 1:1). `duration`/`budget` par destination = première passe de Claude, à valider
+  par Soumia comme les précédentes migrations.
+- **`logistics` renommé** : `solo_friendly`→`solo`, `duo_romantic`→`duo`, `friends_group`→`friends`
+  (family_kids_under_6/over_6 inchangés).
+- **`authenticity_badge`** remplace `status` : `tested_approved` / `bucket_list` / `discovery`
+  (reprend les 3 badges du spec Gemini, mis de côté le 22/08 puis réintégré le 23/08). Les 12
+  destinations actuelles sont toutes en `tested_approved`.
+- **Combos/extensions** (`suggested_combos` par destination, type `SuggestedCombo`) : détecté quand
+  l'utilisateur met ≥4 à la fois sur `nature_plage` et `effervescence_urbaine`. Affiché comme un
+  **badge visuel** sur la carte résultat (🔀 Combo possible), sans influencer le score — décision
+  explicite de Soumia pour ne pas re-toucher la formule de scoring calibrée. Sur la fiche détail
+  (`/voyages/[slug]`), les combos s'affichent seulement si la durée choisie par l'utilisateur
+  (transmise en query param depuis `/resultat`) couvre le `min_duration_required` du combo. Aucune
+  destination n'a de combo renseigné pour l'instant (`suggested_combos: []` partout) — contenu à
+  écrire par Soumia, pas inventé par Claude (comme toute la partie narrative du site).
+
+Testé : `tsc`/lint/build propres, règle week-end vs long-courrier vérifiée (exclusion sans déclencher
+le fallback à tort), filtre budget vérifié.
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

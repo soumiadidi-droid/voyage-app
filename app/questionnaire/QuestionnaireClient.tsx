@@ -3,20 +3,15 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { TRAVEL_MATCH_QUESTIONS } from "@/lib/travel-match/questionnaire";
-import { EMOTION_KEYS, type EmotionKey, type VibeKey } from "@/lib/travel-match/types";
+import { SCORE_KEYS, type ScoreKey } from "@/lib/travel-match/types";
 
-type SliderAnswers = Record<EmotionKey | VibeKey, number>;
+type SliderAnswers = Record<ScoreKey, number>;
 
 function initialSliderAnswers(): SliderAnswers {
   const init = {} as SliderAnswers;
-  for (const q of TRAVEL_MATCH_QUESTIONS) {
-    if (q.type !== "sliders") continue;
-    for (const s of q.sliders) init[s.key] = 3; // curseur au milieu par défaut, jamais biaisé
-  }
+  for (const key of SCORE_KEYS) init[key] = 3; // curseur au milieu par défaut, jamais biaisé
   return init;
 }
-
-const EMOTION_KEY_SET: ReadonlySet<string> = new Set(EMOTION_KEYS);
 
 export function QuestionnaireClient() {
   const router = useRouter();
@@ -32,8 +27,7 @@ export function QuestionnaireClient() {
     const params = new URLSearchParams();
     for (const [key, value] of Object.entries(finalChoices)) params.set(key, value);
     for (const [key, value] of Object.entries(finalSliders)) {
-      const prefix = EMOTION_KEY_SET.has(key) ? "emo_" : "vibe_";
-      params.set(`${prefix}${key}`, String(value));
+      params.set(`score_${key}`, String(value));
     }
     router.push(`/resultat?${params.toString()}`);
   }

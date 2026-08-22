@@ -1,19 +1,20 @@
-import type { EmotionKey, VibeKey } from "./types";
+import type { ScoreKey } from "./types";
 
-// Copy validée par Soumia le 22/08/2026 — voir CLAUDE.md, section "Refactor moteur de matching
-// Travel Match". Ne pas reformuler sans qu'elle le demande (même règle que pour les scores sport).
+// Copy validée par Soumia le 22/08/2026, complétée le 23/08/2026 (durée, budget, nouveaux
+// sliders repos/exploration/gastronomie/nature_plage/effervescence_urbaine/rythme). Ne pas
+// reformuler sans qu'elle le demande (même règle que pour les scores sport).
 
 export type ChoiceOption = { value: string; label: string };
 
 export type ChoiceQuestion = {
   type: "choice";
-  id: "distance" | "climate" | "transport" | "sport_level" | "companions";
+  id: "duration" | "budget" | "distance" | "climate" | "transport" | "sport_level" | "companions";
   question: string;
   options: ChoiceOption[];
 };
 
 export type SliderDef = {
-  key: EmotionKey | VibeKey;
+  key: ScoreKey;
   label: string;
   lowLabel?: string;
   highLabel?: string;
@@ -21,7 +22,7 @@ export type SliderDef = {
 
 export type SlidersQuestion = {
   type: "sliders";
-  id: "emotions" | "vibe";
+  id: "emotions" | "ambiance";
   question: string;
   helper: string;
   sliders: SliderDef[];
@@ -30,6 +31,26 @@ export type SlidersQuestion = {
 export type TravelMatchQuestion = ChoiceQuestion | SlidersQuestion;
 
 export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
+  {
+    type: "choice",
+    id: "duration",
+    question: "Combien de temps tu pars ?",
+    options: [
+      { value: "week_end", label: "Un week-end, 2 à 4 jours" },
+      { value: "semaine", label: "Une semaine, 5 à 8 jours" },
+      { value: "grand_voyage", label: "Un grand voyage, 9 jours et plus" },
+    ],
+  },
+  {
+    type: "choice",
+    id: "budget",
+    question: "Quel budget, hors vols ?",
+    options: [
+      { value: "eco", label: "Petit budget, je fais des choix malins" },
+      { value: "confort", label: "Confort, sans me ruiner" },
+      { value: "premium", label: "Premium, je me fais plaisir" },
+    ],
+  },
   {
     type: "choice",
     id: "distance",
@@ -87,23 +108,25 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     question: "Qu'est-ce que tu recherches, au fond ?",
     helper: "1 = pas du tout, 5 = complètement",
     sliders: [
-      { key: "deconnexion", label: "Déconnexion totale, couper avec le quotidien" },
-      { key: "emerveillement", label: "Émerveillement, en prendre plein les yeux" },
-      { key: "reconnexion", label: "Reconnexion (à soi, à l'autre, à l'essentiel)" },
-      { key: "lacher_prise", label: "Lâcher-prise, ne rien avoir à gérer" },
-      { key: "inspiration", label: "Inspiration, revenir avec des idées plein la tête" },
+      { key: "repos", label: "Repos & déconnexion, ne penser à rien" },
+      { key: "exploration", label: "Découverte & exploration, sortir des sentiers battus" },
+      { key: "gastronomie", label: "Gastronomie & épicurisme, se régaler avant tout" },
     ],
   },
   {
     type: "sliders",
-    id: "vibe",
+    id: "ambiance",
     question: "Et niveau ambiance ?",
-    helper: "Le curseur part du milieu — glisse-le vers le pôle qui te parle",
+    helper: "Ajuste chaque curseur selon ton envie",
     sliders: [
-      { key: "pression_horaire", label: "Programme dense", lowLabel: "Très slow", highLabel: "Programme minuté" },
-      { key: "densite_urbaine", label: "Grande ville", lowLabel: "Nature brute", highLabel: "Pleine métropole" },
-      { key: "gourmandise", label: "Gastronomie", lowLabel: "Secondaire", highLabel: "Priorité absolue" },
-      { key: "nature", label: "Nature", lowLabel: "Plutôt ville", highLabel: "100% nature" },
+      { key: "nature_plage", label: "Envie de nature, de plage, de grands espaces" },
+      { key: "effervescence_urbaine", label: "Envie de ville, d'animation, d'effervescence urbaine" },
+      {
+        key: "rythme",
+        label: "Rythme du séjour",
+        lowLabel: "Slow, libre",
+        highLabel: "Actif, minuté",
+      },
     ],
   },
 ];

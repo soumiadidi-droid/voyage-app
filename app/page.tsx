@@ -63,7 +63,7 @@ export default function Home() {
         >
           <div className="max-w-xl mx-auto">
             <p className="mono mb-2" style={{ color: "var(--aurora)" }}>
-              7 questions, 2 minutes
+              9 questions, 2 minutes
             </p>
             <h2
               className="font-extrabold mb-4"

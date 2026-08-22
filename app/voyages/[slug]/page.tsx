@@ -1,6 +1,8 @@
 import { notFound } from "next/navigation";
 import { LikeButton } from "../../components/LikeButton";
 import { VOYAGES, getVoyage, type Card } from "@/content/voyages";
+import { DESTINATIONS } from "@/lib/travel-match/destinations";
+import type { DurationFilter } from "@/lib/travel-match/types";
 
 export function generateStaticParams() {
   return VOYAGES.map((v) => ({ slug: v.slug }));
@@ -87,7 +89,7 @@ export default async function VoyagePage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ id?: string }>;
+  searchParams: Promise<{ id?: string; duration?: string }>;
 }) {
   const { slug } = await params;
   const voyage = getVoyage(slug);
@@ -97,7 +99,20 @@ export default async function VoyagePage({
   // le lien depuis /resultat. Sans lui (accès direct à la fiche), on retombe sur le slug de
   // contenu — correct pour les 7 destinations à fiche dédiée, approximatif pour Italie/Amérique du
   // Nord qui partagent une fiche entre plusieurs destinations de matching.
-  const { id: favoriteId } = await searchParams;
+  const { id: favoriteId, duration } = await searchParams;
+  const destination = DESTINATIONS.find((d) => d.id === favoriteId);
+
+  // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par
+  // le combo (décidé le 23/08/2026). Sans `duration` transmis (accès direct), on n'affiche rien —
+  // pas de deviner. Ordre : week_end < semaine < grand_voyage.
+  const DURATION_ORDER: Record<DurationFilter, number> = { week_end: 0, semaine: 1, grand_voyage: 2 };
+  const userDurationRank = duration && duration in DURATION_ORDER
+    ? DURATION_ORDER[duration as DurationFilter]
+    : -1;
+  const eligibleCombos =
+    destination?.suggested_combos.filter(
+      (combo) => userDurationRank >= DURATION_ORDER[combo.min_duration_required]
+    ) ?? [];
 
   return (
     <div>
@@ -180,6 +195,36 @@ export default async function VoyagePage({
         <CardSection title="Où dormir" cards={voyage.stays} />
         <CardSection title="Où manger" cards={voyage.eats} />
         <CardSection title="Activités" cards={voyage.activities} />
+
+        {eligibleCombos.length > 0 && (
+          <div className="my-16 sm:my-24">
+            <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
+              🔀 Prolonger le voyage
+            </p>
+            <h2
+              className="font-extrabold mb-8"
+              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
+            >
+              Extensions possibles
+            </h2>
+            <div className="grid gap-6 sm:grid-cols-2">
+              {eligibleCombos.map((combo) => (
+                <div key={combo.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
+                  <h3
+                    className="font-semibold mb-2"
+                    style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
+                  >
+                    {combo.title}
+                  </h3>
+                  <p className="mono mb-2" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
+                    {combo.duration} · {combo.transport_type} · {combo.vibe_type}
+                  </p>
+                  <p className="leading-relaxed">{combo.description}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </main>
     </div>
   );
