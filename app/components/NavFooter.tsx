@@ -4,6 +4,7 @@ import { Logo } from "./Logo";
 const NAV_LINKS = [
   { href: "/questionnaire", label: "Trouver mon voyage" },
   { href: "/favoris", label: "Favoris" },
+  { href: "/partenariats", label: "Notre offre" },
 ];
 
 export function Nav() {
