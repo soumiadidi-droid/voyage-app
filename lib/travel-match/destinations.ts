@@ -27,6 +27,11 @@ export const DESTINATIONS: Destination[] = [
     logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
     tags: ["GrandesVilles", "Foodie", "RuelleAuthentique"],
     suggested_combos: [],
+    regional_transport: {
+      recommended_mode: "Train à grande vitesse (Frecciarossa)",
+      pass_or_tip: "Réserver les billets à l'avance pour les meilleurs tarifs",
+      summary: "Liaison rapide et fréquente entre Florence, Rome et Pise, sans avoir besoin de voiture.",
+    },
   },
   {
     id: "italie-sorrente-amalfe",
@@ -188,6 +193,12 @@ export const DESTINATIONS: Destination[] = [
     },
     tags: ["GrandesVilles", "Foodie", "Authentique", "SlowLife"],
     suggested_combos: [],
+    regional_transport: {
+      recommended_mode: "Train à grande vitesse (Shinkansen)",
+      pass_or_tip: "Acheter le JR Pass en avance",
+      summary:
+        "Réseau ferroviaire ultra-dense et ponctuel, idéal pour relier les grandes villes sans voiture.",
+    },
   },
   {
     id: "mykonos",

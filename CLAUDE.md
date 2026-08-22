@@ -267,6 +267,20 @@ plat. La carte "Extensions possibles" affiche maintenant un bloc "Comment faire 
 bouton "Voir la fiche de [destination]" qui navigue vers la vraie fiche cible. `min_duration_required`
 conservé (pas dans la dernière demande de Soumia, mais nécessaire au filtre d'affichage déjà validé).
 
+## Transport inter-villes / mobilité régionale (23/08/2026)
+
+Nouveau champ optionnel `regional_transport` sur `Destination` (`recommended_mode`, `pass_or_tip?`,
+`summary`) — comment se déplacer ENTRE les étapes d'une même destination multi-villes (JR Pass au
+Japon, Frecciarossa en Italie), pas entre deux destinations différentes (ça, c'est déjà le rôle des
+combos). Affiché en bloc pratique juste après l'intro sur `/voyages/[slug]`, seulement quand
+renseigné. Renseigné pour Japon (Shinkansen) et Italie Nord-Culture (Frecciarossa) — les autres
+destinations n'en ont pas besoin.
+
+**Bug trouvé et corrigé au passage** : la résolution de `destination` sur la fiche détail ne
+retombait pas sur `slug` en l'absence du paramètre `?id=` (contrairement au bouton like, qui le
+faisait déjà) — du coup `regional_transport` et les combos ne s'affichaient jamais en accès direct
+sur les 7 destinations à fiche dédiée, seulement en arrivant depuis `/resultat`. Corrigé.
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

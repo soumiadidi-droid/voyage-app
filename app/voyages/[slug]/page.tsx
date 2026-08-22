@@ -100,7 +100,7 @@ export default async function VoyagePage({
   // contenu — correct pour les 7 destinations à fiche dédiée, approximatif pour Italie/Amérique du
   // Nord qui partagent une fiche entre plusieurs destinations de matching.
   const { id: favoriteId, duration } = await searchParams;
-  const destination = DESTINATIONS.find((d) => d.id === favoriteId);
+  const destination = DESTINATIONS.find((d) => d.id === (favoriteId ?? slug));
 
   // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par
   // le combo (décidé le 23/08/2026). Sans `duration` transmis (accès direct), on n'affiche rien —
@@ -161,6 +161,28 @@ export default async function VoyagePage({
               <span className="drop-cap">{voyage.intro[0]}</span>
               {voyage.intro.slice(1)}
             </p>
+          </div>
+        )}
+
+        {destination?.regional_transport && (
+          <div
+            className="max-w-xl mx-auto mb-16 sm:mb-20 p-5"
+            style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
+          >
+            <p className="mono mb-2" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
+              Se déplacer sur place 🚆
+            </p>
+            <p className="mb-1">
+              <strong>{destination.regional_transport.recommended_mode}</strong>
+            </p>
+            <p className="mb-1" style={{ color: "var(--text-secondary)" }}>
+              {destination.regional_transport.summary}
+            </p>
+            {destination.regional_transport.pass_or_tip && (
+              <p className="italic" style={{ color: "var(--text-secondary)" }}>
+                {destination.regional_transport.pass_or_tip}
+              </p>
+            )}
           </div>
         )}
 

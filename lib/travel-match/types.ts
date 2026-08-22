@@ -73,6 +73,15 @@ export type SuggestedCombo = {
   min_duration_required: Extract<DurationFilter, "semaine" | "grand_voyage">;
 };
 
+// Comment se déplacer ENTRE les étapes d'une même destination (pas entre deux destinations
+// différentes comme les combos) — pertinent pour les pays/régions multi-villes type Japon ou
+// Italie. Optionnel : affiché seulement quand renseigné, décidé le 23/08/2026.
+export type RegionalTransport = {
+  recommended_mode: string; // ex. "Train à grande vitesse (Shinkansen)"
+  pass_or_tip?: string; // ex. "Acheter le JR Pass en avance"
+  summary: string; // ex. "Réseau ferroviaire ultra-dense et ponctuel, idéal pour relier les grandes villes sans voiture."
+};
+
 export type Destination = {
   id: string;
   title: string;
@@ -88,6 +97,7 @@ export type Destination = {
   // Affichés sur la fiche détail uniquement si la durée choisie par l'utilisateur le permet
   // (min_duration_required). Vide par défaut, à peupler destination par destination.
   suggested_combos: SuggestedCombo[];
+  regional_transport?: RegionalTransport;
 };
 
 export type Companions = "solo" | "duo" | "amis" | "famille_moins_6" | "famille_plus_6";
