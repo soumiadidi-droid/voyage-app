@@ -291,7 +291,7 @@ export const DESTINATIONS: Destination[] = [
     filters: {
       distance: ["proche"],
       climate: ["chaleur", "douceur"],
-      transport: ["voiture_necessaire", "transports_possibles"],
+      transport: ["sans_voiture", "voiture_necessaire", "transports_possibles"],
       sport_level: ["tranquille", "actif"],
     },
     emotions: { deconnexion: 4, emerveillement: 4, reconnexion: 5, lacher_prise: 5, inspiration: 3 },
