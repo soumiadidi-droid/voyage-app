@@ -184,6 +184,10 @@ export default async function VoyagePage({
           </div>
         )}
 
+        <CardSection title="Où dormir" cards={voyage.stays} />
+        <CardSection title="Où manger" cards={voyage.eats} />
+        <CardSection title="Activités" cards={voyage.activities} />
+
         <div className="my-14 sm:my-20 grid gap-6 sm:gap-8 sm:grid-cols-2">
           {voyage.gallery.map((photo, i) => (
             <div key={i} className={voyage.gallery.length % 2 === 1 && i === 0 ? "sm:col-span-2" : ""}>
@@ -217,10 +221,6 @@ export default async function VoyagePage({
             </div>
           ))}
         </div>
-
-        <CardSection title="Où dormir" cards={voyage.stays} />
-        <CardSection title="Où manger" cards={voyage.eats} />
-        <CardSection title="Activités" cards={voyage.activities} />
 
         {eligibleCombos.length > 0 && (
           <div className="my-16 sm:my-24">
