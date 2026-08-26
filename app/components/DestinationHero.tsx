@@ -1,22 +1,37 @@
 import { LikeButton } from "./LikeButton";
 import type { VoyageContent } from "@/content/voyages";
 
-// Hero fixe : plus d'image du tout (décidé le 26/08/2026 — retiré après plusieurs allers-retours
-// sur l'image par destination), juste un fond noir semi-transparent.
+// Hero fixe (décidé le 26/08/2026 — plus de carrousel). Fond noir semi-transparent par défaut ;
+// une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
+// remettre en place le système précédent (voile/texture systématique sur toutes les fiches).
 export function DestinationHero({
   hero,
   intro,
   favoriteId,
+  heroImage,
 }: {
   hero: VoyageContent["hero"];
   intro: string;
   favoriteId: string;
+  heroImage?: string;
 }) {
   return (
-    <div
-      className="relative min-h-[60vh] sm:min-h-[70vh] flex items-end p-6 sm:p-14 overflow-hidden"
-      style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
-    >
+    <div className="relative min-h-[60vh] sm:min-h-[70vh] flex items-end p-6 sm:p-14 overflow-hidden">
+      {heroImage && (
+        <div
+          className="absolute inset-0"
+          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+        />
+      )}
+      {heroImage ? (
+        // Dégradé gauche→droite (décidé le 26/08/2026, demandé sur NYC puis étendu à toute image
+        // de Hero) : sombre sous le texte pour la lisibilité, plus léger à droite pour laisser
+        // respirer la photo. Sans image, le fond reste un noir plat uniforme (rien à révéler).
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/15" />
+      ) : (
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
+      )}
+
       <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
         <LikeButton id={favoriteId} />
       </div>
