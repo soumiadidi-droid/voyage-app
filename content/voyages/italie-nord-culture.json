@@ -1,0 +1,66 @@
+{
+  "slug": "italie-nord-culture",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260719_200001.jpg",
+    "country": "Italie",
+    "tags": [
+      "villes",
+      "culture",
+      "gastronomie"
+    ],
+    "title": "Italie : Florence, Rome & Pise",
+    "tagline": "Pise, Florence, Rome — trois villes en juillet, entre Renaissance et Antiquité.",
+    "photoCount": "3 photographies"
+  },
+  "intro": "Trois étapes très différentes en une semaine : la tour penchée de Pise dès le matin, les trésors de la Renaissance à Florence, et la masse écrasante du Colisée sous la chaleur de juillet à Rome.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260718_111014.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260718_111014.jpg",
+      "alt": "Piazza dei Miracoli, matinée — première étape du voyage",
+      "caption": "Piazza dei Miracoli, matinée — première étape du voyage",
+      "emotionalText": "Elle penche vraiment plus qu'on ne l'imagine sur les photos, et il faut lever la tête d'un cran de plus que prévu pour la cadrer en entier. Autour, la pelouse et le marbre blanc de la cathédrale absorbent toute la lumière du matin."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260719_200001.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260719_200001.jpg",
+      "alt": "Cathédrale Santa Maria del Fiore, fin de journée",
+      "caption": "Cathédrale Santa Maria del Fiore, fin de journée",
+      "emotionalText": "Le marbre rose et vert du Duomo prend une teinte presque grise sous ce ciel voilé, et sa masse écrase littéralement la rue en contrebas. Impossible de reculer assez pour tout cadrer d'un coup — il faut lever les yeux et accepter de ne voir qu'un morceau à la fois."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260721_130114.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260721_130114.jpg",
+      "alt": "Colisée, milieu de journée — chaleur de juillet",
+      "caption": "Colisée, milieu de journée — chaleur de juillet",
+      "emotionalText": "Vu d'en bas, en contre-plongée, il paraît encore plus massif que dans le souvenir qu'on en a avant d'y aller. La pierre est presque blanche sous le soleil de juillet, et les arches vides laissent deviner deux mille ans d'usure sans un mot d'explication nécessaire."
+    }
+  ],
+  "stays": [
+    {
+      "name": "The Social Hub Florence",
+      "status": "J’ai dormi ici",
+      "location": "Florence",
+      "review": "Une des adresses du séjour à Florence — détails à compléter.",
+      "tags": [
+        "piscine",
+        "bien situé pour explorer à pied"
+      ],
+      "link": "https://www.booking.com/hotel/it/the-social-hub-florence-lavagnini-extended-stay.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "The Social Hub Rome",
+      "status": "J’ai dormi ici",
+      "location": "San Lorenzo, Rome",
+      "review": "Une des adresses du séjour à Rome — détails à compléter.",
+      "tags": [
+        "piscine"
+      ],
+      "link": "https://www.booking.com/hotel/it/the-social-hub-rome.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [],
+  "activities": []
+}

@@ -3,7 +3,9 @@ import newYork from "./new-york.json";
 import coteBasque from "./cote-basque.json";
 import crete from "./crete.json";
 import dubai from "./dubai.json";
-import italie from "./italie.json";
+import italieNordCulture from "./italie-nord-culture.json";
+import italieSorrenteAmalfe from "./italie-sorrente-amalfe.json";
+import italiePouilles from "./italie-pouilles.json";
 import japonUrbain from "./japon-urbain.json";
 import japonTraditionNature from "./japon-tradition-nature.json";
 import lisbonne from "./lisbonne.json";
@@ -54,7 +56,8 @@ export type VoyageContent = {
 };
 
 export const VOYAGES: VoyageContent[] = [
-  montreal, newYork, coteBasque, crete, dubai, italie, japonUrbain, japonTraditionNature, lisbonne, mykonos, porto,
+  montreal, newYork, coteBasque, crete, dubai, italieNordCulture, italieSorrenteAmalfe, italiePouilles,
+  japonUrbain, japonTraditionNature, lisbonne, mykonos, porto,
 ] as VoyageContent[];
 
 export function getVoyage(slug: string): VoyageContent | undefined {

@@ -1,0 +1,48 @@
+{
+  "slug": "italie-sorrente-amalfe",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_201932.jpg",
+    "country": "Italie",
+    "tags": [
+      "mer",
+      "falaises",
+      "douceur"
+    ],
+    "title": "Italie : Sorrente & Côte Amalfitaine",
+    "tagline": "Sorrente, en juillet — construite à flanc de falaise, face à la mer.",
+    "photoCount": "2 photographies"
+  },
+  "intro": "Sorrente en fin de séjour — la ville accrochée à la falaise, les guirlandes qui s'allument avant que le ciel finisse de virer au bleu nuit, et la mer qui commence là où s'arrête la ruelle.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260723_201120.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_201120.jpg",
+      "alt": "Centre de Sorrente, tombée de la nuit",
+      "caption": "Centre de Sorrente, tombée de la nuit",
+      "emotionalText": "Les guirlandes s'allument avant que le ciel finisse de virer au bleu nuit, et la ruelle se remplit doucement de monde qui sort dîner. Deux silhouettes qui s'éloignent, de dos, sans se retourner — la scène typique d'une station balnéaire italienne en soirée d'été."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260723_192007.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_192007.jpg",
+      "alt": "Marina Grande, fin d'après-midi — dernière étape du voyage",
+      "caption": "Marina Grande, fin d'après-midi — dernière étape du voyage",
+      "emotionalText": "Une serviette rose qui sèche sur la rambarde, et en dessous, la mer qui commence là où s'arrête la ruelle. Sorrente est construite à flanc de falaise, et chaque balcon semble accroché juste au-dessus de l'eau."
+    }
+  ],
+  "stays": [
+    {
+      "name": "So' Lifestyle Hotel Sorrento",
+      "status": "J’ai dormi ici",
+      "location": "Sorrente",
+      "review": "Une des adresses du séjour à Sorrente — détails à compléter.",
+      "tags": [
+        "piscine",
+        "calme"
+      ],
+      "link": "https://www.booking.com/hotel/it/so-lifestyle-hotel-sorrento.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [],
+  "activities": []
+}

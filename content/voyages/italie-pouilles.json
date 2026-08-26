@@ -1,0 +1,35 @@
+{
+  "slug": "italie-pouilles",
+  "hero": {
+    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260730_185631.jpg",
+    "country": "Italie",
+    "tags": [
+      "mer",
+      "authentique",
+      "gastronomie"
+    ],
+    "title": "Italie : Les Pouilles (Bari)",
+    "tagline": "Bari, en juillet — ruelles blanchies à la chaux et gastronomie faite à la main.",
+    "photoCount": "2 photographies"
+  },
+  "intro": "Bari pour clore le voyage — la vieille ville où l'orecchiette se façonne à la main sur une table pliante, sans jamais s'interrompre pour les touristes qui s'arrêtent prendre une photo.",
+  "gallery": [
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260730_185631.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260730_185631.jpg",
+      "alt": "Bari Vecchia, fin de journée",
+      "caption": "Bari Vecchia, fin de journée",
+      "emotionalText": "La pierre blanche renvoie encore la chaleur du jour, et une arche voûtée découpe la ruelle en deux temps de lumière — plein soleil d'un côté, ombre fraîche de l'autre. Le genre de rue où l'on ralentit sans s'en rendre compte."
+    },
+    {
+      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260731_105656.jpg",
+      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260731_105656.jpg",
+      "alt": "Via dell'Arco Basso, matinée — vieille ville de Bari",
+      "caption": "Via dell'Arco Basso, matinée — vieille ville de Bari",
+      "emotionalText": "Sur une table pliante posée à même la ruelle, la semoule devient des dizaines de petites oreilles en quelques gestes, sans jamais regarder ses mains. Autour, les touristes s'arrêtent, prennent une photo, achètent un sachet — le geste continue sans s'interrompre."
+    }
+  ],
+  "stays": [],
+  "eats": [],
+  "activities": []
+}

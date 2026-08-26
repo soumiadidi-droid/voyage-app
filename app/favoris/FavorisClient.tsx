@@ -13,9 +13,11 @@ type LikedItem =
   | { kind: "content"; key: string; voyage: VoyageContent };
 
 // La plupart des likes correspondent à un `id` de destination Travel Match précis. Mais un like
-// posé sur /voyages/italie sans passer par /resultat (donc sans `?id=`) est enregistré sous la clé
-// `"italie"`, qui ne correspond à aucune destination — seulement à une fiche de contenu partagée
-// par plusieurs destinations. On retombe dessus ici pour ne pas perdre le like.
+// posé en accès direct sur une fiche voyage sans passer par /resultat (donc sans `?id=`) est
+// enregistré sous la clé `content_slug` — qui ne correspond à aucun `id` de destination si aucune
+// destination Travel Match ne porte ce même id (ça n'arrive plus depuis le split Italie du
+// 26/08/2026 : chaque destination a maintenant son propre content_slug, mais on garde ce fallback
+// pour les anciens likes déjà enregistrés sous l'ancienne clé partagée "italie").
 function resolveLikedItem(key: string): LikedItem | null {
   const destination = DESTINATIONS.find((d) => d.id === key);
   if (destination) return { kind: "destination", key, destination };

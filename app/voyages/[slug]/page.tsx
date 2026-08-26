@@ -32,6 +32,14 @@ const CATEGORY_META: Record<AddressCategory, { icon: LucideIcon; label: string; 
   Activité: { icon: Compass, label: "Expérience", bg: LVE_COLORS.ocean.bg, color: LVE_COLORS.ocean.dark },
 };
 
+// Texture en photo systématique par catégorie (décidé le 26/08/2026, Hôtel puis Resto) — remplace
+// la vraie photo de l'adresse, contrairement à CATEGORY_META qui ne concerne que le badge. Pas
+// d'entrée pour Activité : rien demandé pour cette catégorie pour l'instant.
+const CATEGORY_PHOTO_OVERRIDE: Partial<Record<AddressCategory, string>> = {
+  Hôtel: "/images/textures/lin.jpg",
+  Resto: "/images/textures/marbre.jpg",
+};
+
 // Bloc remonté juste sous le Hero/intro (décidé le 23/08/2026, ajustement UX/monétisation) —
 // les 3 listes (stays/eats/activities) sont fusionnées en une seule grille de cartes avec
 // catégorie affichée, pour que les adresses (dont celles en affiliation) soient visibles sans
@@ -74,7 +82,19 @@ function AddressesSection({
             style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
           >
             <div className="relative h-48 w-full">
-              {card.image ? (
+              {CATEGORY_PHOTO_OVERRIDE[category] ? (
+                // Texture en photo systématique pour Hôtel/Resto (décidé le 26/08/2026) — pas un
+                // simple fallback, remplace la vraie photo même quand card.image existe. Le badge
+                // catégorie n'est pas concerné, il garde sa couleur pastel plate (cf. plus bas).
+                <div
+                  className="grain h-48 w-full flex items-center justify-center"
+                  style={{
+                    backgroundImage: `url('${CATEGORY_PHOTO_OVERRIDE[category]}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                  }}
+                />
+              ) : card.image ? (
                 // Retour en arrière (décidé le 23/08/2026) : plus aucun filtre couleur (ni
                 // "Obsidian" ni "Terracotta"), photo affichée telle quelle.
                 // eslint-disable-next-line @next/next/no-img-element

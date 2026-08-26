@@ -11,10 +11,10 @@ export const DESTINATIONS: Destination[] = [
     id: "italie-nord-culture",
     title: "Italie : Florence, Rome & Pise",
     authenticity_badge: "tested_approved",
-    content_slug: "italie",
+    content_slug: "italie-nord-culture",
     summary:
       "Les trésors de la Renaissance, l'histoire romaine et les ruelles animées de la Toscane au Latium.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_201932.jpg",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260719_200001.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur", "douceur"],
@@ -37,9 +37,9 @@ export const DESTINATIONS: Destination[] = [
     id: "italie-sorrente-amalfe",
     title: "Italie : Sorrente & Côte Amalfitaine",
     authenticity_badge: "tested_approved",
-    content_slug: "italie",
+    content_slug: "italie-sorrente-amalfe",
     summary: "Falaises escarpées, citronniers, cités perchées et douceur méditerranéenne face à la mer.",
-    hero_image: "https://...",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_201932.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur", "douceur"],
@@ -57,9 +57,9 @@ export const DESTINATIONS: Destination[] = [
     id: "italie-pouilles",
     title: "Italie : Les Pouilles (Bari)",
     authenticity_badge: "tested_approved",
-    content_slug: "italie",
+    content_slug: "italie-pouilles",
     summary: "Eaux turquoises, ruelles blanchies à la chaux, trulli et gastronomie authentique du Sud.",
-    hero_image: "https://...",
+    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260730_185631.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur"],
