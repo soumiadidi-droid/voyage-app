@@ -53,36 +53,46 @@ export function QuestionnaireClient() {
 
   return (
     <div className="max-w-xl mx-auto px-6 py-16 sm:py-24">
-      <div className="h-1 w-full mb-10" style={{ background: "var(--border)" }}>
+      <p className="text-[11px] tracking-widest uppercase font-medium text-text-secondary mb-3 text-center">
+        Question {step + 1} sur {TRAVEL_MATCH_QUESTIONS.length}
+      </p>
+      <div className="h-1 w-full bg-lve-border rounded-full overflow-hidden mb-10">
         <div
-          className="h-1 transition-all"
-          style={{ background: "var(--ember)", width: `${progress}%` }}
+          className="h-1 bg-lve-terracotta transition-all duration-300"
+          style={{ width: `${progress}%` }}
         />
       </div>
-      <p className="mono mb-4" style={{ color: "var(--text-secondary)" }}>
-        Question {step + 1} / {TRAVEL_MATCH_QUESTIONS.length}
-      </p>
       <h1
-        className="font-extrabold mb-3"
-        style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.7rem, 4vw, 2.4rem)" }}
+        className="text-3xl md:text-4xl text-lve-charcoal font-normal text-center mb-8 mt-4"
+        style={{ fontFamily: "var(--font-title)" }}
       >
         {question.question}
       </h1>
 
       {question.type === "choice" ? (
-        <div className="flex flex-col gap-3 mt-8">
+        <div
+          className={
+            question.options.length >= 4
+              ? "grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto"
+              : "flex flex-col gap-3 max-w-xl mx-auto"
+          }
+        >
           {question.options.map((option) => (
             <button
               key={option.value}
               onClick={() => chooseOption(option.value)}
-              className="text-left px-5 py-4 border transition-colors"
-              style={{
-                borderColor:
-                  choices[question.id] === option.value ? "var(--ember)" : "var(--border)",
-                background: "var(--bg-elevated)",
-              }}
+              className={`bg-white/70 hover:bg-white border rounded-2xl p-5 text-center transition-all shadow-sm hover:shadow-md cursor-pointer group ${
+                choices[question.id] === option.value
+                  ? "border-lve-terracotta"
+                  : "border-lve-border hover:border-lve-terracotta/60"
+              }`}
             >
-              {option.label}
+              <span
+                className="text-sm md:text-base text-lve-charcoal group-hover:text-lve-terracotta font-medium"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {option.label}
+              </span>
             </button>
           ))}
         </div>

@@ -1,0 +1,13 @@
+<svg viewBox="0 0 560 90" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="LVE — Le Voyage des Émotions">
+  <text
+    x="280"
+    y="64"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', serif"
+    font-weight="300"
+    font-size="58"
+    letter-spacing="8.7"
+    fill="#1A1A1A"
+  >LVE</text>
+  <line x1="216" y1="76" x2="344" y2="76" stroke="#1A1A1A" stroke-width="0.6" opacity="0.45" />
+</svg>

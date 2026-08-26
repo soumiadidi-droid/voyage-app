@@ -1,0 +1,190 @@
+{
+  "slug": "japon-tradition-nature",
+  "hero": {
+    "image": "https://files.catbox.moe/iu8l3a.jpg",
+    "country": "Japon",
+    "tags": [
+      "famille",
+      "nature",
+      "authentique"
+    ],
+    "title": "Japon : Kyoto, Mont Fuji & Shimoda",
+    "tagline": "Temples séculaires, forêts de bambous, nuits en ryokan et escapade maritime à Shimoda face à l'océan.",
+    "photoCount": "3 photographies"
+  },
+  "intro": "La forêt de bambous d'Arashiyama, où le ciel disparaît sous les tiges vertes. Les cerfs de Nara qui viennent chercher leurs friandises sans peur. Et pour finir, une côte quasi déserte du côté de Shimoda, où le bruit s'est arrêté d'un coup — le Japon qui ralentit, loin des néons d'Osaka et de Tokyo.",
+  "gallery": [
+    {
+      "hiresUrl": "https://files.catbox.moe/n6q43v.jpg",
+      "webUrl": "https://files.catbox.moe/iu8l3a.jpg",
+      "alt": "Forêt de bambous, Arashiyama",
+      "caption": "Forêt de bambous, Arashiyama",
+      "emotionalText": "On lève la tête et le ciel disparaît. Le vent dans les bambous fait un bruit qu'on n'a entendu nulle part ailleurs."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/n8h1ue.jpg",
+      "webUrl": "https://files.catbox.moe/ebmv0f.jpg",
+      "alt": "Parc de Nara",
+      "caption": "Parc de Nara",
+      "emotionalText": "Il nous regarde autant qu'on le regarde. Un vieux marchand vend des friandises aux cerfs en liberté — un moment magique, surtout pour les filles."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/315ni5.jpg",
+      "webUrl": "https://files.catbox.moe/e8cx74.jpg",
+      "alt": "Point de vue, Shimoda — personne autour",
+      "caption": "Point de vue, Shimoda — personne autour",
+      "emotionalText": "Après la densité des temples de Kyoto, deux bancs vides face à la mer. Aucun bruit, aucune autre silhouette. Le calme le plus total du voyage — arrivé là où on ne l'attendait pas."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Agora Kyoto",
+      "status": "J’ai dormi ici",
+      "location": "Centre de Kyoto",
+      "review": "On a pris la chambre avec jardin intérieur sur les conseils de la réception — clairement le bon choix, beaucoup plus agréable que ce à quoi on s'attendait pour ce budget.",
+      "tags": [
+        "centre-ville",
+        "bien situé pour explorer à pied",
+        "chambre avec jardin"
+      ],
+      "link": "https://www.agora-kyoto.com/en/",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "Shimoda Tokyu Hotel",
+      "status": "J’ai dormi ici",
+      "location": "Shimoda, péninsule d'Izu",
+      "review": "L'accès plage demande de descendre quelques escaliers et marcher un peu — ça vaut largement le détour. La piscine avec vue mer a été le meilleur moment de détente de tout le voyage.",
+      "tags": [
+        "accès plage",
+        "vue mer",
+        "piscine",
+        "calme"
+      ],
+      "link": "https://www.booking.com/hotel/jp/shimoda-tokyu.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Kinatei",
+      "status": "Testé",
+      "location": "Vegan/végétarien, à 20 min à pied du parc de Nara",
+      "review": "On mange assis à une petite table basse en bois, sans chaussures — immersion garantie. Le ramen est excellent, la propriétaire adorable et parle anglais, produits bio de très bonne qualité. Environ 35 € pour 2 adultes et 2 enfants.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Mochi & matcha, ruelle vers la gare de Nara",
+      "status": "Testé",
+      "location": "Mochi à l'ananas et matcha au lait local",
+      "review": "Un mochi à l'ananas délicieux et un matcha au lait naturel, fraîchement préparé le matin même — le vendeur propose aussi des crêpes matcha crème brûlée.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Marché Nishiki",
+      "status": "Testé",
+      "location": "Premier repas à Kyoto",
+      "review": "Omelettes japonaises moelleuses, poissons ultra-frais, sushis délicats — il y en a pour tous les goûts. Attention, la plupart des stands ferment tôt, avant 18h.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Oké Donuts",
+      "status": "Testé",
+      "location": "Matcha-banane, ferme à 20h",
+      "review": "Un matcha-banane surprenant et délicieux — pensez à y aller avant la fermeture à 20h.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Yakiniku HIRO-Shoten Karasuma-nishiki",
+      "status": "Testé",
+      "location": "Restaurant de bœuf wagyu, Kyoto",
+      "review": "Restaurant de yakiniku spécialisé dans le bœuf wagyu, à Kyoto.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null,
+      "image": "/images/adresses/yakiniku-hiro-shoten.jpg"
+    },
+    {
+      "name": "Ghassou (がっそう)",
+      "status": "Testé",
+      "location": "Ancienne maison traditionnelle, Shimoda",
+      "review": "Tenu par un adorable couple de personnes âgées — nouilles soba à la bonite séchée et nouilles aux légumes sauvages, tatamis et vaisselle artisanale. Un vrai bijou caché.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Page One",
+      "status": "Testé",
+      "location": "Italien, Perry Road, Shimoda",
+      "review": "Salade de tomates, pizza margherita et pâtes à la sauce tomate, le tout partagé — environ 2500 yens pour 2 adultes et 2 enfants, portions généreuses.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Gelateria Amore",
+      "status": "Testé",
+      "location": "Glacier artisanal, Shimoda",
+      "review": "La glace matcha-coco est un délice — un glacier artisanal qui vaut vraiment le détour.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Fermenco Pizza",
+      "status": "Testé",
+      "location": "Pizzeria en bord de mer, Shimoda",
+      "review": "Un des plus beaux endroits vus au monde — vue panoramique sans prétention, pizzas cuites au feu de bois et personnel adorable.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ],
+  "activities": [
+    {
+      "name": "Parc de Nara",
+      "status": "Testé",
+      "location": "Cerfs sauvages en liberté",
+      "review": "Un moment magique, surtout pour les enfants — les cerfs se nourrissent de friandises achetées chez un vieux marchand local, en toute liberté autour des temples.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Forêt de bambous d'Arashiyama & parc des singes Iwatayama",
+      "status": "Testé",
+      "location": "Kyoto — tramway, arriver avant 9h",
+      "review": "Une promenade hors du temps dans la forêt de bambous, puis la montée jusqu'au parc des singes pour une vue panoramique sur Kyoto. Arriver avant 9h pour éviter la foule.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Balade nocturne à Gion",
+      "status": "Testé",
+      "location": "Kyoto",
+      "review": "Ruelles pavées, maisons traditionnelles, restaurants animés et rooftops à la nuit tombée, avec de jolis temples illuminés sur le chemin.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Piscine & plage du Shimoda Tokyu Hotel",
+      "status": "Testé",
+      "location": "Shimoda",
+      "review": "Accès direct à la plage depuis l'hôtel (quelques escaliers et un peu de marche) — le meilleur moment de détente de tout le voyage.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ]
+}

@@ -1,11 +1,8 @@
-import Link from "next/link";
-import { VOYAGES } from "@/content/voyages";
-
 export const metadata = {
-  title: "Notre offre — Le Voyage des Émotions",
+  title: "Espace Pros — Le Voyage des Émotions",
 };
 
-export default function PartenariatsPage() {
+export default function ProsPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
       <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
@@ -15,7 +12,7 @@ export default function PartenariatsPage() {
         className="font-extrabold mb-6"
         style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
       >
-        Travaillons ensemble
+        Espace Pros
       </h1>
       <p className="italic mb-8" style={{ fontSize: "1.15rem" }}>
         Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage.
@@ -74,41 +71,6 @@ export default function PartenariatsPage() {
         </div>
       </div>
 
-      <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
-        Voir le travail
-      </p>
-      <h2
-        className="font-extrabold mb-8"
-        style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
-      >
-        Exemples publiés
-      </h2>
-      <div className="grid gap-6 sm:grid-cols-3 mb-20">
-        {VOYAGES.map((voyage) => (
-          <Link
-            key={voyage.slug}
-            className="block no-underline group"
-            href={`/voyages/${voyage.slug}`}
-          >
-            <div
-              className="grain relative aspect-[4/3] overflow-hidden mb-2"
-              style={{ background: "var(--border)" }}
-            >
-              {voyage.hero.image && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  alt={voyage.hero.title}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  src={voyage.hero.image}
-                />
-              )}
-            </div>
-            <p className="mono text-sm">{voyage.hero.title}</p>
-          </Link>
-        ))}
-      </div>
-
       <div
         className="text-center py-16 border-t"
         style={{ borderColor: "var(--border)" }}
@@ -121,6 +83,7 @@ export default function PartenariatsPage() {
         </h2>
         <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
           Écrivez-moi directement, avec votre établissement et l&apos;option qui vous intéresse.
+          Portfolio et exemples de récits transmis directement sur demande.
         </p>
         <a
           href="mailto:levoyagedesemotions@gmail.com"

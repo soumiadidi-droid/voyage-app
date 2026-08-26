@@ -1,10 +1,11 @@
 import { LikeButton } from "../components/LikeButton";
+import { TravelerProfileCard } from "../components/TravelerProfileCard";
 import { matchTravel, dedupeComboBadges } from "@/lib/travel-match/engine";
 import { DESTINATIONS } from "@/lib/travel-match/destinations";
 import {
   SCORE_KEYS,
   type UserAnswers,
-  type DistanceFilter,
+  type DistanceAnswer,
   type ClimateFilter,
   type TransportFilter,
   type SportLevelFilter,
@@ -17,7 +18,7 @@ export const metadata = {
   title: "Ton résultat — Le Voyage des Émotions",
 };
 
-const DISTANCE_VALUES: DistanceFilter[] = ["proche", "europe", "long_courrier"];
+const DISTANCE_VALUES: DistanceAnswer[] = ["proche", "europe", "long_courrier", "ouvert"];
 const CLIMATE_VALUES: ClimateFilter[] = ["chaleur", "douceur", "hiver_cosy"];
 const TRANSPORT_VALUES: TransportFilter[] = ["sans_voiture", "transports_possibles", "voiture_necessaire"];
 const SPORT_VALUES: SportLevelFilter[] = ["tranquille", "actif"];
@@ -31,8 +32,8 @@ const REQUIRED_CHOICE_KEYS = ["distance", "climate", "transport", "sport_level",
 // répondu (ex. arrivée directe sur /resultat sans passer par le questionnaire), `complete` est
 // false et la page affiche un message plutôt qu'un résultat basé sur des valeurs inventées.
 function parseAnswers(raw: Record<string, string>): { answers: UserAnswers; complete: boolean } {
-  const distance = DISTANCE_VALUES.includes(raw.distance as DistanceFilter)
-    ? (raw.distance as DistanceFilter)
+  const distance = DISTANCE_VALUES.includes(raw.distance as DistanceAnswer)
+    ? (raw.distance as DistanceAnswer)
     : "europe";
   const climate = CLIMATE_VALUES.includes(raw.climate as ClimateFilter)
     ? (raw.climate as ClimateFilter)
@@ -111,6 +112,8 @@ export default async function ResultatPage({
       >
         Les voyages qui te correspondent
       </h1>
+
+      <TravelerProfileCard answers={answers} />
 
       {fallback && (
         <p

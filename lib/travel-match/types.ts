@@ -2,7 +2,12 @@
 // Travel Match" pour le contexte, et section "Simplification du questionnaire" (23/08/2026) pour
 // cette évolution : durée/budget en filtres, scores repensés en 6 axes indépendants, combos.
 
+// DistanceFilter reste réservé aux destinations (Destination.filters.distance) — une destination
+// n'est jamais "ouvert", seule une réponse utilisateur peut l'être. DistanceAnswer (26/08/2026,
+// question "intensité de dépaysement") est le type de la réponse : "ouvert" désactive le filtre
+// éliminatoire (cf. engine.ts hardConstraintBroken) et laisse les autres critères décider.
 export type DistanceFilter = "proche" | "europe" | "long_courrier";
+export type DistanceAnswer = DistanceFilter | "ouvert";
 export type ClimateFilter = "chaleur" | "douceur" | "hiver_cosy";
 export type TransportFilter = "sans_voiture" | "transports_possibles" | "voiture_necessaire";
 export type SportLevelFilter = "tranquille" | "actif";
@@ -105,7 +110,7 @@ export type Companions = "solo" | "duo" | "amis" | "famille_moins_6" | "famille_
 // Réponses collectées par le questionnaire, dans le langage direct du modèle.
 export type UserAnswers = {
   filters: {
-    distance: DistanceFilter;
+    distance: DistanceAnswer;
     climate: ClimateFilter;
     transport: TransportFilter;
     sport_level: SportLevelFilter;

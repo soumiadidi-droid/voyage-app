@@ -3,6 +3,11 @@ import type { ScoreKey } from "./types";
 // Copy validée par Soumia le 22/08/2026, complétée le 23/08/2026 (durée, budget, nouveaux
 // sliders repos/exploration/gastronomie/nature_plage/effervescence_urbaine/rythme). Ne pas
 // reformuler sans qu'elle le demande (même règle que pour les scores sport).
+//
+// Refonte de ton "humour, second degré & lifestyle" (23/08/2026) — 5 des 9 intitulés de question
+// reformulés par Soumia (duration, companions, budget, sport_level, emotions). distance, climate,
+// transport et ambiance gardent l'ancien ton "tu" neutre, pas reformulés faute de consigne — à
+// harmoniser si Soumia le demande.
 
 export type ChoiceOption = { value: string; label: string };
 
@@ -34,7 +39,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "duration",
-    question: "Combien de temps tu pars ?",
+    question: "Tu te fais la malle combien de temps ?",
     options: [
       { value: "week_end", label: "Un week-end, 2 à 4 jours" },
       { value: "semaine", label: "Une semaine, 5 à 8 jours" },
@@ -44,21 +49,25 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "budget",
-    question: "Quel budget, hors vols ?",
+    question: "Côté porte-monnaie, on vise quel niveau de kiff ?",
     options: [
       { value: "eco", label: "Petit budget, je fais des choix malins" },
       { value: "confort", label: "Confort, sans me ruiner" },
       { value: "premium", label: "Premium, je me fais plaisir" },
     ],
   },
+  // Reformulé le 26/08/2026 (orienté intention/dépaysement plutôt que géographie brute) + ajout de
+  // l'option "ouvert" : proche/europe/long_courrier filtrent le catalogue de façon stricte, "ouvert"
+  // ne filtre rien (cf. lib/travel-match/engine.ts, DistanceAnswer).
   {
     type: "choice",
     id: "distance",
-    question: "Où as-tu envie d'aller ?",
+    question: "Quelle est l'intensité de dépaysement recherchée pour ce voyage ?",
     options: [
-      { value: "proche", label: "Je reste en France (ou tout près)" },
-      { value: "europe", label: "Une évasion en Europe" },
-      { value: "long_courrier", label: "Je pars loin, ça se mérite" },
+      { value: "proche", label: "Échappée proche (France) — Rester dans l'hexagone, privilégier la proximité." },
+      { value: "europe", label: "Escale européenne — Changer d'air sans partir à l'autre bout du monde." },
+      { value: "long_courrier", label: "Le grand large — Partir loin, changer de continent." },
+      { value: "ouvert", label: "L'inspiration avant tout (Surprenez-moi) — Je cherche une émotion, peu importe la distance." },
     ],
   },
   {
@@ -84,7 +93,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "sport_level",
-    question: "Ton rythme sur place ?",
+    question: "À quelle vitesse tu veux voir couler tes journées ?",
     options: [
       { value: "tranquille", label: "Tranquille, je ne me force sur rien" },
       { value: "actif", label: "Actif, j'aime bouger et remplir mes journées" },
@@ -93,7 +102,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "companions",
-    question: "Avec qui tu pars ?",
+    question: "C'est qui le crew pour cette aventure ?",
     options: [
       { value: "solo", label: "Solo" },
       { value: "duo", label: "En duo, en amoureux" },
@@ -105,7 +114,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "sliders",
     id: "emotions",
-    question: "Qu'est-ce que tu recherches, au fond ?",
+    question: "C'est quoi la priorité absolue pour que ton séjour soit un succès ?",
     helper: "1 = pas du tout, 5 = complètement",
     sliders: [
       { key: "repos", label: "Repos & déconnexion, ne penser à rien" },

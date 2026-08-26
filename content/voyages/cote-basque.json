@@ -1,7 +1,7 @@
 {
   "slug": "cote-basque",
   "hero": {
-    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260429_210725.jpg",
+    "image": "/images/voyages/cote-basque/web-IMG_20260429_210725.jpg",
     "country": "France",
     "tags": [
       "mer",
@@ -15,57 +15,57 @@
   "intro": "Des couchers de soleil qui embrasent le ciel au-dessus de la Grande Plage, des séances de surf sur la Côte des Basques, des villas Belle Époque à colombages rouges, et une étape à Saint-Jean-de-Luz pour goûter le vrai gâteau basque — la Côte Basque assume pleinement son double visage, chic et surf. D'autres étapes doivent compléter ce carnet à l'automne.",
   "gallery": [
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20260429_210725.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260429_210725.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20260429_210725.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20260429_210725.jpg",
       "alt": "Grande Plage, fin de journée",
       "caption": "Grande Plage, fin de journée",
       "emotionalText": "Un ciel qui vire au rose et à l'orange vif sous des nuages menaçants, la mer qui renvoie la même lumière — un des couchers de soleil les plus spectaculaires du séjour, presque trop beau pour être vrai."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251017_093757.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251017_093757.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20251017_093757.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20251017_093757.jpg",
       "alt": "Côte des Basques, matinée",
       "caption": "Côte des Basques, matinée",
       "emotionalText": "Un groupe planche sous le bras qui avance vers l'eau, la Côte des Basques enveloppée dans une brume légère — le rituel du matin pour une bonne partie des visiteurs de Biarritz."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251015_191346.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251015_191346.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20251015_191346.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20251015_191346.jpg",
       "alt": "Rocher de la Vierge, soirée",
       "caption": "Rocher de la Vierge, soirée",
       "emotionalText": "Le phare et le rocher qui se détachent en silhouette sur un ciel encore rosé, quelques promeneurs sur le sable — l'image la plus reconnaissable de Biarritz, vue à l'heure où elle est la plus photogénique."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251016_190958.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251016_190958.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20251016_190958.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20251016_190958.jpg",
       "alt": "Front de mer, fin de journée",
       "caption": "Front de mer, fin de journée",
       "emotionalText": "Un ciel doré qui se reflète sur le sable mouillé, quelques silhouettes qui profitent des dernières minutes de lumière — le rituel du soir à Biarritz, jamais deux fois pareil."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251017_142728.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251017_142728.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20251017_142728.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20251017_142728.jpg",
       "alt": "Crique rocheuse, milieu de journée",
       "caption": "Crique rocheuse, milieu de journée",
       "emotionalText": "Un petit îlot couvert de végétation posé au milieu d'une eau turquoise qu'on n'attendait pas sur la côte basque — une crique qui n'a rien à envier à des rivages bien plus au sud."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251016_122837.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251016_122837.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20251016_122837.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20251016_122837.jpg",
       "alt": "Port Vieux, milieu de journée",
       "caption": "Port Vieux, milieu de journée",
       "emotionalText": "Une crique protégée entourée d'immeubles Belle Époque, la mer d'un vert turquoise malgré le ciel couvert — le Port Vieux est la version la plus abritée et la plus familiale du front de mer de Biarritz."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20260430_080545.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260430_080545.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20260430_080545.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20260430_080545.jpg",
       "alt": "Café, matinée",
       "caption": "Café, matinée",
       "emotionalText": "Une vitrine bien garnie de viennoiseries et de cakes maison, en allant prendre un café avant de filer voir l'océan — le genre de rituel simple qui cadre bien une matinée à Biarritz."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/hires-IMG_20251018_121110.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20251018_121110.jpg",
+      "hiresUrl": "/images/voyages/cote-basque/hires-IMG_20251018_121110.jpg",
+      "webUrl": "/images/voyages/cote-basque/web-IMG_20251018_121110.jpg",
       "alt": "Quartier résidentiel, milieu de journée",
       "caption": "Quartier résidentiel, milieu de journée",
       "emotionalText": "Des colombages rouge sombre sur une façade blanche, un portail en fer forgé fermé sur un jardin — l'architecture Belle Époque et basque qui donne à Biarritz son caractère, loin des plages."
@@ -83,7 +83,8 @@
         "design moderne"
       ],
       "link": "https://www.booking.com/hotel/fr/bizipoz-saint-jean-de-luz.html",
-      "linkLabel": "Voir les disponibilités"
+      "linkLabel": "Voir les disponibilités",
+      "image": "/images/adresses/bizipoz-hotel.jpg"
     },
     {
       "name": "Le Talaia Hôtel & Spa Biarritz - MGallery Collection",
@@ -95,7 +96,8 @@
         "design moderne"
       ],
       "link": "https://www.booking.com/hotel/fr/radisson-blu-hotel-biarritz.html",
-      "linkLabel": "Voir les disponibilités"
+      "linkLabel": "Voir les disponibilités",
+      "image": "/images/adresses/talaia-biarritz.jpg"
     }
   ],
   "eats": [
@@ -106,7 +108,8 @@
       "review": "Le petit café du matin avant d'aller voir l'océan.",
       "tags": [],
       "link": "https://cafeloky.com/",
-      "linkLabel": "Voir l’adresse →"
+      "linkLabel": "Voir l’adresse →",
+      "image": "/images/adresses/cafe-loky.jpg"
     },
     {
       "name": "Dunes Blanches, Chez Pascal",

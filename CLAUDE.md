@@ -324,6 +324,40 @@ neutre, transition_logistics avec durées, saisie à sens unique). Se déclenche
 d'ajouter un combo/extension/duo de destinations. Créé pour éviter de lui refaire expliquer la
 convention à chaque nouvelle paire.
 
+## Split de la fiche Japon en 2 destinations (23/08/2026)
+
+La fiche unique `japon` (moteur de matching) mélangeait deux vibes opposées — Tokyo/Osaka
+(effervescence) et Kyoto/Fuji/ryokans (contemplation) — sur les mêmes scores, ce qui écrasait le
+matching pour les deux profils. Scindée à la demande de Soumia en deux destinations distinctes dans
+`lib/travel-match/destinations.ts` :
+
+- `japon-urbain` ("Japon : Tokyo & Osaka") — `repos: 2, effervescence_urbaine: 5`, `sport_level:
+  ["actif"]`
+- `japon-tradition-nature` ("Japon : Kyoto, Fuji & Ryokans") — `repos: 4, nature_plage: 4,
+  effervescence_urbaine: 2`, `sport_level: ["tranquille"]`
+
+Testé : sur un profil urbain (repos bas/effervescence haute), `japon-urbain` ressort #1 à 95% ; sur
+un profil contemplatif (repos/nature hauts, effervescence basse), `japon-tradition-nature` ressort
+#1 à 92%. Les autres axes (`exploration`, `gastronomie`) sont une première passe de Claude, pas
+encore validés par Soumia comme le reste des scores migrés.
+
+**Adresses séparées dans la foulée (23/08/2026)** — Soumia a fait remarquer qu'elles ne sont pas au
+même endroit : `content/voyages/japon.json` (unique, toutes les adresses mélangées Osaka → Nara →
+Kyoto → Shimoda → Tokyo) remplacé par deux fiches avec leur propre `content_slug`, sur le même
+principe que le split Montréal/New York — plus de contenu partagé entre les deux comme c'est encore
+le cas pour Italie :
+
+- `content/voyages/japon-urbain.json` — hôtels Candeo Osaka + OMO5 Tokyo Gotanda, adresses d'Osaka
+  et de Tokyo (15 eats, 3 activités)
+- `content/voyages/japon-tradition-nature.json` — hôtels Agora Kyoto + Shimoda Tokyu Hotel,
+  adresses de Nara, Kyoto et Shimoda (8 eats, 4 activités)
+
+Répartition faite sans rien inventer, chaque adresse déjà attribuable à une ville précise dans les
+échanges de Soumia. Galerie (6 photos) et intro également scindées en 2×3 photos, cohérent avec la
+ville évoquée. `content/voyages/index.ts` mis à jour (deux imports au lieu d'un). Aucun lien réel
+(`link`) trouvé pour les petites adresses japonaises testées — laissé à `null` partout plutôt que
+d'inventer une URL, à compléter par Soumia si elle veut les liens.
+
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les

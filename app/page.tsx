@@ -1,87 +1,120 @@
 import Link from "next/link";
-import { Logo } from "./components/Logo";
 
 export default function Home() {
   return (
     <div>
+      {/* Plus d'image du tout (décidé le 26/08/2026) : fond noir semi-transparent, sobre, cohérent
+          avec le Hero des fiches destination (cf. DestinationHero). */}
       <div
-        className="grain relative flex flex-col items-center justify-center text-center px-6 py-24 sm:py-32 overflow-hidden"
-        style={{ background: "#1A1714", color: "#E8DFC8" }}
+        className="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden"
+        style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
       >
-        <div className="mb-10" style={{ color: "#E8DFC8" }}>
-          <Logo height={56} />
-        </div>
-        <h1
-          className="mb-6"
-          style={{
-            fontFamily: "var(--font-title), serif",
-            fontWeight: 300,
-            fontSize: "clamp(2.4rem, 7vw, 4.4rem)",
-            lineHeight: 1.05,
-            letterSpacing: "0.01em",
-          }}
-        >
-          Mes voyages,
-          <br />
-          racontés vrai.
-        </h1>
-        <div className="w-16 h-px mb-6" style={{ background: "#E8DFC8", opacity: 0.45 }} />
-        <p className="italic mb-10 max-w-md opacity-90" style={{ fontFamily: "var(--font-body)", fontSize: "1.1rem" }}>
-          Une photo, une histoire derrière — et une distinction claire entre ce que j&apos;ai
-          vécu et ce que j&apos;ai simplement bien choisi.
-        </p>
-        <div className="flex flex-wrap justify-center gap-4">
-          <Link
-            className="inline-block px-6 py-3 mono no-underline"
-            href="/questionnaire"
-            style={{ background: "var(--ember)", color: "#fff" }}
+        <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+          <h1
+            className="text-white tracking-tight leading-tight"
+            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 7vw, 4rem)" }}
           >
-            Trouver mon voyage
-          </Link>
+            L&apos;art du voyage, <br className="hidden sm:inline" />raconté sans filtre.
+          </h1>
+          <p
+            className="text-white/70 leading-relaxed max-w-xl mx-auto"
+            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)" }}
+          >
+            Carnets d&apos;expériences, lieux d&apos;exception et adresses curatées avec exigence.
+          </p>
+          <div className="pt-4">
+            <Link
+              href="/questionnaire"
+              className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white font-medium text-[11px] tracking-widest uppercase px-8 py-4 rounded-lg shadow-lg transition-all hover:-translate-y-0.5 no-underline"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Lancer Travel Match
+            </Link>
+          </div>
         </div>
       </div>
 
       <main className="max-w-4xl mx-auto px-6 sm:px-8">
-        <div className="max-w-xl mx-auto my-16 sm:my-24 text-lg leading-relaxed text-center">
-          <p className="mono mb-4" style={{ color: "var(--text-secondary)" }}>
-            À propos
-          </p>
-          <p>
-            <span className="drop-cap">D</span>errière Le Voyage des Émotions, il y a une seule
-            personne : moi. Je voyage, je photographie, et j&apos;écris ce que chaque photo
-            raconte vraiment — pas la version lissée qu&apos;on trouve partout ailleurs. Chaque
-            destination est marquée clairement : <em>testée</em> quand j&apos;y suis allée,{" "}
-            <em>recherchée</em> quand je l&apos;ai sélectionnée sans encore y avoir mis les pieds.
-            Je ne mélange jamais les deux. Le tri et la mise en page, c&apos;est la technique. Le
-            regard, lui, reste entièrement humain.
-          </p>
+        <div className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory">
+          <div className="max-w-4xl mx-auto space-y-8 text-left">
+            <span
+              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold block"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              À Propos — Le Manifeste
+            </span>
+
+            <h2
+              className="text-3xl sm:text-4xl text-lve-charcoal leading-tight max-w-2xl"
+              style={{ fontFamily: "var(--font-title)" }}
+            >
+              Un regard humain, des adresses incarnées et la vérité de l&apos;expérience.
+            </h2>
+
+            <div
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2 text-lve-charcoal/80 text-base leading-relaxed"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              <div>
+                <p>
+                  Derrière <strong className="font-medium text-lve-charcoal">Le Voyage des Émotions</strong>,
+                  il y a une démarche singulière : capturer l&apos;essence d&apos;un lieu à travers la
+                  photographie et le récit, sans la version lissée que l&apos;on retrouve partout.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <p>Chaque destination bénéficie d&apos;une clarté absolue :</p>
+                <ul className="space-y-3 text-sm border-l-2 border-lve-terracotta pl-4 list-none m-0">
+                  <li>
+                    <strong className="text-lve-charcoal">Testée :</strong> Vécue, approuvée et
+                    photographiée sur le terrain.
+                  </li>
+                  <li>
+                    <strong className="text-lve-charcoal">Curatée :</strong> Sélectionnée pour son
+                    potentiel émotif et sa pertinence.
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
         </div>
 
         <div
-          className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-12 sm:py-20 border-t border-b text-center"
-          style={{ background: "var(--bg-guide)", borderColor: "var(--border)" }}
+          className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory border-y border-lve-charcoal/5 text-center"
         >
-          <div className="max-w-xl mx-auto">
-            <p className="mono mb-2" style={{ color: "var(--aurora)" }}>
-              9 questions, 2 minutes
-            </p>
+          <div className="max-w-3xl mx-auto space-y-6">
+            <span
+              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold block"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              9 questions — 2 minutes
+            </span>
+
             <h2
-              className="font-extrabold mb-4"
-              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
+              className="text-3xl sm:text-5xl text-lve-charcoal leading-tight"
+              style={{ fontFamily: "var(--font-title)" }}
             >
-              Trouve le voyage qui te correspond
+              Trouvez le voyage qui vous ressemble
             </h2>
-            <p className="mb-7" style={{ color: "var(--text-secondary)" }}>
-              Ton profil voyageur, une destination qui colle vraiment, et mes adresses qui vont
-              avec.
-            </p>
-            <Link
-              className="inline-block px-6 py-3 mono no-underline"
-              href="/questionnaire"
-              style={{ background: "var(--aurora)", color: "#08120e" }}
+
+            <p
+              className="text-base sm:text-lg text-lve-charcoal/70 max-w-xl mx-auto leading-relaxed"
+              style={{ fontFamily: "var(--font-display)" }}
             >
-              Commencer le questionnaire
-            </Link>
+              Votre profil voyageur, une destination parfaitement alignée et une sélection
+              d&apos;adresses exclusives.
+            </p>
+
+            <div className="pt-4">
+              <Link
+                href="/questionnaire"
+                className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Lancer Travel Match
+              </Link>
+            </div>
           </div>
         </div>
       </main>

@@ -1,0 +1,234 @@
+{
+  "slug": "japon-urbain",
+  "hero": {
+    "image": "https://files.catbox.moe/xwua06.jpg",
+    "country": "Japon",
+    "tags": [
+      "famille",
+      "ville",
+      "street food"
+    ],
+    "title": "Japon : Tokyo & Osaka",
+    "tagline": "Néons, ruelles animées et street food à toute heure — le Japon qui ne s'arrête jamais.",
+    "photoCount": "3 photographies"
+  },
+  "intro": "On ne s'attendait pas à retrouver à Osaka l'énergie d'un Montréal ou d'un New York — des rues qui vivent tard, une nourriture de rue qui ne s'excuse jamais, une décontraction qu'aucun guide n'annonce sur le Japon. Puis Tokyo, en dernière étape, qui ne s'arrête jamais une seconde — le Japon qui bouge, qui mange dehors, qui ne dort pas.",
+  "gallery": [
+    {
+      "hiresUrl": "https://files.catbox.moe/77ndln.jpg",
+      "webUrl": "https://files.catbox.moe/wjmr1z.jpg",
+      "alt": "Nakazakicho, Osaka — le vrai coup de cœur",
+      "caption": "Nakazakicho, Osaka — le vrai coup de cœur",
+      "emotionalText": "Cafés vintage, boutiques indépendantes, une décontraction qui n'a rien à prouver. On a reconnu quelque chose — une énergie de quartier déjà croisée à Montréal, ou dans certains coins de New York. Pas le Japon qu'on attendait. Un Japon qui traîne."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/ckaa7v.jpg",
+      "webUrl": "https://files.catbox.moe/ajm0uv.jpg",
+      "alt": "Nipponbashi, Osaka — premier jour",
+      "caption": "Nipponbashi, Osaka — premier jour",
+      "emotionalText": "Premier contact avec la ville : le marché local, la chaleur, une rue qui ne ressemble à aucune photo qu'on avait vue avant de partir."
+    },
+    {
+      "hiresUrl": "https://files.catbox.moe/auzdl9.jpg",
+      "webUrl": "https://files.catbox.moe/1c00ew.jpg",
+      "alt": "Coucher de soleil sur Tokyo — dernière étape",
+      "caption": "Coucher de soleil sur Tokyo — dernière étape",
+      "emotionalText": "Puis la route reprend, direction Tokyo. Le soleil descend derrière des kilomètres de toits, et la ville ne s'arrête pas une seconde pour le regarder. Osaka, les néons, la street food — tout ce qu'on a aimé ici bouge sans jamais s'arrêter."
+    }
+  ],
+  "stays": [
+    {
+      "name": "Candeo Hotels Osaka (Namba), The Tower",
+      "status": "J’ai dormi ici",
+      "location": "Namba, Osaka",
+      "review": "Notre base pour les 5 jours à Osaka — jamais besoin de prendre un taxi, tout était accessible à pied ou en une station de métro.",
+      "tags": [
+        "centre-ville",
+        "bien situé pour explorer à pied",
+        "rooftop / onsen",
+        "familial"
+      ],
+      "link": "https://www.booking.com/hotel/jp/candeo-hotels-osaka-the-tower.html",
+      "linkLabel": "Voir les disponibilités"
+    },
+    {
+      "name": "OMO5 Tokyo Gotanda by Hoshino Resorts",
+      "status": "J’ai dormi ici",
+      "location": "Gotanda, Tokyo",
+      "review": "Le food court Gotanda Shokudo littéralement au rez-de-chaussée a sauvé plusieurs soirs où personne n'avait l'énergie de ressortir chercher un resto.",
+      "tags": [
+        "bien situé pour explorer à pied",
+        "design moderne",
+        "restauration sur place"
+      ],
+      "link": "https://www.booking.com/hotel/jp/omo5-tokyo-gotanda-by-hoshino-resorts.html",
+      "linkLabel": "Voir les disponibilités"
+    }
+  ],
+  "eats": [
+    {
+      "name": "Chibo",
+      "status": "Testé",
+      "location": "Okonomiyaki, l'omelette typique d'Osaka",
+      "review": "Notre premier vrai repas à Osaka — l'omelette salée emblématique de la ville, garnie au choix (chou, viande, fruits de mer, œuf) et servie avec une sauce savoureuse.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Takoyaki de rue, Dotonbori",
+      "status": "Testé",
+      "location": "Beignets de poulpe, street food",
+      "review": "Des beignets de pâte garnis de morceaux de poulpe, accompagnés de mayonnaise, de bonite séchée et d'oignons verts — un incontournable à manger sur le pouce.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Timeout Market Osaka",
+      "status": "Testé",
+      "location": "Food court, tout pour bien manger",
+      "review": "Déjà testé à Lisbonne, New York, Montréal et Porto — la version d'Osaka tient toutes ses promesses : pizza, ramen vegan, sushis, il y en a pour tous les goûts. Environ 30 € le repas pour 2 adultes et 2 enfants.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Gozasōrō",
+      "status": "Testé",
+      "location": "Gâteaux à la pâte de haricot rouge (anko)",
+      "review": "Des petits gâteaux préparés sur place, moelleux, à environ 0,59 € pièce — une spécialité locale accessible qui parle d'elle-même.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Beard Papa's",
+      "status": "Testé",
+      "location": "Choux à la crème vanille ou matcha",
+      "review": "Des choux à la crème fourrés à la demande — pâte croustillante, crème aérienne, un vrai succès auprès des enfants.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Kikutaya (sous-sol du Daimaru Umeda)",
+      "status": "Testé",
+      "location": "Onigiri, galerie gourmet B1/B2 du grand magasin",
+      "review": "Le sous-sol du Daimaru Umeda est une vraie galerie gourmet sur deux niveaux — nos onigiri pris chez Kikutaya étaient excellents, riz parfaitement assaisonné.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Picco Latte",
+      "status": "Testé",
+      "location": "Café, Nakazakicho",
+      "review": "Une pause goûter dans le quartier bobo de Nakazakicho — déco très sympa et instagrammable, mais sans grande surprise niveau goût.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Kitasando Coffee",
+      "status": "Testé",
+      "location": "Petit café minimaliste, Tokyo",
+      "review": "Un matcha-passion parfaitement équilibré, boissons et pâtisseries fines dans un cadre zen et instagrammable.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "atmos café",
+      "status": "Testé",
+      "location": "Concept store sneakers & café, Harajuku",
+      "review": "Un latte matcha glacé ultra crémeux, une ambiance urbaine et branchée, avec une boutique sneakers à côté — un excellent refuge climatisé en été.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Luke's Lobster",
+      "status": "Testé",
+      "location": "Lobster rolls, Shibuya",
+      "review": "Un lobster roll généreux, homard frais et légèrement citronné dans un pain brioché toasté au beurre — un régal sur le pouce avant de partir en balade.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Flipper's",
+      "status": "Testé",
+      "location": "Pancakes soufflés",
+      "review": "Les fluffy pancakes ultra aériens, accompagnés de crème légère et de fruits frais — un incontournable pour les amateurs de sucré.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Eataly",
+      "status": "Testé",
+      "location": "Italien, Tokyo",
+      "review": "Une pause gourmande avec des pâtes fraîches et une sélection de produits méditerranéens, ambiance chic mais décontractée.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Matcha House",
+      "status": "Testé",
+      "location": "Matcha latte",
+      "review": "Un thé matcha riche et onctueux, parfait pour une pause douceur au fil de la balade.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Metoa Café & Kitchen",
+      "status": "Testé",
+      "location": "Tokyu Plaza Ginza",
+      "review": "Cuisine japonaise moderne dans un cadre élégant et reposant, en plein cœur de Ginza.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Gotanda Shokudo Food Hall",
+      "status": "Testé",
+      "location": "Food court, dans le même bâtiment que l'hôtel OMO5",
+      "review": "Onze stands (ramen, curry, gyoza, glaces) à une minute à pied de la chambre — pratique pour un repas rapide sans quitter l'immeuble.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ],
+  "activities": [
+    {
+      "name": "Universal Studios Japan",
+      "status": "Testé",
+      "location": "Osaka — Super Nintendo World, spectacle Sing",
+      "review": "Une journée sans pression de tout faire : réservation du créneau Mario via l'appli une fois sur place (impossible de le faire depuis l'étranger), attraction Minions et spectacle Sing — celui-là vaut largement l'attente. Arriver à l'ouverture si vous voulez en faire plus.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Parc Yoyogi, temple Meiji-jingu & parc à poneys",
+      "status": "Testé",
+      "location": "Tokyo",
+      "review": "Une balade matinale calme et verdoyante pour souffler après l'effervescence de la ville, avec un détour par le temple shinto et un petit parc à poneys qui a ravi les enfants.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    },
+    {
+      "name": "Akihabara → Ginza",
+      "status": "Testé",
+      "location": "Tokyo, à pied",
+      "review": "Du quartier électronique et geek d'Akihabara jusqu'aux boutiques de luxe et galeries d'art de Ginza — deux visages très différents de Tokyo, à quelques rues d'écart.",
+      "tags": [],
+      "link": null,
+      "linkLabel": null
+    }
+  ]
+}

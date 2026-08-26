@@ -12,6 +12,24 @@
   --tag-text: #1a1714;
   --ember: #c4622d;
   --aurora: #2f6b5e;
+
+  /* Design System LVE (décidé le 23/08/2026) — palette fixe, pas de variante dark comme le reste
+     du thème : ce sont les tokens de marque (badges catégorie, futurs accents), pas les couleurs
+     de surface qui s'adaptent au thème du visiteur. */
+  --lve-bg: #fbf9f5;
+  --lve-charcoal: #1a1a1a;
+  --lve-ivory: #faf6f0;
+  --lve-obsidian: #22252a;
+  --lve-sand: #f1dab1;
+  --lve-border: #e8e3da;
+  --lve-terracotta: #d27b5c;
+  --lve-terracotta-dark: #8c4a32;
+  --lve-terracotta-bg: #f7ebe1;
+  --lve-copper-smoke: #4a2e1f;
+  --lve-sage-dark: #4a6b48;
+  --lve-sage-bg: #eff3ee;
+  --lve-ocean-dark: #2c5e73;
+  --lve-ocean-bg: #e8f0f3;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -41,6 +59,23 @@
   --font-body: var(--font-source-serif);
   --font-mono-lve: var(--font-ibm-plex-mono);
   --font-signature: var(--font-give-you-glory);
+
+  /* Génère les classes utilitaires bg-lve-, text-lve-, border-lve- (ex: bg-lve-terracotta-bg,
+     text-lve-sage-dark) à partir des tokens définis dans :root ci-dessus. */
+  --color-lve-bg: var(--lve-bg);
+  --color-lve-charcoal: var(--lve-charcoal);
+  --color-lve-ivory: var(--lve-ivory);
+  --color-lve-obsidian: var(--lve-obsidian);
+  --color-lve-sand: var(--lve-sand);
+  --color-lve-border: var(--lve-border);
+  --color-lve-terracotta: var(--lve-terracotta);
+  --color-lve-terracotta-dark: var(--lve-terracotta-dark);
+  --color-lve-terracotta-bg: var(--lve-terracotta-bg);
+  --color-lve-copper-smoke: var(--lve-copper-smoke);
+  --color-lve-sage-dark: var(--lve-sage-dark);
+  --color-lve-sage-bg: var(--lve-sage-bg);
+  --color-lve-ocean-dark: var(--lve-ocean-dark);
+  --color-lve-ocean-bg: var(--lve-ocean-bg);
 }
 
 body {
@@ -59,6 +94,15 @@ body {
   position: relative;
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .grain::after {
   content: "";
   position: absolute;
@@ -67,13 +111,4 @@ body {
   opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-.drop-cap {
-  float: left;
-  font-family: var(--font-cormorant), serif;
-  font-size: 3.5rem;
-  line-height: 0.8;
-  padding-right: 0.5rem;
-  padding-top: 0.3rem;
 }

@@ -32,14 +32,11 @@ export function FavorisClient() {
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-      <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
-        Mes favoris
-      </p>
       <h1
         className="font-extrabold mb-10"
         style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
       >
-        Les voyages que tu as sauvegardés
+        Mes Favoris
       </h1>
 
       {liked.length === 0 ? (

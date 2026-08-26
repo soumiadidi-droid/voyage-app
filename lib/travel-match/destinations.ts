@@ -157,29 +157,68 @@ export const DESTINATIONS: Destination[] = [
     suggested_combos: [],
   },
   {
-    id: "japon",
-    title: "Japon",
+    id: "japon-urbain",
+    title: "Japon : Tokyo & Osaka",
     authenticity_badge: "tested_approved",
-    content_slug: "japon",
-    summary: "Osaka, ses rues et sa décontraction — puis une côte où plus rien ne bouge.",
+    content_slug: "japon-urbain",
+    summary: "Néons, ruelles animées et street food à toute heure — le Japon qui ne s'arrête jamais.",
     hero_image: "https://files.catbox.moe/xwua06.jpg",
+    // Ancienne fiche unique "japon" scindée en 2 le 23/08/2026 (Soumia) : elle mélangeait
+    // Tokyo/Osaka (effervescence) et Kyoto/Fuji/ryokans (contemplation) sur les mêmes scores, ce
+    // qui écrasait le matching pour les deux profils opposés. Voir japon-tradition-nature juste
+    // après pour le pendant contemplatif — objectif : un score bien plus précis selon que
+    // l'utilisateur cherche un choc culturel urbain ou une déconnexion nature/temples.
+    // Contenu éditorial scindé au même moment (les adresses ne sont pas au même endroit) :
+    // content/voyages/japon.json remplacé par japon-urbain.json (Osaka + Tokyo) et
+    // japon-tradition-nature.json (Nara + Kyoto + Shimoda) — chaque fiche a désormais son propre
+    // content_slug, plus de partage entre les deux comme pour Italie.
     filters: {
       distance: ["long_courrier"],
       climate: ["chaleur", "douceur", "hiver_cosy"],
-      transport: ["transports_possibles"],
+      transport: ["sans_voiture", "transports_possibles"],
       sport_level: ["actif"],
       duration: ["semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 5, exploration: 5, gastronomie: 5, nature_plage: 5, effervescence_urbaine: 5, rythme: 5 },
+    scores: { repos: 2, exploration: 5, gastronomie: 5, nature_plage: 1, effervescence_urbaine: 5, rythme: 5 },
     logistics: {
       solo: true,
       duo: true,
       friends: true,
-      family_kids_under_6: true, // testé à 4 ans avec succès
+      family_kids_under_6: true, // testé à 4 ans avec succès (Osaka / Universal Studios)
       family_kids_over_6: true,
     },
-    tags: ["GrandesVilles", "Foodie", "Authentique", "SlowLife"],
+    tags: ["GrandesVilles", "Foodie", "Authentique"],
+    suggested_combos: [],
+    regional_transport: {
+      recommended_mode: "Train à grande vitesse (Shinkansen)",
+      pass_or_tip: "Acheter le JR Pass en avance",
+      summary:
+        "Réseau ferroviaire ultra-dense et ponctuel, idéal pour relier les grandes villes sans voiture.",
+    },
+  },
+  {
+    id: "japon-tradition-nature",
+    title: "Japon : Kyoto, Mont Fuji & Shimoda",
+    authenticity_badge: "tested_approved",
+    content_slug: "japon-tradition-nature",
+    // Titre/summary/filters/scores validés par Soumia le 23/08/2026 (remplace la première passe de
+    // Claude) : sport_level élargi à actif (Arashiyama, parc des singes), budget resserré sur
+    // confort/premium (ryokans + Shimoda), exploration/gastronomie/nature_plage remontés à 5.
+    summary:
+      "Temples séculaires, forêts de bambous, nuits en ryokan et escapade maritime à Shimoda face à l'océan.",
+    hero_image: "https://files.catbox.moe/iu8l3a.jpg",
+    filters: {
+      distance: ["long_courrier"],
+      climate: ["chaleur", "douceur", "hiver_cosy"],
+      transport: ["sans_voiture", "transports_possibles"],
+      sport_level: ["tranquille", "actif"],
+      duration: ["semaine", "grand_voyage"],
+      budget: ["confort", "premium"],
+    },
+    scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 5, effervescence_urbaine: 2, rythme: 2 },
+    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    tags: ["Authentique", "SlowLife", "EspacesSauvages"],
     suggested_combos: [],
     regional_transport: {
       recommended_mode: "Train à grande vitesse (Shinkansen)",

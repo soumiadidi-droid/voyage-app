@@ -24,33 +24,71 @@ function euclideanScore(user: UserAnswers, dest: Destination): number {
   return Math.round(70 + rawScore * 0.28);
 }
 
-type FilterCheck = { ok: boolean; label: string };
+type SoftCriterion = { ok: boolean; malus: number; label: string };
 
-// Un check par critère de filtrage strict, avec le libellé à afficher dans le badge
-// d'avertissement du mode fallback (ex. "⚠️ Transport différent de ta recherche").
-function filterChecks(user: UserAnswers, dest: Destination): FilterCheck[] {
+// Refonte du 23/08/2026 (demande de Soumia) : plus aucun de ces critères n'élimine une
+// destination — chacun retire des points au score si non respecté, pondérés selon le poids réel
+// de la friction (budget/logistique pèsent plus qu'une simple préférence de rythme). Avant cette
+// refonte, un .filter() strict excluait des destinations pertinentes mais "hybrides" (ex. le
+// Japon, qui offre à la fois du calme à Kyoto et de l'effervescence à Tokyo) dès qu'un seul
+// critère secondaire ne matchait pas exactement.
+function softCriteria(user: UserAnswers, dest: Destination): SoftCriterion[] {
   const logisticsKey = COMPANIONS_TO_LOGISTICS_KEY[user.companions];
-  // Règle produit du 23/08/2026 : un week-end élimine d'office les destinations long-courrier,
-  // même si la donnée de la destination autoriserait par erreur "week_end" dans son propre
-  // filtre duration — garde-fou appliqué au niveau du moteur, pas seulement de la donnée.
-  const weekendVsLongCourrier =
-    !(user.filters.duration === "week_end" && dest.filters.distance.includes("long_courrier") &&
-      !dest.filters.distance.some((d) => d !== "long_courrier"));
-
   return [
-    { ok: dest.filters.distance.includes(user.filters.distance), label: "Distance différente de ta recherche" },
-    { ok: dest.filters.climate.includes(user.filters.climate), label: "Climat différent de ta recherche" },
-    { ok: dest.filters.transport.includes(user.filters.transport), label: "Transport différent de ta recherche" },
-    { ok: dest.filters.sport_level.includes(user.filters.sport_level), label: "Niveau physique différent de ta recherche" },
-    { ok: dest.filters.duration.includes(user.filters.duration), label: "Durée de séjour différente de ta recherche" },
-    { ok: dest.filters.budget.includes(user.filters.budget), label: "Budget différent de ta recherche" },
-    { ok: weekendVsLongCourrier, label: "Pas adapté à un week-end (destination long-courrier)" },
-    { ok: dest.logistics[logisticsKey], label: "Pas adapté à ta configuration de voyage" },
+    // Distance retirée d'ici le 26/08/2026 : redevenue un filtre éliminatoire strict (cf.
+    // hardConstraintBroken), plus un malus de score.
+    { ok: dest.filters.climate.includes(user.filters.climate), malus: 8, label: "Climat différent de ta recherche" },
+    { ok: dest.filters.transport.includes(user.filters.transport), malus: 6, label: "Transport différent de ta recherche" },
+    { ok: dest.filters.sport_level.includes(user.filters.sport_level), malus: 6, label: "Niveau physique différent de ta recherche" },
+    { ok: dest.filters.duration.includes(user.filters.duration), malus: 5, label: "Durée de séjour différente de ta recherche" },
+    { ok: dest.filters.budget.includes(user.filters.budget), malus: 10, label: "Budget différent de ta recherche" },
+    { ok: dest.logistics[logisticsKey], malus: 15, label: "Pas adapté à ta configuration de voyage" },
   ];
 }
 
-function passesStrictFilters(user: UserAnswers, dest: Destination): boolean {
-  return filterChecks(user, dest).every((c) => c.ok);
+// Contraintes réellement absolues (garde-fous produit, pas des préférences négociables par des
+// points) :
+// 1. Le périmètre géographique choisi (proche/Europe/long-courrier) élimine directement les
+//    destinations hors zone — redevenu un filtre strict le 26/08/2026 (retour de Soumia), après
+//    être passé en malus de score le 23/08/2026. Chaque destination n'a qu'une seule valeur de
+//    distance (jamais hybride sur cet axe, vérifié le 26/08/2026), donc pas de risque de reproduire
+//    le bug du Japon (qui concernait des critères secondaires, pas la distance). Exception : la
+//    réponse "ouvert" (L'inspiration avant tout — ajoutée le 26/08/2026) ne filtre rien du tout,
+//    laisse les autres critères (ambiance, gastronomie, rythme...) décider seuls.
+// 2. Un week-end ne permet pas de rejoindre une destination accessible uniquement en
+//    long-courrier, quel que soit le score émotionnel par ailleurs.
+// 3. Un climat "hiver cosy / enneigé" demandé ne peut pas être satisfait par une destination
+//    marquée uniquement soleil/Méditerranée (aucun "hiver_cosy" dans ses climats) — c'est
+//    physiquement incompatible, pas une histoire de goût. Ajouté le 23/08/2026 après un test où
+//    la Crète ressortait en tête d'une recherche "hiver" malgré le malus climat (le match
+//    émotionnel très fort par ailleurs compensait un malus pensé pour des préférences, pas pour
+//    une impossibilité physique). Uniquement dans ce sens (hiver → pas de sun-only) : les autres
+//    combinaisons de climat restent un malus normal, négociable.
+function hardConstraintBroken(user: UserAnswers, dest: Destination): boolean {
+  const outsidePerimeter =
+    user.filters.distance !== "ouvert" && !dest.filters.distance.includes(user.filters.distance);
+
+  const weekendVsLongCourrier =
+    user.filters.duration === "week_end" &&
+    dest.filters.distance.includes("long_courrier") &&
+    !dest.filters.distance.some((d) => d !== "long_courrier");
+
+  const winterVsSunOnly =
+    user.filters.climate === "hiver_cosy" && !dest.filters.climate.includes("hiver_cosy");
+
+  return outsidePerimeter || weekendVsLongCourrier || winterVsSunOnly;
+}
+
+const MIN_SCORE = 20;
+
+function scoreWithMalus(user: UserAnswers, dest: Destination): { score: number; brokenFilters: string[] } {
+  const base = euclideanScore(user, dest);
+  const failed = softCriteria(user, dest).filter((c) => !c.ok);
+  const totalMalus = failed.reduce((sum, c) => sum + c.malus, 0);
+  return {
+    score: Math.max(MIN_SCORE, base - totalMalus),
+    brokenFilters: failed.map((c) => c.label),
+  };
 }
 
 // Combo : détecté quand l'utilisateur exprime une envie forte à la fois de nature/plage et
@@ -108,34 +146,27 @@ export function dedupeComboBadges(displayed: ScoredDestination[]): ScoredDestina
 }
 
 export function matchTravel(user: UserAnswers, destinations: Destination[] = DESTINATIONS): MatchOutcome {
-  const eligible = destinations.filter((d) => passesStrictFilters(user, d));
+  // Seule la contrainte absolue (week-end vs long-courrier) retire encore une destination de la
+  // liste — tout le reste devient un malus de score (voir scoreWithMalus), plus jamais une
+  // élimination. results contient donc toujours toutes les destinations restantes, triées.
+  const candidates = destinations.filter((d) => !hardConstraintBroken(user, d));
 
-  if (eligible.length > 0) {
-    const results = eligible
-      .map((destination) => ({
+  const results = candidates
+    .map((destination) => {
+      const { score, brokenFilters } = scoreWithMalus(user, destination);
+      return {
         destination,
-        score: euclideanScore(user, destination),
-        brokenFilters: [],
+        score,
+        brokenFilters,
         hasComboOpportunity: hasComboOpportunity(user, destination),
-      }))
-      .sort((a, b) => b.score - a.score);
-    return { fallback: false, results };
-  }
+      };
+    })
+    .sort((a, b) => b.score - a.score);
 
-  // Fallback : aucune destination ne passe le filtrage strict — on l'ignore et on renvoie le
-  // Top 3 au score global, avec le détail des critères non respectés pour affichage en badge
-  // d'avertissement (comportement validé par Soumia le 22/08/2026).
-  const results = destinations
-    .map((destination) => ({
-      destination,
-      score: euclideanScore(user, destination),
-      brokenFilters: filterChecks(user, destination)
-        .filter((c) => !c.ok)
-        .map((c) => c.label),
-      hasComboOpportunity: hasComboOpportunity(user, destination),
-    }))
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+  // fallback ne signifie plus "le filtrage strict a tout éliminé" mais "même le meilleur résultat
+  // n'est pas un match parfait" — déclenche le même message d'avertissement déjà affiché sur
+  // /resultat, avec un sens désormais cohérent avec le scoring cumulatif.
+  const fallback = results.length > 0 && results[0].brokenFilters.length > 0;
 
-  return { fallback: true, results };
+  return { fallback, results };
 }

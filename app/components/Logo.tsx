@@ -13,10 +13,10 @@ export function Logo({ height = 32 }: { height?: number }) {
         x="280"
         y="64"
         textAnchor="middle"
+        className="tracking-[0.15em]"
         fontFamily="'Cormorant Garamond', serif"
         fontWeight="300"
         fontSize="58"
-        letterSpacing="15"
         fill="currentColor"
       >
         LVE
