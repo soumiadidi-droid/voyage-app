@@ -1,5 +1,7 @@
 import type { Destination } from "@/lib/travel-match/types";
 import type { Card, VoyageContent } from "@/content/voyages";
+import { CATEGORY_PHOTO_OVERRIDE, type AddressCategory } from "@/lib/category-images";
+import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 
 // Agent Social Media — décidé le 26/08/2026. Générateur par templates (pas d'appel à un modèle
 // d'IA externe : aucune clé API n'est configurée sur ce projet, et le site s'interdit partout
@@ -70,30 +72,60 @@ function pickHook(angle: SocialAngle, seed: number): string {
   return options[seed % options.length];
 }
 
+export type AddressPick = { card: Card; category: AddressCategory };
+
 // Pioche 2 à 3 adresses réelles dans les catégories les plus pertinentes pour l'angle choisi,
 // avec repli sur tout ce qui existe si la catégorie prioritaire est vide — jamais d'adresse
-// inventée, seulement ce qui est déjà dans content/voyages/*.json.
-function pickAddresses(voyage: VoyageContent, angle: SocialAngle): Card[] {
-  const pools: Record<SocialAngle, Card[][]> = {
-    gastronomie: [voyage.eats, voyage.activities, voyage.stays],
-    nature: [voyage.activities, voyage.eats, voyage.stays],
-    secret: [voyage.activities, voyage.eats, voyage.stays],
-    urbain: [voyage.stays, voyage.activities, voyage.eats],
+// inventée, seulement ce qui est déjà dans content/voyages/*.json. La catégorie est conservée
+// pour choisir le bon visuel (texture) par adresse, cf. CATEGORY_PHOTO_OVERRIDE.
+function pickAddresses(voyage: VoyageContent, angle: SocialAngle): AddressPick[] {
+  const pools: Record<SocialAngle, { cards: Card[]; category: AddressCategory }[]> = {
+    gastronomie: [
+      { cards: voyage.eats, category: "Resto" },
+      { cards: voyage.activities, category: "Activité" },
+      { cards: voyage.stays, category: "Hôtel" },
+    ],
+    nature: [
+      { cards: voyage.activities, category: "Activité" },
+      { cards: voyage.eats, category: "Resto" },
+      { cards: voyage.stays, category: "Hôtel" },
+    ],
+    secret: [
+      { cards: voyage.activities, category: "Activité" },
+      { cards: voyage.eats, category: "Resto" },
+      { cards: voyage.stays, category: "Hôtel" },
+    ],
+    urbain: [
+      { cards: voyage.stays, category: "Hôtel" },
+      { cards: voyage.activities, category: "Activité" },
+      { cards: voyage.eats, category: "Resto" },
+    ],
   };
   for (const pool of pools[angle]) {
-    if (pool.length > 0) return pool.slice(0, 3);
+    if (pool.cards.length > 0) {
+      return pool.cards.slice(0, 3).map((card) => ({ card, category: pool.category }));
+    }
   }
   return [];
 }
 
-function formatAddressLine(card: Card, prefix: string): string {
-  return `${prefix} ${card.name} — ${card.review}`;
+function formatAddressLine(pick: AddressPick, prefix: string): string {
+  return `${prefix} ${pick.card.name} — ${pick.card.review}`;
 }
+
+export type Slide = {
+  label: string; // "Diapo 1", "Diapo 2"...
+  body: string;
+  visual: string; // chemin d'image, toujours renseigné (cover ou texture de catégorie)
+};
 
 export type GeneratedPost = {
   angle: SocialAngle;
   format: SocialFormat;
-  text: string;
+  text: string; // texte complet à copier (caption Instagram, post LinkedIn, script, newsletter)
+  coverImage?: string;
+  // Renseigné uniquement pour le format carousel — une diapo par visuel à prévoir.
+  slides?: Slide[];
 };
 
 export function generatePost(
@@ -106,26 +138,37 @@ export function generatePost(
   const hook = pickHook(angle, seed);
   const addresses = pickAddresses(voyage, angle);
   const hasAddresses = addresses.length > 0;
+  const coverImage = DESTINATION_HERO_IMAGE[destination.content_slug];
 
   let text: string;
+  let slides: Slide[] | undefined;
 
   if (format === "carousel") {
-    const slides = [
-      `Diapo 1\n${destination.title}\n${hook}`,
-      ...addresses.map((card, i) => `Diapo ${i + 2}\n${formatAddressLine(card, "📍")}`),
-      `Diapo ${addresses.length + 2}\n${destination.summary}\n\n${CTA}`,
+    const addressSlides: Slide[] = addresses.map((pick, i) => ({
+      label: `Diapo ${i + 2}`,
+      body: formatAddressLine(pick, "📍"),
+      visual: CATEGORY_PHOTO_OVERRIDE[pick.category],
+    }));
+    slides = [
+      { label: "Diapo 1", body: `${destination.title}\n${hook}`, visual: coverImage ?? CATEGORY_PHOTO_OVERRIDE.Activité },
+      ...addressSlides,
+      {
+        label: `Diapo ${addresses.length + 2}`,
+        body: `${destination.summary}\n\n${CTA}`,
+        visual: coverImage ?? CATEGORY_PHOTO_OVERRIDE.Activité,
+      },
     ];
     const tags = destination.tags.map((t) => `#${t}`).join(" ");
-    text = `${slides.join("\n\n")}\n\n#TravelMatch #VoyageDesEmotions ${HASHTAGS[angle]} ${tags}`;
+    text = `${slides.map((s) => `${s.label}\n${s.body}`).join("\n\n")}\n\n#TravelMatch #VoyageDesEmotions ${HASHTAGS[angle]} ${tags}`;
   } else if (format === "linkedin") {
     const body = hasAddresses
-      ? `\n\nSur place :\n${addresses.map((c) => formatAddressLine(c, "—")).join("\n")}`
+      ? `\n\nSur place :\n${addresses.map((p) => formatAddressLine(p, "—")).join("\n")}`
       : "";
     text = `${destination.title}\n\n${hook}\n\n${destination.summary}${body}\n\n${CTA}`;
   } else if (format === "reel") {
-    const beats = addresses.map((card, i) => {
+    const beats = addresses.map((pick, i) => {
       const start = 3 + i * 5;
-      return `[${start}-${start + 5}s] ${formatAddressLine(card, "→")}`;
+      return `[${start}-${start + 5}s] ${formatAddressLine(pick, "→")}`;
     });
     const ctaStart = 3 + addresses.length * 5;
     text = [
@@ -137,10 +180,10 @@ export function generatePost(
     ].join("\n");
   } else {
     const body = hasAddresses
-      ? `\n\nNos adresses testées :\n${addresses.map((c) => formatAddressLine(c, "📍")).join("\n")}`
+      ? `\n\nNos adresses testées :\n${addresses.map((p) => formatAddressLine(p, "📍")).join("\n")}`
       : "";
     text = `Objet : ${destination.title} — ${hook}\n\nBonjour,\n\n${hook} ${destination.summary}${body}\n\n${CTA_NEWSLETTER}\n\n— L'équipe Voyage des Émotions`;
   }
 
-  return { angle, format, text };
+  return { angle, format, text, coverImage, slides };
 }

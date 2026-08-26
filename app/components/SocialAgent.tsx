@@ -1,10 +1,9 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Copy, RefreshCw, Check } from "lucide-react";
+import { Copy, RefreshCw, Check, Download } from "lucide-react";
 import { DESTINATIONS } from "@/lib/travel-match/destinations";
 import { getVoyage } from "@/content/voyages";
-import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import {
   FORMATS,
   ANGLES,
@@ -12,6 +11,33 @@ import {
   type SocialFormat,
   type SocialAngle,
 } from "@/lib/social-agent/generate";
+
+// Téléchargement réel du fichier (pas juste une navigation) — fetch + blob, plus fiable qu'un
+// simple <a download> pour forcer l'enregistrement plutôt qu'un aperçu dans un nouvel onglet.
+async function downloadImage(url: string) {
+  const res = await fetch(url);
+  const blob = await res.blob();
+  const objectUrl = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = objectUrl;
+  a.download = url.split("/").pop() ?? "image.jpg";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(objectUrl);
+}
+
+function DownloadButton({ src, label }: { src: string; label: string }) {
+  return (
+    <button
+      onClick={() => downloadImage(src)}
+      className="flex items-center gap-2 rounded-full border border-lve-border px-4 py-2 text-xs font-medium text-lve-charcoal transition-colors hover:border-lve-terracotta"
+    >
+      <Download size={14} />
+      {label}
+    </button>
+  );
+}
 
 export function SocialAgent() {
   const [destinationId, setDestinationId] = useState(DESTINATIONS[0].id);
@@ -22,7 +48,6 @@ export function SocialAgent() {
 
   const destination = DESTINATIONS.find((d) => d.id === destinationId) ?? DESTINATIONS[0];
   const voyage = getVoyage(destination.content_slug);
-  const coverImage = DESTINATION_HERO_IMAGE[destination.content_slug];
 
   const post = useMemo(() => {
     if (!voyage) return null;
@@ -115,28 +140,55 @@ export function SocialAgent() {
         </div>
 
         <div className="flex flex-col gap-4">
-          {coverImage && (
-            <div
-              className="grain h-56 w-full rounded-lg"
-              style={{ backgroundImage: `url('${coverImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
-            />
+          {post?.slides ? (
+            // Carousel : une carte visuelle par diapo (cover pour le hook/CTA, texture de
+            // catégorie pour chaque adresse) — décidé le 26/08/2026.
+            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
+              {post.slides.map((slide) => (
+                <div key={slide.label} className="flex flex-col gap-2">
+                  <div
+                    className="grain aspect-square w-full rounded-lg"
+                    style={{ backgroundImage: `url('${slide.visual}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+                  />
+                  <p className="font-mono-lve text-[10px] uppercase tracking-wide text-lve-charcoal/50">
+                    {slide.label}
+                  </p>
+                  <p className="whitespace-pre-wrap text-xs leading-relaxed text-lve-charcoal">
+                    {slide.body}
+                  </p>
+                  <DownloadButton src={slide.visual} label="Télécharger" />
+                </div>
+              ))}
+            </div>
+          ) : (
+            post?.coverImage && (
+              <div className="flex flex-col gap-2">
+                <div
+                  className="grain h-56 w-full rounded-lg"
+                  style={{ backgroundImage: `url('${post.coverImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+                />
+                <div>
+                  <DownloadButton src={post.coverImage} label="Télécharger l'image de couverture" />
+                </div>
+              </div>
+            )
           )}
 
           <div
             className="whitespace-pre-wrap rounded-lg border border-lve-border bg-lve-bg p-6 font-body text-sm leading-relaxed text-lve-charcoal"
-            style={{ minHeight: "320px" }}
+            style={{ minHeight: "200px" }}
           >
             {post ? post.text : "Aucun contenu disponible pour cette destination."}
           </div>
 
-          <div className="flex gap-3">
+          <div className="flex flex-wrap gap-3">
             <button
               onClick={handleCopy}
               disabled={!post}
               className="flex items-center gap-2 rounded-full bg-lve-terracotta px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-lve-terracotta-dark disabled:opacity-50"
             >
               {copied ? <Check size={16} /> : <Copy size={16} />}
-              {copied ? "Copié !" : "Copier dans le presse-papier"}
+              {copied ? "Copié !" : "Copier la caption complète"}
             </button>
             <button
               onClick={handleRegenerate}

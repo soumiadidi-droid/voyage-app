@@ -8,6 +8,7 @@ import { DESTINATIONS } from "@/lib/travel-match/destinations";
 import { getCombosFor } from "@/lib/travel-match/combos";
 import type { DurationFilter } from "@/lib/travel-match/types";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
+import { CATEGORY_PHOTO_OVERRIDE, type AddressCategory } from "@/lib/category-images";
 
 export function generateStaticParams() {
   return VOYAGES.map((v) => ({ slug: v.slug }));
@@ -19,8 +20,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: voyage ? `${voyage.hero.title} — Le Voyage des Émotions` : "Voyage" };
 }
 
-type AddressCategory = "Hôtel" | "Resto" | "Activité";
-
 // Étiquette catégorie minimaliste (icône fine + petite majuscule espacée) — décidé le 23/08/2026.
 // Pas de 4e catégorie "Café" séparée de "Resto" : le modèle de données ne distingue pas les cafés
 // des restaurants dans `eats`, donc pas de tri inventé par Claude — à revoir avec Soumia si elle
@@ -31,14 +30,6 @@ const CATEGORY_META: Record<AddressCategory, { icon: LucideIcon; label: string; 
   Hôtel: { icon: BedDouble, label: "Hôtel de charme", bg: LVE_COLORS.terracotta.bg, color: LVE_COLORS.terracotta.dark },
   Resto: { icon: UtensilsCrossed, label: "Table épicurienne", bg: LVE_COLORS.sage.bg, color: LVE_COLORS.sage.dark },
   Activité: { icon: Compass, label: "Expérience", bg: LVE_COLORS.ocean.bg, color: LVE_COLORS.ocean.dark },
-};
-
-// Texture en photo systématique par catégorie (décidé le 26/08/2026) — remplace la vraie photo de
-// l'adresse, contrairement à CATEGORY_META qui ne concerne que le badge.
-const CATEGORY_PHOTO_OVERRIDE: Partial<Record<AddressCategory, string>> = {
-  Hôtel: "/images/textures/lin.jpg",
-  Resto: "/images/textures/marbre.jpg",
-  Activité: "/images/textures/activite.jpg",
 };
 
 // Bloc remonté juste sous le Hero/intro (décidé le 23/08/2026, ajustement UX/monétisation) —
