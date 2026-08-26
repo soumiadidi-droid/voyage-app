@@ -32,12 +32,12 @@ const CATEGORY_META: Record<AddressCategory, { icon: LucideIcon; label: string; 
   Activité: { icon: Compass, label: "Expérience", bg: LVE_COLORS.ocean.bg, color: LVE_COLORS.ocean.dark },
 };
 
-// Texture en photo systématique par catégorie (décidé le 26/08/2026, Hôtel puis Resto) — remplace
-// la vraie photo de l'adresse, contrairement à CATEGORY_META qui ne concerne que le badge. Pas
-// d'entrée pour Activité : rien demandé pour cette catégorie pour l'instant.
+// Texture en photo systématique par catégorie (décidé le 26/08/2026) — remplace la vraie photo de
+// l'adresse, contrairement à CATEGORY_META qui ne concerne que le badge.
 const CATEGORY_PHOTO_OVERRIDE: Partial<Record<AddressCategory, string>> = {
   Hôtel: "/images/textures/lin.jpg",
   Resto: "/images/textures/marbre.jpg",
+  Activité: "/images/textures/activite.jpg",
 };
 
 // Bloc remonté juste sous le Hero/intro (décidé le 23/08/2026, ajustement UX/monétisation) —
