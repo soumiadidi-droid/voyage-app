@@ -7,13 +7,14 @@ import { LVE_COLORS } from "@/lib/design-tokens";
 import { CATEGORY_PHOTO_OVERRIDE, type AddressCategory } from "@/lib/category-images";
 import { type FamilyProfile } from "@/lib/travel-match/types";
 import { Logo } from "./Logo";
-import { AddressDetailModal } from "./AddressDetailModal";
+import { AddressDetailCard } from "./AddressDetailCard";
 
 // Grille éditoriale masonry (28/08/2026, remplace la bande horizontale à repère sticky — demande
 // explicite de Soumia après un souci de découvrabilité sur desktop : les restos/activités étaient
 // cachés derrière un scroll horizontal peu visible). Vignette seule dans la grille (pas d'embed
 // Instagram chargé ici, coût de perf inutile pour une simple photo de couverture) ; le détail
-// complet (embed inclus, click-to-load) s'ouvre dans AddressDetailModal au clic.
+// complet remplace l'image EN PLACE dans la grille au clic (AddressDetailCard, pas de pop-up
+// flottante pour cet écran-là — demande explicite de Soumia).
 export const CATEGORY_META: Record<
   AddressCategory,
   { icon: LucideIcon; label: string; bg: string; color: string }
@@ -74,7 +75,10 @@ export function AddressGrid({
   activities: Card[];
   familyProfile?: FamilyProfile;
 }) {
-  const [selected, setSelected] = useState<GridItem | null>(null);
+  // Un seul index ouvert à la fois (28/08/2026) — cliquer sur une autre carte referme
+  // automatiquement celle en cours, cohérent avec le comportement précédent (une seule fiche
+  // visible à la fois, juste inline dans la grille au lieu d'une pop-up).
+  const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
 
   const items: GridItem[] = [
     ...stays.map((card) => ({ card, category: "Hôtel" as AddressCategory })),
@@ -85,27 +89,27 @@ export function AddressGrid({
   if (items.length === 0) return null;
 
   return (
-    <>
-      <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-        {items.map((item, i) => (
+    <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+      {items.map((item, i) =>
+        expandedIndex === i ? (
+          <AddressDetailCard
+            key={i}
+            card={item.card}
+            category={item.category}
+            familyProfile={familyProfile}
+            onClose={() => setExpandedIndex(null)}
+          />
+        ) : (
           <button
             key={i}
             type="button"
-            onClick={() => setSelected(item)}
+            onClick={() => setExpandedIndex(i)}
             className="group mb-4 block w-full break-inside-avoid text-left"
           >
             <Thumbnail item={item} />
           </button>
-        ))}
-      </div>
-      {selected && (
-        <AddressDetailModal
-          card={selected.card}
-          category={selected.category}
-          familyProfile={familyProfile}
-          onClose={() => setSelected(null)}
-        />
+        )
       )}
-    </>
+    </div>
   );
 }
