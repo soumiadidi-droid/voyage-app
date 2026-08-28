@@ -73,7 +73,10 @@ export function AddressDetailCard({
       className="relative flex h-full w-full flex-col rounded-xl p-5"
       style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
     >
-      <div className="flex items-center gap-2 mb-3 flex-wrap">
+      {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de badges — sans ça, une carte
+          avec juste le badge catégorie vs une autre avec catégorie + "Partenaire" + statut
+          décalait tout le contenu en dessous entre les deux. */}
+      <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
@@ -135,14 +138,18 @@ export function AddressDetailCard({
         </button>
       )}
 
+      {/* `line-clamp-3` + `min-h` (28/08/2026) : même logique que le nom/la localisation — une
+          description longue vs courte décalait les tags et le bouton du dessous entre cartes. */}
       {card.review && (
-        <p className="leading-relaxed mb-3" style={{ fontSize: "0.95rem" }}>
+        <p className="mb-3 line-clamp-3 min-h-[4.3rem] leading-relaxed" style={{ fontSize: "0.95rem" }}>
           {card.review}
         </p>
       )}
 
+      {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de tags, pour que le bouton du bas
+          (poussé par mt-auto) parte du même niveau même quand le nombre de tags diffère. */}
       {card.tags.length > 0 && (
-        <div className="flex flex-wrap gap-2 mb-4">
+        <div className="mb-4 flex min-h-[2.25rem] flex-wrap gap-2">
           {card.tags.map((tag) => (
             <span
               key={tag}
