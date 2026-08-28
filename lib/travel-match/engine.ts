@@ -4,7 +4,6 @@ import {
   type Destination,
   type UserAnswers,
 } from "./types";
-import { DESTINATIONS } from "./destinations";
 import { getCombosFor } from "./combos";
 
 // Distance euclidienne max théorique sur 6 axes (repos/exploration/gastronomie/nature_plage/
@@ -64,19 +63,28 @@ function softCriteria(user: UserAnswers, dest: Destination): SoftCriterion[] {
 //    émotionnel très fort par ailleurs compensait un malus pensé pour des préférences, pas pour
 //    une impossibilité physique). Uniquement dans ce sens (hiver → pas de sun-only) : les autres
 //    combinaisons de climat restent un malus normal, négociable.
-function hardConstraintBroken(user: UserAnswers, dest: Destination): boolean {
+function brokenHardConstraints(user: UserAnswers, dest: Destination): string[] {
+  const labels: string[] = [];
+
   const outsidePerimeter =
     user.filters.distance !== "ouvert" && !dest.filters.distance.includes(user.filters.distance);
+  if (outsidePerimeter) labels.push("Zone géographique différente de ta recherche");
 
   const weekendVsLongCourrier =
     user.filters.duration === "week_end" &&
     dest.filters.distance.includes("long_courrier") &&
     !dest.filters.distance.some((d) => d !== "long_courrier");
+  if (weekendVsLongCourrier) labels.push("Accessible seulement en long-courrier, pas compatible avec un week-end");
 
   const winterVsSunOnly =
     user.filters.climate === "hiver_cosy" && !dest.filters.climate.includes("hiver_cosy");
+  if (winterVsSunOnly) labels.push("Pas de climat hiver cosy disponible ici");
 
-  return outsidePerimeter || weekendVsLongCourrier || winterVsSunOnly;
+  return labels;
+}
+
+function hardConstraintBroken(user: UserAnswers, dest: Destination): boolean {
+  return brokenHardConstraints(user, dest).length > 0;
 }
 
 const MIN_SCORE = 20;
@@ -97,9 +105,9 @@ function scoreWithMalus(user: UserAnswers, dest: Destination): { score: number; 
 // visuel sur la carte résultat, sans influencer le score (validé par Soumia le 23/08/2026).
 const COMBO_THRESHOLD = 4;
 
-function hasComboOpportunity(user: UserAnswers, dest: Destination): boolean {
+function hasComboOpportunity(user: UserAnswers, dest: Destination, destinations: Destination[]): boolean {
   return (
-    getCombosFor(dest.id).length > 0 &&
+    getCombosFor(dest.id, destinations).length > 0 &&
     user.scores.nature_plage >= COMBO_THRESHOLD &&
     user.scores.effervescence_urbaine >= COMBO_THRESHOLD
   );
@@ -126,12 +134,15 @@ function canonicalPairKey(idA: string, idB: string): string {
 // pas sur les deux cartes — sinon ça a l'air d'un doublon. On garde le badge sur le premier des
 // deux rencontré (déjà trié par score décroissant), on le retire sur le second (miroir).
 // À appliquer sur le lot réellement affiché (ex. après slice(0, 3)), pas sur la liste complète.
-export function dedupeComboBadges(displayed: ScoredDestination[]): ScoredDestination[] {
+export function dedupeComboBadges(
+  displayed: ScoredDestination[],
+  destinations: Destination[]
+): ScoredDestination[] {
   const shownPairs = new Set<string>();
   return displayed.map((result) => {
     if (!result.hasComboOpportunity) return result;
 
-    const mirrored = getCombosFor(result.destination.id).find((resolved) =>
+    const mirrored = getCombosFor(result.destination.id, destinations).find((resolved) =>
       displayed.some((other) => other.destination.id === resolved.otherDestination.id)
     );
     if (!mirrored) return result; // pas d'autre destination du combo affichée, rien à dédoublonner
@@ -145,20 +156,28 @@ export function dedupeComboBadges(displayed: ScoredDestination[]): ScoredDestina
   });
 }
 
-export function matchTravel(user: UserAnswers, destinations: Destination[] = DESTINATIONS): MatchOutcome {
-  // Seule la contrainte absolue (week-end vs long-courrier) retire encore une destination de la
-  // liste — tout le reste devient un malus de score (voir scoreWithMalus), plus jamais une
-  // élimination. results contient donc toujours toutes les destinations restantes, triées.
-  const candidates = destinations.filter((d) => !hardConstraintBroken(user, d));
+export function matchTravel(user: UserAnswers, destinations: Destination[]): MatchOutcome {
+  // Seule la contrainte absolue (week-end vs long-courrier, périmètre, climat hiver) retire
+  // encore une destination de la liste — tout le reste devient un malus de score (voir
+  // scoreWithMalus), plus jamais une élimination.
+  const strictCandidates = destinations.filter((d) => !hardConstraintBroken(user, d));
+
+  // Filet de sécurité (28/08/2026, demande de Soumia) : jamais de page de résultat vide. Si le
+  // filtrage strict élimine TOUTES les destinations (ex. climat hiver demandé alors qu'aucune
+  // destination dispo ne l'offre), on retombe sur le catalogue complet — chaque contrainte dure
+  // cassée devient un badge d'avertissement au lieu d'une élimination silencieuse.
+  const usingSafetyNet = strictCandidates.length === 0;
+  const candidates = usingSafetyNet ? destinations : strictCandidates;
 
   const results = candidates
     .map((destination) => {
       const { score, brokenFilters } = scoreWithMalus(user, destination);
+      const hardLabels = usingSafetyNet ? brokenHardConstraints(user, destination) : [];
       return {
         destination,
         score,
-        brokenFilters,
-        hasComboOpportunity: hasComboOpportunity(user, destination),
+        brokenFilters: [...hardLabels, ...brokenFilters],
+        hasComboOpportunity: hasComboOpportunity(user, destination, destinations),
       };
     })
     .sort((a, b) => b.score - a.score);

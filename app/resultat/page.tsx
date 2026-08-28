@@ -1,9 +1,11 @@
-import { LikeButton } from "../components/LikeButton";
 import { TravelerProfileCard } from "../components/TravelerProfileCard";
+import { FallbackNotice } from "./FallbackNotice";
+import { DestinationCard } from "./DestinationCard";
 import { matchTravel, dedupeComboBadges } from "@/lib/travel-match/engine";
-import { DESTINATIONS } from "@/lib/travel-match/destinations";
+import { getDestinations } from "@/lib/travel-match/data";
 import {
   SCORE_KEYS,
+  FAMILY_PROFILE_OPTIONS,
   type UserAnswers,
   type DistanceAnswer,
   type ClimateFilter,
@@ -12,6 +14,7 @@ import {
   type DurationFilter,
   type BudgetFilter,
   type Companions,
+  type FamilyProfile,
 } from "@/lib/travel-match/types";
 
 export const metadata = {
@@ -24,7 +27,8 @@ const TRANSPORT_VALUES: TransportFilter[] = ["sans_voiture", "transports_possibl
 const SPORT_VALUES: SportLevelFilter[] = ["tranquille", "actif"];
 const DURATION_VALUES: DurationFilter[] = ["week_end", "semaine", "grand_voyage"];
 const BUDGET_VALUES: BudgetFilter[] = ["eco", "confort", "premium"];
-const COMPANIONS_VALUES: Companions[] = ["solo", "duo", "amis", "famille_moins_6", "famille_plus_6"];
+const COMPANIONS_VALUES: Companions[] = ["solo", "duo", "amis", "famille"];
+const FAMILY_PROFILE_VALUES: FamilyProfile[] = FAMILY_PROFILE_OPTIONS.map((o) => o.value);
 
 const REQUIRED_CHOICE_KEYS = ["distance", "climate", "transport", "sport_level", "duration", "budget", "companions"];
 
@@ -53,6 +57,12 @@ function parseAnswers(raw: Record<string, string>): { answers: UserAnswers; comp
   const companions = COMPANIONS_VALUES.includes(raw.companions as Companions)
     ? (raw.companions as Companions)
     : "solo";
+  // Optionnel : présent seulement quand companions === "famille". Une valeur absente ou invalide ne
+  // rend pas la réponse incomplète (contrairement aux REQUIRED_CHOICE_KEYS) — le pavé "Adapté aux
+  // Familles" ne s'affichera simplement pas sur la fiche voyage.
+  const familyProfile = FAMILY_PROFILE_VALUES.includes(raw.familyProfile as FamilyProfile)
+    ? (raw.familyProfile as FamilyProfile)
+    : undefined;
 
   const complete = REQUIRED_CHOICE_KEYS.every((key) => key in raw);
 
@@ -66,6 +76,7 @@ function parseAnswers(raw: Record<string, string>): { answers: UserAnswers; comp
     answers: {
       filters: { distance, climate, transport, sport_level, duration, budget },
       companions,
+      familyProfile,
       scores,
     },
     complete,
@@ -98,82 +109,38 @@ export default async function ResultatPage({
     );
   }
 
-  const { fallback, results } = matchTravel(answers, DESTINATIONS);
-  const top = dedupeComboBadges(results.slice(0, 3));
+  const destinations = await getDestinations();
+  const { fallback, results } = matchTravel(answers, destinations);
+  const top = dedupeComboBadges(results.slice(0, 3), destinations);
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-      <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
-        Ton résultat
+      <p
+        className="text-[11px] font-medium uppercase tracking-widest mb-3"
+        style={{ color: "var(--lve-terracotta-dark)" }}
+      >
+        Votre diagnostic
       </p>
       <h1
-        className="font-extrabold mb-10"
-        style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+        className="font-light mb-10 text-3xl md:text-4xl"
+        style={{ fontFamily: "var(--font-title)" }}
       >
         Les voyages qui te correspondent
       </h1>
 
       <TravelerProfileCard answers={answers} />
 
-      {fallback && (
-        <p
-          className="mb-10 px-5 py-4 border"
-          style={{ borderColor: "var(--ember)", color: "var(--text-secondary)" }}
-        >
-          Aucune destination ne correspond à 100% à tous tes critères logistiques stricts, mais
-          voici les voyages les plus proches de tes envies émotionnelles :
-        </p>
-      )}
+      {fallback && <FallbackNotice />}
 
       <div className="flex flex-col gap-8">
-        {top.map(({ destination, score, brokenFilters, hasComboOpportunity }) => (
-          <div key={destination.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
-            <div className="flex items-baseline justify-between gap-4 mb-2">
-              <h2
-                className="font-semibold"
-                style={{ fontFamily: "var(--font-display)", fontSize: "1.4rem" }}
-              >
-                {destination.title}
-              </h2>
-              <div className="flex items-center gap-3">
-                <span className="mono" style={{ color: "var(--ember)" }}>
-                  {score}%
-                </span>
-                <LikeButton id={destination.id} />
-              </div>
-            </div>
-            <p className="mb-3" style={{ color: "var(--text-secondary)" }}>{destination.summary}</p>
-            {hasComboOpportunity && (
-              <p className="mono mb-3" style={{ color: "var(--aurora)", fontSize: "0.8rem" }}>
-                🔀 Combo possible — cette destination propose une extension
-              </p>
-            )}
-            <ul
-              className="mono flex flex-wrap gap-x-2 gap-y-1 mb-3"
-              style={{ color: "var(--text-secondary)", fontSize: "0.8rem" }}
-            >
-              {destination.tags.map((tag) => (
-                <li key={tag}>#{tag}</li>
-              ))}
-            </ul>
-            {brokenFilters.length > 0 && (
-              <ul
-                className="mono flex flex-wrap gap-x-2 gap-y-1 mb-3"
-                style={{ color: "var(--ember)", fontSize: "0.75rem" }}
-              >
-                {brokenFilters.map((label) => (
-                  <li key={label}>⚠️ {label}</li>
-                ))}
-              </ul>
-            )}
-            <a
-              href={`/voyages/${destination.content_slug}?id=${destination.id}&duration=${answers.filters.duration}`}
-              className="mono"
-              style={{ color: "var(--ember)" }}
-            >
-              Voir la fiche voyage →
-            </a>
-          </div>
+        {top.map((result) => (
+          <DestinationCard
+            key={result.destination.id}
+            {...result}
+            href={`/voyages/${result.destination.content_slug}?id=${result.destination.id}&duration=${answers.filters.duration}${
+              answers.familyProfile ? `&familyProfile=${answers.familyProfile}` : ""
+            }`}
+          />
         ))}
       </div>
     </div>

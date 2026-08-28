@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { Copy, RefreshCw, Check, Download } from "lucide-react";
-import { DESTINATIONS } from "@/lib/travel-match/destinations";
-import { getVoyage } from "@/content/voyages";
+import type { Destination } from "@/lib/travel-match/types";
+import type { VoyageContent } from "@/content/voyages";
+import { getVoyageForSocialAgent } from "../admin/social-agent/actions";
 import {
   FORMATS,
   ANGLES,
@@ -39,20 +40,29 @@ function DownloadButton({ src, label }: { src: string; label: string }) {
   );
 }
 
-export function SocialAgent() {
-  const [destinationId, setDestinationId] = useState(DESTINATIONS[0].id);
+export function SocialAgent({ destinations }: { destinations: Destination[] }) {
+  const [destinationId, setDestinationId] = useState(destinations[0].id);
   const [format, setFormat] = useState<SocialFormat>("carousel");
   const [angle, setAngle] = useState<SocialAngle>("gastronomie");
   const [nonce, setNonce] = useState(0); // force une régénération même si angle/format inchangés
   const [copied, setCopied] = useState(false);
+  const [voyage, setVoyage] = useState<VoyageContent | undefined>(undefined);
 
-  const destination = DESTINATIONS.find((d) => d.id === destinationId) ?? DESTINATIONS[0];
-  const voyage = getVoyage(destination.content_slug);
+  const destination = destinations.find((d) => d.id === destinationId) ?? destinations[0];
 
-  const post = useMemo(() => {
-    if (!voyage) return null;
-    return generatePost(destination, voyage, format, angle, nonce);
-  }, [destination, voyage, format, angle, nonce]);
+  // La fiche voyage vient maintenant de Neon (migration DB du 27/08/2026) — plus un simple import
+  // statique, donc résolue via Server Action à chaque changement de destination sélectionnée.
+  useEffect(() => {
+    let cancelled = false;
+    getVoyageForSocialAgent(destination.content_slug).then((v) => {
+      if (!cancelled) setVoyage(v);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [destination.content_slug]);
+
+  const post = voyage ? generatePost(destination, voyage, format, angle, nonce) : null;
 
   function handleCopy() {
     if (!post) return;
@@ -88,7 +98,7 @@ export function SocialAgent() {
               onChange={(e) => setDestinationId(e.target.value)}
               className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
             >
-              {DESTINATIONS.map((d) => (
+              {destinations.map((d) => (
                 <option key={d.id} value={d.id}>
                   {d.title}
                 </option>

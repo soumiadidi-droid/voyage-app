@@ -1,6 +1,41 @@
 "use client";
 
 import Link from "next/link";
+import { Settings } from "lucide-react";
+import { useEffect, useSyncExternalStore } from "react";
+
+// Bouton Backoffice discret (décidé le 26/08/2026) — visible uniquement sur le navigateur de
+// Soumia, après avoir visité une fois une URL avec ?admin=1 (le flag est mémorisé dans
+// localStorage, propre à cet appareil/navigateur). Ce n'est PAS une vraie protection : /studio et
+// /admin/* restent accessibles à qui aurait le lien direct, comme avant — juste rien à voir pour
+// un visiteur normal qui navigue le site sans connaître cette URL.
+// useSyncExternalStore pour la lecture (même raison que lib/favorites.ts : évite le anti-pattern
+// "setState synchrone dans un effect" et gère le mismatch SSR/client) ; l'effect ne fait que
+// l'écriture dans localStorage quand l'URL contient ?admin=1.
+const ADMIN_FLAG_KEY = "lve-admin-unlocked";
+
+function subscribe() {
+  return () => {};
+}
+
+function getSnapshot(): boolean {
+  return window.localStorage.getItem(ADMIN_FLAG_KEY) === "true";
+}
+
+function getServerSnapshot(): boolean {
+  return false;
+}
+
+function useAdminUnlocked(): boolean {
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("admin") === "1") {
+      window.localStorage.setItem(ADMIN_FLAG_KEY, "true");
+    }
+  }, []);
+
+  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
+}
 
 // Compte réel de Soumia, donné le 23/08/2026 — profil public (pas le lien d'invitation ig_contact
 // personnel qu'elle a collé, qui n'est pas fait pour être partagé publiquement sur le site).
@@ -44,6 +79,8 @@ const NAV_LINKS = [
 // remplace l'ancien header transparent réservé à la homepage. Plus besoin de usePathname : même
 // habillage partout.
 export function Nav() {
+  const adminUnlocked = useAdminUnlocked();
+
   return (
     <nav className="sticky top-0 z-50 bg-lve-charcoal text-lve-ivory border-b border-lve-ivory/10">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between gap-6">
@@ -76,6 +113,16 @@ export function Nav() {
               </li>
             ))}
           </ul>
+          {adminUnlocked && (
+            <Link
+              href="/admin"
+              aria-label="Backoffice"
+              title="Backoffice"
+              className="no-underline text-lve-ivory/50 hover:text-lve-sand transition-colors"
+            >
+              <Settings size={18} />
+            </Link>
+          )}
           <Link
             href="/questionnaire"
             className="no-underline bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors shadow-sm"

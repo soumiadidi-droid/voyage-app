@@ -84,7 +84,15 @@
       ],
       "link": "https://www.booking.com/hotel/fr/bizipoz-saint-jean-de-luz.html",
       "linkLabel": "Voir les disponibilités",
-      "image": "/images/adresses/bizipoz-hotel.jpg"
+      "image": "/images/adresses/bizipoz-hotel.jpg",
+      "familyFit": {
+        "tribu_multi_ages": {
+          "beds": "Chambre familiale immense, deux lits doubles avec une vraie séparation (cloison, pas juste un rideau)",
+          "equipment": ["Décoration street art (tags) dans la chambre"],
+          "services": [],
+          "activities": []
+        }
+      }
     },
     {
       "name": "Le Talaia Hôtel & Spa Biarritz - MGallery Collection",
@@ -97,7 +105,15 @@
       ],
       "link": "https://www.booking.com/hotel/fr/radisson-blu-hotel-biarritz.html",
       "linkLabel": "Voir les disponibilités",
-      "image": "/images/adresses/talaia-biarritz.jpg"
+      "image": "/images/adresses/talaia-biarritz.jpg",
+      "familyFit": {
+        "tribu_multi_ages": {
+          "beds": "Chambre familiale avec deux lits doubles",
+          "equipment": [],
+          "services": [],
+          "activities": []
+        }
+      }
     }
   ],
   "eats": [

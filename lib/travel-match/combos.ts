@@ -1,5 +1,4 @@
 import type { Destination, SuggestedCombo } from "./types";
-import { DESTINATIONS } from "./destinations";
 
 // Un combo n'est déclaré qu'une seule fois, côté destination "phare" (celle qui a
 // `target_destination_id` pointant vers l'autre) — décidé le 23/08/2026 pour éviter de saisir
@@ -16,10 +15,7 @@ export type ResolvedCombo = {
   direction: "authored" | "reverse";
 };
 
-export function getCombosFor(
-  destinationId: string,
-  destinations: Destination[] = DESTINATIONS
-): ResolvedCombo[] {
+export function getCombosFor(destinationId: string, destinations: Destination[]): ResolvedCombo[] {
   const self = destinations.find((d) => d.id === destinationId);
 
   const authored: ResolvedCombo[] = (self?.suggested_combos ?? []).flatMap((combo) => {

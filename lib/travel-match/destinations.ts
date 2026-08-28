@@ -24,7 +24,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["confort", "premium"],
     },
     scores: { repos: 3, exploration: 5, gastronomie: 5, nature_plage: 2, effervescence_urbaine: 4, rythme: 4 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Foodie", "RuelleAuthentique"],
     suggested_combos: [],
     regional_transport: {
@@ -49,7 +49,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["confort", "premium"],
     },
     scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 4, effervescence_urbaine: 3, rythme: 2 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "SoleilDouceur", "Foodie", "SlowLife"],
     suggested_combos: [],
   },
@@ -69,7 +69,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["eco", "confort", "premium"],
     },
     scores: { repos: 5, exploration: 4, gastronomie: 5, nature_plage: 4, effervescence_urbaine: 2, rythme: 1 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "Foodie", "RuelleAuthentique", "SlowLife"],
     suggested_combos: [],
   },
@@ -90,7 +90,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["eco", "confort", "premium"],
     },
     scores: { repos: 4, exploration: 5, gastronomie: 4, nature_plage: 5, effervescence_urbaine: 4, rythme: 3 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "HiverCosy", "EspacesSauvages", "Foodie"],
     // Le combo Montréal<->New York n'est déclaré qu'une seule fois, côté New York (voir plus bas) —
     // décidé le 23/08/2026 pour ne plus saisir la même paire deux fois. Le sens retour est déduit
@@ -114,7 +114,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["confort", "premium"],
     },
     scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 2, effervescence_urbaine: 5, rythme: 5 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Foodie", "HiverCosy", "SoleilDouceur"],
     suggested_combos: [
       {
@@ -152,7 +152,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["eco", "confort", "premium"],
     },
     scores: { repos: 5, exploration: 4, gastronomie: 4, nature_plage: 5, effervescence_urbaine: 2, rythme: 1 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "SoleilDouceur", "Authentique", "SlowLife"],
     suggested_combos: [],
   },
@@ -185,8 +185,7 @@ export const DESTINATIONS: Destination[] = [
       solo: true,
       duo: true,
       friends: true,
-      family_kids_under_6: true, // testé à 4 ans avec succès (Osaka / Universal Studios)
-      family_kids_over_6: true,
+      family: true, // testé à 4 ans avec succès (Osaka / Universal Studios)
     },
     tags: ["GrandesVilles", "Foodie", "Authentique"],
     suggested_combos: [],
@@ -217,7 +216,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["confort", "premium"],
     },
     scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 5, effervescence_urbaine: 2, rythme: 2 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["Authentique", "SlowLife", "EspacesSauvages"],
     suggested_combos: [],
     regional_transport: {
@@ -244,7 +243,11 @@ export const DESTINATIONS: Destination[] = [
       budget: ["confort", "premium"],
     },
     scores: { repos: 5, exploration: 5, gastronomie: 4, nature_plage: 4, effervescence_urbaine: 2, rythme: 1 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: false, family_kids_over_6: true },
+    // Avant le 27/08/2026 : family_kids_under_6 était à false ici (Mykonos exclu pour les tout-petits,
+    // décidé le 22/08/2026). La suppression du filtre +/- 6 ans collapse ça en family: true — première
+    // passe de Claude, la nuance "pas idéal pour les tout-petits" n'est plus qu'éditoriale (à traiter
+    // au niveau du pavé "Adapté aux Familles" des fiches hôtel, pas du matching). À valider par Soumia.
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "SoleilDouceur", "EntreAmies", "SlowLife"],
     suggested_combos: [],
   },
@@ -264,7 +267,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["confort", "premium"],
     },
     scores: { repos: 4, exploration: 5, gastronomie: 4, nature_plage: 2, effervescence_urbaine: 5, rythme: 1 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Luxe", "GrandEcart"],
     suggested_combos: [],
   },
@@ -285,7 +288,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["eco", "confort", "premium"],
     },
     scores: { repos: 5, exploration: 4, gastronomie: 5, nature_plage: 4, effervescence_urbaine: 2, rythme: 1 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "Surf", "Foodie", "SoleilDouceur"],
     suggested_combos: [],
   },
@@ -305,7 +308,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["eco", "confort", "premium"],
     },
     scores: { repos: 4, exploration: 4, gastronomie: 3, nature_plage: 2, effervescence_urbaine: 3, rythme: 2 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Authentique", "Foodie"],
     suggested_combos: [],
   },
@@ -325,7 +328,7 @@ export const DESTINATIONS: Destination[] = [
       budget: ["eco", "confort", "premium"],
     },
     scores: { repos: 4, exploration: 4, gastronomie: 5, nature_plage: 3, effervescence_urbaine: 3, rythme: 3 },
-    logistics: { solo: true, duo: true, friends: true, family_kids_under_6: true, family_kids_over_6: true },
+    logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Authentique", "Foodie"],
     suggested_combos: [],
   },

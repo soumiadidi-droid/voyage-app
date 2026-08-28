@@ -1,36 +1,30 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { LikeButton } from "../components/LikeButton";
 import { useFavorites } from "@/lib/favorites";
-import { DESTINATIONS } from "@/lib/travel-match/destinations";
-import { VOYAGES } from "@/content/voyages";
-import type { Destination } from "@/lib/travel-match/types";
-import type { VoyageContent } from "@/content/voyages";
-
-type LikedItem =
-  | { kind: "destination"; key: string; destination: Destination }
-  | { kind: "content"; key: string; voyage: VoyageContent };
-
-// La plupart des likes correspondent à un `id` de destination Travel Match précis. Mais un like
-// posé en accès direct sur une fiche voyage sans passer par /resultat (donc sans `?id=`) est
-// enregistré sous la clé `content_slug` — qui ne correspond à aucun `id` de destination si aucune
-// destination Travel Match ne porte ce même id (ça n'arrive plus depuis le split Italie du
-// 26/08/2026 : chaque destination a maintenant son propre content_slug, mais on garde ce fallback
-// pour les anciens likes déjà enregistrés sous l'ancienne clé partagée "italie").
-function resolveLikedItem(key: string): LikedItem | null {
-  const destination = DESTINATIONS.find((d) => d.id === key);
-  if (destination) return { kind: "destination", key, destination };
-  const voyage = VOYAGES.find((v) => v.slug === key);
-  if (voyage) return { kind: "content", key, voyage };
-  return null;
-}
+import { resolveFavorites, type LikedItem } from "./actions";
 
 export function FavorisClient() {
   const { favorites } = useFavorites();
-  const liked = favorites
-    .map(resolveLikedItem)
-    .filter((item): item is LikedItem => item !== null);
+  const [liked, setLiked] = useState<LikedItem[] | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+    resolveFavorites(favorites).then((items) => {
+      if (!cancelled) setLiked(items);
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [favorites]);
+
+  if (liked === null) {
+    // Court instant pendant que la Server Action résout les favoris (localStorage → DB) — pas de
+    // contenu à afficher tant qu'on ne sait pas ce qui est vraiment liké.
+    return <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24" />;
+  }
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">

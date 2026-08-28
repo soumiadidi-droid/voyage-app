@@ -25,6 +25,11 @@ export const LVE_COLORS = {
     dark: "#2C5E73",
     bg: "#E8F0F3",
   },
+  // Alerte discrète (27/08/2026, refonte /resultat) — voir app/globals.css --lve-warning-*.
+  warning: {
+    bg: "#FFFBEB",
+    text: "#92400E",
+  },
 } as const;
 
 export type LveColorToken = typeof LVE_COLORS;

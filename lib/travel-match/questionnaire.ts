@@ -1,4 +1,4 @@
-import type { ScoreKey } from "./types";
+import { FAMILY_PROFILE_OPTIONS, type ScoreKey } from "./types";
 
 // Copy validée par Soumia le 22/08/2026, complétée le 23/08/2026 (durée, budget, nouveaux
 // sliders repos/exploration/gastronomie/nature_plage/effervescence_urbaine/rythme). Ne pas
@@ -13,7 +13,15 @@ export type ChoiceOption = { value: string; label: string };
 
 export type ChoiceQuestion = {
   type: "choice";
-  id: "duration" | "budget" | "distance" | "climate" | "transport" | "sport_level" | "companions";
+  id:
+    | "duration"
+    | "budget"
+    | "distance"
+    | "climate"
+    | "transport"
+    | "sport_level"
+    | "companions"
+    | "familyProfile";
   question: string;
   options: ChoiceOption[];
 };
@@ -107,8 +115,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
       { value: "solo", label: "Solo" },
       { value: "duo", label: "En duo, en amoureux" },
       { value: "amis", label: "Entre amis" },
-      { value: "famille_moins_6", label: "En famille, avec un enfant de moins de 6 ans" },
-      { value: "famille_plus_6", label: "En famille, avec des enfants de plus de 6 ans" },
+      { value: "famille", label: "En famille" },
     ],
   },
   {
@@ -139,3 +146,15 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     ],
   },
 ];
+
+// Sous-question conditionnelle (27/08/2026) : affichée uniquement quand la réponse à "companions"
+// vaut "famille", juste après cette question, avant d'enchaîner sur les émotions/ambiance. Hors du
+// tableau TRAVEL_MATCH_QUESTIONS car son affichage dépend d'une réponse précédente — insérée
+// dynamiquement par QuestionnaireClient (voir getEffectiveQuestions). N'influence pas le matching de
+// destination, sert uniquement à personnaliser le pavé "Adapté aux Familles" des fiches hôtel.
+export const FAMILY_PROFILE_QUESTION: ChoiceQuestion = {
+  type: "choice",
+  id: "familyProfile",
+  question: "Quel est le profil de votre tribu ?",
+  options: FAMILY_PROFILE_OPTIONS,
+};

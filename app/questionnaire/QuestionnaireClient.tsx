@@ -2,7 +2,11 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { TRAVEL_MATCH_QUESTIONS } from "@/lib/travel-match/questionnaire";
+import {
+  TRAVEL_MATCH_QUESTIONS,
+  FAMILY_PROFILE_QUESTION,
+  type TravelMatchQuestion,
+} from "@/lib/travel-match/questionnaire";
 import { SCORE_KEYS, type ScoreKey } from "@/lib/travel-match/types";
 
 type SliderAnswers = Record<ScoreKey, number>;
@@ -13,15 +17,28 @@ function initialSliderAnswers(): SliderAnswers {
   return init;
 }
 
+// Insère FAMILY_PROFILE_QUESTION juste après "companions" seulement si "famille" a été choisi
+// (27/08/2026) — sinon la question saute directement aux émotions, sans étape famille.
+function getEffectiveQuestions(choices: Record<string, string>): TravelMatchQuestion[] {
+  if (choices.companions !== "famille") return TRAVEL_MATCH_QUESTIONS;
+  const companionsIndex = TRAVEL_MATCH_QUESTIONS.findIndex((q) => q.id === "companions");
+  return [
+    ...TRAVEL_MATCH_QUESTIONS.slice(0, companionsIndex + 1),
+    FAMILY_PROFILE_QUESTION,
+    ...TRAVEL_MATCH_QUESTIONS.slice(companionsIndex + 1),
+  ];
+}
+
 export function QuestionnaireClient() {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [choices, setChoices] = useState<Record<string, string>>({});
   const [sliders, setSliders] = useState<SliderAnswers>(initialSliderAnswers);
 
-  const question = TRAVEL_MATCH_QUESTIONS[step];
-  const isLast = step === TRAVEL_MATCH_QUESTIONS.length - 1;
-  const progress = Math.round(((step + 1) / TRAVEL_MATCH_QUESTIONS.length) * 100);
+  const effectiveQuestions = getEffectiveQuestions(choices);
+  const question = effectiveQuestions[Math.min(step, effectiveQuestions.length - 1)];
+  const isLast = step === effectiveQuestions.length - 1;
+  const progress = Math.round(((step + 1) / effectiveQuestions.length) * 100);
 
   function submit(finalChoices: Record<string, string>, finalSliders: SliderAnswers) {
     const params = new URLSearchParams();
@@ -36,7 +53,11 @@ export function QuestionnaireClient() {
     if (question.type !== "choice") return;
     const next = { ...choices, [question.id]: value };
     setChoices(next);
-    if (isLast) {
+    // Recalcule sur `next` (pas `choices`) : si on vient de répondre "famille" à la question
+    // companions, la sous-question profil doit être prise en compte immédiatement, pas au rendu
+    // suivant, sinon isLast/step avancent sur la mauvaise longueur de liste.
+    const isLastNow = step === getEffectiveQuestions(next).length - 1;
+    if (isLastNow) {
       submit(next, sliders);
     } else {
       setStep(step + 1);
@@ -97,47 +118,66 @@ export function QuestionnaireClient() {
           ))}
         </div>
       ) : (
-        <div className="mt-8">
-          <p className="mono mb-8" style={{ color: "var(--text-secondary)" }}>
+        <div
+          className="mt-8 p-5 sm:p-6 rounded-xl"
+          style={{ background: "var(--lve-bg)" }}
+        >
+          <p className="mono mb-6" style={{ color: "var(--text-secondary)" }}>
             {question.helper}
           </p>
-          <div className="flex flex-col gap-8">
-            {question.sliders.map((s) => (
-              <div key={s.key}>
-                <div className="flex items-baseline justify-between mb-2 gap-4">
-                  <span>{s.label}</span>
-                  <span className="mono" style={{ color: "var(--ember)" }}>
-                    {sliders[s.key]}
-                  </span>
-                </div>
-                <input
-                  type="range"
-                  min={1}
-                  max={5}
-                  step={1}
-                  value={sliders[s.key]}
-                  onChange={(e) =>
-                    setSliders((prev) => ({ ...prev, [s.key]: Number(e.target.value) }))
-                  }
-                  className="w-full"
-                  style={{ accentColor: "var(--ember)" }}
-                />
-                {s.lowLabel && s.highLabel && (
-                  <div
-                    className="mono flex justify-between mt-1"
-                    style={{ color: "var(--text-secondary)", fontSize: "0.75rem" }}
-                  >
-                    <span>{s.lowLabel}</span>
-                    <span>{s.highLabel}</span>
+          <div className="flex flex-col gap-4">
+            {question.sliders.map((s) => {
+              const pct = ((sliders[s.key] - 1) / 4) * 100;
+              return (
+                <div
+                  key={s.key}
+                  className="bg-white rounded-xl shadow-sm p-5"
+                >
+                  <div className="flex items-baseline justify-between mb-4 gap-4">
+                    <span
+                      className="text-lve-charcoal"
+                      style={{ fontFamily: "var(--font-title)", fontSize: "1.05rem" }}
+                    >
+                      {s.label}
+                    </span>
+                    <span
+                      className="mono"
+                      style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.9rem" }}
+                    >
+                      {sliders[s.key]}
+                    </span>
                   </div>
-                )}
-              </div>
-            ))}
+                  <input
+                    type="range"
+                    min={1}
+                    max={5}
+                    step={1}
+                    value={sliders[s.key]}
+                    onChange={(e) =>
+                      setSliders((prev) => ({ ...prev, [s.key]: Number(e.target.value) }))
+                    }
+                    className="lve-slider w-full"
+                    style={{
+                      background: `linear-gradient(to right, var(--lve-terracotta) ${pct}%, var(--lve-border) ${pct}%)`,
+                    }}
+                  />
+                  {s.lowLabel && s.highLabel && (
+                    <div
+                      className="mono flex justify-between mt-3"
+                      style={{ color: "var(--text-secondary)", fontSize: "0.72rem" }}
+                    >
+                      <span>{s.lowLabel}</span>
+                      <span>{s.highLabel}</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
           </div>
           <button
             onClick={continueFromSliders}
-            className="mt-10 px-6 py-3 border"
-            style={{ borderColor: "var(--ember)", background: "var(--bg-elevated)" }}
+            className="mt-8 px-6 py-3 rounded-xl text-white"
+            style={{ background: "var(--lve-terracotta)" }}
           >
             Continuer
           </button>

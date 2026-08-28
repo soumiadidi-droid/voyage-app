@@ -27,9 +27,25 @@ export type Logistics = {
   solo: boolean;
   duo: boolean;
   friends: boolean;
-  family_kids_under_6: boolean;
-  family_kids_over_6: boolean;
+  // Remplace family_kids_under_6/family_kids_over_6 (27/08/2026, demande de Soumia) : le filtre
+  // éliminatoire "enfant +/- 6 ans" est supprimé, un seul flag générique "adapté aux familles"
+  // suffit pour le moteur de matching. La granularité par âge (tout-petits/enfants/ados/tribu
+  // multi-âges) vit désormais uniquement dans FamilyProfile, côté questionnaire et personnalisation
+  // des fiches hôtel — elle n'influence plus le filtrage/malus des destinations.
+  family: boolean;
 };
+
+// Profil d'âge de la tribu, demandé uniquement quand companions === "famille" (27/08/2026).
+// N'intervient pas dans le matching de destination (voir Logistics.family ci-dessus) : sert à
+// personnaliser le pavé "Adapté aux Familles" sur les fiches hôtel.
+export type FamilyProfile = "tout_petits" | "enfants_juniors" | "ados" | "tribu_multi_ages";
+
+export const FAMILY_PROFILE_OPTIONS: { value: FamilyProfile; label: string }[] = [
+  { value: "tout_petits", label: "👶 Tout-petits (-3 ans)" },
+  { value: "enfants_juniors", label: "🎒 Enfants / Juniors (3-12 ans)" },
+  { value: "ados", label: "🎧 Ados (13 ans+)" },
+  { value: "tribu_multi_ages", label: "👨‍👩‍👧‍👦 Tribu multi-âges" },
+];
 
 // 6 axes indépendants (remplace l'ancien modèle émotions/vibe à 9 axes, décidé le 23/08/2026).
 // "cadre de vie" bipolaire a été scindé en 2 curseurs indépendants (nature_plage,
@@ -87,6 +103,19 @@ export type RegionalTransport = {
   summary: string; // ex. "Réseau ferroviaire ultra-dense et ponctuel, idéal pour relier les grandes villes sans voiture."
 };
 
+// 4 cartes d'infos pratiques (28/08/2026) — texte descriptif prêt à afficher, distinct des champs
+// de matching existants même si le sujet se recoupe parfois : `filters.transport`/`filters.duration`
+// servent au filtrage (valeurs fermées), `regional_transport` couvre la mobilité ENTRE les étapes
+// d'une destination multi-villes — `practical_info` est le pendant "fiche pratique" lisible
+// directement sur la page, jamais généré automatiquement (voir .claude/skills/voyage-ingest) :
+// Claude rédige à partir de ce que Soumia donne, ou laisse le champ vide plutôt que d'inventer.
+export type PracticalInfo = {
+  access?: string; // ex. "TGV direct depuis Paris (4h) ou vol vers Biarritz, voiture utile sur place"
+  duration?: string; // ex. "3 jours / 2 nuits, idéal au printemps ou à l'automne"
+  atmosphere?: string; // 3 mots-clés, ex. "Iodé, chic, décontracté"
+  insider_tips?: string; // ex. "Réserver le restaurant du port à l'avance en juillet-août"
+};
+
 export type Destination = {
   id: string;
   title: string;
@@ -103,9 +132,13 @@ export type Destination = {
   // (min_duration_required). Vide par défaut, à peupler destination par destination.
   suggested_combos: SuggestedCombo[];
   regional_transport?: RegionalTransport;
+  practical_info?: PracticalInfo;
 };
 
-export type Companions = "solo" | "duo" | "amis" | "famille_moins_6" | "famille_plus_6";
+// "famille_moins_6"/"famille_plus_6" fusionnés en une seule valeur "famille" (27/08/2026, demande
+// de Soumia) — le détail d'âge est maintenant capté par FamilyProfile (sous-question conditionnelle),
+// plus par deux options de companions séparées.
+export type Companions = "solo" | "duo" | "amis" | "famille";
 
 // Réponses collectées par le questionnaire, dans le langage direct du modèle.
 export type UserAnswers = {
@@ -118,6 +151,8 @@ export type UserAnswers = {
     budget: BudgetFilter;
   };
   companions: Companions;
+  // Renseigné uniquement quand companions === "famille" (sous-question conditionnelle, 27/08/2026).
+  familyProfile?: FamilyProfile;
   scores: Scores;
 };
 
@@ -125,6 +160,5 @@ export const COMPANIONS_TO_LOGISTICS_KEY: Record<Companions, keyof Logistics> = 
   solo: "solo",
   duo: "duo",
   amis: "friends",
-  famille_moins_6: "family_kids_under_6",
-  famille_plus_6: "family_kids_over_6",
+  famille: "family",
 };

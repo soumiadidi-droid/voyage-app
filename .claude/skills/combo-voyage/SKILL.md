@@ -5,9 +5,12 @@ description: Ajoute un combo/extension entre deux destinations du site "Le Voyag
 
 # Combo voyage — ajout au format neutre et réversible
 
-Ajoute une entrée `suggested_combos` dans `lib/travel-match/destinations.ts`, au format validé le
-23/08/2026 pour que le code puisse déduire automatiquement le sens inverse (voir
-`lib/travel-match/combos.ts`, `getCombosFor`) sans que Soumia ait à saisir la paire deux fois.
+Depuis la migration du 27/08/2026, ajoute une ligne dans la table `combos` (Neon) via
+`upsertCombo()` (`lib/travel-match/ingest.ts`) — plus une entrée `suggested_combos` dans le fichier
+statique `lib/travel-match/destinations.ts` (laissé de côté, ne sert plus qu'au script de
+seed/resync `scripts/seed.ts`). Même format validé le 23/08/2026, pour que le code puisse déduire
+automatiquement le sens inverse (voir `lib/travel-match/combos.ts`, `getCombosFor`) sans que Soumia
+ait à saisir la paire deux fois.
 
 ## Ce qu'il faut avant de démarrer
 
@@ -66,24 +69,25 @@ week-end.
 ## Exemple complet
 
 ```ts
-suggested_combos: [
-  {
-    id: "combo-<ville-a>-<ville-b>",
-    target_destination_id: "<id-de-l-autre-destination>",
-    title: "Combo Métropole & Nature : New York x Montréal",
-    vibe_type: "Énergie urbaine & grand air",
-    description:
-      "Deux métropoles nord-américaines aux tempéraments complémentaires : l'effervescence électrique de Manhattan d'un côté, les grands espaces et la douceur québécoise de l'autre.",
-    transition_logistics: {
-      transport_mode: "Vol direct (1h30), voiture (6h) ou train/bus Amtrak (10h)",
-      recommended_days: "3 à 4 jours sur place",
-      practical_tip: "...",
-      partner_link: "https://...",
-      partner_link_label: "Voir l'offre →",
-    },
-    min_duration_required: "semaine",
+import { upsertCombo } from "@/lib/travel-match/ingest";
+
+await upsertCombo({
+  id: "combo-<ville-a>-<ville-b>",
+  sourceDestinationId: "<id-de-la-destination-phare>",
+  targetDestinationId: "<id-de-l-autre-destination>",
+  title: "Combo Métropole & Nature : New York x Montréal",
+  vibeType: "Énergie urbaine & grand air",
+  description:
+    "Deux métropoles nord-américaines aux tempéraments complémentaires : l'effervescence électrique de Manhattan d'un côté, les grands espaces et la douceur québécoise de l'autre.",
+  transitionLogistics: {
+    transport_mode: "Vol direct (1h30), voiture (6h) ou train/bus Amtrak (10h)",
+    recommended_days: "3 à 4 jours sur place",
+    practical_tip: "...",
+    partner_link: "https://...",
+    partner_link_label: "Voir l'offre →",
   },
-],
+  minDurationRequired: "semaine",
+});
 ```
 
 ## Après l'ajout

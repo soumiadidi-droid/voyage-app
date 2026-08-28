@@ -30,6 +30,11 @@
   --lve-sage-bg: #eff3ee;
   --lve-ocean-dark: #2c5e73;
   --lve-ocean-bg: #e8f0f3;
+  /* Alerte discrète (27/08/2026, refonte /resultat) — distincte du terracotta (utilisé pour la
+     bannière fallback générale) : réservée aux avertissements ponctuels sur une carte destination
+     précise (ex. "Budget différent de ta recherche"). */
+  --lve-warning-bg: #fffbeb;
+  --lve-warning-text: #92400e;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -76,6 +81,8 @@
   --color-lve-sage-bg: var(--lve-sage-bg);
   --color-lve-ocean-dark: var(--lve-ocean-dark);
   --color-lve-ocean-bg: var(--lve-ocean-bg);
+  --color-lve-warning-bg: var(--lve-warning-bg);
+  --color-lve-warning-text: var(--lve-warning-text);
 }
 
 body {
@@ -101,6 +108,57 @@ body {
 
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* Curseur de notation minimaliste (Q8/Q9 questionnaire, 27/08/2026) — remplace le rendu natif du
+   navigateur ("galet"/"œuf" selon l'OS) par une piste fine + un pointeur pastille terracotta.
+   Nécessite de cibler les pseudo-éléments propriétaires (webkit/moz), impossible en pur Tailwind.
+   Le remplissage terracotta de la piste est posé en background inline sur l'input lui-même (voir
+   QuestionnaireClient.tsx) : le pseudo-élément webkit reste transparent pour laisser voir ce
+   gradient, faute de pseudo-élément "progress" standard côté webkit. */
+.lve-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 9999px;
+  cursor: pointer;
+}
+.lve-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: transparent;
+}
+.lve-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border-radius: 9999px;
+  background: var(--lve-terracotta);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.18);
+  cursor: pointer;
+}
+.lve-slider::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--lve-border);
+}
+.lve-slider::-moz-range-progress {
+  height: 4px;
+  border-radius: 9999px;
+  background: var(--lve-terracotta);
+}
+.lve-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: var(--lve-terracotta);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 4px rgba(26, 26, 26, 0.18);
+  cursor: pointer;
 }
 
 .grain::after {
