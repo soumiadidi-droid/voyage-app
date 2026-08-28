@@ -34,10 +34,13 @@ function loadEmbedScript(onReady: () => void) {
   document.body.appendChild(script);
 }
 
-export function InstagramEmbed({ url }: { url: string }) {
+// `autoLoad` (28/08/2026) : saute le badge "Découvrir l'ambiance Insta" et charge directement —
+// utile quand un parent sert déjà lui-même de geste de consentement explicite (ex. le bouton qui
+// ouvre InstagramPopup.tsx), pour éviter un double clic redondant.
+export function InstagramEmbed({ url, autoLoad = false }: { url: string; autoLoad?: boolean }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(autoLoad);
   const [loaded, setLoaded] = useState(false);
   const [canScrollMore, setCanScrollMore] = useState(false);
 

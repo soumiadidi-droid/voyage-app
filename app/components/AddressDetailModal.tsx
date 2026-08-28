@@ -1,11 +1,11 @@
 "use client";
 
 import { X, Users } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { type Card } from "@/content/voyages";
 import { type AddressCategory } from "@/lib/category-images";
 import { FAMILY_PROFILE_OPTIONS, type FamilyProfile } from "@/lib/travel-match/types";
-import { InstagramEmbed } from "./InstagramEmbed";
+import { InstagramPopup } from "./InstagramPopup";
 import { CATEGORY_META } from "./AddressGrid";
 
 const FAMILY_PROFILE_LABEL: Record<FamilyProfile, string> = Object.fromEntries(
@@ -60,10 +60,17 @@ export function AddressDetailModal({
   onClose: () => void;
 }) {
   const { icon: CategoryIcon, label: categoryLabel, bg: categoryBg, color: categoryColor } = CATEGORY_META[category];
+  // Écran 3 du parcours (28/08/2026) : grille → cette fiche détail → pop-up Instagram dédiée,
+  // ouverte seulement au clic sur le badge ci-dessous (cf. InstagramPopup.tsx).
+  const [igOpen, setIgOpen] = useState(false);
 
   useEffect(() => {
     function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape") onClose();
+      // `igOpen` dans le garde (28/08/2026) : quand la pop-up Instagram est ouverte par-dessus,
+      // Escape doit d'abord la fermer, elle seule — sans ce garde, les deux listeners globaux
+      // (celui-ci + celui d'InstagramPopup) réagissaient au même Escape et fermaient les deux
+      // écrans d'un coup.
+      if (e.key === "Escape" && !igOpen) onClose();
     }
     document.addEventListener("keydown", onKeyDown);
     // Empêche le scroll de la page derrière la modale ouverte.
@@ -73,7 +80,7 @@ export function AddressDetailModal({
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = prevOverflow;
     };
-  }, [onClose]);
+  }, [onClose, igOpen]);
 
   return (
     <div
@@ -138,12 +145,17 @@ export function AddressDetailModal({
         )}
 
         {card.instagramUrl && (
-          // Click-to-load (comportement par défaut d'InstagramEmbed) : rien ne se charge tant que
-          // l'utilisateur n'a pas ouvert cette modale ET cliqué sur le badge — pas de coût de
-          // perf pour les adresses jamais consultées en détail.
-          <div className="mb-4">
-            <InstagramEmbed url={card.instagramUrl} />
-          </div>
+          // Bouton seul ici (28/08/2026) — l'embed lui-même ne s'ouvre que dans une pop-up dédiée
+          // au clic (InstagramPopup.tsx), pas inline dans cette fiche. Rien ne se charge tant que
+          // l'utilisateur n'a pas ouvert la fiche ET cliqué sur ce badge.
+          <button
+            type="button"
+            onClick={() => setIgOpen(true)}
+            className="mb-4 flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-6 text-sm font-medium transition-colors hover:opacity-90"
+            style={{ background: "var(--bg-guide)", color: "var(--text-secondary)" }}
+          >
+            📸 Découvrir l&apos;ambiance Insta
+          </button>
         )}
 
         {card.review && (
@@ -180,6 +192,9 @@ export function AddressDetailModal({
           </a>
         )}
       </div>
+      {igOpen && card.instagramUrl && (
+        <InstagramPopup url={card.instagramUrl} onClose={() => setIgOpen(false)} />
+      )}
     </div>
   );
 }
