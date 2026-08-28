@@ -24,6 +24,12 @@ export type FamilyFit = {
 };
 
 export type Card = {
+  // id stable (28/08/2026) — l'UUID de la ligne voyage_addresses en base, utilisé comme clé pour
+  // enregistrer un établissement en favori (cf. lib/favorites.ts, usePlaceFavorites). Optionnel
+  // uniquement parce que scripts/seed.ts construit encore des Card depuis les JSON statiques
+  // legacy (jamais exécuté à nouveau, l'id est généré par la DB à l'insertion) — toujours présent
+  // sur les données réellement affichées, qui viennent toutes de getVoyage (lib/travel-match/data.ts).
+  id?: string;
   name: string;
   status: string;
   location: string;

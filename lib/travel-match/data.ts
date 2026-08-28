@@ -76,6 +76,7 @@ export async function getDestinations(): Promise<Destination[]> {
 type VoyageRow = { slug: string; hero: VoyageContent["hero"]; intro: string; gallery: VoyageContent["gallery"] };
 
 type AddressRow = {
+  id: string;
   voyage_slug: string;
   category: "stay" | "eat" | "activity";
   name: string;
@@ -94,6 +95,7 @@ type AddressRow = {
 
 function rowToCard(a: AddressRow): Card {
   return {
+    id: a.id,
     name: a.name,
     status: a.status,
     location: a.location,

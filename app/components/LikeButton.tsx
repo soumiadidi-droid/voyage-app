@@ -4,9 +4,19 @@ import { Heart } from "lucide-react";
 import { useFavorites } from "@/lib/favorites";
 
 // Badge rond effet verre (décidé le 23/08/2026, remplace l'ancien émoji ❤️/🤍) — icône filaire au
-// repos, remplie blanche une fois liké.
-export function LikeButton({ id, size = "md" }: { id: string; size?: "sm" | "md" }) {
-  const { isFavorite, toggle } = useFavorites();
+// repos, remplie blanche une fois liké. `useStore` (28/08/2026) : par défaut le favori
+// destination historique, mais réutilisable pour un autre store (ex. usePlaceFavorites pour les
+// établissements) sans dupliquer le bouton.
+export function LikeButton({
+  id,
+  size = "md",
+  useStore = useFavorites,
+}: {
+  id: string;
+  size?: "sm" | "md";
+  useStore?: typeof useFavorites;
+}) {
+  const { isFavorite, toggle } = useStore();
   const liked = isFavorite(id);
   const iconSize = size === "sm" ? 16 : 20;
 

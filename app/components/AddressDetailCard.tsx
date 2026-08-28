@@ -4,8 +4,10 @@ import { Users } from "lucide-react";
 import { useState } from "react";
 import { type Card } from "@/content/voyages";
 import { type AddressCategory } from "@/lib/category-images";
+import { usePlaceFavorites } from "@/lib/favorites";
 import { FAMILY_PROFILE_OPTIONS, type FamilyProfile } from "@/lib/travel-match/types";
 import { InstagramPopup } from "./InstagramPopup";
+import { LikeButton } from "./LikeButton";
 import { CATEGORY_META } from "./AddressGrid";
 
 const FAMILY_PROFILE_LABEL: Record<FamilyProfile, string> = Object.fromEntries(
@@ -73,10 +75,20 @@ export function AddressDetailCard({
       className="relative flex h-full w-full flex-col rounded-xl p-5"
       style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
     >
+      {/* Enregistrer l'établissement (28/08/2026, demande explicite de Soumia — même mécanisme
+          que le like destination existant, mais store localStorage séparé pour ne jamais
+          mélanger les deux types d'id, cf. lib/favorites.ts). */}
+      {card.id && (
+        <div className="absolute right-4 top-4 z-10">
+          <LikeButton id={card.id} useStore={usePlaceFavorites} size="sm" />
+        </div>
+      )}
+
       {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de badges — sans ça, une carte
           avec juste le badge catégorie vs une autre avec catégorie + "Partenaire" + statut
-          décalait tout le contenu en dessous entre les deux. */}
-      <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2">
+          décalait tout le contenu en dessous entre les deux. `pr-9` laisse la place au bouton
+          favori en haut à droite. */}
+      <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-9">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
