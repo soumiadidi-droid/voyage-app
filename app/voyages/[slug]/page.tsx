@@ -182,7 +182,13 @@ function AddressCard({
 
       <div className="p-5 flex flex-col flex-1">
         {card.instagramUrl && (
-          <div className="mb-4">
+          // `-mx-5` (28/08/2026) : annule le padding horizontal du bloc p-5 parent pour cette
+          // zone précise — sur petit mobile la carte peut ne faire que ~327px de large, et le
+          // p-5 (40px) ramenait l'espace dispo pour l'embed sous les 326px minimum qu'Instagram
+          // impose (bouton "Voir le profil" coupé, repéré par Soumia). L'embed garde son propre
+          // max-w-[326px] mx-auto (cf. InstagramEmbed.tsx), donc rien ne change sur desktop où
+          // la carte est déjà bien plus large que 326px.
+          <div className="mb-4 -mx-5">
             <InstagramEmbed url={card.instagramUrl} />
           </div>
         )}
