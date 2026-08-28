@@ -1,7 +1,7 @@
 "use client";
 
-import { X, Users } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Users } from "lucide-react";
+import { useState } from "react";
 import { type Card } from "@/content/voyages";
 import { type AddressCategory } from "@/lib/category-images";
 import { FAMILY_PROFILE_OPTIONS, type FamilyProfile } from "@/lib/travel-match/types";
@@ -47,50 +47,29 @@ function FamilyFitBlock({ card, familyProfile }: { card: Card; familyProfile: Fa
   );
 }
 
-// Fiche détail inline (28/08/2026, remplace AddressDetailModal — demande explicite de Soumia : au
-// clic sur une carte de la grille, le texte doit prendre la place de l'image DANS la grille, pas
-// s'ouvrir dans une pop-up flottante par-dessus tout). Rendue à la place de <Thumbnail> par
-// AddressGrid.tsx, dans le flux normal de la grille (le multi-column reflow gère naturellement le
-// changement de hauteur). L'embed Instagram reste sur son propre écran séparé (InstagramPopup),
-// ouvert seulement au clic sur le badge dédié.
+// Fiche détail (28/08/2026, remplace AddressDetailModal, puis retire le mécanisme vignette+clic
+// introduit le même jour — nouvelle demande explicite de Soumia : chaque carte affiche
+// directement son détail complet dans la grille, plus de texture/image de couverture à cliquer).
+// L'embed Instagram reste sur son propre écran séparé (InstagramPopup), ouvert seulement au clic
+// sur le badge dédié.
 export function AddressDetailCard({
   card,
   category,
   familyProfile,
-  onClose,
 }: {
   card: Card;
   category: AddressCategory;
   familyProfile?: FamilyProfile;
-  onClose: () => void;
 }) {
   const { icon: CategoryIcon, label: categoryLabel, bg: categoryBg, color: categoryColor } = CATEGORY_META[category];
   const [igOpen, setIgOpen] = useState(false);
-
-  useEffect(() => {
-    function onKeyDown(e: KeyboardEvent) {
-      if (e.key === "Escape" && !igOpen) onClose();
-    }
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
-  }, [onClose, igOpen]);
 
   return (
     <div
       className="relative mb-4 w-full break-inside-avoid rounded-xl p-5"
       style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
     >
-      <button
-        type="button"
-        onClick={onClose}
-        aria-label="Fermer"
-        className="absolute right-4 top-4 rounded-full p-1.5"
-        style={{ background: "var(--bg-guide)", color: "var(--text)" }}
-      >
-        <X size={18} />
-      </button>
-
-      <div className="flex items-center gap-2 mb-3 flex-wrap pr-9">
+      <div className="flex items-center gap-2 mb-3 flex-wrap">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
@@ -117,7 +96,7 @@ export function AddressDetailCard({
         )}
       </div>
 
-      <h3 className="font-semibold mb-1 pr-8" style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}>
+      <h3 className="font-semibold mb-1" style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}>
         {card.name}
       </h3>
       {card.location && (
