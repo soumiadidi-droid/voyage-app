@@ -3,11 +3,12 @@
 import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
-// Embed Instagram (28/08/2026, passé en lazy-load au scroll le 28/08/2026 — remplace le
-// click-to-load initial, pas apprécié). Un IntersectionObserver charge le script officiel
-// embed.js et le blockquote automatiquement dès que la carte approche du viewport (rootMargin
-// anticipé pour éviter un pop-in tardif), sans action de l'utilisateur — mais toujours pas TOUTES
-// en même temps au premier rendu : avec ~20 adresses par fiche, ça resterait gravement lourd.
+// Embed Instagram (28/08/2026, repassé en click-to-load le 28/08/2026 sur confirmation explicite
+// de Soumia — un lazy-load automatique au scroll avait été essayé entre-temps, mais elle est
+// revenue dessus). Le script officiel embed.js et le blockquote ne sont créés qu'au clic de
+// l'utilisateur, pas au montage de la page : avec jusqu'à ~20 adresses par fiche voyage, charger
+// 20 iframes Instagram automatiquement alourdirait gravement le chargement initial. Avant le
+// clic, seul un badge cliquable léger est affiché.
 declare global {
   interface Window {
     instgrm?: { Embeds: { process: () => void } };
@@ -34,28 +35,11 @@ function loadEmbedScript(onReady: () => void) {
 }
 
 export function InstagramEmbed({ url }: { url: string }) {
-  const outerRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
+  const [clicked, setClicked] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const [canScrollMore, setCanScrollMore] = useState(false);
-
-  useEffect(() => {
-    const el = outerRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "400px" } // charge un peu avant que la carte n'entre réellement à l'écran
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     // Le tap/swipe démarré SUR l'iframe Instagram (cross-origin) est capté par l'iframe elle-même
@@ -79,12 +63,12 @@ export function InstagramEmbed({ url }: { url: string }) {
   }, [loaded]);
 
   useEffect(() => {
-    if (!visible) return;
+    if (!clicked) return;
     loadEmbedScript(() => window.instgrm?.Embeds.process());
-  }, [visible, url]);
+  }, [clicked, url]);
 
   useEffect(() => {
-    if (!visible) return;
+    if (!clicked) return;
     const el = containerRef.current;
     if (!el) return;
     // Instagram remplace le contenu du blockquote par un iframe une fois le post chargé — c'est
@@ -97,7 +81,20 @@ export function InstagramEmbed({ url }: { url: string }) {
     });
     observer.observe(el, { childList: true, subtree: true });
     return () => observer.disconnect();
-  }, [visible, url]);
+  }, [clicked, url]);
+
+  if (!clicked) {
+    return (
+      <button
+        type="button"
+        onClick={() => setClicked(true)}
+        className="flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-6 text-sm font-medium transition-colors hover:opacity-90"
+        style={{ background: "var(--bg-guide)", color: "var(--text-secondary)" }}
+      >
+        📸 Découvrir l&apos;ambiance Insta
+      </button>
+    );
+  }
 
   return (
     // 326px = largeur minimale documentée par Instagram pour son embed officiel — en dessous, le
@@ -105,7 +102,7 @@ export function InstagramEmbed({ url }: { url: string }) {
     // sous ce seuil sur petit mobile (bouton coupé et inaccessible, repéré par Soumia le
     // 28/08/2026), l'embed garde toujours sa largeur fixe de 326px et le wrapper devient
     // scrollable horizontalement si la carte est plus étroite.
-    <div ref={outerRef} className="relative w-full">
+    <div className="relative w-full">
       <div ref={scrollRef} className="w-full overflow-x-auto">
         <div className="relative mx-auto w-[326px]">
           {!loaded && (
@@ -117,16 +114,14 @@ export function InstagramEmbed({ url }: { url: string }) {
               style={{ background: "var(--bg-guide)", aspectRatio: "9 / 16" }}
             />
           )}
-          {visible && (
-            <div ref={containerRef} className="overflow-hidden rounded-2xl">
-              <blockquote
-                className="instagram-media"
-                data-instgrm-permalink={url}
-                data-instgrm-version="14"
-                style={{ margin: 0, width: "100%" }}
-              />
-            </div>
-          )}
+          <div ref={containerRef} className="overflow-hidden rounded-2xl">
+            <blockquote
+              className="instagram-media"
+              data-instgrm-permalink={url}
+              data-instgrm-version="14"
+              style={{ margin: 0, width: "100%" }}
+            />
+          </div>
         </div>
       </div>
       {canScrollMore && (
