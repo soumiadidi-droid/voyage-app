@@ -115,12 +115,13 @@ function AddressCard({
     <div
       // `shrink-0` nécessaire (28/08/2026) : carte directement enfant du flex row scrollable
       // d'AddressStrip, sinon flex-shrink:1 par défaut écrase sa largeur pour tout faire tenir
-      // dans le viewport au lieu de déborder en scroll horizontal. Pleine largeur sous sm (une
-      // seule carte visible à la fois sur mobile, cf. AddressStrip qui repasse en colonne en
-      // dessous de ce point de rupture) ; largeur fixe à partir de sm — élargie quand la carte
-      // contient un embed Instagram : 326px = largeur minimale documentée par Instagram pour son
-      // embed (en dessous le header déborde, cf. InstagramEmbed.tsx), + 2×20px de padding (p-5).
-      className={`flex w-full shrink-0 flex-col overflow-hidden rounded-xl ${
+      // dans le viewport au lieu de déborder en scroll horizontal. Sous sm : 88vw + snap-center,
+      // carrousel par catégorie (une carte quasi pleine largeur à la fois, bord suivant visible
+      // pour inciter au swipe, cf. AddressStrip pour le conteneur scroll-snap) ; largeur fixe à
+      // partir de sm — élargie quand la carte contient un embed Instagram : 326px = largeur
+      // minimale documentée par Instagram pour son embed (en dessous le header déborde, cf.
+      // InstagramEmbed.tsx), + 2×20px de padding (p-5).
+      className={`flex w-[88vw] shrink-0 snap-center flex-col overflow-hidden rounded-xl ${
         card.instagramUrl ? "sm:w-[388px]" : "sm:w-[320px]"
       }`}
       style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
@@ -301,18 +302,20 @@ function AddressStrip({
 
   return (
     // Responsive (28/08/2026) : la bande horizontale avec repère sticky ne fonctionne qu'à partir
-    // de sm — sous ce point de rupture les cartes (pleine largeur, cf. AddressCard) et le repère
-    // vertical (326-388px) ne laissaient presque plus rien voir d'une carte à la fois sur un
-    // écran de téléphone. Sous sm : colonne verticale simple, un titre de section classique par
-    // catégorie (plus de sticky/vertical-rl, ça n'a de sens qu'en scroll horizontal).
+    // de sm — sous ce point de rupture le repère vertical (326-388px) ne laissait presque plus
+    // rien voir d'une carte à la fois sur un écran de téléphone. Sous sm : un titre de section
+    // classique par catégorie (plus de sticky/vertical-rl), puis un carrousel horizontal
+    // scroll-snap propre à cette catégorie (une carte ~88vw à la fois, bord de la suivante visible
+    // pour inciter au swipe — demande explicite de Soumia après un premier essai en colonne
+    // verticale simple, moins engageant).
     <div className="flex flex-col gap-10 sm:flex-row sm:gap-4 sm:overflow-x-auto sm:pb-4">
       {groups.map((group) => {
         const { icon: CategoryIcon } = CATEGORY_META[group.category];
         return (
-          // `sm:contents` (28/08/2026) : ce wrapper par catégorie sert à donner un gap plus
-          // serré entre le titre et ses cartes sur mobile (colonne), mais doit disparaître de la
-          // boîte au-delà de sm pour que titre + cartes redeviennent des flex-items DIRECTS de la
-          // ligne parente (condition du pattern sticky-column pour le repère de catégorie).
+          // `sm:contents` (28/08/2026, sur les deux niveaux de wrapper) : titre + rangée de
+          // cartes doivent disparaître de la boîte au-delà de sm pour redevenir des flex-items
+          // DIRECTS de la ligne parente (condition du pattern sticky-column pour le repère de
+          // catégorie côté desktop).
           <div key={group.category} className="flex flex-col gap-4 sm:contents">
             <div className="flex shrink-0 items-center gap-2 sm:sticky sm:left-0 sm:z-10 sm:flex-col sm:justify-center sm:gap-3 sm:rounded-xl sm:px-3 sm:py-4 sm:bg-[var(--bg-guide)]">
               <CategoryIcon size={18} style={{ color: "var(--lve-terracotta-dark)" }} />
@@ -323,9 +326,11 @@ function AddressStrip({
                 {CATEGORY_SECTION_TITLE[group.category]}
               </span>
             </div>
-            {group.cards.map((card, i) => (
-              <AddressCard key={i} card={card} category={group.category} familyProfile={familyProfile} />
-            ))}
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 sm:contents sm:overflow-visible sm:pb-0">
+              {group.cards.map((card, i) => (
+                <AddressCard key={i} card={card} category={group.category} familyProfile={familyProfile} />
+              ))}
+            </div>
           </div>
         );
       })}
