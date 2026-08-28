@@ -87,14 +87,22 @@ export function InstagramEmbed({ url, autoLoad = false }: { url: string; autoLoa
   }, [clicked, url]);
 
   if (!clicked) {
+    // Pastille "Voir sur Instagram" (28/08/2026) — dégradé Instagram très atténué (pas le
+    // dégradé saturé officiel, qui jurerait avec la palette chaleureuse du site) + glassmorphism
+    // (backdrop-blur, bordure fine translucide), scale + luminosité au survol.
     return (
       <button
         type="button"
         onClick={() => setClicked(true)}
-        className="flex w-full items-center justify-center gap-2 rounded-2xl px-4 py-6 text-sm font-medium transition-colors hover:opacity-90"
-        style={{ background: "var(--bg-guide)", color: "var(--text-secondary)" }}
+        className="flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-6 text-sm font-medium backdrop-blur-md transition-all duration-200 hover:scale-[1.02] hover:brightness-110"
+        style={{
+          background:
+            "linear-gradient(135deg, color-mix(in srgb, #f09433 14%, var(--bg-guide)), color-mix(in srgb, #e6446f 14%, var(--bg-guide)), color-mix(in srgb, #bc4fd6 14%, var(--bg-guide)))",
+          borderColor: "color-mix(in srgb, var(--text) 12%, transparent)",
+          color: "var(--text-secondary)",
+        }}
       >
-        📸 Découvrir l&apos;ambiance Insta
+        📸 Voir l&apos;ambiance sur Instagram ↗
       </button>
     );
   }
