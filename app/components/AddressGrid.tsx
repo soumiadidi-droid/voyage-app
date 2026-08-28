@@ -62,7 +62,11 @@ export function AddressGrid({
               <CategoryIcon size={18} style={{ color: "var(--lve-terracotta-dark)" }} />
               {CATEGORY_SECTION_TITLE[group.category]}
             </h3>
-            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+            {/* `grid` (28/08/2026, remplace `columns-*`) : demande explicite de Soumia, "taille
+                homogène alignement parfait" — un vrai CSS Grid aligne chaque rangée à la hauteur
+                de sa carte la plus haute, contrairement au multi-column masonry qui décalait
+                librement les cartes d'une colonne à l'autre. */}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {group.cards.map((card, i) => (
                 <AddressDetailCard key={i} card={card} category={group.category} familyProfile={familyProfile} />
               ))}

@@ -65,8 +65,12 @@ export function AddressDetailCard({
   const [igOpen, setIgOpen] = useState(false);
 
   return (
+    // `flex h-full flex-col` (28/08/2026) : cellule de grille CSS (pas columns/masonry — demande
+    // explicite de Soumia, "taille homogène alignement parfait") ; grid étire chaque carte à la
+    // hauteur de la plus haute de sa rangée, ce wrapper remplit cet espace et pousse le lien en
+    // bas via mt-auto plus loin, pour que toutes les cartes d'une même rangée s'alignent pile.
     <div
-      className="relative mb-4 w-full break-inside-avoid rounded-xl p-5"
+      className="relative flex h-full w-full flex-col rounded-xl p-5"
       style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
     >
       <div className="flex items-center gap-2 mb-3 flex-wrap">
@@ -145,7 +149,7 @@ export function AddressDetailCard({
 
       {card.link && (
         <a
-          className="inline-block w-full px-4 py-2 mono text-sm text-center no-underline"
+          className="mt-auto inline-block w-full px-4 py-2 mono text-sm text-center no-underline"
           href={card.link}
           target="_blank"
           rel="noopener noreferrer nofollow"
