@@ -10,8 +10,10 @@ import { AddressDetailCard } from "./AddressDetailCard";
 // Grille éditoriale (28/08/2026, remplace la bande horizontale à repère sticky — demande
 // explicite de Soumia après un souci de découvrabilité sur desktop : les restos/activités étaient
 // cachés derrière un scroll horizontal peu visible). Vignette photo + clic pour révéler le détail
-// essayée entre-temps, puis retirée sur nouvelle demande de Soumia (28/08/2026) : chaque carte
-// affiche directement son détail complet, plus de texture/image de couverture à cliquer.
+// essayée entre-temps, puis retirée : chaque carte affiche directement son détail complet, plus
+// de texture/image de couverture à cliquer. Regroupée par catégorie (28/08/2026, demande
+// explicite de Soumia) : une section "Où dormir"/"Où manger"/"Quoi faire" par catégorie non vide,
+// chacune avec sa propre grille masonry.
 export const CATEGORY_META: Record<
   AddressCategory,
   { icon: LucideIcon; label: string; bg: string; color: string }
@@ -21,7 +23,11 @@ export const CATEGORY_META: Record<
   Activité: { icon: Compass, label: "Expérience", bg: LVE_COLORS.ocean.bg, color: LVE_COLORS.ocean.dark },
 };
 
-type GridItem = { card: Card; category: AddressCategory };
+const CATEGORY_SECTION_TITLE: Record<AddressCategory, string> = {
+  Hôtel: "Où dormir",
+  Resto: "Où manger",
+  Activité: "Quoi faire",
+};
 
 export function AddressGrid({
   stays,
@@ -34,19 +40,36 @@ export function AddressGrid({
   activities: Card[];
   familyProfile?: FamilyProfile;
 }) {
-  const items: GridItem[] = [
-    ...stays.map((card) => ({ card, category: "Hôtel" as AddressCategory })),
-    ...eats.map((card) => ({ card, category: "Resto" as AddressCategory })),
-    ...activities.map((card) => ({ card, category: "Activité" as AddressCategory })),
+  const allGroups: { category: AddressCategory; cards: Card[] }[] = [
+    { category: "Hôtel", cards: stays },
+    { category: "Resto", cards: eats },
+    { category: "Activité", cards: activities },
   ];
+  const groups = allGroups.filter((g) => g.cards.length > 0);
 
-  if (items.length === 0) return null;
+  if (groups.length === 0) return null;
 
   return (
-    <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
-      {items.map((item, i) => (
-        <AddressDetailCard key={i} card={item.card} category={item.category} familyProfile={familyProfile} />
-      ))}
-    </div>
+    <>
+      {groups.map((group) => {
+        const { icon: CategoryIcon } = CATEGORY_META[group.category];
+        return (
+          <div key={group.category} className="mb-10 sm:mb-12">
+            <h3
+              className="flex items-center gap-2 font-semibold mb-4"
+              style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem" }}
+            >
+              <CategoryIcon size={18} style={{ color: "var(--lve-terracotta-dark)" }} />
+              {CATEGORY_SECTION_TITLE[group.category]}
+            </h3>
+            <div className="columns-1 gap-4 sm:columns-2 lg:columns-3">
+              {group.cards.map((card, i) => (
+                <AddressDetailCard key={i} card={card} category={group.category} familyProfile={familyProfile} />
+              ))}
+            </div>
+          </div>
+        );
+      })}
+    </>
   );
 }
