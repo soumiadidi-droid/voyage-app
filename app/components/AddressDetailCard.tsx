@@ -100,11 +100,21 @@ export function AddressDetailCard({
         )}
       </div>
 
-      <h3 className="font-semibold mb-1" style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}>
+      {/* `line-clamp-2` + `min-h` (28/08/2026) : sans ça, un nom court (1 ligne) vs un nom long
+          (3 lignes, ex. "Le Talaia Hôtel & Spa Biarritz - MGallery Collection") décalait tout le
+          contenu en dessous — repéré par Soumia. Hauteur réservée fixe pour 2 lignes max, peu
+          importe le nombre réel de lignes du nom. */}
+      <h3
+        className="mb-1 line-clamp-2 min-h-[3.5rem] font-semibold"
+        style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
+      >
         {card.name}
       </h3>
       {card.location && (
-        <p className="mono mb-2" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
+        <p
+          className="mono mb-2 line-clamp-1 min-h-[1.3rem]"
+          style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}
+        >
           {card.location}
         </p>
       )}
