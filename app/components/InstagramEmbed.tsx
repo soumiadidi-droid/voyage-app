@@ -77,28 +77,33 @@ export function InstagramEmbed({ url }: { url: string }) {
 
   return (
     // 326px = largeur minimale documentée par Instagram pour son embed officiel — en dessous, le
-    // header (avatar + bouton "Voir le profil") déborde et se fait couper par overflow-hidden
-    // (repéré par Soumia à 280px le 28/08/2026).
-    <div ref={wrapperRef} className="relative w-full max-w-[326px] mx-auto">
-      {!loaded && (
-        // Posé par-dessus le blockquote (pas en remplacement) : le blockquote doit rester dans
-        // le flux normal, avec une vraie largeur mesurable, sinon embed.js calcule mal ses
-        // dimensions avant de le transformer en iframe.
-        <div
-          className="grain absolute inset-0 rounded-2xl animate-pulse"
-          style={{ background: "var(--bg-guide)", aspectRatio: "9 / 16" }}
-        />
-      )}
-      {visible && (
-        <div ref={containerRef} className="overflow-hidden rounded-2xl">
-          <blockquote
-            className="instagram-media"
-            data-instgrm-permalink={url}
-            data-instgrm-version="14"
-            style={{ margin: 0, width: "100%" }}
+    // header (avatar + bouton "Voir le profil") déborde. Plutôt que de forcer l'embed à rétrécir
+    // sous ce seuil sur petit mobile (bouton coupé et inaccessible, repéré par Soumia le
+    // 28/08/2026), l'embed garde toujours sa largeur fixe de 326px et le wrapper devient
+    // scrollable horizontalement si la carte est plus étroite — swipe pour voir la partie
+    // coupée plutôt que de la perdre.
+    <div ref={wrapperRef} className="w-full overflow-x-auto">
+      <div className="relative mx-auto w-[326px]">
+        {!loaded && (
+          // Posé par-dessus le blockquote (pas en remplacement) : le blockquote doit rester dans
+          // le flux normal, avec une vraie largeur mesurable, sinon embed.js calcule mal ses
+          // dimensions avant de le transformer en iframe.
+          <div
+            className="grain absolute inset-0 rounded-2xl animate-pulse"
+            style={{ background: "var(--bg-guide)", aspectRatio: "9 / 16" }}
           />
-        </div>
-      )}
+        )}
+        {visible && (
+          <div ref={containerRef} className="overflow-hidden rounded-2xl">
+            <blockquote
+              className="instagram-media"
+              data-instgrm-permalink={url}
+              data-instgrm-version="14"
+              style={{ margin: 0, width: "100%" }}
+            />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
