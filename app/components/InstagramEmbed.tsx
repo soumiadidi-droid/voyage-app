@@ -1,5 +1,6 @@
 "use client";
 
+import { ChevronRight } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 
 // Embed Instagram (28/08/2026, passé en lazy-load au scroll le 28/08/2026 — remplace le
@@ -33,13 +34,15 @@ function loadEmbedScript(onReady: () => void) {
 }
 
 export function InstagramEmbed({ url }: { url: string }) {
-  const wrapperRef = useRef<HTMLDivElement>(null);
+  const outerRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const [canScrollMore, setCanScrollMore] = useState(false);
 
   useEffect(() => {
-    const el = wrapperRef.current;
+    const el = outerRef.current;
     if (!el) return;
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -53,6 +56,27 @@ export function InstagramEmbed({ url }: { url: string }) {
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
+
+  useEffect(() => {
+    // Le tap/swipe démarré SUR l'iframe Instagram (cross-origin) est capté par l'iframe elle-même
+    // et ne fait jamais défiler le parent — vérifié sur mobile réel le 28/08/2026, le swipe seul
+    // ne marche pas. D'où la flèche cliquable ci-dessous : un vrai bouton HTML au-dessus de
+    // l'iframe reçoit le tap normalement et scrolle le wrapper par programme.
+    const el = scrollRef.current;
+    if (!el) return;
+    function updateCanScrollMore() {
+      if (!el) return;
+      setCanScrollMore(el.scrollWidth - el.clientWidth - el.scrollLeft > 4);
+    }
+    updateCanScrollMore();
+    const resizeObserver = new ResizeObserver(updateCanScrollMore);
+    resizeObserver.observe(el);
+    el.addEventListener("scroll", updateCanScrollMore, { passive: true });
+    return () => {
+      resizeObserver.disconnect();
+      el.removeEventListener("scroll", updateCanScrollMore);
+    };
+  }, [loaded]);
 
   useEffect(() => {
     if (!visible) return;
@@ -80,30 +104,42 @@ export function InstagramEmbed({ url }: { url: string }) {
     // header (avatar + bouton "Voir le profil") déborde. Plutôt que de forcer l'embed à rétrécir
     // sous ce seuil sur petit mobile (bouton coupé et inaccessible, repéré par Soumia le
     // 28/08/2026), l'embed garde toujours sa largeur fixe de 326px et le wrapper devient
-    // scrollable horizontalement si la carte est plus étroite — swipe pour voir la partie
-    // coupée plutôt que de la perdre.
-    <div ref={wrapperRef} className="w-full overflow-x-auto">
-      <div className="relative mx-auto w-[326px]">
-        {!loaded && (
-          // Posé par-dessus le blockquote (pas en remplacement) : le blockquote doit rester dans
-          // le flux normal, avec une vraie largeur mesurable, sinon embed.js calcule mal ses
-          // dimensions avant de le transformer en iframe.
-          <div
-            className="grain absolute inset-0 rounded-2xl animate-pulse"
-            style={{ background: "var(--bg-guide)", aspectRatio: "9 / 16" }}
-          />
-        )}
-        {visible && (
-          <div ref={containerRef} className="overflow-hidden rounded-2xl">
-            <blockquote
-              className="instagram-media"
-              data-instgrm-permalink={url}
-              data-instgrm-version="14"
-              style={{ margin: 0, width: "100%" }}
+    // scrollable horizontalement si la carte est plus étroite.
+    <div ref={outerRef} className="relative w-full">
+      <div ref={scrollRef} className="w-full overflow-x-auto">
+        <div className="relative mx-auto w-[326px]">
+          {!loaded && (
+            // Posé par-dessus le blockquote (pas en remplacement) : le blockquote doit rester dans
+            // le flux normal, avec une vraie largeur mesurable, sinon embed.js calcule mal ses
+            // dimensions avant de le transformer en iframe.
+            <div
+              className="grain absolute inset-0 rounded-2xl animate-pulse"
+              style={{ background: "var(--bg-guide)", aspectRatio: "9 / 16" }}
             />
-          </div>
-        )}
+          )}
+          {visible && (
+            <div ref={containerRef} className="overflow-hidden rounded-2xl">
+              <blockquote
+                className="instagram-media"
+                data-instgrm-permalink={url}
+                data-instgrm-version="14"
+                style={{ margin: 0, width: "100%" }}
+              />
+            </div>
+          )}
+        </div>
       </div>
+      {canScrollMore && (
+        <button
+          type="button"
+          aria-label="Voir la suite de l'embed Instagram"
+          onClick={() => scrollRef.current?.scrollBy({ left: 140, behavior: "smooth" })}
+          className="absolute right-1 top-1/2 z-10 -translate-y-1/2 rounded-full p-1.5 shadow-md"
+          style={{ background: "var(--bg-elevated)", color: "var(--text)" }}
+        >
+          <ChevronRight size={16} />
+        </button>
+      )}
     </div>
   );
 }
