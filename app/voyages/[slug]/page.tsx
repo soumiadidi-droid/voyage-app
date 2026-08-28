@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Navigation, CalendarDays, Sparkles, Lightbulb, type LucideIcon } from "lucide-react";
+import { Navigation, CalendarDays, type LucideIcon } from "lucide-react";
 import { DestinationHero } from "../../components/DestinationHero";
 import { AddressGrid } from "../../components/AddressGrid";
 import { type Card } from "@/content/voyages";
@@ -25,48 +25,35 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: voyage ? `${voyage.hero.title} — Le Voyage des Émotions` : "Voyage" };
 }
 
-// 4 cartes d'infos pratiques (28/08/2026) — jamais générées automatiquement (voir
-// lib/travel-match/ingest.ts, NewDestinationInput.practical_info) : chaque carte n'apparaît que
-// si Claude/Soumia l'a vraiment renseignée, jamais de texte générique en remplissage. Toute la
-// section disparaît si aucun des 4 champs n'est renseigné.
-const PRACTICAL_INFO_CARDS: {
-  key: keyof PracticalInfo;
+// Pictos pratico-pratiques compacts (28/08/2026, remplace les 4 grandes cartes du même jour —
+// demande explicite de Soumia : juste transport et saison, en petit badge sous le Hero, pas tout
+// le bloc "Infos pratiques" d'origine). `atmosphere`/`insider_tips` ne sont plus affichés ici
+// tant qu'elle ne redemande pas de les remettre ailleurs — jamais générés automatiquement (voir
+// lib/travel-match/ingest.ts, NewDestinationInput.practical_info), affiché seulement si renseigné.
+const PRACTICAL_INFO_BADGES: {
+  key: Extract<keyof PracticalInfo, "access" | "duration">;
   icon: LucideIcon;
-  label: string;
 }[] = [
-  { key: "access", icon: Navigation, label: "Accès & Transport" },
-  { key: "duration", icon: CalendarDays, label: "Rythme & Durée idéale" },
-  { key: "atmosphere", icon: Sparkles, label: "Esprit du lieu" },
-  { key: "insider_tips", icon: Lightbulb, label: "Bon à savoir" },
+  { key: "access", icon: Navigation },
+  { key: "duration", icon: CalendarDays },
 ];
 
 function PracticalInfoSection({ info }: { info?: PracticalInfo }) {
-  const cards = PRACTICAL_INFO_CARDS.filter(({ key }) => info?.[key]);
-  if (cards.length === 0) return null;
+  const badges = PRACTICAL_INFO_BADGES.filter(({ key }) => info?.[key]);
+  if (badges.length === 0) return null;
 
   return (
-    <div className="my-16 sm:my-20">
-      <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
-        Infos pratiques
-      </p>
-      <div className="grid gap-4 sm:grid-cols-2">
-        {cards.map(({ key, icon: Icon, label }) => (
-          <div
-            key={key}
-            className="p-5 rounded-xl"
-            style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
-          >
-            <p
-              className="mono flex items-center gap-2 mb-2"
-              style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.8rem" }}
-            >
-              <Icon size={15} />
-              {label}
-            </p>
-            <p style={{ color: "var(--text-secondary)" }}>{info?.[key]}</p>
-          </div>
-        ))}
-      </div>
+    <div className="my-8 sm:my-10 flex flex-wrap gap-3">
+      {badges.map(({ key, icon: Icon }) => (
+        <span
+          key={key}
+          className="mono inline-flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-md"
+          style={{ background: "color-mix(in srgb, var(--bg-guide) 70%, transparent)", fontSize: "0.85rem" }}
+        >
+          <Icon size={15} style={{ color: "var(--lve-terracotta-dark)" }} />
+          {info?.[key]}
+        </span>
+      ))}
     </div>
   );
 }
