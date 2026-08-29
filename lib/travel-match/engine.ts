@@ -6,8 +6,10 @@ import {
 } from "./types";
 import { getCombosFor } from "./combos";
 
-// Distance euclidienne max théorique sur 6 axes (repos/exploration/gastronomie/nature_plage/
-// effervescence_urbaine/rythme), échelle 1-5 donc écart max de 4 par axe : sqrt(6 * 4^2).
+// Distance euclidienne max théorique sur 7 axes (repos/exploration/gastronomie/nature/plage/
+// effervescence_urbaine/rythme), échelle 1-5 donc écart max de 4 par axe : sqrt(7 * 4^2). Passé de
+// 6 à 7 axes le 29/08/2026 (split nature_plage → nature/plage, demande Soumia) — recalculé
+// automatiquement via SCORE_KEYS.length, comme lors du passage de 9 à 6 axes.
 const MAX_DISTANCE = Math.sqrt(SCORE_KEYS.length * Math.pow(4, 2));
 
 function euclideanScore(user: UserAnswers, dest: Destination): number {
@@ -19,7 +21,11 @@ function euclideanScore(user: UserAnswers, dest: Destination): number {
   const rawScore = 100 * (1 - distance / MAX_DISTANCE);
   // Calibration : remonte les scores vers la fourchette 70-98% pour un rendu plus positif,
   // décidé par Soumia le 22/08/2026 (objectif 70-90% sur les bons matchs). Constantes inchangées
-  // par le passage de 9 à 6 axes : rawScore est déjà normalisé 0-100 quel que soit le nombre d'axes.
+  // par le passage de 9 à 6 axes, puis de 6 à 7 (split nature_plage, 29/08/2026) : rawScore est
+  // déjà normalisé 0-100 quel que soit le nombre d'axes (MAX_DISTANCE grandit avec SCORE_KEYS.length,
+  // donc le ratio distance/MAX_DISTANCE reste comparable) — pas de recalcul de ces constantes
+  // nécessaire mathématiquement. À reconfirmer par un test manuel sur quelques profils réels malgré
+  // tout : plus d'axes indépendants peut légèrement changer la distribution des distances typiques.
   return Math.round(70 + rawScore * 0.28);
 }
 
@@ -105,10 +111,15 @@ function scoreWithMalus(user: UserAnswers, dest: Destination): { score: number; 
 // visuel sur la carte résultat, sans influencer le score (validé par Soumia le 23/08/2026).
 const COMBO_THRESHOLD = 4;
 
+// Depuis le split nature_plage → nature/plage (29/08/2026), on prend le MAX des deux curseurs
+// plutôt qu'une moyenne : quelqu'un qui met 5 sur "nature" et 1 sur "plage" veut quand même
+// fortement du grand air, ça doit continuer à déclencher le combo au même titre qu'avant le split.
+// Une moyenne aurait dilué ce genre de profil tranché sous le seuil. Choix de Claude, pas encore
+// validé par Soumia — à corriger si elle préfère exiger les deux curseurs hauts (nature ET plage).
 function hasComboOpportunity(user: UserAnswers, dest: Destination, destinations: Destination[]): boolean {
   return (
     getCombosFor(dest.id, destinations).length > 0 &&
-    user.scores.nature_plage >= COMBO_THRESHOLD &&
+    Math.max(user.scores.nature, user.scores.plage) >= COMBO_THRESHOLD &&
     user.scores.effervescence_urbaine >= COMBO_THRESHOLD
   );
 }

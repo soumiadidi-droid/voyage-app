@@ -19,10 +19,10 @@ dans le projet : Claude propose une première passe, Soumia valide, jamais l'inv
 
 ## Schéma réel — ne pas dévier
 
-**6 axes de score, et uniquement ceux-là** (`lib/travel-match/types.ts`, `SCORE_KEYS`) :
-`repos`, `exploration`, `gastronomie`, `nature_plage`, `effervescence_urbaine`, `rythme` — chacun
-1 à 5. Ne jamais utiliser d'anciens axes (déconnexion/culture/aventure/social...), abandonnés le
-23/08/2026.
+**7 axes de score, et uniquement ceux-là** (`lib/travel-match/types.ts`, `SCORE_KEYS`) :
+`repos`, `exploration`, `gastronomie`, `nature`, `plage`, `effervescence_urbaine`, `rythme` — chacun
+1 à 5. Ne jamais utiliser d'anciens axes (déconnexion/culture/aventure/social..., ou l'ancien axe
+combiné `nature_plage` scindé en `nature`/`plage` le 29/08/2026).
 
 **Jamais d'archétype sur une destination.** L'archétype ("Le Refuge Contemplatif"...) est calculé
 côté voyageur à partir de ses réponses (`app/components/TravelerProfileCard.tsx`), jamais stocké en
@@ -122,7 +122,7 @@ await upsertDestination({
   summary: "...",
   hero_image: "...",
   filters: { distance: [...], climate: [...], transport: [...], sport_level: [...], duration: [...], budget: [...] },
-  scores: { repos: 3, exploration: 4, gastronomie: 4, nature_plage: 2, effervescence_urbaine: 4, rythme: 3 },
+  scores: { repos: 3, exploration: 4, gastronomie: 4, nature: 2, plage: 1, effervescence_urbaine: 4, rythme: 3 },
   logistics: { solo: true, duo: true, friends: true, family: true },
   tags: ["Ville", "..."],
   // Optionnel (28/08/2026) — 4 cartes d'infos pratiques affichées sur la fiche. Jamais générées
@@ -256,7 +256,7 @@ liens d'hôtels). Pour CHAQUE lien/note :
    profil).
 4. Si la destination/le voyage cible n'existe pas encore (vérifier avec `getDestinations()`), ça
    devient aussi un item `voyage` + `destination` dans le même lot — mêmes règles que l'étape 1
-   (6 axes réels, jamais d'archétype, première passe à signaler comme telle sur les champs devinés
+   (7 axes réels, jamais d'archétype, première passe à signaler comme telle sur les champs devinés
    comme `filters`/`scores`/`budget`).
 
 Prompt type pour `WebFetch` (site officiel d'un lieu) :

@@ -4,6 +4,11 @@ import { FAMILY_PROFILE_OPTIONS, type ScoreKey } from "./types";
 // sliders repos/exploration/gastronomie/nature_plage/effervescence_urbaine/rythme). Ne pas
 // reformuler sans qu'elle le demande (même règle que pour les scores sport).
 //
+// Slider nature_plage scindé en deux (nature / plage) le 29/08/2026 (demande Soumia, split de
+// l'axe de score correspondant — voir types.ts). Libellés ci-dessous = première passe de Claude
+// (simple découpe du libellé combiné d'origine, pas une reformulation de ton), à valider comme le
+// reste de la copy.
+//
 // Refonte de ton "humour, second degré & lifestyle" (23/08/2026) — 5 des 9 intitulés de question
 // reformulés par Soumia (duration, companions, budget, sport_level, emotions). distance, climate,
 // transport et ambiance gardent l'ancien ton "tu" neutre, pas reformulés faute de consigne — à
@@ -137,7 +142,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     question: "Et niveau ambiance ?",
     helper: "Ajuste chaque curseur selon ton envie",
     sliders: [
-      { key: "nature_plage", label: "Envie de nature, de plage, de grands espaces" },
+      { key: "nature", label: "Envie de nature, de grands espaces" },
+      { key: "plage", label: "Envie de plage, de bord de mer" },
       { key: "effervescence_urbaine", label: "Envie de ville, d'animation, d'effervescence urbaine" },
       {
         key: "rythme",

@@ -47,15 +47,21 @@ export const FAMILY_PROFILE_OPTIONS: { value: FamilyProfile; label: string }[] =
   { value: "tribu_multi_ages", label: "👨‍👩‍👧‍👦 Tribu multi-âges" },
 ];
 
-// 6 axes indépendants (remplace l'ancien modèle émotions/vibe à 9 axes, décidé le 23/08/2026).
-// "cadre de vie" bipolaire a été scindé en 2 curseurs indépendants (nature_plage,
+// 7 axes indépendants (remplace l'ancien modèle émotions/vibe à 9 axes, décidé le 23/08/2026).
+// "cadre de vie" bipolaire a été scindé en 2 curseurs indépendants (nature_plage à l'origine,
 // effervescence_urbaine) pour permettre la détection de combo (un utilisateur peut vouloir les
 // deux à la fois, ce qu'un seul axe bipolaire ne permettait pas de capter).
+// `nature_plage` scindé à son tour en `nature`/`plage` le 29/08/2026 (demande Soumia) : un seul
+// axe combiné confondait des destinations très différentes (Dubaï = plage sans nature, montagne
+// japonaise = nature sans plage). MAX_DISTANCE (engine.ts) se recalcule automatiquement sur
+// SCORE_KEYS.length, donc ce passage de 6 à 7 axes change mécaniquement le calibrage du score —
+// voir engine.ts pour la note associée.
 export const SCORE_KEYS = [
   "repos",
   "exploration",
   "gastronomie",
-  "nature_plage",
+  "nature",
+  "plage",
   "effervescence_urbaine",
   "rythme",
 ] as const;

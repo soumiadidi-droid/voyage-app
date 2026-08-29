@@ -6,6 +6,11 @@ import type { Destination } from "./types";
 // gastronomie = ancien gourmandise ; nature_plage = ancien nature ;
 // effervescence_urbaine = ancien densite_urbaine ; rythme = ancien pression_horaire.
 // duration/budget : première passe de Claude, à valider par Soumia comme les précédentes.
+//
+// nature_plage scindé en nature/plage le 29/08/2026 (grille complète donnée par Soumia). Ce
+// fichier n'est plus la source de vérité runtime depuis la migration Neon du 27/08/2026 (voir
+// data.ts) — gardé pour scripts/seed.ts, mis à jour pour rester compilable et cohérent avec la
+// vraie base. Carry-le-Rouet et Londres n'existent pas ici (ajoutées en base après ce fichier).
 export const DESTINATIONS: Destination[] = [
   {
     id: "italie-nord-culture",
@@ -23,7 +28,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["confort", "premium"],
     },
-    scores: { repos: 3, exploration: 5, gastronomie: 5, nature_plage: 2, effervescence_urbaine: 4, rythme: 4 },
+    scores: { repos: 3, exploration: 5, gastronomie: 5, nature: 2, plage: 1, effervescence_urbaine: 4, rythme: 4 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Foodie", "RuelleAuthentique"],
     suggested_combos: [],
@@ -48,7 +53,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["confort", "premium"],
     },
-    scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 4, effervescence_urbaine: 3, rythme: 2 },
+    scores: { repos: 4, exploration: 5, gastronomie: 5, nature: 4, plage: 4, effervescence_urbaine: 3, rythme: 2 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "SoleilDouceur", "Foodie", "SlowLife"],
     suggested_combos: [],
@@ -68,7 +73,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 5, exploration: 4, gastronomie: 5, nature_plage: 4, effervescence_urbaine: 2, rythme: 1 },
+    scores: { repos: 5, exploration: 4, gastronomie: 5, nature: 3.5, plage: 4.5, effervescence_urbaine: 2, rythme: 1 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "Foodie", "RuelleAuthentique", "SlowLife"],
     suggested_combos: [],
@@ -89,7 +94,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 4, exploration: 5, gastronomie: 4, nature_plage: 5, effervescence_urbaine: 4, rythme: 3 },
+    scores: { repos: 4, exploration: 5, gastronomie: 4, nature: 3.5, plage: 1, effervescence_urbaine: 4, rythme: 3 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "HiverCosy", "EspacesSauvages", "Foodie"],
     // Le combo Montréal<->New York n'est déclaré qu'une seule fois, côté New York (voir plus bas) —
@@ -113,7 +118,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["semaine", "grand_voyage"],
       budget: ["confort", "premium"],
     },
-    scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 2, effervescence_urbaine: 5, rythme: 5 },
+    scores: { repos: 4, exploration: 5, gastronomie: 5, nature: 2, plage: 1, effervescence_urbaine: 5, rythme: 5 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Foodie", "HiverCosy", "SoleilDouceur"],
     suggested_combos: [
@@ -151,7 +156,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 5, exploration: 4, gastronomie: 4, nature_plage: 5, effervescence_urbaine: 2, rythme: 1 },
+    scores: { repos: 5, exploration: 4, gastronomie: 4, nature: 4.5, plage: 5, effervescence_urbaine: 2, rythme: 1 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "SoleilDouceur", "Authentique", "SlowLife"],
     suggested_combos: [],
@@ -180,7 +185,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 2, exploration: 5, gastronomie: 5, nature_plage: 1, effervescence_urbaine: 5, rythme: 5 },
+    scores: { repos: 2, exploration: 5, gastronomie: 5, nature: 1.5, plage: 1, effervescence_urbaine: 5, rythme: 5 },
     logistics: {
       solo: true,
       duo: true,
@@ -215,7 +220,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["semaine", "grand_voyage"],
       budget: ["confort", "premium"],
     },
-    scores: { repos: 4, exploration: 5, gastronomie: 5, nature_plage: 5, effervescence_urbaine: 2, rythme: 2 },
+    scores: { repos: 4, exploration: 5, gastronomie: 5, nature: 5, plage: 2.5, effervescence_urbaine: 2, rythme: 2 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["Authentique", "SlowLife", "EspacesSauvages"],
     suggested_combos: [],
@@ -242,7 +247,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["confort", "premium"],
     },
-    scores: { repos: 5, exploration: 5, gastronomie: 4, nature_plage: 4, effervescence_urbaine: 2, rythme: 1 },
+    scores: { repos: 5, exploration: 5, gastronomie: 4, nature: 1.5, plage: 5, effervescence_urbaine: 2, rythme: 1 },
     // Avant le 27/08/2026 : family_kids_under_6 était à false ici (Mykonos exclu pour les tout-petits,
     // décidé le 22/08/2026). La suppression du filtre +/- 6 ans collapse ça en family: true — première
     // passe de Claude, la nuance "pas idéal pour les tout-petits" n'est plus qu'éditoriale (à traiter
@@ -266,7 +271,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["semaine", "grand_voyage"],
       budget: ["confort", "premium"],
     },
-    scores: { repos: 4, exploration: 5, gastronomie: 4, nature_plage: 2, effervescence_urbaine: 5, rythme: 1 },
+    scores: { repos: 4, exploration: 5, gastronomie: 4, nature: 1, plage: 4.5, effervescence_urbaine: 5, rythme: 1 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Luxe", "GrandEcart"],
     suggested_combos: [],
@@ -287,7 +292,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 5, exploration: 4, gastronomie: 5, nature_plage: 4, effervescence_urbaine: 2, rythme: 1 },
+    scores: { repos: 5, exploration: 4, gastronomie: 5, nature: 4.5, plage: 4.5, effervescence_urbaine: 2, rythme: 1 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["BordDeMer", "Surf", "Foodie", "SoleilDouceur"],
     suggested_combos: [],
@@ -307,7 +312,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 4, exploration: 4, gastronomie: 3, nature_plage: 2, effervescence_urbaine: 3, rythme: 2 },
+    scores: { repos: 4, exploration: 4, gastronomie: 3, nature: 2.5, plage: 2.5, effervescence_urbaine: 3, rythme: 2 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Authentique", "Foodie"],
     suggested_combos: [],
@@ -327,7 +332,7 @@ export const DESTINATIONS: Destination[] = [
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
     },
-    scores: { repos: 4, exploration: 4, gastronomie: 5, nature_plage: 3, effervescence_urbaine: 3, rythme: 3 },
+    scores: { repos: 4, exploration: 4, gastronomie: 5, nature: 3, plage: 2.5, effervescence_urbaine: 3, rythme: 3 },
     logistics: { solo: true, duo: true, friends: true, family: true },
     tags: ["GrandesVilles", "Authentique", "Foodie"],
     suggested_combos: [],

@@ -44,7 +44,7 @@ export type NewDestinationInput = {
   summary: string;
   hero_image: string;
   filters: Filters;
-  scores: Scores; // les 6 vrais axes uniquement (repos/exploration/gastronomie/nature_plage/effervescence_urbaine/rythme)
+  scores: Scores; // les 7 vrais axes uniquement (repos/exploration/gastronomie/nature/plage/effervescence_urbaine/rythme)
   logistics: Logistics;
   tags: string[];
   regional_transport?: RegionalTransport;

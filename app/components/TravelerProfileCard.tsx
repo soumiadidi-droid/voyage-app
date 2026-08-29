@@ -79,7 +79,23 @@ const ARCHETYPES: Record<ScoreAxis, Archetype> = {
   },
 };
 
-function topAxis(scores: UserAnswers["scores"]): ScoreAxis {
+// Depuis le split nature_plage → nature/plage (29/08/2026, demande Soumia), l'archétype et les
+// pills restent au nombre de 5 (décision explicite : pas de 6e archétype pour la plage) — on
+// dérive un "nature_plage" synthétique = MAX(nature, plage) pour réutiliser tel quel le système
+// existant. Max plutôt que moyenne : un profil marqué sur un seul des deux (ex. nature=5/plage=1,
+// montagnard pur) doit garder son intensité, une moyenne l'aurait fait passer sous le seuil des
+// pills (>= 4). Choix de Claude, pas encore validé par Soumia.
+function derivedAxisScores(scores: UserAnswers["scores"]): Record<ScoreAxis, number> {
+  return {
+    repos: scores.repos,
+    exploration: scores.exploration,
+    gastronomie: scores.gastronomie,
+    nature_plage: Math.max(scores.nature, scores.plage),
+    effervescence_urbaine: scores.effervescence_urbaine,
+  };
+}
+
+function topAxis(scores: Record<ScoreAxis, number>): ScoreAxis {
   return SCORE_AXES.reduce<ScoreAxis>(
     (best, axis) => (scores[axis] > scores[best] ? axis : best),
     SCORE_AXES[0]
@@ -87,9 +103,10 @@ function topAxis(scores: UserAnswers["scores"]): ScoreAxis {
 }
 
 function buildPills(answers: UserAnswers): Pill[] {
+  const derived = derivedAxisScores(answers.scores);
   const pills: Pill[] = [];
   for (const axis of SCORE_AXES) {
-    if (answers.scores[axis] >= 4) pills.push(SCORE_PILLS[axis]);
+    if (derived[axis] >= 4) pills.push(SCORE_PILLS[axis]);
   }
   if (answers.scores.rythme >= 4) pills.push({ icon: Zap, label: "Rythme Soutenu" });
   if (answers.scores.rythme <= 2) pills.push({ icon: Leaf, label: "Rythme Modéré" });
@@ -99,7 +116,7 @@ function buildPills(answers: UserAnswers): Pill[] {
 }
 
 export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
-  const archetype = ARCHETYPES[topAxis(answers.scores)];
+  const archetype = ARCHETYPES[topAxis(derivedAxisScores(answers.scores))];
   const pills = buildPills(answers);
 
   return (
