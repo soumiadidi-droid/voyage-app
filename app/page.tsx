@@ -18,27 +18,31 @@ export default function Home() {
             backgroundPosition: "center",
           }}
         />
-        {/* Overlay uniforme → dégradé concentré (29/08/2026) : un aplat noir sur toute la photo
-            assombrissait aussi les zones sans texte (ciel, ailes) — remplacé par un halo radial
-            centré sur le bloc de texte (le texte est centré verticalement dans ce hero), pour que
-            le reste de la photo garde sa lumière d'origine. */}
-        <div
-          className="absolute inset-0"
-          style={{ background: "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(0,0,0,0.4), transparent 70%)" }}
-        />
+        {/* Plus d'overlay du tout (29/08/2026, demande explicite de Soumia — "je veux que le texte
+            soit direct sur l'image") : la photo garde sa lumière intacte, la lisibilité vient
+            d'une ombre portée sur le texte (text-shadow) plutôt que d'assombrir la photo. */}
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
           {/* Hero réécrit (29/08/2026, 2e passe) : promesse encore plus directe et affirmative. */}
           <h1
             className="text-white tracking-tight leading-tight"
-            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 7vw, 4rem)" }}
+            style={{
+              fontFamily: "var(--font-title)",
+              fontSize: "clamp(2.4rem, 7vw, 4rem)",
+              textShadow: "0 2px 20px rgba(0,0,0,0.55)",
+            }}
           >
             Le voyage qui vous ressemble existe déjà.
           </h1>
           {/* Respiration ajustée (29/08/2026) : leading un peu plus ample + tracking léger, plus
               d'air avant le CTA (pt-4 → pt-6). */}
           <p
-            className="text-white/70 max-w-xl mx-auto tracking-wide"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)", lineHeight: 1.8 }}
+            className="text-white/90 max-w-xl mx-auto tracking-wide"
+            style={{
+              fontFamily: "var(--font-display)",
+              fontSize: "clamp(1rem, 2vw, 1.15rem)",
+              lineHeight: 1.8,
+              textShadow: "0 1px 12px rgba(0,0,0,0.55)",
+            }}
           >
             Votre match idéal et nos adresses exclusives.
           </p>
@@ -47,7 +51,7 @@ export default function Home() {
           <div className="pt-6">
             <p
               className="text-lve-terracotta text-xs font-semibold uppercase tracking-[0.25em] mb-3"
-              style={{ fontFamily: "var(--font-display)" }}
+              style={{ fontFamily: "var(--font-display)", textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
             >
               9 questions — 2 minutes
             </p>

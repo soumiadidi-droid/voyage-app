@@ -38,17 +38,13 @@ export function DestinationHero({
             style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
           />
         )}
-        {heroImage ? (
-          // Dégradé gauche→droite (décidé le 26/08/2026, demandé sur NYC puis étendu à toute image
-          // de Hero) : sombre sous le texte pour la lisibilité, plus léger à droite pour laisser
-          // respirer la photo. Sans image, le fond reste un noir plat uniforme (rien à révéler).
-          // Assombri par-dessus (29/08/2026) : "la photo est sombre" — from-black/60 assombrissait
-          // toute la partie gauche de la photo, même hors zone de texte. Allégé, le titre en blanc
-          // gras (font-extrabold) reste lisible avec moins de voile.
-          <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/10 to-transparent" />
-        ) : (
-          <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
-        )}
+        {/* Plus de voile sur la photo (29/08/2026, demande explicite de Soumia — "je veux que le
+            texte soit direct sur l'image") : après plusieurs allègements successifs du dégradé
+            gauche→droite toujours jugés trop sombres, il est retiré complètement quand il y a une
+            photo. La lisibilité vient d'un text-shadow sur le texte, pas d'un assombrissement de
+            la photo. Sans image, le fond reste un noir plat uniforme (rien à révéler, pas concerné
+            par la demande). */}
+        {!heroImage && <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />}
         {/* Fondu bas de la photo vers la couleur EXACTE du bloc intro juste en dessous (29/08/2026)
             — sans ça, la photo s'arrêtait net contre le bloc charcoal plein, ce qui donnait
             l'impression d'une bande noire plaquée dessus. Bande volontairement COURTE (h-20, pas
@@ -67,7 +63,10 @@ export function DestinationHero({
         </div>
 
         <div className="relative z-10 max-w-2xl" style={{ color: "#f4f8f7" }}>
-          <p className="mono opacity-90 mb-3">
+          <p
+            className="mono opacity-90 mb-3"
+            style={heroImage ? { textShadow: "0 1px 8px rgba(0,0,0,0.6)" } : undefined}
+          >
             {hero.country}
             {hero.tags.length > 0 && ` — ${hero.tags.join(" · ")}`}
           </p>
@@ -77,13 +76,21 @@ export function DestinationHero({
               reste du site plutôt qu'avec le nom générique donné dans la demande. */}
           <h1
             className="font-extrabold leading-[0.95] mb-4"
-            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3rem, 9vw, 6.2rem)" }}
+            style={{
+              fontFamily: "var(--font-title)",
+              fontSize: "clamp(3rem, 9vw, 6.2rem)",
+              textShadow: heroImage ? "0 2px 20px rgba(0,0,0,0.6)" : undefined,
+            }}
           >
             {hero.title}
           </h1>
           <p
             className="italic max-w-xl opacity-95"
-            style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.05rem, 2vw, 1.35rem)" }}
+            style={{
+              fontFamily: "var(--font-body)",
+              fontSize: "clamp(1.05rem, 2vw, 1.35rem)",
+              textShadow: heroImage ? "0 1px 12px rgba(0,0,0,0.6)" : undefined,
+            }}
           >
             {hero.tagline}
           </p>
