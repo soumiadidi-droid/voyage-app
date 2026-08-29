@@ -144,7 +144,13 @@ export default async function VoyagePage({
         heroImage={DESTINATION_HERO_IMAGE[voyage.slug]}
       />
 
-      <main className="max-w-4xl mx-auto px-6 sm:px-8">
+      {/* <div>, pas <main> (29/08/2026, bug trouvé au passage) : app/layout.tsx a déjà SON <main>
+          autour de chaque page — ce <main> imbriqué ici cassait silencieusement max-w-6xl (le
+          calculait à `none`), ce qui rétrécissait les cartes d'adresses par rapport à celles de
+          Favoris (repéré par Soumia : "je veux la même taille que dans favoris"). max-w-6xl (était
+          max-w-4xl) pour matcher exactement la largeur de app/favoris. Le bloc regional_transport
+          garde son propre max-w-xl plus bas, non affecté. */}
+      <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <PracticalInfoSection info={destination?.practical_info} />
 
         {/* Cœur de page : le reste de la fiche est dédié aux adresses/partenariat B2B — décidé le
@@ -250,7 +256,7 @@ export default async function VoyagePage({
             </div>
           </div>
         )}
-      </main>
+      </div>
     </div>
   );
 }
