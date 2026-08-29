@@ -11,8 +11,9 @@ import { FAMILY_PROFILE_OPTIONS, type ScoreKey } from "./types";
 //
 // Refonte de ton "humour, second degré & lifestyle" (23/08/2026) — 5 des 9 intitulés de question
 // reformulés par Soumia (duration, companions, budget, sport_level, emotions). distance, climate,
-// transport et ambiance gardent l'ancien ton "tu" neutre, pas reformulés faute de consigne — à
-// harmoniser si Soumia le demande.
+// transport et ambiance harmonisés au même ton le 29/08/2026 (titre + options pour distance/
+// climate/transport, titre seul pour ambiance — les libellés des curseurs n'ont pas été redonnés
+// cette fois, inchangés).
 
 export type ChoiceOption = { value: string; label: string };
 
@@ -76,32 +77,32 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "distance",
-    question: "Tu veux partir à quelle distance ?",
+    question: "Tu es prêt à faire combien de bornes ?",
     options: [
-      { value: "proche", label: "Échappée proche (France) — Rester dans l'hexagone, privilégier la proximité." },
-      { value: "europe", label: "Escale européenne — Changer d'air sans partir à l'autre bout du monde." },
-      { value: "long_courrier", label: "Le grand large — Partir loin, changer de continent." },
-      { value: "ouvert", label: "L'inspiration avant tout (Surprenez-moi) — Je cherche une émotion, peu importe la distance." },
+      { value: "proche", label: "À deux pas (la France, c'est très bien)" },
+      { value: "europe", label: "Un petit saut de puce en Europe" },
+      { value: "long_courrier", label: "On passe plusieurs fuseaux horaires, je veux du vrai dépaysement" },
+      { value: "ouvert", label: "L'inspiration avant tout (surprends-moi, même au bout de la rue)" },
     ],
   },
   {
     type: "choice",
     id: "climate",
-    question: "Quel temps veux-tu retrouver là-bas ?",
+    question: "Côté météo, tu signes pour quoi ?",
     options: [
-      { value: "chaleur", label: "Une vraie chaleur, soleil garanti" },
-      { value: "douceur", label: "Une douceur agréable, ni trop chaud ni trop froid" },
-      { value: "hiver_cosy", label: "Un hiver enneigé & cosy, quitte à sortir la grosse doudoune" },
+      { value: "chaleur", label: "Full soleil, option maillot et crème solaire 50" },
+      { value: "douceur", label: "Le climat parfait (ni canicule, ni doudoune)" },
+      { value: "hiver_cosy", label: "Ambiance plaid, feu de cheminée et gros pull" },
     ],
   },
   {
     type: "choice",
     id: "transport",
-    question: "Comment tu te déplaces une fois sur place ?",
+    question: "Une fois sur place, on bouge comment ?",
     options: [
-      { value: "sans_voiture", label: "Zéro voiture, tout à pied ou en transports" },
-      { value: "transports_possibles", label: "Peu importe, selon les besoins" },
-      { value: "voiture_necessaire", label: "Une voiture, indispensable" },
+      { value: "sans_voiture", label: "Team 100 % à pied, train ou vélo (zéro stress de créneau)" },
+      { value: "voiture_necessaire", label: "Team roadtrip, j'aime avoir les clés et tracer" },
+      { value: "transports_possibles", label: "Je m'adapte, tant qu'on arrive à bon port" },
     ],
   },
   {
@@ -139,7 +140,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "sliders",
     id: "ambiance",
-    question: "Et niveau ambiance ?",
+    question: "C'est quoi ton décor idéal pour décrocher ?",
     helper: "Ajuste chaque curseur selon ton envie",
     sliders: [
       { key: "nature", label: "Envie de nature, de grands espaces" },
