@@ -80,7 +80,7 @@ function AddressesSection({
         className="font-extrabold mb-8"
         style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
       >
-        Nos adresses pépites &amp; coups de cœur ✨
+        Nos adresses pépites &amp; coups de cœur
       </h2>
       <AddressGrid stays={stays} eats={eats} activities={activities} familyProfile={familyProfile} />
     </div>

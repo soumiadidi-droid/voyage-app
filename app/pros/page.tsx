@@ -5,13 +5,17 @@ export const metadata = {
 };
 
 // (29/08/2026, "plus de peps/plus de terracotta") : la page n'avait quasi aucune couleur de
-// marque (labels gris, bordures grises, "aurora" vert sur les options) — texte strictement
-// inchangé, seul l'habillage visuel change pour aligner la page sur le reste du site.
+// marque — habillage visuel aligné sur le reste du site.
+// (29/08/2026, ton "je suis une personne pas une entreprise") : le texte sonnait trop pro/corporate
+// par endroits (vocabulaire type "vos canaux", "trackable", options numérotées comme une grille
+// tarifaire) — réécrit plus proche de comment Soumia en parlerait elle-même, en gardant les faits
+// exacts (mêmes deux façons de collaborer, même règle testé/recherché, même commission). Espacement
+// entre sections resserré au même geste (py- réduits partout, plainte "trop d'espace haut/bas").
 export default function ProsPage() {
   return (
     <div>
       <div
-        className="px-6 sm:px-8 py-16 sm:py-24"
+        className="px-6 sm:px-8 py-10 sm:py-14"
         style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
       >
         <div className="max-w-3xl mx-auto">
@@ -34,16 +38,17 @@ export default function ProsPage() {
             Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage.
           </p>
           <p className="leading-relaxed">
-            Le Voyage des Émotions raconte des voyages réels, avec une règle qui ne bouge jamais :
-            chaque adresse est marquée <em>testée</em> quand elle a été vécue, <em>recherchée</em>{" "}
-            quand elle a été sélectionnée sans encore avoir été visitée. Cette distinction est
-            affichée sur chaque fiche du site — c&apos;est elle qui fait la confiance des lecteurs, et
-            c&apos;est elle que je ne romps jamais, même pour un partenariat.
+            Ici, pas de service com&apos; ni d&apos;équipe partenariats : c&apos;est moi, et une règle
+            que je ne casse jamais, même pour vous. Chaque adresse du site est marquée{" "}
+            <em>testée</em> quand je l&apos;ai vraiment vécue, <em>recherchée</em> quand je l&apos;ai
+            repérée sans encore y être allée — affiché noir sur blanc sur chaque fiche. C&apos;est ce
+            qui fait que les gens qui me lisent me font confiance, alors je ne romps jamais cette
+            règle, partenariat ou pas.
           </p>
         </div>
       </div>
 
-      <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-20">
+      <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
         <span
           className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold mb-2"
           style={{ fontFamily: "var(--font-display)" }}
@@ -72,12 +77,12 @@ export default function ProsPage() {
               className="font-semibold mb-3"
               style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem" }}
             >
-              Contenu pour vos canaux
+              Je viens, je vis, je raconte
             </h3>
             <p className="leading-relaxed">
               Vous m&apos;accueillez, je vis le séjour normalement, et vous repartez avec un lot de
-              photos originales (et, selon l&apos;accord, de courtes vidéos) à utiliser librement sur
-              votre site et vos réseaux. Je publie aussi mon propre récit sur mon site, marqué{" "}
+              photos originales (et, si on est d&apos;accord, quelques vidéos courtes) à utiliser
+              librement de votre côté. Je publie aussi mon propre récit sur mon site, marqué{" "}
               <em>testé</em> — en bonus, pas en échange.
             </p>
           </div>
@@ -95,19 +100,19 @@ export default function ProsPage() {
               className="font-semibold mb-3"
               style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem" }}
             >
-              Mise en avant + réservation
+              Je vous recommande vraiment
             </h3>
             <p className="leading-relaxed">
-              Votre établissement apparaît dans les fiches « Où dormir » du site, avec un lien de
-              réservation trackable. Commission sur les ventes générées, mention affiliée
-              transparente affichée à côté du lien — jamais cachée.
+              Votre établissement apparaît dans mes fiches « Où dormir », avec votre propre lien de
+              réservation. Je touche une commission sur ce qui est réservé par ce lien — toujours
+              annoncée clairement à côté, jamais planquée en petit.
             </p>
           </div>
         </div>
       </div>
 
       <div
-        className="text-center py-16 sm:py-20 px-6"
+        className="text-center py-10 sm:py-14 px-6"
         style={{ background: "radial-gradient(ellipse 70% 70% at 50% 50%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
       >
         <h2
@@ -117,8 +122,8 @@ export default function ProsPage() {
           On en parle ?
         </h2>
         <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-          Écrivez-moi directement, avec votre établissement et l&apos;option qui vous intéresse.
-          Portfolio et exemples de récits transmis directement sur demande.
+          Écrivez-moi directement : dites-moi qui vous êtes et ce qui vous tente. Je vous envoie mon
+          portfolio et des exemples de récits sans problème.
         </p>
         <a
           href="mailto:levoyagedesemotions@gmail.com"
