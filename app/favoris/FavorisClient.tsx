@@ -5,6 +5,7 @@ import Link from "next/link";
 import { LikeButton } from "../components/LikeButton";
 import { AddressDetailCard } from "../components/AddressDetailCard";
 import { useFavorites, usePlaceFavorites } from "@/lib/favorites";
+import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { TransportFilter } from "@/lib/travel-match/types";
 import { resolveFavorites, resolvePlaceFavorites, type LikedItem, type PlaceLikedItem } from "./actions";
 
@@ -86,10 +87,17 @@ export function FavorisClient() {
                 item.kind === "destination" ? (
                   // Carte horizontale avec photo de couverture en fond (28/08/2026) — overlay
                   // sombre pour garder le texte blanc lisible peu importe la photo.
+                  // `destinations.hero_image` en base est un champ jamais tenu à jour (encore un
+                  // "https://..." factice pour Montréal/New York, une vieille photo perso pour le
+                  // reste) — la vraie photo de couverture, la même que sur la fiche voyage, vit
+                  // dans DESTINATION_HERO_IMAGE (lib/hero-images.ts) depuis le 28/08/2026. Repéré
+                  // par Soumia : l'image manquait carrément sur la carte Montréal des favoris.
                   <div
                     key={item.key}
                     className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl bg-cover bg-center p-6 sm:p-8"
-                    style={{ backgroundImage: `url('${item.destination.hero_image}')` }}
+                    style={{
+                      backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.destination.content_slug] ?? item.destination.hero_image}')`,
+                    }}
                   >
                     <div
                       className="absolute inset-0"
@@ -143,7 +151,9 @@ export function FavorisClient() {
                   <div
                     key={item.key}
                     className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl bg-cover bg-center p-6 sm:p-8"
-                    style={{ backgroundImage: `url('${item.voyage.hero.image}')` }}
+                    style={{
+                      backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.voyage.slug] ?? item.voyage.hero.image}')`,
+                    }}
                   >
                     <div
                       className="absolute inset-0"
