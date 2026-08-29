@@ -42,7 +42,10 @@ export function DestinationHero({
           // Dégradé gauche→droite (décidé le 26/08/2026, demandé sur NYC puis étendu à toute image
           // de Hero) : sombre sous le texte pour la lisibilité, plus léger à droite pour laisser
           // respirer la photo. Sans image, le fond reste un noir plat uniforme (rien à révéler).
-          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/35 to-black/15" />
+          // Assombri par-dessus (29/08/2026) : "la photo est sombre" — from-black/60 assombrissait
+          // toute la partie gauche de la photo, même hors zone de texte. Allégé, le titre en blanc
+          // gras (font-extrabold) reste lisible avec moins de voile.
+          <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/10 to-transparent" />
         ) : (
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
         )}
