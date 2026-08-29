@@ -97,11 +97,17 @@ export function DestinationHero({
       {intro && (
         <div
           className="p-6 sm:p-14"
-          style={heroImage ? { background: "var(--lve-charcoal)" } : { backgroundColor: "rgba(0,0,0,0.6)" }}
+          style={heroImage ? undefined : { backgroundColor: "rgba(0,0,0,0.6)" }}
         >
-          <div className="max-w-2xl" style={{ color: "#f4f8f7" }}>
+          {/* Fond charcoal retiré (29/08/2026, demande explicite de Soumia — "gros bandeau noir en
+              en-tête, enlève ça partout") : le bloc intro tombait sur var(--lve-charcoal) (#1a1a1a,
+              quasi noir), lisible comme un second voile juste sous la photo alors que le voile SUR
+              la photo avait déjà été retiré. Repasse sur le fond normal de la page (couleur de
+              texte normale) quand il y a une photo — reste en blanc sur fond sombre uniquement
+              dans le cas sans photo (fond noir plat, non concerné par la demande). */}
+          <div className="max-w-2xl" style={heroImage ? { color: "var(--text)" } : { color: "#f4f8f7" }}>
             <p
-              className="leading-relaxed opacity-95"
+              className={heroImage ? "leading-relaxed" : "leading-relaxed opacity-95"}
               style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)" }}
             >
               {intro}
