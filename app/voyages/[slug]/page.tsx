@@ -143,9 +143,15 @@ export default async function VoyagePage({
         {/* Cœur de page : le reste de la fiche est dédié aux adresses/partenariat B2B — décidé le
             23/08/2026, refonte éditoriale "Alternance Story/Photos". */}
         <AddressesSection
-          stays={voyage.stays}
-          eats={voyage.eats}
-          activities={voyage.activities}
+          // Masquées tant qu'aucun lien Instagram vérifié n'est en base (29/08/2026) — filtré ici,
+          // uniquement à l'affichage de la fiche voyage, PAS dans lib/travel-match/data.ts : cette
+          // couche est aussi utilisée par app/favoris/actions.ts pour retrouver un établissement
+          // déjà liké (usePlaceFavorites), qui doit continuer à s'afficher dans "Mes Favoris" même
+          // sans lien Instagram — bug du 29/08/2026 où un like posé avant l'ajout du lien
+          // disparaissait silencieusement de la page Favoris, corrigé en déplaçant le filtre ici.
+          stays={voyage.stays.filter((c) => c.instagramUrl)}
+          eats={voyage.eats.filter((c) => c.instagramUrl)}
+          activities={voyage.activities.filter((c) => c.instagramUrl)}
           familyProfile={familyProfile}
         />
 
