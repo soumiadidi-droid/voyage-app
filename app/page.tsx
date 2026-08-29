@@ -20,11 +20,19 @@ export default function Home() {
         />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.45)" }} />
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
+          {/* Hero réécrit (29/08/2026, demande Gemini) : promesse directe de Travel Match plutôt
+              qu'un titre de marque abstrait, cohérent avec le CTA juste en dessous. */}
+          <p
+            className="text-lve-terracotta text-xs font-semibold uppercase tracking-[0.25em]"
+            style={{ fontFamily: "var(--font-display)" }}
+          >
+            9 questions — 2 minutes
+          </p>
           <h1
             className="text-white tracking-tight leading-tight"
             style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 7vw, 4rem)" }}
           >
-            L&apos;art du voyage, <br className="hidden sm:inline" />raconté sans filtre.
+            Trouvez le voyage qui vous ressemble
           </h1>
           {/* Respiration ajustée (29/08/2026, demande Gemini) : leading un peu plus ample +
               tracking léger, plus d'air avant le CTA (pt-4 → pt-6). */}
@@ -32,7 +40,8 @@ export default function Home() {
             className="text-white/70 max-w-xl mx-auto tracking-wide"
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)", lineHeight: 1.8 }}
           >
-            Carnets d&apos;expériences, lieux d&apos;exception et adresses curatées avec exigence.
+            Votre profil voyageur, une destination parfaitement alignée et une sélection
+            d&apos;adresses exclusives.
           </p>
           <div className="pt-6">
             <Link
