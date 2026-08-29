@@ -72,10 +72,12 @@ export function FavorisClient() {
   return (
     <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
       {/* Serif éditoriale (29/08/2026, demande Gemini) : var(--font-title), cohérence avec les H1
-          des fiches voyage et de Notre Philosophie. */}
+          des fiches voyage et de Notre Philosophie. Noir pur → anthracite chaud (29/08/2026, 2e
+          passe Gemini) : #2C2523 sur fond crème, moins dur que le noir. Graisse allégée
+          (font-extrabold → font-normal) au même geste, jugée trop lourde sur fond clair. */}
       <h1
-        className="font-extrabold mb-10"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+        className="font-normal mb-10"
+        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 5vw, 3rem)", color: "#2C2523" }}
       >
         Mes Favoris
       </h1>
@@ -101,10 +103,12 @@ export function FavorisClient() {
           {liked.length > 0 && (
             <div>
               {/* Sous-titre ajouté (29/08/2026, demande Gemini) : fait écho à "Mes adresses
-                  enregistrées" plus bas, même style que le H2 de cette section-là. */}
+                  enregistrées" plus bas, même style que le H2 de cette section-là. Serif éditoriale
+                  + anthracite chaud (29/08/2026, 2e passe Gemini, option A "unité visuelle") :
+                  était sans-serif gras, harmonisé avec le H1. */}
               <h2
-                className="font-semibold mb-6"
-                style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem" }}
+                className="font-normal mb-6"
+                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "#2C2523" }}
               >
                 Mes Carnets &amp; Voyages
               </h2>
@@ -209,9 +213,11 @@ export function FavorisClient() {
 
           {likedPlaces.length > 0 && (
             <div>
+              {/* Serif éditoriale + anthracite chaud (29/08/2026, 2e passe Gemini) : même
+                  harmonisation que "Mes Carnets & Voyages" juste au-dessus. */}
               <h2
-                className="font-semibold mb-6"
-                style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem" }}
+                className="font-normal mb-6"
+                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "#2C2523" }}
               >
                 Mes adresses enregistrées
               </h2>
