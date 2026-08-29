@@ -20,11 +20,26 @@ const TRANSPORT_BADGE: Record<TransportFilter, string> = {
   voiture_necessaire: "🚗 Voiture nécessaire",
 };
 
+// Filtres pilules "Mes adresses enregistrées" (29/08/2026, demande Gemini transmise par Soumia) —
+// adaptés aux 3 catégories RÉELLES du schéma (PlaceLikedItem.category : Hôtel/Resto/Activité, voir
+// app/favoris/actions.ts). La demande d'origine listait une 4e catégorie "Cafés & Bars" qui
+// n'existe pas dans les données (les cafés/bars sont rangés dans "Resto") — inventer un filtre qui
+// ne matcherait jamais rien aurait été pire que de s'en tenir au schéma réel.
+const PLACE_FILTERS = ["Tous", "Hôtel", "Resto", "Activité"] as const;
+type PlaceFilter = (typeof PLACE_FILTERS)[number];
+const PLACE_FILTER_LABEL: Record<PlaceFilter, string> = {
+  Tous: "Tous",
+  Hôtel: "Hôtels",
+  Resto: "Restaurants",
+  Activité: "Activités",
+};
+
 export function FavorisClient() {
   const { favorites } = useFavorites();
   const { favorites: placeFavorites } = usePlaceFavorites();
   const [liked, setLiked] = useState<LikedItem[] | null>(null);
   const [likedPlaces, setLikedPlaces] = useState<PlaceLikedItem[] | null>(null);
+  const [placeFilter, setPlaceFilter] = useState<PlaceFilter>("Tous");
 
   useEffect(() => {
     let cancelled = false;
@@ -56,9 +71,11 @@ export function FavorisClient() {
 
   return (
     <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+      {/* Serif éditoriale (29/08/2026, demande Gemini) : var(--font-title), cohérence avec les H1
+          des fiches voyage et de Notre Philosophie. */}
       <h1
         className="font-extrabold mb-10"
-        style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
       >
         Mes Favoris
       </h1>
@@ -82,7 +99,16 @@ export function FavorisClient() {
       ) : (
         <>
           {liked.length > 0 && (
-            <div className="flex flex-col gap-5 mb-16">
+            <div>
+              {/* Sous-titre ajouté (29/08/2026, demande Gemini) : fait écho à "Mes adresses
+                  enregistrées" plus bas, même style que le H2 de cette section-là. */}
+              <h2
+                className="font-semibold mb-6"
+                style={{ fontFamily: "var(--font-display)", fontSize: "1.6rem" }}
+              >
+                Mes Carnets &amp; Voyages
+              </h2>
+              <div className="flex flex-col gap-5 mb-16">
               {liked.map((item) =>
                 item.kind === "destination" ? (
                   // Carte horizontale avec photo de couverture en fond (28/08/2026) — overlay
@@ -186,6 +212,7 @@ export function FavorisClient() {
                   </div>
                 )
               )}
+              </div>
             </div>
           )}
 
@@ -197,13 +224,37 @@ export function FavorisClient() {
               >
                 Mes adresses enregistrées
               </h2>
+              {/* Filtres pilules (29/08/2026, demande Gemini) — purement client, ne re-résout
+                  rien côté serveur, juste un .filter() sur ce qui est déjà chargé. */}
+              <div className="flex flex-wrap gap-2 mb-6">
+                {PLACE_FILTERS.map((f) => {
+                  const active = placeFilter === f;
+                  return (
+                    <button
+                      key={f}
+                      type="button"
+                      onClick={() => setPlaceFilter(f)}
+                      className="rounded-full px-4 py-1.5 text-xs font-medium transition-colors"
+                      style={{
+                        fontFamily: "var(--font-display)",
+                        background: active ? "var(--lve-terracotta)" : "var(--lve-terracotta-bg)",
+                        color: active ? "#fff" : "var(--lve-terracotta-dark)",
+                      }}
+                    >
+                      {PLACE_FILTER_LABEL[f]}
+                    </button>
+                  );
+                })}
+              </div>
               {/* Réutilise AddressDetailCard tel quel (28/08/2026) — même carte que sur les
                   fiches voyage, badge/nom/description/tags/bouton Instagram/lien inclus, le
                   cœur de retrait est déjà intégré au composant. */}
               <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {likedPlaces.map((item) => (
-                  <AddressDetailCard key={item.key} card={item.card} category={item.category} />
-                ))}
+                {likedPlaces
+                  .filter((item) => placeFilter === "Tous" || item.category === placeFilter)
+                  .map((item) => (
+                    <AddressDetailCard key={item.key} card={item.card} category={item.category} />
+                  ))}
               </div>
             </div>
           )}

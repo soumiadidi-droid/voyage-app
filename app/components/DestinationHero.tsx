@@ -71,9 +71,13 @@ export function DestinationHero({
             {hero.country}
             {hero.tags.length > 0 && ` — ${hero.tags.join(" · ")}`}
           </p>
+          {/* Serif éditoriale (29/08/2026, demande Gemini transmise par Soumia) : var(--font-title)
+              = Cormorant Garamond, la vraie police "titres" du projet (pas de Playfair installé
+              ici) — même police que le logo LVE et les H2 de Notre Philosophie, cohérence avec le
+              reste du site plutôt qu'avec le nom générique donné dans la demande. */}
           <h1
             className="font-extrabold leading-[0.95] mb-4"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(3rem, 9vw, 6.2rem)" }}
+            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3rem, 9vw, 6.2rem)" }}
           >
             {hero.title}
           </h1>

@@ -109,12 +109,14 @@ export function Nav() {
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-6">
+          {/* Contraste augmenté (29/08/2026, demande Gemini transmise par Soumia) : /80 → /95,
+              ce projet n'a pas de token zinc-200 (palette lve-* maison), même effet visé. */}
           <ul className="hidden sm:flex items-center gap-6 list-none m-0 p-0">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="no-underline text-sm text-lve-ivory/80 hover:text-lve-sand transition-colors"
+                  className="no-underline text-sm text-lve-ivory/95 hover:text-lve-sand transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {link.label}
@@ -132,9 +134,14 @@ export function Nav() {
               <Settings size={18} />
             </Link>
           )}
+          {/* Ghost/outline (29/08/2026, demande Gemini transmise par Soumia) : le bouton plein
+              rivalisait avec le gros CTA du Hero d'accueil — garder l'impact réservé à celui-là,
+              ce bouton de header reste discret. Uniquement CE bouton (validé explicitement par
+              Soumia) — "Voir les disponibilités" sur les cartes d'adresses reste inchangé, en
+              plein terracotta, elle a tranché pour le garder tel quel. */}
           <Link
             href="/questionnaire"
-            className="no-underline bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors shadow-sm"
+            className="no-underline border border-lve-terracotta text-lve-terracotta hover:bg-lve-terracotta hover:text-white text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Lancer Travel Match
@@ -159,7 +166,7 @@ export function Nav() {
                 <Link
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block no-underline py-3 text-base text-lve-ivory/90 hover:text-lve-sand transition-colors"
+                  className="block no-underline py-3 text-base text-lve-ivory/95 hover:text-lve-sand transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {link.label}

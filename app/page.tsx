@@ -26,13 +26,15 @@ export default function Home() {
           >
             L&apos;art du voyage, <br className="hidden sm:inline" />raconté sans filtre.
           </h1>
+          {/* Respiration ajustée (29/08/2026, demande Gemini) : leading un peu plus ample +
+              tracking léger, plus d'air avant le CTA (pt-4 → pt-6). */}
           <p
-            className="text-white/70 leading-relaxed max-w-xl mx-auto"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)" }}
+            className="text-white/70 max-w-xl mx-auto tracking-wide"
+            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)", lineHeight: 1.8 }}
           >
             Carnets d&apos;expériences, lieux d&apos;exception et adresses curatées avec exigence.
           </p>
-          <div className="pt-4">
+          <div className="pt-6">
             <Link
               href="/questionnaire"
               className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white font-medium text-[11px] tracking-widest uppercase px-8 py-4 rounded-lg shadow-lg transition-all hover:-translate-y-0.5 no-underline"

@@ -148,10 +148,11 @@ export function AddressDetailCard({
       >
         {card.name}
       </h3>
+      {/* Sans-serif moderne (29/08/2026, demande Gemini) : mono retiré, var(--font-display). */}
       {card.location && (
         <p
-          className="mono mb-2 line-clamp-1 min-h-[1.3rem]"
-          style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}
+          className="mb-2 line-clamp-1 min-h-[1.3rem] text-xs font-medium"
+          style={{ color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
         >
           {card.location}
         </p>
@@ -172,13 +173,14 @@ export function AddressDetailCard({
 
       {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de tags, pour que le bouton du bas
           (poussé par mt-auto) parte du même niveau même quand le nombre de tags diffère. */}
+      {/* Sans-serif moderne (29/08/2026, demande Gemini) : mono retiré, var(--font-display). */}
       {card.tags.length > 0 && (
         <div className="mb-4 flex min-h-[2.25rem] flex-wrap gap-2">
           {card.tags.map((tag) => (
             <span
               key={tag}
-              className="mono px-2 py-1 border text-xs"
-              style={{ borderColor: "var(--border)", color: "var(--text-secondary)" }}
+              className="px-2 py-1 border text-xs font-medium"
+              style={{ borderColor: "var(--border)", color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
             >
               {tag}
             </span>

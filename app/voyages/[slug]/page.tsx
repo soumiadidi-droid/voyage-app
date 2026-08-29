@@ -44,11 +44,16 @@ function PracticalInfoSection({ info }: { info?: PracticalInfo }) {
 
   return (
     <div className="my-8 sm:my-10 flex flex-wrap gap-3">
+      {/* Sans-serif moderne (29/08/2026, demande Gemini) : var(--font-display) = Bricolage
+          Grotesque, remplace le style code/mono jugé trop technique pour un badge pratique. */}
       {badges.map(({ key, icon: Icon }) => (
         <span
           key={key}
-          className="mono inline-flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-md"
-          style={{ background: "color-mix(in srgb, var(--bg-guide) 70%, transparent)", fontSize: "0.85rem" }}
+          className="inline-flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-md text-xs font-medium"
+          style={{
+            background: "color-mix(in srgb, var(--bg-guide) 70%, transparent)",
+            fontFamily: "var(--font-display)",
+          }}
         >
           <Icon size={15} style={{ color: "var(--lve-terracotta-dark)" }} />
           {info?.[key]}
@@ -76,9 +81,11 @@ function AddressesSection({
       <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
         Mes adresses
       </p>
+      {/* Serif éditoriale (29/08/2026, demande Gemini) : var(--font-title), cohérent avec le H1
+          du hero juste au-dessus (même changement appliqué). */}
       <h2
         className="font-extrabold mb-8"
-        style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
+        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
       >
         Nos adresses pépites &amp; coups de cœur
       </h2>
