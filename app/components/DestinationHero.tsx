@@ -5,19 +5,23 @@ import type { VoyageContent } from "@/content/voyages";
 // une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
 // remettre en place le système précédent (voile/texture systématique sur toutes les fiches).
 //
-// Bande image + intro détachée en dessous (29/08/2026) : avant, `min-h` + `flex items-end`
-// laissait le titre ET l'intro (parfois 4-5 lignes) pousser le bloc entier bien plus haut que
-// 60/70vh sur mobile — l'image en `inset-0` s'étirait pour suivre, et `background-size: cover`
-// sur une boîte devenue très haute et étroite ne laissait plus voir qu'une bande centrale zoomée
-// de la photo ("la photo du hero est coupée"). L'intro (souvent longue) passe dans un bloc sombre
-// séparé en dessous, pour ne plus faire gonfler la bande photo.
+// Photo + intro à nouveau réunies (29/08/2026, 2e demande de Soumia — "tu m'as coupé les images
+// avec un gros bloc blanc, mets-moi la photo entière avec le texte sur l'image") : le passage
+// 29/08 précédent avait détaché l'intro dans un bloc séparé sous la photo, pour éviter que
+// `min-h` + `flex items-end` sur UNE SEULE boîte ne pousse la boîte (photo + texte confondus)
+// bien plus haut que 60/70vh quand l'intro est longue — `background-size: cover` sur une boîte
+// devenue très haute ne montrait plus qu'une bande centrale zoomée de la photo. Le bloc séparé a
+// réglé le crop mais créé le nouveau problème signalé ici (bandeau visible sous la photo, quelle
+// que soit sa couleur).
 //
-// Bien garder `min-h-` ici, PAS `h-` (bug du 29/08/2026, corrigé) : `h-` est une hauteur RIGIDE
-// qui, combinée à `overflow-hidden`, coupe net tout contenu qui dépasse (repéré par Soumia :
-// "tu m'as coupé le hero avec un bout noir" — un titre+accroche un peu longs sur mobile, avec le
-// H1 en clamp(3rem, 9vw, 6.2rem), peut dépasser 60vh même une fois l'intro sortie du bloc). `min-h`
-// grandit avec le contenu, donc le texte n'est jamais rogné ; le crop de l'image reste réglé
-// puisque c'est l'intro (déjà déplacée) qui causait l'inflation excessive, pas le titre seul.
+// Fix qui règle les deux à la fois : la PHOTO vit dans son propre calque à hauteur FIXE (`h-`,
+// pas `min-h`) — `background-size: cover` s'applique donc toujours à un ratio de boîte stable, la
+// photo ne "zoome" jamais quel que soit le texte. Le TEXTE (titre + accroche + intro) vit dans un
+// calque à part, superposé (`absolute`, `z-10`), dans un conteneur EXTÉRIEUR à `min-h` : un texte
+// court reste bien calé en bas de la photo (comme avant) ; un texte long (intro de 4-5 lignes)
+// grandit le conteneur extérieur au-delà de la hauteur de la photo, et continue naturellement sur
+// le fond normal de la page juste en dessous — jamais de crop, jamais de bloc/bandeau visible,
+// juste la photo entière puis, si besoin, la suite du texte qui déborde en dessous sans coupure.
 export function DestinationHero({
   hero,
   intro,
@@ -30,32 +34,28 @@ export function DestinationHero({
   heroImage?: string;
 }) {
   return (
-    <div>
-      <div className="relative min-h-[60vh] sm:min-h-[70vh] flex items-end p-6 sm:p-14 overflow-hidden">
-        {heroImage && (
-          <div
-            className="absolute inset-0"
-            style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
-          />
-        )}
-        {/* Plus de voile sur la photo (29/08/2026, demande explicite de Soumia — "je veux que le
-            texte soit direct sur l'image") : après plusieurs allègements successifs du dégradé
-            gauche→droite toujours jugés trop sombres, il est retiré complètement quand il y a une
-            photo. La lisibilité vient d'un text-shadow sur le texte, pas d'un assombrissement de
-            la photo. Sans image, le fond reste un noir plat uniforme (rien à révéler, pas concerné
-            par la demande). */}
-        {!heroImage && <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />}
-        {/* Le fondu bas (transparent → charcoal) qui vivait ici a été retiré (29/08/2026, dernier
-            passage) : c'était le dernier assombrissement de photo qui traînait encore, repéré par
-            Soumia en testant toutes les fiches ("j'ai encore le voile noir, c'est usant"). La
-            transition franche photo → bloc intro (sans fondu) est un choix de design courant et
-            propre, pas un bug — plus aucun pixel de la photo n'est assombri nulle part. */}
+    <div className="relative min-h-[60vh] sm:min-h-[70vh]">
+      {heroImage ? (
+        <div
+          className="absolute inset-x-0 top-0 h-[60vh] sm:h-[70vh]"
+          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+        />
+      ) : (
+        // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu (rien à
+        // révéler, pas concerné par le "photo entière" demandé) — inset-0 de l'extérieur à min-h
+        // grandit avec le texte comme avant.
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
+      )}
 
-        <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
-          <LikeButton id={favoriteId} />
-        </div>
+      <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
+        <LikeButton id={favoriteId} />
+      </div>
 
-        <div className="relative z-10 max-w-2xl" style={{ color: "#f4f8f7" }}>
+      <div
+        className="relative z-10 min-h-[60vh] sm:min-h-[70vh] flex flex-col justify-end p-6 sm:p-14"
+        style={{ color: "#f4f8f7" }}
+      >
+        <div className="max-w-2xl">
           <p
             className="mono opacity-90 mb-3"
             style={heroImage ? { textShadow: "0 1px 8px rgba(0,0,0,0.6)" } : undefined}
@@ -91,30 +91,20 @@ export function DestinationHero({
           >
             {hero.tagline}
           </p>
-        </div>
-      </div>
-
-      {intro && (
-        <div
-          className="p-6 sm:p-14"
-          style={heroImage ? undefined : { backgroundColor: "rgba(0,0,0,0.6)" }}
-        >
-          {/* Fond charcoal retiré (29/08/2026, demande explicite de Soumia — "gros bandeau noir en
-              en-tête, enlève ça partout") : le bloc intro tombait sur var(--lve-charcoal) (#1a1a1a,
-              quasi noir), lisible comme un second voile juste sous la photo alors que le voile SUR
-              la photo avait déjà été retiré. Repasse sur le fond normal de la page (couleur de
-              texte normale) quand il y a une photo — reste en blanc sur fond sombre uniquement
-              dans le cas sans photo (fond noir plat, non concerné par la demande). */}
-          <div className="max-w-2xl" style={heroImage ? { color: "var(--text)" } : { color: "#f4f8f7" }}>
+          {intro && (
             <p
-              className={heroImage ? "leading-relaxed" : "leading-relaxed opacity-95"}
-              style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)" }}
+              className="mt-4 leading-relaxed"
+              style={{
+                fontFamily: "var(--font-body)",
+                fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)",
+                textShadow: heroImage ? "0 1px 12px rgba(0,0,0,0.6)" : undefined,
+              }}
             >
               {intro}
             </p>
-          </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }
