@@ -5,13 +5,19 @@ import type { VoyageContent } from "@/content/voyages";
 // une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
 // remettre en place le système précédent (voile/texture systématique sur toutes les fiches).
 //
-// Bande image à hauteur FIXE, intro détachée en dessous (29/08/2026) : avant, `min-h` + `flex
-// items-end` laissait le titre ET l'intro (parfois 4-5 lignes) pousser le bloc entier bien plus
-// haut que 60/70vh sur mobile — l'image en `inset-0` s'étirait pour suivre, et `background-size:
-// cover` sur une boîte devenue très haute et étroite ne laissait plus voir qu'une bande centrale
-// zoomée de la photo (repéré par Soumia : "la photo du hero est coupée"). La bande photo garde
-// maintenant une hauteur fixe (h-, pas min-h-) indépendante du texte ; seuls titre + accroche
-// restent dessus, l'intro (souvent longue) passe dans un bloc sombre séparé en dessous.
+// Bande image + intro détachée en dessous (29/08/2026) : avant, `min-h` + `flex items-end`
+// laissait le titre ET l'intro (parfois 4-5 lignes) pousser le bloc entier bien plus haut que
+// 60/70vh sur mobile — l'image en `inset-0` s'étirait pour suivre, et `background-size: cover`
+// sur une boîte devenue très haute et étroite ne laissait plus voir qu'une bande centrale zoomée
+// de la photo ("la photo du hero est coupée"). L'intro (souvent longue) passe dans un bloc sombre
+// séparé en dessous, pour ne plus faire gonfler la bande photo.
+//
+// Bien garder `min-h-` ici, PAS `h-` (bug du 29/08/2026, corrigé) : `h-` est une hauteur RIGIDE
+// qui, combinée à `overflow-hidden`, coupe net tout contenu qui dépasse (repéré par Soumia :
+// "tu m'as coupé le hero avec un bout noir" — un titre+accroche un peu longs sur mobile, avec le
+// H1 en clamp(3rem, 9vw, 6.2rem), peut dépasser 60vh même une fois l'intro sortie du bloc). `min-h`
+// grandit avec le contenu, donc le texte n'est jamais rogné ; le crop de l'image reste réglé
+// puisque c'est l'intro (déjà déplacée) qui causait l'inflation excessive, pas le titre seul.
 export function DestinationHero({
   hero,
   intro,
@@ -25,7 +31,7 @@ export function DestinationHero({
 }) {
   return (
     <div>
-      <div className="relative h-[60vh] sm:h-[70vh] flex items-end p-6 sm:p-14 overflow-hidden">
+      <div className="relative min-h-[60vh] sm:min-h-[70vh] flex items-end p-6 sm:p-14 overflow-hidden">
         {heroImage && (
           <div
             className="absolute inset-0"
