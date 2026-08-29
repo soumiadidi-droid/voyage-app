@@ -287,7 +287,11 @@ export const DESTINATIONS: Destination[] = [
     filters: {
       distance: ["proche"],
       climate: ["chaleur", "douceur"],
-      transport: ["sans_voiture", "voiture_necessaire", "transports_possibles"],
+      // 29/08/2026 (Soumia) : retiré "transports_possibles" — Biarritz/Côte Basque se vit à pied
+      // ou en voiture, pas vraiment en transports en commun. Corrigé aussi en base (désynchro
+      // trouvée : la base n'avait que ["sans_voiture"], ce qui excluait Biarritz d'un score
+      // 100% logistique dès qu'un profil "voiture nécessaire" était demandé).
+      transport: ["sans_voiture", "voiture_necessaire"],
       sport_level: ["tranquille", "actif"],
       duration: ["week_end", "semaine", "grand_voyage"],
       budget: ["eco", "confort", "premium"],
