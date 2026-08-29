@@ -18,10 +18,15 @@ import type { VoyageContent } from "@/content/voyages";
 // pas `min-h`) — `background-size: cover` s'applique donc toujours à un ratio de boîte stable, la
 // photo ne "zoome" jamais quel que soit le texte. Le TEXTE (titre + accroche + intro) vit dans un
 // calque à part, superposé (`absolute`, `z-10`), dans un conteneur EXTÉRIEUR à `min-h` : un texte
-// court reste bien calé en bas de la photo (comme avant) ; un texte long (intro de 4-5 lignes)
-// grandit le conteneur extérieur au-delà de la hauteur de la photo, et continue naturellement sur
-// le fond normal de la page juste en dessous — jamais de crop, jamais de bloc/bandeau visible,
-// juste la photo entière puis, si besoin, la suite du texte qui déborde en dessous sans coupure.
+// court reste bien calé en bas de la photo (comme avant) ; un texte long grandit le conteneur
+// extérieur au-delà de la hauteur de la photo, et continue naturellement sur le fond normal de la
+// page juste en dessous — jamais de crop, jamais de bloc/bandeau visible.
+//
+// Hauteur passée à 100vh (`h-screen`, 29/08/2026, 3e itération — capture d'écran de Soumia sur
+// Côte Basque montrant l'intro presque entièrement hors de la photo à 70vh) : donne beaucoup plus
+// de place, la plupart des intros tiennent maintenant entièrement sur la photo. Les toutes plus
+// longues (Carry-le-Rouet) peuvent encore déborder légèrement en dessous — accepté explicitement
+// par Soumia plutôt que de risquer un retour du bug de crop avec une boîte à hauteur variable.
 export function DestinationHero({
   hero,
   intro,
@@ -34,10 +39,10 @@ export function DestinationHero({
   heroImage?: string;
 }) {
   return (
-    <div className="relative min-h-[60vh] sm:min-h-[70vh]">
+    <div className="relative min-h-screen">
       {heroImage ? (
         <div
-          className="absolute inset-x-0 top-0 h-[60vh] sm:h-[70vh]"
+          className="absolute inset-x-0 top-0 h-screen"
           style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
       ) : (
@@ -52,7 +57,7 @@ export function DestinationHero({
       </div>
 
       <div
-        className="relative z-10 min-h-[60vh] sm:min-h-[70vh] flex flex-col justify-end p-6 sm:p-14"
+        className="relative z-10 min-h-screen flex flex-col justify-end p-6 sm:p-14"
         style={{ color: "#f4f8f7" }}
       >
         <div className="max-w-2xl">
