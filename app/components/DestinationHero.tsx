@@ -45,18 +45,11 @@ export function DestinationHero({
             la photo. Sans image, le fond reste un noir plat uniforme (rien à révéler, pas concerné
             par la demande). */}
         {!heroImage && <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />}
-        {/* Fondu bas de la photo vers la couleur EXACTE du bloc intro juste en dessous (29/08/2026)
-            — sans ça, la photo s'arrêtait net contre le bloc charcoal plein, ce qui donnait
-            l'impression d'une bande noire plaquée dessus. Bande volontairement COURTE (h-20, pas
-            h-1/2) : une première version assombrissait la moitié de la photo, jugée trop "voile
-            noir" par Soumia — juste de quoi fondre la coupure sur les derniers pixels, la photo
-            doit rester lumineuse. Seulement si un bloc intro suit vraiment (voir plus bas). */}
-        {heroImage && intro && (
-          <div
-            className="absolute inset-x-0 bottom-0 h-20 sm:h-28"
-            style={{ background: "linear-gradient(to bottom, transparent, var(--lve-charcoal))" }}
-          />
-        )}
+        {/* Le fondu bas (transparent → charcoal) qui vivait ici a été retiré (29/08/2026, dernier
+            passage) : c'était le dernier assombrissement de photo qui traînait encore, repéré par
+            Soumia en testant toutes les fiches ("j'ai encore le voile noir, c'est usant"). La
+            transition franche photo → bloc intro (sans fondu) est un choix de design courant et
+            propre, pas un bug — plus aucun pixel de la photo n'est assombri nulle part. */}
 
         <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
           <LikeButton id={favoriteId} />
@@ -74,8 +67,12 @@ export function DestinationHero({
               = Cormorant Garamond, la vraie police "titres" du projet (pas de Playfair installé
               ici) — même police que le logo LVE et les H2 de Notre Philosophie, cohérence avec le
               reste du site plutôt qu'avec le nom générique donné dans la demande. */}
+          {/* leading-[0.95] → 1.05 (29/08/2026, bug trouvé en testant toutes les fiches) : à
+              clamp(3rem, 9vw, 6.2rem), un leading sous 1 fait chevaucher les lignes entre elles
+              dès qu'un titre passe sur 3 lignes (ex. "Italie : Sorrente & Côte Amalfitaine") — le
+              sous-titre juste en dessous se retrouvait visuellement fondu dans le titre. */}
           <h1
-            className="font-extrabold leading-[0.95] mb-4"
+            className="font-extrabold leading-[1.05] mb-4"
             style={{
               fontFamily: "var(--font-title)",
               fontSize: "clamp(3rem, 9vw, 6.2rem)",
