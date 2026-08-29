@@ -125,6 +125,9 @@ export async function getVoyage(slug: string): Promise<VoyageContent | undefined
   const eats: Card[] = [];
   const activities: Card[] = [];
   for (const a of addressRows) {
+    // Masquées tant qu'aucun lien Instagram vérifié n'est en base (28/08/2026) — restent en base
+    // pour reprendre le sourcing plus tard, juste pas affichées sur la fiche voyage.
+    if (!a.instagram_url) continue;
     const card = rowToCard(a);
     if (a.category === "stay") stays.push(card);
     else if (a.category === "eat") eats.push(card);
@@ -145,6 +148,8 @@ export async function getVoyages(): Promise<VoyageContent[]> {
 
   const addressesBySlug = new Map<string, { stays: Card[]; eats: Card[]; activities: Card[] }>();
   for (const a of addressRows) {
+    // Même règle de masquage que getVoyage() ci-dessus (sans lien Instagram = pas affichée).
+    if (!a.instagram_url) continue;
     const bucket = addressesBySlug.get(a.voyage_slug) ?? { stays: [], eats: [], activities: [] };
     const card = rowToCard(a);
     if (a.category === "stay") bucket.stays.push(card);

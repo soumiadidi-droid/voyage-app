@@ -2,6 +2,7 @@
 
 import { Users } from "lucide-react";
 import { useState } from "react";
+import type { SVGProps } from "react";
 import { type Card } from "@/content/voyages";
 import { type AddressCategory } from "@/lib/category-images";
 import { usePlaceFavorites } from "@/lib/favorites";
@@ -13,6 +14,18 @@ import { CATEGORY_META } from "./AddressGrid";
 const FAMILY_PROFILE_LABEL: Record<FamilyProfile, string> = Object.fromEntries(
   FAMILY_PROFILE_OPTIONS.map((o) => [o.value, o.label])
 ) as Record<FamilyProfile, string>;
+
+// lucide-react n'a plus d'icônes de marque (Instagram retiré, cf. leur politique de licence) —
+// glyphe maison au même gabarit que les icônes lucide environnantes (viewBox 24, strokeWidth 1.75).
+function InstagramGlyph(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4.2" />
+      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
 
 // Pavé "Adapté aux Familles" — inchangé depuis l'ancienne AddressDetailModal. Pas de contenu par
 // défaut/inventé : un hôtel sans entrée pour ce profil n'affiche simplement rien.
@@ -75,20 +88,30 @@ export function AddressDetailCard({
       className="relative flex h-full w-full flex-col rounded-xl p-5"
       style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
     >
-      {/* Enregistrer l'établissement (28/08/2026, demande explicite de Soumia — même mécanisme
-          que le like destination existant, mais store localStorage séparé pour ne jamais
-          mélanger les deux types d'id, cf. lib/favorites.ts). */}
-      {card.id && (
-        <div className="absolute right-4 top-4 z-10">
-          <LikeButton id={card.id} useStore={usePlaceFavorites} size="sm" />
-        </div>
-      )}
+      {/* Icônes du coin haut-droit (29/08/2026, alignées ensemble dans une même rangée) : lien
+          Instagram (ouvre InstagramPopup en autoLoad, remplace l'ancien gros bouton dégradé
+          "Voir l'ambiance sur Instagram" — demande explicite de Soumia, juste l'icône déclenche
+          l'embed) puis le favori établissement (28/08/2026, même mécanisme que le like
+          destination, store localStorage séparé, cf. lib/favorites.ts). */}
+      <div className="absolute right-4 top-4 z-10 flex items-center gap-2">
+        {card.instagramUrl && (
+          <button
+            type="button"
+            onClick={() => setIgOpen(true)}
+            aria-label="Voir le post Instagram"
+            className="inline-flex items-center justify-center rounded-full border border-white/15 bg-black/30 p-2.5 text-white backdrop-blur-md transition-all hover:bg-black/50 cursor-pointer"
+          >
+            <InstagramGlyph width={16} height={16} />
+          </button>
+        )}
+        {card.id && <LikeButton id={card.id} useStore={usePlaceFavorites} size="sm" />}
+      </div>
 
       {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de badges — sans ça, une carte
           avec juste le badge catégorie vs une autre avec catégorie + "Partenaire" + statut
-          décalait tout le contenu en dessous entre les deux. `pr-9` laisse la place au bouton
-          favori en haut à droite. */}
-      <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-9">
+          décalait tout le contenu en dessous entre les deux. `pr-24` (29/08/2026, était `pr-9`)
+          laisse la place aux deux icônes du coin haut-droit désormais côte à côte. */}
+      <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-24">
         <span
           className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
@@ -139,26 +162,6 @@ export function AddressDetailCard({
         </p>
       )}
 
-      {/* Pastille "Voir sur Instagram" (28/08/2026) — dégradé Instagram très atténué + effet
-          verre, même style que le badge interne d'InstagramEmbed.tsx (ce bouton-ci est le
-          vraiment affiché ici, InstagramEmbed n'ouvre plus jamais son propre badge depuis que
-          ce bouton pilote InstagramPopup en autoLoad). */}
-      {card.instagramUrl && (
-        <button
-          type="button"
-          onClick={() => setIgOpen(true)}
-          className="mb-3 flex w-full items-center justify-center gap-2 rounded-2xl border px-4 py-6 text-sm font-medium backdrop-blur-md transition-all duration-200 hover:scale-[1.02] hover:brightness-110"
-          style={{
-            background:
-              "linear-gradient(135deg, color-mix(in srgb, #f09433 14%, var(--bg-guide)), color-mix(in srgb, #e6446f 14%, var(--bg-guide)), color-mix(in srgb, #bc4fd6 14%, var(--bg-guide)))",
-            borderColor: "color-mix(in srgb, var(--text) 12%, transparent)",
-            color: "var(--text-secondary)",
-          }}
-        >
-          📸 Voir l&apos;ambiance sur Instagram ↗
-        </button>
-      )}
-
       {/* `line-clamp-3` + `min-h` (28/08/2026) : même logique que le nom/la localisation — une
           description longue vs courte décalait les tags et le bouton du dessous entre cartes. */}
       {card.review && (
@@ -187,7 +190,7 @@ export function AddressDetailCard({
 
       {card.link && (
         <a
-          className="mt-auto inline-block w-full px-4 py-2 mono text-sm text-center no-underline"
+          className="mt-auto inline-block w-full rounded-lg px-4 py-2 mono text-sm text-center no-underline"
           href={card.link}
           target="_blank"
           rel="noopener noreferrer nofollow"

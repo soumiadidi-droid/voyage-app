@@ -72,7 +72,7 @@ export function FavorisClient() {
               pas la destination du lien. */}
           <Link
             href="/questionnaire"
-            className="inline-block px-6 py-3 mono no-underline"
+            className="inline-block rounded-lg px-6 py-3 mono no-underline"
             style={{ background: "var(--ember)", color: "#fff" }}
           >
             Découvrir nos destinations ↗

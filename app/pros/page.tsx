@@ -87,7 +87,7 @@ export default function ProsPage() {
         </p>
         <a
           href="mailto:levoyagedesemotions@gmail.com"
-          className="inline-block px-6 py-3 mono no-underline"
+          className="inline-block rounded-lg px-6 py-3 mono no-underline"
           style={{ background: "var(--ember)", color: "#fff" }}
         >
           levoyagedesemotions@gmail.com
