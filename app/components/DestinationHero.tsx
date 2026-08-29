@@ -48,11 +48,13 @@ export function DestinationHero({
         )}
         {/* Fondu bas de la photo vers la couleur EXACTE du bloc intro juste en dessous (29/08/2026)
             — sans ça, la photo s'arrêtait net contre le bloc charcoal plein, ce qui donnait
-            l'impression d'une bande noire plaquée dessus ("j'ai toujours une bande noire sur les
-            images du hero"). Seulement si un bloc intro suit vraiment (voir plus bas). */}
+            l'impression d'une bande noire plaquée dessus. Bande volontairement COURTE (h-20, pas
+            h-1/2) : une première version assombrissait la moitié de la photo, jugée trop "voile
+            noir" par Soumia — juste de quoi fondre la coupure sur les derniers pixels, la photo
+            doit rester lumineuse. Seulement si un bloc intro suit vraiment (voir plus bas). */}
         {heroImage && intro && (
           <div
-            className="absolute inset-x-0 bottom-0 h-1/2"
+            className="absolute inset-x-0 bottom-0 h-20 sm:h-28"
             style={{ background: "linear-gradient(to bottom, transparent, var(--lve-charcoal))" }}
           />
         )}
