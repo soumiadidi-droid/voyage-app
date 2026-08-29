@@ -27,36 +27,48 @@ export function DestinationCard({
             className="absolute inset-0"
             style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
           />
-          {/* Overlay retiré (29/08/2026, "je veux que le texte soit direct sur l'image") : ni le
-              badge Match ni le cœur n'ont de texte à même la photo (fond plein sur les deux),
-              aucun besoin d'assombrir la photo pour la lisibilité ici. */}
+          {/* Pas d'assombrissement de la photo (29/08/2026, "je veux que le texte soit direct sur
+              l'image") : lisibilité du titre via text-shadow, badge/cœur ont leur propre fond
+              plein — aucun voile sur la photo. */}
           <div className="absolute right-4 top-4">
             <LikeButton id={destination.id} size="sm" />
           </div>
-          {/* Badge Match gratifiant (29/08/2026, demande Gemini — "✨ 92% Match") : posé sur la
-              photo plutôt qu'à côté du titre, plus visible. */}
-          <span
-            className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold text-white shadow-md"
-            style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
-          >
-            ✨ {score}% Match
-          </span>
+          {/* Titre remonté sur la photo (29/08/2026, repéré par Soumia en testant Porto — le nom
+              de la destination vivait dans la zone blanche en dessous, pas "sur l'image" comme sur
+              les cartes Favoris/la fiche voyage). Badge Match juste au-dessus, même coin. */}
+          <div className="absolute bottom-4 left-4 right-4">
+            <span
+              className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold text-white shadow-md mb-2"
+              style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
+            >
+              ✨ {score}% Match
+            </span>
+            <h2
+              className="font-semibold text-white"
+              style={{
+                fontFamily: "var(--font-title)",
+                fontSize: "1.8rem",
+                textShadow: "0 2px 16px rgba(0,0,0,0.6)",
+              }}
+            >
+              {destination.title}
+            </h2>
+          </div>
         </div>
       )}
 
       <div className="p-6">
-        <div className="mb-3 flex items-baseline justify-between gap-4">
-          {/* Serif éditoriale (29/08/2026, demande Gemini). */}
-          <h2
-            className="font-semibold"
-            style={{ fontFamily: "var(--font-title)", fontSize: "1.6rem" }}
-          >
-            {destination.title}
-          </h2>
-          {/* Sans photo (rare, tant que DESTINATION_HERO_IMAGE n'a pas d'entrée pour cette
-              destination) : le badge Match et le favori repassent à côté du titre, repli identique
-              à l'ancien comportement plutôt que de les faire disparaître. */}
-          {!heroImage && (
+        {/* Sans photo (rare, tant que DESTINATION_HERO_IMAGE n'a pas d'entrée pour cette
+            destination) : titre + badge + favori repassent ici, repli identique à l'ancien
+            comportement plutôt que de les faire disparaître. */}
+        {!heroImage && (
+          <div className="mb-3 flex items-baseline justify-between gap-4">
+            <h2
+              className="font-semibold"
+              style={{ fontFamily: "var(--font-title)", fontSize: "1.6rem" }}
+            >
+              {destination.title}
+            </h2>
             <div className="flex items-center gap-3">
               <span
                 className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white"
@@ -66,8 +78,8 @@ export function DestinationCard({
               </span>
               <LikeButton id={destination.id} size="sm" />
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           {destination.summary}
