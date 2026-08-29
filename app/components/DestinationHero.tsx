@@ -46,6 +46,16 @@ export function DestinationHero({
         ) : (
           <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
         )}
+        {/* Fondu bas de la photo vers la couleur EXACTE du bloc intro juste en dessous (29/08/2026)
+            — sans ça, la photo s'arrêtait net contre le bloc charcoal plein, ce qui donnait
+            l'impression d'une bande noire plaquée dessus ("j'ai toujours une bande noire sur les
+            images du hero"). Seulement si un bloc intro suit vraiment (voir plus bas). */}
+        {heroImage && intro && (
+          <div
+            className="absolute inset-x-0 bottom-0 h-1/2"
+            style={{ background: "linear-gradient(to bottom, transparent, var(--lve-charcoal))" }}
+          />
+        )}
 
         <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
           <LikeButton id={favoriteId} />
