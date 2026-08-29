@@ -72,7 +72,10 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 const NAV_LINKS = [
   { href: "/favoris", label: "Favoris" },
   { href: "/philosophie", label: "Notre Philosophie" },
-  { href: "/pros", label: "Espace Pros" },
+  // Renommé (29/08/2026) : "Espace Pros" sonnait corporate à côté de "Favoris"/"Notre
+  // Philosophie" et contredisait le ton perso donné à la page elle-même ("pas de service com',
+  // c'est moi") — Soumia a validé "On collabore ?".
+  { href: "/pros", label: "On collabore ?" },
 ];
 
 // Header sombre permanent (charcoal, comme le footer) sur toutes les pages — décidé le 23/08/2026,
@@ -268,7 +271,7 @@ export function Footer() {
           <h4 className={DARK_COLUMN_TITLE_CLASS}>Maison</h4>
           <ul className="space-y-2 text-sm list-none m-0 p-0">
             <li><DarkFooterLink href="/philosophie">Notre philosophie</DarkFooterLink></li>
-            <li><DarkFooterLink href="/pros">Espace Pros</DarkFooterLink></li>
+            <li><DarkFooterLink href="/pros">On collabore ?</DarkFooterLink></li>
             <li>
               <a href="mailto:levoyagedesemotions@gmail.com" className={DARK_LINK_CLASS} style={DARK_FONT}>
                 Contact

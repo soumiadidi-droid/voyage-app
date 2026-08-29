@@ -1,7 +1,7 @@
 import { Camera, Link2 } from "lucide-react";
 
 export const metadata = {
-  title: "Espace Pros — Le Voyage des Émotions",
+  title: "On collabore ? — Le Voyage des Émotions",
 };
 
 // (29/08/2026, "plus de peps/plus de terracotta") : la page n'avait quasi aucune couleur de
@@ -25,11 +25,13 @@ export default function ProsPage() {
           >
             Hôtels &amp; marques de voyage
           </span>
+          {/* Renommé (29/08/2026) : "Espace Pros" → "On collabore ?", plus chaleureux, cohérent
+              avec le nav/footer et le ton perso du reste de la page. */}
           <h1
             className="font-extrabold mb-6"
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
           >
-            Espace Pros
+            On collabore ?
           </h1>
           <p
             className="italic mb-8 border-l-4 border-lve-terracotta pl-4 text-lve-charcoal/90"
