@@ -113,7 +113,7 @@ export function AddressDetailCard({
           laisse la place aux deux icônes du coin haut-droit désormais côte à côte. */}
       <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-24">
         <span
-          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[10px] font-medium tracking-widest uppercase"
+          className="inline-flex items-center gap-1.5 rounded-full py-0.5 px-2.5 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
         >
           <CategoryIcon size={12} />
@@ -180,7 +180,7 @@ export function AddressDetailCard({
           {card.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-white px-3 py-1 text-xs font-medium shadow-sm"
+              className="rounded-full bg-white py-0.5 px-2.5 text-xs font-medium leading-tight shadow-sm"
               style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}
             >
               {tag}
