@@ -20,22 +20,21 @@ export default function Home() {
         />
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.45)" }} />
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-          {/* Hero réécrit (29/08/2026, demande Gemini) : promesse directe de Travel Match plutôt
-              qu'un titre de marque abstrait, cohérent avec le CTA juste en dessous. */}
+          {/* Hero réécrit (29/08/2026, 2e passe) : promesse encore plus directe et affirmative. */}
           <h1
             className="text-white tracking-tight leading-tight"
             style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 7vw, 4rem)" }}
           >
-            Trouvez le voyage qui vous ressemble
+            Le voyage qui vous ressemble existe déjà.
           </h1>
-          {/* Respiration ajustée (29/08/2026, demande Gemini) : leading un peu plus ample +
-              tracking léger, plus d'air avant le CTA (pt-4 → pt-6). */}
+          {/* Respiration ajustée (29/08/2026) : leading un peu plus ample + tracking léger, plus
+              d'air avant le CTA (pt-4 → pt-6). */}
           <p
             className="text-white/70 max-w-xl mx-auto tracking-wide"
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)", lineHeight: 1.8 }}
           >
-            Votre profil voyageur, une destination parfaitement alignée et une sélection
-            d&apos;adresses exclusives.
+            Répondez à 9 questions intuitives et obtenez votre match idéal : une destination
+            alignée sur vos envies et une sélection de pépites exclusives.
           </p>
           {/* Repositionné (29/08/2026, demande Gemini) : était en haut du Hero, se noyait dans la
               photo — placé juste au-dessus du CTA, badge discret plutôt qu'un paragraphe. */}
@@ -114,19 +113,21 @@ export default function Home() {
               9 questions — 2 minutes
             </span>
 
+            {/* Synchronisé avec le hero du haut (29/08/2026) — les deux blocs avaient dérivé,
+                repéré par Soumia. */}
             <h2
               className="text-3xl sm:text-5xl text-lve-charcoal leading-tight"
               style={{ fontFamily: "var(--font-title)" }}
             >
-              Trouvez le voyage qui vous ressemble
+              Le voyage qui vous ressemble existe déjà.
             </h2>
 
             <p
               className="text-base sm:text-lg text-lve-charcoal/70 max-w-xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Votre profil voyageur, une destination parfaitement alignée et une sélection
-              d&apos;adresses exclusives.
+              Répondez à 9 questions intuitives et obtenez votre match idéal : une destination
+              alignée sur vos envies et une sélection de pépites exclusives.
             </p>
 
             <div className="pt-4">
