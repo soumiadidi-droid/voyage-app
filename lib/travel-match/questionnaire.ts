@@ -66,11 +66,12 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   },
   // Reformulé le 26/08/2026 (orienté intention/dépaysement plutôt que géographie brute) + ajout de
   // l'option "ouvert" : proche/europe/long_courrier filtrent le catalogue de façon stricte, "ouvert"
-  // ne filtre rien (cf. lib/travel-match/engine.ts, DistanceAnswer).
+  // ne filtre rien (cf. lib/travel-match/engine.ts, DistanceAnswer). Raccourci le 29/08/2026
+  // (demande Gemini transmise par Soumia — "aller droit au but", exemple donné tel quel).
   {
     type: "choice",
     id: "distance",
-    question: "Quelle est l'intensité de dépaysement recherchée pour ce voyage ?",
+    question: "Tu veux partir à quelle distance ?",
     options: [
       { value: "proche", label: "Échappée proche (France) — Rester dans l'hexagone, privilégier la proximité." },
       { value: "europe", label: "Escale européenne — Changer d'air sans partir à l'autre bout du monde." },
@@ -121,7 +122,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "sliders",
     id: "emotions",
-    question: "C'est quoi la priorité absolue pour que ton séjour soit un succès ?",
+    // Raccourci le 29/08/2026 (demande Gemini, "aller droit au but").
+    question: "C'est quoi ta priorité pour ce séjour ?",
     helper: "1 = pas du tout, 5 = complètement",
     sliders: [
       { key: "repos", label: "Repos & déconnexion, ne penser à rien" },

@@ -1,10 +1,15 @@
 import { TriangleAlert } from "lucide-react";
 import { LikeButton } from "../components/LikeButton";
+import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { ScoredDestination } from "@/lib/travel-match/engine";
 
 // Refonte visuelle (27/08/2026) : cartes à plat → cartes blanches avec hiérarchie (titre serif,
 // score en pastille terracotta, tags en pills, alerte d'incompatibilité en encadré ambré au lieu
 // d'une ligne monospace qui détonnait avec le reste du site).
+//
+// Photo de couverture + badge Match (29/08/2026, demande Gemini — "ajoute OBLIGATOIREMENT une
+// photo immersive") : même source que la fiche voyage et Favoris (DESTINATION_HERO_IMAGE), pour
+// ne jamais afficher une photo différente d'un endroit à l'autre du site.
 export function DestinationCard({
   destination,
   score,
@@ -12,29 +17,59 @@ export function DestinationCard({
   hasComboOpportunity,
   href,
 }: ScoredDestination & { href: string }) {
-  return (
-    <div className="rounded-2xl bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
-      <div className="mb-3 flex items-baseline justify-between gap-4">
-        <h2
-          className="font-semibold"
-          style={{ fontFamily: "var(--font-display)", fontSize: "1.4rem" }}
-        >
-          {destination.title}
-        </h2>
-        <div className="flex items-center gap-3">
-          <span
-            className="mono rounded-full px-3 py-1 text-xs font-semibold"
-            style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
-          >
-            {score}%
-          </span>
-          <LikeButton id={destination.id} size="sm" />
-        </div>
-      </div>
+  const heroImage = DESTINATION_HERO_IMAGE[destination.content_slug];
 
-      <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
-        {destination.summary}
-      </p>
+  return (
+    <div className="overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md">
+      {heroImage && (
+        <div className="relative h-48 sm:h-56">
+          <div
+            className="absolute inset-0"
+            style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
+          <div className="absolute right-4 top-4">
+            <LikeButton id={destination.id} size="sm" />
+          </div>
+          {/* Badge Match gratifiant (29/08/2026, demande Gemini — "✨ 92% Match") : posé sur la
+              photo plutôt qu'à côté du titre, plus visible. */}
+          <span
+            className="absolute bottom-4 left-4 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold text-white shadow-md"
+            style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
+          >
+            ✨ {score}% Match
+          </span>
+        </div>
+      )}
+
+      <div className="p-6">
+        <div className="mb-3 flex items-baseline justify-between gap-4">
+          {/* Serif éditoriale (29/08/2026, demande Gemini). */}
+          <h2
+            className="font-semibold"
+            style={{ fontFamily: "var(--font-title)", fontSize: "1.6rem" }}
+          >
+            {destination.title}
+          </h2>
+          {/* Sans photo (rare, tant que DESTINATION_HERO_IMAGE n'a pas d'entrée pour cette
+              destination) : le badge Match et le favori repassent à côté du titre, repli identique
+              à l'ancien comportement plutôt que de les faire disparaître. */}
+          {!heroImage && (
+            <div className="flex items-center gap-3">
+              <span
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white"
+                style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
+              >
+                ✨ {score}% Match
+              </span>
+              <LikeButton id={destination.id} size="sm" />
+            </div>
+          )}
+        </div>
+
+        <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
+          {destination.summary}
+        </p>
 
       {hasComboOpportunity && (
         <p
@@ -79,6 +114,7 @@ export function DestinationCard({
         Voir la fiche voyage
         <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>
       </a>
+      </div>
     </div>
   );
 }

@@ -96,40 +96,58 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
   const pills = buildPills(answers);
 
   return (
+    // Carnet/passeport (29/08/2026, demande Gemini — "univers graphique chaleureux et poétique")
+    // : fond ivoire (plus blanc plat), double liseré terracotta façon page de passeport, grand
+    // Compass en filigrane. Textes de l'archétype INCHANGÉS (validés par Soumia le 23/08/2026),
+    // seul l'habillage visuel change.
     <div
-      className="bg-white rounded-2xl p-6 md:p-8 mb-12 shadow-xl"
-      style={{ border: "1px solid var(--lve-border)", boxShadow: "0 20px 40px -20px rgba(26, 26, 26, 0.12)" }}
+      className="relative overflow-hidden rounded-2xl p-6 md:p-8 mb-12"
+      style={{
+        background: "var(--lve-ivory)",
+        border: "1px solid var(--lve-terracotta)",
+        boxShadow: "0 20px 40px -20px rgba(26, 26, 26, 0.12), inset 0 0 0 4px var(--lve-terracotta-bg)",
+      }}
     >
-      <span
-        className="inline-block text-[11px] tracking-widest font-medium uppercase rounded-full px-3 py-1.5 mb-4"
-        style={{ background: "var(--bg-guide)", color: "var(--lve-terracotta-dark)" }}
-      >
-        Votre profil Travel Match
-      </span>
-      <h2
-        className="font-semibold mb-3"
-        style={{
-          fontFamily: "var(--font-title)",
-          fontSize: "clamp(2rem, 4.5vw, 2.8rem)",
-          color: "var(--lve-terracotta-dark)",
-        }}
-      >
-        {archetype.title}
-      </h2>
-      <p className="leading-relaxed mb-5" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
-        {archetype.intro}
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {pills.map(({ icon: Icon, label }, i) => (
-          <span
-            key={i}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium"
-            style={{ background: "var(--bg-guide)", color: "var(--text-secondary)" }}
-          >
-            <Icon size={14} strokeWidth={1.75} />
-            {label}
-          </span>
-        ))}
+      <Compass
+        size={180}
+        strokeWidth={0.75}
+        className="pointer-events-none absolute -right-8 -top-8 opacity-[0.06]"
+        style={{ color: "var(--lve-terracotta-dark)" }}
+        aria-hidden="true"
+      />
+      <div className="relative">
+        <span
+          className="inline-flex items-center gap-2 text-[11px] tracking-widest font-medium uppercase text-white rounded-full px-3.5 py-1.5 mb-5"
+          style={{ background: "var(--lve-terracotta)" }}
+        >
+          <Sparkles size={12} strokeWidth={2} />
+          Votre profil Travel Match
+        </span>
+        <h2
+          className="font-semibold mb-3"
+          style={{
+            fontFamily: "var(--font-title)",
+            fontSize: "clamp(2rem, 4.5vw, 2.8rem)",
+            color: "var(--lve-terracotta-dark)",
+          }}
+        >
+          {archetype.title}
+        </h2>
+        <p className="leading-relaxed mb-5 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
+          {archetype.intro}
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {pills.map(({ icon: Icon, label }, i) => (
+            <span
+              key={i}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white"
+              style={{ color: "var(--lve-terracotta-dark)" }}
+            >
+              <Icon size={14} strokeWidth={1.75} />
+              {label}
+            </span>
+          ))}
+        </div>
       </div>
     </div>
   );

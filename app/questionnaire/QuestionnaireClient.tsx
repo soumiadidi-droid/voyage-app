@@ -46,6 +46,15 @@ function withUnbreakableQuestionMark(text: string): string {
   return text.replace(/ \?$/, " ?");
 }
 
+// Titre court + explication (29/08/2026, demande Gemini) : certains labels d'option suivent déjà
+// le format "Titre — explication" (ex. la question distance) — réutilisé plutôt que d'inventer une
+// description pour les options qui n'en ont pas. Sans tiret, le label entier devient le titre,
+// pas de ligne de description en dessous (rien à inventer).
+function splitOptionLabel(label: string): { title: string; description?: string } {
+  const [title, ...rest] = label.split(" — ");
+  return rest.length > 0 ? { title, description: rest.join(" — ") } : { title };
+}
+
 type SliderAnswers = Record<ScoreKey, number>;
 
 function initialSliderAnswers(): SliderAnswers {
@@ -147,11 +156,14 @@ export function QuestionnaireClient() {
           {question.options.map((option) => {
             const icon = OPTION_ICON[`${question.id}:${option.value}`];
             const selected = choices[question.id] === option.value;
+            // Titre gras court + description 1 ligne max (29/08/2026, demande Gemini — "évite les
+            // pavés de texte"), scale ramené à 1.01 (était 1.02, jugé trop marqué).
+            const { title, description } = splitOptionLabel(option.label);
             return (
               <button
                 key={option.value}
                 onClick={() => chooseOption(option.value)}
-                className={`flex flex-col items-center gap-2 bg-white/70 hover:bg-white border rounded-2xl p-5 text-center transition-all duration-200 shadow-sm hover:shadow-lg hover:scale-[1.02] cursor-pointer group ${
+                className={`flex flex-col items-center gap-2 bg-white/70 hover:bg-white border rounded-2xl p-5 text-center transition-all duration-200 shadow-sm hover:shadow-lg hover:scale-[1.01] cursor-pointer group ${
                   selected ? "border-lve-terracotta shadow-md" : "border-lve-border hover:border-lve-terracotta"
                 }`}
               >
@@ -161,11 +173,19 @@ export function QuestionnaireClient() {
                   </span>
                 )}
                 <span
-                  className="text-sm md:text-base text-lve-charcoal group-hover:text-lve-terracotta font-medium"
+                  className="text-sm md:text-base text-lve-charcoal group-hover:text-lve-terracotta font-bold"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
-                  {option.label}
+                  {title}
                 </span>
+                {description && (
+                  <span
+                    className="text-xs line-clamp-1"
+                    style={{ color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
+                  >
+                    {description}
+                  </span>
+                )}
               </button>
             );
           })}

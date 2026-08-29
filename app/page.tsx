@@ -22,12 +22,6 @@ export default function Home() {
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
           {/* Hero réécrit (29/08/2026, demande Gemini) : promesse directe de Travel Match plutôt
               qu'un titre de marque abstrait, cohérent avec le CTA juste en dessous. */}
-          <p
-            className="text-lve-terracotta text-xs font-semibold uppercase tracking-[0.25em]"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            9 questions — 2 minutes
-          </p>
           <h1
             className="text-white tracking-tight leading-tight"
             style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 7vw, 4rem)" }}
@@ -43,7 +37,15 @@ export default function Home() {
             Votre profil voyageur, une destination parfaitement alignée et une sélection
             d&apos;adresses exclusives.
           </p>
+          {/* Repositionné (29/08/2026, demande Gemini) : était en haut du Hero, se noyait dans la
+              photo — placé juste au-dessus du CTA, badge discret plutôt qu'un paragraphe. */}
           <div className="pt-6">
+            <p
+              className="text-lve-terracotta text-xs font-semibold uppercase tracking-[0.25em] mb-3"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              9 questions — 2 minutes
+            </p>
             <Link
               href="/questionnaire"
               className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white font-medium text-[11px] tracking-widest uppercase px-8 py-4 rounded-lg shadow-lg transition-all hover:-translate-y-0.5 no-underline"

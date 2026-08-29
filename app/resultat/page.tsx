@@ -115,17 +115,20 @@ export default async function ResultatPage({
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
+      {/* Wording (29/08/2026, demande Gemini) : "Votre diagnostic" sonnait clinique, "les voyages
+          qui te correspondent" mélangeait le tutoiement du questionnaire et le vouvoiement du
+          reste du site — uniformisé sur le vouvoiement ici. */}
       <p
         className="text-[11px] font-medium uppercase tracking-widest mb-3"
         style={{ color: "var(--lve-terracotta-dark)" }}
       >
-        Votre diagnostic
+        Votre match émotionnel
       </p>
       <h1
         className="font-light mb-10 text-3xl md:text-4xl"
         style={{ fontFamily: "var(--font-title)" }}
       >
-        Les voyages qui te correspondent
+        Vos destinations idéales
       </h1>
 
       <TravelerProfileCard answers={answers} />
