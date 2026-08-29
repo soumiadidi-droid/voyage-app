@@ -140,7 +140,10 @@ export default async function ResultatPage({
           <DestinationCard
             key={result.destination.id}
             {...result}
-            href={`/voyages/${result.destination.content_slug}?id=${result.destination.id}&duration=${answers.filters.duration}${
+            // climate ajouté (29/08/2026) : permet à la fiche voyage d'afficher un conseil
+            // "quand y aller" adapté à ce que la personne a vraiment demandé (ex. "chaleur" +
+            // Montréal en résultat → afficher juillet-août, pas un conseil toutes saisons).
+            href={`/voyages/${result.destination.content_slug}?id=${result.destination.id}&duration=${answers.filters.duration}&climate=${answers.filters.climate}${
               answers.familyProfile ? `&familyProfile=${answers.familyProfile}` : ""
             }`}
           />

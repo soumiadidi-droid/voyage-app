@@ -21,6 +21,7 @@ type DestinationRow = {
   tags: string[];
   regional_transport: Destination["regional_transport"] | null;
   practical_info: Destination["practical_info"] | null;
+  when_to_go: Destination["when_to_go"] | null;
 };
 
 type ComboRow = {
@@ -70,6 +71,7 @@ export async function getDestinations(): Promise<Destination[]> {
     suggested_combos: combosBySource.get(r.id) ?? [],
     regional_transport: r.regional_transport ?? undefined,
     practical_info: r.practical_info ?? undefined,
+    when_to_go: r.when_to_go ?? undefined,
   }));
 }
 

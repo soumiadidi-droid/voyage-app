@@ -13,6 +13,7 @@ import type {
   TransitionLogistics,
   FamilyProfile,
   PracticalInfo,
+  WhenToGo,
 } from "./types";
 import type { FamilyFit, GalleryItem, VoyageContent } from "@/content/voyages";
 
@@ -52,6 +53,10 @@ export type NewDestinationInput = {
   // partir de ce que Soumia donne, comme le reste du contenu du site. Champ non renseigné =
   // absent de l'affichage, jamais rempli de banalités.
   practical_info?: PracticalInfo;
+  // "Quand y aller" conditionné au climat choisi au questionnaire (29/08/2026) — voir WhenToGo.
+  // Même règle que practical_info : jamais généré automatiquement, vide tant que Soumia n'a pas
+  // donné le vrai conseil saisonnier.
+  when_to_go?: WhenToGo;
 };
 
 // N'attribue JAMAIS d'archétype ici — l'archétype est calculé côté voyageur à partir de ses
@@ -65,14 +70,14 @@ export type NewDestinationInput = {
 export async function upsertDestination(input: NewDestinationInput): Promise<void> {
   await sql.query(
     `insert into destinations
-       (id, title, authenticity_badge, content_slug, summary, hero_image, filters, scores, logistics, tags, regional_transport, practical_info)
-     values ($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9::jsonb,$10,$11::jsonb,$12::jsonb)
+       (id, title, authenticity_badge, content_slug, summary, hero_image, filters, scores, logistics, tags, regional_transport, practical_info, when_to_go)
+     values ($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9::jsonb,$10,$11::jsonb,$12::jsonb,$13::jsonb)
      on conflict (id) do update set
        title = excluded.title, authenticity_badge = excluded.authenticity_badge,
        content_slug = excluded.content_slug, summary = excluded.summary, hero_image = excluded.hero_image,
        filters = excluded.filters, scores = excluded.scores, logistics = excluded.logistics,
        tags = excluded.tags, regional_transport = excluded.regional_transport,
-       practical_info = excluded.practical_info, updated_at = now()`,
+       practical_info = excluded.practical_info, when_to_go = excluded.when_to_go, updated_at = now()`,
     [
       input.id,
       input.title,
@@ -86,6 +91,7 @@ export async function upsertDestination(input: NewDestinationInput): Promise<voi
       input.tags,
       input.regional_transport ? JSON.stringify(input.regional_transport) : null,
       input.practical_info ? JSON.stringify(input.practical_info) : null,
+      input.when_to_go ? JSON.stringify(input.when_to_go) : null,
     ]
   );
 }

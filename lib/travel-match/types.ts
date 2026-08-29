@@ -116,6 +116,19 @@ export type PracticalInfo = {
   insider_tips?: string; // ex. "Réserver le restaurant du port à l'avance en juillet-août"
 };
 
+// "Quand y aller" conditionné à la préférence climat du questionnaire (29/08/2026) — ex. un
+// voyageur qui a répondu "chaleur" et se retrouve avec Montréal en résultat (grâce à d'autres
+// critères) doit voir "juillet-août" plutôt qu'un conseil générique toutes saisons. `default` sert
+// de repli quand le climat demandé n'a pas d'entrée dédiée (ex. réponse "douceur", ou arrivée
+// directe sur la fiche sans être passé par le questionnaire). Jamais généré automatiquement —
+// vide tant que Soumia n'a pas donné le vrai conseil saisonnier destination par destination (voir
+// .claude/skills/voyage-ingest).
+export type WhenToGo = {
+  default?: string; // ex. "Le printemps et l'automne restent les saisons les plus agréables."
+  chaleur?: string; // ex. "Juillet-août, pour une vraie chaleur estivale."
+  hiver_cosy?: string; // ex. "Décembre-février, pour la neige et l'ambiance cosy."
+};
+
 export type Destination = {
   id: string;
   title: string;
@@ -133,6 +146,7 @@ export type Destination = {
   suggested_combos: SuggestedCombo[];
   regional_transport?: RegionalTransport;
   practical_info?: PracticalInfo;
+  when_to_go?: WhenToGo;
 };
 
 // "famille_moins_6"/"famille_plus_6" fusionnés en une seule valeur "famille" (27/08/2026, demande

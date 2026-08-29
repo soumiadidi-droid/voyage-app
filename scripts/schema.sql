@@ -25,6 +25,8 @@ create table if not exists destinations (
   tags                text[] not null default '{}',
   regional_transport  jsonb,
   practical_info      jsonb,
+  when_to_go          jsonb, -- 29/08/2026 : conseil "quand y aller" conditionné au climat choisi
+                             -- au questionnaire, voir WhenToGo dans lib/travel-match/types.ts
   created_at          timestamptz not null default now(),
   updated_at          timestamptz not null default now()
 );
