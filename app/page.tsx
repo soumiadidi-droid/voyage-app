@@ -18,7 +18,10 @@ export default function Home() {
             backgroundPosition: "center",
           }}
         />
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.45)" }} />
+        {/* Voile allégé (29/08/2026) : 0.45 restait un aplat noir uniforme sur toute la photo,
+            jamais retouché depuis son ajout — même plainte "voile noir" déjà réglée sur les
+            heros de fiche voyage (from-black/60 → from-black/35), appliquée ici aussi. */}
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.25)" }} />
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
           {/* Hero réécrit (29/08/2026, 2e passe) : promesse encore plus directe et affirmative. */}
           <h1
