@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { Settings } from "lucide-react";
-import { useEffect, useSyncExternalStore } from "react";
+import { Menu, Settings, X } from "lucide-react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 
 // Bouton Backoffice discret (décidé le 26/08/2026) — visible uniquement sur le navigateur de
 // Soumia, après avoir visité une fois une URL avec ?admin=1 (le flag est mémorisé dans
@@ -80,11 +80,20 @@ const NAV_LINKS = [
 // habillage partout.
 export function Nav() {
   const adminUnlocked = useAdminUnlocked();
+  // Menu mobile (29/08/2026) : les liens (Favoris/Notre Philosophie/Espace Pros) étaient dans un
+  // <ul className="hidden sm:flex"> sans AUCUN repli en dessous de 640px — repéré par Soumia en
+  // testant sur son téléphone, ils étaient juste invisibles, aucun moyen d'y accéder sur mobile.
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <nav className="sticky top-0 z-50 bg-lve-charcoal text-lve-ivory border-b border-lve-ivory/10">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between gap-6">
-        <Link aria-label="Le Voyage des Émotions — accueil" href="/" className="flex items-center gap-3">
+        <Link
+          aria-label="Le Voyage des Émotions — accueil"
+          href="/"
+          className="flex items-center gap-3"
+          onClick={() => setMobileOpen(false)}
+        >
           <span
             className="inline-block text-2xl tracking-[0.15em] leading-none text-lve-ivory"
             style={{ fontFamily: "var(--font-title)" }}
@@ -99,7 +108,7 @@ export function Nav() {
           </span>
         </Link>
 
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 sm:gap-6">
           <ul className="hidden sm:flex items-center gap-6 list-none m-0 p-0">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
@@ -118,7 +127,7 @@ export function Nav() {
               href="/admin"
               aria-label="Backoffice"
               title="Backoffice"
-              className="no-underline text-lve-ivory/50 hover:text-lve-sand transition-colors"
+              className="hidden sm:inline-block no-underline text-lve-ivory/50 hover:text-lve-sand transition-colors"
             >
               <Settings size={18} />
             </Link>
@@ -130,8 +139,49 @@ export function Nav() {
           >
             Lancer Travel Match
           </Link>
+          <button
+            type="button"
+            className="sm:hidden inline-flex items-center justify-center rounded-lg p-2 -mr-2 text-lve-ivory/80 hover:text-lve-sand transition-colors"
+            aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={mobileOpen}
+            onClick={() => setMobileOpen((open) => !open)}
+          >
+            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
       </div>
+
+      {mobileOpen && (
+        <div className="sm:hidden border-t border-lve-ivory/10 bg-lve-charcoal">
+          <ul className="flex flex-col list-none m-0 p-5 gap-1">
+            {NAV_LINKS.map((link) => (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className="block no-underline py-3 text-base text-lve-ivory/90 hover:text-lve-sand transition-colors"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            {adminUnlocked && (
+              <li>
+                <Link
+                  href="/admin"
+                  onClick={() => setMobileOpen(false)}
+                  className="flex items-center gap-2 no-underline py-3 text-base text-lve-ivory/60 hover:text-lve-sand transition-colors"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  <Settings size={16} />
+                  Backoffice
+                </Link>
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
     </nav>
   );
 }
