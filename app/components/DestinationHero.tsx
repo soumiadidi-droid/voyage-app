@@ -5,28 +5,16 @@ import type { VoyageContent } from "@/content/voyages";
 // une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
 // remettre en place le système précédent (voile/texture systématique sur toutes les fiches).
 //
-// Photo + intro à nouveau réunies (29/08/2026, 2e demande de Soumia — "tu m'as coupé les images
-// avec un gros bloc blanc, mets-moi la photo entière avec le texte sur l'image") : le passage
-// 29/08 précédent avait détaché l'intro dans un bloc séparé sous la photo, pour éviter que
-// `min-h` + `flex items-end` sur UNE SEULE boîte ne pousse la boîte (photo + texte confondus)
-// bien plus haut que 60/70vh quand l'intro est longue — `background-size: cover` sur une boîte
-// devenue très haute ne montrait plus qu'une bande centrale zoomée de la photo. Le bloc séparé a
-// réglé le crop mais créé le nouveau problème signalé ici (bandeau visible sous la photo, quelle
-// que soit sa couleur).
+// Photo + intro réunies (29/08/2026), hauteur 100vh (`h-screen`, même jour, 3e itération) : la
+// PHOTO vit dans son propre calque à hauteur FIXE (jamais de zoom/crop quel que soit le texte), le
+// TEXTE (titre + accroche + intro) vit dans un calque superposé à hauteur libre qui continue
+// naturellement sur le fond de page en dessous si l'intro est exceptionnellement longue.
 //
-// Fix qui règle les deux à la fois : la PHOTO vit dans son propre calque à hauteur FIXE (`h-`,
-// pas `min-h`) — `background-size: cover` s'applique donc toujours à un ratio de boîte stable, la
-// photo ne "zoome" jamais quel que soit le texte. Le TEXTE (titre + accroche + intro) vit dans un
-// calque à part, superposé (`absolute`, `z-10`), dans un conteneur EXTÉRIEUR à `min-h` : un texte
-// court reste bien calé en bas de la photo (comme avant) ; un texte long grandit le conteneur
-// extérieur au-delà de la hauteur de la photo, et continue naturellement sur le fond normal de la
-// page juste en dessous — jamais de crop, jamais de bloc/bandeau visible.
-//
-// Hauteur passée à 100vh (`h-screen`, 29/08/2026, 3e itération — capture d'écran de Soumia sur
-// Côte Basque montrant l'intro presque entièrement hors de la photo à 70vh) : donne beaucoup plus
-// de place, la plupart des intros tiennent maintenant entièrement sur la photo. Les toutes plus
-// longues (Carry-le-Rouet) peuvent encore déborder légèrement en dessous — accepté explicitement
-// par Soumia plutôt que de risquer un retour du bug de crop avec une boîte à hauteur variable.
+// Retour à un overlay dégradé (29/08/2026, 4e itération — "correction d'urgence" demandée par
+// Soumia) : la lisibilité reposait sur du text-shadow (technique choisie plus tôt dans la journée
+// pour éviter tout assombrissement de la photo), remplacée ici par un dégradé noir classique
+// (transparent en haut → sombre en bas) + texte blanc pur sans ombre, sur demande explicite malgré
+// le sens inverse du choix précédent — confirmé par Soumia avant application.
 export function DestinationHero({
   hero,
   intro,
@@ -46,25 +34,20 @@ export function DestinationHero({
           style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
       ) : (
-        // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu (rien à
-        // révéler, pas concerné par le "photo entière" demandé) — inset-0 de l'extérieur à min-h
-        // grandit avec le texte comme avant.
+        // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu.
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />
+      )}
+      {heroImage && (
+        <div className="absolute inset-x-0 top-0 h-screen bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
       )}
 
       <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
         <LikeButton id={favoriteId} />
       </div>
 
-      <div
-        className="relative z-10 min-h-screen flex flex-col justify-end p-6 sm:p-14"
-        style={{ color: "#f4f8f7" }}
-      >
+      <div className="relative z-10 min-h-screen flex flex-col justify-end p-6 sm:p-14 text-white">
         <div className="max-w-2xl">
-          <p
-            className="mono opacity-90 mb-3"
-            style={heroImage ? { textShadow: "0 1px 8px rgba(0,0,0,0.6)" } : undefined}
-          >
+          <p className="mono opacity-90 mb-3">
             {hero.country}
             {hero.tags.length > 0 && ` — ${hero.tags.join(" · ")}`}
           </p>
@@ -78,32 +61,20 @@ export function DestinationHero({
               sous-titre juste en dessous se retrouvait visuellement fondu dans le titre. */}
           <h1
             className="font-extrabold leading-[1.05] mb-4"
-            style={{
-              fontFamily: "var(--font-title)",
-              fontSize: "clamp(3rem, 9vw, 6.2rem)",
-              textShadow: heroImage ? "0 2px 20px rgba(0,0,0,0.6)" : undefined,
-            }}
+            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3rem, 9vw, 6.2rem)" }}
           >
             {hero.title}
           </h1>
           <p
             className="italic max-w-xl opacity-95"
-            style={{
-              fontFamily: "var(--font-body)",
-              fontSize: "clamp(1.05rem, 2vw, 1.35rem)",
-              textShadow: heroImage ? "0 1px 12px rgba(0,0,0,0.6)" : undefined,
-            }}
+            style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1.05rem, 2vw, 1.35rem)" }}
           >
             {hero.tagline}
           </p>
           {intro && (
             <p
               className="mt-4 leading-relaxed"
-              style={{
-                fontFamily: "var(--font-body)",
-                fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)",
-                textShadow: heroImage ? "0 1px 12px rgba(0,0,0,0.6)" : undefined,
-              }}
+              style={{ fontFamily: "var(--font-body)", fontSize: "clamp(0.95rem, 1.6vw, 1.1rem)" }}
             >
               {intro}
             </p>
