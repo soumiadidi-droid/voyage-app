@@ -33,8 +33,7 @@ export default function Home() {
             className="text-white/70 max-w-xl mx-auto tracking-wide"
             style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1rem, 2vw, 1.15rem)", lineHeight: 1.8 }}
           >
-            Répondez à 9 questions intuitives et obtenez votre match idéal : une destination
-            alignée sur vos envies et une sélection de pépites exclusives.
+            Votre match idéal et nos adresses exclusives.
           </p>
           {/* Repositionné (29/08/2026, demande Gemini) : était en haut du Hero, se noyait dans la
               photo — placé juste au-dessus du CTA, badge discret plutôt qu'un paragraphe. */}
@@ -126,8 +125,7 @@ export default function Home() {
               className="text-base sm:text-lg text-lve-charcoal/70 max-w-xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Répondez à 9 questions intuitives et obtenez votre match idéal : une destination
-              alignée sur vos envies et une sélection de pépites exclusives.
+              Votre match idéal et nos adresses exclusives.
             </p>
 
             <div className="pt-4">
