@@ -9,6 +9,43 @@ import {
 } from "@/lib/travel-match/questionnaire";
 import { SCORE_KEYS, type ScoreKey } from "@/lib/travel-match/types";
 
+// Immersion (29/08/2026, demande Gemini transmise par Soumia — "manque d'immersion, trop sondage
+// plat") : icône contextuelle par option, clé "questionId:value" pour rester non-ambigu entre
+// questions (ex. deux "actif" différents sur deux questions n'existent pas ici, mais la clé
+// composée évite le risque). Couvre TOUTES les questions à choix, pas seulement l'exemple donné
+// (durée) — une carte sans icône dans le lot aurait détonné visuellement.
+const OPTION_ICON: Record<string, string> = {
+  "duration:week_end": "⏱️",
+  "duration:semaine": "🗓️",
+  "duration:grand_voyage": "🧭",
+  "budget:eco": "💰",
+  "budget:confort": "💳",
+  "budget:premium": "💎",
+  "distance:proche": "🏡",
+  "distance:europe": "✈️",
+  "distance:long_courrier": "🌍",
+  "distance:ouvert": "✨",
+  "climate:chaleur": "☀️",
+  "climate:douceur": "🌤️",
+  "climate:hiver_cosy": "❄️",
+  "transport:sans_voiture": "🚶",
+  "transport:transports_possibles": "🚌",
+  "transport:voiture_necessaire": "🚗",
+  "sport_level:tranquille": "🌴",
+  "sport_level:actif": "🏃",
+  "companions:solo": "🧍",
+  "companions:duo": "💑",
+  "companions:amis": "👯",
+  "companions:famille": "👨‍👩‍👧‍👦",
+};
+
+// Convention typo française : espace avant "?" — remplacée par une espace insécable pour que le
+// "?" ne se retrouve jamais seul sur sa ligne (demande Gemini). Fait à l'affichage plutôt que dans
+// lib/travel-match/questionnaire.ts pour ne pas toucher le texte source des questions.
+function withUnbreakableQuestionMark(text: string): string {
+  return text.replace(/ \?$/, " ?");
+}
+
 type SliderAnswers = Record<ScoreKey, number>;
 
 function initialSliderAnswers(): SliderAnswers {
@@ -73,7 +110,13 @@ export function QuestionnaireClient() {
   }
 
   return (
-    <div className="max-w-xl mx-auto px-6 py-16 sm:py-24">
+    // max-w-2xl (29/08/2026, était max-w-xl) : plus d'air pour la grille de cartes à 3 colonnes
+    // ci-dessous — demande Gemini "manque d'immersion, trop sondage plat". Halo terracotta très
+    // doux en fond, même traitement que Notre Philosophie/Espace Pros pour cohérence de site.
+    <div
+      className="max-w-2xl mx-auto px-6 py-16 sm:py-24"
+      style={{ background: "radial-gradient(ellipse 90% 60% at 50% 0%, var(--lve-terracotta-bg), transparent)" }}
+    >
       <p className="text-[11px] tracking-widest uppercase font-medium text-text-secondary mb-3 text-center">
         Question {step + 1} sur {TRAVEL_MATCH_QUESTIONS.length}
       </p>
@@ -87,35 +130,45 @@ export function QuestionnaireClient() {
         className="text-3xl md:text-4xl text-lve-charcoal font-normal text-center mb-8 mt-4"
         style={{ fontFamily: "var(--font-title)" }}
       >
-        {question.question}
+        {withUnbreakableQuestionMark(question.question)}
       </h1>
 
       {question.type === "choice" ? (
+        // Grille de cartes (29/08/2026, demande Gemini) — 3 colonnes pour les questions à 3
+        // options (occupe l'espace plus franchement que la liste verticale d'avant), 2 colonnes
+        // pour 2 ou 4+ options (un 4e élément en 3 colonnes aurait laissé une rangée bancale).
         <div
           className={
-            question.options.length >= 4
-              ? "grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-xl mx-auto"
-              : "flex flex-col gap-3 max-w-xl mx-auto"
+            question.options.length === 3
+              ? "grid grid-cols-1 md:grid-cols-3 gap-4"
+              : "grid grid-cols-1 sm:grid-cols-2 gap-4"
           }
         >
-          {question.options.map((option) => (
-            <button
-              key={option.value}
-              onClick={() => chooseOption(option.value)}
-              className={`bg-white/70 hover:bg-white border rounded-2xl p-5 text-center transition-all shadow-sm hover:shadow-md cursor-pointer group ${
-                choices[question.id] === option.value
-                  ? "border-lve-terracotta"
-                  : "border-lve-border hover:border-lve-terracotta/60"
-              }`}
-            >
-              <span
-                className="text-sm md:text-base text-lve-charcoal group-hover:text-lve-terracotta font-medium"
-                style={{ fontFamily: "var(--font-display)" }}
+          {question.options.map((option) => {
+            const icon = OPTION_ICON[`${question.id}:${option.value}`];
+            const selected = choices[question.id] === option.value;
+            return (
+              <button
+                key={option.value}
+                onClick={() => chooseOption(option.value)}
+                className={`flex flex-col items-center gap-2 bg-white/70 hover:bg-white border rounded-2xl p-5 text-center transition-all duration-200 shadow-sm hover:shadow-lg hover:scale-[1.02] cursor-pointer group ${
+                  selected ? "border-lve-terracotta shadow-md" : "border-lve-border hover:border-lve-terracotta"
+                }`}
               >
-                {option.label}
-              </span>
-            </button>
-          ))}
+                {icon && (
+                  <span className="text-2xl" aria-hidden="true">
+                    {icon}
+                  </span>
+                )}
+                <span
+                  className="text-sm md:text-base text-lve-charcoal group-hover:text-lve-terracotta font-medium"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {option.label}
+                </span>
+              </button>
+            );
+          })}
         </div>
       ) : (
         <div
