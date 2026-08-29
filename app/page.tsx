@@ -18,10 +18,14 @@ export default function Home() {
             backgroundPosition: "center",
           }}
         />
-        {/* Voile allégé (29/08/2026) : 0.45 restait un aplat noir uniforme sur toute la photo,
-            jamais retouché depuis son ajout — même plainte "voile noir" déjà réglée sur les
-            heros de fiche voyage (from-black/60 → from-black/35), appliquée ici aussi. */}
-        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.25)" }} />
+        {/* Overlay uniforme → dégradé concentré (29/08/2026) : un aplat noir sur toute la photo
+            assombrissait aussi les zones sans texte (ciel, ailes) — remplacé par un halo radial
+            centré sur le bloc de texte (le texte est centré verticalement dans ce hero), pour que
+            le reste de la photo garde sa lumière d'origine. */}
+        <div
+          className="absolute inset-0"
+          style={{ background: "radial-gradient(ellipse 65% 55% at 50% 50%, rgba(0,0,0,0.4), transparent 70%)" }}
+        />
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
           {/* Hero réécrit (29/08/2026, 2e passe) : promesse encore plus directe et affirmative. */}
           <h1

@@ -112,14 +112,14 @@ export function Nav() {
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-6">
-          {/* Contraste augmenté (29/08/2026, demande Gemini) : hover terracotta au lieu de sand,
-              texte quasi-blanc (pas de token zinc-100 ici, palette lve-* maison). */}
+          {/* Blanc éclatant (29/08/2026, demande Gemini) : white/90 → white plein, hover
+              terracotta. */}
           <ul className="hidden sm:flex items-center gap-6 list-none m-0 p-0">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="no-underline text-sm text-white/90 hover:text-lve-terracotta transition-colors"
+                  className="no-underline text-sm text-white hover:text-lve-terracotta transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {link.label}
@@ -142,11 +142,11 @@ export function Nav() {
               ce bouton de header reste discret. Uniquement CE bouton (validé explicitement par
               Soumia) — "Voir les disponibilités" sur les cartes d'adresses reste inchangé, en
               plein terracotta, elle a tranché pour le garder tel quel. */}
-          {/* Texte blanc (29/08/2026, demande Gemini) : était text-lve-terracotta, passé en blanc
-              pour plus de netteté — bordure terracotta inchangée. */}
+          {/* Bordure blanche par défaut, terracotta au survol (29/08/2026, demande Gemini) : plus
+              de remplissage terracotta au hover, juste bordure + texte qui virent terracotta. */}
           <Link
             href="/questionnaire"
-            className="no-underline border border-lve-terracotta text-white hover:bg-lve-terracotta hover:text-white text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors"
+            className="no-underline border border-white text-white hover:border-lve-terracotta hover:text-lve-terracotta text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Lancer Travel Match
@@ -171,7 +171,7 @@ export function Nav() {
                 <Link
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block no-underline py-3 text-base text-white/90 hover:text-lve-terracotta transition-colors"
+                  className="block no-underline py-3 text-base text-white hover:text-lve-terracotta transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {link.label}
