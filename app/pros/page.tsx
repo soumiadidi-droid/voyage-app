@@ -39,13 +39,11 @@ export default function ProsPage() {
           >
             Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage.
           </p>
+          {/* Réécrit par Soumia (29/08/2026) — remplace le paragraphe précédent. */}
           <p className="leading-relaxed">
-            Ici, pas de service com&apos; ni d&apos;équipe partenariats : c&apos;est moi, et une règle
-            que je ne casse jamais, même pour vous. Chaque adresse du site est marquée{" "}
-            <em>testée</em> quand je l&apos;ai vraiment vécue, <em>recherchée</em> quand je l&apos;ai
-            repérée sans encore y être allée — affiché noir sur blanc sur chaque fiche. C&apos;est ce
-            qui fait que les gens qui me lisent me font confiance, alors je ne romps jamais cette
-            règle, partenariat ou pas.
+            Je fonctionne à la sincérité : si j&apos;ai vécu l&apos;expérience, c&apos;est écrit ;
+            si c&apos;est une pépite repérée, aussi. Cette ligne éditoriale claire, c&apos;est ce qui
+            garantit un engagement réel auprès des voyageurs qui me suivent.
           </p>
         </div>
       </div>
@@ -104,10 +102,14 @@ export default function ProsPage() {
             >
               Je vous recommande vraiment
             </h3>
+            {/* Refonte (29/08/2026, demande explicite de Soumia — "comme le reste de la charte")
+                : même ton sincère/direct que l'intro réécrite juste au-dessus, mêmes faits
+                (fiche « Où dormir », lien perso, commission annoncée). */}
             <p className="leading-relaxed">
-              Votre établissement apparaît dans mes fiches « Où dormir », avec votre propre lien de
-              réservation. Je touche une commission sur ce qui est réservé par ce lien — toujours
-              annoncée clairement à côté, jamais planquée en petit.
+              Votre établissement rejoint mes fiches « Où dormir » — une vraie recommandation, pas
+              un encart publicitaire. Je touche une commission sur ce qui est réservé via votre
+              lien, toujours affichée en clair à côté, jamais dissimulée. Même sincérité que
+              partout ailleurs sur le site.
             </p>
           </div>
         </div>
