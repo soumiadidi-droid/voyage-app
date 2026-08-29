@@ -8,8 +8,8 @@ export function FallbackNotice() {
       style={{ background: "var(--lve-terracotta-bg)", borderLeft: "4px solid var(--lve-terracotta)" }}
     >
       <p className="leading-relaxed" style={{ color: "var(--lve-terracotta-dark)" }}>
-        Aucune destination ne correspond à 100% à tous tes critères logistiques stricts, mais voici
-        les voyages les plus proches de tes envies émotionnelles :
+        Aucune destination ne coche 100 % de tes critères logistiques, mais voici celles qui
+        correspondent le plus à tes envies de voyage :
       </p>
     </div>
   );
