@@ -41,34 +41,41 @@ const BUDGET_PILLS: Record<UserAnswers["filters"]["budget"], Pill> = {
   premium: { icon: Sparkles, label: "Expérience Premium" },
 };
 
-type Archetype = { title: string; intro: string };
+type Archetype = { title: string; subtitle: string; intro: string };
 
-// Textes définitifs validés par Soumia le 23/08/2026 — ne plus modifier sans son accord.
+// Textes définitifs validés par Soumia le 29/08/2026 (réécriture complète — les titres/intros du
+// 23/08/2026 sont remplacés, plume plus incarnée/sensible, + nouveau champ `subtitle`) — ne plus
+// modifier sans son accord. Mêmes 5 clés/axes qu'avant, aucun changement côté moteur de scoring.
 const ARCHETYPES: Record<ScoreAxis, Archetype> = {
   repos: {
-    title: "Le Refuge Contemplatif",
+    title: "La Parenthèse Intimiste",
+    subtitle: "Déconnexion choisie & adresses secrètes",
     intro:
-      "Un séjour pensé pour ralentir, déconnecter et privilégier des adresses intimistes, entre parenthèses bien-être et douceur de vivre.",
+      "Tu ne pars pas pour accumuler des visites, mais pour ralentir le temps. Ton luxe ultime ? Une adresse enveloppante, du calme absolu, une belle lumière du soir et zéro contrainte horaire. Un séjour pensé comme un cocon où l'on débranche tout pour réapprendre à savourer le moment présent.",
   },
   exploration: {
-    title: "L'Esthète Curieux",
+    title: "L'Âme Curieuse",
+    subtitle: "Savoir-faire, histoire & pépites hors-piste",
     intro:
-      "Un itinéraire conçu comme un voyage de découvertes, mêlant patrimoine d'exception, savoir-faire locaux et pépites culturelles méconnues.",
+      "Les itinéraires tout faits très peu pour toi. Ce qui te fait vibrer, c'est l'authenticité brute : rencontrer un artisan passionné au détour d'une ruelle, dénicher une pépite patrimoniale cachée et comprendre l'histoire d'un lieu à travers ceux qui le font vivre.",
   },
   gastronomie: {
-    title: "Le Gourmet Épicurien",
+    title: "La Quête Hédoniste",
+    subtitle: "Tables vibrantes, terroir & bons flacons",
     intro:
-      "Un carnet de route articulé autour des plaisirs de la table, des rencontres avec des producteurs passionnés et de grandes expériences culinaires.",
+      "Pour toi, une destination se découvre d'abord avec le palais. Du néobistro inspiré à la table de village authentique, en passant par le marché de producteurs locaux, tes journées sont rythmées par le plaisir de la table et l'art de recevoir. Le voyage gourmand dans toute sa noblesse.",
   },
   nature_plage: {
-    title: "L'Épicurien de l'Océan",
+    title: "Le Souffle Sauvage",
+    subtitle: "Littoral préservé, grands espaces & horizon",
     intro:
-      "Un séjour pensé pour concilier immersion en pleine nature, grands espaces préservés, gastronomie locale et parenthèses bien-être.",
+      "Ton équilibre passe par la nature et le grand air. Que ce soit une crique secrète fouettée par les embruns, une balade au sommet ou un bain de soleil loin de la foule, tu cherches l'apaisement par l'horizon. Une immersion iodée et végétale pour faire le plein d'énergie brute.",
   },
   effervescence_urbaine: {
-    title: "Le Flâneur Élégant",
+    title: "L'Électron Urbain",
+    subtitle: "Quartiers vivants, design & effervescence",
     intro:
-      "Une immersion au cœur de destinations vivantes, pour capter l'énergie des quartiers, les adresses créatives et l'art de vivre local.",
+      "Tu aimes sentir le pouls d'une ville qui bouge. Les coffee shops de spécialité, les galeries inspirantes, le design affirmé et les terrasses baignées de lumière : tu flânes l'esprit ouvert pour capturer l'énergie unique des plus beaux quartiers citadins.",
   },
 };
 
@@ -133,6 +140,14 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
         >
           {archetype.title}
         </h2>
+        {/* Sous-titre (29/08/2026, nouveau champ de la réécriture) : tagline courte, pas en
+            italique pour se distinguer visuellement du corps de texte juste en dessous. */}
+        <p
+          className="mb-4 font-medium"
+          style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
+        >
+          {archetype.subtitle}
+        </p>
         <p className="leading-relaxed mb-5 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
           {archetype.intro}
         </p>
