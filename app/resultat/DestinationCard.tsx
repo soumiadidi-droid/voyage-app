@@ -27,7 +27,9 @@ export function DestinationCard({
             className="absolute inset-0"
             style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-black/5 to-transparent" />
+          {/* Overlay retiré (29/08/2026, "je veux que le texte soit direct sur l'image") : ni le
+              badge Match ni le cœur n'ont de texte à même la photo (fond plein sur les deux),
+              aucun besoin d'assombrir la photo pour la lisibilité ici. */}
           <div className="absolute right-4 top-4">
             <LikeButton id={destination.id} size="sm" />
           </div>

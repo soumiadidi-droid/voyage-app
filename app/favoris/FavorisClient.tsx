@@ -111,13 +111,18 @@ export function FavorisClient() {
               <div className="flex flex-col gap-5 mb-16">
               {liked.map((item) =>
                 item.kind === "destination" ? (
-                  // Carte horizontale avec photo de couverture en fond (28/08/2026) — overlay
-                  // sombre pour garder le texte blanc lisible peu importe la photo.
+                  // Carte horizontale avec photo de couverture en fond (28/08/2026).
                   // `destinations.hero_image` en base est un champ jamais tenu à jour (encore un
                   // "https://..." factice pour Montréal/New York, une vieille photo perso pour le
                   // reste) — la vraie photo de couverture, la même que sur la fiche voyage, vit
                   // dans DESTINATION_HERO_IMAGE (lib/hero-images.ts) depuis le 28/08/2026. Repéré
                   // par Soumia : l'image manquait carrément sur la carte Montréal des favoris.
+                  //
+                  // Overlay retiré (29/08/2026, "je veux que le texte soit direct sur l'image") :
+                  // le dégradé montait jusqu'à 75% de noir en bas, jamais retouché pendant tout le
+                  // reste du ménage "voile noir" fait sur l'accueil/les fiches voyage — repéré par
+                  // Soumia ("j'en ai ras le bol de demander la même chose"). Lisibilité assurée par
+                  // text-shadow sur le texte, plus par l'assombrissement de la photo.
                   <div
                     key={item.key}
                     className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl bg-cover bg-center p-6 sm:p-8"
@@ -125,24 +130,17 @@ export function FavorisClient() {
                       backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.destination.content_slug] ?? item.destination.hero_image}')`,
                     }}
                   >
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%)",
-                      }}
-                    />
                     <div className="absolute right-4 top-4 z-10">
                       <LikeButton id={item.key} />
                     </div>
                     <div className="relative z-10 w-full">
                       <h2
                         className="font-extrabold mb-2 text-white"
-                        style={{ fontFamily: "var(--font-display)", fontSize: "1.7rem" }}
+                        style={{ fontFamily: "var(--font-display)", fontSize: "1.7rem", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.6)" }}
                       >
                         {item.destination.title}
                       </h2>
-                      <p className="mb-3" style={{ color: "rgba(255,255,255,0.85)" }}>
+                      <p className="mb-3" style={{ color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 14px rgba(0,0,0,0.6)" }}>
                         {item.destination.summary}
                       </p>
                       <div className="mono flex flex-wrap gap-2 mb-4" style={{ fontSize: "0.8rem" }}>
@@ -150,7 +148,7 @@ export function FavorisClient() {
                           <span
                             key={t}
                             className="rounded-full px-3 py-1"
-                            style={{ background: "rgba(255,255,255,0.15)", color: "#fff" }}
+                            style={{ background: "rgba(0,0,0,0.55)", color: "#fff" }}
                           >
                             {TRANSPORT_BADGE[t]}
                           </span>
@@ -158,7 +156,7 @@ export function FavorisClient() {
                         {item.destination.regional_transport && (
                           <span
                             className="rounded-full px-3 py-1"
-                            style={{ background: "rgba(255,255,255,0.15)", color: "#fff" }}
+                            style={{ background: "rgba(0,0,0,0.55)", color: "#fff" }}
                           >
                             🚆 {item.destination.regional_transport.recommended_mode}
                           </span>
@@ -167,7 +165,7 @@ export function FavorisClient() {
                       <a
                         href={`/voyages/${item.destination.content_slug}?id=${item.destination.id}`}
                         className="mono"
-                        style={{ color: "#fff", textDecoration: "underline" }}
+                        style={{ color: "#fff", textDecoration: "underline", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
                       >
                         Voir la fiche voyage →
                       </a>
@@ -181,30 +179,23 @@ export function FavorisClient() {
                       backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.voyage.slug] ?? item.voyage.hero.image}')`,
                     }}
                   >
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        background:
-                          "linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.75) 100%)",
-                      }}
-                    />
                     <div className="absolute right-4 top-4 z-10">
                       <LikeButton id={item.key} />
                     </div>
                     <div className="relative z-10 w-full">
                       <h2
                         className="font-extrabold mb-2 text-white"
-                        style={{ fontFamily: "var(--font-display)", fontSize: "1.7rem" }}
+                        style={{ fontFamily: "var(--font-display)", fontSize: "1.7rem", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.6)" }}
                       >
                         {item.voyage.hero.title}
                       </h2>
-                      <p className="mb-4" style={{ color: "rgba(255,255,255,0.85)" }}>
+                      <p className="mb-4" style={{ color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 14px rgba(0,0,0,0.6)" }}>
                         {item.voyage.hero.tagline}
                       </p>
                       <a
                         href={`/voyages/${item.voyage.slug}`}
                         className="mono"
-                        style={{ color: "#fff", textDecoration: "underline" }}
+                        style={{ color: "#fff", textDecoration: "underline", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
                       >
                         Voir la fiche voyage →
                       </a>
