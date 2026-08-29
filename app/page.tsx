@@ -3,12 +3,22 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div>
-      {/* Plus d'image du tout (décidé le 26/08/2026) : fond noir semi-transparent, sobre, cohérent
-          avec le Hero des fiches destination (cf. DestinationHero). */}
+      {/* Photo remise en place (29/08/2026, demande explicite de Soumia — revient sur la décision
+          du 26/08/2026 "plus d'image du tout"). Aile d'avion au coucher de soleil, dernière photo
+          ajoutée à public/images/ (redimensionnée à 2400px de large). Même traitement voile sombre
+          que DestinationHero pour garder le texte blanc lisible. */}
       <div
         className="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden"
-        style={{ backgroundColor: "rgba(0,0,0,0.6)" }}
       >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: "url('/images/hero-accueil.jpg')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+          }}
+        />
+        <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.45)" }} />
         <div className="relative z-10 max-w-3xl mx-auto space-y-6">
           <h1
             className="text-white tracking-tight leading-tight"
