@@ -156,6 +156,14 @@ export function DestinationPracticalCard({
                 {regionalTransport.pass_or_tip}
               </p>
             )}
+            {regionalTransport.to_city_center && (
+              <p className="text-sm mt-1">
+                <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
+                  Rejoindre le centre-ville —{" "}
+                </span>
+                <span style={{ color: "var(--text-secondary)" }}>{regionalTransport.to_city_center}</span>
+              </p>
+            )}
           </div>
         </div>
       )}

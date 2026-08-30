@@ -107,6 +107,10 @@ export type RegionalTransport = {
   recommended_mode: string; // ex. "Train à grande vitesse (Shinkansen)"
   pass_or_tip?: string; // ex. "Acheter le JR Pass en avance"
   summary: string; // ex. "Réseau ferroviaire ultra-dense et ponctuel, idéal pour relier les grandes villes sans voiture."
+  // Dernier kilomètre gare/aéroport → centre-ville (30/08/2026, demande Soumia) — distinct de
+  // pass_or_tip (conseil sur un pass/billet), ex. "Bus 12 pour rejoindre le centre-ville, taxi
+  // environ 8€" pour Biarritz.
+  to_city_center?: string;
 };
 
 // 4 cartes d'infos pratiques (28/08/2026) — texte descriptif prêt à afficher, distinct des champs
