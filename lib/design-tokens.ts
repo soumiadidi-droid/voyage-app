@@ -33,6 +33,14 @@ export const LVE_COLORS = {
     dark: "#6B3B5E",
     bg: "#F3E8EE",
   },
+  // 5e famille (30/08/2026, demande Soumia) — réservée au bloc "Logistique & Climat"
+  // (DestinationPracticalCard), distincte des 4 familles déjà prises (terracotta hôtel/sauge
+  // resto/océan activité/plum extensions). Bleu-gris ardoise, cohérent avec le thème pratique/
+  // météo tout en restant clairement différent du bleu-vert d'ocean.
+  slate: {
+    dark: "#47586B",
+    bg: "#EAEEF2",
+  },
   // Alerte discrète (27/08/2026, refonte /resultat) — voir app/globals.css --lve-warning-*.
   warning: {
     bg: "#FFFBEB",

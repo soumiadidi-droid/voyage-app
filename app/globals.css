@@ -34,6 +34,10 @@
      (TripExtensionCard), distincte des 3 familles déjà prises par les catégories d'adresse. */
   --lve-plum-dark: #6b3b5e;
   --lve-plum-bg: #f3e8ee;
+  /* 5e famille (30/08/2026, demande Soumia) — réservée au bloc "Logistique & Climat"
+     (DestinationPracticalCard), bleu-gris ardoise distinct du bleu-vert d'ocean. */
+  --lve-slate-dark: #47586b;
+  --lve-slate-bg: #eaeef2;
   /* Alerte discrète (27/08/2026, refonte /resultat) — distincte du terracotta (utilisé pour la
      bannière fallback générale) : réservée aux avertissements ponctuels sur une carte destination
      précise (ex. "Budget différent de ta recherche"). */
@@ -87,6 +91,8 @@
   --color-lve-ocean-bg: var(--lve-ocean-bg);
   --color-lve-plum-dark: var(--lve-plum-dark);
   --color-lve-plum-bg: var(--lve-plum-bg);
+  --color-lve-slate-dark: var(--lve-slate-dark);
+  --color-lve-slate-bg: var(--lve-slate-bg);
   --color-lve-warning-bg: var(--lve-warning-bg);
   --color-lve-warning-text: var(--lve-warning-text);
 }

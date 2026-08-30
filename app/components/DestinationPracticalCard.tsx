@@ -49,7 +49,7 @@ export function DestinationPracticalCard({
     >
       <span
         className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium tracking-widest uppercase mb-4"
-        style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+        style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
       >
         <Compass size={12} />
         Logistique & climat
@@ -61,7 +61,7 @@ export function DestinationPracticalCard({
           <div className="flex items-center gap-3">
             <div
               className="p-2.5 rounded-xl shrink-0"
-              style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+              style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
             >
               <TravelIcon size={18} />
             </div>
@@ -80,13 +80,13 @@ export function DestinationPracticalCard({
                       target="_blank"
                       rel="noopener noreferrer nofollow"
                       className="inline-flex items-center gap-1 font-medium"
-                      style={{ color: "var(--lve-terracotta-dark)" }}
+                      style={{ color: "var(--lve-slate-dark)" }}
                     >
                       {travelFromParis.booking_platform}
                       <ExternalLink size={12} />
                     </a>
                   ) : (
-                    <span className="font-medium" style={{ color: "var(--lve-terracotta-dark)" }}>
+                    <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
                       {travelFromParis.booking_platform}
                     </span>
                   )}
@@ -103,7 +103,7 @@ export function DestinationPracticalCard({
           {travelFromParis.insider_tip && (
             <div
               className="mt-3 flex items-start gap-2 rounded-xl px-3.5 py-2.5 text-sm"
-              style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+              style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
             >
               <Sparkles size={15} className="shrink-0 mt-0.5" />
               <span>
@@ -129,7 +129,7 @@ export function DestinationPracticalCard({
                   className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors cursor-pointer"
                   style={
                     active
-                      ? { background: "var(--lve-terracotta)", color: "#fff" }
+                      ? { background: "var(--lve-slate-dark)", color: "#fff" }
                       : { background: "#fff", color: "var(--text-secondary)", border: "1px solid var(--lve-border)" }
                   }
                 >
