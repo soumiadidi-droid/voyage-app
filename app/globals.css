@@ -30,6 +30,10 @@
   --lve-sage-bg: #eff3ee;
   --lve-ocean-dark: #2c5e73;
   --lve-ocean-bg: #e8f0f3;
+  /* 4e famille (30/08/2026, demande Soumia) — réservée aux "Extensions possibles"
+     (TripExtensionCard), distincte des 3 familles déjà prises par les catégories d'adresse. */
+  --lve-plum-dark: #6b3b5e;
+  --lve-plum-bg: #f3e8ee;
   /* Alerte discrète (27/08/2026, refonte /resultat) — distincte du terracotta (utilisé pour la
      bannière fallback générale) : réservée aux avertissements ponctuels sur une carte destination
      précise (ex. "Budget différent de ta recherche"). */
@@ -81,6 +85,8 @@
   --color-lve-sage-bg: var(--lve-sage-bg);
   --color-lve-ocean-dark: var(--lve-ocean-dark);
   --color-lve-ocean-bg: var(--lve-ocean-bg);
+  --color-lve-plum-dark: var(--lve-plum-dark);
+  --color-lve-plum-bg: var(--lve-plum-bg);
   --color-lve-warning-bg: var(--lve-warning-bg);
   --color-lve-warning-text: var(--lve-warning-text);
 }

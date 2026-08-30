@@ -229,9 +229,9 @@ export default async function VoyagePage({
           <section className="my-16 sm:my-24">
             <div
               className="flex items-center gap-2 mb-4 text-xs font-semibold tracking-wider uppercase"
-              style={{ color: "color-mix(in srgb, var(--lve-terracotta-dark) 80%, transparent)" }}
+              style={{ color: "color-mix(in srgb, var(--lve-plum-dark) 80%, transparent)" }}
             >
-              <Sparkles size={16} style={{ color: "var(--lve-terracotta)" }} />
+              <Sparkles size={16} style={{ color: "var(--lve-plum-dark)" }} />
               <span>Prolonger le voyage</span>
             </div>
             <h2

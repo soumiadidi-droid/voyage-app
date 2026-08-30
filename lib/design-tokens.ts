@@ -25,6 +25,14 @@ export const LVE_COLORS = {
     dark: "#2C5E73",
     bg: "#E8F0F3",
   },
+  // 4e famille (30/08/2026, demande Soumia — "l'extension possible peut être une quatrième
+  // couleur de la charte") : réservée aux "Extensions possibles" (TripExtensionCard), pour se
+  // distinguer des 3 familles déjà prises par les catégories d'adresse (terracotta hôtel/sauge
+  // resto/océan activité).
+  plum: {
+    dark: "#6B3B5E",
+    bg: "#F3E8EE",
+  },
   // Alerte discrète (27/08/2026, refonte /resultat) — voir app/globals.css --lve-warning-*.
   warning: {
     bg: "#FFFBEB",

@@ -11,6 +11,11 @@ import type { Destination, SuggestedCombo } from "@/lib/travel-match/types";
 // Le reference n'affichait qu'un seul bloc info (transport + durée) : `practical_tip` et
 // `partner_link` (utilisés par le combo Montréal↔New York) n'existaient pas dans son exemple —
 // conservés ici pour ne pas perdre de fonctionnalité déjà en prod.
+//
+// Repassé sur la 4e famille de couleur "plum" (30/08/2026, demande Soumia — "l'extension possible
+// peut être une quatrième couleur de la charte") : les 3 familles existantes (terracotta/sage/
+// ocean) étaient déjà prises par les catégories d'adresse, celle-ci distingue visuellement les
+// extensions du reste de la fiche.
 export function TripExtensionCard({
   combo,
   otherDestination,
@@ -22,21 +27,21 @@ export function TripExtensionCard({
     <div
       className="group relative overflow-hidden rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300"
       style={{
-        background: "linear-gradient(135deg, var(--lve-terracotta-bg) 0%, #ffffff 55%, var(--lve-sand) 100%)",
-        border: "1px solid color-mix(in srgb, var(--lve-terracotta) 20%, transparent)",
+        background: "linear-gradient(135deg, var(--lve-plum-bg) 0%, #ffffff 55%, var(--lve-sand) 100%)",
+        border: "1px solid color-mix(in srgb, var(--lve-plum-dark) 20%, transparent)",
       }}
     >
       {/* Barre d'accent latérale, reprise telle quelle du reference */}
       <div
         className="absolute top-0 left-0 w-2 h-full rounded-l-3xl"
-        style={{ background: "linear-gradient(to bottom, var(--lve-terracotta), var(--lve-terracotta-dark))" }}
+        style={{ background: "linear-gradient(to bottom, color-mix(in srgb, var(--lve-plum-dark) 65%, white), var(--lve-plum-dark))" }}
       />
 
       <div className="pl-2 space-y-5">
         <div>
           <span
             className="inline-block text-xs font-semibold px-3 py-1 rounded-full mb-3"
-            style={{ color: "var(--lve-terracotta-dark)", background: "var(--lve-terracotta-bg)" }}
+            style={{ color: "var(--lve-plum-dark)", background: "var(--lve-plum-bg)" }}
           >
             {combo.vibe_type}
           </span>
@@ -56,14 +61,14 @@ export function TripExtensionCard({
           className="rounded-2xl p-4 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3 text-xs md:text-sm"
           style={{
             background: "rgba(255,255,255,0.8)",
-            border: "1px solid color-mix(in srgb, var(--lve-terracotta) 15%, transparent)",
+            border: "1px solid color-mix(in srgb, var(--lve-plum-dark) 15%, transparent)",
             color: "var(--lve-charcoal)",
           }}
         >
           <div className="flex items-center gap-2.5">
             <div
               className="p-2 rounded-xl"
-              style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+              style={{ background: "var(--lve-plum-bg)", color: "var(--lve-plum-dark)" }}
             >
               <Train size={16} />
             </div>
@@ -78,7 +83,7 @@ export function TripExtensionCard({
             className="flex items-center gap-2 md:border-l pt-2 md:pt-0 border-t md:border-t-0"
             style={{ borderColor: "var(--lve-border)" }}
           >
-            <Clock size={16} style={{ color: "var(--lve-terracotta)" }} />
+            <Clock size={16} style={{ color: "var(--lve-plum-dark)" }} />
             <span className="font-medium">{combo.transition_logistics.recommended_days}</span>
           </div>
         </div>
@@ -104,7 +109,7 @@ export function TripExtensionCard({
           <a
             href={`/voyages/${otherDestination.content_slug}?id=${otherDestination.id}`}
             className="inline-flex items-center gap-2 text-sm font-semibold transition-colors group/link"
-            style={{ color: "var(--lve-terracotta-dark)" }}
+            style={{ color: "var(--lve-plum-dark)" }}
           >
             <span>Découvrir {otherDestination.title}</span>
             <ArrowRight size={16} className="transition-transform group-hover/link:translate-x-1" />
