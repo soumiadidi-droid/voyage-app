@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Compass, Sun, Train, Plane, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
-import type { Seasonality, TravelFromParis } from "@/lib/travel-match/types";
+import type { Seasonality, TravelFromParis, RegionalTransport } from "@/lib/travel-match/types";
 
 type SeasonKey = keyof Seasonality["weather_profile"];
 
@@ -25,19 +25,23 @@ function currentSeason(): SeasonKey {
 }
 
 // Bloc unique "Logistique & Climat" (30/08/2026, demande Soumia — "nettoie l'en-tête, ne garder
-// QUE le grand bloc central combiné"). Remplace ClimateSection.tsx (renommé/restructuré) ET les
-// anciennes pilules météo/transport de PracticalInfoSection, supprimées de app/voyages/[slug]/
-// page.tsx dans le même geste. Rendu vide si ni travelFromParis ni seasonality ne sont renseignés.
+// QUE le grand bloc central combiné"). Remplace ClimateSection.tsx (renommé/restructuré), les
+// anciennes pilules météo/transport de PracticalInfoSection, ET le bloc séparé "Se déplacer sur
+// place" (regional_transport, ex. Shinkansen au Japon — demande explicite de Soumia du 30/08/2026,
+// "ajouter aussi les transports internes"), tous supprimés de app/voyages/[slug]/page.tsx dans le
+// même geste. Rendu vide si aucun des trois n'est renseigné.
 export function DestinationPracticalCard({
   travelFromParis,
   seasonality,
+  regionalTransport,
 }: {
   travelFromParis?: TravelFromParis;
   seasonality?: Seasonality;
+  regionalTransport?: RegionalTransport;
 }) {
   const [season, setSeason] = useState<SeasonKey>(currentSeason());
 
-  if (!travelFromParis && !seasonality) return null;
+  if (!travelFromParis && !seasonality && !regionalTransport) return null;
 
   const TravelIcon = travelFromParis?.mode.toLowerCase().includes("vol") ? Plane : Train;
   const weather = seasonality?.weather_profile[season];
@@ -126,9 +130,42 @@ export function DestinationPracticalCard({
         </div>
       )}
 
+      {/* Section Transport sur place (30/08/2026, demande Soumia) — mobilité interne à la
+          destination (ex. Shinkansen entre Tokyo/Osaka/Kyoto), distincte du trajet Depuis Paris
+          ci-dessus. N'existe que pour les destinations multi-villes (Japon, Italie Nord). */}
+      {regionalTransport && (
+        <div
+          className={travelFromParis ? "flex items-center gap-3 mb-5 pt-5" : "flex items-center gap-3 mb-5"}
+          style={travelFromParis ? { borderTop: "1px solid var(--lve-border)" } : undefined}
+        >
+          <div
+            className="p-2.5 rounded-xl shrink-0"
+            style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
+          >
+            <Train size={18} />
+          </div>
+          <div>
+            <p className="font-semibold" style={{ color: "var(--lve-charcoal)" }}>
+              Sur place — {regionalTransport.recommended_mode}
+            </p>
+            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+              {regionalTransport.summary}
+            </p>
+            {regionalTransport.pass_or_tip && (
+              <p className="text-sm italic mt-1" style={{ color: "var(--text-secondary)" }}>
+                {regionalTransport.pass_or_tip}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Section Météo & Saisons */}
       {seasonality && weather && (
-        <div className={travelFromParis ? "pt-5" : undefined} style={travelFromParis ? { borderTop: "1px solid var(--lve-border)" } : undefined}>
+        <div
+          className={travelFromParis || regionalTransport ? "pt-5" : undefined}
+          style={travelFromParis || regionalTransport ? { borderTop: "1px solid var(--lve-border)" } : undefined}
+        >
           <div className="flex flex-wrap gap-2 mb-4">
             {SEASON_ORDER.map((key) => {
               const { label, icon: Icon } = SEASON_META[key];

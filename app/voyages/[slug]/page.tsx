@@ -129,33 +129,9 @@ export default async function VoyagePage({
           <DestinationPracticalCard
             travelFromParis={destination?.travel_from_paris}
             seasonality={destination?.seasonality}
+            regionalTransport={destination?.regional_transport}
           />
         </div>
-
-        {/* Remonté juste après les badges pratiques (30/08/2026, demande Soumia) — vivait avant
-            tout en bas de la page, après les adresses et les extensions, quasi invisible sans
-            scroller jusqu'au bout. */}
-        {destination?.regional_transport && (
-          <div
-            className="max-w-xl mx-auto mb-16 sm:mb-20 p-5"
-            style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
-          >
-            <p className="mono mb-2" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
-              Se déplacer sur place 🚆
-            </p>
-            <p className="mb-1">
-              <strong>{destination.regional_transport.recommended_mode}</strong>
-            </p>
-            <p className="mb-1" style={{ color: "var(--text-secondary)" }}>
-              {destination.regional_transport.summary}
-            </p>
-            {destination.regional_transport.pass_or_tip && (
-              <p className="italic" style={{ color: "var(--text-secondary)" }}>
-                {destination.regional_transport.pass_or_tip}
-              </p>
-            )}
-          </div>
-        )}
 
         {/* Cœur de page : le reste de la fiche est dédié aux adresses/partenariat B2B — décidé le
             23/08/2026, refonte éditoriale "Alternance Story/Photos". */}
