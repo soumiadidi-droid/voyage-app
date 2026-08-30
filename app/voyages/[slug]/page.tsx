@@ -3,6 +3,7 @@ import { Navigation, CalendarDays, Sun, Sparkles, type LucideIcon } from "lucide
 import { DestinationHero } from "../../components/DestinationHero";
 import { AddressGrid } from "../../components/AddressGrid";
 import { TripExtensionCard } from "../../components/TripExtensionCard";
+import { ClimateSection } from "../../components/ClimateSection";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
 import { getCombosFor } from "@/lib/travel-match/combos";
@@ -184,6 +185,17 @@ export default async function VoyagePage({
           garde son propre max-w-xl plus bas, non affecté. */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <PracticalInfoSection info={destination?.practical_info} whenToGo={whenToGo} />
+
+        {/* Bloc "Climat & Quand partir" (30/08/2026, demande Soumia) — trajet réel depuis Paris +
+            météo/saisonnalité, juste au-dessus de "Se déplacer sur place" (mobilité inter-villes,
+            sujet transport voisin). Vide tant que travel_from_paris/seasonality ne sont pas
+            renseignés pour la destination (recherche en cours, pas encore peuplé en base). */}
+        <div className="max-w-xl mx-auto">
+          <ClimateSection
+            travelFromParis={destination?.travel_from_paris}
+            seasonality={destination?.seasonality}
+          />
+        </div>
 
         {/* Remonté juste après les badges pratiques (30/08/2026, demande Soumia) — vivait avant
             tout en bas de la page, après les adresses et les extensions, quasi invisible sans
