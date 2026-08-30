@@ -1,18 +1,16 @@
 import { notFound } from "next/navigation";
-import { Navigation, CalendarDays, Sun, Sparkles, type LucideIcon } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { DestinationHero } from "../../components/DestinationHero";
 import { AddressGrid } from "../../components/AddressGrid";
 import { TripExtensionCard } from "../../components/TripExtensionCard";
-import { ClimateSection } from "../../components/ClimateSection";
+import { DestinationPracticalCard } from "../../components/DestinationPracticalCard";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
 import { getCombosFor } from "@/lib/travel-match/combos";
 import {
   FAMILY_PROFILE_OPTIONS,
-  type ClimateFilter,
   type DurationFilter,
   type FamilyProfile,
-  type PracticalInfo,
 } from "@/lib/travel-match/types";
 
 const FAMILY_PROFILE_VALUES: FamilyProfile[] = FAMILY_PROFILE_OPTIONS.map((o) => o.value);
@@ -28,58 +26,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   return { title: voyage ? `${voyage.hero.title} — Le Voyage des Émotions` : "Voyage" };
 }
 
-// Pictos pratico-pratiques compacts (28/08/2026, remplace les 4 grandes cartes du même jour —
-// demande explicite de Soumia : juste transport et saison, en petit badge sous le Hero, pas tout
-// le bloc "Infos pratiques" d'origine). `atmosphere`/`insider_tips` ne sont plus affichés ici
-// tant qu'elle ne redemande pas de les remettre ailleurs — jamais générés automatiquement (voir
-// lib/travel-match/ingest.ts, NewDestinationInput.practical_info), affiché seulement si renseigné.
-const PRACTICAL_INFO_BADGES: {
-  key: Extract<keyof PracticalInfo, "access" | "duration">;
-  icon: LucideIcon;
-}[] = [
-  { key: "access", icon: Navigation },
-  { key: "duration", icon: CalendarDays },
-];
-
-function PracticalInfoSection({ info, whenToGo }: { info?: PracticalInfo; whenToGo?: string }) {
-  const badges = PRACTICAL_INFO_BADGES.filter(({ key }) => info?.[key]);
-  if (badges.length === 0 && !whenToGo) return null;
-
-  return (
-    <div className="my-8 sm:my-10 flex flex-wrap gap-3">
-      {/* "Quand y aller" (29/08/2026) — résolu côté page à partir de destination.when_to_go et du
-          climat demandé au questionnaire (?climate=...), pas une clé de PracticalInfo comme les
-          deux badges ci-dessous : affiché en premier quand présent. */}
-      {whenToGo && (
-        <span
-          className="inline-flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-md text-xs font-medium"
-          style={{
-            background: "color-mix(in srgb, var(--bg-guide) 70%, transparent)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          <Sun size={15} style={{ color: "var(--lve-terracotta-dark)" }} />
-          {whenToGo}
-        </span>
-      )}
-      {/* Sans-serif moderne (29/08/2026, demande Gemini) : var(--font-display) = Bricolage
-          Grotesque, remplace le style code/mono jugé trop technique pour un badge pratique. */}
-      {badges.map(({ key, icon: Icon }) => (
-        <span
-          key={key}
-          className="inline-flex items-center gap-2 rounded-full px-4 py-2 backdrop-blur-md text-xs font-medium"
-          style={{
-            background: "color-mix(in srgb, var(--bg-guide) 70%, transparent)",
-            fontFamily: "var(--font-display)",
-          }}
-        >
-          <Icon size={15} style={{ color: "var(--lve-terracotta-dark)" }} />
-          {info?.[key]}
-        </span>
-      ))}
-    </div>
-  );
-}
+// PracticalInfoSection (pilules météo/transport compactes) et le bloc ClimateSection séparé,
+// supprimés le 30/08/2026 (demande Soumia — "ne garder QUE le grand bloc central combiné") :
+// fusionnés en un seul DestinationPracticalCard (app/components/DestinationPracticalCard.tsx).
+// practical_info.access/duration et le "quand y aller" conditionné au climat (?climate=...)
+// n'ont plus d'emplacement d'affichage sur la page — signalé à Soumia, à rebrancher quelque part
+// si elle le souhaite.
 
 function AddressesSection({
   stays,
@@ -127,7 +79,7 @@ export default async function VoyagePage({
   // le lien depuis /resultat. Sans lui (accès direct à la fiche), on retombe sur le slug de
   // contenu — correct pour les 7 destinations à fiche dédiée, approximatif pour Italie/Amérique du
   // Nord qui partagent une fiche entre plusieurs destinations de matching.
-  const { id: favoriteId, duration, familyProfile: rawFamilyProfile, climate: rawClimate } = await searchParams;
+  const { id: favoriteId, duration, familyProfile: rawFamilyProfile } = await searchParams;
   // Absent en accès direct à la fiche, ou si companions ≠ "famille" au questionnaire — le pavé ne
   // s'affiche simplement pas (27/08/2026).
   const familyProfile = FAMILY_PROFILE_VALUES.includes(rawFamilyProfile as FamilyProfile)
@@ -135,21 +87,6 @@ export default async function VoyagePage({
     : undefined;
   const destinations = await getDestinations();
   const destination = destinations.find((d) => d.id === (favoriteId ?? slug));
-
-  // "Quand y aller" résolu selon le climat demandé au questionnaire (29/08/2026) — ex. "chaleur"
-  // + Montréal en résultat affiche le conseil été plutôt qu'un conseil toutes saisons. Repli sur
-  // `default` si le climat n'a pas d'entrée dédiée (ex. "douceur") ou en accès direct sans
-  // `?climate=`. `undefined` si rien n'est renseigné — jamais de texte inventé.
-  const CLIMATE_VALUES: ClimateFilter[] = ["chaleur", "douceur", "hiver_cosy"];
-  const climate = CLIMATE_VALUES.includes(rawClimate as ClimateFilter)
-    ? (rawClimate as ClimateFilter)
-    : undefined;
-  // "douceur" n'a pas d'entrée dédiée dans WhenToGo (climat déjà tempéré, pas de saison à
-  // pointer spécifiquement) — repli direct sur `default` pour cette valeur.
-  const whenToGo =
-    (climate === "chaleur" && destination?.when_to_go?.chaleur) ||
-    (climate === "hiver_cosy" && destination?.when_to_go?.hiver_cosy) ||
-    destination?.when_to_go?.default;
 
   // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par
   // le combo (décidé le 23/08/2026). Sans `duration` transmis (accès direct), on n'affiche rien —
@@ -184,14 +121,11 @@ export default async function VoyagePage({
           max-w-4xl) pour matcher exactement la largeur de app/favoris. Le bloc regional_transport
           garde son propre max-w-xl plus bas, non affecté. */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        <PracticalInfoSection info={destination?.practical_info} whenToGo={whenToGo} />
-
-        {/* Bloc "Climat & Quand partir" (30/08/2026, demande Soumia) — trajet réel depuis Paris +
-            météo/saisonnalité, juste au-dessus de "Se déplacer sur place" (mobilité inter-villes,
-            sujet transport voisin). Vide tant que travel_from_paris/seasonality ne sont pas
-            renseignés pour la destination (recherche en cours, pas encore peuplé en base). */}
-        <div className="max-w-xl mx-auto">
-          <ClimateSection
+        {/* Bloc unique "Logistique & Climat" (30/08/2026) — remplace les anciennes pilules
+            météo/transport ET l'ancien ClimateSection séparé. Vide tant que travel_from_paris/
+            seasonality ne sont pas renseignés pour la destination. */}
+        <div className="max-w-xl mx-auto pt-8 sm:pt-10">
+          <DestinationPracticalCard
             travelFromParis={destination?.travel_from_paris}
             seasonality={destination?.seasonality}
           />

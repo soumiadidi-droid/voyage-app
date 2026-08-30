@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sun, CloudRain, Train, Plane, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
+import { Compass, Sun, Train, Plane, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
 import type { Seasonality, TravelFromParis } from "@/lib/travel-match/types";
 
 type SeasonKey = keyof Seasonality["weather_profile"];
@@ -24,11 +24,11 @@ function currentSeason(): SeasonKey {
   return "winter";
 }
 
-// Bloc "Climat & Quand partir" (30/08/2026, demande Soumia) — trajet depuis Paris +
-// météo/saisonnalité réelle, recherchées et vérifiées par Claude (pas le contenu narratif/vécu du
-// reste du site). Rendu vide si aucune des deux données n'est renseignée pour la destination —
-// même principe que les autres blocs optionnels (practical_info, regional_transport...).
-export function ClimateSection({
+// Bloc unique "Logistique & Climat" (30/08/2026, demande Soumia — "nettoie l'en-tête, ne garder
+// QUE le grand bloc central combiné"). Remplace ClimateSection.tsx (renommé/restructuré) ET les
+// anciennes pilules météo/transport de PracticalInfoSection, supprimées de app/voyages/[slug]/
+// page.tsx dans le même geste. Rendu vide si ni travelFromParis ni seasonality ne sont renseignés.
+export function DestinationPracticalCard({
   travelFromParis,
   seasonality,
 }: {
@@ -51,10 +51,11 @@ export function ClimateSection({
         className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium tracking-widest uppercase mb-4"
         style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
       >
-        <CloudRain size={12} />
-        Climat & quand partir
+        <Compass size={12} />
+        Logistique & climat
       </span>
 
+      {/* Section Transport */}
       {travelFromParis && (
         <div className="mb-5">
           <div className="flex items-center gap-3">
@@ -71,8 +72,6 @@ export function ClimateSection({
               <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
                 {travelFromParis.details}
               </p>
-              {/* Plateforme de réservation (30/08/2026) — juste sous la ligne de trajet, lien
-                  externe propre si booking_url est renseigné, sinon texte seul. */}
               {travelFromParis.booking_platform && (
                 <p className="text-sm mt-1">
                   {travelFromParis.booking_url ? (
@@ -99,8 +98,8 @@ export function ClimateSection({
             </div>
           </div>
 
-          {/* Bulle "Conseil d'initié" (30/08/2026) — jamais générée automatiquement, absente tant
-              que Soumia n'a pas donné le vrai conseil vécu (voir insider_tip dans types.ts). */}
+          {/* Bulle "Conseil d'initié" — jamais générée automatiquement, absente tant que Soumia
+              n'a pas donné le vrai conseil vécu (voir insider_tip dans types.ts). */}
           {travelFromParis.insider_tip && (
             <div
               className="mt-3 flex items-start gap-2 rounded-xl px-3.5 py-2.5 text-sm"
@@ -115,8 +114,9 @@ export function ClimateSection({
         </div>
       )}
 
+      {/* Section Météo & Saisons */}
       {seasonality && weather && (
-        <>
+        <div className={travelFromParis ? "pt-5" : undefined} style={travelFromParis ? { borderTop: "1px solid var(--lve-border)" } : undefined}>
           <div className="flex flex-wrap gap-2 mb-4">
             {SEASON_ORDER.map((key) => {
               const { label, icon: Icon } = SEASON_META[key];
@@ -155,14 +155,13 @@ export function ClimateSection({
             {weather.tip}
           </p>
 
-          <p className="text-xs" style={{ color: "var(--text-secondary)" }}>
-            <strong style={{ color: "var(--lve-charcoal)" }}>Meilleure période :</strong>{" "}
-            {seasonality.best_months.join(", ")}
+          <p className="text-sm font-semibold" style={{ color: "var(--lve-charcoal)" }}>
+            Meilleure période : {seasonality.best_months.join(", ")}
             {seasonality.peak_season.length > 0 && (
-              <> · Haute saison : {seasonality.peak_season.join(", ")}</>
+              <> • Haute saison : {seasonality.peak_season.join(", ")}</>
             )}
           </p>
-        </>
+        </div>
       )}
     </div>
   );
