@@ -2,7 +2,7 @@ import {
   Moon,
   Compass,
   UtensilsCrossed,
-  Waves,
+  Mountain,
   Building2,
   Zap,
   Leaf,
@@ -31,7 +31,11 @@ const SCORE_PILLS: Record<ScoreAxis, Pill> = {
   repos: { icon: Moon, label: "Détente & Ressourcement" },
   exploration: { icon: Compass, label: "Exploration & Découverte" },
   gastronomie: { icon: UtensilsCrossed, label: "Gastronomie & Terroir" },
-  nature_plage: { icon: Waves, label: "Nature & Littoral" },
+  // Icône + libellé neutralisés le 30/08/2026 (demande Soumia) : "Nature & Littoral" + Waves
+  // étaient trop marqués mer pour un profil calculé sur MAX(nature, plage) — un profil 100%
+  // montagne pouvait recevoir ce badge. Mountain reste un choix imparfait (penche visuellement
+  // montagne plutôt que neutre), mais moins trompeur qu'une vague pour un profil plage.
+  nature_plage: { icon: Mountain, label: "Grands Espaces" },
   effervescence_urbaine: { icon: Building2, label: "Énergie Urbaine" },
 };
 
