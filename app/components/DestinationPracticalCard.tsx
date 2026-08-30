@@ -43,20 +43,32 @@ export function DestinationPracticalCard({
   const weather = seasonality?.weather_profile[season];
 
   return (
+    // Même look que TripExtensionCard (30/08/2026, demande Soumia — "je le veux étendu comme
+    // suggestions d'extension avec un bandeau de la même couleur sur la gauche") : dégradé
+    // slate-bg → blanc → sand, coins très arrondis, barre d'accent latérale.
     <div
-      className="rounded-2xl p-5 sm:p-6 mb-8"
-      style={{ background: "var(--lve-ivory)", border: "1px solid var(--lve-border)" }}
+      className="relative overflow-hidden rounded-3xl p-6 md:p-8 mb-8"
+      style={{
+        background: "linear-gradient(135deg, var(--lve-slate-bg) 0%, #ffffff 55%, var(--lve-sand) 100%)",
+        border: "1px solid color-mix(in srgb, var(--lve-slate-dark) 20%, transparent)",
+      }}
     >
-      <span
-        className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium tracking-widest uppercase mb-4"
-        style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
-      >
-        <Compass size={12} />
-        Logistique & climat
-      </span>
+      <div
+        className="absolute top-0 left-0 w-2 h-full rounded-l-3xl"
+        style={{ background: "linear-gradient(to bottom, color-mix(in srgb, var(--lve-slate-dark) 65%, white), var(--lve-slate-dark))" }}
+      />
 
-      {/* Section Transport */}
-      {travelFromParis && (
+      <div className="relative pl-2">
+        <span
+          className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-medium tracking-widest uppercase mb-4"
+          style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
+        >
+          <Compass size={12} />
+          Logistique & climat
+        </span>
+
+        {/* Section Transport */}
+        {travelFromParis && (
         <div className="mb-5">
           <div className="flex items-center gap-3">
             <div
@@ -162,7 +174,8 @@ export function DestinationPracticalCard({
             )}
           </p>
         </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

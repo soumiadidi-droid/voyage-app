@@ -122,9 +122,10 @@ export default async function VoyagePage({
           garde son propre max-w-xl plus bas, non affecté. */}
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         {/* Bloc unique "Logistique & Climat" (30/08/2026) — remplace les anciennes pilules
-            météo/transport ET l'ancien ClimateSection séparé. Vide tant que travel_from_paris/
-            seasonality ne sont pas renseignés pour la destination. */}
-        <div className="max-w-xl mx-auto pt-8 sm:pt-10">
+            météo/transport ET l'ancien ClimateSection séparé. Étendu pleine largeur avec le même
+            look que "Extensions possibles" (30/08/2026, 2e passe — demande explicite de Soumia).
+            Vide tant que travel_from_paris/seasonality ne sont pas renseignés pour la destination. */}
+        <div className="pt-8 sm:pt-10">
           <DestinationPracticalCard
             travelFromParis={destination?.travel_from_paris}
             seasonality={destination?.seasonality}
