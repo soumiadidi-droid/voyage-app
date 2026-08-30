@@ -14,6 +14,8 @@ import type {
   FamilyProfile,
   PracticalInfo,
   WhenToGo,
+  TravelFromParis,
+  Seasonality,
 } from "./types";
 import type { FamilyFit, GalleryItem, VoyageContent } from "@/content/voyages";
 
@@ -57,6 +59,12 @@ export type NewDestinationInput = {
   // Même règle que practical_info : jamais généré automatiquement, vide tant que Soumia n'a pas
   // donné le vrai conseil saisonnier.
   when_to_go?: WhenToGo;
+  // Trajet réel depuis Paris + météo/saisonnalité réelle (30/08/2026) — voir TravelFromParis et
+  // Seasonality dans types.ts. Contrairement au reste du contenu du site, ce sont des données
+  // factuelles vérifiables (recherchées par Claude, jamais le contenu narratif/vécu), mais
+  // toujours soumises à la même règle de validation avant écriture — voir SKILL.md.
+  travel_from_paris?: TravelFromParis;
+  seasonality?: Seasonality;
 };
 
 // N'attribue JAMAIS d'archétype ici — l'archétype est calculé côté voyageur à partir de ses
@@ -70,14 +78,16 @@ export type NewDestinationInput = {
 export async function upsertDestination(input: NewDestinationInput): Promise<void> {
   await sql.query(
     `insert into destinations
-       (id, title, authenticity_badge, content_slug, summary, hero_image, filters, scores, logistics, tags, regional_transport, practical_info, when_to_go)
-     values ($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9::jsonb,$10,$11::jsonb,$12::jsonb,$13::jsonb)
+       (id, title, authenticity_badge, content_slug, summary, hero_image, filters, scores, logistics, tags, regional_transport, practical_info, when_to_go, travel_from_paris, seasonality)
+     values ($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9::jsonb,$10,$11::jsonb,$12::jsonb,$13::jsonb,$14::jsonb,$15::jsonb)
      on conflict (id) do update set
        title = excluded.title, authenticity_badge = excluded.authenticity_badge,
        content_slug = excluded.content_slug, summary = excluded.summary, hero_image = excluded.hero_image,
        filters = excluded.filters, scores = excluded.scores, logistics = excluded.logistics,
        tags = excluded.tags, regional_transport = excluded.regional_transport,
-       practical_info = excluded.practical_info, when_to_go = excluded.when_to_go, updated_at = now()`,
+       practical_info = excluded.practical_info, when_to_go = excluded.when_to_go,
+       travel_from_paris = excluded.travel_from_paris, seasonality = excluded.seasonality,
+       updated_at = now()`,
     [
       input.id,
       input.title,
@@ -92,6 +102,8 @@ export async function upsertDestination(input: NewDestinationInput): Promise<voi
       input.regional_transport ? JSON.stringify(input.regional_transport) : null,
       input.practical_info ? JSON.stringify(input.practical_info) : null,
       input.when_to_go ? JSON.stringify(input.when_to_go) : null,
+      input.travel_from_paris ? JSON.stringify(input.travel_from_paris) : null,
+      input.seasonality ? JSON.stringify(input.seasonality) : null,
     ]
   );
 }

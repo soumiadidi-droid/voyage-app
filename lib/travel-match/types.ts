@@ -135,6 +135,36 @@ export type WhenToGo = {
   hiver_cosy?: string; // ex. "Décembre-février, pour la neige et l'ambiance cosy."
 };
 
+// Trajet de référence depuis Paris (30/08/2026, demande Soumia) — structuré (mode/durée/détail
+// séparés) plutôt que texte libre, pour être affichable avec une icône dédiée dans le nouveau bloc
+// "Climat & Quand partir". Recoupe partiellement practical_info.access (texte libre déjà existant,
+// ex. "TGV direct depuis Paris (4h)...") — les deux coexistent, celui-ci sert l'affichage structuré.
+export type TravelFromParis = {
+  mode: string; // ex. "TGV Direct", "Vol direct"
+  duration: string; // ex. "4h10", "14h50"
+  details: string; // ex. "TGV InOui au départ de Paris Montparnasse"
+};
+
+export type SeasonWeather = {
+  avg_temp: string; // ex. "22°C" — texte libre, pas de valeur numérique isolée ailleurs dans le schéma
+  tip: string; // conseil d'ambiance court, ex. "Idéal pour les terrasses, penser à réserver"
+};
+
+// Saisonnalité réelle (30/08/2026, demande Soumia) — données factuelles (températures, meilleure
+// période) recherchées et vérifiées par Claude, PAS le contenu narratif/vécu du reste du site
+// (review, intro, tagline...) qui reste strictement réservé à ce que Soumia donne elle-même. Champ
+// optionnel, absent tant qu'aucune recherche n'a été faite/validée pour la destination.
+export type Seasonality = {
+  best_months: string[]; // ex. ["Avril", "Mai", "Septembre", "Octobre"]
+  peak_season: string[]; // ex. ["Juillet", "Août"]
+  weather_profile: {
+    spring: SeasonWeather;
+    summer: SeasonWeather;
+    autumn: SeasonWeather;
+    winter: SeasonWeather;
+  };
+};
+
 export type Destination = {
   id: string;
   title: string;
@@ -153,6 +183,8 @@ export type Destination = {
   regional_transport?: RegionalTransport;
   practical_info?: PracticalInfo;
   when_to_go?: WhenToGo;
+  travel_from_paris?: TravelFromParis;
+  seasonality?: Seasonality;
 };
 
 // "famille_moins_6"/"famille_plus_6" fusionnés en une seule valeur "famille" (27/08/2026, demande

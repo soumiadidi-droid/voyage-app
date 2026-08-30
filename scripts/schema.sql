@@ -27,10 +27,17 @@ create table if not exists destinations (
   practical_info      jsonb,
   when_to_go          jsonb, -- 29/08/2026 : conseil "quand y aller" conditionné au climat choisi
                              -- au questionnaire, voir WhenToGo dans lib/travel-match/types.ts
+  travel_from_paris   jsonb, -- 30/08/2026 : trajet réel depuis Paris, voir TravelFromParis
+  seasonality         jsonb, -- 30/08/2026 : météo/saisonnalité réelle, voir Seasonality
   created_at          timestamptz not null default now(),
   updated_at          timestamptz not null default now()
 );
 create index if not exists destinations_content_slug_idx on destinations(content_slug);
+
+-- Idempotent pour la base déjà en place (create table if not exists ne touche pas les colonnes
+-- d'une table existante) — même principe que le reste du schéma, relançable sans risque.
+alter table destinations add column if not exists travel_from_paris jsonb;
+alter table destinations add column if not exists seasonality jsonb;
 
 create type address_category as enum ('stay','eat','activity');
 
