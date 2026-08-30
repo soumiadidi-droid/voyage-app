@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Sun, CloudRain, Train, Plane, Flower, Leaf, Snowflake, type LucideIcon } from "lucide-react";
+import { Sun, CloudRain, Train, Plane, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
 import type { Seasonality, TravelFromParis } from "@/lib/travel-match/types";
 
 type SeasonKey = keyof Seasonality["weather_profile"];
@@ -56,21 +56,62 @@ export function ClimateSection({
       </span>
 
       {travelFromParis && (
-        <div className="flex items-center gap-3 mb-5">
-          <div
-            className="p-2.5 rounded-xl shrink-0"
-            style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
-          >
-            <TravelIcon size={18} />
+        <div className="mb-5">
+          <div className="flex items-center gap-3">
+            <div
+              className="p-2.5 rounded-xl shrink-0"
+              style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+            >
+              <TravelIcon size={18} />
+            </div>
+            <div>
+              <p className="font-semibold" style={{ color: "var(--lve-charcoal)" }}>
+                {travelFromParis.mode} depuis Paris — {travelFromParis.duration}
+              </p>
+              <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                {travelFromParis.details}
+              </p>
+              {/* Plateforme de réservation (30/08/2026) — juste sous la ligne de trajet, lien
+                  externe propre si booking_url est renseigné, sinon texte seul. */}
+              {travelFromParis.booking_platform && (
+                <p className="text-sm mt-1">
+                  {travelFromParis.booking_url ? (
+                    <a
+                      href={travelFromParis.booking_url}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex items-center gap-1 font-medium"
+                      style={{ color: "var(--lve-terracotta-dark)" }}
+                    >
+                      {travelFromParis.booking_platform}
+                      <ExternalLink size={12} />
+                    </a>
+                  ) : (
+                    <span className="font-medium" style={{ color: "var(--lve-terracotta-dark)" }}>
+                      {travelFromParis.booking_platform}
+                    </span>
+                  )}
+                  {travelFromParis.advance_booking_notice && (
+                    <span style={{ color: "var(--text-secondary)" }}> · {travelFromParis.advance_booking_notice}</span>
+                  )}
+                </p>
+              )}
+            </div>
           </div>
-          <div>
-            <p className="font-semibold" style={{ color: "var(--lve-charcoal)" }}>
-              {travelFromParis.mode} depuis Paris — {travelFromParis.duration}
-            </p>
-            <p className="text-sm" style={{ color: "var(--text-secondary)" }}>
-              {travelFromParis.details}
-            </p>
-          </div>
+
+          {/* Bulle "Conseil d'initié" (30/08/2026) — jamais générée automatiquement, absente tant
+              que Soumia n'a pas donné le vrai conseil vécu (voir insider_tip dans types.ts). */}
+          {travelFromParis.insider_tip && (
+            <div
+              className="mt-3 flex items-start gap-2 rounded-xl px-3.5 py-2.5 text-sm"
+              style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+            >
+              <Sparkles size={15} className="shrink-0 mt-0.5" />
+              <span>
+                <strong>Conseil d&apos;initié —</strong> {travelFromParis.insider_tip}
+              </span>
+            </div>
+          )}
         </div>
       )}
 

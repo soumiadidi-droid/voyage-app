@@ -143,6 +143,16 @@ export type TravelFromParis = {
   mode: string; // ex. "TGV Direct", "Vol direct"
   duration: string; // ex. "4h10", "14h50"
   details: string; // ex. "TGV InOui au départ de Paris Montparnasse"
+  // Conseils de réservation (30/08/2026) — booking_platform/booking_url/advance_booking_notice
+  // sont factuels (recherchés et vérifiés, comme le reste de travel_from_paris). insider_tip suit
+  // la même règle stricte que practical_info.insider_tips : jamais généré automatiquement, vide
+  // tant que Soumia n'a pas donné le vrai conseil vécu (ex. "réserve le siège D pour voir le Mont
+  // Fuji") — ne PAS confondre avec practical_info.insider_tips, champ différent, à ne pas dupliquer
+  // sans raison si un seul des deux suffit pour une destination donnée.
+  booking_platform?: string; // ex. "SmartEX (App officielle JR)", "SNCF Connect"
+  booking_url?: string;
+  advance_booking_notice?: string; // ex. "Ouverture des ventes 30 jours avant"
+  insider_tip?: string;
 };
 
 export type SeasonWeather = {
