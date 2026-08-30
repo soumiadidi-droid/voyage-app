@@ -84,10 +84,22 @@ export function AddressDetailCard({
     // explicite de Soumia, "taille homogène alignement parfait") ; grid étire chaque carte à la
     // hauteur de la plus haute de sa rangée, ce wrapper remplit cet espace et pousse le lien en
     // bas via mt-auto plus loin, pour que toutes les cartes d'une même rangée s'alignent pile.
+    //
+    // Repris le look du bloc "Extensions possibles" (30/08/2026, demande Soumia — "même look and
+    // feel") : dégradé subtil, coins très arrondis, barre d'accent latérale. Teintée par
+    // catégorie (categoryBg/categoryColor déjà utilisés pour le badge) plutôt qu'aplatie en
+    // terracotta partout — cohérent avec la distinction existante hôtel/resto/activité.
     <div
-      className="relative flex h-full w-full flex-col rounded-xl p-5"
-      style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
+      className="relative flex h-full w-full flex-col overflow-hidden rounded-3xl p-5 pl-6"
+      style={{
+        background: `linear-gradient(135deg, ${categoryBg} 0%, #ffffff 60%, ${categoryBg} 100%)`,
+        border: `1px solid color-mix(in srgb, ${categoryColor} 20%, transparent)`,
+      }}
     >
+      <div
+        className="absolute left-0 top-0 h-full w-2"
+        style={{ background: `linear-gradient(to bottom, color-mix(in srgb, ${categoryColor} 65%, white), ${categoryColor})` }}
+      />
       {/* Icônes du coin haut-droit (29/08/2026, alignées ensemble dans une même rangée) : lien
           Instagram (ouvre InstagramPopup en autoLoad, remplace l'ancien gros bouton dégradé
           "Voir l'ambiance sur Instagram" — demande explicite de Soumia, juste l'icône déclenche
