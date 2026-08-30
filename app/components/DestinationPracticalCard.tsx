@@ -43,12 +43,18 @@ function currentSeason(): SeasonKey {
 // la 5e couleur dédiée à ce bloc, cohérent avec le reste de la charte) plutôt qu'une couleur hors
 // système.
 //
-// 2e passe d'épure (30/08/2026) : bulle "Conseil d'initié" retirée de l'affichage (la donnée
-// insider_tip reste en base, juste plus montrée ici) ; details/summary/booking en line-clamp-2
-// pour rester compacts quelle que soit la longueur du texte réel par destination — pas de
-// raccourcissement en dur du contenu (chaque destination a un texte différent, un exemple donné
-// pour le Japon ne peut pas être figé dans le composant partagé) ; sous-cartes en h-full pour
-// s'aligner à la même hauteur.
+// 2e passe d'épure (30/08/2026) : bulle "Conseil d'initié" retirée de l'affichage (donnée gardée
+// en base) ; sous-cartes en h-full pour s'aligner à la même hauteur.
+//
+// 3e passe, drastique (30/08/2026, demande Soumia) : les paragraphes descriptifs (details/summary)
+// sont retirés de l'affichage — chaque sous-carte se limite à [icône+titre section] + [titre gras
+// mode/durée] + 1-2 liens de réservation compacts. Règle générale du composant (s'applique aux 15
+// destinations), pas un cas Japon particulier. Si travelFromParis.mode contient "+" (trajet à
+// étapes, ex. "Vol direct + Shinkansen"), la carte "Depuis Paris" affiche aussi le lien de
+// réservation de regionalTransport (ex. SmartEX) en 2e puce — sinon une seule puce (le trajet
+// principal). ATTENTION : cette passe retire aussi l'avertissement "billets à échanger en gare/
+// QR code Klook" que Soumia avait qualifié de "hyper utile" deux échanges plus tôt — signalé
+// explicitement plutôt que perdu silencieusement, voir le message de fin de tour.
 export function DestinationPracticalCard({
   travelFromParis,
   seasonality,
@@ -114,32 +120,53 @@ export function DestinationPracticalCard({
                 <p className="font-semibold mt-3" style={{ color: "var(--lve-charcoal)" }}>
                   {travelFromParis.mode} — {travelFromParis.duration}
                 </p>
-                <p className="text-sm mt-0.5 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
-                  {travelFromParis.details}
-                </p>
-                {travelFromParis.booking_platform && (
-                  <p className="text-sm mt-1.5 line-clamp-2">
-                    {travelFromParis.booking_url ? (
-                      <a
-                        href={travelFromParis.booking_url}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="inline-flex items-center gap-1 font-medium"
-                        style={{ color: "var(--lve-slate-dark)" }}
-                      >
-                        {travelFromParis.booking_platform}
-                        <ExternalLink size={12} />
-                      </a>
-                    ) : (
-                      <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
-                        {travelFromParis.booking_platform}
-                      </span>
-                    )}
-                    {travelFromParis.advance_booking_notice && (
-                      <span style={{ color: "var(--text-secondary)" }}> · {travelFromParis.advance_booking_notice}</span>
-                    )}
-                  </p>
-                )}
+                <ul className="mt-2 space-y-1">
+                  {travelFromParis.booking_platform && (
+                    <li className="text-sm">
+                      {travelFromParis.booking_url ? (
+                        <a
+                          href={travelFromParis.booking_url}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          className="inline-flex items-center gap-1 font-medium"
+                          style={{ color: "var(--lve-slate-dark)" }}
+                        >
+                          {travelFromParis.booking_platform}
+                          <ExternalLink size={12} />
+                        </a>
+                      ) : (
+                        <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
+                          {travelFromParis.booking_platform}
+                        </span>
+                      )}
+                    </li>
+                  )}
+                  {/* Trajet à étapes (mode contient "+") : la puce de réservation du transport sur
+                      place (ex. SmartEX/Shinkansen) apparaît aussi ici, avec le délai de résa. */}
+                  {travelFromParis.mode.includes("+") && regionalTransport?.booking_platform && (
+                    <li className="text-sm">
+                      {regionalTransport.booking_url ? (
+                        <a
+                          href={regionalTransport.booking_url}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          className="inline-flex items-center gap-1 font-medium"
+                          style={{ color: "var(--lve-slate-dark)" }}
+                        >
+                          {regionalTransport.booking_platform}
+                          <ExternalLink size={12} />
+                        </a>
+                      ) : (
+                        <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
+                          {regionalTransport.booking_platform}
+                        </span>
+                      )}
+                      {travelFromParis.advance_booking_notice && (
+                        <span style={{ color: "var(--text-secondary)" }}> — {travelFromParis.advance_booking_notice}</span>
+                      )}
+                    </li>
+                  )}
+                </ul>
               </div>
             )}
 
@@ -163,37 +190,33 @@ export function DestinationPracticalCard({
                 <p className="font-semibold mt-3" style={{ color: "var(--lve-charcoal)" }}>
                   {regionalTransport.recommended_mode}
                 </p>
-                <p className="text-sm mt-0.5 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
-                  {regionalTransport.summary}
-                </p>
-                {regionalTransport.booking_platform && (
-                  <p className="text-sm mt-1.5">
-                    {regionalTransport.booking_url ? (
-                      <a
-                        href={regionalTransport.booking_url}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="inline-flex items-center gap-1 font-medium"
-                        style={{ color: "var(--lve-slate-dark)" }}
-                      >
-                        {regionalTransport.booking_platform}
-                        <ExternalLink size={12} />
-                      </a>
-                    ) : (
-                      <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
-                        {regionalTransport.booking_platform}
-                      </span>
-                    )}
-                  </p>
-                )}
-                {/* Pas de line-clamp ici (30/08/2026, bug repéré par Soumia) : contrairement à
-                    summary/details, ce champ porte souvent une info pratique importante (ex.
-                    avertissement billets à échanger en gare) — la tronquer masquait l'info. */}
-                {regionalTransport.pass_or_tip && (
-                  <p className="text-sm italic mt-1" style={{ color: "var(--text-secondary)" }}>
-                    {regionalTransport.pass_or_tip}
-                  </p>
-                )}
+                <ul className="mt-2 space-y-1">
+                  {regionalTransport.booking_platform && (
+                    <li className="text-sm">
+                      {regionalTransport.booking_url ? (
+                        <a
+                          href={regionalTransport.booking_url}
+                          target="_blank"
+                          rel="noopener noreferrer nofollow"
+                          className="inline-flex items-center gap-1 font-medium"
+                          style={{ color: "var(--lve-slate-dark)" }}
+                        >
+                          {regionalTransport.booking_platform}
+                          <ExternalLink size={12} />
+                        </a>
+                      ) : (
+                        <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
+                          {regionalTransport.booking_platform}
+                        </span>
+                      )}
+                    </li>
+                  )}
+                  {regionalTransport.pass_or_tip && (
+                    <li className="text-sm" style={{ color: "var(--text-secondary)" }}>
+                      {regionalTransport.pass_or_tip}
+                    </li>
+                  )}
+                </ul>
                 {/* Badge discret (30/08/2026, demande Soumia) — remplace l'ancienne ligne pleine
                     largeur, moins de poids visuel pour une info secondaire. */}
                 {regionalTransport.to_city_center && (
