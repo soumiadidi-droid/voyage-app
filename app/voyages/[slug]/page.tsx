@@ -185,21 +185,9 @@ export default async function VoyagePage({
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
         <PracticalInfoSection info={destination?.practical_info} whenToGo={whenToGo} />
 
-        {/* Cœur de page : le reste de la fiche est dédié aux adresses/partenariat B2B — décidé le
-            23/08/2026, refonte éditoriale "Alternance Story/Photos". */}
-        <AddressesSection
-          // Masquées tant qu'aucun lien Instagram vérifié n'est en base (29/08/2026) — filtré ici,
-          // uniquement à l'affichage de la fiche voyage, PAS dans lib/travel-match/data.ts : cette
-          // couche est aussi utilisée par app/favoris/actions.ts pour retrouver un établissement
-          // déjà liké (usePlaceFavorites), qui doit continuer à s'afficher dans "Mes Favoris" même
-          // sans lien Instagram — bug du 29/08/2026 où un like posé avant l'ajout du lien
-          // disparaissait silencieusement de la page Favoris, corrigé en déplaçant le filtre ici.
-          stays={voyage.stays.filter((c) => c.instagramUrl)}
-          eats={voyage.eats.filter((c) => c.instagramUrl)}
-          activities={voyage.activities.filter((c) => c.instagramUrl)}
-          familyProfile={familyProfile}
-        />
-
+        {/* Remonté juste après les badges pratiques (30/08/2026, demande Soumia) — vivait avant
+            tout en bas de la page, après les adresses et les extensions, quasi invisible sans
+            scroller jusqu'au bout. */}
         {destination?.regional_transport && (
           <div
             className="max-w-xl mx-auto mb-16 sm:mb-20 p-5"
@@ -221,6 +209,21 @@ export default async function VoyagePage({
             )}
           </div>
         )}
+
+        {/* Cœur de page : le reste de la fiche est dédié aux adresses/partenariat B2B — décidé le
+            23/08/2026, refonte éditoriale "Alternance Story/Photos". */}
+        <AddressesSection
+          // Masquées tant qu'aucun lien Instagram vérifié n'est en base (29/08/2026) — filtré ici,
+          // uniquement à l'affichage de la fiche voyage, PAS dans lib/travel-match/data.ts : cette
+          // couche est aussi utilisée par app/favoris/actions.ts pour retrouver un établissement
+          // déjà liké (usePlaceFavorites), qui doit continuer à s'afficher dans "Mes Favoris" même
+          // sans lien Instagram — bug du 29/08/2026 où un like posé avant l'ajout du lien
+          // disparaissait silencieusement de la page Favoris, corrigé en déplaçant le filtre ici.
+          stays={voyage.stays.filter((c) => c.instagramUrl)}
+          eats={voyage.eats.filter((c) => c.instagramUrl)}
+          activities={voyage.activities.filter((c) => c.instagramUrl)}
+          familyProfile={familyProfile}
+        />
 
         {eligibleCombos.length > 0 && (
           <section className="my-16 sm:my-24">
