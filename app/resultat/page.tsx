@@ -1,4 +1,5 @@
-import { TravelerProfileCard } from "../components/TravelerProfileCard";
+import { TravelerProfileCard, getArchetypeTitle } from "../components/TravelerProfileCard";
+import { EmailCapture } from "../components/EmailCapture";
 import { FallbackNotice } from "./FallbackNotice";
 import { DestinationCard } from "./DestinationCard";
 import { matchTravel, dedupeComboBadges } from "@/lib/travel-match/engine";
@@ -149,6 +150,15 @@ export default async function ResultatPage({
           />
         ))}
       </div>
+
+      <EmailCapture
+        archetypeTitle={getArchetypeTitle(answers)}
+        destinations={top.map((r) => ({
+          title: r.destination.title,
+          slug: r.destination.content_slug,
+          id: r.destination.id,
+        }))}
+      />
     </div>
   );
 }

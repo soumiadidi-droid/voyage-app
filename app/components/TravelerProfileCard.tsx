@@ -123,6 +123,12 @@ function buildPills(answers: UserAnswers): Pill[] {
   return pills;
 }
 
+// Exporté (30/08/2026) pour être réutilisé hors de la carte elle-même — EmailCapture a besoin du
+// même titre d'archétype pour le récap envoyé par mail, sans dupliquer la logique de calcul.
+export function getArchetypeTitle(answers: UserAnswers): string {
+  return ARCHETYPES[topAxis(derivedAxisScores(answers.scores))].title;
+}
+
 export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
   const archetype = ARCHETYPES[topAxis(derivedAxisScores(answers.scores))];
   const pills = buildPills(answers);
