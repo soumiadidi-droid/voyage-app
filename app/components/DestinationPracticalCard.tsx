@@ -186,8 +186,11 @@ export function DestinationPracticalCard({
                     )}
                   </p>
                 )}
+                {/* Pas de line-clamp ici (30/08/2026, bug repéré par Soumia) : contrairement à
+                    summary/details, ce champ porte souvent une info pratique importante (ex.
+                    avertissement billets à échanger en gare) — la tronquer masquait l'info. */}
                 {regionalTransport.pass_or_tip && (
-                  <p className="text-sm italic mt-1 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
+                  <p className="text-sm italic mt-1" style={{ color: "var(--text-secondary)" }}>
                     {regionalTransport.pass_or_tip}
                   </p>
                 )}
