@@ -204,12 +204,15 @@ export function AddressDetailCard({
       {familyProfile && <FamilyFitBlock card={card} familyProfile={familyProfile} />}
 
       {card.link && (
+        // Couleur du bouton alignée sur la catégorie (30/08/2026, demande Soumia — "les liens de
+        // chaque catégorie doivent avoir la couleur des catégories") : categoryColor (terracotta
+        // hôtel/sauge resto/océan activité) au lieu du var(--ember) fixe utilisé partout avant.
         <a
           className="mt-auto inline-block w-full rounded-lg px-4 py-2 mono text-sm text-center no-underline"
           href={card.link}
           target="_blank"
           rel="noopener noreferrer nofollow"
-          style={{ background: "var(--ember)", color: "#fff" }}
+          style={{ background: categoryColor, color: "#fff" }}
         >
           {card.linkLabel || "Voir l'adresse →"}
         </a>
