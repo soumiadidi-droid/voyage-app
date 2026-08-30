@@ -67,9 +67,13 @@ const ARCHETYPES: Record<ScoreAxis, Archetype> = {
   },
   nature_plage: {
     title: "Le Souffle Sauvage",
-    subtitle: "Littoral préservé, grands espaces & horizon",
+    // Texte ajusté le 30/08/2026 (demande Soumia) : la version précédente était trop marquée
+    // littoral/embruns pour un profil calculé sur MAX(nature, plage) — un profil 100% montagne
+    // (nature=5, plage=1) obtenait quand même ce texte. Vocabulaire neutralisé vers grand air/
+    // éléments/horizons, plus aucun terme exclusivement maritime (iodé, embruns, vagues).
+    subtitle: "Grands espaces, éléments & horizon",
     intro:
-      "Ton équilibre passe par la nature et le grand air. Que ce soit une crique secrète fouettée par les embruns, une balade au sommet ou un bain de soleil loin de la foule, tu cherches l'apaisement par l'horizon. Une immersion iodée et végétale pour faire le plein d'énergie brute.",
+      "Ton équilibre passe par la nature et le grand air. Que ce soit une crête balayée par le vent, un sommet silencieux ou une crique sauvage loin de la foule, tu cherches l'apaisement par l'horizon. Une immersion brute dans les éléments pour faire le plein d'énergie.",
   },
   effervescence_urbaine: {
     title: "L'Électron Urbain",
