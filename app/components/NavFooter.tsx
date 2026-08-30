@@ -41,6 +41,9 @@ function useAdminUnlocked(): boolean {
 // personnel qu'elle a collé, qui n'est pas fait pour être partagé publiquement sur le site).
 const INSTAGRAM_URL = "https://www.instagram.com/levoyagedesemotions/";
 
+// Masqué temporairement (30/08/2026, demande Soumia) — repasser à true pour réactiver.
+const SHOW_NEWSLETTER = false;
+
 // lucide-react (v1.x installé sur ce projet) n'a plus d'icônes de marque (Instagram, X, etc.),
 // retirées pour des raisons de droits — icône maison au même style de trait que les icônes Lucide
 // utilisées ailleurs sur le site (viewBox 24, stroke arrondi).
@@ -280,32 +283,37 @@ export function Footer() {
           </ul>
         </div>
 
-        <div className="md:col-span-4 space-y-3">
-          <h4 className={DARK_COLUMN_TITLE_CLASS}>Le Carnet de Route</h4>
-          <p className="text-sm text-lve-ivory/70" style={DARK_FONT}>
-            Recevez nos nouvelles pépites et itinéraires exclusifs.
-          </p>
-          {/* Formulaire visuel uniquement pour l'instant : aucun outil de newsletter (Mailchimp,
-              Brevo, etc.) n'est branché sur ce projet, donc rien n'est réellement collecté ou
-              stocké nulle part. preventDefault() évite juste un rechargement de page inutile —
-              pas de faux message "Inscrit·e !" qui mentirait sur ce qui se passe vraiment.
-              À connecter à un vrai service avant mise en prod si Soumia veut que ça fonctionne. */}
-          <form className="flex items-center gap-2 pt-2" onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="email"
-              placeholder="Votre adresse e-mail"
-              className="bg-lve-ivory/10 border border-lve-ivory/20 rounded-lg px-3 py-2 text-sm text-lve-ivory placeholder-lve-ivory/40 focus:outline-none focus:border-lve-terracotta w-full"
-              style={DARK_FONT}
-            />
-            <button
-              type="submit"
-              className="bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-sm px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap cursor-pointer"
-              style={DARK_FONT}
-            >
-              S&apos;abonner
-            </button>
-          </form>
-        </div>
+        {/* Newsletter masquée temporairement (30/08/2026, demande Soumia — "pour le moment,
+            demain on règle ça") : formulaire jamais branché à un vrai service, remis à plus tard
+            plutôt que laissé en l'état. SHOW_NEWSLETTER → true pour la réactiver. */}
+        {SHOW_NEWSLETTER && (
+          <div className="md:col-span-4 space-y-3">
+            <h4 className={DARK_COLUMN_TITLE_CLASS}>Le Carnet de Route</h4>
+            <p className="text-sm text-lve-ivory/70" style={DARK_FONT}>
+              Recevez nos nouvelles pépites et itinéraires exclusifs.
+            </p>
+            {/* Formulaire visuel uniquement pour l'instant : aucun outil de newsletter (Mailchimp,
+                Brevo, etc.) n'est branché sur ce projet, donc rien n'est réellement collecté ou
+                stocké nulle part. preventDefault() évite juste un rechargement de page inutile —
+                pas de faux message "Inscrit·e !" qui mentirait sur ce qui se passe vraiment.
+                À connecter à un vrai service avant mise en prod si Soumia veut que ça fonctionne. */}
+            <form className="flex items-center gap-2 pt-2" onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="email"
+                placeholder="Votre adresse e-mail"
+                className="bg-lve-ivory/10 border border-lve-ivory/20 rounded-lg px-3 py-2 text-sm text-lve-ivory placeholder-lve-ivory/40 focus:outline-none focus:border-lve-terracotta w-full"
+                style={DARK_FONT}
+              />
+              <button
+                type="submit"
+                className="bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-sm px-4 py-2 rounded-lg font-medium transition-colors whitespace-nowrap cursor-pointer"
+                style={DARK_FONT}
+              >
+                S&apos;abonner
+              </button>
+            </form>
+          </div>
+        )}
       </div>
 
       <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-lve-ivory/50 gap-4">

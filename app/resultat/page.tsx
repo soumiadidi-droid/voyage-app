@@ -18,6 +18,9 @@ import {
   type FamilyProfile,
 } from "@/lib/travel-match/types";
 
+// Masqué temporairement (30/08/2026, demande Soumia) — repasser à true pour réactiver.
+const SHOW_EMAIL_CAPTURE = false;
+
 export const metadata = {
   title: "Ton résultat — Le Voyage des Émotions",
 };
@@ -151,14 +154,19 @@ export default async function ResultatPage({
         ))}
       </div>
 
-      <EmailCapture
-        archetypeTitle={getArchetypeTitle(answers)}
-        destinations={top.map((r) => ({
-          title: r.destination.title,
-          slug: r.destination.content_slug,
-          id: r.destination.id,
-        }))}
-      />
+      {/* Masqué temporairement (30/08/2026, demande Soumia — "pour le moment, demain on règle
+          ça") : l'envoi réel dépend de la vérification du domaine côté Resend, pas encore faite.
+          SHOW_EMAIL_CAPTURE → true pour réactiver une fois le domaine vérifié. */}
+      {SHOW_EMAIL_CAPTURE && (
+        <EmailCapture
+          archetypeTitle={getArchetypeTitle(answers)}
+          destinations={top.map((r) => ({
+            title: r.destination.title,
+            slug: r.destination.content_slug,
+            id: r.destination.id,
+          }))}
+        />
+      )}
     </div>
   );
 }
