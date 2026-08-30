@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Compass, Sun, Train, Plane, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
+import { Compass, Sun, Train, Plane, Bike, Car, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
 import type { Seasonality, TravelFromParis, RegionalTransport } from "@/lib/travel-match/types";
 
 type SeasonKey = keyof Seasonality["weather_profile"];
@@ -13,6 +13,16 @@ const SEASON_META: Record<SeasonKey, { label: string; icon: LucideIcon }> = {
   winter: { label: "Hiver", icon: Snowflake },
 };
 const SEASON_ORDER: SeasonKey[] = ["spring", "summer", "autumn", "winter"];
+
+// Icône du transport sur place (30/08/2026, demande Soumia — "mets-moi un vélo") : dynamique
+// plutôt que figée sur Train, sinon fausse pour les destinations où le vélo ou la voiture dominent
+// (ex. Côte Basque "Vélo à Biarritz...", Mykonos "Voiture obligatoire").
+function regionalTransportIcon(mode: string): LucideIcon {
+  const lower = mode.toLowerCase();
+  if (lower.includes("vélo") || lower.includes("velo") || lower.includes("bike")) return Bike;
+  if (lower.includes("voiture") || lower.includes("scooter")) return Car;
+  return Train;
+}
 
 // Mois → saison (hémisphère nord, cohérent avec toutes les destinations actuelles du catalogue) —
 // sert uniquement à présélectionner un onglet pertinent à l'ouverture, purement cosmétique.
@@ -142,7 +152,10 @@ export function DestinationPracticalCard({
             className="p-2.5 rounded-xl shrink-0"
             style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
           >
-            <Train size={18} />
+            {(() => {
+              const RegionalIcon = regionalTransportIcon(regionalTransport.recommended_mode);
+              return <RegionalIcon size={18} />;
+            })()}
           </div>
           <div>
             <p className="font-semibold" style={{ color: "var(--lve-charcoal)" }}>
