@@ -71,9 +71,16 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
       subject: "Ton profil Travel Match & tes destinations idéales 🌿",
       html: buildEmailHtml(input),
     });
-    if (error) return { ok: false, error: "L'envoi a échoué, réessaie." };
+    // Loggé (30/08/2026) : le message affiché à l'utilisateur reste volontairement générique,
+    // mais la vraie raison (souvent : domaine expéditeur pas encore vérifié dans Resend) doit être
+    // visible côté logs Vercel pour pouvoir diagnostiquer sans deviner.
+    if (error) {
+      console.error("[sendResultsEmail] Resend error:", error);
+      return { ok: false, error: "L'envoi a échoué, réessaie." };
+    }
     return { ok: true };
-  } catch {
+  } catch (err) {
+    console.error("[sendResultsEmail] Exception:", err);
     return { ok: false, error: "L'envoi a échoué, réessaie." };
   }
 }
