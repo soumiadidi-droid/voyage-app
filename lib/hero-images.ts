@@ -49,11 +49,11 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // Pont Dom Luís I sur le Douro, Porto — Dorian Mongel, https://unsplash.com/photos/dom-luis-i-bridge-over-the-douro-river-in-porto-zllGA-8RW5M
   porto:
     "https://images.unsplash.com/photo-1762294946283-6921938e9937?fm=jpg&q=80&w=2400&auto=format&fit=crop",
-  // ATTENTION : Vieux-Port de MARSEILLE (basilique Notre-Dame de la Garde reconnaissable en
-  // arrière-plan), pas Carry-le-Rouet lui-même — aucune photo libre de droit du village exact
-  // trouvée. Accepté explicitement par Soumia le 28/08/2026 ("carry marseille") en connaissance
-  // de cause après l'avoir signalé. Elisa Schmidt, https://unsplash.com/photos/-jGQaEA3YC0
-  "carry-le-rouet":
+  // Vieux-Port de Marseille (basilique Notre-Dame de la Garde en arrière-plan) — Elisa Schmidt,
+  // https://unsplash.com/photos/-jGQaEA3YC0. Destination renommée carry-le-rouet → marseille le
+  // 30/08/2026 (demande Soumia) : cette photo, prise à l'origine en approximation faute de photo
+  // libre de droit du village exact de Carry-le-Rouet, colle maintenant pile au nouveau nom.
+  marseille:
     "https://images.unsplash.com/photo-1566838217578-1903568a76d9?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   // Big Ben et Westminster Bridge — Alex Ghiurau, https://unsplash.com/photos/big-ben-clock-tower-and-westminster-bridge-over-river-thames-A94gGLeFd68
   londres:
