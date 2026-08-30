@@ -111,6 +111,11 @@ export type RegionalTransport = {
   // pass_or_tip (conseil sur un pass/billet), ex. "Bus 12 pour rejoindre le centre-ville, taxi
   // environ 8€" pour Biarritz.
   to_city_center?: string;
+  // Lien de réservation du transport régional (30/08/2026, demande Soumia — "mettre le lien vers
+  // JR pour le Shinkansen") — même paire booking_platform/booking_url que TravelFromParis, mais
+  // pour la mobilité SUR PLACE (ex. SmartEX/JR) plutôt que le trajet depuis Paris.
+  booking_platform?: string;
+  booking_url?: string;
 };
 
 // 4 cartes d'infos pratiques (28/08/2026) — texte descriptif prêt à afficher, distinct des champs

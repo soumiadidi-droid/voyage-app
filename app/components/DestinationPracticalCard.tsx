@@ -166,6 +166,26 @@ export function DestinationPracticalCard({
                 <p className="text-sm mt-0.5 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
                   {regionalTransport.summary}
                 </p>
+                {regionalTransport.booking_platform && (
+                  <p className="text-sm mt-1.5">
+                    {regionalTransport.booking_url ? (
+                      <a
+                        href={regionalTransport.booking_url}
+                        target="_blank"
+                        rel="noopener noreferrer nofollow"
+                        className="inline-flex items-center gap-1 font-medium"
+                        style={{ color: "var(--lve-slate-dark)" }}
+                      >
+                        {regionalTransport.booking_platform}
+                        <ExternalLink size={12} />
+                      </a>
+                    ) : (
+                      <span className="font-medium" style={{ color: "var(--lve-slate-dark)" }}>
+                        {regionalTransport.booking_platform}
+                      </span>
+                    )}
+                  </p>
+                )}
                 {regionalTransport.pass_or_tip && (
                   <p className="text-sm italic mt-1 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
                     {regionalTransport.pass_or_tip}
