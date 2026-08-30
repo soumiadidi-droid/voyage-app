@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
-import { Navigation, CalendarDays, Sun, type LucideIcon } from "lucide-react";
+import { Navigation, CalendarDays, Sun, Sparkles, type LucideIcon } from "lucide-react";
 import { DestinationHero } from "../../components/DestinationHero";
 import { AddressGrid } from "../../components/AddressGrid";
+import { TripExtensionCard } from "../../components/TripExtensionCard";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
 import { getCombosFor } from "@/lib/travel-match/combos";
@@ -222,70 +223,26 @@ export default async function VoyagePage({
         )}
 
         {eligibleCombos.length > 0 && (
-          <div className="my-16 sm:my-24">
-            <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
-              🔀 Prolonger le voyage
-            </p>
+          <section className="my-16 sm:my-24">
+            <div
+              className="flex items-center gap-2 mb-4 text-xs font-semibold tracking-wider uppercase"
+              style={{ color: "color-mix(in srgb, var(--lve-terracotta-dark) 80%, transparent)" }}
+            >
+              <Sparkles size={16} style={{ color: "var(--lve-terracotta)" }} />
+              <span>Prolonger le voyage</span>
+            </div>
             <h2
-              className="font-extrabold mb-8"
-              style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
+              className="text-2xl md:text-3xl font-bold mb-6 tracking-tight"
+              style={{ fontFamily: "var(--font-title)", color: "var(--lve-charcoal)" }}
             >
               Extensions possibles
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="flex flex-col gap-6">
               {eligibleCombos.map(({ combo, otherDestination }) => (
-                <div key={combo.id} className="border p-6" style={{ borderColor: "var(--border)" }}>
-                  <h3
-                    className="font-semibold mb-2"
-                    style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
-                  >
-                    {combo.title}
-                  </h3>
-                  <p className="mono mb-3" style={{ color: "var(--text-secondary)", fontSize: "0.85rem" }}>
-                    {combo.vibe_type}
-                  </p>
-                  <p className="leading-relaxed mb-4">{combo.description}</p>
-
-                  <div
-                    className="p-3 mb-4"
-                    style={{ background: "var(--bg-elevated)", border: "1px solid var(--border)" }}
-                  >
-                    <p className="mono mb-1" style={{ color: "var(--text-secondary)", fontSize: "0.75rem" }}>
-                      Comment faire la liaison
-                    </p>
-                    <p className="text-sm mb-1">
-                      {combo.transition_logistics.transport_mode} —{" "}
-                      {combo.transition_logistics.recommended_days}
-                    </p>
-                    {combo.transition_logistics.practical_tip && (
-                      <p className="text-sm italic mb-1" style={{ color: "var(--text-secondary)" }}>
-                        {combo.transition_logistics.practical_tip}
-                      </p>
-                    )}
-                    {combo.transition_logistics.partner_link && (
-                      <a
-                        href={combo.transition_logistics.partner_link}
-                        target="_blank"
-                        rel="noopener noreferrer nofollow"
-                        className="mono text-sm inline-block mt-1"
-                        style={{ color: "var(--ember)" }}
-                      >
-                        {combo.transition_logistics.partner_link_label || "Voir l'offre →"}
-                      </a>
-                    )}
-                  </div>
-
-                  <a
-                    href={`/voyages/${otherDestination.content_slug}?id=${otherDestination.id}`}
-                    className="mono"
-                    style={{ color: "var(--ember)" }}
-                  >
-                    Découvrir {otherDestination.title} →
-                  </a>
-                </div>
+                <TripExtensionCard key={combo.id} combo={combo} otherDestination={otherDestination} />
               ))}
             </div>
-          </div>
+          </section>
         )}
       </div>
     </div>
