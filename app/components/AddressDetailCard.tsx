@@ -183,17 +183,24 @@ export function AddressDetailCard({
         </p>
       )}
 
-      {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de tags, pour que le bouton du bas
-          (poussé par mt-auto) parte du même niveau même quand le nombre de tags diffère. */}
+      {/* Limité à 2 tags (30/08/2026, demande Soumia) : au-delà d'une ligne, le `min-h` fixe
+          (pensé pour UNE rangée) ne suffisait plus à absorber les cartes à 3+ tags — elles
+          passaient sur 2 lignes et décalaient le bouton du bas par rapport aux cartes voisines.
+          Plafonner à 2 tags garde une hauteur constante quel que soit le nombre réel de tags. */}
       {/* Pilules blanches/terracotta (29/08/2026, demande Gemini — était bordure grise/mono) :
-          rounded-full, fond blanc, texte terracotta, sans-serif. */}
+          rounded-full, fond blanc, texte terracotta, sans-serif. Taille resserrée le 30/08/2026
+          (text-[11px], moins de padding) pour un rendu moins "grosse pilule". */}
       {card.tags.length > 0 && (
-        <div className="mb-4 flex min-h-[2.25rem] flex-wrap gap-2">
-          {card.tags.map((tag) => (
+        <div className="mb-4 flex items-center flex-wrap gap-1.5">
+          {card.tags.slice(0, 2).map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-white py-0.5 px-2.5 text-xs font-medium leading-tight shadow-sm"
-              style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}
+              className="rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] font-medium leading-tight shadow-sm"
+              style={{
+                color: "var(--lve-terracotta-dark)",
+                fontFamily: "var(--font-display)",
+                border: "1px solid color-mix(in srgb, var(--lve-terracotta) 20%, transparent)",
+              }}
             >
               {tag}
             </span>
