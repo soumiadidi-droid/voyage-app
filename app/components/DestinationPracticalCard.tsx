@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Compass, Sun, Train, Plane, Bike, Car, Flower, Leaf, Snowflake, ExternalLink, Sparkles, type LucideIcon } from "lucide-react";
+import { Compass, Sun, Train, Plane, Bike, Car, Flower, Leaf, Snowflake, ExternalLink, type LucideIcon } from "lucide-react";
 import type { Seasonality, TravelFromParis, RegionalTransport } from "@/lib/travel-match/types";
 
 type SeasonKey = keyof Seasonality["weather_profile"];
@@ -42,6 +42,13 @@ function currentSeason(): SeasonKey {
 // spec transmise en ambre/orange générique, remplacée par les tokens réels du site (--lve-slate-*,
 // la 5e couleur dédiée à ce bloc, cohérent avec le reste de la charte) plutôt qu'une couleur hors
 // système.
+//
+// 2e passe d'épure (30/08/2026) : bulle "Conseil d'initié" retirée de l'affichage (la donnée
+// insider_tip reste en base, juste plus montrée ici) ; details/summary/booking en line-clamp-2
+// pour rester compacts quelle que soit la longueur du texte réel par destination — pas de
+// raccourcissement en dur du contenu (chaque destination a un texte différent, un exemple donné
+// pour le Japon ne peut pas être figé dans le composant partagé) ; sous-cartes en h-full pour
+// s'aligner à la même hauteur.
 export function DestinationPracticalCard({
   travelFromParis,
   seasonality,
@@ -89,10 +96,10 @@ export function DestinationPracticalCard({
         </span>
 
         {hasTransportGrid && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-stretch">
             {/* Sous-carte 1 : Trajet depuis Paris */}
             {travelFromParis && (
-              <div className="rounded-2xl p-4 shadow-sm" style={subcardStyle}>
+              <div className="rounded-2xl p-4 shadow-sm h-full flex flex-col" style={subcardStyle}>
                 <div className="flex items-center gap-3">
                   <div
                     className="p-2 rounded-xl shrink-0"
@@ -107,11 +114,11 @@ export function DestinationPracticalCard({
                 <p className="font-semibold mt-3" style={{ color: "var(--lve-charcoal)" }}>
                   {travelFromParis.mode} — {travelFromParis.duration}
                 </p>
-                <p className="text-sm mt-0.5" style={{ color: "var(--text-secondary)" }}>
+                <p className="text-sm mt-0.5 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
                   {travelFromParis.details}
                 </p>
                 {travelFromParis.booking_platform && (
-                  <p className="text-sm mt-1.5">
+                  <p className="text-sm mt-1.5 line-clamp-2">
                     {travelFromParis.booking_url ? (
                       <a
                         href={travelFromParis.booking_url}
@@ -133,26 +140,12 @@ export function DestinationPracticalCard({
                     )}
                   </p>
                 )}
-
-                {/* Bulle "Conseil d'initié" — jamais générée automatiquement, absente tant que
-                    Soumia n'a pas donné le vrai conseil vécu (voir insider_tip dans types.ts). */}
-                {travelFromParis.insider_tip && (
-                  <div
-                    className="mt-3 flex items-start gap-2 rounded-xl px-3 py-2 text-sm"
-                    style={{ background: "var(--lve-slate-bg)", color: "var(--lve-slate-dark)" }}
-                  >
-                    <Sparkles size={14} className="shrink-0 mt-0.5" />
-                    <span>
-                      <strong>Conseil d&apos;initié —</strong> {travelFromParis.insider_tip}
-                    </span>
-                  </div>
-                )}
               </div>
             )}
 
             {/* Sous-carte 2 : Sur place & Mobilité */}
             {regionalTransport && (
-              <div className="rounded-2xl p-4 shadow-sm" style={subcardStyle}>
+              <div className="rounded-2xl p-4 shadow-sm h-full flex flex-col" style={subcardStyle}>
                 <div className="flex items-center gap-3">
                   <div
                     className="p-2 rounded-xl shrink-0"
@@ -170,11 +163,11 @@ export function DestinationPracticalCard({
                 <p className="font-semibold mt-3" style={{ color: "var(--lve-charcoal)" }}>
                   {regionalTransport.recommended_mode}
                 </p>
-                <p className="text-sm mt-0.5" style={{ color: "var(--text-secondary)" }}>
+                <p className="text-sm mt-0.5 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
                   {regionalTransport.summary}
                 </p>
                 {regionalTransport.pass_or_tip && (
-                  <p className="text-sm italic mt-1" style={{ color: "var(--text-secondary)" }}>
+                  <p className="text-sm italic mt-1 line-clamp-2" style={{ color: "var(--text-secondary)" }}>
                     {regionalTransport.pass_or_tip}
                   </p>
                 )}
