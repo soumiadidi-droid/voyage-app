@@ -2,7 +2,6 @@
 
 import { Users } from "lucide-react";
 import { useState } from "react";
-import type { SVGProps } from "react";
 import { type Card } from "@/content/voyages";
 import { type AddressCategory } from "@/lib/category-images";
 import { usePlaceFavorites } from "@/lib/favorites";
@@ -10,22 +9,11 @@ import { FAMILY_PROFILE_OPTIONS, type FamilyProfile } from "@/lib/travel-match/t
 import { InstagramPopup } from "./InstagramPopup";
 import { LikeButton } from "./LikeButton";
 import { CATEGORY_META } from "./AddressGrid";
+import { InstagramGlyph } from "./BrandGlyphs";
 
 const FAMILY_PROFILE_LABEL: Record<FamilyProfile, string> = Object.fromEntries(
   FAMILY_PROFILE_OPTIONS.map((o) => [o.value, o.label])
 ) as Record<FamilyProfile, string>;
-
-// lucide-react n'a plus d'icônes de marque (Instagram retiré, cf. leur politique de licence) —
-// glyphe maison au même gabarit que les icônes lucide environnantes (viewBox 24, strokeWidth 1.75).
-function InstagramGlyph(props: SVGProps<SVGSVGElement>) {
-  return (
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} strokeLinecap="round" strokeLinejoin="round" {...props}>
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4.2" />
-      <circle cx="17.2" cy="6.8" r="0.6" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
 
 // Pavé "Adapté aux Familles" — inchangé depuis l'ancienne AddressDetailModal. Pas de contenu par
 // défaut/inventé : un hôtel sans entrée pour ce profil n'affiche simplement rien.

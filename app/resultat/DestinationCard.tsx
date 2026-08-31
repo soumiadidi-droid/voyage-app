@@ -1,5 +1,6 @@
 import { TriangleAlert } from "lucide-react";
 import { LikeButton } from "../components/LikeButton";
+import { ShareButton } from "../components/ShareButton";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { ScoredDestination } from "@/lib/travel-match/engine";
 
@@ -30,7 +31,14 @@ export function DestinationCard({
           {/* Pas d'assombrissement de la photo (29/08/2026, "je veux que le texte soit direct sur
               l'image") : lisibilité du titre via text-shadow, badge/cœur ont leur propre fond
               plein — aucun voile sur la photo. */}
-          <div className="absolute right-4 top-4">
+          <div className="absolute right-4 top-4 flex items-center gap-2">
+            <ShareButton
+              path={href}
+              title={destination.title}
+              description={destination.summary}
+              imageUrl={heroImage}
+              size="sm"
+            />
             <LikeButton id={destination.id} size="sm" />
           </div>
           {/* Titre remonté sur la photo (29/08/2026, repéré par Soumia en testant Porto — le nom
@@ -76,6 +84,7 @@ export function DestinationCard({
               >
                 ✨ {score}% Match
               </span>
+              <ShareButton path={href} title={destination.title} description={destination.summary} size="sm" />
               <LikeButton id={destination.id} size="sm" />
             </div>
           </div>

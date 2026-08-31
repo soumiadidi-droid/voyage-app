@@ -40,7 +40,10 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "500"],
 });
 
+// metadataBase (31/08/2026, ajout OG tags) — nécessaire pour que Next résolve les URLs
+// openGraph.images en absolu. URL de prod confirmée dans ce même CLAUDE.md ("État actuel").
 export const metadata: Metadata = {
+  metadataBase: new URL("https://voyage-app-sage.vercel.app"),
   title: "Le Voyage des Émotions",
   description: "Un pays, une histoire, une photo à la fois.",
 };

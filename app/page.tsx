@@ -1,6 +1,40 @@
 import Link from "next/link";
+import { InteractiveDemo, type DemoItem } from "./components/InteractiveDemo";
+import { getDestinations, getVoyage } from "@/lib/travel-match/data";
 
-export default function Home() {
+// 3 destinations réelles du catalogue mappées aux 3 puces de la démo (31/08/2026) — aucune donnée
+// inventée, chaque puce affiche les vraies données Neon (DestinationPracticalCard/AddressDetailCard
+// avec leurs propres gardes "vide si non renseigné").
+const DEMO_MAPPING: { id: string; label: string }[] = [
+  { id: "cote-basque", label: "Séjour Météo Douce & TGV" },
+  { id: "japon-tradition-nature", label: "Escapade Japon" },
+  { id: "lisbonne", label: "Week-end Design" },
+];
+
+async function buildDemoItems(): Promise<DemoItem[]> {
+  const destinations = await getDestinations();
+  const items: DemoItem[] = [];
+  for (const { id, label } of DEMO_MAPPING) {
+    const destination = destinations.find((d) => d.id === id);
+    if (!destination) continue;
+    const voyage = await getVoyage(destination.content_slug);
+    items.push({
+      id,
+      label,
+      destinationTitle: destination.title,
+      travelFromParis: destination.travel_from_paris,
+      seasonality: destination.seasonality,
+      regionalTransport: destination.regional_transport,
+      addressCard: voyage?.stays[0],
+      addressCategory: "Hôtel",
+    });
+  }
+  return items;
+}
+
+export default async function Home() {
+  const demoItems = await buildDemoItems();
+
   return (
     <div>
       {/* Photo remise en place (29/08/2026, demande explicite de Soumia — revient sur la décision
@@ -67,6 +101,8 @@ export default function Home() {
       </div>
 
       <main className="max-w-4xl mx-auto px-6 sm:px-8">
+        {demoItems.length > 0 && <InteractiveDemo items={demoItems} />}
+
         <div className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory">
           <div className="max-w-4xl mx-auto space-y-8 text-left">
             <span

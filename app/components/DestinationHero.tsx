@@ -1,4 +1,5 @@
 import { LikeButton } from "./LikeButton";
+import { ShareButton } from "./ShareButton";
 import type { VoyageContent } from "@/content/voyages";
 
 // Hero fixe (décidé le 26/08/2026 — plus de carrousel). Fond noir semi-transparent par défaut ;
@@ -20,11 +21,13 @@ export function DestinationHero({
   intro,
   favoriteId,
   heroImage,
+  sharePath,
 }: {
   hero: VoyageContent["hero"];
   intro: string;
   favoriteId: string;
   heroImage?: string;
+  sharePath: string;
 }) {
   return (
     <div className="relative min-h-screen">
@@ -41,7 +44,8 @@ export function DestinationHero({
         <div className="absolute inset-x-0 top-0 h-screen bg-gradient-to-t from-black/60 via-black/30 to-black/20" />
       )}
 
-      <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20">
+      <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20 flex items-center gap-2">
+        <ShareButton path={sharePath} title={hero.title} description={hero.tagline} imageUrl={heroImage} />
         <LikeButton id={favoriteId} />
       </div>
 

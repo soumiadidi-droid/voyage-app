@@ -20,10 +20,38 @@ import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 // dynamiquement à chaque requête (searchParams la force en `ƒ`), donc la pré-génération
 // n'apportait aucun gain SSG réel — juste une dépendance DB au moment du build.
 
+// OG tags (31/08/2026) : og:description croise l'accroche de la destination avec sa logistique
+// transport réelle (travel_from_paris) quand elle existe. `destinations` reçoit une 2e requête
+// Neon ici (déjà le cas pour getVoyage, appelé séparément par la page plus bas — même style que
+// le reste du fichier, pas de cache/dedup particulier mis en place).
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const voyage = await getVoyage(slug);
-  return { title: voyage ? `${voyage.hero.title} — Le Voyage des Émotions` : "Voyage" };
+  if (!voyage) return { title: "Voyage" };
+
+  const destinations = await getDestinations();
+  // Résolution par content_slug, sans `id` (pas transmis à generateMetadata) — même approximation
+  // déjà acceptée ailleurs dans ce fichier pour Italie/Amérique du Nord (plusieurs destinations,
+  // un seul content_slug) : la 1ère correspondance suffit pour une preview de partage.
+  const destination = destinations.find((d) => d.content_slug === slug);
+  const travelInfo = destination?.travel_from_paris
+    ? `${destination.travel_from_paris.mode}, ${destination.travel_from_paris.duration} depuis Paris`
+    : undefined;
+  const description = [voyage.hero.tagline, travelInfo].filter(Boolean).join(" — ");
+  const image = DESTINATION_HERO_IMAGE[slug];
+
+  return {
+    title: `${voyage.hero.title} — Le Voyage des Émotions`,
+    openGraph: {
+      title: `Découvre ${voyage.hero.title} sur Voyage des Émotions`,
+      description,
+      images: image ? [image] : undefined,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+    },
+  };
 }
 
 // PracticalInfoSection (pilules météo/transport compactes) et le bloc ClimateSection séparé,
@@ -112,6 +140,7 @@ export default async function VoyagePage({
         intro={voyage.intro}
         favoriteId={favoriteId ?? slug}
         heroImage={DESTINATION_HERO_IMAGE[voyage.slug]}
+        sharePath={`/voyages/${slug}`}
       />
 
       {/* <div>, pas <main> (29/08/2026, bug trouvé au passage) : app/layout.tsx a déjà SON <main>
