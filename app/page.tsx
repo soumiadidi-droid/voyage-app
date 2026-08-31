@@ -53,6 +53,17 @@ const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string }> = {
   },
 };
 
+// Override photo teaser (1er septembre 2026, demande Soumia) — indépendant du calcul "meilleure
+// destination réelle sur l'axe" (celui-ci reste la source pour tag/label/matchScore) : juste
+// l'image affichée. "new-york" est une vraie destination du catalogue (DESTINATION_HERO_IMAGE),
+// la photo de vagues est une vraie photo Unsplash vérifiée (Philipp Deus,
+// https://unsplash.com/photos/ocean-wave-crashing-with-water-splashing-Nu3xicKn_ZY), pas rattachée
+// à une destination précise du catalogue — cohérent avec le teaser qui ne montre que l'ambiance.
+const AXIS_HERO_IMAGE_OVERRIDE: Partial<Record<ScoreAxis, string>> = {
+  nature_plage: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+  effervescence_urbaine: DESTINATION_HERO_IMAGE["new-york"],
+};
+
 // Score dérivé d'une destination sur un axe d'archétype — même règle que
 // TravelerProfileCard.derivedAxisScores (nature_plage = MAX(nature, plage)), appliquée ici aux
 // scores d'une destination plutôt qu'aux réponses d'un utilisateur (même forme de données).
@@ -95,7 +106,7 @@ async function buildDemoItems(): Promise<DemoItem[]> {
       badge: archetype.subtitle,
       matchScore: AXIS_MATCH_SCORE[axis],
       destinationTitle: teaser.title,
-      heroImage: DESTINATION_HERO_IMAGE[destination.content_slug],
+      heroImage: AXIS_HERO_IMAGE_OVERRIDE[axis] ?? DESTINATION_HERO_IMAGE[destination.content_slug],
     });
   }
   return items;
