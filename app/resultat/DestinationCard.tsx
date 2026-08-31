@@ -17,7 +17,8 @@ export function DestinationCard({
   brokenFilters,
   hasComboOpportunity,
   href,
-}: ScoredDestination & { href: string }) {
+  archetypeTitle,
+}: ScoredDestination & { href: string; archetypeTitle?: string }) {
   const heroImage = DESTINATION_HERO_IMAGE[destination.content_slug];
 
   return (
@@ -37,10 +38,8 @@ export function DestinationCard({
               title={destination.title}
               description={destination.summary}
               imageUrl={heroImage}
-              eyebrow={destination.tags.slice(0, 2).join(" · ")}
               matchScore={score}
-              travelFromParis={destination.travel_from_paris}
-              bestMonths={destination.seasonality?.best_months}
+              profile={archetypeTitle}
               size="sm"
             />
             <LikeButton id={destination.id} size="sm" />
@@ -92,10 +91,8 @@ export function DestinationCard({
                 path={href}
                 title={destination.title}
                 description={destination.summary}
-                eyebrow={destination.tags.slice(0, 2).join(" · ")}
                 matchScore={score}
-                travelFromParis={destination.travel_from_paris}
-                bestMonths={destination.seasonality?.best_months}
+                profile={archetypeTitle}
                 size="sm"
               />
               <LikeButton id={destination.id} size="sm" />

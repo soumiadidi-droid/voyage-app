@@ -1,7 +1,6 @@
 import { LikeButton } from "./LikeButton";
 import { ShareButton } from "./ShareButton";
 import type { VoyageContent } from "@/content/voyages";
-import type { TravelFromParis } from "@/lib/travel-match/types";
 
 // Hero fixe (décidé le 26/08/2026 — plus de carrousel). Fond noir semi-transparent par défaut ;
 // une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
@@ -23,16 +22,12 @@ export function DestinationHero({
   favoriteId,
   heroImage,
   sharePath,
-  travelFromParis,
-  bestMonths,
 }: {
   hero: VoyageContent["hero"];
   intro: string;
   favoriteId: string;
   heroImage?: string;
   sharePath: string;
-  travelFromParis?: TravelFromParis;
-  bestMonths?: string[];
 }) {
   const eyebrow = hero.country + (hero.tags.length > 0 ? ` — ${hero.tags.join(" · ")}` : "");
 
@@ -52,15 +47,7 @@ export function DestinationHero({
       )}
 
       <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20 flex items-center gap-2">
-        <ShareButton
-          path={sharePath}
-          title={hero.title}
-          description={hero.tagline}
-          imageUrl={heroImage}
-          eyebrow={eyebrow}
-          travelFromParis={travelFromParis}
-          bestMonths={bestMonths}
-        />
+        <ShareButton path={sharePath} title={hero.title} description={hero.tagline} imageUrl={heroImage} />
         <LikeButton id={favoriteId} />
       </div>
 

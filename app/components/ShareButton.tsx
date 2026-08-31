@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Share2 } from "lucide-react";
 import { ShareModal } from "./ShareModal";
-import type { TravelFromParis } from "@/lib/travel-match/types";
 
 // Bouton de partage (31/08/2026) — même style "verre" que LikeButton (app/components/LikeButton.tsx),
 // posé dans les mêmes coins qu'elle (DestinationCard, DestinationHero). Ouvre ShareModal en popover
@@ -13,22 +12,19 @@ export function ShareButton({
   title,
   description,
   imageUrl,
-  eyebrow,
   matchScore,
-  travelFromParis,
-  bestMonths,
+  profile,
   size = "md",
 }: {
   path: string;
   title: string;
   description?: string;
   imageUrl?: string;
-  // Habillage de l'image de partage (reprise du 31/08/2026 — "générer une image avec le look and
-  // feel de la destination avec tout") : mêmes infos que sur la vraie fiche/carte destination.
-  eyebrow?: string;
   matchScore?: number;
-  travelFromParis?: TravelFromParis;
-  bestMonths?: string[];
+  // Archétype réel de l'utilisateur (1er septembre 2026, carte Story "Profil : X") — seulement
+  // disponible sur /resultat (getArchetypeTitle(answers)), absent sur la fiche voyage en accès
+  // direct : la ligne "Profil" ne s'affiche simplement pas dans ce cas.
+  profile?: string;
   size?: "sm" | "md";
 }) {
   const [open, setOpen] = useState(false);
@@ -74,10 +70,8 @@ export function ShareButton({
           title={title}
           description={description}
           imageUrl={imageUrl}
-          eyebrow={eyebrow}
           matchScore={matchScore}
-          travelFromParis={travelFromParis}
-          bestMonths={bestMonths}
+          profile={profile}
           onClose={() => setOpen(false)}
         />
       )}

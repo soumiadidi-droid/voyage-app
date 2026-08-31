@@ -150,6 +150,9 @@ export default async function ResultatPage({
             href={`/voyages/${result.destination.content_slug}?id=${result.destination.id}&duration=${answers.filters.duration}&climate=${answers.filters.climate}${
               answers.familyProfile ? `&familyProfile=${answers.familyProfile}` : ""
             }`}
+            // Profil voyageur réel (1er septembre 2026, demande Soumia — carte de partage Story
+            // "Profil : X") : même archétype que TravelerProfileCard juste au-dessus, pas recalculé.
+            archetypeTitle={getArchetypeTitle(answers)}
           />
         ))}
       </div>
