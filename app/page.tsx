@@ -1,32 +1,129 @@
 import Link from "next/link";
-import { InteractiveDemo, type DemoItem } from "./components/InteractiveDemo";
-import { getDestinations, getVoyage } from "@/lib/travel-match/data";
+import { HeroLandingPage, type DemoItem } from "./components/HeroLandingPage";
+import { getDestinations } from "@/lib/travel-match/data";
+import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
+import { ARCHETYPES, SCORE_AXES, type ScoreAxis } from "./components/TravelerProfileCard";
+import type { Destination } from "@/lib/travel-match/types";
 
-// 3 destinations réelles du catalogue mappées aux 3 puces de la démo (31/08/2026) — aucune donnée
-// inventée, chaque puce affiche les vraies données Neon (DestinationPracticalCard/AddressDetailCard
-// avec leurs propres gardes "vide si non renseigné").
-const DEMO_MAPPING: { id: string; label: string }[] = [
-  { id: "cote-basque", label: "Séjour Météo Douce & TGV" },
-  { id: "japon-tradition-nature", label: "Escapade Japon" },
-  { id: "lisbonne", label: "Week-end Design" },
-];
+// 5 puces = les 5 vrais "profils voyageur" (mêmes archétypes/textes validés que TravelerProfileCard,
+// affichés sur /resultat) — décidé le 31/08/2026, reskin teaser sombre. Emoji cosmétique par axe
+// pour le libellé du bouton, pas dans les textes validés eux-mêmes.
+const AXIS_EMOJI: Record<ScoreAxis, string> = {
+  repos: "🌿",
+  exploration: "🎨",
+  gastronomie: "🍷",
+  nature_plage: "🌊",
+  effervescence_urbaine: "🏙️",
+};
+
+// Décoratif (31/08/2026) — pas un vrai calcul, pas de réponses utilisateur dans cette démo.
+const AXIS_MATCH_SCORE: Record<ScoreAxis, number> = {
+  repos: 97,
+  exploration: 94,
+  gastronomie: 98,
+  nature_plage: 96,
+  effervescence_urbaine: 95,
+};
+
+// CTA personnalisé par archétype (copy Claude, pas de donnée factuelle) — texte du bouton du hero.
+const AXIS_CTA_TEXT: Record<ScoreAxis, string> = {
+  repos: "Trouver ma parenthèse intimiste →",
+  exploration: "Partir en quête de pépites →",
+  gastronomie: "Créer mon itinéraire hédoniste →",
+  nature_plage: "Explorer mon souffle sauvage →",
+  effervescence_urbaine: "Découvrir mon city-break sur-mesure →",
+};
+
+// Habillage "teaser" par archétype (31/08/2026, demande Soumia après retour sur la 1ère version qui
+// donnait directement la destination + l'hôtel exacts, "l'utilisateur a déjà la réponse") — copy
+// générique par type d'expérience, jamais le nom de la vraie destination gagnante ni l'adresse
+// précise. Seuls la photo (ambiance réelle) et le temps de trajet (donnée réelle non-spoiler) restent
+// tirés de la vraie destination qui gagne l'axe ; le nom du lieu et l'adresse exacte sont masqués.
+const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string; stayHint: string; essentials: string[] }> = {
+  repos: {
+    title: "Parenthèse Nature & Grand Calme",
+    tag: "Refuge & Calme Absolu",
+    stayHint: "Éco-lodge enveloppant & spa privatif",
+    essentials: ["🏠 Refuge intimiste", "🍽️ Table de saison", "🌿 Calme absolu"],
+  },
+  exploration: {
+    title: "Toscane & Ateliers Secrets",
+    tag: "Patrimoine & Savoir-faire",
+    stayHint: "Hôtel design & ateliers d'artisans secrets",
+    essentials: ["🏠 Refuge de charme", "🍷 Tables locales", "🎨 Savoir-faire & Artisans"],
+  },
+  gastronomie: {
+    title: "Route des Saveurs & Tables d'Exception",
+    tag: "Terroir & Gastronomie",
+    stayHint: "Auberge de charme & dégustations chez le vigneron",
+    essentials: ["🏠 Adresse gourmande", "🍷 Tables d'exception", "🍇 Vignerons & terroir"],
+  },
+  nature_plage: {
+    title: "Sentiers Sauvages & Horizon Marin",
+    tag: "Grands Espaces & Mer",
+    stayHint: "Cabane nature & randonnée bord de falaise",
+    essentials: ["🏠 Cabane nature", "🐟 Cuisine locale", "🥾 Sentiers & grand air"],
+  },
+  effervescence_urbaine: {
+    title: "City-Trip Design & Effervescence",
+    tag: "Énergie Urbaine & Architecture",
+    stayHint: "Boutique-hôtel central & rooftops tendance",
+    essentials: ["🏠 Boutique-hôtel", "🍸 Rooftops & tables", "🎭 Culture & design"],
+  },
+};
+
+// Score dérivé d'une destination sur un axe d'archétype — même règle que
+// TravelerProfileCard.derivedAxisScores (nature_plage = MAX(nature, plage)), appliquée ici aux
+// scores d'une destination plutôt qu'aux réponses d'un utilisateur (même forme de données).
+function destinationAxisScore(scores: Destination["scores"], axis: ScoreAxis): number {
+  return axis === "nature_plage" ? Math.max(scores.nature, scores.plage) : scores[axis];
+}
+
+// Pour chaque archétype, la vraie destination du catalogue qui le représente le mieux (score max
+// sur l'axe) — calculé dynamiquement, jamais choisi/inventé à la main : reste correct même si le
+// catalogue évolue. `excluded` évite qu'une même destination gagne 2 archétypes à la fois (ex.
+// Crète en tête à la fois sur repos et nature_plage) : sans ça, la démo montrait la même
+// destination sur 2 des 5 puces, moins parlant pour montrer la variété du catalogue — on garde
+// quand même la meilleure réelle sur l'axe, juste parmi les destinations pas déjà utilisées.
+function bestDestinationForAxis(destinations: Destination[], axis: ScoreAxis, excluded: Set<string>): Destination {
+  const pool = destinations.filter((d) => !excluded.has(d.id));
+  const candidates = pool.length > 0 ? pool : destinations;
+  return candidates.reduce((best, d) =>
+    destinationAxisScore(d.scores, axis) > destinationAxisScore(best.scores, axis) ? d : best
+  );
+}
 
 async function buildDemoItems(): Promise<DemoItem[]> {
   const destinations = await getDestinations();
+  if (destinations.length === 0) return [];
+
+  const usedIds = new Set<string>();
   const items: DemoItem[] = [];
-  for (const { id, label } of DEMO_MAPPING) {
-    const destination = destinations.find((d) => d.id === id);
-    if (!destination) continue;
-    const voyage = await getVoyage(destination.content_slug);
+  for (const axis of SCORE_AXES) {
+    // La vraie destination qui gagne l'axe sert uniquement à choisir la photo (ambiance réelle) et
+    // le temps de trajet réel — jamais affichée par son nom ni son adresse exacte (teaser, voir
+    // AXIS_TEASER ci-dessus).
+    const destination = bestDestinationForAxis(destinations, axis, usedIds);
+    usedIds.add(destination.id);
+    const archetype = ARCHETYPES[axis];
+    const teaser = AXIS_TEASER[axis];
+
+    const transportLine = destination.travel_from_paris
+      ? `${destination.travel_from_paris.mode} · ${destination.travel_from_paris.duration} depuis Paris`
+      : undefined;
+    const details = [transportLine, teaser.stayHint].filter(Boolean).join(" • ");
+
     items.push({
-      id,
-      label,
-      destinationTitle: destination.title,
-      travelFromParis: destination.travel_from_paris,
-      seasonality: destination.seasonality,
-      regionalTransport: destination.regional_transport,
-      addressCard: voyage?.stays[0],
-      addressCategory: "Hôtel",
+      id: axis,
+      label: `${AXIS_EMOJI[axis]} ${archetype.title}`,
+      tag: teaser.tag,
+      badge: archetype.subtitle,
+      essentials: teaser.essentials,
+      matchScore: AXIS_MATCH_SCORE[axis],
+      destinationTitle: teaser.title,
+      details,
+      ctaText: AXIS_CTA_TEXT[axis],
+      heroImage: DESTINATION_HERO_IMAGE[destination.content_slug],
     });
   }
   return items;
@@ -37,72 +134,14 @@ export default async function Home() {
 
   return (
     <div>
-      {/* Photo remise en place (29/08/2026, demande explicite de Soumia — revient sur la décision
-          du 26/08/2026 "plus d'image du tout"). Aile d'avion au coucher de soleil, dernière photo
-          ajoutée à public/images/ (redimensionnée à 2400px de large). Même traitement voile sombre
-          que DestinationHero pour garder le texte blanc lisible. */}
-      <div
-        className="relative h-[85vh] flex items-center justify-center text-center px-6 overflow-hidden"
-      >
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: "url('/images/hero-accueil.jpg')",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        />
-        {/* Plus d'overlay du tout (29/08/2026, demande explicite de Soumia — "je veux que le texte
-            soit direct sur l'image") : la photo garde sa lumière intacte, la lisibilité vient
-            d'une ombre portée sur le texte (text-shadow) plutôt que d'assombrir la photo. */}
-        <div className="relative z-10 max-w-3xl mx-auto space-y-6">
-          {/* Hero réécrit (29/08/2026, 2e passe) : promesse encore plus directe et affirmative. */}
-          <h1
-            className="text-white tracking-tight leading-tight"
-            style={{
-              fontFamily: "var(--font-title)",
-              fontSize: "clamp(2.4rem, 7vw, 4rem)",
-              textShadow: "0 2px 20px rgba(0,0,0,0.55)",
-            }}
-          >
-            Le voyage qui vous ressemble existe déjà.
-          </h1>
-          {/* Respiration ajustée (29/08/2026) : leading un peu plus ample + tracking léger, plus
-              d'air avant le CTA (pt-4 → pt-6). */}
-          <p
-            className="text-white/90 max-w-xl mx-auto tracking-wide"
-            style={{
-              fontFamily: "var(--font-display)",
-              fontSize: "clamp(1rem, 2vw, 1.15rem)",
-              lineHeight: 1.8,
-              textShadow: "0 1px 12px rgba(0,0,0,0.55)",
-            }}
-          >
-            Votre match idéal et nos adresses exclusives.
-          </p>
-          {/* Repositionné (29/08/2026, demande Gemini) : était en haut du Hero, se noyait dans la
-              photo — placé juste au-dessus du CTA, badge discret plutôt qu'un paragraphe. */}
-          <div className="pt-6">
-            <p
-              className="text-lve-terracotta text-xs font-semibold uppercase tracking-[0.25em] mb-3"
-              style={{ fontFamily: "var(--font-display)", textShadow: "0 1px 8px rgba(0,0,0,0.55)" }}
-            >
-              9 questions — 2 minutes
-            </p>
-            <Link
-              href="/questionnaire"
-              className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white font-medium text-[11px] tracking-widest uppercase px-8 py-4 rounded-lg shadow-lg transition-all hover:-translate-y-0.5 no-underline"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              Lancer Travel Match
-            </Link>
-          </div>
-        </div>
-      </div>
+      {/* Ancien hero photo (aile d'avion + "Le voyage qui vous ressemble existe déjà.") remplacé
+          le 31/08/2026 par HeroLandingPage — fusion hero + démo interactive, habillage fourni par
+          Soumia. La photo d'avion (public/images/hero-accueil.jpg) n'est plus utilisée sur cette
+          page — signalé explicitement, cf. message de fin de tour, à remettre si ce n'était pas
+          l'intention en remplaçant ce composant. */}
+      {demoItems.length > 0 && <HeroLandingPage items={demoItems} />}
 
       <main className="max-w-4xl mx-auto px-6 sm:px-8">
-        {demoItems.length > 0 && <InteractiveDemo items={demoItems} />}
-
         <div className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory">
           <div className="max-w-4xl mx-auto space-y-8 text-left">
             <span

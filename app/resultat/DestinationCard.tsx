@@ -37,6 +37,10 @@ export function DestinationCard({
               title={destination.title}
               description={destination.summary}
               imageUrl={heroImage}
+              eyebrow={destination.tags.slice(0, 2).join(" · ")}
+              matchScore={score}
+              travelFromParis={destination.travel_from_paris}
+              bestMonths={destination.seasonality?.best_months}
               size="sm"
             />
             <LikeButton id={destination.id} size="sm" />
@@ -84,7 +88,16 @@ export function DestinationCard({
               >
                 ✨ {score}% Match
               </span>
-              <ShareButton path={href} title={destination.title} description={destination.summary} size="sm" />
+              <ShareButton
+                path={href}
+                title={destination.title}
+                description={destination.summary}
+                eyebrow={destination.tags.slice(0, 2).join(" · ")}
+                matchScore={score}
+                travelFromParis={destination.travel_from_paris}
+                bestMonths={destination.seasonality?.best_months}
+                size="sm"
+              />
               <LikeButton id={destination.id} size="sm" />
             </div>
           </div>

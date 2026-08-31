@@ -141,6 +141,8 @@ export default async function VoyagePage({
         favoriteId={favoriteId ?? slug}
         heroImage={DESTINATION_HERO_IMAGE[voyage.slug]}
         sharePath={`/voyages/${slug}`}
+        travelFromParis={destination?.travel_from_paris}
+        bestMonths={destination?.seasonality?.best_months}
       />
 
       {/* <div>, pas <main> (29/08/2026, bug trouvé au passage) : app/layout.tsx a déjà SON <main>

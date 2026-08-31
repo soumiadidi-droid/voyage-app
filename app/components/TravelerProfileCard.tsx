@@ -24,8 +24,11 @@ import type { UserAnswers } from "@/lib/travel-match/types";
 
 type Pill = { icon: LucideIcon; label: string };
 
-const SCORE_AXES = ["repos", "exploration", "gastronomie", "nature_plage", "effervescence_urbaine"] as const;
-type ScoreAxis = (typeof SCORE_AXES)[number];
+// Exportés (31/08/2026) pour être réutilisés par la démo teaser de la landing page
+// (InteractiveDemo.tsx, via app/page.tsx) — même 5 archétypes, mêmes textes validés, pas de
+// duplication de copy.
+export const SCORE_AXES = ["repos", "exploration", "gastronomie", "nature_plage", "effervescence_urbaine"] as const;
+export type ScoreAxis = (typeof SCORE_AXES)[number];
 
 const SCORE_PILLS: Record<ScoreAxis, Pill> = {
   repos: { icon: Moon, label: "Détente & Ressourcement" },
@@ -45,12 +48,12 @@ const BUDGET_PILLS: Record<UserAnswers["filters"]["budget"], Pill> = {
   premium: { icon: Sparkles, label: "Expérience Premium" },
 };
 
-type Archetype = { title: string; subtitle: string; intro: string };
+export type Archetype = { title: string; subtitle: string; intro: string };
 
 // Textes définitifs validés par Soumia le 29/08/2026 (réécriture complète — les titres/intros du
 // 23/08/2026 sont remplacés, plume plus incarnée/sensible, + nouveau champ `subtitle`) — ne plus
 // modifier sans son accord. Mêmes 5 clés/axes qu'avant, aucun changement côté moteur de scoring.
-const ARCHETYPES: Record<ScoreAxis, Archetype> = {
+export const ARCHETYPES: Record<ScoreAxis, Archetype> = {
   repos: {
     title: "La Parenthèse Intimiste",
     subtitle: "Déconnexion choisie & adresses secrètes",

@@ -1,6 +1,7 @@
 import { LikeButton } from "./LikeButton";
 import { ShareButton } from "./ShareButton";
 import type { VoyageContent } from "@/content/voyages";
+import type { TravelFromParis } from "@/lib/travel-match/types";
 
 // Hero fixe (décidé le 26/08/2026 — plus de carrousel). Fond noir semi-transparent par défaut ;
 // une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
@@ -22,13 +23,19 @@ export function DestinationHero({
   favoriteId,
   heroImage,
   sharePath,
+  travelFromParis,
+  bestMonths,
 }: {
   hero: VoyageContent["hero"];
   intro: string;
   favoriteId: string;
   heroImage?: string;
   sharePath: string;
+  travelFromParis?: TravelFromParis;
+  bestMonths?: string[];
 }) {
+  const eyebrow = hero.country + (hero.tags.length > 0 ? ` — ${hero.tags.join(" · ")}` : "");
+
   return (
     <div className="relative min-h-screen">
       {heroImage ? (
@@ -45,16 +52,21 @@ export function DestinationHero({
       )}
 
       <div className="absolute top-6 right-6 sm:top-14 sm:right-14 z-20 flex items-center gap-2">
-        <ShareButton path={sharePath} title={hero.title} description={hero.tagline} imageUrl={heroImage} />
+        <ShareButton
+          path={sharePath}
+          title={hero.title}
+          description={hero.tagline}
+          imageUrl={heroImage}
+          eyebrow={eyebrow}
+          travelFromParis={travelFromParis}
+          bestMonths={bestMonths}
+        />
         <LikeButton id={favoriteId} />
       </div>
 
       <div className="relative z-10 min-h-screen flex flex-col justify-end p-6 sm:p-14 text-white">
         <div className="max-w-2xl">
-          <p className="mono opacity-90 mb-3">
-            {hero.country}
-            {hero.tags.length > 0 && ` — ${hero.tags.join(" · ")}`}
-          </p>
+          <p className="mono opacity-90 mb-3">{eyebrow}</p>
           {/* Serif éditoriale (29/08/2026, demande Gemini transmise par Soumia) : var(--font-title)
               = Cormorant Garamond, la vraie police "titres" du projet (pas de Playfair installé
               ici) — même police que le logo LVE et les H2 de Notre Philosophie, cohérence avec le

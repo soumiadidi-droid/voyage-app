@@ -4,21 +4,53 @@ import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import { Check, Link2, X as CloseIcon } from "lucide-react";
 import { InstagramGlyph, WhatsAppGlyph, PinterestGlyph, XGlyph, LinkedInGlyph } from "./BrandGlyphs";
+import type { TravelFromParis } from "@/lib/travel-match/types";
 
-// Popover de partage (31/08/2026) — rendu par ShareButton.tsx. Copie de lien + 4 réseaux (ouverture
-// d'intent en nouvel onglet) + export Story Instagram (carte cachée 1080×1920 exportée en PNG via
-// html-to-image, même technique que InstaStudio.tsx).
+function Pill({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="font-display"
+      style={{
+        display: "inline-block",
+        borderRadius: 999,
+        background: "var(--lve-terracotta-bg)",
+        color: "var(--lve-terracotta-dark)",
+        fontSize: 15,
+        fontWeight: 600,
+        padding: "8px 16px",
+      }}
+    >
+      {children}
+    </span>
+  );
+}
+
+// Popover de partage (31/08/2026, carte Story reprise le même jour — "générer une image avec le
+// look and feel de la destination avec tout" : la 1ère version se limitait à photo + titre). Copie
+// de lien + 4 réseaux (ouverture d'intent en nouvel onglet) + export Story Instagram (carte cachée
+// 1080×1920 exportée en PNG via html-to-image, même technique que InstaStudio.tsx). La carte reprend
+// le vrai langage visuel du site : photo + gradient + badge Match (DestinationCard), titre serif +
+// eyebrow (DestinationHero), pastilles logistique/saison (DestinationPracticalCard), signature
+// (InstaStudio).
 export function ShareModal({
   path,
   title,
   description,
   imageUrl,
+  eyebrow,
+  matchScore,
+  travelFromParis,
+  bestMonths,
   onClose,
 }: {
   path: string;
   title: string;
   description?: string;
   imageUrl?: string;
+  eyebrow?: string;
+  matchScore?: number;
+  travelFromParis?: TravelFromParis;
+  bestMonths?: string[];
   onClose: () => void;
 }) {
   const [copied, setCopied] = useState(false);
@@ -163,43 +195,151 @@ export function ShareModal({
       )}
 
       {/* Carte cachée 1080×1920 (rendue à 540×960 css, exportée à pixelRatio 2), hors-écran — même
-          technique que InstaStudio.tsx (toPng + pixelRatio 2). */}
+          technique que InstaStudio.tsx (toPng + pixelRatio 2). Zone photo (haut, 660px) + bandeau
+          ivoire (bas, 300px) — même découpe que la carte "carnet" d'InstaStudio, mais avec les
+          vraies infos de la destination plutôt qu'une saisie manuelle. */}
       {imageUrl && (
         <div style={{ position: "fixed", top: 0, left: "-9999px", pointerEvents: "none" }} aria-hidden="true">
           <div
             ref={storyRef}
-            style={{
-              width: 540,
-              height: 960,
-              position: "relative",
-              overflow: "hidden",
-              backgroundImage: `url('${imageUrl}')`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-            }}
+            style={{ width: 540, height: 960, position: "relative", overflow: "hidden", background: "var(--lve-ivory)" }}
           >
+            {/* Zone photo */}
             <div
               style={{
                 position: "absolute",
-                inset: 0,
-                background: "linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 45%, transparent 70%)",
+                top: 0,
+                left: 0,
+                right: 0,
+                height: 660,
+                backgroundImage: `url('${imageUrl}')`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
               }}
-            />
-            <div style={{ position: "absolute", left: 40, right: 40, bottom: 56, color: "#fff" }}>
-              <p className="font-title" style={{ fontSize: 52, fontWeight: 700, lineHeight: 1.05, marginBottom: 14 }}>
+            >
+              <div
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  background: "linear-gradient(180deg, rgba(0,0,0,0.4) 0%, transparent 24%)",
+                }}
+              />
+              <div
+                style={{
+                  position: "absolute",
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                  height: 220,
+                  background: "linear-gradient(to bottom, transparent, var(--lve-ivory))",
+                }}
+              />
+
+              {eyebrow && (
+                <span
+                  className="font-mono-lve"
+                  style={{
+                    position: "absolute",
+                    left: 40,
+                    top: 36,
+                    color: "#fff",
+                    fontSize: 15,
+                    letterSpacing: "0.04em",
+                    textShadow: "0 1px 8px rgba(0,0,0,0.5)",
+                  }}
+                >
+                  {eyebrow}
+                </span>
+              )}
+
+              {matchScore != null && (
+                <span
+                  className="font-display"
+                  style={{
+                    position: "absolute",
+                    right: 40,
+                    top: 32,
+                    background: "var(--lve-terracotta)",
+                    color: "#fff",
+                    fontSize: 15,
+                    fontWeight: 700,
+                    borderRadius: 999,
+                    padding: "8px 16px",
+                    boxShadow: "0 4px 14px rgba(0,0,0,0.25)",
+                  }}
+                >
+                  ✨ {matchScore}% Match
+                </span>
+              )}
+
+              <p
+                className="font-title"
+                style={{
+                  position: "absolute",
+                  left: 40,
+                  right: 40,
+                  bottom: 40,
+                  color: "#fff",
+                  fontSize: 56,
+                  fontWeight: 700,
+                  lineHeight: 1.02,
+                  textShadow: "0 2px 20px rgba(0,0,0,0.5)",
+                }}
+              >
                 {title}
               </p>
-              {description && (
-                <p
-                  className="font-body"
-                  style={{ fontSize: 20, fontStyle: "italic", opacity: 0.95, marginBottom: 24 }}
+            </div>
+
+            {/* Bandeau ivoire */}
+            <div
+              style={{
+                position: "absolute",
+                left: 0,
+                right: 0,
+                top: 660,
+                bottom: 0,
+                padding: "26px 40px 34px",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              <div>
+                {description && (
+                  <p
+                    className="font-body"
+                    style={{
+                      fontSize: 19,
+                      fontStyle: "italic",
+                      color: "var(--lve-charcoal)",
+                      lineHeight: 1.4,
+                      marginBottom: 16,
+                    }}
+                  >
+                    {description}
+                  </p>
+                )}
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+                  {travelFromParis && (
+                    <Pill>
+                      {travelFromParis.mode} · {travelFromParis.duration}
+                    </Pill>
+                  )}
+                  {bestMonths && bestMonths.length > 0 && <Pill>Idéal en {bestMonths.slice(0, 3).join(", ")}</Pill>}
+                </div>
+              </div>
+
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <span
+                  className="font-title"
+                  style={{ fontSize: 22, letterSpacing: "0.2em", color: "var(--lve-terracotta-dark)", fontWeight: 500 }}
                 >
-                  {description}
-                </p>
-              )}
-              <p className="font-signature" style={{ fontSize: 30, color: "var(--lve-sand)" }}>
-                @voyagedesemotions
-              </p>
+                  LVE
+                </span>
+                <span className="font-signature" style={{ fontSize: 26, color: "var(--lve-terracotta)" }}>
+                  @voyagedesemotions
+                </span>
+              </div>
             </div>
           </div>
         </div>
