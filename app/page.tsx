@@ -25,50 +25,31 @@ const AXIS_MATCH_SCORE: Record<ScoreAxis, number> = {
   effervescence_urbaine: 95,
 };
 
-// CTA personnalisé par archétype (copy Claude, pas de donnée factuelle) — texte du bouton du hero.
-const AXIS_CTA_TEXT: Record<ScoreAxis, string> = {
-  repos: "Trouver ma parenthèse intimiste →",
-  exploration: "Partir en quête de pépites →",
-  gastronomie: "Créer mon itinéraire hédoniste →",
-  nature_plage: "Explorer mon souffle sauvage →",
-  effervescence_urbaine: "Découvrir mon city-break sur-mesure →",
-};
-
-// Habillage "teaser" par archétype (31/08/2026, demande Soumia après retour sur la 1ère version qui
-// donnait directement la destination + l'hôtel exacts, "l'utilisateur a déjà la réponse") — copy
-// générique par type d'expérience, jamais le nom de la vraie destination gagnante ni l'adresse
-// précise. Seuls la photo (ambiance réelle) et le temps de trajet (donnée réelle non-spoiler) restent
-// tirés de la vraie destination qui gagne l'axe ; le nom du lieu et l'adresse exacte sont masqués.
-const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string; stayHint: string; essentials: string[] }> = {
+// Habillage "teaser" par archétype (demande Soumia après retour sur la 1ère version qui donnait
+// directement la destination + l'hôtel exacts, "l'utilisateur a déjà la réponse") — copy générique
+// par type d'expérience, jamais le nom de la vraie destination gagnante. Simplifié le 1er septembre
+// 2026 : plus de ligne transport ni de pictos "tout-en-un" (carte "épurée", CTA unique — voir
+// HeroLandingPage.tsx), seule la photo reste tirée de la vraie destination qui gagne l'axe.
+const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string }> = {
   repos: {
     title: "Parenthèse Nature & Grand Calme",
     tag: "Refuge & Calme Absolu",
-    stayHint: "Éco-lodge enveloppant & spa privatif",
-    essentials: ["🏠 Refuge intimiste", "🍽️ Table de saison", "🌿 Calme absolu"],
   },
   exploration: {
     title: "Toscane & Ateliers Secrets",
     tag: "Patrimoine & Savoir-faire",
-    stayHint: "Hôtel design & ateliers d'artisans secrets",
-    essentials: ["🏠 Refuge de charme", "🍷 Tables locales", "🎨 Savoir-faire & Artisans"],
   },
   gastronomie: {
     title: "Route des Saveurs & Tables d'Exception",
     tag: "Terroir & Gastronomie",
-    stayHint: "Auberge de charme & dégustations chez le vigneron",
-    essentials: ["🏠 Adresse gourmande", "🍷 Tables d'exception", "🍇 Vignerons & terroir"],
   },
   nature_plage: {
     title: "Sentiers Sauvages & Horizon Marin",
     tag: "Grands Espaces & Mer",
-    stayHint: "Cabane nature & randonnée bord de falaise",
-    essentials: ["🏠 Cabane nature", "🐟 Cuisine locale", "🥾 Sentiers & grand air"],
   },
   effervescence_urbaine: {
     title: "City-Trip Design & Effervescence",
     tag: "Énergie Urbaine & Architecture",
-    stayHint: "Boutique-hôtel central & rooftops tendance",
-    essentials: ["🏠 Boutique-hôtel", "🍸 Rooftops & tables", "🎭 Culture & design"],
   },
 };
 
@@ -100,29 +81,20 @@ async function buildDemoItems(): Promise<DemoItem[]> {
   const usedIds = new Set<string>();
   const items: DemoItem[] = [];
   for (const axis of SCORE_AXES) {
-    // La vraie destination qui gagne l'axe sert uniquement à choisir la photo (ambiance réelle) et
-    // le temps de trajet réel — jamais affichée par son nom ni son adresse exacte (teaser, voir
-    // AXIS_TEASER ci-dessus).
+    // La vraie destination qui gagne l'axe sert uniquement à choisir la photo (ambiance réelle) —
+    // jamais affichée par son nom (teaser, voir AXIS_TEASER ci-dessus).
     const destination = bestDestinationForAxis(destinations, axis, usedIds);
     usedIds.add(destination.id);
     const archetype = ARCHETYPES[axis];
     const teaser = AXIS_TEASER[axis];
-
-    const transportLine = destination.travel_from_paris
-      ? `${destination.travel_from_paris.mode} · ${destination.travel_from_paris.duration} depuis Paris`
-      : undefined;
-    const details = [transportLine, teaser.stayHint].filter(Boolean).join(" • ");
 
     items.push({
       id: axis,
       label: `${AXIS_EMOJI[axis]} ${archetype.title}`,
       tag: teaser.tag,
       badge: archetype.subtitle,
-      essentials: teaser.essentials,
       matchScore: AXIS_MATCH_SCORE[axis],
       destinationTitle: teaser.title,
-      details,
-      ctaText: AXIS_CTA_TEXT[axis],
       heroImage: DESTINATION_HERO_IMAGE[destination.content_slug],
     });
   }

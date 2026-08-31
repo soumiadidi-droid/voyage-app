@@ -2,10 +2,12 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
-import { Sparkles } from "lucide-react";
+import { motion, AnimatePresence, animate, useMotionValue } from "framer-motion";
+import { Sparkles, Check } from "lucide-react";
 
-const AUTOPLAY_INTERVAL_MS = 4500;
+const AUTOPLAY_INTERVAL_MS = 5000;
+const MAIN_CTA_TEXT = "Lancer le Travel Match (2 min) →";
+const SCORE_COUNT_UP_DURATION = 1.2;
 
 export type DemoItem = {
   id: string;
@@ -14,33 +16,54 @@ export type DemoItem = {
   badge: string;
   matchScore: number;
   destinationTitle: string;
-  details: string;
-  // Ligne "tout-en-un" (31/08/2026, demande Soumia) : rappelle la promesse clé (destination +
-  // hébergement + table + activité en un seul endroit), 3 pictos courts, jamais un nom de lieu précis.
-  essentials: string[];
-  ctaText: string;
   heroImage?: string;
 };
 
-// Hero de la landing page (31/08/2026, 4e reprise le même jour — reconstruit sur la Charte
-// Graphique officielle ~/Downloads/Charte Graphique & Design System — Le Voyage des Émotions.docx
-// après que les 3 versions précédentes, calquées sur des mockups sombres slate/ambre, ne
-// respectaient pas la charte réelle (palette terre/sable/terracotta, Cormorant en titres, Bricolage
-// en corps — voir tokens dans app/globals.css). Fusionne hero + démo interactive : la photo de fond
-// change avec l'archétype sélectionné (même traitement dégradé que DestinationHero.tsx), la carte
-// résultat reprend le style "Profil Voyageur" du charte (fond sable/crème translucide, bordure
-// terracotta, pills blanches). Les 5 onglets restent les vrais "profils voyageur" (mêmes
-// archétypes/textes validés que TravelerProfileCard.tsx), chacun pointant vers la vraie destination
-// du catalogue qui le représente le mieux (calculée côté serveur dans app/page.tsx, jamais choisie/
-// inventée à la main). Seuls `matchScore` et `ctaText` restent décoratifs (pas de vrai calcul, pas
-// de réponses utilisateur dans cette démo).
+// Compteur animé 0 → score (1er septembre 2026, demande Soumia — "le pourcentage de match monte
+// dynamiquement de 0% jusqu'à son score"). Repart de 0 à chaque changement de `target` (pas une
+// interpolation entre deux scores) : `motionValue.set(0)` n'est pas un setState React (une
+// MotionValue vit hors du cycle de rendu), seul l'appel `setDisplay` dans `onUpdate` déclenche un
+// rendu, de façon asynchrone à chaque frame — pas de setState synchrone dans le corps de l'effect.
+// `done` (check "Votre Match" validé) est dérivé de `display === target`, pas un état séparé à
+// réinitialiser à la main.
+function useCountUpScore(target: number) {
+  const motionValue = useMotionValue(0);
+  const [display, setDisplay] = useState(0);
+
+  useEffect(() => {
+    motionValue.set(0);
+    const controls = animate(motionValue, target, {
+      duration: SCORE_COUNT_UP_DURATION,
+      ease: "easeOut",
+      onUpdate: (latest) => setDisplay(Math.round(latest)),
+    });
+    return () => controls.stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target]);
+
+  return { display, done: display === target };
+}
+
+// Hero de la landing page (1er septembre 2026, 5e reprise — carte "épurée" : compteur de match
+// animé + CTA unique, remplacent le score statique/la ligne transport/la ligne "tout-en-un" des
+// versions précédentes, jugées trop chargées). Reconstruit sur la Charte Graphique officielle
+// ~/Downloads/Charte Graphique & Design System — Le Voyage des Émotions.docx (palette terre/sable/
+// terracotta, Cormorant en titres, Bricolage en corps — voir tokens dans app/globals.css), pas sur
+// les mockups sombres slate/ambre proposés en brief. Fusionne hero + démo interactive : la photo de
+// fond change avec l'archétype sélectionné (même traitement dégradé que DestinationHero.tsx), la
+// carte résultat reprend le style "Profil Voyageur" du charte (fond sable/crème translucide,
+// bordure terracotta). Les 5 onglets restent les vrais "profils voyageur" (mêmes archétypes/textes
+// validés que TravelerProfileCard.tsx), chacun pointant vers la vraie destination du catalogue qui
+// le représente le mieux (calculée côté serveur dans app/page.tsx, jamais choisie/inventée à la
+// main) — seule la photo en est tirée, jamais son nom ni son adresse exacte (teaser). Seul
+// `matchScore` reste décoratif (pas de vrai calcul, pas de réponses utilisateur dans cette démo).
 export function HeroLandingPage({ items }: { items: DemoItem[] }) {
   const [selectedId, setSelectedId] = useState(items[0]?.id ?? "");
   const activeProfile = items.find((item) => item.id === selectedId) ?? items[0];
 
-  // Auto-play (31/08/2026, demande Soumia) : rotation automatique toutes les 4,5s, en pause au
-  // survol de la carte, arrêtée définitivement dès qu'on clique un onglet à la main (on laisse le
-  // contrôle total à l'utilisateur plutôt que de reprendre derrière son dos).
+  // Auto-play : rotation automatique toutes les 5s, en pause au survol de la carte, arrêtée
+  // définitivement dès qu'on clique un onglet à la main (on laisse le contrôle total à
+  // l'utilisateur plutôt que de reprendre derrière son dos).
   const [autoplayEnabled, setAutoplayEnabled] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const isPlaying = autoplayEnabled && !isHovering;
@@ -60,6 +83,8 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
     setAutoplayEnabled(false);
     setSelectedId(id);
   }
+
+  const { display: animatedScore, done: scoreValidated } = useCountUpScore(activeProfile?.matchScore ?? 0);
 
   if (!activeProfile) return null;
 
@@ -150,7 +175,9 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
         </div>
 
         {/* Carte résultat — même traitement que la carte "Profil Voyageur" (TravelerProfileCard.tsx) :
-            fond sable/crème translucide, bordure terracotta, coins très arrondis. */}
+            fond sable/crème translucide, bordure terracotta, coins très arrondis. Épurée (1er
+            septembre 2026) : compteur de match animé, plus de ligne transport ni de pictos
+            "tout-en-un" (la promesse tout-en-un vit déjà dans le sous-titre du hero). */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeProfile.id}
@@ -165,13 +192,25 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
           >
             <div className="flex items-center justify-between mb-3">
               <span
-                className="uppercase tracking-[0.2em]"
+                className="inline-flex items-center gap-1.5 uppercase tracking-[0.2em]"
                 style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.7rem", fontFamily: "var(--font-display)", fontWeight: 600 }}
               >
-                Matching Travel Match
+                Votre Match
+                <AnimatePresence>
+                  {scoreValidated && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.5 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Check size={12} strokeWidth={3} />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </span>
               <span style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-title)", fontSize: "1.3rem", fontWeight: 700 }}>
-                {activeProfile.matchScore}% Match
+                {animatedScore}% Match
               </span>
             </div>
 
@@ -188,20 +227,8 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
             >
               {activeProfile.destinationTitle}
             </h2>
-            <p className="text-sm font-medium mb-3" style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}>
+            <p className="text-sm font-medium mb-6" style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}>
               {activeProfile.badge}
-            </p>
-            <p className="text-sm mb-4 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
-              {activeProfile.details}
-            </p>
-
-            {/* Ligne "tout-en-un" — rappelle la promesse clé (destination + hébergement + table +
-                activité en un seul endroit), pictos subtils. */}
-            <p
-              className="text-xs mb-6"
-              style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}
-            >
-              {activeProfile.essentials.join(" · ")}
             </p>
 
             <Link
@@ -209,7 +236,7 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
               className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-widest font-medium px-6 py-3.5 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              {activeProfile.ctaText}
+              {MAIN_CTA_TEXT}
             </Link>
           </motion.div>
         </AnimatePresence>
