@@ -55,13 +55,15 @@ const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string }> = {
 
 // Override photo teaser (1er septembre 2026, demande Soumia) — indépendant du calcul "meilleure
 // destination réelle sur l'axe" (celui-ci reste la source pour tag/label/matchScore) : juste
-// l'image affichée. "new-york" est une vraie destination du catalogue (DESTINATION_HERO_IMAGE),
-// la photo de vagues est une vraie photo Unsplash vérifiée (Philipp Deus,
-// https://unsplash.com/photos/ocean-wave-crashing-with-water-splashing-Nu3xicKn_ZY), pas rattachée
-// à une destination précise du catalogue — cohérent avec le teaser qui ne montre que l'ambiance.
+// l'image affichée. "new-york" est une vraie destination du catalogue (DESTINATION_HERO_IMAGE), les
+// autres sont de vraies photos Unsplash vérifiées, pas rattachées à une destination précise du
+// catalogue — cohérent avec le teaser qui ne montre que l'ambiance.
 const AXIS_HERO_IMAGE_OVERRIDE: Partial<Record<ScoreAxis, string>> = {
+  // Philipp Deus — https://unsplash.com/photos/ocean-wave-crashing-with-water-splashing-Nu3xicKn_ZY
   nature_plage: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   effervescence_urbaine: DESTINATION_HERO_IMAGE["new-york"],
+  // Stephanie McCabe — https://unsplash.com/photos/U3zasaqWD-I (longue table en bois, plats partagés)
+  gastronomie: "https://images.unsplash.com/photo-1463183547458-6a2c760d0912?fm=jpg&q=80&w=2400&auto=format&fit=crop",
 };
 
 // Score dérivé d'une destination sur un axe d'archétype — même règle que
