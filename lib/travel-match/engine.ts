@@ -73,10 +73,6 @@ export function emotionalProximity(user: UserAnswers, dest: Destination): number
   return 100 * (1 - ratio);
 }
 
-function compressToDisplayScale(rawScore: number): number {
-  return Math.round(SCORE_FLOOR + rawScore * SCORE_SPREAD);
-}
-
 type SoftCriterion = { ok: boolean; malus: number; label: string };
 
 // Poids relatifs des frictions logistiques, fixés par Soumia le 23/08/2026 (budget/configuration
@@ -96,14 +92,42 @@ const SOFT_CRITERIA_MALUS = {
 const MAX_MALUS_POINTS = Object.values(SOFT_CRITERIA_MALUS).reduce((sum, m) => sum + m, 0);
 
 // Plafond d'impact de la logistique sur le score (2 septembre 2026, demande Soumia) : au pire, la
-// logistique retire 15% du score émotionnel. Avant, les malus étaient soustraits en points
+// logistique retire 40% du score émotionnel. Avant, les malus étaient soustraits en points
 // D'AFFICHAGE (8, 10, 15...) alors que tout le match émotionnel ne pèse que 28 points d'affichage
 // (SCORE_SPREAD) — un seul malus effaçait donc un écart émotionnel énorme, et la logistique
 // dominait l'émotion. Cas concret mesuré avant correction : sur un profil "plage avant tout",
 // Mykonos était le meilleur match émotionnel du catalogue (87/100 brut) et finissait 7e derrière
-// Marseille (71/100), à cause de 14 points de malus. Désormais la logistique module l'émotion sans
-// jamais renverser un écart émotionnel fort.
-const MAX_MALUS_IMPACT = 0.15;
+// Marseille (71/100), à cause de 14 points de malus.
+//
+// Puis, après un test de Soumia en prod : à 15%, un critère isolé (transport, 6 points sur 50) ne
+// coûtait que 0,5 point d'affichage — incapable de départager deux destinations proches (Marseille
+// 98% avec alerte transport devant Côte Basque 97% sans alerte). Et durcir le pourcentage ne
+// suffisait pas : une pénalité PROPORTIONNELLE frappe d'autant plus fort que le match est bon, donc
+// renforcer pour régler le cas Marseille recassait le cas Mykonos — les deux s'excluaient à tous
+// les niveaux testés (15 / 30 / 40 / 55 / 90%).
+//
+// D'où une pénalité ABSOLUE, en points bruts : elle coûte le même nombre de points à tout le monde,
+// donc elle départage les matchs proches sans écraser un écart d'envie large. 35 points bruts au
+// maximum (tous critères non respectés) satisfont enfin les deux cas simultanément.
+const MAX_MALUS_RAW_POINTS = 35;
+
+// Plafond du score AFFICHÉ quand des critères ne sont pas respectés (2 septembre 2026, même test) :
+// une destination qui ne répond pas à une exigence explicite ne doit jamais afficher un score quasi
+// parfait — lire "98% Match" au-dessus d'une alerte "transport différent de ta recherche" décrédibilise
+// le résultat. Ne change pas l'ordre quand l'écart d'envie est net (le plafond reste au-dessus du
+// score des destinations sans alerte dans ce cas), mais laisse repasser devant une destination sans
+// alerte quand les deux sont proches.
+// Volontairement haut (95/94) pour ne mordre qu'au sommet de l'échelle : des plafonds plus bas
+// (93/90, testés) écrasaient tout le milieu de tableau et refaisaient perdre Mykonos. Le classement
+// se fait sur la valeur AVANT plafonnement (voir matchTravel), donc deux destinations plafonnées à
+// la même valeur gardent leur ordre.
+const SCORE_CAP_ONE_WARNING = 95;
+const SCORE_CAP_MANY_WARNINGS = 94;
+
+function warningCeiling(warningCount: number): number {
+  if (warningCount === 0) return Number.POSITIVE_INFINITY;
+  return warningCount === 1 ? SCORE_CAP_ONE_WARNING : SCORE_CAP_MANY_WARNINGS;
+}
 
 // Refonte du 23/08/2026 (demande de Soumia) : plus aucun de ces critères n'élimine une
 // destination — chacun dégrade le score si non respecté, pondéré selon le poids réel de la
@@ -172,13 +196,21 @@ const MIN_SCORE = 20;
 // (échelle 0-100 du match émotionnel), AVANT la compression vers la fourchette d'affichage. Avant,
 // les malus étaient soustraits après compression, donc sur une échelle 3,5× plus petite — d'où leur
 // poids disproportionné face à l'émotion.
-function scoreWithMalus(user: UserAnswers, dest: Destination): { score: number; brokenFilters: string[] } {
+// `rankingValue` = score avant plafonnement et avant arrondi : c'est lui qui trie (voir
+// matchTravel), pour que deux destinations plafonnées à la même valeur affichée gardent l'ordre de
+// leur vraie affinité.
+function scoreWithMalus(
+  user: UserAnswers,
+  dest: Destination
+): { score: number; rankingValue: number; brokenFilters: string[] } {
   const rawScore = emotionalProximity(user, dest);
   const failed = softCriteria(user, dest).filter((c) => !c.ok);
   const malusPoints = failed.reduce((sum, c) => sum + c.malus, 0);
-  const impact = MAX_MALUS_IMPACT * (malusPoints / MAX_MALUS_POINTS);
+  const penalty = MAX_MALUS_RAW_POINTS * (malusPoints / MAX_MALUS_POINTS);
+  const rankingValue = SCORE_FLOOR + Math.max(0, rawScore - penalty) * SCORE_SPREAD;
   return {
-    score: Math.max(MIN_SCORE, compressToDisplayScale(rawScore * (1 - impact))),
+    score: Math.max(MIN_SCORE, Math.round(Math.min(rankingValue, warningCeiling(failed.length)))),
+    rankingValue,
     brokenFilters: failed.map((c) => c.label),
   };
 }
@@ -260,16 +292,24 @@ export function matchTravel(user: UserAnswers, destinations: Destination[]): Mat
 
   const results = candidates
     .map((destination) => {
-      const { score, brokenFilters } = scoreWithMalus(user, destination);
+      const { score, rankingValue, brokenFilters } = scoreWithMalus(user, destination);
       const hardLabels = usingSafetyNet ? brokenHardConstraints(user, destination) : [];
       return {
         destination,
         score,
+        rankingValue,
         brokenFilters: [...hardLabels, ...brokenFilters],
         hasComboOpportunity: hasComboOpportunity(user, destination, destinations),
       };
     })
-    .sort((a, b) => b.score - a.score);
+    // Tri sur la valeur avant plafonnement/arrondi : deux destinations affichant le même
+    // pourcentage restent classées selon leur vraie affinité.
+    .sort((a, b) => b.rankingValue - a.rankingValue)
+    .map((result) => {
+      const { rankingValue, ...displayed } = result;
+      void rankingValue; // interne au tri, pas exposé aux composants
+      return displayed;
+    });
 
   // fallback ne signifie plus "le filtrage strict a tout éliminé" mais "même le meilleur résultat
   // n'est pas un match parfait" — déclenche le même message d'avertissement déjà affiché sur
