@@ -2,52 +2,125 @@ import {
   COMPANIONS_TO_LOGISTICS_KEY,
   SCORE_KEYS,
   type Destination,
+  type ScoreKey,
   type UserAnswers,
 } from "./types";
 import { getCombosFor } from "./combos";
 
-// Distance euclidienne max théorique sur 7 axes (repos/exploration/gastronomie/nature/plage/
-// effervescence_urbaine/rythme), échelle 1-5 donc écart max de 4 par axe : sqrt(7 * 4^2). Passé de
-// 6 à 7 axes le 29/08/2026 (split nature_plage → nature/plage, demande Soumia) — recalculé
-// automatiquement via SCORE_KEYS.length, comme lors du passage de 9 à 6 axes.
-const MAX_DISTANCE = Math.sqrt(SCORE_KEYS.length * Math.pow(4, 2));
+// Axes "priorité" (2 septembre 2026) — ceux de la question "C'est quoi ta priorité pour ce
+// séjour ?" (questionnaire.ts). Le curseur y exprime une IMPORTANCE, pas un niveau souhaité :
+// répondre 2 en gastronomie veut dire "ce n'est pas ma priorité", jamais "je veux mal manger".
+// Avant cette refonte, la distance euclidienne symétrique pénalisait une destination excellente en
+// gastronomie auprès de quelqu'un qui n'en avait simplement pas fait sa priorité — et poussait à
+// noter toutes les destinations 5/5 sur ces axes (une note basse se lisant comme un jugement),
+// d'où 10 destinations sur 15 à 5/5 en gastronomie, axe devenu incapable de trier quoi que ce soit.
+// Les axes du "décor idéal" (nature/plage/effervescence) et le rythme gardent une logique de cible
+// symétrique : y répondre 1 veut vraiment dire "je n'en veux pas", et leurs notes sont saines.
+const PRIORITY_AXES = new Set<ScoreKey>(["repos", "exploration", "gastronomie"]);
 
-function euclideanScore(user: UserAnswers, dest: Destination): number {
-  let sumSquaredDiffs = 0;
+// Curseurs 1-5 : 3 = "je n'ai pas d'avis", 1 ou 5 = "j'y tiens".
+const NEUTRAL_SLIDER = 3;
+const MIN_SLIDER = 1;
+const MAX_SLIDER = 5;
+
+// Pondération par l'intensité de la demande (2 septembre 2026) — avant, les 7 axes comptaient
+// exactement pareil : quelqu'un qui mettait 5 en gastronomie et 3 partout ailleurs était traité
+// comme quelqu'un de tiède sur tout. `1 + écart au neutre` va de 1 (curseur au milieu) à 3
+// (curseur à fond) : une envie forte pèse 3 fois plus qu'un axe sur lequel la personne n'a pas
+// d'avis, sans jamais annuler complètement un axe (le +1 garde le comportement d'avant quand tous
+// les curseurs sont au neutre).
+function axisWeight(userValue: number): number {
+  return 1 + Math.abs(userValue - NEUTRAL_SLIDER);
+}
+
+// Écart réellement pénalisant sur un axe. Sur un axe "priorité", une destination qui offre PLUS que
+// demandé n'est pas pénalisée (écart 0) — seul le manque compte.
+function axisGap(key: ScoreKey, userValue: number, destValue: number): number {
+  const gap = userValue - destValue;
+  if (PRIORITY_AXES.has(key)) return Math.max(0, gap);
+  return Math.abs(gap);
+}
+
+// Écart maximum atteignable sur cet axe POUR CET UTILISATEUR (pire destination possible), utilisé
+// comme dénominateur de normalisation. Le calculer en fonction de la réponse — plutôt que de garder
+// l'ancien maximum théorique fixe sqrt(7 × 4²) — évite que les axes devenus asymétriques gonflent
+// artificiellement tous les scores : un axe qui ne peut plus rien pénaliser ne compte plus non plus
+// dans le total de référence.
+function axisMaxGap(key: ScoreKey, userValue: number): number {
+  if (PRIORITY_AXES.has(key)) return userValue - MIN_SLIDER;
+  return Math.max(Math.abs(userValue - MIN_SLIDER), Math.abs(userValue - MAX_SLIDER));
+}
+
+// Calibration : remonte les scores vers une fourchette lisible (objectif de Soumia du 22/08/2026 :
+// les bons matchs affichent 70-90%, pas un score écrasé). Constantes revérifiées empiriquement
+// après la refonte du 2 septembre 2026 (voir scripts/calibrate-matching.ts).
+const SCORE_FLOOR = 70;
+const SCORE_SPREAD = 0.28;
+
+// Proximité brute 0-100 (100 = la destination répond exactement à la demande). Exportée pour la
+// passe de calibration (scripts/calibrate-matching.ts), qui a besoin de la valeur avant mise à
+// l'échelle pour choisir SCORE_FLOOR/SCORE_SPREAD sur des chiffres réels.
+export function emotionalProximity(user: UserAnswers, dest: Destination): number {
+  let weightedSquares = 0;
+  let maxWeightedSquares = 0;
   for (const key of SCORE_KEYS) {
-    sumSquaredDiffs += Math.pow(user.scores[key] - dest.scores[key], 2);
+    const weight = axisWeight(user.scores[key]);
+    weightedSquares += weight * Math.pow(axisGap(key, user.scores[key], dest.scores[key]), 2);
+    maxWeightedSquares += weight * Math.pow(axisMaxGap(key, user.scores[key]), 2);
   }
-  const distance = Math.sqrt(sumSquaredDiffs);
-  const rawScore = 100 * (1 - distance / MAX_DISTANCE);
-  // Calibration : remonte les scores vers la fourchette 70-98% pour un rendu plus positif,
-  // décidé par Soumia le 22/08/2026 (objectif 70-90% sur les bons matchs). Constantes inchangées
-  // par le passage de 9 à 6 axes, puis de 6 à 7 (split nature_plage, 29/08/2026) : rawScore est
-  // déjà normalisé 0-100 quel que soit le nombre d'axes (MAX_DISTANCE grandit avec SCORE_KEYS.length,
-  // donc le ratio distance/MAX_DISTANCE reste comparable) — pas de recalcul de ces constantes
-  // nécessaire mathématiquement. À reconfirmer par un test manuel sur quelques profils réels malgré
-  // tout : plus d'axes indépendants peut légèrement changer la distribution des distances typiques.
-  return Math.round(70 + rawScore * 0.28);
+  // maxWeightedSquares ne peut pas être nul : les axes symétriques ont toujours un écart max ≥ 2.
+  const ratio = Math.sqrt(weightedSquares) / Math.sqrt(maxWeightedSquares);
+  return 100 * (1 - ratio);
+}
+
+function compressToDisplayScale(rawScore: number): number {
+  return Math.round(SCORE_FLOOR + rawScore * SCORE_SPREAD);
 }
 
 type SoftCriterion = { ok: boolean; malus: number; label: string };
 
+// Poids relatifs des frictions logistiques, fixés par Soumia le 23/08/2026 (budget/configuration
+// pèsent plus qu'une préférence de rythme). Ces valeurs ne sont PAS des points d'affichage : elles
+// servent uniquement à répartir la dégradation relative plafonnée (voir MAX_MALUS_IMPACT).
+const SOFT_CRITERIA_MALUS = {
+  climate: 8,
+  transport: 6,
+  sport_level: 6,
+  duration: 5,
+  budget: 10,
+  companions: 15,
+} as const;
+
+// Total si TOUS les critères échouent — dérivé de la table plutôt que codé en dur, pour rester
+// juste si un critère est ajouté/retiré plus tard.
+const MAX_MALUS_POINTS = Object.values(SOFT_CRITERIA_MALUS).reduce((sum, m) => sum + m, 0);
+
+// Plafond d'impact de la logistique sur le score (2 septembre 2026, demande Soumia) : au pire, la
+// logistique retire 15% du score émotionnel. Avant, les malus étaient soustraits en points
+// D'AFFICHAGE (8, 10, 15...) alors que tout le match émotionnel ne pèse que 28 points d'affichage
+// (SCORE_SPREAD) — un seul malus effaçait donc un écart émotionnel énorme, et la logistique
+// dominait l'émotion. Cas concret mesuré avant correction : sur un profil "plage avant tout",
+// Mykonos était le meilleur match émotionnel du catalogue (87/100 brut) et finissait 7e derrière
+// Marseille (71/100), à cause de 14 points de malus. Désormais la logistique module l'émotion sans
+// jamais renverser un écart émotionnel fort.
+const MAX_MALUS_IMPACT = 0.15;
+
 // Refonte du 23/08/2026 (demande de Soumia) : plus aucun de ces critères n'élimine une
-// destination — chacun retire des points au score si non respecté, pondérés selon le poids réel
-// de la friction (budget/logistique pèsent plus qu'une simple préférence de rythme). Avant cette
-// refonte, un .filter() strict excluait des destinations pertinentes mais "hybrides" (ex. le
-// Japon, qui offre à la fois du calme à Kyoto et de l'effervescence à Tokyo) dès qu'un seul
-// critère secondaire ne matchait pas exactement.
+// destination — chacun dégrade le score si non respecté, pondéré selon le poids réel de la
+// friction. Avant cette refonte, un .filter() strict excluait des destinations pertinentes mais
+// "hybrides" (ex. le Japon, qui offre à la fois du calme à Kyoto et de l'effervescence à Tokyo)
+// dès qu'un seul critère secondaire ne matchait pas exactement.
 function softCriteria(user: UserAnswers, dest: Destination): SoftCriterion[] {
   const logisticsKey = COMPANIONS_TO_LOGISTICS_KEY[user.companions];
   return [
     // Distance retirée d'ici le 26/08/2026 : redevenue un filtre éliminatoire strict (cf.
     // hardConstraintBroken), plus un malus de score.
-    { ok: dest.filters.climate.includes(user.filters.climate), malus: 8, label: "Climat différent de ta recherche" },
-    { ok: dest.filters.transport.includes(user.filters.transport), malus: 6, label: "Transport différent de ta recherche" },
-    { ok: dest.filters.sport_level.includes(user.filters.sport_level), malus: 6, label: "Niveau physique différent de ta recherche" },
-    { ok: dest.filters.duration.includes(user.filters.duration), malus: 5, label: "Durée de séjour différente de ta recherche" },
-    { ok: dest.filters.budget.includes(user.filters.budget), malus: 10, label: "Budget différent de ta recherche" },
-    { ok: dest.logistics[logisticsKey], malus: 15, label: "Pas adapté à ta configuration de voyage" },
+    { ok: dest.filters.climate.includes(user.filters.climate), malus: SOFT_CRITERIA_MALUS.climate, label: "Climat différent de ta recherche" },
+    { ok: dest.filters.transport.includes(user.filters.transport), malus: SOFT_CRITERIA_MALUS.transport, label: "Transport différent de ta recherche" },
+    { ok: dest.filters.sport_level.includes(user.filters.sport_level), malus: SOFT_CRITERIA_MALUS.sport_level, label: "Niveau physique différent de ta recherche" },
+    { ok: dest.filters.duration.includes(user.filters.duration), malus: SOFT_CRITERIA_MALUS.duration, label: "Durée de séjour différente de ta recherche" },
+    { ok: dest.filters.budget.includes(user.filters.budget), malus: SOFT_CRITERIA_MALUS.budget, label: "Budget différent de ta recherche" },
+    { ok: dest.logistics[logisticsKey], malus: SOFT_CRITERIA_MALUS.companions, label: "Pas adapté à ta configuration de voyage" },
   ];
 }
 
@@ -95,12 +168,17 @@ function hardConstraintBroken(user: UserAnswers, dest: Destination): boolean {
 
 const MIN_SCORE = 20;
 
+// Ordre des opérations (2 septembre 2026) : la dégradation logistique s'applique sur le score BRUT
+// (échelle 0-100 du match émotionnel), AVANT la compression vers la fourchette d'affichage. Avant,
+// les malus étaient soustraits après compression, donc sur une échelle 3,5× plus petite — d'où leur
+// poids disproportionné face à l'émotion.
 function scoreWithMalus(user: UserAnswers, dest: Destination): { score: number; brokenFilters: string[] } {
-  const base = euclideanScore(user, dest);
+  const rawScore = emotionalProximity(user, dest);
   const failed = softCriteria(user, dest).filter((c) => !c.ok);
-  const totalMalus = failed.reduce((sum, c) => sum + c.malus, 0);
+  const malusPoints = failed.reduce((sum, c) => sum + c.malus, 0);
+  const impact = MAX_MALUS_IMPACT * (malusPoints / MAX_MALUS_POINTS);
   return {
-    score: Math.max(MIN_SCORE, base - totalMalus),
+    score: Math.max(MIN_SCORE, compressToDisplayScale(rawScore * (1 - impact))),
     brokenFilters: failed.map((c) => c.label),
   };
 }
