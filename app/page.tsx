@@ -62,8 +62,6 @@ const AXIS_HERO_IMAGE_OVERRIDE: Partial<Record<ScoreAxis, string>> = {
   // Philipp Deus — https://unsplash.com/photos/ocean-wave-crashing-with-water-splashing-Nu3xicKn_ZY
   nature_plage: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   effervescence_urbaine: DESTINATION_HERO_IMAGE["new-york"],
-  // Stephanie McCabe — https://unsplash.com/photos/U3zasaqWD-I (longue table en bois, plats partagés)
-  gastronomie: "https://images.unsplash.com/photo-1463183547458-6a2c760d0912?fm=jpg&q=80&w=2400&auto=format&fit=crop",
 };
 
 // Score dérivé d'une destination sur un axe d'archétype — même règle que
