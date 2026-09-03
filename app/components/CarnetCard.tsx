@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Camera, MapPin } from "lucide-react";
+import { MapPin } from "lucide-react";
 import type { AuthenticityBadge } from "@/lib/travel-match/types";
 
 // Carte de carnet (03/09/2026) — partagée par la liste complète (/carnets) et la section "à la
@@ -32,7 +32,6 @@ export type Carnet = {
   badge: AuthenticityBadge;
   image: string;
   addressCount: number;
-  photoCount: number;
 };
 
 // headingLevel : sur /carnets le titre de carte est un h2 (sous le h1 "Les carnets") ; dans la
@@ -97,20 +96,16 @@ export function CarnetCard({
         >
           {carnet.tagline}
         </p>
+        {/* Compteur photo retiré le 03/09/2026 : les photos ne sont pas l'argument de vente (dans
+            l'offre de /pros, elles sont ce que Soumia LIVRE au partenaire, pas ce qu'elle montre
+            pour décrocher le séjour), et le chiffre affiché était le plus faible du lot — deux ou
+            trois sur plusieurs carnets. Pour le remettre : rajouter photoCount au type Carnet et
+            le remplir dans lib/carnets.ts avec v.gallery.length. */}
         <div className="flex items-center gap-4 font-mono-lve text-xs text-lve-charcoal/55">
           <span className="inline-flex items-center gap-1.5">
             <MapPin size={13} strokeWidth={1.75} />
             {carnet.addressCount} adresses
           </span>
-          {/* Compteur photo masqué à 0 (03/09/2026) : deux carnets en base (Londres, Marseille)
-              n'ont pas encore de galerie — annoncer "0 photos" sur la carte d'un site qui vend du
-              contenu visuel est pire que ne rien annoncer. */}
-          {carnet.photoCount > 0 && (
-            <span className="inline-flex items-center gap-1.5">
-              <Camera size={13} strokeWidth={1.75} />
-              {carnet.photoCount} photos
-            </span>
-          )}
         </div>
       </div>
     </Link>

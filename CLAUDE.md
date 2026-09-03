@@ -11,15 +11,38 @@ Site perso de récits de voyage. Une seule autrice (Soumia), un pays/une destina
 racontée avec photos, avec une distinction stricte annoncée partout : **voyage vécu** (testé,
 photographié par elle) vs **voyage recherché** (sélectionné mais pas encore fait). Jamais mélangés.
 
-- Baseline : "Un pays, une histoire, une photo à la fois."
-- Titre H1 accueil : "Mes voyages, racontés vrai."
+- Baseline : "Un pays, une histoire, une photo à la fois." (affichée dans le footer depuis le
+  03/09/2026, à la place d'une formule d'agence)
+- Titre H1 accueil : "Des récits de voyages vrais, des adresses incarnées." (03/09/2026)
 - Logo : monogramme "LVE" en Cormorant Garamond
+- **Le site parle au "je"**, jamais au "nous" (décidé le 03/09/2026) : une seule personne, qui vend
+  son regard. Aucun "nous/notre/nos" ne doit réapparaître dans la copie visible.
 
 ## État actuel — IMPORTANT
 
-Le site est **en ligne et fonctionnel** sur Vercel : https://voyage-app-sage.vercel.app
+Le site est **en ligne et fonctionnel** sur son nom de domaine : **https://levoyagedesemotions.fr**
+(acheté par Soumia). L'ancienne URL `voyage-app-sage.vercel.app` redirige dessus depuis le
+03/09/2026 — ne plus l'utiliser nulle part.
+
 Projet Vercel : `voyage-app` (team `ai-product5` / `team_dRjUleuL4QiTSwUyVlEKalH1`,
 id `prj_VoXzgnLHaF5PZDtACcE4teyiv2WS`).
+
+**Déploiement manuel, et le scope est obligatoire** : `npx vercel --prod --yes --scope ai-product5`
+(sans `--scope`, la commande échoue sur un `Not authorized` peu parlant). Sans `--prod`, on obtient
+une preview protégée, visible seulement par Soumia — c'est ce qu'il faut lui envoyer pour
+validation avant la prod. Le lien GitHub → Vercel n'est pas branché en auto-déploiement.
+
+**Le contenu vit en base (Neon/Postgres), plus dans les fichiers.** Depuis la migration du
+27/08/2026 (`lib/travel-match/data.ts`, plan `~/.claude/plans/moonlit-noodling-dolphin.md`), les
+destinations, fiches et adresses sont lues en base via `getDestinations()` / `getVoyage()` /
+`getVoyages()`. Les JSON de `content/voyages/*.json` et `lib/travel-match/destinations.ts` sont du
+**legacy** : les modifier ne change RIEN sur le site. Ils ne servent plus qu'à porter les types.
+
+**Piège du cache de build** : une page prérendue au build peut resservir un contenu périmé après
+une modification en base (constaté le 03/09/2026 sur le statut de Marseille — la page affichait
+encore l'ancienne valeur après rebuild). L'accueil, `/carnets` et `sitemap.xml` sont pour cette
+raison en `export const dynamic = "force-dynamic"`. Toute nouvelle page qui lit la base doit faire
+pareil, sinon un ajout de destination reste invisible sans qu'on comprenne pourquoi.
 
 Le dossier local a été perdu une première fois (aucun repo Git retrouvé sur la machine). On a
 reconstruit depuis le 21/08/2026 : repo GitHub créé (https://github.com/soumiadidi-droid/voyage-app),
@@ -39,22 +62,38 @@ push régulièrement au fil du travail.
   `--ember` et `--aurora`
 - Images stockées sur Vercel Blob storage sur le site original (`*.public.blob.vercel-storage.com`)
 
-## Pages — état au 22/08/2026
+## Pages — état au 03/09/2026
 
-- `/` — accueil : hero, à propos, CTA questionnaire (fait)
-- `/questionnaire` — 7 écrans du moteur Travel Match, voir section dédiée plus bas (fait, testé)
-- `/resultat` — résultats du moteur Travel Match (fait, testé)
-- `/voyages/[slug]` — fiche voyage complète par destination : galerie photo, "Mes adresses" (Où
-  dormir / Où manger), Activités, bouton like (fait pour les 9 fiches : `amerique-du-nord-hiver`,
-  `cote-basque`, `crete`, `dubai`, `italie`, `japon`, `lisbonne`, `mykonos`, `porto`)
-- `/favoris` — destinations likées en localStorage (fait, voir section Favoris plus bas)
+- `/` — accueil : hero fusionné avec la démo Travel Match, manifeste, CTA questionnaire
+- `/questionnaire` — les écrans du moteur Travel Match, voir section dédiée plus bas
+- `/resultat` — résultats du moteur Travel Match
+- `/voyages/[slug]` — fiche voyage complète par destination : galerie, "Mes adresses" (Où dormir /
+  Où manger), Activités, bouton like, extensions/combos. 15 fiches en base
+- `/favoris` — destinations likées en localStorage (voir section Favoris plus bas)
+- `/philosophie` — piliers + "mot de la fondatrice" (texte définitif de Soumia du 23/08/2026, ne
+  pas modifier sans son accord). Libellé de nav : "Ma philosophie"
+- `/pros` — l'offre de collaboration (voir plus bas). Libellé de nav : "On collabore ?", validé par
+  Soumia le 29/08/2026 — ne pas le renommer
+- `/mentions-legales`, `/confidentialite`
+- `/studio`, `/admin`, `/admin/social-agent` — backoffice de Soumia. Pas protégés par mot de passe,
+  juste non liés dans la nav (bouton révélé par `?admin=1`, mémorisé en localStorage). Exclus de
+  l'indexation depuis le 03/09/2026
+- `/carnets` — **page cachée, réservée au démarchage** (voir la section du 03/09/2026 plus bas)
 
 **Pages volontairement abandonnées (décidé le 22/08/2026)** : `/photos`, `/guides` — jamais
 construites, Soumia a tranché qu'elles ne sont plus nécessaires. Ne pas les reproposer. Le contenu
 en cache (`.recovery/photos.html`, `.recovery/guides.html`) est mort, supprimable sans risque.
 
-**`/partenariats` ("Notre offre") — FAIT (23/08/2026)**. Reconstruite à partir du contenu réel de
-l'ancien site en ligne (https://voyage-app-sage.vercel.app/partenariats, toujours accessible), pas
+**Redirections en place (`next.config.ts`, 03/09/2026)** : `/partenariats` → `/pros`, `/voyages` et
+`/destinations` → `/questionnaire`, et tout `voyage-app-sage.vercel.app/*` → le domaine.
+
+**Pages volontairement abandonnées (décidé le 22/08/2026)** : `/photos`, `/guides` — jamais
+construites, Soumia a tranché qu'elles ne sont plus nécessaires. Ne pas les reproposer. Le contenu
+en cache (`.recovery/photos.html`, `.recovery/guides.html`) est mort, supprimable sans risque.
+
+**La page d'offre s'appelle `/pros`** (fichier `app/pros/page.tsx`) — l'URL historique
+`/partenariats` de l'ancien site n'existe plus et redirige dessus. Reconstruite le 23/08/2026 à
+partir du contenu réel de l'ancien site en ligne, pas
 depuis le Business Plan Gemini : **volontairement sans grille tarifaire publique** (pas de
 Starter/Signature/Premium affichés), juste 2 modes de collaboration + un contact direct par email
 (décidé par Soumia le 23/08/2026 — les tarifs du BP restent pour la prospection directe, pas
@@ -361,7 +400,8 @@ d'inventer une URL, à compléter par Soumia si elle veut les liens.
 ## Favoris (❤️) — FONCTIONNEL (22/08/2026)
 
 `/voyages` (catalogue ouvert) est volontairement supprimé — la seule porte d'entrée vers les
-destinations est le questionnaire, pour ne pas spoiler la base. En complément, un système de
+destinations est le questionnaire, pour ne pas spoiler la base. Toujours vrai au 03/09/2026 : le
+catalogue reconstruit ce jour-là vit sur `/carnets` et n'est lié de nulle part (voir plus bas). En complément, un système de
 favoris permet de retrouver les destinations likées sans repasser par le questionnaire :
 
 - `lib/favorites.ts` — store `useSyncExternalStore` sur `localStorage` (clé `lve-favoris`), 100%
@@ -378,3 +418,60 @@ favoris permet de retrouver les destinations likées sans repasser par le questi
   (`"italie"`) — `/favoris` la résout en repêchant la fiche de contenu correspondante (`content/
   voyages/*.json`) quand aucune destination ne matche cet id, donc rien n'est perdu, juste affiché
   au niveau de la fiche groupée plutôt que d'une destination précise (résolu le 22/08/2026).
+
+## Ouverture puis fermeture du catalogue, et repositionnement (03/09/2026)
+
+Journée en deux temps, dans cet ordre — l'ordre compte pour comprendre l'état final.
+
+**Objectif posé par Soumia** : le site sert de book de crédibilité pour démarcher des offices de
+tourisme et des hôtels (séjour offert contre contenu + affiliation). Ce n'est pas un projet
+d'audience : ne jamais mettre des chiffres de trafic ou de followers en avant, ce qui se vend c'est
+son regard et sa sélection d'adresses.
+
+**Temps 1 — catalogue ouvert.** `/carnets` (jusque-là un stub "page en cours de rédaction", délié
+de la nav le 23/08) est devenu la liste complète des 15 carnets, mise dans la nav et le footer, avec
+une section "Récits & destinations à la une" sur l'accueil.
+
+**Temps 2 — catalogue refermé, après que Soumia l'a vu en preview.** Afficher les destinations
+révèle la réponse du Travel Match avant que le visiteur ne le passe — même raison qui avait fait
+retirer le nom des vraies destinations de la carte teaser du hero le 01/09. État final :
+
+- `/carnets` existe, est complète et servie, mais **rien sur le site n'y renvoie** : pas de nav, pas
+  de footer, pas de section accueil, page Favoris repointée sur `/questionnaire`
+- elle est en `robots: { index: false, follow: false }`, absente du sitemap, interdite dans
+  `robots.txt` — sans ça elle remonterait dans Google et n'importe quel visiteur y tomberait
+- `/voyages` et `/destinations` redirigent vers `/questionnaire` et **pas** vers `/carnets` : une
+  URL aussi évidente suffirait à la rendre trouvable
+- Soumia envoie l'URL `https://levoyagedesemotions.fr/carnets` elle-même aux partenaires
+
+**Ne pas remettre `/carnets` dans la nav ni de vitrine de destinations sur l'accueil sans son
+accord explicite.** C'est une décision produit, pas un oubli.
+
+**Composants** : `app/components/CarnetCard.tsx` (carte de carnet) et `lib/carnets.ts`
+(`getCarnets()`, tri par badge puis titre) — écrits pour être partagés entre `/carnets` et l'accueil,
+seul `/carnets` les utilise depuis la fermeture. La carte n'affiche que le nombre d'adresses : le
+compteur de photos a été retiré, les photos étant ce que Soumia **livre** au partenaire et pas ce
+qu'elle montre pour décrocher le séjour.
+
+**Les 15 destinations sont toutes en `tested_approved`** (Londres corrigée en base ce jour-là,
+Marseille l'était déjà). Le bandeau de `/carnets` affiche donc "tous vécus sur le terrain", et le
+libellé "Curatée" n'apparaît nulle part aujourd'hui — il reste prévu pour une future destination
+non vécue. `authenticity_badge` ne sert qu'à l'affichage et au tri, jamais au calcul du matching.
+
+**Galeries maigres** : plusieurs carnets n'ont que 2 ou 3 photos, Londres et Marseille zéro (mais
+15 et 3 embeds Instagram sur leurs adresses). Signalé à Soumia, elle a tranché que ça n'impacte pas
+le démarchage. Ne pas le resoulever.
+
+### SEO — ce qui n'existait pas avant ce jour
+
+`metadataBase` pointait encore sur le sous-domaine Vercel, il n'y avait aucune balise canonique,
+aucun sitemap, aucun `robots.txt`. Ajoutés : `lib/site.ts` (`SITE_URL`), `app/sitemap.ts`,
+`app/robots.ts`, et une canonique **page par page**.
+
+Piège à connaître : une canonique posée sur le layout racine est héritée par toutes les pages
+enfant qui ne la redéfinissent pas — elle déclarerait l'accueil comme URL canonique de tout le
+site. C'est pour ça qu'elle est posée page par page et pas une fois pour toutes.
+
+Les 15 fiches `/voyages/[slug]` restent indexées individuellement (elles l'étaient déjà avant).
+Question ouverte avec Soumia : faut-il aussi les sortir de Google, puisqu'un visiteur peut y
+atterrir en cherchant une destination sans passer par le questionnaire ? Non tranché.

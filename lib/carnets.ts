@@ -29,7 +29,6 @@ export async function getCarnets(): Promise<Carnet[]> {
       badge: badgeBySlug.get(v.slug) ?? ("discovery" as AuthenticityBadge),
       image: DESTINATION_HERO_IMAGE[v.slug] ?? v.hero.image,
       addressCount: v.stays.length + v.eats.length + v.activities.length,
-      photoCount: v.gallery.length,
     }))
     .sort(
       (a, b) => BADGE_RANK[a.badge] - BADGE_RANK[b.badge] || a.title.localeCompare(b.title, "fr")
