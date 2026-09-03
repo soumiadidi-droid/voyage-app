@@ -1,9 +1,23 @@
 import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { HeroLandingPage, type DemoItem } from "./components/HeroLandingPage";
+import { CarnetCard } from "./components/CarnetCard";
+import { getCarnets } from "@/lib/carnets";
 import { getDestinations } from "@/lib/travel-match/data";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import { ARCHETYPES, SCORE_AXES, type ScoreAxis } from "./components/TravelerProfileCard";
 import type { Destination } from "@/lib/travel-match/types";
+
+// Relue en base à la requête (03/09/2026), comme /carnets : l'accueil affiche les 4 carnets mis
+// en avant et le compteur "Voir les N carnets". Laissée statique, elle pouvait annoncer un nombre
+// différent de celui affiché par /carnets après un ajout en base (cache de build).
+export const dynamic = "force-dynamic";
+
+// Canonique de l'accueil (03/09/2026) — posée page par page et pas sur le layout racine, où elle
+// serait héritée par toutes les pages enfant qui ne la redéfinissent pas.
+export const metadata = {
+  alternates: { canonical: "/" },
+};
 
 // 5 puces = les 5 vrais "profils voyageur" (mêmes archétypes/textes validés que TravelerProfileCard,
 // affichés sur /resultat) — décidé le 31/08/2026, reskin teaser sombre. Emoji cosmétique par axe
@@ -113,7 +127,10 @@ async function buildDemoItems(): Promise<DemoItem[]> {
 }
 
 export default async function Home() {
-  const demoItems = await buildDemoItems();
+  const [demoItems, carnets] = await Promise.all([buildDemoItems(), getCarnets()]);
+  // 4 carnets mis en avant : getCarnets() trie déjà les destinations vécues en premier, donc on
+  // met en avant la preuve de terrain, pas un choix au hasard (03/09/2026).
+  const featured = carnets.slice(0, 4);
 
   return (
     <div>
@@ -170,6 +187,50 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Récits & destinations à la une (03/09/2026) — jusqu'ici les 13 carnets n'étaient
+            atteignables qu'en terminant le questionnaire : aucun accès direct depuis l'accueil,
+            rien d'indexable. Accès direct aux fiches ici, liste complète sur /carnets. */}
+        {featured.length > 0 && (
+          <section className="my-16 sm:my-24">
+            <div>
+              <div className="flex flex-wrap items-end justify-between gap-4 mb-10">
+                <div>
+                  <span
+                    className="text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold block mb-3"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    Récits &amp; destinations
+                  </span>
+                  <h2
+                    className="text-3xl sm:text-4xl text-lve-charcoal leading-tight max-w-xl m-0"
+                    style={{ fontFamily: "var(--font-title)" }}
+                  >
+                    À la une
+                  </h2>
+                </div>
+                <Link
+                  href="/carnets"
+                  className="inline-flex items-center gap-2 no-underline text-sm text-lve-charcoal hover:text-lve-terracotta transition-colors border-b border-lve-charcoal/20 hover:border-lve-terracotta pb-1"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Voir les {carnets.length} carnets
+                  <ArrowRight size={15} strokeWidth={1.75} />
+                </Link>
+              </div>
+
+              {/* 2x2 : cette section vit dans le conteneur max-w-4xl de l'accueil, 4 cartes sur
+                  une seule ligne y seraient trop étroites pour que la photo respire. */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-6 list-none m-0 p-0">
+                {featured.map((carnet) => (
+                  <li key={carnet.slug}>
+                    <CarnetCard carnet={carnet} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        )}
+
         <div
           className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory border-y border-lve-charcoal/5 text-center"
         >
@@ -194,7 +255,7 @@ export default async function Home() {
               className="text-base sm:text-lg text-lve-charcoal/70 max-w-xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Votre match idéal et nos adresses exclusives.
+              Votre match idéal et mes adresses, testées une par une.
             </p>
 
             <div className="pt-4">

@@ -2,6 +2,9 @@ import { Camera, Link2 } from "lucide-react";
 
 export const metadata = {
   title: "On collabore ? — Le Voyage des Émotions",
+  description:
+    "Deux façons de collaborer : je viens, je vis et je raconte, ou votre établissement rejoint mes fiches « Où dormir ».",
+  alternates: { canonical: "/pros" },
 };
 
 // (29/08/2026, "plus de peps/plus de terracotta") : la page n'avait quasi aucune couleur de

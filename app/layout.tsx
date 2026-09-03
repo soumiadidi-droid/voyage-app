@@ -8,6 +8,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { Nav, Footer } from "./components/NavFooter";
+import { SITE_URL } from "@/lib/site";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -41,9 +42,16 @@ const cormorant = Cormorant_Garamond({
 });
 
 // metadataBase (31/08/2026, ajout OG tags) — nécessaire pour que Next résolve les URLs
-// openGraph.images en absolu. URL de prod confirmée dans ce même CLAUDE.md ("État actuel").
+// openGraph.images et les balises canoniques en absolu.
+// Basculé le 03/09/2026 du sous-domaine Vercel vers le nom de domaine acheté par Soumia : toutes
+// les URLs absolues du site (previews de partage, canoniques, sitemap) pointaient encore sur
+// voyage-app-sage.vercel.app, ce qui faisait remonter l'URL technique au lieu de la vraie. Le
+// sous-domaine redirige désormais ici (next.config.ts).
+// Pas de `alternates.canonical` ici : les métadonnées Next sont héritées par les pages enfant
+// qui ne redéfinissent pas le champ, donc une canonique posée sur le layout racine déclarerait
+// l'accueil comme URL canonique de TOUTES les pages. Chaque page pose la sienne.
 export const metadata: Metadata = {
-  metadataBase: new URL("https://voyage-app-sage.vercel.app"),
+  metadataBase: new URL(SITE_URL),
   title: "Le Voyage des Émotions",
   description: "Un pays, une histoire, une photo à la fois.",
 };

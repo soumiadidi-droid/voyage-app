@@ -42,6 +42,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${voyage.hero.title} — Le Voyage des Émotions`,
+    description,
+    // Canonique explicite (03/09/2026) : la page accepte des searchParams (durée, profil famille
+    // venant du questionnaire), qui créent autant d'URLs pour un même carnet. Sans canonique,
+    // Google indexe ces variantes comme des pages distinctes au contenu quasi identique.
+    alternates: { canonical: `/voyages/${slug}` },
     openGraph: {
       title: `Découvre ${voyage.hero.title} sur Voyage des Émotions`,
       description,
@@ -85,7 +90,7 @@ function AddressesSection({
         className="font-extrabold mb-8"
         style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
       >
-        Nos adresses pépites &amp; coups de cœur
+        Mes adresses pépites &amp; coups de cœur
       </h2>
       <AddressGrid stays={stays} eats={eats} activities={activities} familyProfile={familyProfile} />
     </div>

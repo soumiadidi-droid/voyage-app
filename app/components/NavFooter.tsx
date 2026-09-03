@@ -69,12 +69,15 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 
 // Header aligné sur le Design System officiel Figma (décidé le 23/08/2026). Le CTA reste vers
 // /questionnaire (pas de route /travel-match — validé avec Soumia, la page réelle du questionnaire
-// ne change pas de nom juste pour coller à l'URL de la maquette). "Carnets" remplacé par "Favoris"
-// le 23/08/2026 : pas de section blog sur le site, /carnets reste en place (stub) mais n'est plus
-// lié dans la nav — à supprimer si elle confirme qu'il ne servira jamais.
+// ne change pas de nom juste pour coller à l'URL de la maquette).
+// "Carnets" remis dans la nav le 03/09/2026, en 1re position : /carnets n'est plus un stub mais la
+// liste complète des 13 carnets. Annule la décision du 23/08/2026 qui l'avait délié ("pas de
+// section blog") — le site sert maintenant de book de crédibilité pour le démarchage B2B, les
+// récits doivent être atteignables sans passer par le questionnaire.
 const NAV_LINKS = [
+  { href: "/carnets", label: "Carnets" },
   { href: "/favoris", label: "Favoris" },
-  { href: "/philosophie", label: "Notre Philosophie" },
+  { href: "/philosophie", label: "Ma philosophie" },
   // Renommé (29/08/2026) : "Espace Pros" sonnait corporate à côté de "Favoris"/"Notre
   // Philosophie" et contredisait le ton perso donné à la page elle-même ("pas de service com',
   // c'est moi") — Soumia a validé "On collabore ?".
@@ -249,8 +252,12 @@ export function Footer() {
               LVE
             </span>
           </Link>
+          {/* Baseline remplacée le 03/09/2026 : "L'art du voyage sur-mesure & la curation
+              d'adresses d'exception" était une formule d'agence, sur un site tenu par une seule
+              personne qui vend précisément son regard. Remplacée par la vraie baseline du projet
+              (cf. AGENTS.md), qui est de Soumia. */}
           <p className="text-sm text-lve-ivory/70 leading-relaxed max-w-sm" style={DARK_FONT}>
-            L&apos;art du voyage sur-mesure &amp; la curation d&apos;adresses d&apos;exception.
+            Un pays, une histoire, une photo à la fois.
           </p>
           <a
             href={INSTAGRAM_URL}
@@ -266,14 +273,17 @@ export function Footer() {
         <div className="md:col-span-2 space-y-3">
           <h4 className={DARK_COLUMN_TITLE_CLASS}>Découvrir</h4>
           <ul className="space-y-2 text-sm list-none m-0 p-0">
+            {/* Ajouté le 03/09/2026, en tête de colonne : le footer est présent sur toutes les
+                pages, c'est le filet de sécurité pour atteindre les récits depuis n'importe où. */}
+            <li><DarkFooterLink href="/carnets">Tous les carnets</DarkFooterLink></li>
             <li><DarkFooterLink href="/questionnaire">Trouver mon voyage</DarkFooterLink></li>
           </ul>
         </div>
 
         <div className="md:col-span-2 space-y-3">
-          <h4 className={DARK_COLUMN_TITLE_CLASS}>Maison</h4>
+          <h4 className={DARK_COLUMN_TITLE_CLASS}>À propos</h4>
           <ul className="space-y-2 text-sm list-none m-0 p-0">
-            <li><DarkFooterLink href="/philosophie">Notre philosophie</DarkFooterLink></li>
+            <li><DarkFooterLink href="/philosophie">Ma philosophie</DarkFooterLink></li>
             <li><DarkFooterLink href="/pros">On collabore ?</DarkFooterLink></li>
             <li>
               <a href="mailto:levoyagedesemotions@gmail.com" className={DARK_LINK_CLASS} style={DARK_FONT}>
@@ -290,7 +300,7 @@ export function Footer() {
           <div className="md:col-span-4 space-y-3">
             <h4 className={DARK_COLUMN_TITLE_CLASS}>Le Carnet de Route</h4>
             <p className="text-sm text-lve-ivory/70" style={DARK_FONT}>
-              Recevez nos nouvelles pépites et itinéraires exclusifs.
+              Recevez mes nouvelles pépites et itinéraires.
             </p>
             {/* Formulaire visuel uniquement pour l'instant : aucun outil de newsletter (Mailchimp,
                 Brevo, etc.) n'est branché sur ce projet, donc rien n'est réellement collecté ou

@@ -117,22 +117,27 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
           style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
         >
           <Sparkles size={12} strokeWidth={2} />
-          Voyage des Émotions × Travel Match
+          Récits vécus, adresses testées
         </span>
 
+        {/* H1 repositionné le 03/09/2026 : l'ancien ("Le voyage qui vous ressemble existe déjà.")
+            vendait un outil de recommandation, pas une ligne éditoriale — incohérent avec
+            l'objectif du site (book de crédibilité pour le démarchage offices de tourisme /
+            hôtels : ce qui se vend, c'est le regard, pas l'algorithme). La promesse Travel Match
+            n'est pas perdue, elle vit désormais sur le bloc CTA du bas de l'accueil
+            (app/page.tsx), où elle est à sa place. */}
         <h1
           className="text-white font-extrabold leading-[1.05] mb-3 max-w-2xl"
           style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5.5vw, 3.8rem)" }}
         >
-          Le voyage qui vous ressemble existe déjà.
+          Des récits de voyages vrais, des adresses incarnées.
         </h1>
         <p
           className="italic text-white/90 max-w-xl mb-8"
           style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
         >
-          De l&apos;inspiration initiale aux plus belles adresses locales, l&apos;hôtel, les tables
-          et les expériences s&apos;accordent à vos émotions en un seul endroit. Découvrez votre
-          match idéal et nos adresses exclusives.
+          Découvrez des destinations testées sur le terrain ou trouvez le voyage qui vous
+          correspond.
         </p>
 
         {/* Onglets archétypes */}

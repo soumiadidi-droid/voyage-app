@@ -2,7 +2,8 @@ import Link from "next/link";
 import { Quote, Sparkles } from "lucide-react";
 
 export const metadata = {
-  title: "Notre philosophie — Le Voyage des Émotions",
+  title: "Ma philosophie — Le Voyage des Émotions",
+  alternates: { canonical: "/philosophie" },
 };
 
 // Textes définitifs validés par Soumia le 23/08/2026.
@@ -20,7 +21,7 @@ const PILLARS = [
   {
     title: "À la hauteur de vos émotions",
     description:
-      "Parce que chaque voyageur est unique, nous connectons vos envies profondes aux meilleures destinations grâce à Travel Match.",
+      "Parce que chaque voyageur est unique, je connecte vos envies profondes aux destinations qui leur répondent, grâce à Travel Match.",
   },
 ];
 
