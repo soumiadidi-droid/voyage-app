@@ -14,10 +14,11 @@ const nextConfig: NextConfig = {
       // /partenariats : URL historique de l'ancien site, la page vit sur /pros depuis le rebuild
       // du 23/08/2026. Redirigée plutôt que dupliquée (03/09/2026).
       { source: "/partenariats", destination: "/pros", permanent: true },
-      // /voyages et /destinations : les fiches détail vivent sur /voyages/[slug], l'index complet
-      // sur /carnets. Une seule page de liste, pour ne pas créer deux URLs au même contenu.
-      { source: "/voyages", destination: "/carnets", permanent: true },
-      { source: "/destinations", destination: "/carnets", permanent: true },
+      // /voyages et /destinations renvoient vers le questionnaire, PAS vers /carnets (03/09/2026) :
+      // /carnets n'est plus lié depuis le site, une redirection depuis une URL aussi évidente que
+      // /voyages suffirait à la rendre trouvable par n'importe qui.
+      { source: "/voyages", destination: "/questionnaire", permanent: true },
+      { source: "/destinations", destination: "/questionnaire", permanent: true },
       // Tout le sous-domaine Vercel bascule sur le domaine canonique, chemin conservé.
       {
         source: "/:path*",

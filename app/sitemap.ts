@@ -6,9 +6,9 @@ import { getCarnets } from "@/lib/carnets";
 // l'indexation. Les 13 fiches sont générées depuis la base, comme la page /carnets : une nouvelle
 // destination ajoutée en base apparaît automatiquement ici, sans rien à mettre à jour à la main.
 //
-// Pages volontairement absentes : /resultat et /favoris (contenu propre à chaque visiteur, sans
-// intérêt en recherche), /admin et /studio (backoffice), /questionnaire (formulaire, l'entrée
-// éditoriale c'est /carnets).
+// Pages volontairement absentes : /carnets (réservée au démarchage, en noindex — cf. la page
+// elle-même), /resultat et /favoris (contenu propre à chaque visiteur, sans intérêt en recherche),
+// /admin et /studio (backoffice), /questionnaire (formulaire).
 // Même raison que /carnets : régénéré à la requête pour qu'une nouvelle destination en base
 // apparaisse sans dépendre du cache de build.
 export const dynamic = "force-dynamic";
@@ -19,7 +19,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
-    { url: `${SITE_URL}/carnets`, lastModified: now, changeFrequency: "weekly", priority: 0.9 },
     { url: `${SITE_URL}/pros`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/philosophie`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     ...carnets.map((c) => ({

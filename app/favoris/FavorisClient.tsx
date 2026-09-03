@@ -87,16 +87,15 @@ export function FavorisClient() {
           <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
             Votre carnet de voyage est vide.
           </p>
-          {/* Pointait vers /questionnaire jusqu'au 03/09/2026, faute de catalogue ouvert (celui
-              du 22/08/2026 avait été supprimé). /carnets existe maintenant : depuis une page de
-              favoris vide, envoyer vers la liste des carnets est plus direct qu'un questionnaire
-              de neuf questions. */}
+          {/* Repointé sur /questionnaire le 03/09/2026 : /carnets existe mais n'est plus lié
+              depuis le site (page réservée au démarchage), donc aucune page publique ne doit y
+              renvoyer — ni pour un visiteur, ni pour un moteur de recherche. */}
           <Link
-            href="/carnets"
+            href="/questionnaire"
             className="inline-block rounded-lg px-6 py-3 mono no-underline"
             style={{ background: "var(--ember)", color: "#fff" }}
           >
-            Découvrir mes carnets ↗
+            Découvrir mes destinations ↗
           </Link>
         </div>
       ) : (

@@ -22,6 +22,10 @@ export const metadata = {
   description:
     "Tous les carnets : des destinations testées sur le terrain et des adresses curatées, racontées une par une.",
   alternates: { canonical: "/carnets" },
+  // Hors index (03/09/2026) : page réservée au démarchage, dont Soumia envoie l'URL elle-même.
+  // Sans ce noindex elle remonterait dans Google et n'importe quel visiteur y tomberait, ce qui
+  // annulerait la raison de l'avoir retirée de la nav.
+  robots: { index: false, follow: false },
   openGraph: {
     title: "Les carnets — Le Voyage des Émotions",
     description: "Des récits de voyages vrais, des adresses incarnées.",

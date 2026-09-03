@@ -70,12 +70,13 @@ function InstagramIcon({ size = 18 }: { size?: number }) {
 // Header aligné sur le Design System officiel Figma (décidé le 23/08/2026). Le CTA reste vers
 // /questionnaire (pas de route /travel-match — validé avec Soumia, la page réelle du questionnaire
 // ne change pas de nom juste pour coller à l'URL de la maquette).
-// "Carnets" remis dans la nav le 03/09/2026, en 1re position : /carnets n'est plus un stub mais la
-// liste complète des 13 carnets. Annule la décision du 23/08/2026 qui l'avait délié ("pas de
-// section blog") — le site sert maintenant de book de crédibilité pour le démarchage B2B, les
-// récits doivent être atteignables sans passer par le questionnaire.
+// /carnets volontairement ABSENT de la nav (décision de Soumia, 03/09/2026, après l'avoir vu en
+// preview) : la liste des destinations révèle la réponse du Travel Match avant que le visiteur ne
+// le passe — même raison qui avait fait retirer le nom des vraies destinations de la carte teaser
+// du hero le 01/09/2026. La page existe, reste servie, mais n'est liée de NULLE PART sur le site :
+// Soumia envoie l'URL elle-même aux partenaires qu'elle démarche. Ne pas la remettre dans la nav
+// sans son accord explicite.
 const NAV_LINKS = [
-  { href: "/carnets", label: "Carnets" },
   { href: "/favoris", label: "Favoris" },
   { href: "/philosophie", label: "Ma philosophie" },
   // Renommé (29/08/2026) : "Espace Pros" sonnait corporate à côté de "Favoris"/"Notre
@@ -273,9 +274,6 @@ export function Footer() {
         <div className="md:col-span-2 space-y-3">
           <h4 className={DARK_COLUMN_TITLE_CLASS}>Découvrir</h4>
           <ul className="space-y-2 text-sm list-none m-0 p-0">
-            {/* Ajouté le 03/09/2026, en tête de colonne : le footer est présent sur toutes les
-                pages, c'est le filet de sécurité pour atteindre les récits depuis n'importe où. */}
-            <li><DarkFooterLink href="/carnets">Tous les carnets</DarkFooterLink></li>
             <li><DarkFooterLink href="/questionnaire">Trouver mon voyage</DarkFooterLink></li>
           </ul>
         </div>
