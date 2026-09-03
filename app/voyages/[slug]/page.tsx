@@ -4,6 +4,7 @@ import { DestinationHero } from "../../components/DestinationHero";
 import { AddressGrid } from "../../components/AddressGrid";
 import { TripExtensionCard } from "../../components/TripExtensionCard";
 import { DestinationPracticalCard } from "../../components/DestinationPracticalCard";
+import { QuizCta } from "../../components/QuizCta";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
 import { getCombosFor } from "@/lib/travel-match/combos";
@@ -37,24 +38,50 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const travelInfo = destination?.travel_from_paris
     ? `${destination.travel_from_paris.mode}, ${destination.travel_from_paris.duration} depuis Paris`
     : undefined;
-  const description = [voyage.hero.tagline, travelInfo].filter(Boolean).join(" — ");
   const image = DESTINATION_HERO_IMAGE[slug];
+
+  // Complété le 03/09/2026 (fiches ouvertes à l'indexation) : la description reprenait la seule
+  // accroche, trop courte pour un extrait de résultat de recherche. Elle annonce maintenant le
+  // pays et le volume réel d'adresses de la fiche, qui est son vrai contenu.
+  //
+  // Google tronque l'extrait autour de 160 caractères : la logistique transport n'est ajoutée que
+  // si elle tient dans ce budget, l'essentiel (pays, accroche, nombre d'adresses) passe d'abord.
+  const addressCount = voyage.stays.length + voyage.eats.length + voyage.activities.length;
+  const sentences = [`${voyage.hero.country} — ${voyage.hero.tagline}`];
+  if (addressCount > 0) sentences.push(`${addressCount} adresses testées et racontées.`);
+  const essential = sentences.join(" ");
+  const withTravel = travelInfo ? `${essential} ${travelInfo}.` : essential;
+  const metaDescription = withTravel.length <= 160 ? withTravel : essential;
 
   return {
     title: `${voyage.hero.title} — Le Voyage des Émotions`,
-    description,
+    description: metaDescription,
+    keywords: voyage.hero.tags,
     // Canonique explicite (03/09/2026) : la page accepte des searchParams (durée, profil famille
     // venant du questionnaire), qui créent autant d'URLs pour un même carnet. Sans canonique,
     // Google indexe ces variantes comme des pages distinctes au contenu quasi identique.
     alternates: { canonical: `/voyages/${slug}` },
+    // Indexation explicite (03/09/2026) : les fiches sont la vraie porte d'entrée en recherche.
+    // Un visiteur qui atterrit ici sans passer par le Travel Match est récupéré par le bloc
+    // QuizCta en fin de page.
+    robots: { index: true, follow: true },
     openGraph: {
       title: `Découvre ${voyage.hero.title} sur Voyage des Émotions`,
-      description,
-      images: image ? [image] : undefined,
-      type: "website",
+      description: metaDescription,
+      url: `/voyages/${slug}`,
+      siteName: "Le Voyage des Émotions",
+      locale: "fr_FR",
+      // "article" et non "website" : c'est un récit signé, pas une page de site.
+      type: "article",
+      images: image
+        ? [{ url: image, width: 1200, height: 630, alt: `${voyage.hero.title} — ${voyage.hero.country}` }]
+        : undefined,
     },
     twitter: {
       card: "summary_large_image",
+      title: `Découvre ${voyage.hero.title} sur Voyage des Émotions`,
+      description: metaDescription,
+      images: image ? [image] : undefined,
     },
   };
 }
@@ -204,6 +231,10 @@ export default async function VoyagePage({
             </div>
           </section>
         )}
+
+        {/* En dernier, après les adresses et les extensions : le lecteur a vu le récit, c'est le
+            moment de lui proposer le questionnaire (03/09/2026). */}
+        <QuizCta />
       </div>
     </div>
   );

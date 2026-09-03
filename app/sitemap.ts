@@ -8,7 +8,7 @@ import { getCarnets } from "@/lib/carnets";
 //
 // Pages volontairement absentes : /carnets (réservée au démarchage, en noindex — cf. la page
 // elle-même), /resultat et /favoris (contenu propre à chaque visiteur, sans intérêt en recherche),
-// /admin et /studio (backoffice), /questionnaire (formulaire).
+// /admin et /studio (backoffice).
 // Même raison que /carnets : régénéré à la requête pour qu'une nouvelle destination en base
 // apparaisse sans dépendre du cache de build.
 export const dynamic = "force-dynamic";
@@ -21,6 +21,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/pros`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/philosophie`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    // Ajouté le 03/09/2026 : c'est la cible de tous les CTA du site, dont celui en fin de fiche —
+    // donc une vraie page d'entrée, plus seulement un formulaire.
+    { url: `${SITE_URL}/questionnaire`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
     ...carnets.map((c) => ({
       url: `${SITE_URL}/voyages/${c.slug}`,
       lastModified: now,
