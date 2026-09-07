@@ -27,10 +27,15 @@ Le site est **en ligne et fonctionnel** sur son nom de domaine : **https://levoy
 Projet Vercel : `voyage-app` (team `ai-product5` / `team_dRjUleuL4QiTSwUyVlEKalH1`,
 id `prj_VoXzgnLHaF5PZDtACcE4teyiv2WS`).
 
-**Déploiement manuel, et le scope est obligatoire** : `npx vercel --prod --yes --scope ai-product5`
-(sans `--scope`, la commande échoue sur un `Not authorized` peu parlant). Sans `--prod`, on obtient
-une preview protégée, visible seulement par Soumia — c'est ce qu'il faut lui envoyer pour
-validation avant la prod. Le lien GitHub → Vercel n'est pas branché en auto-déploiement.
+**Déploiement automatique depuis GitHub (vérifié le 07/09/2026)** : le repo
+`soumiadidi-droid/voyage-app` est connecté au projet Vercel. Tout `git push origin main` déclenche
+un déploiement **en production** sur levoyagedesemotions.fr, sans commande à lancer. Un push sur
+n'importe quelle autre branche produit une preview protégée, visible seulement par Soumia — c'est
+ce qu'il faut lui envoyer pour validation avant la prod. Conséquence : ne plus pousser sur `main`
+ce qui n'est pas validé, le push EST la mise en ligne.
+
+Déploiement manuel toujours possible en secours (`npx vercel --prod --yes --scope ai-product5`) —
+le `--scope` est obligatoire, sans lui la commande échoue sur un `Not authorized` peu parlant.
 
 **Le contenu vit en base (Neon/Postgres), plus dans les fichiers.** Depuis la migration du
 27/08/2026 (`lib/travel-match/data.ts`, plan `~/.claude/plans/moonlit-noodling-dolphin.md`), les
@@ -54,8 +59,8 @@ push régulièrement au fil du travail.
 ## Stack
 
 - Next.js (App Router, TypeScript, Tailwind CSS) — scaffold via `create-next-app`
-- Déploiement Vercel (à reconnecter au repo GitHub une fois le rebuild suffisamment avancé —
-  voir plan `/Users/soumiadidi/.claude/plans/rosy-swimming-magpie.md`)
+- Déploiement Vercel, connecté au repo GitHub : push sur `main` = mise en production automatique
+  (voir la section "État actuel" plus haut)
 - Polices : Cormorant Garamond (titres/logo), Bricolage Grotesque / Source Serif 4 / IBM Plex Mono
   (corps), via Google Fonts
 - Palette sombre chaleureuse observée sur le site en ligne : `#1A1714` / `#E8DFC8`, accents
