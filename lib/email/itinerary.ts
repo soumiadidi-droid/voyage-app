@@ -86,7 +86,9 @@ function pickPreviewAddresses(voyage: VoyageContent): PreviewAddress[] {
   return picked;
 }
 
-function addressRow({ card, category }: PreviewAddress, showLabel: boolean): string {
+// `label` = le libellé de catégorie à imprimer au-dessus de l'adresse, ou null pour ne rien
+// imprimer (mail carnet, où les adresses sont déjà regroupées sous un titre de section).
+function addressRow(card: Card, label: string | null): string {
   const name = esc(card.name);
   // L'adresse renvoie vers son propre site quand Soumia a renseigné un lien, sinon elle reste en
   // texte : pas de lien inventé (même règle que sur la fiche).
@@ -101,9 +103,9 @@ function addressRow({ card, category }: PreviewAddress, showLabel: boolean): str
 
   return `<tr><td style="padding:0 0 16px;">
     ${
-      showLabel
+      label
         ? `<p style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em;color:${C.terracottaDark};margin:0 0 3px;font-weight:700;">
-            ${CATEGORY_LABEL[category]}
+            ${label}
           </p>`
         : ""
     }
@@ -137,7 +139,12 @@ function destinationBlock(destination: ItineraryDestination, rank: number): stri
           ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:20px;border-top:1px solid ${C.border};padding-top:4px;">
               <tr><td style="height:16px;"></td></tr>
               ${preview
-                .map((entry, i) => addressRow(entry, i === 0 || preview[i - 1].category !== entry.category))
+                .map((entry, i) =>
+                  addressRow(
+                    entry.card,
+                    i === 0 || preview[i - 1].category !== entry.category ? CATEGORY_LABEL[entry.category] : null
+                  )
+                )
                 .join("")}
             </table>`
           : ""
@@ -202,4 +209,77 @@ export const GMAIL_CLIP_KB = 102;
 
 export function estimateSizeKb(html: string): number {
   return Math.round((Buffer.byteLength(html, "utf8") / 1024) * 10) / 10;
+}
+
+// ---------------------------------------------------------------------------
+// Mail "carnet" — envoyé depuis une fiche destination (09/09/2026, demande Soumia).
+//
+// Logique inverse de celle du mail d'itinéraire ci-dessus, et c'est volontaire : l'aperçu à 3
+// adresses sert à ramener le visiteur vers la fiche. Quand il EST sur la fiche, il a déjà tout
+// sous les yeux — ce qu'il demande là, c'est de l'emporter. Donc on envoie le carnet entier.
+// ---------------------------------------------------------------------------
+
+export type CarnetEmailInput = {
+  destinationTitle: string;
+  slug: string;
+  voyage: VoyageContent;
+};
+
+function fullSection(label: string, cards: Card[]): string {
+  if (cards.length === 0) return "";
+  return `
+    <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:${C.terracottaDark};margin:26px 0 12px;font-weight:700;">
+      ${label} <span style="color:${C.muted};font-weight:400;">(${cards.length})</span>
+    </p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+      ${cards.map((card) => addressRow(card, null)).join("")}
+    </table>`;
+}
+
+export function buildCarnetEmailHtml(input: CarnetEmailInput): string {
+  const { voyage } = input;
+  const ficheUrl = `${SITE_URL}/voyages/${input.slug}`;
+  const total = voyage.stays.length + voyage.eats.length + voyage.activities.length;
+
+  return `<!doctype html>
+<html lang="fr"><body style="margin:0;padding:0;background:${C.paper};">
+<div style="background:${C.paper};padding:32px 16px;font-family:Georgia,'Times New Roman',serif;color:${C.ink};">
+  <div style="max-width:600px;margin:0 auto;">
+    <p style="font-family:Georgia,serif;letter-spacing:0.18em;font-size:13px;color:${C.terracottaDark};margin:0 0 24px;text-align:center;">
+      LVE · LE VOYAGE DES ÉMOTIONS
+    </p>
+
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0"
+           style="background:${C.card};border:1px solid ${C.border};border-radius:14px;">
+      <tr><td style="padding:28px 24px;">
+        <p style="text-transform:uppercase;letter-spacing:0.08em;font-size:11px;color:${C.terracottaDark};margin:0 0 8px;">
+          Votre carnet · ${total} adresse${total > 1 ? "s" : ""}
+        </p>
+        <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:27px;margin:0 0 14px;color:${C.ink};">
+          ${esc(input.destinationTitle)}
+        </h1>
+        <p style="font-size:15px;line-height:1.6;margin:0;color:${C.muted};">
+          ${esc(truncate(voyage.intro, 300))}
+        </p>
+
+        ${fullSection("Où dormir", voyage.stays)}
+        ${fullSection("Où manger", voyage.eats)}
+        ${fullSection("Quoi faire", voyage.activities)}
+
+        <p style="margin:28px 0 0;">
+          <a href="${ficheUrl}" style="display:inline-block;background:${C.terracotta};color:#ffffff;padding:11px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">
+            Revoir le carnet et les photos
+          </a>
+        </p>
+      </td></tr>
+    </table>
+
+    <p style="font-size:12px;line-height:1.6;color:${C.muted};text-align:center;margin:26px 0 0;">
+      Vous recevez ce message parce que vous avez demandé ce carnet sur
+      <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.<br>
+      Un pays, une histoire, une photo à la fois.
+    </p>
+  </div>
+</div>
+</body></html>`;
 }

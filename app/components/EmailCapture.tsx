@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
-import { sendResultsEmail } from "@/app/actions/sendTravelMatch";
+import { sendResultsEmail, sendCarnetEmail } from "@/app/actions/sendTravelMatch";
 
 type Destination = { title: string; slug: string; id: string; score: number };
 
@@ -23,12 +23,22 @@ type Status = "idle" | "loading" | "success" | "error";
 // générique (amber/orange/slate) remplacée par les tokens réels du site (--lve-terracotta-bg,
 // --lve-charcoal, --text-secondary...), et le handler d'envoi bidon du reference (`// Ton appel
 // ici`) remplacé par le vrai appel à sendResultsEmail.
-export function EmailCapture({
-  archetypeTitle,
-  destinations,
+// Coquille visuelle partagée (09/09/2026) : le même bloc sert sur /resultat (envoi de
+// l'itinéraire) et en bas d'une fiche destination (envoi du carnet). Seuls les textes et l'action
+// d'envoi changent — dupliquer la carte dégradée + les halos aurait garanti qu'elles divergent à
+// la première retouche.
+function EmailCaptureShell({
+  badge,
+  title,
+  description,
+  successText,
+  onSend,
 }: {
-  archetypeTitle: string;
-  destinations: Destination[];
+  badge: string;
+  title: string;
+  description: string;
+  successText: string;
+  onSend: (email: string) => Promise<{ ok: true } | { ok: false; error: string }>;
 }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<Status>("idle");
@@ -38,7 +48,7 @@ export function EmailCapture({
     e.preventDefault();
     if (!email) return;
     setStatus("loading");
-    const result = await sendResultsEmail({ email, archetypeTitle, destinations });
+    const result = await onSend(email);
     if (result.ok) {
       setStatus("success");
     } else {
@@ -77,7 +87,7 @@ export function EmailCapture({
               C&apos;est envoyé ! 💌
             </h3>
             <p className="text-sm max-w-md" style={{ color: "var(--text-secondary)" }}>
-              Votre itinéraire complet vient d&apos;être envoyé à{" "}
+              {successText}{" "}
               <span className="font-medium" style={{ color: "var(--lve-charcoal)" }}>{email}</span>.
             </p>
           </div>
@@ -88,17 +98,16 @@ export function EmailCapture({
                 className="inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase rounded-full"
                 style={{ color: "var(--lve-terracotta-dark)", background: "var(--lve-terracotta-bg)" }}
               >
-                Votre itinéraire, par écrit
+                {badge}
               </span>
               <h3
                 className="text-2xl md:text-3xl font-bold tracking-tight"
                 style={{ fontFamily: "var(--font-title)", color: "var(--lve-charcoal)" }}
               >
-                Recevoir mon itinéraire par email
+                {title}
               </h3>
               <p className="text-sm md:text-base max-w-lg mx-auto" style={{ color: "var(--text-secondary)" }}>
-                Vos trois destinations et un avant-goût de mes adresses testées sur place,
-                directement dans votre boîte mail.
+                {description}
               </p>
             </div>
 
@@ -146,5 +155,39 @@ export function EmailCapture({
         )}
       </div>
     </section>
+  );
+}
+
+// Bloc de /resultat : envoie l'itinéraire (les 3 destinations, 3 adresses en aperçu chacune).
+export function EmailCapture({
+  archetypeTitle,
+  destinations,
+}: {
+  archetypeTitle: string;
+  destinations: Destination[];
+}) {
+  return (
+    <EmailCaptureShell
+      badge="Votre itinéraire, par écrit"
+      title="Recevoir mon itinéraire par email"
+      description="Vos trois destinations et un avant-goût de mes adresses testées sur place, directement dans votre boîte mail."
+      successText="Votre itinéraire complet vient d'être envoyé à"
+      onSend={(email) => sendResultsEmail({ email, archetypeTitle, destinations })}
+    />
+  );
+}
+
+// Bloc de fin de fiche destination (09/09/2026) : envoie le carnet ENTIER de cette destination —
+// à l'inverse de l'aperçu ci-dessus. Quelqu'un qui est déjà sur la fiche a passé le stade de la
+// vitrine : ce qu'il demande, c'est d'emporter les adresses avec lui.
+export function CarnetEmailCapture({ slug, destinationTitle }: { slug: string; destinationTitle: string }) {
+  return (
+    <EmailCaptureShell
+      badge="Emporter ce carnet"
+      title={`Recevoir mes adresses de ${destinationTitle} par email`}
+      description="Toutes les adresses de ce carnet — où dormir, où manger, quoi faire — dans votre boîte mail, pour les retrouver une fois sur place."
+      successText="Votre carnet vient d'être envoyé à"
+      onSend={(email) => sendCarnetEmail({ email, slug })}
+    />
   );
 }

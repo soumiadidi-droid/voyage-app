@@ -15,6 +15,7 @@ import { Resend } from "resend";
 import { getVoyage } from "@/lib/travel-match/data";
 import {
   buildItineraryEmailHtml,
+  buildCarnetEmailHtml,
   estimateSizeKb,
   GMAIL_CLIP_KB,
   type ItineraryDestination,
@@ -92,6 +93,56 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
     return { ok: true };
   } catch (err) {
     console.error("[sendResultsEmail] Exception:", err);
+    return { ok: false, error: "L'envoi a échoué, réessaie." };
+  }
+}
+
+// Envoi du carnet d'UNE destination depuis sa fiche (09/09/2026, demande Soumia). Même remarque que
+// pour l'itinéraire : le navigateur ne transmet qu'un slug, tout le contenu est relu en base ici.
+export async function sendCarnetEmail(input: {
+  email: string;
+  slug: string;
+}): Promise<SendResultsEmailResult> {
+  if (!EMAIL_RE.test(input.email)) {
+    return { ok: false, error: "Adresse email invalide." };
+  }
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey || apiKey.startsWith("re_ton_cle")) {
+    return { ok: false, error: "Envoi non configuré pour l'instant, réessaie plus tard." };
+  }
+
+  const voyage = await getVoyage(input.slug);
+  if (!voyage) {
+    console.error("[sendCarnetEmail] Carnet introuvable:", input.slug);
+    return { ok: false, error: "L'envoi a échoué, réessaie." };
+  }
+
+  const html = buildCarnetEmailHtml({
+    destinationTitle: voyage.hero.title,
+    slug: input.slug,
+    voyage,
+  });
+
+  const sizeKb = estimateSizeKb(html);
+  if (sizeKb > GMAIL_CLIP_KB) {
+    console.warn(`[sendCarnetEmail] Mail de ${sizeKb} Ko — au-delà du seuil de coupure Gmail (${GMAIL_CLIP_KB} Ko).`);
+  }
+
+  try {
+    const { error } = await new Resend(apiKey).emails.send({
+      from: "Voyage des Émotions <contact@levoyagedesemotions.fr>",
+      to: input.email,
+      subject: `Votre carnet : ${voyage.hero.title} 🌿`,
+      html,
+    });
+    if (error) {
+      console.error("[sendCarnetEmail] Resend error:", error);
+      return { ok: false, error: "L'envoi a échoué, réessaie." };
+    }
+    return { ok: true };
+  } catch (err) {
+    console.error("[sendCarnetEmail] Exception:", err);
     return { ok: false, error: "L'envoi a échoué, réessaie." };
   }
 }

@@ -38,9 +38,15 @@ Chaque profil renseigné a la forme `{ beds, equipment: string[], services: stri
 string[] }` — voir `content/voyages/index.ts` (type `FamilyFit`). Ne renseigner que les profils pour
 lesquels Soumia a vraiment donné de l'info, jamais inventer les autres.
 
-**`price` (28/08/2026)** : texte libre sur une adresse (ex. "45€ la nuit", "Menu à partir de
-25€"). Comme `familyFit`/`isPartner`/`image` : jamais inventé, absent tant qu'aucun vrai prix n'a
-été donné.
+**`price` (09/09/2026, remplace le texte libre du 28/08)** : une gamme en sigles euro, jamais un
+montant. Grille validée par Soumia, calculée sur le prix PAR NUIT d'un hébergement :
+`€` = moins de 100 €, `€€` = 100 à 250 €, `€€€` = 250 € et plus. Un montant sec ("~700 € les 4
+nuits") vieillit mal sur une page publique et ne veut rien dire pour un partenaire qui la lit ;
+la gamme reste vraie. Comme `familyFit`/`isPartner`/`image` : jamais inventé, absent tant que
+Soumia n'a pas donné de vrai prix à convertir.
+
+Ne pas confondre avec `filters.budget` (eco/confort/premium), qui vit sur la DESTINATION et sert
+au filtrage du questionnaire, pas à l'affichage d'une carte d'adresse.
 
 ## Charte éditoriale — gabarits de rédaction (28/08/2026)
 

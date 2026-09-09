@@ -5,6 +5,7 @@ import { AddressGrid } from "../../components/AddressGrid";
 import { TripExtensionCard } from "../../components/TripExtensionCard";
 import { DestinationPracticalCard } from "../../components/DestinationPracticalCard";
 import { QuizCta } from "../../components/QuizCta";
+import { CarnetEmailCapture } from "../../components/EmailCapture";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
 import { getCombosFor } from "@/lib/travel-match/combos";
@@ -208,6 +209,11 @@ export default async function VoyagePage({
           activities={voyage.activities.filter((c) => c.instagramUrl)}
           familyProfile={familyProfile}
         />
+
+        {/* Juste après les adresses (09/09/2026, demande Soumia) : c'est le moment où le lecteur
+            vient de les parcourir et où "je veux garder ça" a du sens. Avant les extensions et le
+            CTA questionnaire, qui l'emmènent tous les deux ailleurs. */}
+        <CarnetEmailCapture slug={slug} destinationTitle={voyage.hero.title} />
 
         {eligibleCombos.length > 0 && (
           <section className="my-16 sm:my-24">

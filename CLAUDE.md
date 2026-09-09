@@ -509,6 +509,21 @@ bouton vers la fiche. 12 Ko. Ne pas re-proposer d'y remettre les carnets entiers
 Copie de `/resultat` alignée sur le vouvoiement à cette occasion (le bloc email tutoyait encore,
 reste du questionnaire).
 
+**Deuxième bloc, en bas de chaque fiche destination** (même jour, après un test de Soumia qui
+cherchait le bloc sur une fiche) : "Recevoir mes adresses de X par email", qui envoie le carnet
+**entier** de cette destination — logique inverse de l'aperçu, et volontaire : l'aperçu sert à
+ramener vers la fiche, quelqu'un qui EST sur la fiche veut emporter les adresses. Placé juste après
+les adresses, avant les extensions et le CTA questionnaire. `CarnetEmailCapture` dans
+`app/components/EmailCapture.tsx` (les deux blocs partagent la coquille visuelle
+`EmailCaptureShell`), action `sendCarnetEmail`, HTML par `buildCarnetEmailHtml`.
+
+Aperçu du mail de fiche : `npx tsx --env-file=.env.local scripts/preview-itinerary-email.ts
+--carnet <slug>` → `~/Downloads/apercu-mail-carnet.html`.
+
+**La clé Resend n'existe que dans l'environnement Production de Vercel** : sur un lien de preview,
+le bloc s'affiche mais l'envoi répond "Envoi non configuré". Constaté le 09/09/2026. À ajouter à
+l'environnement Preview si un jour on veut tester l'envoi avant mise en ligne.
+
 ### Resend / DNS — ce qu'il ne faut plus jamais refaire
 
 La zone DNS OVH porte 4 entrées Resend : TXT `resend._domainkey` (signature DKIM, commence par
@@ -524,3 +539,22 @@ commencent par `p=`, `rsend-`, `send.` ou `v=DMARC1`.
 
 Le mail part de `contact@levoyagedesemotions.fr` — les réponses des visiteurs atterrissent dans
 cette boîte OVH.
+
+## Prix des adresses en gammes, pas en montants (09/09/2026)
+
+Le champ `price` d'une adresse porte une gamme en sigles euro, jamais un montant. Grille validée
+par Soumia, sur le prix **par nuit** d'un hébergement :
+
+| Sigle | Par nuit |
+|---|---|
+| `€` | moins de 100 € |
+| `€€` | 100 à 250 € |
+| `€€€` | 250 € et plus |
+
+Pourquoi : un montant sec ("~700 € les 4 nuits") vieillit en quelques mois sur une page publique et
+ne veut rien dire pour un partenaire qui lit la fiche — la gamme, elle, reste vraie. Les trois
+hôtels chinois, saisis en montants le 09/09 à partir de l'itinéraire de Soumia, ont été convertis
+le jour même ; aucune autre adresse du site n'a de prix (3 sur 147 avant conversion).
+
+Ne pas confondre avec `filters.budget` (eco/confort/premium), qui vit sur la **destination** et sert
+au filtrage du questionnaire, jamais à l'affichage d'une carte d'adresse.
