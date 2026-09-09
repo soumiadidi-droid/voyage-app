@@ -58,4 +58,12 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // Big Ben et Westminster Bridge — Alex Ghiurau, https://unsplash.com/photos/big-ben-clock-tower-and-westminster-bridge-over-river-thames-A94gGLeFd68
   londres:
     "https://images.unsplash.com/photo-1758543144598-9d954f44799a?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+  // Skyline de Hong Kong depuis le Victoria Peak au coucher du soleil — Manson,
+  // https://unsplash.com/photos/4vf1KEkD7Gc
+  "chine-urbaine":
+    "https://images.unsplash.com/photo-1620015092538-e33c665fc181?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+  // Piliers de grès de Zhangjiajie dans la brume ("les montagnes d'Avatar") — Robynne O,
+  // https://unsplash.com/photos/sandstone-pillars-in-zhangjiajie-national-park-CRvaC071ZXo
+  "chine-nature":
+    "https://images.unsplash.com/photo-1567266565245-c08dc046815f?fm=jpg&q=80&w=2400&auto=format&fit=crop",
 };
