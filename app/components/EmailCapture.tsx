@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Send, CheckCircle2, Loader2 } from "lucide-react";
 import { sendResultsEmail } from "@/app/actions/sendTravelMatch";
 
-type Destination = { title: string; slug: string; id: string };
+type Destination = { title: string; slug: string; id: string; score: number };
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -12,6 +12,11 @@ type Status = "idle" | "loading" | "success" | "error";
 // sendResultsEmail (Server Action, app/actions/sendTravelMatch.ts). Tant que RESEND_API_KEY n'est
 // pas configurée/le domaine pas vérifié dans Resend (voir .env.local), l'action renvoie une erreur
 // explicite : jamais un faux succès.
+//
+// 09/09/2026 : le mail envoyé contient l'itinéraire — les 3 destinations et 3 adresses en aperçu
+// pour chacune, le carnet complet restant sur le site (arbitrage de Soumia le même jour). D'où le
+// `score` transmis avec chaque destination, affiché dans le mail, et la copie alignée sur le
+// vouvoiement du reste de /resultat (elle tutoyait, seul reste du questionnaire).
 //
 // Redesign du 30/08/2026 : reprend un composant généré par Figma Make transmis par Soumia (carte
 // dégradée + halos décoratifs flous, badge, icônes Send/CheckCircle2/Loader2) — palette Tailwind
@@ -69,10 +74,10 @@ export function EmailCapture({
               className="text-xl font-semibold"
               style={{ fontFamily: "var(--font-title)", color: "var(--lve-charcoal)" }}
             >
-              C&apos;est parti ! 💌
+              C&apos;est envoyé ! 💌
             </h3>
             <p className="text-sm max-w-md" style={{ color: "var(--text-secondary)" }}>
-              Ton récapitulatif personnalisé vient d&apos;être envoyé à{" "}
+              Votre itinéraire complet vient d&apos;être envoyé à{" "}
               <span className="font-medium" style={{ color: "var(--lve-charcoal)" }}>{email}</span>.
             </p>
           </div>
@@ -83,17 +88,17 @@ export function EmailCapture({
                 className="inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase rounded-full"
                 style={{ color: "var(--lve-terracotta-dark)", background: "var(--lve-terracotta-bg)" }}
               >
-                Garde ton itinéraire
+                Votre itinéraire, par écrit
               </span>
               <h3
                 className="text-2xl md:text-3xl font-bold tracking-tight"
                 style={{ fontFamily: "var(--font-title)", color: "var(--lve-charcoal)" }}
               >
-                Recevoir ma sélection par email
+                Recevoir mon itinéraire par email
               </h3>
               <p className="text-sm md:text-base max-w-lg mx-auto" style={{ color: "var(--text-secondary)" }}>
-                Retrouve ton profil émotionnel et tes adresses sur mesure directement dans ta boîte
-                mail.
+                Vos trois destinations et un avant-goût de mes adresses testées sur place,
+                directement dans votre boîte mail.
               </p>
             </div>
 
@@ -101,7 +106,7 @@ export function EmailCapture({
               <input
                 type="email"
                 required
-                placeholder="ton.email@exemple.com"
+                placeholder="votre.email@exemple.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "loading"}
@@ -135,7 +140,7 @@ export function EmailCapture({
             )}
 
             <p className="text-[11px]" style={{ color: "var(--text-secondary)" }}>
-              Pas de spam. Tes données restent protégées chez Voyage des Émotions.
+              Pas de spam. Vos données restent protégées chez Voyage des Émotions.
             </p>
           </div>
         )}

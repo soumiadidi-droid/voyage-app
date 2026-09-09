@@ -6,51 +6,33 @@
 //
 // Ne fait RIEN tant que RESEND_API_KEY n'est pas une vraie clé (voir .env.local) : retourne une
 // erreur explicite plutôt que de prétendre avoir envoyé un mail qui n'est jamais parti.
+//
+// 09/09/2026 — le mail contient maintenant l'itinéraire complet (les 3 carnets, adresse par
+// adresse) et non plus 3 liens. Conséquence importante : le contenu des carnets est relu ICI depuis
+// la base à partir des seuls slugs, il n'est jamais envoyé par le navigateur. Le client ne décide
+// que de QUELLES destinations parler, jamais de ce qui est écrit dans le mail.
 import { Resend } from "resend";
+import { getVoyage } from "@/lib/travel-match/data";
+import {
+  buildItineraryEmailHtml,
+  estimateSizeKb,
+  GMAIL_CLIP_KB,
+  type ItineraryDestination,
+} from "@/lib/email/itinerary";
 
 export type SendResultsEmailInput = {
   email: string;
   archetypeTitle: string;
-  destinations: { title: string; slug: string; id: string }[];
+  destinations: { title: string; slug: string; id: string; score: number }[];
 };
 
 export type SendResultsEmailResult = { ok: true } | { ok: false; error: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-function buildEmailHtml(input: SendResultsEmailInput): string {
-  const destinationRows = input.destinations
-    .map(
-      (d) => `
-        <li style="margin-bottom:12px;">
-          <a href="https://levoyagedesemotions.fr/voyages/${d.slug}?id=${d.id}"
-             style="color:#c4622d;text-decoration:none;font-weight:600;">
-            ${d.title}
-          </a>
-        </li>`
-    )
-    .join("");
-
-  return `
-    <div style="background:#faf7f0;padding:32px 24px;font-family:Georgia,'Times New Roman',serif;color:#1a1714;">
-      <div style="max-width:520px;margin:0 auto;background:#ffffff;border-radius:16px;padding:32px;border:1px solid #e4dfd3;">
-        <p style="text-transform:uppercase;letter-spacing:0.08em;font-size:11px;color:#8c4a32;margin:0 0 12px;">
-          Votre profil Travel Match
-        </p>
-        <h1 style="font-size:28px;margin:0 0 20px;color:#1a1714;">${input.archetypeTitle}</h1>
-        <p style="font-size:15px;line-height:1.6;margin:0 0 20px;">
-          Voici les destinations qui correspondent le plus à tes envies de voyage :
-        </p>
-        <ul style="list-style:none;padding:0;margin:0 0 28px;">
-          ${destinationRows}
-        </ul>
-        <a href="https://levoyagedesemotions.fr"
-           style="display:inline-block;background:#c4622d;color:#ffffff;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:600;">
-          Retourner sur Le Voyage des Émotions
-        </a>
-      </div>
-    </div>`;
-}
+// Garde-fou : /resultat n'affiche que 3 destinations, un appel qui en demanderait 15 ne peut venir
+// que d'un navigateur bricolé.
+const MAX_DESTINATIONS = 3;
 
 export async function sendResultsEmail(input: SendResultsEmailInput): Promise<SendResultsEmailResult> {
   if (!EMAIL_RE.test(input.email)) {
@@ -62,14 +44,43 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
     return { ok: false, error: "Envoi non configuré pour l'instant, réessaie plus tard." };
   }
 
+  // Italie et Amérique du Nord ont plusieurs destinations de matching pour une seule fiche de
+  // contenu : sans ce dédoublonnage, le même carnet pourrait être imprimé deux fois dans le mail.
+  const seenSlugs = new Set<string>();
+  const wanted = input.destinations.filter((d) => {
+    if (seenSlugs.has(d.slug)) return false;
+    seenSlugs.add(d.slug);
+    return true;
+  }).slice(0, MAX_DESTINATIONS);
+
+  const voyages = await Promise.all(wanted.map((d) => getVoyage(d.slug)));
+  const destinations: ItineraryDestination[] = wanted.flatMap((d, i) => {
+    const voyage = voyages[i];
+    return voyage ? [{ ...d, voyage }] : [];
+  });
+
+  if (destinations.length === 0) {
+    console.error("[sendResultsEmail] Aucun carnet trouvé pour:", wanted.map((d) => d.slug));
+    return { ok: false, error: "L'envoi a échoué, réessaie." };
+  }
+
+  const html = buildItineraryEmailHtml({ archetypeTitle: input.archetypeTitle, destinations });
+
+  // Pas bloquant (le mail part quand même) : sert à repérer dans les logs Vercel le jour où un
+  // carnet grossit assez pour que Gmail commence à tronquer la fin.
+  const sizeKb = estimateSizeKb(html);
+  if (sizeKb > GMAIL_CLIP_KB) {
+    console.warn(`[sendResultsEmail] Mail de ${sizeKb} Ko — au-delà du seuil de coupure Gmail (${GMAIL_CLIP_KB} Ko).`);
+  }
+
   const resend = new Resend(apiKey);
 
   try {
     const { error } = await resend.emails.send({
       from: "Voyage des Émotions <contact@levoyagedesemotions.fr>",
       to: input.email,
-      subject: "Ton profil Travel Match & tes destinations idéales 🌿",
-      html: buildEmailHtml(input),
+      subject: "Votre itinéraire sur mesure 🌿",
+      html,
     });
     // Loggé (30/08/2026) : le message affiché à l'utilisateur reste volontairement générique,
     // mais la vraie raison (souvent : domaine expéditeur pas encore vérifié dans Resend) doit être

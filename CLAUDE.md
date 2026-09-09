@@ -480,3 +480,47 @@ site. C'est pour ça qu'elle est posée page par page et pas une fois pour toute
 Les 15 fiches `/voyages/[slug]` restent indexées individuellement (elles l'étaient déjà avant).
 Question ouverte avec Soumia : faut-il aussi les sortir de Google, puisqu'un visiteur peut y
 atterrir en cherchant une destination sans passer par le questionnaire ? Non tranché.
+
+## Envoi de l'itinéraire par email — FONCTIONNEL (09/09/2026)
+
+Le bloc de capture email de `/resultat` (écrit le 30/08, resté masqué depuis) est **actif** :
+`SHOW_EMAIL_CAPTURE = true` dans `app/resultat/page.tsx`. L'envoi passe par Resend, domaine
+`levoyagedesemotions.fr` vérifié ce jour-là, premier envoi réel confirmé.
+
+**Le mail est un aperçu, pas une copie du site.** Première version écrite avec les 3 carnets
+complets (60 adresses, 38 Ko) — refusée par Soumia le jour même : recopier tout le contenu enlève
+au visiteur toute raison de revenir sur les fiches. Version retenue : profil, les 3 destinations
+avec leur % de match et l'intro du carnet, puis **3 adresses par destination** (une par catégorie
+quand c'est possible : dormir / manger / faire), un "+ N autres adresses dans le carnet" et le
+bouton vers la fiche. 12 Ko. Ne pas re-proposer d'y remettre les carnets entiers.
+
+- `lib/email/itinerary.ts` — construction du HTML. `pickPreviewAddresses()` prend une adresse par
+  catégorie en tour de rôle, puis complète si une catégorie est vide (plusieurs carnets n'ont pas
+  d'activité). Le libellé de catégorie ne s'imprime qu'au changement de groupe (sinon Porto, qui
+  n'a que des restos, affichait "Où manger" trois fois). Sans images : bloquées par défaut par les
+  messageries, et inutiles ici.
+- `app/actions/sendTravelMatch.ts` — **le contenu des carnets est relu en base côté serveur** à
+  partir des seuls slugs. Le navigateur ne décide que de quelles destinations parler, jamais de ce
+  qui est écrit dans le mail. Dédoublonne les `content_slug` partagés (Italie, Amérique du Nord).
+- `scripts/preview-itinerary-email.ts` — écrit le rendu dans `~/Downloads/apercu-mail-itineraire.html`
+  sans rien envoyer, et affiche la taille (Gmail tronque au-delà de ~102 Ko).
+- `scripts/test-send-itinerary.ts` — envoi réel vers une adresse donnée, pour tester la chaîne.
+
+Copie de `/resultat` alignée sur le vouvoiement à cette occasion (le bloc email tutoyait encore,
+reste du questionnaire).
+
+### Resend / DNS — ce qu'il ne faut plus jamais refaire
+
+La zone DNS OVH porte 4 entrées Resend : TXT `resend._domainkey` (signature DKIM, commence par
+`p=`), CNAME `rsend` → `rsend-euw1.forge.rmta.net.`, CNAME `send` → `send.forge.rmta.net.`, TXT
+`_dmarc` → `v=DMARC1; p=none;`. **Aucune ne touche les MX ni le SPF de la racine** : la messagerie
+OVH de Soumia est indépendante, ne pas y toucher.
+
+**Trois clés API Resend ont été publiées dans le DNS** (`re_GYSpq71d…`, `re_UudfuMph…`,
+`re_HeXq5MvJ…`) : la valeur DKIM avait été remplacée par la clé API, par copier-coller. Toutes les
+trois ont été révoquées. Règle : une valeur qui commence par `re_` ne va JAMAIS dans le DNS, elle
+ne va que dans les variables d'environnement Vercel et dans `.env.local`. Les valeurs du DNS
+commencent par `p=`, `rsend-`, `send.` ou `v=DMARC1`.
+
+Le mail part de `contact@levoyagedesemotions.fr` — les réponses des visiteurs atterrissent dans
+cette boîte OVH.

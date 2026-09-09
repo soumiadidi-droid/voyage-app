@@ -19,7 +19,7 @@ import {
 } from "@/lib/travel-match/types";
 
 // Masqué temporairement (30/08/2026, demande Soumia) — repasser à true pour réactiver.
-const SHOW_EMAIL_CAPTURE = false;
+const SHOW_EMAIL_CAPTURE = true;
 
 export const metadata = {
   title: "Ton résultat — Le Voyage des Émotions",
@@ -160,9 +160,9 @@ export default async function ResultatPage({
         ))}
       </div>
 
-      {/* Masqué temporairement (30/08/2026, demande Soumia — "pour le moment, demain on règle
-          ça") : l'envoi réel dépend de la vérification du domaine côté Resend, pas encore faite.
-          SHOW_EMAIL_CAPTURE → true pour réactiver une fois le domaine vérifié. */}
+      {/* Activé le 09/09/2026 : domaine levoyagedesemotions.fr vérifié chez Resend (DKIM, les deux
+          CNAME d'envoi et DMARC posés dans la zone OVH), premier envoi réel confirmé le même jour.
+          L'interrupteur reste en place pour pouvoir recouper l'envoi sans redéployer une refonte. */}
       {SHOW_EMAIL_CAPTURE && (
         <EmailCapture
           archetypeTitle={getArchetypeTitle(answers)}
@@ -170,6 +170,9 @@ export default async function ResultatPage({
             title: r.destination.title,
             slug: r.destination.content_slug,
             id: r.destination.id,
+            // 09/09/2026 : affiché dans le mail ("Destination 1 · 94% de match"), même score que
+            // le badge de la carte juste au-dessus.
+            score: r.score,
           }))}
         />
       )}
