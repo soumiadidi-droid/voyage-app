@@ -18,7 +18,8 @@ import {
   type FamilyProfile,
 } from "@/lib/travel-match/types";
 
-// Masqué temporairement (30/08/2026, demande Soumia) — repasser à true pour réactiver.
+// Interrupteur du bloc d'envoi par email : masqué du 30/08 au 09/09/2026 (domaine Resend pas
+// encore vérifié), actif depuis. Repasser à false coupe l'envoi sans rien démonter d'autre.
 const SHOW_EMAIL_CAPTURE = true;
 
 export const metadata = {
