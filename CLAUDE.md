@@ -556,5 +556,15 @@ ne veut rien dire pour un partenaire qui lit la fiche — la gamme, elle, reste 
 hôtels chinois, saisis en montants le 09/09 à partir de l'itinéraire de Soumia, ont été convertis
 le jour même ; aucune autre adresse du site n'a de prix (3 sur 147 avant conversion).
 
+Pour un **restaurant**, la grille porte sur le prix moyen par personne (validée le 09/09/2026) :
+`€` = moins de 10 €, `€€` = 10 à 30 €, `€€€` = plus de 30 €.
+
+État au 10/09/2026 : les 37 hébergements et les 82 restaurants du site sont classés (restaurants :
+29 en €, 44 en €€, 9 en €€€). Trois hébergements restent sans gamme faute de source — l'appartement
+de Montréal (pas un établissement), Trullo Luceri (introuvable en ligne) et l'hôtel de Zhangjiajie
+(non identifié). Les gammes des restaurants ont été établies par recherche pour les adresses où le
+prix est discriminant, et déduites du type d'établissement pour les cafés, boulangeries et stands de
+rue — Soumia les a validées en bloc, elle y a mangé.
+
 Ne pas confondre avec `filters.budget` (eco/confort/premium), qui vit sur la **destination** et sert
 au filtrage du questionnaire, jamais à l'affichage d'une carte d'adresse.
