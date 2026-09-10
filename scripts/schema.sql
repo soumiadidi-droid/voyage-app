@@ -80,3 +80,43 @@ create table if not exists combos (
 );
 create index if not exists combos_source_idx on combos(source_destination_id);
 create index if not exists combos_target_idx on combos(target_destination_id);
+
+-- Demandes d'envoi par email (10/09/2026) — une ligne par carnet/itinéraire demandé.
+--
+-- Deux usages dans une seule table, décidés au grillage du 09/09 :
+--   1. Compter. Toute demande crée une ligne, y compris quand la personne ne laisse pas son
+--      adresse : `email` est alors NULL et rien de personnel n'est conservé. C'est ce qui permet
+--      de dire à un hôtel "38 personnes ont demandé mon carnet sur ta destination".
+--   2. La liste. Uniquement si la personne a coché la case (`consent` = true) : son adresse est
+--      conservée, avec un jeton de désinscription à usage unique dans les mails.
+--
+-- Durée de conservation retenue : 3 ans après la dernière activité (`last_activity_at`), remise à
+-- zéro à chaque nouvelle demande de la même adresse.
+create table if not exists email_requests (
+  id                uuid primary key default gen_random_uuid(),
+  kind              text not null check (kind in ('itinerary','carnet')),
+  destination_slugs text[] not null default '{}',
+  email             text,
+  consent           boolean not null default false,
+  unsubscribe_token text unique,
+  unsubscribed_at   timestamptz,
+  created_at        timestamptz not null default now(),
+  last_activity_at  timestamptz not null default now(),
+  -- Une adresse n'est conservée QUE si la personne a coché : sans consentement, pas d'email en base.
+  constraint email_requests_consent_requires_email check (
+    (consent = false and email is null) or (consent = true and email is not null)
+  )
+);
+create index if not exists email_requests_email_idx on email_requests(email) where email is not null;
+create index if not exists email_requests_created_idx on email_requests(created_at);
+
+-- Limitation d'envois (10/09/2026) — table volontairement séparée d'email_requests : elle contient
+-- une empreinte d'adresse IP, donnée bien plus sensible que le reste, et ses lignes sont éphémères.
+-- Purgées à chaque insertion (au-delà d'une heure), donc aucune rétention et aucun travail planifié
+-- à mettre en place.
+create table if not exists send_throttle (
+  id         uuid primary key default gen_random_uuid(),
+  ip_hash    text not null,
+  created_at timestamptz not null default now()
+);
+create index if not exists send_throttle_ip_idx on send_throttle(ip_hash, created_at);

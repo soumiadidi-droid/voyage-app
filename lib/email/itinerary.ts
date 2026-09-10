@@ -23,6 +23,10 @@ export type ItineraryDestination = {
 export type ItineraryEmailInput = {
   archetypeTitle: string;
   destinations: ItineraryDestination[];
+  // Présent uniquement si la personne a coché la case de recontact (10/09/2026) : le mail
+  // d'itinéraire est un mail demandé, y afficher un lien de désinscription à quelqu'un qui n'est
+  // inscrit à rien serait incompréhensible.
+  unsubscribeUrl?: string | null;
 };
 
 const SITE_URL = "https://levoyagedesemotions.fr";
@@ -37,6 +41,15 @@ const C = {
   terracottaDark: "#8c4a32",
   muted: "#6b6259",
 };
+
+// Confirme l'inscription et offre la sortie immédiate, dans le mail où le souvenir d'avoir coché
+// est encore frais (décidé au grillage du 09/09/2026 : mieux vaut une désinscription tout de suite
+// qu'un signalement en indésirable dans six mois).
+function subscriptionFooter(unsubscribeUrl?: string | null): string {
+  if (!unsubscribeUrl) return "";
+  return `<br>Vous recevrez aussi mes nouvelles destinations —
+    <a href="${unsubscribeUrl}" style="color:${C.muted};text-decoration:underline;">se désinscrire</a>.`;
+}
 
 function esc(value: string): string {
   return value
@@ -194,7 +207,8 @@ export function buildItineraryEmailHtml(input: ItineraryEmailInput): string {
 
     <p style="font-size:12px;line-height:1.6;color:${C.muted};text-align:center;margin:26px 0 0;">
       Vous recevez ce message parce que vous avez demandé votre itinéraire sur
-      <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.<br>
+      <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.
+      ${subscriptionFooter(input.unsubscribeUrl)}<br>
       Un pays, une histoire, une photo à la fois.
     </p>
   </div>
@@ -214,32 +228,27 @@ export function estimateSizeKb(html: string): number {
 // ---------------------------------------------------------------------------
 // Mail "carnet" — envoyé depuis une fiche destination (09/09/2026, demande Soumia).
 //
-// Logique inverse de celle du mail d'itinéraire ci-dessus, et c'est volontaire : l'aperçu à 3
-// adresses sert à ramener le visiteur vers la fiche. Quand il EST sur la fiche, il a déjà tout
-// sous les yeux — ce qu'il demande là, c'est de l'emporter. Donc on envoie le carnet entier.
+// Même principe d'aperçu que le mail d'itinéraire : une adresse par catégorie, choisies parmi
+// celles que la fiche affiche, puis le renvoi vers le carnet complet.
+//
+// Historique : la première version (09/09/2026) envoyait le carnet ENTIER, au motif que quelqu'un
+// déjà sur la fiche veut emporter les adresses. Arbitrage inverse de Soumia le 10/09/2026 — un mail
+// de 24 adresses, "c'est trop". Le mail donne un avant-goût, le site garde le contenu.
 // ---------------------------------------------------------------------------
 
 export type CarnetEmailInput = {
   destinationTitle: string;
   slug: string;
   voyage: VoyageContent;
+  unsubscribeUrl?: string | null;
 };
-
-function fullSection(label: string, cards: Card[]): string {
-  if (cards.length === 0) return "";
-  return `
-    <p style="font-size:11px;text-transform:uppercase;letter-spacing:0.08em;color:${C.terracottaDark};margin:26px 0 12px;font-weight:700;">
-      ${label} <span style="color:${C.muted};font-weight:400;">(${cards.length})</span>
-    </p>
-    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
-      ${cards.map((card) => addressRow(card, null)).join("")}
-    </table>`;
-}
 
 export function buildCarnetEmailHtml(input: CarnetEmailInput): string {
   const { voyage } = input;
   const ficheUrl = `${SITE_URL}/voyages/${input.slug}`;
   const total = voyage.stays.length + voyage.eats.length + voyage.activities.length;
+  const preview = pickPreviewAddresses(voyage);
+  const remaining = total - preview.length;
 
   return `<!doctype html>
 <html lang="fr"><body style="margin:0;padding:0;background:${C.paper};">
@@ -262,11 +271,30 @@ export function buildCarnetEmailHtml(input: CarnetEmailInput): string {
           ${esc(truncate(voyage.intro, 300))}
         </p>
 
-        ${fullSection("Où dormir", voyage.stays)}
-        ${fullSection("Où manger", voyage.eats)}
-        ${fullSection("Quoi faire", voyage.activities)}
+        ${
+          preview.length > 0
+            ? `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="margin-top:22px;border-top:1px solid ${C.border};">
+                <tr><td style="height:18px;"></td></tr>
+                ${preview
+                  .map((entry, i) =>
+                    addressRow(
+                      entry.card,
+                      i === 0 || preview[i - 1].category !== entry.category ? CATEGORY_LABEL[entry.category] : null
+                    )
+                  )
+                  .join("")}
+              </table>`
+            : ""
+        }
+        ${
+          remaining > 0
+            ? `<p style="font-size:13px;color:${C.muted};margin:0;">
+                + ${remaining} autre${remaining > 1 ? "s" : ""} adresse${remaining > 1 ? "s" : ""} dans le carnet.
+              </p>`
+            : ""
+        }
 
-        <p style="margin:28px 0 0;">
+        <p style="margin:24px 0 0;">
           <a href="${ficheUrl}" style="display:inline-block;background:${C.terracotta};color:#ffffff;padding:11px 20px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:600;">
             Revoir le carnet et les photos
           </a>
@@ -276,7 +304,8 @@ export function buildCarnetEmailHtml(input: CarnetEmailInput): string {
 
     <p style="font-size:12px;line-height:1.6;color:${C.muted};text-align:center;margin:26px 0 0;">
       Vous recevez ce message parce que vous avez demandé ce carnet sur
-      <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.<br>
+      <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.
+      ${subscriptionFooter(input.unsubscribeUrl)}<br>
       Un pays, une histoire, une photo à la fois.
     </p>
   </div>

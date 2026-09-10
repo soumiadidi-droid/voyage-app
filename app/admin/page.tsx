@@ -14,6 +14,11 @@ const TOOLS = [
     description: "Générateur de posts/cards Instagram (3 presets, export PNG).",
   },
   {
+    href: "/admin/demandes",
+    title: "Demandes par email",
+    description: "Combien de personnes ont demandé un itinéraire ou un carnet, et sur quelles destinations.",
+  },
+  {
     href: "/admin/social-agent",
     title: "Agent Social Media",
     description: "Génère des posts (carousel, LinkedIn, Reel, newsletter) à partir des destinations.",

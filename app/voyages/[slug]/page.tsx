@@ -8,6 +8,7 @@ import { QuizCta } from "../../components/QuizCta";
 import { CarnetEmailCapture } from "../../components/EmailCapture";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
+import { withVisibleAddresses } from "@/lib/visible-addresses";
 import { getCombosFor } from "@/lib/travel-match/combos";
 import {
   FAMILY_PROFILE_OPTIONS,
@@ -135,6 +136,7 @@ export default async function VoyagePage({
   const { slug } = await params;
   const voyage = await getVoyage(slug);
   if (!voyage) notFound();
+  const visible = withVisibleAddresses(voyage);
 
   // `id` = l'identifiant précis de destination Travel Match (ex. "italie-pouilles"), transmis par
   // le lien depuis /resultat. Sans lui (accès direct à la fiche), on retombe sur le slug de
@@ -198,15 +200,12 @@ export default async function VoyagePage({
         {/* Cœur de page : le reste de la fiche est dédié aux adresses/partenariat B2B — décidé le
             23/08/2026, refonte éditoriale "Alternance Story/Photos". */}
         <AddressesSection
-          // Masquées tant qu'aucun lien Instagram vérifié n'est en base (29/08/2026) — filtré ici,
-          // uniquement à l'affichage de la fiche voyage, PAS dans lib/travel-match/data.ts : cette
-          // couche est aussi utilisée par app/favoris/actions.ts pour retrouver un établissement
-          // déjà liké (usePlaceFavorites), qui doit continuer à s'afficher dans "Mes Favoris" même
-          // sans lien Instagram — bug du 29/08/2026 où un like posé avant l'ajout du lien
-          // disparaissait silencieusement de la page Favoris, corrigé en déplaçant le filtre ici.
-          stays={voyage.stays.filter((c) => c.instagramUrl)}
-          eats={voyage.eats.filter((c) => c.instagramUrl)}
-          activities={voyage.activities.filter((c) => c.instagramUrl)}
+          // Masquées tant qu'aucun lien Instagram vérifié n'est en base (29/08/2026). Le filtre vit
+          // dans lib/visible-addresses.ts depuis le 10/09/2026 pour être partagé avec les mails —
+          // et surtout PAS dans lib/travel-match/data.ts, cf. le commentaire de ce module.
+          stays={visible.stays}
+          eats={visible.eats}
+          activities={visible.activities}
           familyProfile={familyProfile}
         />
 

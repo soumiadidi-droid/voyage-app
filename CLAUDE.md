@@ -568,3 +568,50 @@ rue — Soumia les a validées en bloc, elle y a mangé.
 
 Ne pas confondre avec `filters.budget` (eco/confort/premium), qui vit sur la **destination** et sert
 au filtrage du questionnaire, jamais à l'affichage d'une carte d'adresse.
+
+## Collecte, consentement et anti-abus (10/09/2026)
+
+Onze décisions prises au grillage du 09/09/2026 au soir, appliquées le lendemain. L'ordre des
+décisions compte pour comprendre l'état final.
+
+**Les deux mails sont des aperçus.** Itinéraire et carnet affichent chacun 3 adresses, une par
+catégorie (dormir / manger / faire), puis "+ N autres adresses dans le carnet" et le bouton vers la
+fiche. Le mail de carnet envoyait initialement le carnet entier (24 adresses) : arbitrage inverse de
+Soumia le 10/09 — "c'est trop". Ne pas re-proposer d'y remettre les carnets complets.
+
+**Les mails ne contiennent que ce que le site affiche.** `lib/visible-addresses.ts`
+(`withVisibleAddresses`) est la définition unique de ce filtre — une adresse n'apparaît que si son
+lien Instagram est vérifié. Avant cette correction, 6 adresses masquées sur les fiches partaient
+quand même par mail. Ce module est utilisé par la fiche voyage, les deux mails et le script
+d'aperçu. **À ne pas remonter dans `lib/travel-match/data.ts`** (les favoris en dépendent, cf. bug
+du 29/08).
+
+**Anti-abus volontairement léger** : un champ piège invisible dans le formulaire (`isBot`) et une
+limite de 5 envois par heure et par visiteur (`allowSend`, table `send_throttle`, empreinte IP
+purgée au bout d'une heure). Pas de service externe : Turnstile a été envisagé et écarté ("le plus
+simple possible"), à ressortir seulement si des envois anormaux apparaissent.
+
+**Consentement** : case facultative, décochée par défaut, sous le champ email. Sans elle, la demande
+est comptée anonymement et **aucune adresse n'est conservée** — la contrainte
+`email_requests_consent_requires_email` l'impose au niveau de la base, pas seulement dans le code.
+Avec elle, l'adresse est gardée 3 ans après la dernière activité, et le mail porte une ligne de
+désinscription (`/desinscription?token=…`, effacement immédiat, idempotent).
+
+**Reporting** : `/admin/demandes` — total, 30 derniers jours, inscrits, détail par destination.
+Objectif énoncé par Soumia : pouvoir dire à un hôtel combien de personnes ont demandé son carnet,
+cinq minutes avant un rendez-vous. `force-dynamic` obligatoire (piège du cache de build).
+
+**Pas d'outil d'envoi à la liste** : on collecte seulement. À construire quand la liste sera
+alimentée et qu'il y aura quelque chose à dire.
+
+### Pages légales — le nom de Soumia n'y figure pas
+
+Choix explicite du 09/09/2026. C'est légal pour un site personnel non professionnel : il suffit
+d'indiquer l'hébergeur et d'avoir communiqué son identité à celui-ci (LCEN art. 6 III 2).
+**À revoir au premier partenariat rémunéré ou lien d'affiliation** : le site devient alors
+commercial et l'identité complète devient obligatoire. Soumia le sait, c'est un report assumé, pas
+un oubli.
+
+`app/confidentialite/page.tsx` décrit exactement ce que fait le code. Toute modification de
+`lib/email/requests.ts`, des actions d'envoi ou de la table `email_requests` doit y être répercutée
+— une page qui ment est pire qu'une page absente.

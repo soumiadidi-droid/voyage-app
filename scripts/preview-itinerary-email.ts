@@ -13,6 +13,7 @@ import { writeFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { getVoyage } from "../lib/travel-match/data";
+import { withVisibleAddresses } from "../lib/visible-addresses";
 import { buildItineraryEmailHtml, buildCarnetEmailHtml, estimateSizeKb, GMAIL_CLIP_KB } from "../lib/email/itinerary";
 
 const DEFAULT_SLUGS = ["cote-basque", "porto", "crete"];
@@ -24,11 +25,12 @@ async function main() {
   // Mail "carnet" envoyé depuis une fiche destination : un seul carnet, en entier.
   if (args[0] === "--carnet") {
     const slug = args[1];
-    const voyage = await getVoyage(slug);
-    if (!voyage) {
+    const raw = await getVoyage(slug);
+    if (!raw) {
       console.error(`Carnet introuvable en base : ${slug}`);
       process.exit(1);
     }
+    const voyage = withVisibleAddresses(raw);
     const html = buildCarnetEmailHtml({ destinationTitle: voyage.hero.title, slug, voyage });
     const out = join(homedir(), "Downloads", "apercu-mail-carnet.html");
     writeFileSync(out, html, "utf8");
@@ -43,11 +45,12 @@ async function main() {
 
   const destinations = [];
   for (const [i, slug] of slugs.entries()) {
-    const voyage = await getVoyage(slug);
-    if (!voyage) {
+    const raw = await getVoyage(slug);
+    if (!raw) {
       console.error(`Carnet introuvable en base : ${slug}`);
       process.exit(1);
     }
+    const voyage = withVisibleAddresses(raw);
     destinations.push({
       id: slug,
       title: voyage.hero.title,

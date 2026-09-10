@@ -38,9 +38,15 @@ function EmailCaptureShell({
   title: string;
   description: string;
   successText: string;
-  onSend: (email: string) => Promise<{ ok: true } | { ok: false; error: string }>;
+  onSend: (
+    email: string,
+    options: { consent: boolean; trap: string }
+  ) => Promise<{ ok: true } | { ok: false; error: string }>;
 }) {
   const [email, setEmail] = useState("");
+  const [consent, setConsent] = useState(false);
+  // Piège à robots (10/09/2026) : champ caché, jamais rempli par un humain. Voir isBot côté serveur.
+  const [trap, setTrap] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -48,7 +54,7 @@ function EmailCaptureShell({
     e.preventDefault();
     if (!email) return;
     setStatus("loading");
-    const result = await onSend(email);
+    const result = await onSend(email, { consent, trap });
     if (result.ok) {
       setStatus("success");
     } else {
@@ -140,7 +146,37 @@ function EmailCaptureShell({
                   </>
                 )}
               </button>
+              {/* Champ piège : sorti de l'écran plutôt que display:none (certains robots ignorent
+                  les champs masqués en CSS), retiré du parcours au clavier et de la lecture d'écran. */}
+              <input
+                type="text"
+                name="website"
+                tabIndex={-1}
+                autoComplete="off"
+                aria-hidden="true"
+                value={trap}
+                onChange={(e) => setTrap(e.target.value)}
+                style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+              />
             </form>
+
+            {/* Facultative et décochée par défaut (décidé au grillage du 09/09/2026) : l'envoi de
+                l'itinéraire est le service demandé, garder l'adresse pour recontacter est un accord
+                distinct. Sans la case, aucune adresse n'est conservée. */}
+            <label
+              className="flex items-start justify-center gap-2.5 text-xs max-w-md mx-auto cursor-pointer select-none"
+              style={{ color: "var(--text-secondary)" }}
+            >
+              <input
+                type="checkbox"
+                checked={consent}
+                onChange={(e) => setConsent(e.target.checked)}
+                className="mt-0.5 accent-[var(--lve-terracotta)] cursor-pointer"
+              />
+              <span className="text-left">
+                Je veux aussi être prévenu(e) des nouvelles destinations publiées sur le site.
+              </span>
+            </label>
 
             {status === "error" && (
               <p className="text-xs font-medium" style={{ color: "#b91c1c" }}>
@@ -148,8 +184,14 @@ function EmailCaptureShell({
               </p>
             )}
 
+            {/* Lien vers la page Confidentialité (10/09/2026) : la mention "vos données sont
+                protégées" ne renvoyait à rien tant que la page était vide. */}
             <p className="text-[11px]" style={{ color: "var(--text-secondary)" }}>
-              Pas de spam. Vos données restent protégées chez Voyage des Émotions.
+              Pas de spam, aucune donnée revendue.{" "}
+              <a href="/confidentialite" className="underline" style={{ color: "var(--text-secondary)" }}>
+                Ce que je fais de votre adresse
+              </a>
+              .
             </p>
           </div>
         )}
@@ -172,7 +214,9 @@ export function EmailCapture({
       title="Recevoir mon itinéraire par email"
       description="Vos trois destinations et un avant-goût de mes adresses testées sur place, directement dans votre boîte mail."
       successText="Votre itinéraire complet vient d'être envoyé à"
-      onSend={(email) => sendResultsEmail({ email, archetypeTitle, destinations })}
+      onSend={(email, { consent, trap }) =>
+        sendResultsEmail({ email, archetypeTitle, destinations, consent, trap })
+      }
     />
   );
 }
@@ -187,7 +231,7 @@ export function CarnetEmailCapture({ slug, destinationTitle }: { slug: string; d
       title={`Recevoir mes adresses de ${destinationTitle} par email`}
       description="Toutes les adresses de ce carnet — où dormir, où manger, quoi faire — dans votre boîte mail, pour les retrouver une fois sur place."
       successText="Votre carnet vient d'être envoyé à"
-      onSend={(email) => sendCarnetEmail({ email, slug })}
+      onSend={(email, { consent, trap }) => sendCarnetEmail({ email, slug, consent, trap })}
     />
   );
 }

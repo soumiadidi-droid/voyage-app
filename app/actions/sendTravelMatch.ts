@@ -13,6 +13,8 @@
 // que de QUELLES destinations parler, jamais de ce qui est écrit dans le mail.
 import { Resend } from "resend";
 import { getVoyage } from "@/lib/travel-match/data";
+import { withVisibleAddresses } from "@/lib/visible-addresses";
+import { allowSend, recordRequest } from "@/lib/email/requests";
 import {
   buildItineraryEmailHtml,
   buildCarnetEmailHtml,
@@ -21,24 +23,47 @@ import {
   type ItineraryDestination,
 } from "@/lib/email/itinerary";
 
+// `consent` : la personne a coché la case de recontact (facultative, décochée par défaut).
+// `trap` : champ caché du formulaire, invisible pour un humain — voir isBot ci-dessous.
 export type SendResultsEmailInput = {
   email: string;
   archetypeTitle: string;
   destinations: { title: string; slug: string; id: string; score: number }[];
+  consent?: boolean;
+  trap?: string;
 };
 
 export type SendResultsEmailResult = { ok: true } | { ok: false; error: string };
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// Piège à robots (10/09/2026, décidé au grillage) : le formulaire contient un champ caché qu'aucun
+// humain ne voit ni ne remplit. Un robot qui remplit tout ce qu'il trouve se signale tout seul.
+// On répond alors un faux succès : lui dire qu'il a été repéré l'inviterait à recommencer autrement.
+function isBot(trap?: string): boolean {
+  return Boolean(trap && trap.trim().length > 0);
+}
+
+const THROTTLED_MESSAGE = "Trop de demandes pour l'instant, réessayez dans un moment.";
+
+const SITE_URL = "https://levoyagedesemotions.fr";
+
+function unsubscribeUrl(token: string | null): string | null {
+  return token ? `${SITE_URL}/desinscription?token=${token}` : null;
+}
+
 // Garde-fou : /resultat n'affiche que 3 destinations, un appel qui en demanderait 15 ne peut venir
 // que d'un navigateur bricolé.
 const MAX_DESTINATIONS = 3;
 
 export async function sendResultsEmail(input: SendResultsEmailInput): Promise<SendResultsEmailResult> {
+  if (isBot(input.trap)) return { ok: true };
+
   if (!EMAIL_RE.test(input.email)) {
     return { ok: false, error: "Adresse email invalide." };
   }
+
+  if (!(await allowSend())) return { ok: false, error: THROTTLED_MESSAGE };
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey || apiKey.startsWith("re_ton_cle")) {
@@ -55,9 +80,11 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
   }).slice(0, MAX_DESTINATIONS);
 
   const voyages = await Promise.all(wanted.map((d) => getVoyage(d.slug)));
+  // withVisibleAddresses (10/09/2026) : le mail ne doit contenir que ce que la fiche affiche —
+  // sans ce filtre, des adresses masquées faute de lien Instagram vérifié partaient par mail.
   const destinations: ItineraryDestination[] = wanted.flatMap((d, i) => {
     const voyage = voyages[i];
-    return voyage ? [{ ...d, voyage }] : [];
+    return voyage ? [{ ...d, voyage: withVisibleAddresses(voyage) }] : [];
   });
 
   if (destinations.length === 0) {
@@ -65,7 +92,21 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
     return { ok: false, error: "L'envoi a échoué, réessaie." };
   }
 
-  const html = buildItineraryEmailHtml({ archetypeTitle: input.archetypeTitle, destinations });
+  // Enregistré AVANT l'envoi parce que le jeton de désinscription doit figurer dans le mail. Un
+  // envoi qui échouerait ensuite laisse donc une demande comptée — écart assumé, les échecs sont
+  // rares et tracés dans les logs.
+  const { unsubscribeToken } = await recordRequest({
+    kind: "itinerary",
+    destinationSlugs: destinations.map((d) => d.slug),
+    email: input.email,
+    consent: Boolean(input.consent),
+  });
+
+  const html = buildItineraryEmailHtml({
+    archetypeTitle: input.archetypeTitle,
+    destinations,
+    unsubscribeUrl: unsubscribeUrl(unsubscribeToken),
+  });
 
   // Pas bloquant (le mail part quand même) : sert à repérer dans les logs Vercel le jour où un
   // carnet grossit assez pour que Gmail commence à tronquer la fin.
@@ -102,10 +143,16 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
 export async function sendCarnetEmail(input: {
   email: string;
   slug: string;
+  consent?: boolean;
+  trap?: string;
 }): Promise<SendResultsEmailResult> {
+  if (isBot(input.trap)) return { ok: true };
+
   if (!EMAIL_RE.test(input.email)) {
     return { ok: false, error: "Adresse email invalide." };
   }
+
+  if (!(await allowSend())) return { ok: false, error: THROTTLED_MESSAGE };
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey || apiKey.startsWith("re_ton_cle")) {
@@ -118,10 +165,18 @@ export async function sendCarnetEmail(input: {
     return { ok: false, error: "L'envoi a échoué, réessaie." };
   }
 
+  const { unsubscribeToken } = await recordRequest({
+    kind: "carnet",
+    destinationSlugs: [input.slug],
+    email: input.email,
+    consent: Boolean(input.consent),
+  });
+
   const html = buildCarnetEmailHtml({
     destinationTitle: voyage.hero.title,
     slug: input.slug,
-    voyage,
+    voyage: withVisibleAddresses(voyage),
+    unsubscribeUrl: unsubscribeUrl(unsubscribeToken),
   });
 
   const sizeKb = estimateSizeKb(html);
