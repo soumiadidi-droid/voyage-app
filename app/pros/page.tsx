@@ -133,11 +133,11 @@ export default function ProsPage() {
           portfolio et des exemples de récits sans problème.
         </p>
         <a
-          href="mailto:levoyagedesemotions@gmail.com"
+          href="mailto:contact@levoyagedesemotions.fr"
           className="inline-block rounded-lg px-6 py-3 mono no-underline shadow-md transition-all hover:-translate-y-0.5"
           style={{ background: "var(--lve-terracotta)", color: "#fff" }}
         >
-          levoyagedesemotions@gmail.com
+          contact@levoyagedesemotions.fr
         </a>
       </div>
     </div>

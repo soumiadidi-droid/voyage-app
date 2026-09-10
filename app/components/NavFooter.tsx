@@ -284,7 +284,7 @@ export function Footer() {
             <li><DarkFooterLink href="/philosophie">Ma philosophie</DarkFooterLink></li>
             <li><DarkFooterLink href="/pros">On collabore ?</DarkFooterLink></li>
             <li>
-              <a href="mailto:levoyagedesemotions@gmail.com" className={DARK_LINK_CLASS} style={DARK_FONT}>
+              <a href="mailto:contact@levoyagedesemotions.fr" className={DARK_LINK_CLASS} style={DARK_FONT}>
                 Contact
               </a>
             </li>
