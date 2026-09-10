@@ -66,4 +66,9 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // https://unsplash.com/photos/sandstone-pillars-in-zhangjiajie-national-park-CRvaC071ZXo
   "chine-nature":
     "https://images.unsplash.com/photo-1567266565245-c08dc046815f?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+  // Pin penché sur une plage déserte d'Ibiza, ciel voilé — Dave Dunlop,
+  // https://unsplash.com/photos/SP1gHd_62oI (choisie par Soumia : correspond à son séjour de
+  // février, hors saison, plutôt qu'une crique turquoise de carte postale)
+  ibiza:
+    "https://images.unsplash.com/photo-1756968169980-846ac2e81430?fm=jpg&q=80&w=2400&auto=format&fit=crop",
 };
