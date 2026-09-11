@@ -5,6 +5,11 @@ import { toPng } from "html-to-image";
 import { Download, ImagePlus } from "lucide-react";
 import { PRESETS, type PresetId } from "./presets";
 
+// Le compte Instagram, écrit une seule fois (11/09/2026) : la carte "minimalist" affichait
+// "@voyagedesemotions" alors que le pied de page du site pointe vers "@levoyagedesemotions".
+// Une signature fausse sur un visuel publié ne se rattrape pas.
+const HANDLE = "@levoyagedesemotions";
+
 export function InstaStudio() {
   const [preset, setPreset] = useState<PresetId>("minimalist");
   const [quote, setQuote] = useState(
@@ -87,6 +92,20 @@ export function InstaStudio() {
             </div>
           )}
 
+          {preset === "editorial" && (
+            <div className="flex flex-col gap-3">
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Phrase (une ligne par retour à la ligne)
+              </label>
+              <textarea
+                value={quote}
+                onChange={(e) => setQuote(e.target.value)}
+                rows={4}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+            </div>
+          )}
+
           {preset === "terracotta-mood" && (
             <div className="flex flex-col gap-3">
               <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
@@ -157,14 +176,51 @@ export function InstaStudio() {
             ref={cardRef}
             className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-sm shadow-lg"
           >
+            {/* Refonte du 11/09/2026, après comparaison avec la référence apportée par Soumia
+                (le compte Slow Studio) : une seule typographie sur toute la carte — la signature
+                était en écriture manuscrite, d'un registre étranger au reste et qui annulait
+                l'élégance de la citation. Le bloc de texte est ancré en bas plutôt que flottant au
+                milieu, et le monogramme apparaît en haut : c'est lui qui tient la grille quand les
+                publications se suivent. */}
             {preset === "minimalist" && (
               <div className="flex h-full w-full flex-col justify-between bg-lve-ivory p-12">
-                <div />
-                <p className="font-title text-3xl leading-snug text-lve-charcoal">
-                  {quote}
-                </p>
-                <p className="font-signature text-2xl text-lve-terracotta">
-                  @voyagedesemotions
+                <span className="font-title text-sm tracking-[0.4em] text-lve-charcoal/70">
+                  LVE
+                </span>
+                <div className="flex flex-col gap-6">
+                  <p className="font-title text-3xl leading-snug text-lve-charcoal">
+                    {quote}
+                  </p>
+                  <p className="font-title text-[11px] uppercase tracking-[0.3em] text-lve-terracotta">
+                    {HANDLE}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Monogramme débordant (11/09/2026) : "LVE" écrit à la verticale, volontairement
+                rogné par le bord gauche, la phrase calée à droite. Chaque ligne de la phrase est
+                affichée séparément, ce qui permet le procédé de répétition de la référence. */}
+            {preset === "editorial" && (
+              <div className="relative h-full w-full overflow-hidden bg-lve-sand">
+                <span
+                  className="pointer-events-none absolute -left-[0.12em] top-1/2 -translate-y-1/2 font-title leading-none text-white"
+                  style={{ fontSize: "clamp(9rem, 42vw, 17rem)", writingMode: "vertical-rl" }}
+                >
+                  LVE
+                </span>
+                <div className="absolute inset-y-0 right-0 flex w-[58%] flex-col justify-center gap-2 pr-10">
+                  {quote.split("\n").filter(Boolean).map((line, i) => (
+                    <p
+                      key={i}
+                      className="font-title text-[13px] uppercase tracking-[0.28em] text-lve-charcoal"
+                    >
+                      {line}
+                    </p>
+                  ))}
+                </div>
+                <p className="absolute bottom-8 right-10 font-title text-[10px] uppercase tracking-[0.3em] text-lve-charcoal/60">
+                  {HANDLE}
                 </p>
               </div>
             )}
@@ -175,6 +231,9 @@ export function InstaStudio() {
                 <div className="h-px w-16 bg-lve-sand" />
                 <p className="font-mono-lve text-xs uppercase tracking-[0.2em] text-lve-sand">
                   {moodDetail}
+                </p>
+                <p className="mt-6 font-title text-[10px] uppercase tracking-[0.3em] text-white/70">
+                  {HANDLE}
                 </p>
               </div>
             )}
@@ -195,7 +254,7 @@ export function InstaStudio() {
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
                 <span className="absolute left-6 top-6 rounded-full bg-lve-terracotta px-3 py-1 font-mono-lve text-[10px] uppercase tracking-[0.15em] text-white">
-                  Testé &amp; Approuvé
+                  J’ai testé
                 </span>
                 <div className="absolute bottom-6 left-6 right-6">
                   <p className="font-title text-2xl text-white">
@@ -203,6 +262,9 @@ export function InstaStudio() {
                   </p>
                   <p className="font-body text-sm text-lve-sand">
                     {addressCity}
+                  </p>
+                  <p className="mt-4 font-title text-[10px] uppercase tracking-[0.3em] text-white/70">
+                    {HANDLE}
                   </p>
                 </div>
               </div>
