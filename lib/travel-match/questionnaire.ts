@@ -62,7 +62,18 @@ export type SlidersQuestion = {
 // d'abord, mais elles illustrent des LIEUX, pas des envies — deux plages différentes se
 // retrouvaient sur deux intentions distinctes, ce qui brouillait la lecture. Même logique et mêmes
 // crédits que lib/hero-images.ts.
-export type CardDef = { key: ScoreKey; label: string; hint: string; image: string };
+// `groupe` (11/09/2026) : "Déconnecter" est une intention, "Le grand air" est un décor — les
+// mettre sur le même plan brouillait le choix, puisque le décor est souvent le moyen de
+// l'intention. Repéré par Soumia. Deux rangées séparées sur le même écran plutôt que deux écrans,
+// pour ne pas rallonger le parcours.
+export type CardGroupe = "intention" | "terrain";
+
+export type CardDef = { key: ScoreKey; label: string; hint: string; image: string; groupe: CardGroupe };
+
+export const CARD_GROUPES: { id: CardGroupe; titre: string }[] = [
+  { id: "intention", titre: "Ce que tu viens chercher" },
+  { id: "terrain", titre: "Ce qui t'y emmène" },
+];
 
 export type CardsQuestion = {
   type: "cards";
@@ -86,19 +97,19 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     max: 3,
     cards: [
       // Moulin de Mykonos — Jason Mavrommatis, https://unsplash.com/photos/tc5z7vlztuY
-      { image: "https://images.unsplash.com/photo-1494356830678-78f6cd754f1a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler" },
+      { image: "https://images.unsplash.com/photo-1494356830678-78f6cd754f1a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler", groupe: "intention" },
       // Duomo de Florence au lever du jour — Henrique Ferreira, https://unsplash.com/photos/zMFxCtkn9vI
-      { image: "https://images.unsplash.com/photo-1776377231754-d36928e6ee4d?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Nourrir sa curiosité", hint: "Voir autre chose, comprendre" },
+      { image: "https://images.unsplash.com/photo-1776377231754-d36928e6ee4d?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Découvrir", hint: "Des artisans, des ruelles, des histoires", groupe: "intention" },
       // Table de mezze — Hari Nandakumar, https://unsplash.com/photos/fi9kJ8-8BEk
-      { image: "https://images.unsplash.com/photo-1534824394572-a24ff25bbb5e?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      { image: "https://images.unsplash.com/photo-1534824394572-a24ff25bbb5e?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger", groupe: "intention" },
       // Sentier dans les Dolomites — Vadim Matei, https://unsplash.com/photos/RpY04izMaeo
-      { image: "https://images.unsplash.com/photo-1786352260444-20539d92fee0?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Le grand air", hint: "De l'espace, du vert, du silence" },
+      { image: "https://images.unsplash.com/photo-1786352260444-20539d92fee0?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence", groupe: "terrain" },
       // Balos Beach, Crète — Ignacio Correia, https://unsplash.com/photos/C5eXdxCS74c
-      { image: "https://images.unsplash.com/photo-1585320806322-db6d9f35b0c8?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Le bord de l'eau", hint: "La mer, le sel, lâcher prise" },
+      { image: "https://images.unsplash.com/photo-1585320806322-db6d9f35b0c8?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire", groupe: "terrain" },
       // Rue de Shinjuku la nuit — Johan Mouchet, https://unsplash.com/photos/wZLX8vQqa08
-      { image: "https://images.unsplash.com/photo-1749813482475-3c12a8c4a5bd?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Une ville qui vibre", hint: "De l'énergie, du monde, des nuits" },
+      { image: "https://images.unsplash.com/photo-1749813482475-3c12a8c4a5bd?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits", groupe: "terrain" },
       // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
-      { image: "https://images.unsplash.com/photo-1745594151310-d771b97211cc?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
+      { image: "https://images.unsplash.com/photo-1745594151310-d771b97211cc?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser", groupe: "terrain" },
     ],
   },
   {

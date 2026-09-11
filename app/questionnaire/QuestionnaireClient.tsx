@@ -9,6 +9,7 @@ import {
 import { useRouter } from "next/navigation";
 import {
   TRAVEL_MATCH_QUESTIONS,
+  CARD_GROUPES,
   FAMILY_PROFILE_QUESTION,
   type TravelMatchQuestion,
 } from "@/lib/travel-match/questionnaire";
@@ -219,8 +220,13 @@ export function QuestionnaireClient() {
           <p className="mono mb-6 text-center" style={{ color: "var(--text-secondary)" }}>
             {question.helper}
           </p>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {question.cards.map((card) => {
+          {CARD_GROUPES.map((groupe) => (
+          <div key={groupe.id} className="mb-8 last:mb-0">
+            <p className="mono mb-3 text-[11px] uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
+              {groupe.titre}
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            {question.cards.filter((c) => c.groupe === groupe.id).map((card) => {
               const choisie = intentions.includes(card.key);
               const complet = intentions.length >= question.max && !choisie;
               return (
@@ -294,7 +300,9 @@ export function QuestionnaireClient() {
                 </button>
               );
             })}
+            </div>
           </div>
+          ))}
 
           {/* Le bouton ne s'allume qu'au minimum atteint : sans ça, quelqu'un qui ne choisit rien
               obtiendrait un profil entièrement neutre et des résultats interchangeables. */}

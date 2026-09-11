@@ -26,6 +26,6 @@ export const PHOTO_GRADE = {
 // Volontairement limité à cet écran : les photos des carnets doivent rester documentaires, ce sont
 // des preuves de ce que Soumia a vu, pas des éléments graphiques.
 export const PHOTO_DUOTONE = {
-  filtre: "grayscale(1) contrast(1.08) brightness(0.95)",
+  filtre: "saturate(0.35) contrast(1.02) brightness(0.99)",
   teinte: { couleur: "#C4622D", melange: "color" as const, opacite: 0.9 },
 } as const;
