@@ -615,3 +615,146 @@ un oubli.
 `app/confidentialite/page.tsx` décrit exactement ce que fait le code. Toute modification de
 `lib/email/requests.ts`, des actions d'envoi ou de la table `email_requests` doit y être répercutée
 — une page qui ment est pire qu'une page absente.
+
+## Refonte du questionnaire — écran d'intentions (11/09/2026)
+
+**Les curseurs ont disparu.** Le questionnaire s'ouvrait sur sept curseurs répartis sur deux écrans,
+en fin de parcours. Un curseur demande de NOTER une envie de 1 à 5 : geste d'analyste, pas de
+voyageur, pénible sur mobile, et l'émotion arrivait après sept écrans de logistique.
+
+À la place, un premier écran de **six cartes photo**, dont on choisit deux ou trois. Le parcours
+passe de 9 à 8 écrans.
+
+**Le moteur n'a pas bougé.** Une carte choisie envoie 5, une carte non choisie envoie 3 — les
+valeurs exactes que produisaient les curseurs (dont le défaut était 3). L'adresse transmise à
+`/resultat` est identique. Toute la conversion vit dans `QuestionnaireClient.scoresDepuisIntentions`.
+
+**Les six cartes sont des verbes** : Flâner (exploration), Se régaler (gastronomie), Respirer
+(nature), Lâcher prise (plage), Vibrer (effervescence_urbaine), Bouger (rythme).
+
+**"Déconnecter" a été retirée** (axe `repos`). Ce n'était pas un choix de même nature : déconnecter
+est le RÉSULTAT de respirer, lâcher prise, vibrer ou bouger. La donnée le confirmait — 14
+destinations sur 18 étaient notées 4 ou 5 en repos, l'axe ne séparait presque rien. **L'axe existe
+toujours dans le moteur et reste au neutre pour tout le monde** : le retirer aurait décalé le
+calibrage, ce qu'on ne fait pas sans trafic pour le vérifier.
+
+Une tentative de séparer les cartes en deux rangées ("Ce que tu viens chercher" / "Ce qui t'y
+emmène") a été posée puis retirée le même jour : avec six verbes de même nature, la distinction
+n'avait plus lieu d'être.
+
+**Les photos des cartes sont des photos libres de droit, pas celles de Soumia.** Trois itérations :
+ses propres photos illustraient des LIEUX et non des envies (deux plages différentes sur deux
+intentions), puis des photos de banque de lieux identifiables (sept sujets, sept lumières), puis le
+choix final, une image par envie, validée une par une par Soumia. Les crédits photographes sont dans
+`lib/travel-match/questionnaire.ts`, comme dans `hero-images.ts`.
+
+Un traitement bichrome terracotta a été essayé pour unifier les sept photos, puis **retiré** :
+Soumia le trouvait trop sombre et trop orangé. Les photos sont dans leur rendu naturel, et le voile
+de lisibilité a été allégé en conséquence (0,82 → 0,66).
+
+**Les emojis ont disparu du questionnaire.** Les vingt icônes d'options sont des icônes Lucide en
+trait fin, en terracotta. Les emojis ne se dessinent pas pareil d'un appareil à l'autre et juraient
+à côté des cartes photo. Attention : quatre d'entre eux étaient écrits **dans le libellé même** des
+options famille (`FAMILY_PROFILE_OPTIONS`), donc hors de portée de la table d'icônes — et ils
+réapparaissaient sur le pavé "Adapté aux familles" des fiches hôtel.
+
+## Le site tutoie (11/09/2026)
+
+Le questionnaire tutoyait, tout le reste vouvoyait. Choix de Soumia : **le tutoiement partout où le
+site s'adresse à un visiteur** — accueil, questionnaire, résultats, fiches, mails, philosophie,
+désinscription.
+
+**Exceptions volontaires, à ne pas "corriger"** : la page `/pros` et les deux pages légales restent
+au vouvoiement. Elles s'adressent à un professionnel ou ont une portée juridique. C'est la même
+personne qui ne parle pas pareil à un lecteur et à un directeur d'hôtel.
+
+## Profils voyageur — noms et combinaison (11-12/09/2026)
+
+Deux profils renommés, parce que leur nom ne désignait pas une personne contrairement aux trois
+autres : "La Parenthèse Intimiste" → **L'Âme Tranquille**, "La Quête Hédoniste" → **Le Cœur
+Gourmand**. Les sous-titres ont perdu leur vocabulaire précieux ("bons flacons" → "le vin qui va
+avec"). Les trois autres (L'Âme Curieuse, Le Souffle Sauvage, L'Électron Urbain) sont inchangés,
+Soumia y tient.
+
+**Le profil affiché combine les deux axes arrivés au maximum.** C'est une correction de régression :
+avec les cartes, chaque intention choisie vaut 5, donc les égalités sont devenues la règle, et le
+`>` strict de `topAxis` faisait gagner le premier axe de `SCORE_AXES` à chaque fois. Quelqu'un qui
+choisissait "Se régaler" et "Vibrer" voyait toujours Le Cœur Gourmand, jamais L'Électron Urbain.
+
+Les pastilles sous le profil décrivent **le visiteur**, pas les destinations — d'où l'intertitre
+"Ce que tu as demandé" ajouté le 12/09 : Soumia avait lu "Sport & Aventure" comme une description de
+Montréal.
+
+## Le vrai problème du moteur : les notes ne contrastent pas
+
+Constaté plusieurs fois le 11/09, avec les chiffres :
+
+- **14 destinations sur 18** sont notées 4 ou 5 sur `repos`.
+- **8 villes sur 10** sont notées 5 sur `exploration`. Florence et New York sont identiques sur
+  trois axes sur quatre.
+- La Côte Basque était notée **1 sur `rythme`** alors que c'est la destination surf — corrigé à 5 le
+  11/09, ce qui la sépare enfin de Marseille (2).
+- `rythme` mesure aujourd'hui **le rythme d'une ville**, pas l'effort physique : Chine urbaine, Japon
+  urbain et New York sont à 5. La carte s'appelle pourtant "Bouger — se dépenser". Décision en
+  attente : soit on assume le rythme, soit on fait redescendre les villes puisque leur agitation est
+  déjà captée par "Vibrer".
+
+**Aucune refonte d'interface ne réglera ça.** Tant que tout ce qui vaut le voyage est noté 5, le
+moteur ne peut pas trier. La prochaine étape utile est une passe de notation destination par
+destination — proposition de Claude, validation de Soumia, comme pour les scores sport.
+
+## Mode brouillon (11/09/2026)
+
+`destinations.published` et `voyages.published`, à `true` par défaut. Une destination non publiée
+n'existe pour personne : absente du matching, de `/carnets`, et son adresse directe renvoie une page
+introuvable. Permet de créer une destination et de la remplir au fil de l'eau.
+
+**Toute destination créée par le gabarit naît en brouillon** (`ingest.ts` écrit `published = false`),
+et un réimport ne touche pas au statut d'une fiche déjà en base.
+
+    npx tsx --env-file=.env.local scripts/publier.ts            → l'état de tout
+    npx tsx --env-file=.env.local scripts/publier.ts paris      → publie
+    npx tsx --env-file=.env.local scripts/publier.ts paris off  → repasse en brouillon
+
+## Mesure d'audience (11/09/2026)
+
+Vercel Web Analytics, installé au moment où Soumia a envisagé d'acheter de la publicité — sans
+chiffres, impossible de juger un euro dépensé. Sans cookie, sans donnée personnelle.
+
+**La page Confidentialité affirmait le contraire** et a été corrigée dans le même commit. Règle :
+toute évolution de la mesure ou de la collecte doit être répercutée sur cette page. Une page qui ment
+est pire qu'une page absente.
+
+Attention : l'activation se fait aussi **dans le tableau de bord Vercel** (onglet Analytics →
+Enable). Le code seul ne collecte rien.
+
+## Étalonnage photo et studio (11/09/2026)
+
+`lib/photo-grade.ts` — une seule définition de l'ambiance "Sable" (réchauffe, désature légèrement,
+remonte les noirs vers l'ivoire), appliquée aux couvertures de fiches, aux cartes de résultats, aux
+carnets et aux favoris. Ce n'est pas le sujet des photos qui crée une identité visuelle, c'est leur
+traitement.
+
+Sur la page Favoris, l'image était posée sur le même bloc que le texte : un filtre l'aurait délavé
+avec. L'image vit dans un calque séparé depuis.
+
+**Le studio** (`/studio`) a gagné un sélecteur de format (Instagram carré, Pinterest 2:3, story 9:16)
+et un sélecteur d'ambiance photo. La carte citation a été refondue : une seule typographie, texte
+ancré en bas, monogramme en haut — la signature manuscrite venait d'un registre étranger au site. Un
+modèle "Monogramme Éditorial" a été ajouté. Le compte affiché est `@levoyagedesemotions`, écrit une
+seule fois dans le code.
+
+## Vocabulaire du contenu, unifié (11/09/2026)
+
+**Trois étiquettes de statut**, toutes à la première personne : "J'ai testé" (75), "Sur mon radar"
+(61), "J'ai dormi ici" (18). Les libellés isolés ("Sur notre radar", "Repéré, pas encore testé",
+"Sélection recherchée", "À tester", "Sélectionné", "Testé") ont été fondus dedans. Plus aucune
+adresse sans étiquette.
+
+**La couleur dit la même chose que le mot** : vert plein pour le vécu, gris ardoise à trait
+discontinu pour le repéré. C'est la distinction centrale du site, elle se lit maintenant sans lire.
+
+**Libellés de liens** : "Voir sur Google Maps", "Voir l'adresse", "Voir le site officiel", "Voir les
+disponibilités", et pour les activités "Réservez votre activité" — réservé à celles qui se réservent
+vraiment, les trois gratuites (temple Meiji-jingu, aire de jeux Diana, piscine du Shimoda) affichent
+"Voir le site".
