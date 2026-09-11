@@ -13,7 +13,7 @@ import {
   type TravelMatchQuestion,
 } from "@/lib/travel-match/questionnaire";
 import { SCORE_KEYS, type ScoreKey } from "@/lib/travel-match/types";
-import { PHOTO_GRADE } from "@/lib/photo-grade";
+import { PHOTO_DUOTONE } from "@/lib/photo-grade";
 
 // Immersion (29/08/2026, demande Gemini transmise par Soumia — "manque d'immersion, trop sondage
 // plat") : icône contextuelle par option, clé "questionId:value" pour rester non-ambigu entre
@@ -250,12 +250,16 @@ export function QuestionnaireClient() {
                       backgroundPosition: "center",
                       // Même étalonnage sur les sept cartes : sans lui, sept photos de sept
                       // photographes différents ne forment pas une famille.
-                      filter: PHOTO_GRADE.filtre,
+                      filter: PHOTO_DUOTONE.filtre,
                     }}
                   />
                   <div
                     className="pointer-events-none absolute inset-0"
-                    style={{ background: PHOTO_GRADE.voile.couleur, opacity: PHOTO_GRADE.voile.opacite }}
+                    style={{
+                      background: PHOTO_DUOTONE.teinte.couleur,
+                      mixBlendMode: PHOTO_DUOTONE.teinte.melange,
+                      opacity: PHOTO_DUOTONE.teinte.opacite,
+                    }}
                   />
                   {/* Voile sombre : le texte doit rester lisible sur n'importe quelle photo, et la
                       carte choisie se teinte en terracotta pour que la sélection se voie d'un
