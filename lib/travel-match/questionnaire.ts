@@ -98,8 +98,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      // Ruelle d'Orta San Giulio, Italie — Rafael Garcin, https://unsplash.com/photos/bc_qS1ZyXb0
-      { image: "https://images.unsplash.com/photo-1719921220054-722018f84442?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
+      // Ruelle de Trogir, Croatie — Tobias Reich, https://unsplash.com/photos/A9USXmqJE7w
+      { image: "https://images.unsplash.com/photo-1783173561737-202300de9165?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
       // Table dressée aux bougies — Alena Torgonskaya, https://unsplash.com/photos/wO5DwEoyKjI
       { image: "https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
