@@ -98,8 +98,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      // Salle de lecture ronde — Lilian Do Khac, https://unsplash.com/photos/8CASOM38lQc
-      { image: "https://images.unsplash.com/photo-1765394715568-889eab558ed2?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Découvrir", hint: "Des artisans, des ruelles, des histoires" },
+      // Visiteurs devant des tableaux — Robert | Visual Diary, https://unsplash.com/photos/5yPvSf3bc6g
+      { image: "https://images.unsplash.com/photo-1758380742154-44738eb92832?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Découvrir", hint: "Des artisans, des ruelles, des histoires" },
       // Olives et huile sur lin — Anya Chernykh, https://unsplash.com/photos/fQHQp75Ap3E
       { image: "https://images.unsplash.com/photo-1755404215191-abc0083c4d07?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
