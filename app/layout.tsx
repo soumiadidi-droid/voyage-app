@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import {
   Bricolage_Grotesque,
@@ -56,6 +57,10 @@ export const metadata: Metadata = {
   description: "Un pays, une histoire, une photo à la fois.",
 };
 
+// Mesure d'audience (11/09/2026) — installée au moment où Soumia envisage d'acheter de la
+// publicité : sans chiffres, impossible de savoir si un euro dépensé ramène quelqu'un.
+// Vercel Web Analytics : pas de cookie, pas de donnée personnelle, chiffres agrégés. La page
+// Confidentialité a été corrigée en conséquence le même jour (elle affirmait le contraire).
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -65,6 +70,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Nav />
         <main className="flex-1">{children}</main>
+        <Analytics />
         <Footer />
       </body>
     </html>

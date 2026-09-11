@@ -14,7 +14,7 @@ const SECTIONS = [
   {
     title: "Le principe",
     body: [
-      "Ce site est un site personnel de récits de voyage. Il ne vend rien, ne mesure pas son audience, n'utilise aucun outil publicitaire et ne revend aucune donnée — cette dernière phrase n'a pas d'exception.",
+      "Ce site est un site personnel de récits de voyage. Il ne vend rien, n'utilise aucun outil publicitaire et ne revend aucune donnée — cette dernière phrase n'a pas d'exception.",
       "La seule situation où vous me confiez une donnée personnelle, c'est lorsque vous demandez à recevoir un itinéraire ou un carnet d'adresses par email.",
     ],
   },
@@ -60,7 +60,7 @@ const SECTIONS = [
   {
     title: "Cookies et contenus extérieurs",
     body: [
-      "Ce site ne dépose aucun cookie publicitaire ni aucun outil de mesure d'audience.",
+      "Ce site ne dépose aucun cookie, ni publicitaire ni autre. La fréquentation des pages est mesurée par Vercel Web Analytics, un outil qui compte les visites sans cookie, sans identifiant de navigateur et sans conserver la moindre donnée permettant de vous reconnaître : je vois combien de personnes ont ouvert une page, jamais qui.",
       "Les destinations que vous mettez en favoris sont enregistrées dans la mémoire de votre navigateur, sur votre appareil. Elles ne sont jamais transmises au site, et disparaissent si vous videz les données de votre navigateur.",
       "Les publications Instagram affichées sur les fiches destination sont chargées depuis les serveurs de Meta, qui peut à cette occasion déposer ses propres traceurs. Cet affichage n'est pas de mon fait technique et obéit à la politique de confidentialité de Meta.",
     ],
