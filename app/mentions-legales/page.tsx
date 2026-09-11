@@ -28,7 +28,8 @@ const SECTIONS = [
   {
     title: "Propriété intellectuelle",
     body: [
-      "Les textes, les récits et les photographies publiés sur ce site sont des créations originales. Toute reproduction, même partielle, sans autorisation préalable est interdite.",
+      "Les textes, les récits et les photographies des carnets de voyage sont des créations originales. Toute reproduction, même partielle, sans autorisation préalable est interdite.",
+      "Les autres photographies (couvertures des destinations, page d'accueil, questionnaire) proviennent d'Unsplash et sont utilisées selon la licence Unsplash. Elles restent la propriété de leurs auteurs.",
       "Les marques, noms d'établissements et logos cités appartiennent à leurs propriétaires respectifs. Leur mention relève du droit de citation et ne suppose aucun lien commercial, sauf lorsque c'est explicitement indiqué sur la page concernée.",
     ],
   },
@@ -74,7 +75,7 @@ export default function MentionsLegalesPage() {
       ))}
 
       <p className="mt-14 text-xs" style={{ color: "var(--text-secondary)" }}>
-        Dernière mise à jour : 10 septembre 2026.
+        Dernière mise à jour : 11 septembre 2026.
       </p>
     </div>
   );

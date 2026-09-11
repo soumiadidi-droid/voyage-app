@@ -225,13 +225,16 @@ function DarkFooterLink({ href, children }: { href: string; children: React.Reac
 export function Footer() {
   return (
     <footer className="bg-lve-charcoal text-lve-ivory pt-16 pb-8 border-t border-lve-terracotta/20">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 border-b border-lve-ivory/10 items-start">
+      <div className="max-w-6xl mx-auto px-5 sm:px-8 grid grid-cols-1 md:grid-cols-12 gap-12 pb-12 items-start">
         {/* Logo en texte stylé ici (le composant <Logo/> SVG a du vide au-dessus des lettres, pour
             sa ligne de soulignement en dessous — aucun leading-none/items-start ne peut aligner
             son haut visuel sur celui des titres de colonnes voisins). Même traitement texte dans
             le header depuis le 23/08/2026, le composant SVG ne sert plus que sur les cartes
             adresses (fallback sans photo, app/voyages/[slug]/page.tsx). */}
-        <div className="md:col-span-4 space-y-4 pt-0">
+        {/* Newsletter masquée = 4 colonnes vides à droite, les liens s'arrêtaient au milieu alors que
+            la rangée du bas va jusqu'au bord (repéré par Soumia le 11/09/2026). Le bloc logo prend
+            la place libérée, les colonnes de liens se calent à droite. */}
+        <div className={`${SHOW_NEWSLETTER ? "md:col-span-4" : "md:col-span-8"} space-y-4 pt-0`}>
           <Link
             aria-label="Le Voyage des Émotions — accueil"
             href="/"
@@ -324,15 +327,24 @@ export function Footer() {
         )}
       </div>
 
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-lve-ivory/50 gap-4">
-        <p>© 2026 Voyage des Émotions — Photographies originales sous licence.</p>
-        <div className="flex gap-6">
-          <Link href="/mentions-legales" className="hover:text-lve-ivory transition-colors">
-            Mentions légales
-          </Link>
-          <Link href="/confidentialite" className="hover:text-lve-ivory transition-colors">
-            Confidentialité
-          </Link>
+      {/* Filet de séparation porté par le bloc intérieur (11/09/2026) : posé sur la grille du haut,
+          qui porte aussi les marges, il débordait de part et d'autre du texte. */}
+      <div className="max-w-6xl mx-auto px-5 sm:px-8">
+        <div className="pt-8 border-t border-lve-ivory/10 flex flex-col md:flex-row justify-between items-center text-xs text-lve-ivory/50 gap-4">
+          {/* "Photographies originales sous licence" était faux sur les deux mots (11/09/2026) : les
+              photos des carnets sont celles de Soumia, toutes les autres (couvertures des fiches,
+              accueil, cartes du questionnaire) viennent d'Unsplash. */}
+          <p className="text-center md:text-left">
+            © 2026 Voyage des Émotions — Photos des carnets : les miennes. Les autres : Unsplash.
+          </p>
+          <div className="flex gap-6">
+            <Link href="/mentions-legales" className="hover:text-lve-ivory transition-colors">
+              Mentions légales
+            </Link>
+            <Link href="/confidentialite" className="hover:text-lve-ivory transition-colors">
+              Confidentialité
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
