@@ -57,11 +57,16 @@ export type SlidersQuestion = {
 // produit exactement les mêmes valeurs qu'avant (axe choisi = 5, axe non choisi = 3, la valeur
 // neutre qu'avait le curseur par défaut). Le moteur de matching, la page de résultats et l'adresse
 // transmise sont inchangés — voir QuestionnaireClient.submit.
-// `image` : photos libres de droit (licence Unsplash), choisies le 11/09/2026 à la demande de
-// Soumia et regardées une par une avant d'être posées. Ses propres photos avaient été essayées
-// d'abord, mais elles illustrent des LIEUX, pas des envies — deux plages différentes se
-// retrouvaient sur deux intentions distinctes, ce qui brouillait la lecture. Même logique et mêmes
-// crédits que lib/hero-images.ts.
+// `image` : photos libres de droit (licence Unsplash), regardées une par une avant d'être posées.
+//
+// Deux itérations avant d'arriver là. D'abord les photos de Soumia : elles illustrent des LIEUX,
+// pas des envies, et deux plages différentes se retrouvaient sur deux intentions distinctes.
+// Ensuite des photos de banque, mais de lieux identifiables — un moulin, une cathédrale, une rue
+// de Tokyo la nuit : sept sujets et sept lumières qu'aucun étalonnage ne rend cousins.
+//
+// Ce sont donc des MATIÈRES : du sable, de la pierre, de l'eau, du verre. Même distance de prise
+// de vue, aucun monument à reconnaître, et la famille se forme d'elle-même. Seule exception, le
+// mouvement : "Bouger" a besoin d'un sujet, une texture ne sait pas dire l'élan.
 // `groupe` (11/09/2026) : "Déconnecter" est une intention, "Le grand air" est un décor — les
 // mettre sur le même plan brouillait le choix, puisque le décor est souvent le moyen de
 // l'intention. Repéré par Soumia. Deux rangées séparées sur le même écran plutôt que deux écrans,
@@ -96,18 +101,18 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      // Moulin de Mykonos — Jason Mavrommatis, https://unsplash.com/photos/tc5z7vlztuY
-      { image: "https://images.unsplash.com/photo-1494356830678-78f6cd754f1a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler", groupe: "intention" },
-      // Duomo de Florence au lever du jour — Henrique Ferreira, https://unsplash.com/photos/zMFxCtkn9vI
-      { image: "https://images.unsplash.com/photo-1776377231754-d36928e6ee4d?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Découvrir", hint: "Des artisans, des ruelles, des histoires", groupe: "intention" },
-      // Table de mezze — Hari Nandakumar, https://unsplash.com/photos/fi9kJ8-8BEk
-      { image: "https://images.unsplash.com/photo-1534824394572-a24ff25bbb5e?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger", groupe: "intention" },
-      // Sentier dans les Dolomites — Vadim Matei, https://unsplash.com/photos/RpY04izMaeo
-      { image: "https://images.unsplash.com/photo-1786352260444-20539d92fee0?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence", groupe: "terrain" },
-      // Balos Beach, Crète — Ignacio Correia, https://unsplash.com/photos/C5eXdxCS74c
-      { image: "https://images.unsplash.com/photo-1585320806322-db6d9f35b0c8?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire", groupe: "terrain" },
-      // Rue de Shinjuku la nuit — Johan Mouchet, https://unsplash.com/photos/wZLX8vQqa08
-      { image: "https://images.unsplash.com/photo-1749813482475-3c12a8c4a5bd?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits", groupe: "terrain" },
+      // Sable ridé — BP Miller, https://unsplash.com/photos/9L0Hdw3dBCc
+      { image: "https://images.unsplash.com/photo-1760321856160-01a41d7a67c1?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler", groupe: "intention" },
+      // Mur de pierre sèche — Max Tcvetkov, https://unsplash.com/photos/jfHj2ovy-EA
+      { image: "https://images.unsplash.com/photo-1641025925967-08057696111e?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Découvrir", hint: "Des artisans, des ruelles, des histoires", groupe: "intention" },
+      // Olives et huile sur lin — Anya Chernykh, https://unsplash.com/photos/fQHQp75Ap3E
+      { image: "https://images.unsplash.com/photo-1755404215191-abc0083c4d07?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger", groupe: "intention" },
+      // Feuilles d'olivier au soleil — Susana Bartolome, https://unsplash.com/photos/v8W9aIFqRIs
+      { image: "https://images.unsplash.com/photo-1757863798018-7882cfc0b5f2?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence", groupe: "terrain" },
+      // Surface de mer — Alexander Mass, https://unsplash.com/photos/0xugG5t9dsc
+      { image: "https://images.unsplash.com/photo-1749045939257-2b7423bd15a8?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire", groupe: "terrain" },
+      // Façade de verre vue d'en bas — Clay LeConey, https://unsplash.com/photos/oW66SyCnoLs
+      { image: "https://images.unsplash.com/photo-1749928399835-4e2b261879c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits", groupe: "terrain" },
       // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
       { image: "https://images.unsplash.com/photo-1745594151310-d771b97211cc?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser", groupe: "terrain" },
     ],
