@@ -1,6 +1,7 @@
 import { LikeButton } from "./LikeButton";
 import { ShareButton } from "./ShareButton";
 import type { VoyageContent } from "@/content/voyages";
+import { PHOTO_GRADE } from "@/lib/photo-grade";
 
 // Hero fixe (décidé le 26/08/2026 — plus de carrousel). Fond noir semi-transparent par défaut ;
 // une image optionnelle peut être posée dessous destination par destination (ex. New York) sans
@@ -36,7 +37,7 @@ export function DestinationHero({
       {heroImage ? (
         <div
           className="absolute inset-x-0 top-0 h-screen"
-          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center", filter: PHOTO_GRADE.filtre }}
         />
       ) : (
         // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu.

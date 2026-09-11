@@ -3,6 +3,7 @@ import { LikeButton } from "../components/LikeButton";
 import { ShareButton } from "../components/ShareButton";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { ScoredDestination } from "@/lib/travel-match/engine";
+import { PHOTO_GRADE } from "@/lib/photo-grade";
 
 // Refonte visuelle (27/08/2026) : cartes à plat → cartes blanches avec hiérarchie (titre serif,
 // score en pastille terracotta, tags en pills, alerte d'incompatibilité en encadré ambré au lieu
@@ -27,7 +28,7 @@ export function DestinationCard({
         <div className="relative h-48 sm:h-56">
           <div
             className="absolute inset-0"
-            style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+            style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center", filter: PHOTO_GRADE.filtre }}
           />
           {/* Pas d'assombrissement de la photo (29/08/2026, "je veux que le texte soit direct sur
               l'image") : lisibilité du titre via text-shadow, badge/cœur ont leur propre fond

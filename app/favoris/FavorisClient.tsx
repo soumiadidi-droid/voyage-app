@@ -8,6 +8,7 @@ import { useFavorites, usePlaceFavorites } from "@/lib/favorites";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { TransportFilter } from "@/lib/travel-match/types";
 import { resolveFavorites, resolvePlaceFavorites, type LikedItem, type PlaceLikedItem } from "./actions";
+import { PHOTO_GRADE } from "@/lib/photo-grade";
 
 // Pills d'infos pratiques (28/08/2026, remplace les hashtags bruts) — construites uniquement à
 // partir de champs réels et jamais inventées : `filters.transport` est toujours renseigné (champ
@@ -129,11 +130,19 @@ export function FavorisClient() {
                   // text-shadow sur le texte, plus par l'assombrissement de la photo.
                   <div
                     key={item.key}
-                    className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl bg-cover bg-center p-6 sm:p-8"
-                    style={{
-                      backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.destination.content_slug] ?? item.destination.hero_image}')`,
-                    }}
+                    className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl p-6 sm:p-8"
                   >
+                    {/* L'image passe dans un calque à part (11/09/2026) : un filtre posé sur le
+                        bloc parent aurait aussi filtré le titre et le bouton par-dessus. */}
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.destination.content_slug] ?? item.destination.hero_image}')`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        filter: PHOTO_GRADE.filtre,
+                      }}
+                    />
                     <div className="absolute right-4 top-4 z-10">
                       <LikeButton id={item.key} />
                     </div>
@@ -178,11 +187,19 @@ export function FavorisClient() {
                 ) : (
                   <div
                     key={item.key}
-                    className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl bg-cover bg-center p-6 sm:p-8"
-                    style={{
-                      backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.voyage.slug] ?? item.voyage.hero.image}')`,
-                    }}
+                    className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl p-6 sm:p-8"
                   >
+                    {/* L'image passe dans un calque à part (11/09/2026) : un filtre posé sur le
+                        bloc parent aurait aussi filtré le titre et le bouton par-dessus. */}
+                    <div
+                      className="absolute inset-0"
+                      style={{
+                        backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.voyage.slug] ?? item.voyage.hero.image}')`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                        filter: PHOTO_GRADE.filtre,
+                      }}
+                    />
                     <div className="absolute right-4 top-4 z-10">
                       <LikeButton id={item.key} />
                     </div>
