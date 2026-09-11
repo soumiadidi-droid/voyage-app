@@ -13,7 +13,6 @@ import {
   type TravelMatchQuestion,
 } from "@/lib/travel-match/questionnaire";
 import { SCORE_KEYS, type ScoreKey } from "@/lib/travel-match/types";
-import { PHOTO_DUOTONE } from "@/lib/photo-grade";
 
 // Immersion (29/08/2026, demande Gemini transmise par Soumia — "manque d'immersion, trop sondage
 // plat") : icône contextuelle par option, clé "questionId:value" pour rester non-ambigu entre
@@ -248,17 +247,6 @@ export function QuestionnaireClient() {
                       backgroundImage: `url('${card.image}')`,
                       backgroundSize: "cover",
                       backgroundPosition: "center",
-                      // Même étalonnage sur les sept cartes : sans lui, sept photos de sept
-                      // photographes différents ne forment pas une famille.
-                      filter: PHOTO_DUOTONE.filtre,
-                    }}
-                  />
-                  <div
-                    className="pointer-events-none absolute inset-0"
-                    style={{
-                      background: PHOTO_DUOTONE.teinte.couleur,
-                      mixBlendMode: PHOTO_DUOTONE.teinte.melange,
-                      opacity: PHOTO_DUOTONE.teinte.opacite,
                     }}
                   />
                   {/* Voile sombre : le texte doit rester lisible sur n'importe quelle photo, et la
@@ -268,8 +256,8 @@ export function QuestionnaireClient() {
                     className="absolute inset-0"
                     style={{
                       background: choisie
-                        ? "linear-gradient(to top, color-mix(in srgb, var(--lve-terracotta-dark) 88%, transparent), color-mix(in srgb, var(--lve-terracotta-dark) 35%, transparent))"
-                        : "linear-gradient(to top, rgba(26,23,20,0.82), rgba(26,23,20,0.15))",
+                        ? "linear-gradient(to top, color-mix(in srgb, var(--lve-terracotta-dark) 80%, transparent), color-mix(in srgb, var(--lve-terracotta-dark) 20%, transparent))"
+                        : "linear-gradient(to top, rgba(26,23,20,0.66), rgba(26,23,20,0.05))",
                     }}
                   />
                   {choisie && (
