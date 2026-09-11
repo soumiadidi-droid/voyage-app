@@ -163,19 +163,21 @@ function EmailCaptureShell({
             {/* Facultative et décochée par défaut (décidé au grillage du 09/09/2026) : l'envoi de
                 l'itinéraire est le service demandé, garder l'adresse pour recontacter est un accord
                 distinct. Sans la case, aucune adresse n'est conservée. */}
+            {/* items-center et non items-start (11/09/2026) : le libellé tient désormais sur une
+                seule ligne, l'alignement haut décalait la case vers le haut pour rien. w-fit
+                mx-auto centre le couple case + texte comme le reste du bloc, au lieu de centrer
+                une boîte plus large dans laquelle le texte partait à gauche. */}
             <label
-              className="flex items-start justify-center gap-2.5 text-xs max-w-md mx-auto cursor-pointer select-none"
+              className="flex w-fit mx-auto items-center gap-2.5 text-xs cursor-pointer select-none"
               style={{ color: "var(--text-secondary)" }}
             >
               <input
                 type="checkbox"
                 checked={consent}
                 onChange={(e) => setConsent(e.target.checked)}
-                className="mt-0.5 accent-[var(--lve-terracotta)] cursor-pointer"
+                className="accent-[var(--lve-terracotta)] cursor-pointer"
               />
-              <span className="text-left">
-                Je veux aussi être prévenu(e) des nouvelles destinations publiées sur le site.
-              </span>
+              <span>Je veux aussi recevoir les nouvelles destinations.</span>
             </label>
 
             {status === "error" && (
