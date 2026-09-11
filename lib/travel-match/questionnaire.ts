@@ -98,8 +98,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      // Ruelle d'Ostuni, Pouilles — Valerio Giannattasio, https://unsplash.com/photos/U3Qecmky0EA
-      { image: "https://images.unsplash.com/photo-1693649511119-4ba0dec9d079?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
+      // Ruelle blanche d'Oia, Grèce — Stephanie Harlacher, https://unsplash.com/photos/v8Wcrpb6_PU
+      { image: "https://images.unsplash.com/photo-1690611283232-fa6dea392217?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
       // Table dressée aux bougies — Alena Torgonskaya, https://unsplash.com/photos/wO5DwEoyKjI
       { image: "https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
