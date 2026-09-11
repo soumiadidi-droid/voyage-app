@@ -97,13 +97,20 @@ export default function PhilosophiePage() {
       </div>
 
       {/* Piliers (29/08/2026) : trait fin remplacé par un badge numéroté rond terracotta + carte
-          surélevée (fond blanc, ombre, hover lift) — plus de relief que 3 colonnes de texte nu. */}
+          surélevée (fond blanc, ombre, hover lift) — plus de relief que 3 colonnes de texte nu.
+          Habillage "passeport" de la carte profil de /resultat (11/09/2026, Soumia : "fade") :
+          la bordure terracotta-bg était invisible sur l'ivoire, les cartes blanches se fondaient
+          dans la section. Liseré terracotta + double filet intérieur, comme TravelerProfileCard. */}
       <div className="bg-lve-ivory py-16 sm:py-20 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-6">
           {PILLARS.map((pillar, i) => (
             <div
               key={pillar.title}
-              className="text-center sm:text-left bg-white rounded-2xl p-6 shadow-sm border border-lve-terracotta-bg transition-all hover:-translate-y-1 hover:shadow-md"
+              className="text-center sm:text-left bg-white rounded-2xl p-6 transition-all hover:-translate-y-1"
+              style={{
+                border: "1px solid var(--lve-terracotta)",
+                boxShadow: "0 20px 40px -24px rgba(26, 26, 26, 0.25), inset 0 0 0 4px var(--lve-terracotta-bg)",
+              }}
             >
               <div
                 className="w-9 h-9 rounded-full bg-lve-terracotta text-white flex items-center justify-center mb-4 mx-auto sm:mx-0 font-semibold"
@@ -112,13 +119,13 @@ export default function PhilosophiePage() {
                 {i + 1}
               </div>
               <h3
-                className="text-xl text-lve-charcoal mb-3"
+                className="text-2xl font-semibold text-lve-terracotta-dark leading-tight mb-3"
                 style={{ fontFamily: "var(--font-title)" }}
               >
                 {pillar.title}
               </h3>
               <p
-                className="text-sm text-lve-charcoal/70 leading-relaxed"
+                className="text-[15px] text-lve-charcoal/85 leading-relaxed"
                 style={{ fontFamily: "var(--font-display)" }}
               >
                 {pillar.description}
