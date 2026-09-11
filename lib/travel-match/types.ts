@@ -40,11 +40,14 @@ export type Logistics = {
 // personnaliser le pavé "Adapté aux Familles" sur les fiches hôtel.
 export type FamilyProfile = "tout_petits" | "enfants_juniors" | "ados" | "tribu_multi_ages";
 
+// Emojis retirés des libellés le 11/09/2026 : ils étaient écrits dans le texte même de l'option,
+// donc ils échappaient à la table d'icônes du questionnaire et réapparaissaient aussi sur le pavé
+// "Adapté aux familles" des fiches hôtel. Les icônes vivent maintenant dans OPTION_ICON.
 export const FAMILY_PROFILE_OPTIONS: { value: FamilyProfile; label: string }[] = [
-  { value: "tout_petits", label: "👶 Tout-petits (-3 ans)" },
-  { value: "enfants_juniors", label: "🎒 Enfants / Juniors (3-12 ans)" },
-  { value: "ados", label: "🎧 Ados (13 ans+)" },
-  { value: "tribu_multi_ages", label: "👨‍👩‍👧‍👦 Tribu multi-âges" },
+  { value: "tout_petits", label: "Tout-petits (-3 ans)" },
+  { value: "enfants_juniors", label: "Enfants et juniors (3-12 ans)" },
+  { value: "ados", label: "Ados (13 ans et plus)" },
+  { value: "tribu_multi_ages", label: "Tribu multi-âges" },
 ];
 
 // 7 axes indépendants (remplace l'ancien modèle émotions/vibe à 9 axes, décidé le 23/08/2026).

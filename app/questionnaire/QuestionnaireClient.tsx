@@ -4,7 +4,7 @@ import { useState } from "react";
 import {
   CalendarDays, CalendarRange, Compass, PiggyBank, Wallet, Gem, Home, Plane, Globe, Sparkles,
   Sun, CloudSun, Snowflake, Footprints, TramFront, Car, Armchair, Mountain, User, Heart, Users,
-  Baby, type LucideIcon,
+  Baby, Backpack, Headphones, type LucideIcon,
 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
@@ -46,6 +46,10 @@ const OPTION_ICON: Record<string, LucideIcon> = {
   "companions:duo": Heart,
   "companions:amis": Users,
   "companions:famille": Baby,
+  "familyProfile:tout_petits": Baby,
+  "familyProfile:enfants_juniors": Backpack,
+  "familyProfile:ados": Headphones,
+  "familyProfile:tribu_multi_ages": Users,
 };
 
 // Convention typo française : espace avant "?" — remplacée par une espace insécable pour que le
