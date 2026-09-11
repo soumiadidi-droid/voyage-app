@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import { Download, ImagePlus } from "lucide-react";
-import { PRESETS, type PresetId } from "./presets";
+import { PRESETS, FORMATS, type PresetId, type FormatId } from "./presets";
 
 // Le compte Instagram, écrit une seule fois (11/09/2026) : la carte "minimalist" affichait
 // "@voyagedesemotions" alors que le pied de page du site pointe vers "@levoyagedesemotions".
@@ -12,6 +12,7 @@ const HANDLE = "@levoyagedesemotions";
 
 export function InstaStudio() {
   const [preset, setPreset] = useState<PresetId>("minimalist");
+  const [format, setFormat] = useState<FormatId>("square");
   const [quote, setQuote] = useState(
     "Un pays, une histoire, une photo à la fois."
   );
@@ -41,7 +42,7 @@ export function InstaStudio() {
         cacheBust: true,
       });
       const link = document.createElement("a");
-      link.download = `lve-${preset}.png`;
+      link.download = `lve-${preset}-${format}.png`;
       link.href = dataUrl;
       link.click();
     } finally {
@@ -62,6 +63,28 @@ export function InstaStudio() {
 
       <div className="grid gap-10 md:grid-cols-[360px_1fr]">
         <div className="flex flex-col gap-8">
+          <div className="flex flex-col gap-2">
+            <span className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+              Format
+            </span>
+            <div className="flex flex-wrap gap-2">
+              {FORMATS.map((f) => (
+                <button
+                  key={f.id}
+                  onClick={() => setFormat(f.id)}
+                  title={f.hint}
+                  className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                    format === f.id
+                      ? "border-lve-terracotta bg-lve-terracotta-bg text-lve-terracotta-dark"
+                      : "border-lve-border text-lve-charcoal hover:border-lve-terracotta"
+                  }`}
+                >
+                  {f.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div className="flex flex-col gap-2">
             {PRESETS.map((p) => (
               <button
@@ -174,7 +197,8 @@ export function InstaStudio() {
         <div className="flex items-start justify-center">
           <div
             ref={cardRef}
-            className="relative aspect-square w-full max-w-[420px] overflow-hidden rounded-sm shadow-lg"
+            className="relative w-full max-w-[420px] overflow-hidden rounded-sm shadow-lg"
+            style={{ aspectRatio: FORMATS.find((f) => f.id === format)!.ratio }}
           >
             {/* Refonte du 11/09/2026, après comparaison avec la référence apportée par Soumia
                 (le compte Slow Studio) : une seule typographie sur toute la carte — la signature

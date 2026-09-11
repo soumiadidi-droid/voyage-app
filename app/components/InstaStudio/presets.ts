@@ -9,3 +9,14 @@ export const PRESETS: { id: PresetId; label: string }[] = [
   { id: "terracotta-mood", label: "Terracotta Mood" },
   { id: "carnet", label: "Carnet d'Adresse" },
 ];
+
+// Formats de sortie (11/09/2026) : le même visuel sert sur plusieurs réseaux, mais pas au même
+// gabarit. Pinterest est un moteur de recherche vertical — une image carrée y prend deux fois
+// moins de place à l'écran et se fait dépasser par les épingles 2:3.
+export type FormatId = "square" | "pin" | "story";
+
+export const FORMATS: { id: FormatId; label: string; ratio: string; hint: string }[] = [
+  { id: "square", label: "Instagram · carré", ratio: "1 / 1", hint: "1080 × 1080" },
+  { id: "pin", label: "Pinterest · vertical", ratio: "2 / 3", hint: "1000 × 1500" },
+  { id: "story", label: "Story · plein écran", ratio: "9 / 16", hint: "1080 × 1920" },
+];
