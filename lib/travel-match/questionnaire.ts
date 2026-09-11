@@ -100,14 +100,14 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     cards: [
       // Ruelle d'Orta San Giulio, Italie — Rafael Garcin, https://unsplash.com/photos/bc_qS1ZyXb0
       { image: "https://images.unsplash.com/photo-1719921220054-722018f84442?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
-      // Olives et huile sur lin — Anya Chernykh, https://unsplash.com/photos/fQHQp75Ap3E
-      { image: "https://images.unsplash.com/photo-1755404215191-abc0083c4d07?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      // Table dressée aux bougies — Alena Torgonskaya, https://unsplash.com/photos/wO5DwEoyKjI
+      { image: "https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
       { image: "https://images.unsplash.com/photo-1787163427371-321e46e2a7a3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
       // Vague qui se brise — Philipp Deus, https://unsplash.com/photos/Nu3xicKn_ZY (déjà utilisée sur le hero de l'accueil)
       { image: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
-      // Façade de verre vue d'en bas — Clay LeConey, https://unsplash.com/photos/oW66SyCnoLs
-      { image: "https://images.unsplash.com/photo-1749928399835-4e2b261879c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits" },
+      // Manhattan Bridge au crépuscule — Maxim Klimashin, https://unsplash.com/photos/CDQRLACxIzw (même image que la fiche New York)
+      { image: "https://images.unsplash.com/photo-1761233139114-def1098bf2b5?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits" },
       // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
       { image: "https://images.unsplash.com/photo-1745594151310-d771b97211cc?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
     ],
