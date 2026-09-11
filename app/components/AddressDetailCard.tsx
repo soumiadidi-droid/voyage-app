@@ -55,6 +55,28 @@ function FamilyFitBlock({ card, familyProfile }: { card: Card; familyProfile: Fa
 // directement son détail complet dans la grille, plus de texture/image de couverture à cliquer).
 // L'embed Instagram reste sur son propre écran séparé (InstagramPopup), ouvert seulement au clic
 // sur le badge dédié.
+// Vécu ou repéré (11/09/2026, demande de Soumia) : jusqu'ici toutes les étiquettes de statut
+// s'affichaient dans la même pastille verte, qu'elle ait dormi sur place ou qu'elle rêve d'y aller.
+// Or c'est LA distinction que le site revendique partout — un visiteur devait lire l'étiquette mot
+// à mot pour la saisir. Le vécu garde le vert (validé), le repéré passe en ardoise avec un trait
+// discontinu : on voit au premier coup d'œil que ce n'est pas encore fait.
+const STATUTS_VECUS = ["Testé", "J'ai dormi ici", "J’ai dormi ici"];
+
+function statusStyle(status: string): React.CSSProperties {
+  const vecu = STATUTS_VECUS.includes(status.trim());
+  return vecu
+    ? {
+        background: "var(--lve-sage-bg)",
+        color: "var(--lve-sage-dark)",
+        border: "1px solid color-mix(in srgb, var(--lve-sage-dark) 20%, transparent)",
+      }
+    : {
+        background: "var(--lve-slate-bg)",
+        color: "var(--lve-slate-dark)",
+        border: "1px dashed color-mix(in srgb, var(--lve-slate-dark) 35%, transparent)",
+      };
+}
+
 export function AddressDetailCard({
   card,
   category,
@@ -127,11 +149,7 @@ export function AddressDetailCard({
         {card.status && (
           <span
             className="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium"
-            style={{
-              background: "var(--lve-sage-bg)",
-              color: "var(--lve-sage-dark)",
-              border: "1px solid color-mix(in srgb, var(--lve-sage-dark) 20%, transparent)",
-            }}
+            style={statusStyle(card.status)}
           >
             {card.status}
           </span>
