@@ -47,13 +47,52 @@ export type SlidersQuestion = {
   sliders: SliderDef[];
 };
 
-export type TravelMatchQuestion = ChoiceQuestion | SlidersQuestion;
+// Écran d'intentions (11/09/2026) — remplace les deux écrans de curseurs.
+//
+// Pourquoi : un curseur demande de NOTER une envie de 1 à 5. C'est un geste d'analyste, pas de
+// voyageur, et sur mobile c'est pénible. Sept curseurs répartis sur deux écrans arrivaient en plus
+// à la fin d'un parcours déjà long, une fois l'élan retombé.
+//
+// Ce que ça ne change PAS : chaque carte correspond à un axe de score existant, et la sélection
+// produit exactement les mêmes valeurs qu'avant (axe choisi = 5, axe non choisi = 3, la valeur
+// neutre qu'avait le curseur par défaut). Le moteur de matching, la page de résultats et l'adresse
+// transmise sont inchangés — voir QuestionnaireClient.submit.
+export type CardDef = { key: ScoreKey; label: string; hint: string };
+
+export type CardsQuestion = {
+  type: "cards";
+  id: "intentions";
+  question: string;
+  helper: string;
+  min: number;
+  max: number;
+  cards: CardDef[];
+};
+
+export type TravelMatchQuestion = ChoiceQuestion | CardsQuestion;
 
 export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
+    type: "cards",
+    id: "intentions",
+    question: "De quoi avez-vous profondément envie ?",
+    helper: "Choisissez-en deux ou trois",
+    min: 2,
+    max: 3,
+    cards: [
+      { key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler" },
+      { key: "exploration", label: "Nourrir sa curiosité", hint: "Voir autre chose, comprendre" },
+      { key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      { key: "nature", label: "Le grand air", hint: "De l'espace, du vert, du silence" },
+      { key: "plage", label: "Le bord de l'eau", hint: "La mer, le sel, lâcher prise" },
+      { key: "effervescence_urbaine", label: "Une ville qui vibre", hint: "De l'énergie, du monde, des nuits" },
+      { key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
+    ],
+  },
+  {
     type: "choice",
     id: "duration",
-    question: "Tu te fais la malle combien de temps ?",
+    question: "Combien de temps pouvez-vous couper le contact ?",
     options: [
       { value: "week_end", label: "Un week-end, 2 à 4 jours" },
       { value: "semaine", label: "Une semaine, 5 à 8 jours" },
@@ -63,7 +102,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "budget",
-    question: "Côté porte-monnaie, on vise quel niveau de kiff ?",
+    question: "Quel budget, pour que le plaisir reste entier ?",
     options: [
       { value: "eco", label: "Petit budget, je fais des choix malins" },
       { value: "confort", label: "Confort, sans me ruiner" },
@@ -77,7 +116,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "distance",
-    question: "Tu es prêt à faire combien de bornes ?",
+    question: "Jusqu'où iriez-vous pour changer d'air ?",
     options: [
       { value: "proche", label: "À deux pas (la France, c'est très bien)" },
       { value: "europe", label: "Un petit saut de puce en Europe" },
@@ -88,9 +127,9 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "climate",
-    question: "Côté météo, tu signes pour quoi ?",
+    question: "Quelle lumière vous fait du bien ?",
     options: [
-      { value: "chaleur", label: "Full soleil, option maillot et crème solaire 50" },
+      { value: "chaleur", label: "Le plein soleil, sans négociation" },
       { value: "douceur", label: "Le climat parfait (ni canicule, ni doudoune)" },
       { value: "hiver_cosy", label: "Ambiance plaid, feu de cheminée et gros pull" },
     ],
@@ -98,60 +137,31 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "transport",
-    question: "Une fois sur place, on bouge comment ?",
+    question: "Une fois sur place, comment aimez-vous explorer ?",
     options: [
-      { value: "sans_voiture", label: "Team 100 % à pied, train ou vélo (zéro stress de créneau)" },
-      { value: "voiture_necessaire", label: "Team roadtrip, j'aime avoir les clés et tracer" },
+      { value: "sans_voiture", label: "À pied, en train, à vélo — sans voiture" },
+      { value: "voiture_necessaire", label: "Au volant, pour s'arrêter où l'on veut" },
       { value: "transports_possibles", label: "Je m'adapte, tant qu'on arrive à bon port" },
     ],
   },
   {
     type: "choice",
     id: "sport_level",
-    question: "À quelle vitesse tu veux voir couler tes journées ?",
+    question: "Et l'effort physique, vous en voulez un peu, ou pas du tout ?",
     options: [
-      { value: "tranquille", label: "Tranquille, je ne me force sur rien" },
-      { value: "actif", label: "Actif, j'aime bouger et remplir mes journées" },
+      { value: "tranquille", label: "Aucun, je ne me force sur rien" },
+      { value: "actif", label: "Volontiers, marcher et grimper ne me fait pas peur" },
     ],
   },
   {
     type: "choice",
     id: "companions",
-    question: "C'est qui le crew pour cette aventure ?",
+    question: "Avec qui partagez-vous cette échappée ?",
     options: [
       { value: "solo", label: "Solo" },
       { value: "duo", label: "En duo, en amoureux" },
       { value: "amis", label: "Entre amis" },
       { value: "famille", label: "En famille" },
-    ],
-  },
-  {
-    type: "sliders",
-    id: "emotions",
-    // Raccourci le 29/08/2026 (demande Gemini, "aller droit au but").
-    question: "C'est quoi ta priorité pour ce séjour ?",
-    helper: "1 = pas du tout, 5 = complètement",
-    sliders: [
-      { key: "repos", label: "Repos & déconnexion, ne penser à rien" },
-      { key: "exploration", label: "Découverte & exploration, sortir des sentiers battus" },
-      { key: "gastronomie", label: "Gastronomie & épicurisme, se régaler avant tout" },
-    ],
-  },
-  {
-    type: "sliders",
-    id: "ambiance",
-    question: "C'est quoi ton décor idéal pour décrocher ?",
-    helper: "Ajuste chaque curseur selon ton envie",
-    sliders: [
-      { key: "nature", label: "Envie de nature, de grands espaces" },
-      { key: "plage", label: "Envie de plage, de bord de mer" },
-      { key: "effervescence_urbaine", label: "Envie de ville, d'animation, d'effervescence urbaine" },
-      {
-        key: "rythme",
-        label: "Rythme du séjour",
-        lowLabel: "Slow, libre",
-        highLabel: "Actif, minuté",
-      },
     ],
   },
 ];

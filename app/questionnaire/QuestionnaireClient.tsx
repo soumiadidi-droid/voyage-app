@@ -57,10 +57,15 @@ function splitOptionLabel(label: string): { title: string; description?: string 
 
 type SliderAnswers = Record<ScoreKey, number>;
 
-function initialSliderAnswers(): SliderAnswers {
-  const init = {} as SliderAnswers;
-  for (const key of SCORE_KEYS) init[key] = 3; // curseur au milieu par défaut, jamais biaisé
-  return init;
+// Traduction des intentions en scores. C'est le seul endroit où la nouvelle interface touche au
+// format attendu par le moteur : il reçoit exactement ce qu'il recevait du temps des curseurs.
+const VALEUR_CHOISIE = 5;
+const VALEUR_NEUTRE = 3;
+
+function scoresDepuisIntentions(intentions: ScoreKey[]): SliderAnswers {
+  const scores = {} as SliderAnswers;
+  for (const key of SCORE_KEYS) scores[key] = intentions.includes(key) ? VALEUR_CHOISIE : VALEUR_NEUTRE;
+  return scores;
 }
 
 // Insère FAMILY_PROFILE_QUESTION juste après "companions" seulement si "famille" a été choisi
@@ -79,17 +84,19 @@ export function QuestionnaireClient() {
   const router = useRouter();
   const [step, setStep] = useState(0);
   const [choices, setChoices] = useState<Record<string, string>>({});
-  const [sliders, setSliders] = useState<SliderAnswers>(initialSliderAnswers);
+  // Axes choisis sur l'écran d'intentions (11/09/2026). Convertis en scores au moment de
+  // l'envoi : choisi = 5, non choisi = 3 (la valeur neutre qu'avait le curseur par défaut).
+  const [intentions, setIntentions] = useState<ScoreKey[]>([]);
 
   const effectiveQuestions = getEffectiveQuestions(choices);
   const question = effectiveQuestions[Math.min(step, effectiveQuestions.length - 1)];
   const isLast = step === effectiveQuestions.length - 1;
   const progress = Math.round(((step + 1) / effectiveQuestions.length) * 100);
 
-  function submit(finalChoices: Record<string, string>, finalSliders: SliderAnswers) {
+  function submit(finalChoices: Record<string, string>, finalIntentions: ScoreKey[]) {
     const params = new URLSearchParams();
     for (const [key, value] of Object.entries(finalChoices)) params.set(key, value);
-    for (const [key, value] of Object.entries(finalSliders)) {
+    for (const [key, value] of Object.entries(scoresDepuisIntentions(finalIntentions))) {
       params.set(`score_${key}`, String(value));
     }
     router.push(`/resultat?${params.toString()}`);
@@ -104,15 +111,15 @@ export function QuestionnaireClient() {
     // suivant, sinon isLast/step avancent sur la mauvaise longueur de liste.
     const isLastNow = step === getEffectiveQuestions(next).length - 1;
     if (isLastNow) {
-      submit(next, sliders);
+      submit(next, intentions);
     } else {
       setStep(step + 1);
     }
   }
 
-  function continueFromSliders() {
+  function continueFromCards() {
     if (isLast) {
-      submit(choices, sliders);
+      submit(choices, intentions);
     } else {
       setStep(step + 1);
     }
@@ -127,7 +134,7 @@ export function QuestionnaireClient() {
       style={{ background: "radial-gradient(ellipse 90% 60% at 50% 0%, var(--lve-terracotta-bg), transparent)" }}
     >
       <p className="text-[11px] tracking-widest uppercase font-medium text-text-secondary mb-3 text-center">
-        Question {step + 1} sur {TRAVEL_MATCH_QUESTIONS.length}
+        Question {step + 1} sur {effectiveQuestions.length}
       </p>
       <div className="h-1 w-full bg-lve-border rounded-full overflow-hidden mb-10">
         <div
@@ -191,68 +198,67 @@ export function QuestionnaireClient() {
           })}
         </div>
       ) : (
-        <div
-          className="mt-8 p-5 sm:p-6 rounded-xl"
-          style={{ background: "var(--lve-bg)" }}
-        >
-          <p className="mono mb-6" style={{ color: "var(--text-secondary)" }}>
+        <div className="mt-8">
+          <p className="mono mb-6 text-center" style={{ color: "var(--text-secondary)" }}>
             {question.helper}
           </p>
-          <div className="flex flex-col gap-4">
-            {question.sliders.map((s) => {
-              const pct = ((sliders[s.key] - 1) / 4) * 100;
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+            {question.cards.map((card) => {
+              const choisie = intentions.includes(card.key);
+              const complet = intentions.length >= question.max && !choisie;
               return (
-                <div
-                  key={s.key}
-                  className="bg-white rounded-xl shadow-sm p-5"
+                <button
+                  key={card.key}
+                  disabled={complet}
+                  onClick={() =>
+                    setIntentions((prev) =>
+                      prev.includes(card.key)
+                        ? prev.filter((k) => k !== card.key)
+                        : prev.length >= question.max
+                          ? prev
+                          : [...prev, card.key]
+                    )
+                  }
+                  className={`rounded-xl p-4 text-left transition-all disabled:opacity-40 ${
+                    choisie ? "shadow-md" : "bg-white shadow-sm hover:shadow-md"
+                  }`}
+                  style={
+                    choisie
+                      ? {
+                          background: "var(--lve-terracotta-bg)",
+                          border: "1px solid var(--lve-terracotta)",
+                        }
+                      : { border: "1px solid var(--lve-border)" }
+                  }
                 >
-                  <div className="flex items-baseline justify-between mb-4 gap-4">
-                    <span
-                      className="text-lve-charcoal"
-                      style={{ fontFamily: "var(--font-title)", fontSize: "1.05rem" }}
-                    >
-                      {s.label}
-                    </span>
-                    <span
-                      className="mono"
-                      style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.9rem" }}
-                    >
-                      {sliders[s.key]}
-                    </span>
-                  </div>
-                  <input
-                    type="range"
-                    min={1}
-                    max={5}
-                    step={1}
-                    value={sliders[s.key]}
-                    onChange={(e) =>
-                      setSliders((prev) => ({ ...prev, [s.key]: Number(e.target.value) }))
-                    }
-                    className="lve-slider w-full"
-                    style={{
-                      background: `linear-gradient(to right, var(--lve-terracotta) ${pct}%, var(--lve-border) ${pct}%)`,
-                    }}
-                  />
-                  {s.lowLabel && s.highLabel && (
-                    <div
-                      className="mono flex justify-between mt-3"
-                      style={{ color: "var(--text-secondary)", fontSize: "0.72rem" }}
-                    >
-                      <span>{s.lowLabel}</span>
-                      <span>{s.highLabel}</span>
-                    </div>
-                  )}
-                </div>
+                  <span
+                    className="block text-lve-charcoal"
+                    style={{ fontFamily: "var(--font-title)", fontSize: "1.05rem" }}
+                  >
+                    {card.label}
+                  </span>
+                  <span
+                    className="mt-1 block"
+                    style={{ color: "var(--text-secondary)", fontSize: "0.78rem" }}
+                  >
+                    {card.hint}
+                  </span>
+                </button>
               );
             })}
           </div>
+
+          {/* Le bouton ne s'allume qu'au minimum atteint : sans ça, quelqu'un qui ne choisit rien
+              obtiendrait un profil entièrement neutre et des résultats interchangeables. */}
           <button
-            onClick={continueFromSliders}
-            className="mt-8 px-6 py-3 rounded-xl text-white"
+            onClick={continueFromCards}
+            disabled={intentions.length < question.min}
+            className="mt-8 w-full px-6 py-3.5 rounded-xl text-white transition-opacity disabled:opacity-40"
             style={{ background: "var(--lve-terracotta)" }}
           >
-            Continuer
+            {intentions.length < question.min
+              ? `Choisissez-en encore ${question.min - intentions.length}`
+              : "Continuer"}
           </button>
         </div>
       )}
