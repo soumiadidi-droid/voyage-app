@@ -104,8 +104,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
       { image: "https://images.unsplash.com/photo-1669310097451-826ff0e66b9a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
       { image: "https://images.unsplash.com/photo-1787163427371-321e46e2a7a3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
-      // Vague qui se brise — Philipp Deus, https://unsplash.com/photos/Nu3xicKn_ZY (déjà utilisée sur le hero de l'accueil)
-      { image: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
+      // Île de palmiers et lagon turquoise, Punta Cana — Miltiadis Fragkidis, https://unsplash.com/photos/pwiqvi98VGo
+      { image: "https://images.unsplash.com/photo-1781901379467-0de4e6c5c7cb?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
       // Manhattan Bridge au crépuscule — Maxim Klimashin, https://unsplash.com/photos/CDQRLACxIzw (même image que la fiche New York)
       { image: "https://images.unsplash.com/photo-1761233139114-def1098bf2b5?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits" },
       // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
