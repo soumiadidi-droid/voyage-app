@@ -102,10 +102,10 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
       { image: "https://images.unsplash.com/photo-1765394715568-889eab558ed2?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Découvrir", hint: "Des artisans, des ruelles, des histoires" },
       // Olives et huile sur lin — Anya Chernykh, https://unsplash.com/photos/fQHQp75Ap3E
       { image: "https://images.unsplash.com/photo-1755404215191-abc0083c4d07?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
-      // Feuilles d'olivier au soleil — Susana Bartolome, https://unsplash.com/photos/v8W9aIFqRIs
-      { image: "https://images.unsplash.com/photo-1757863798018-7882cfc0b5f2?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
-      // Surface de mer — Alexander Mass, https://unsplash.com/photos/0xugG5t9dsc
-      { image: "https://images.unsplash.com/photo-1749045939257-2b7423bd15a8?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
+      // Sentier dans les Dolomites — Vadim Matei, https://unsplash.com/photos/RpY04izMaeo
+      { image: "https://images.unsplash.com/photo-1786352260444-20539d92fee0?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
+      // Vague qui se brise — Philipp Deus, https://unsplash.com/photos/Nu3xicKn_ZY (déjà utilisée sur le hero de l'accueil)
+      { image: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
       // Façade de verre vue d'en bas — Clay LeConey, https://unsplash.com/photos/oW66SyCnoLs
       { image: "https://images.unsplash.com/photo-1749928399835-4e2b261879c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits" },
       // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
