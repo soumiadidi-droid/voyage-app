@@ -180,8 +180,8 @@ export function QuestionnaireClient() {
                   </span>
                 )}
                 <span
-                  className="text-sm md:text-base text-lve-charcoal group-hover:text-lve-terracotta font-bold"
-                  style={{ fontFamily: "var(--font-display)" }}
+                  className="text-base md:text-lg text-lve-charcoal group-hover:text-lve-terracotta"
+                  style={{ fontFamily: "var(--font-title)" }}
                 >
                   {title}
                 </span>
@@ -219,30 +219,50 @@ export function QuestionnaireClient() {
                           : [...prev, card.key]
                     )
                   }
-                  className={`rounded-xl p-4 text-left transition-all disabled:opacity-40 ${
-                    choisie ? "shadow-md" : "bg-white shadow-sm hover:shadow-md"
-                  }`}
-                  style={
+                  className={`group relative aspect-[4/5] overflow-hidden rounded-2xl border text-left transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer ${
                     choisie
-                      ? {
-                          background: "var(--lve-terracotta-bg)",
-                          border: "1px solid var(--lve-terracotta)",
-                        }
-                      : { border: "1px solid var(--lve-border)" }
-                  }
+                      ? "border-lve-terracotta shadow-md"
+                      : "border-lve-border shadow-sm hover:shadow-lg hover:scale-[1.01] hover:border-lve-terracotta"
+                  }`}
                 >
-                  <span
-                    className="block text-lve-charcoal"
-                    style={{ fontFamily: "var(--font-title)", fontSize: "1.05rem" }}
-                  >
-                    {card.label}
-                  </span>
-                  <span
-                    className="mt-1 block"
-                    style={{ color: "var(--text-secondary)", fontSize: "0.78rem" }}
-                  >
-                    {card.hint}
-                  </span>
+                  <div
+                    className="absolute inset-0 transition-transform duration-300 group-hover:scale-[1.04]"
+                    style={{
+                      backgroundImage: `url('${card.image}')`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                    }}
+                  />
+                  {/* Voile sombre : le texte doit rester lisible sur n'importe quelle photo, et la
+                      carte choisie se teinte en terracotta pour que la sélection se voie d'un
+                      coup d'œil, comme sur les écrans de questions suivants. */}
+                  <div
+                    className="absolute inset-0"
+                    style={{
+                      background: choisie
+                        ? "linear-gradient(to top, color-mix(in srgb, var(--lve-terracotta-dark) 88%, transparent), color-mix(in srgb, var(--lve-terracotta-dark) 35%, transparent))"
+                        : "linear-gradient(to top, rgba(26,23,20,0.82), rgba(26,23,20,0.15))",
+                    }}
+                  />
+                  {choisie && (
+                    <span className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-lve-terracotta-dark">
+                      ✓
+                    </span>
+                  )}
+                  <div className="absolute inset-x-0 bottom-0 p-4">
+                    <span
+                      className="block text-white"
+                      style={{ fontFamily: "var(--font-title)", fontSize: "1.15rem", lineHeight: 1.2 }}
+                    >
+                      {card.label}
+                    </span>
+                    <span
+                      className="mt-1 block text-white/80"
+                      style={{ fontFamily: "var(--font-display)", fontSize: "0.74rem" }}
+                    >
+                      {card.hint}
+                    </span>
+                  </div>
                 </button>
               );
             })}

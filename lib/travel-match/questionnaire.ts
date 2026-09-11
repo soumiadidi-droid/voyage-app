@@ -57,7 +57,9 @@ export type SlidersQuestion = {
 // produit exactement les mêmes valeurs qu'avant (axe choisi = 5, axe non choisi = 3, la valeur
 // neutre qu'avait le curseur par défaut). Le moteur de matching, la page de résultats et l'adresse
 // transmise sont inchangés — voir QuestionnaireClient.submit.
-export type CardDef = { key: ScoreKey; label: string; hint: string };
+// `image` : une photo de Soumia, jamais une banque d'images — c'est la première chose que voit un
+// visiteur, et tout le site repose sur le fait que les images sont les siennes.
+export type CardDef = { key: ScoreKey; label: string; hint: string; image: string };
 
 export type CardsQuestion = {
   type: "cards";
@@ -80,13 +82,13 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      { key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler" },
-      { key: "exploration", label: "Nourrir sa curiosité", hint: "Voir autre chose, comprendre" },
-      { key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
-      { key: "nature", label: "Le grand air", hint: "De l'espace, du vert, du silence" },
-      { key: "plage", label: "Le bord de l'eau", hint: "La mer, le sel, lâcher prise" },
-      { key: "effervescence_urbaine", label: "Une ville qui vibre", hint: "De l'énergie, du monde, des nuits" },
-      { key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
+      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260728_102459.jpg", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler" },
+      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260731_105656.jpg", key: "exploration", label: "Nourrir sa curiosité", hint: "Voir autre chose, comprendre" },
+      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_165755.jpg", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      { image: "https://files.catbox.moe/iu8l3a.jpg", key: "nature", label: "Le grand air", hint: "De l'espace, du vert, du silence" },
+      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_143844.jpg", key: "plage", label: "Le bord de l'eau", hint: "La mer, le sel, lâcher prise" },
+      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_174131.jpg", key: "effervescence_urbaine", label: "Une ville qui vibre", hint: "De l'énergie, du monde, des nuits" },
+      { image: "/images/voyages/cote-basque/web-IMG_20251017_093757.jpg", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
     ],
   },
   {
