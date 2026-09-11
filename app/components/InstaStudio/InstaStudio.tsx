@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import { Download, ImagePlus } from "lucide-react";
-import { PRESETS, FORMATS, type PresetId, type FormatId } from "./presets";
+import { PRESETS, FORMATS, FILTRES, type PresetId, type FormatId, type FiltreId } from "./presets";
 
 // Le compte Instagram, écrit une seule fois (11/09/2026) : la carte "minimalist" affichait
 // "@voyagedesemotions" alors que le pied de page du site pointe vers "@levoyagedesemotions".
@@ -13,6 +13,7 @@ const HANDLE = "@levoyagedesemotions";
 export function InstaStudio() {
   const [preset, setPreset] = useState<PresetId>("minimalist");
   const [format, setFormat] = useState<FormatId>("square");
+  const [filtre, setFiltre] = useState<FiltreId>("sable");
   const [quote, setQuote] = useState(
     "Un pays, une histoire, une photo à la fois."
   );
@@ -184,6 +185,29 @@ export function InstaStudio() {
             </div>
           )}
 
+          {photo && (
+            <div className="flex flex-col gap-2">
+              <span className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Ambiance de la photo
+              </span>
+              <div className="flex flex-wrap gap-2">
+                {FILTRES.map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => setFiltre(f.id)}
+                    className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                      filtre === f.id
+                        ? "border-lve-terracotta bg-lve-terracotta-bg text-lve-terracotta-dark"
+                        : "border-lve-border text-lve-charcoal hover:border-lve-terracotta"
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <button
             onClick={handleExport}
             disabled={isExporting}
@@ -265,12 +289,24 @@ export function InstaStudio() {
             {preset === "carnet" && (
               <div className="relative h-full w-full bg-lve-obsidian">
                 {photo ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={photo}
-                    alt=""
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={photo}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover"
+                      style={{ filter: FILTRES.find((f) => f.id === filtre)!.css }}
+                    />
+                    {(() => {
+                      const voile = FILTRES.find((f) => f.id === filtre)!.voile;
+                      return voile ? (
+                        <div
+                          className="pointer-events-none absolute inset-0"
+                          style={{ background: voile.couleur, opacity: voile.opacite }}
+                        />
+                      ) : null;
+                    })()}
+                  </>
                 ) : (
                   <div className="flex h-full w-full items-center justify-center font-mono-lve text-xs uppercase tracking-wide text-white/40">
                     Ajoute une photo
