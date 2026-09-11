@@ -57,8 +57,11 @@ export type SlidersQuestion = {
 // produit exactement les mêmes valeurs qu'avant (axe choisi = 5, axe non choisi = 3, la valeur
 // neutre qu'avait le curseur par défaut). Le moteur de matching, la page de résultats et l'adresse
 // transmise sont inchangés — voir QuestionnaireClient.submit.
-// `image` : une photo de Soumia, jamais une banque d'images — c'est la première chose que voit un
-// visiteur, et tout le site repose sur le fait que les images sont les siennes.
+// `image` : photos libres de droit (licence Unsplash), choisies le 11/09/2026 à la demande de
+// Soumia et regardées une par une avant d'être posées. Ses propres photos avaient été essayées
+// d'abord, mais elles illustrent des LIEUX, pas des envies — deux plages différentes se
+// retrouvaient sur deux intentions distinctes, ce qui brouillait la lecture. Même logique et mêmes
+// crédits que lib/hero-images.ts.
 export type CardDef = { key: ScoreKey; label: string; hint: string; image: string };
 
 export type CardsQuestion = {
@@ -82,13 +85,20 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260728_102459.jpg", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler" },
-      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260731_105656.jpg", key: "exploration", label: "Nourrir sa curiosité", hint: "Voir autre chose, comprendre" },
-      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_165755.jpg", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
-      { image: "https://files.catbox.moe/iu8l3a.jpg", key: "nature", label: "Le grand air", hint: "De l'espace, du vert, du silence" },
-      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260627_143844.jpg", key: "plage", label: "Le bord de l'eau", hint: "La mer, le sel, lâcher prise" },
-      { image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250222_174131.jpg", key: "effervescence_urbaine", label: "Une ville qui vibre", hint: "De l'énergie, du monde, des nuits" },
-      { image: "/images/voyages/cote-basque/web-IMG_20251017_093757.jpg", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
+      // Moulin de Mykonos — Jason Mavrommatis, https://unsplash.com/photos/tc5z7vlztuY
+      { image: "https://images.unsplash.com/photo-1494356830678-78f6cd754f1a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "repos", label: "Déconnecter", hint: "Ne penser à rien, souffler" },
+      // Duomo de Florence au lever du jour — Henrique Ferreira, https://unsplash.com/photos/zMFxCtkn9vI
+      { image: "https://images.unsplash.com/photo-1776377231754-d36928e6ee4d?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Nourrir sa curiosité", hint: "Voir autre chose, comprendre" },
+      // Table de mezze — Hari Nandakumar, https://unsplash.com/photos/fi9kJ8-8BEk
+      { image: "https://images.unsplash.com/photo-1534824394572-a24ff25bbb5e?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      // Sentier dans les Dolomites — Vadim Matei, https://unsplash.com/photos/RpY04izMaeo
+      { image: "https://images.unsplash.com/photo-1786352260444-20539d92fee0?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Le grand air", hint: "De l'espace, du vert, du silence" },
+      // Balos Beach, Crète — Ignacio Correia, https://unsplash.com/photos/C5eXdxCS74c
+      { image: "https://images.unsplash.com/photo-1585320806322-db6d9f35b0c8?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Le bord de l'eau", hint: "La mer, le sel, lâcher prise" },
+      // Rue de Shinjuku la nuit — Johan Mouchet, https://unsplash.com/photos/wZLX8vQqa08
+      { image: "https://images.unsplash.com/photo-1749813482475-3c12a8c4a5bd?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Une ville qui vibre", hint: "De l'énergie, du monde, des nuits" },
+      // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
+      { image: "https://images.unsplash.com/photo-1745594151310-d771b97211cc?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
     ],
   },
   {
