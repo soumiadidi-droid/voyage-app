@@ -60,7 +60,7 @@ function FamilyFitBlock({ card, familyProfile }: { card: Card; familyProfile: Fa
 // Or c'est LA distinction que le site revendique partout — un visiteur devait lire l'étiquette mot
 // à mot pour la saisir. Le vécu garde le vert (validé), le repéré passe en ardoise avec un trait
 // discontinu : on voit au premier coup d'œil que ce n'est pas encore fait.
-const STATUTS_VECUS = ["Testé", "J'ai dormi ici", "J’ai dormi ici"];
+const STATUTS_VECUS = ["J’ai testé", "J'ai testé", "Testé", "J’ai dormi ici", "J'ai dormi ici"];
 
 function statusStyle(status: string): React.CSSProperties {
   const vecu = STATUTS_VECUS.includes(status.trim());
