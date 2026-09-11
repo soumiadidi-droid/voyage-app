@@ -11,7 +11,7 @@ const PILLARS = [
   {
     title: "Tout au même endroit",
     description:
-      "Libérez votre esprit. Plus besoin de multiplier les onglets : retrouvez l'inspiration, les itinéraires et les adresses pépites centralisés en un seul endroit.",
+      "Libère ton esprit. Plus besoin de multiplier les onglets : retrouve l'inspiration, les itinéraires et les adresses pépites centralisés en un seul endroit.",
   },
   {
     title: "La vérité de l'expérience",
@@ -19,9 +19,9 @@ const PILLARS = [
       "Une sélection exigeante et incarnée. Pas de listes impersonnelles ou d'attrapes-touristes, uniquement des lieux qui ont une vraie âme.",
   },
   {
-    title: "À la hauteur de vos émotions",
+    title: "À la hauteur de tes émotions",
     description:
-      "Parce que chaque voyageur est unique, je connecte vos envies profondes aux destinations qui leur répondent, grâce à Travel Match.",
+      "Parce que chaque voyageur est unique, je connecte tes envies profondes aux destinations qui leur répondent, grâce à Travel Match.",
   },
 ];
 
@@ -89,8 +89,8 @@ export default function PhilosophiePage() {
               C&apos;est de cette frustration qu&apos;est né Voyage des Émotions. J&apos;ai voulu
               créer l&apos;espace que j&apos;aurais aimé trouver : un endroit unique où tout est
               rassemblé, pensé avec soin et guidé par la sincérité. Mon objectif aujourd&apos;hui
-              est simple : vous décharger de la recherche pour vous offrir des expériences
-              sincères, à la hauteur de ce que vous venez chercher — de l&apos;émotion.
+              est simple : te décharger de la recherche pour t&apos;offrir des expériences
+              sincères, à la hauteur de ce que tu viens chercher — de l&apos;émotion.
             </p>
           </div>
         </div>

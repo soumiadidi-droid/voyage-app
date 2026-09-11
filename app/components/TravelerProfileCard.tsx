@@ -55,20 +55,20 @@ export type Archetype = { title: string; subtitle: string; intro: string };
 // modifier sans son accord. Mêmes 5 clés/axes qu'avant, aucun changement côté moteur de scoring.
 export const ARCHETYPES: Record<ScoreAxis, Archetype> = {
   repos: {
-    title: "La Parenthèse Intimiste",
-    subtitle: "Déconnexion choisie & adresses secrètes",
+    title: "L'Âme Tranquille",
+    subtitle: "Du calme, du temps, des adresses discrètes",
     intro:
       "Tu ne pars pas pour accumuler des visites, mais pour ralentir le temps. Ton luxe ultime ? Une adresse enveloppante, du calme absolu, une belle lumière du soir et zéro contrainte horaire. Un séjour pensé comme un cocon où l'on débranche tout pour réapprendre à savourer le moment présent.",
   },
   exploration: {
     title: "L'Âme Curieuse",
-    subtitle: "Savoir-faire, histoire & pépites hors-piste",
+    subtitle: "Artisans, histoire et adresses hors des sentiers",
     intro:
       "Les itinéraires tout faits très peu pour toi. Ce qui te fait vibrer, c'est l'authenticité brute : rencontrer un artisan passionné au détour d'une ruelle, dénicher une pépite patrimoniale cachée et comprendre l'histoire d'un lieu à travers ceux qui le font vivre.",
   },
   gastronomie: {
-    title: "La Quête Hédoniste",
-    subtitle: "Tables vibrantes, terroir & bons flacons",
+    title: "Le Cœur Gourmand",
+    subtitle: "Bonnes tables, produits du coin et vin qui va avec",
     intro:
       "Pour toi, une destination se découvre d'abord avec le palais. Du néobistro inspiré à la table de village authentique, en passant par le marché de producteurs locaux, tes journées sont rythmées par le plaisir de la table et l'art de recevoir. Le voyage gourmand dans toute sa noblesse.",
   },
@@ -78,13 +78,13 @@ export const ARCHETYPES: Record<ScoreAxis, Archetype> = {
     // littoral/embruns pour un profil calculé sur MAX(nature, plage) — un profil 100% montagne
     // (nature=5, plage=1) obtenait quand même ce texte. Vocabulaire neutralisé vers grand air/
     // éléments/horizons, plus aucun terme exclusivement maritime (iodé, embruns, vagues).
-    subtitle: "Grands espaces, éléments & horizon",
+    subtitle: "Grands espaces, vent, horizon",
     intro:
       "Ton équilibre passe par la nature et le grand air. Que ce soit une crête balayée par le vent, un sommet silencieux ou une crique sauvage loin de la foule, tu cherches l'apaisement par l'horizon. Une immersion brute dans les éléments pour faire le plein d'énergie.",
   },
   effervescence_urbaine: {
     title: "L'Électron Urbain",
-    subtitle: "Quartiers vivants, design & effervescence",
+    subtitle: "Quartiers vivants, cafés, énergie",
     intro:
       "Tu aimes sentir le pouls d'une ville qui bouge. Les coffee shops de spécialité, les galeries inspirantes, le design affirmé et les terrasses baignées de lumière : tu flânes l'esprit ouvert pour capturer l'énergie unique des plus beaux quartiers citadins.",
   },
@@ -162,7 +162,7 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
           style={{ background: "var(--lve-terracotta)" }}
         >
           <Sparkles size={12} strokeWidth={2} />
-          Votre profil Travel Match
+          Ton profil Travel Match
         </span>
         <h2
           className="font-semibold mb-3"

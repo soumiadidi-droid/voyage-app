@@ -33,13 +33,13 @@ export default async function DesinscriptionPage({
       <p className="text-base leading-relaxed mb-10" style={{ color: "var(--text-secondary)" }}>
         {result.ok ? (
           <>
-            Votre adresse a été supprimée. Vous ne recevrez plus rien de ma part — et je n&apos;en
+            Ton adresse a été supprimée. Tu ne recevras plus rien de ma part — et je n&apos;en
             garde aucune trace.
           </>
         ) : (
           <>
-            Ce lien n&apos;est plus valide, ou votre adresse a déjà été supprimée. Dans les deux cas,
-            vous ne recevrez plus rien.
+            Ce lien n&apos;est plus valide, ou ton adresse a déjà été supprimée. Dans les deux cas,
+            tu ne recevras plus rien.
           </>
         )}
       </p>

@@ -132,7 +132,7 @@ export default async function Home() {
 
   return (
     <div>
-      {/* Ancien hero photo (aile d'avion + "Le voyage qui vous ressemble existe déjà.") remplacé
+      {/* Ancien hero photo (aile d'avion + "Le voyage qui te ressemble existe déjà.") remplacé
           le 31/08/2026 par HeroLandingPage — fusion hero + démo interactive, habillage fourni par
           Soumia. La photo d'avion (public/images/hero-accueil.jpg) n'est plus utilisée sur cette
           page — signalé explicitement, cf. message de fin de tour, à remettre si ce n'était pas
@@ -202,14 +202,14 @@ export default async function Home() {
               className="text-3xl sm:text-5xl text-lve-charcoal leading-tight"
               style={{ fontFamily: "var(--font-title)" }}
             >
-              Le voyage qui vous ressemble existe déjà.
+              Le voyage qui te ressemble existe déjà.
             </h2>
 
             <p
               className="text-base sm:text-lg text-lve-charcoal/70 max-w-xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Votre match idéal et mes adresses, testées une par une.
+              Ton match idéal et mes adresses, testées une par une.
             </p>
 
             <div className="pt-4">

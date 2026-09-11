@@ -121,7 +121,7 @@ function EmailCaptureShell({
               <input
                 type="email"
                 required
-                placeholder="votre.email@exemple.com"
+                placeholder="ton.email@exemple.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "loading"}
@@ -189,7 +189,7 @@ function EmailCaptureShell({
             <p className="text-[11px]" style={{ color: "var(--text-secondary)" }}>
               Pas de spam, aucune donnée revendue.{" "}
               <a href="/confidentialite" className="underline" style={{ color: "var(--text-secondary)" }}>
-                Ce que je fais de votre adresse
+                Ce que je fais de ton adresse
               </a>
               .
             </p>
@@ -210,10 +210,10 @@ export function EmailCapture({
 }) {
   return (
     <EmailCaptureShell
-      badge="Votre itinéraire, par écrit"
+      badge="Ton itinéraire, par écrit"
       title="Recevoir mon itinéraire par email"
-      description="Vos trois destinations et un avant-goût de mes adresses testées sur place, directement dans votre boîte mail."
-      successText="Votre itinéraire complet vient d'être envoyé à"
+      description="Tes trois destinations et un avant-goût de mes adresses testées sur place, directement dans ta boîte mail."
+      successText="Ton itinéraire complet vient d'être envoyé à"
       onSend={(email, { consent, trap }) =>
         sendResultsEmail({ email, archetypeTitle, destinations, consent, trap })
       }
@@ -229,8 +229,8 @@ export function CarnetEmailCapture({ slug, destinationTitle }: { slug: string; d
     <EmailCaptureShell
       badge="Emporter ce carnet"
       title={`Recevoir mes adresses de ${destinationTitle} par email`}
-      description="Toutes les adresses de ce carnet — où dormir, où manger, quoi faire — dans votre boîte mail, pour les retrouver une fois sur place."
-      successText="Votre carnet vient d'être envoyé à"
+      description="Toutes les adresses de ce carnet — où dormir, où manger, quoi faire — dans ta boîte mail, pour les retrouver une fois sur place."
+      successText="Ton carnet vient d'être envoyé à"
       onSend={(email, { consent, trap }) => sendCarnetEmail({ email, slug, consent, trap })}
     />
   );

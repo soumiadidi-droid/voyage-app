@@ -130,13 +130,13 @@ export default async function ResultatPage({
         className="text-[11px] font-medium uppercase tracking-widest mb-3"
         style={{ color: "var(--lve-terracotta-dark)" }}
       >
-        Votre match émotionnel
+        Ton match émotionnel
       </p>
       <h1
         className="font-light mb-10 text-3xl md:text-4xl"
         style={{ fontFamily: "var(--font-title)" }}
       >
-        Vos destinations idéales
+        Tes destinations idéales
       </h1>
 
       <TravelerProfileCard answers={answers} />

@@ -308,7 +308,7 @@ export function Footer() {
             <form className="flex items-center gap-2 pt-2" onSubmit={(e) => e.preventDefault()}>
               <input
                 type="email"
-                placeholder="Votre adresse e-mail"
+                placeholder="Ton adresse e-mail"
                 className="bg-lve-ivory/10 border border-lve-ivory/20 rounded-lg px-3 py-2 text-sm text-lve-ivory placeholder-lve-ivory/40 focus:outline-none focus:border-lve-terracotta w-full"
                 style={DARK_FONT}
               />

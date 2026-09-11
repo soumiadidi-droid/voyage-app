@@ -25,13 +25,13 @@ export function QuizCta() {
               className="text-lve-charcoal leading-tight m-0"
               style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.5rem, 3vw, 2rem)" }}
             >
-              Vous hésitez sur votre prochaine destination ?
+              Tu hésites sur ta prochaine destination ?
             </h2>
             <p
               className="text-lve-charcoal/75 leading-relaxed m-0 max-w-xl"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Passez mon questionnaire sur-mesure pour trouver l&apos;expérience qui vous ressemble.
+              Passe mon questionnaire sur-mesure pour trouver l&apos;expérience qui te ressemble.
             </p>
           </div>
           <div className="shrink-0">

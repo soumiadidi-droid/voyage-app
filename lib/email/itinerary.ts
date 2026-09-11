@@ -47,7 +47,7 @@ const C = {
 // qu'un signalement en indésirable dans six mois).
 function subscriptionFooter(unsubscribeUrl?: string | null): string {
   if (!unsubscribeUrl) return "";
-  return `<br>Vous recevrez aussi mes nouvelles destinations —
+  return `<br>Tu recevras aussi mes nouvelles destinations —
     <a href="${unsubscribeUrl}" style="color:${C.muted};text-decoration:underline;">se désinscrire</a>.`;
 }
 
@@ -191,14 +191,14 @@ export function buildItineraryEmailHtml(input: ItineraryEmailInput): string {
            style="background:${C.card};border:1px solid ${C.border};border-radius:14px;margin:0 0 20px;">
       <tr><td style="padding:28px 24px;">
         <p style="text-transform:uppercase;letter-spacing:0.08em;font-size:11px;color:${C.terracottaDark};margin:0 0 8px;">
-          Votre profil de voyageur
+          Ton profil de voyageur
         </p>
         <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:27px;margin:0 0 14px;color:${C.ink};">
           ${esc(input.archetypeTitle)}
         </h1>
         <p style="font-size:15px;line-height:1.6;margin:0;color:${C.muted};">
-          Voici votre itinéraire : les trois destinations qui vous correspondent le plus, et un
-          avant-goût de mes adresses testées sur place. Le carnet complet vous attend sur le site.
+          Voici ton itinéraire : les trois destinations qui te correspondent le plus, et un
+          avant-goût de mes adresses testées sur place. Le carnet complet t'attend sur le site.
         </p>
       </td></tr>
     </table>
@@ -206,7 +206,7 @@ export function buildItineraryEmailHtml(input: ItineraryEmailInput): string {
     ${input.destinations.map((d, i) => destinationBlock(d, i + 1)).join("")}
 
     <p style="font-size:12px;line-height:1.6;color:${C.muted};text-align:center;margin:26px 0 0;">
-      Vous recevez ce message parce que vous avez demandé votre itinéraire sur
+      Tu reçois ce message parce que tu as demandé ton itinéraire sur
       <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.
       ${subscriptionFooter(input.unsubscribeUrl)}<br>
       Un pays, une histoire, une photo à la fois.
@@ -262,7 +262,7 @@ export function buildCarnetEmailHtml(input: CarnetEmailInput): string {
            style="background:${C.card};border:1px solid ${C.border};border-radius:14px;">
       <tr><td style="padding:28px 24px;">
         <p style="text-transform:uppercase;letter-spacing:0.08em;font-size:11px;color:${C.terracottaDark};margin:0 0 8px;">
-          Votre carnet · ${total} adresse${total > 1 ? "s" : ""}
+          Ton carnet · ${total} adresse${total > 1 ? "s" : ""}
         </p>
         <h1 style="font-family:Georgia,'Times New Roman',serif;font-size:27px;margin:0 0 14px;color:${C.ink};">
           ${esc(input.destinationTitle)}
@@ -303,7 +303,7 @@ export function buildCarnetEmailHtml(input: CarnetEmailInput): string {
     </table>
 
     <p style="font-size:12px;line-height:1.6;color:${C.muted};text-align:center;margin:26px 0 0;">
-      Vous recevez ce message parce que vous avez demandé ce carnet sur
+      Tu reçois ce message parce que tu as demandé ce carnet sur
       <a href="${SITE_URL}" style="color:${C.terracottaDark};">levoyagedesemotions.fr</a>.
       ${subscriptionFooter(input.unsubscribeUrl)}<br>
       Un pays, une histoire, une photo à la fois.

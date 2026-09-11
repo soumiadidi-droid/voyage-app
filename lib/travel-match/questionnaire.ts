@@ -80,7 +80,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "cards",
     id: "intentions",
-    question: "De quoi avez-vous profondément envie ?",
+    question: "De quoi as-tu profondément envie ?",
     helper: "Choisissez-en deux ou trois",
     min: 2,
     max: 3,
@@ -104,7 +104,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "duration",
-    question: "Combien de temps pouvez-vous couper le contact ?",
+    question: "Combien de temps peux-tu couper le contact ?",
     options: [
       { value: "week_end", label: "Un week-end, 2 à 4 jours" },
       { value: "semaine", label: "Une semaine, 5 à 8 jours" },
@@ -128,7 +128,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "distance",
-    question: "Jusqu'où iriez-vous pour changer d'air ?",
+    question: "Jusqu'où irais-tu pour changer d'air ?",
     options: [
       { value: "proche", label: "À deux pas (la France, c'est très bien)" },
       { value: "europe", label: "Un petit saut de puce en Europe" },
@@ -139,7 +139,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "climate",
-    question: "Quelle lumière vous fait du bien ?",
+    question: "Quelle lumière te fait du bien ?",
     options: [
       { value: "chaleur", label: "Le plein soleil, sans négociation" },
       { value: "douceur", label: "Le climat parfait (ni canicule, ni doudoune)" },
@@ -149,7 +149,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "transport",
-    question: "Une fois sur place, comment aimez-vous explorer ?",
+    question: "Une fois sur place, comment aimes-tu explorer ?",
     options: [
       { value: "sans_voiture", label: "À pied, en train, à vélo — sans voiture" },
       { value: "voiture_necessaire", label: "Au volant, pour s'arrêter où l'on veut" },
@@ -159,7 +159,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "sport_level",
-    question: "Et l'effort physique, vous en voulez un peu, ou pas du tout ?",
+    question: "Et l'effort physique, tu en veux un peu, ou pas du tout ?",
     options: [
       { value: "tranquille", label: "Aucun, je ne me force sur rien" },
       { value: "actif", label: "Volontiers, marcher et grimper ne me fait pas peur" },
@@ -168,7 +168,7 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
   {
     type: "choice",
     id: "companions",
-    question: "Avec qui partagez-vous cette échappée ?",
+    question: "Avec qui partages-tu cette échappée ?",
     options: [
       { value: "solo", label: "Solo" },
       { value: "duo", label: "En duo, en amoureux" },
@@ -186,6 +186,6 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
 export const FAMILY_PROFILE_QUESTION: ChoiceQuestion = {
   type: "choice",
   id: "familyProfile",
-  question: "Quel est le profil de votre tribu ?",
+  question: "Quel est le profil de ta tribu ?",
   options: FAMILY_PROFILE_OPTIONS,
 };
