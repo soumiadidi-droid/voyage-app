@@ -120,3 +120,10 @@ create table if not exists send_throttle (
   created_at timestamptz not null default now()
 );
 create index if not exists send_throttle_ip_idx on send_throttle(ip_hash, created_at);
+
+-- Mode brouillon (11/09/2026) — permet d'ajouter une destination et de la remplir au fil de l'eau
+-- sans qu'elle soit visible, ni dans le questionnaire, ni sur /carnets, ni via son URL directe.
+-- Demande de Soumia : avoir une base à compléter progressivement plutôt que de tout saisir d'un
+-- coup. Par défaut à true pour que les 18 destinations existantes restent publiées.
+alter table destinations add column if not exists published boolean not null default true;
+alter table voyages add column if not exists published boolean not null default true;

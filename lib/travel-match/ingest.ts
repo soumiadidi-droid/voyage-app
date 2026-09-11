@@ -30,8 +30,11 @@ export type NewVoyageInput = {
 
 export async function upsertVoyage(input: NewVoyageInput): Promise<void> {
   await sql.query(
-    `insert into voyages (slug, hero, intro, gallery)
-     values ($1,$2::jsonb,$3,$4::jsonb)
+    // published (11/09/2026) : une destination créée ici naît EN BROUILLON. Soumia remplit au fil
+    // de l'eau et publie quand elle juge la fiche prête (scripts/publier.ts). Un réimport ne
+    // touche pas au statut d'une fiche déjà en base, pour ne jamais dépublier par accident.
+    `insert into voyages (slug, hero, intro, gallery, published)
+     values ($1,$2::jsonb,$3,$4::jsonb,false)
      on conflict (slug) do update
        set hero = excluded.hero, intro = excluded.intro, gallery = excluded.gallery, updated_at = now()`,
     [input.slug, JSON.stringify(input.hero), input.intro, JSON.stringify(input.gallery ?? [])]
@@ -78,8 +81,8 @@ export type NewDestinationInput = {
 export async function upsertDestination(input: NewDestinationInput): Promise<void> {
   await sql.query(
     `insert into destinations
-       (id, title, authenticity_badge, content_slug, summary, hero_image, filters, scores, logistics, tags, regional_transport, practical_info, when_to_go, travel_from_paris, seasonality)
-     values ($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9::jsonb,$10,$11::jsonb,$12::jsonb,$13::jsonb,$14::jsonb,$15::jsonb)
+       (id, title, authenticity_badge, content_slug, summary, hero_image, filters, scores, logistics, tags, regional_transport, practical_info, when_to_go, travel_from_paris, seasonality, published)
+     values ($1,$2,$3,$4,$5,$6,$7::jsonb,$8::jsonb,$9::jsonb,$10,$11::jsonb,$12::jsonb,$13::jsonb,$14::jsonb,$15::jsonb,false)
      on conflict (id) do update set
        title = excluded.title, authenticity_badge = excluded.authenticity_badge,
        content_slug = excluded.content_slug, summary = excluded.summary, hero_image = excluded.hero_image,
