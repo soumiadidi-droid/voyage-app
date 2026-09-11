@@ -106,12 +106,21 @@ function derivedAxisScores(scores: UserAnswers["scores"]): Record<ScoreAxis, num
   };
 }
 
-function topAxis(scores: Record<ScoreAxis, number>): ScoreAxis {
-  return SCORE_AXES.reduce<ScoreAxis>(
-    (best, axis) => (scores[axis] > scores[best] ? axis : best),
-    SCORE_AXES[0]
-  );
+// Profils combinés (12/09/2026) — corrige une régression du passage aux cartes d'intentions.
+//
+// Avec les curseurs, deux axes atteignaient rarement exactement la même valeur. Avec les cartes,
+// chaque intention choisie vaut 5 : l'égalité est devenue la règle, et un ">" strict faisait
+// gagner le premier axe de SCORE_AXES à chaque fois. Concrètement, quelqu'un qui choisissait
+// "Se régaler" et "Vibrer" voyait toujours Le Cœur Gourmand, jamais L'Électron Urbain.
+//
+// On retourne donc tous les axes à la valeur maximale, dans l'ordre, et le profil affiché combine
+// les deux premiers. C'est plus fidèle : la personne a explicitement choisi deux envies, elle doit
+// les retrouver toutes les deux.
+function topAxes(scores: Record<ScoreAxis, number>): ScoreAxis[] {
+  const max = Math.max(...SCORE_AXES.map((a) => scores[a]));
+  return SCORE_AXES.filter((a) => scores[a] === max);
 }
+
 
 function buildPills(answers: UserAnswers): Pill[] {
   const derived = derivedAxisScores(answers.scores);
@@ -129,11 +138,14 @@ function buildPills(answers: UserAnswers): Pill[] {
 // Exporté (30/08/2026) pour être réutilisé hors de la carte elle-même — EmailCapture a besoin du
 // même titre d'archétype pour le récap envoyé par mail, sans dupliquer la logique de calcul.
 export function getArchetypeTitle(answers: UserAnswers): string {
-  return ARCHETYPES[topAxis(derivedAxisScores(answers.scores))].title;
+  const axes = topAxes(derivedAxisScores(answers.scores)).slice(0, 2);
+  return axes.map((a) => ARCHETYPES[a].title).join(" & ");
 }
 
 export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
-  const archetype = ARCHETYPES[topAxis(derivedAxisScores(answers.scores))];
+  const axes = topAxes(derivedAxisScores(answers.scores)).slice(0, 2);
+  const archetype = ARCHETYPES[axes[0]];
+  const second = axes.length > 1 ? ARCHETYPES[axes[1]] : undefined;
   const pills = buildPills(answers);
 
   return (
@@ -173,6 +185,9 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
           }}
         >
           {archetype.title}
+          {second && (
+            <span style={{ color: "var(--lve-terracotta)" }}> &amp; {second.title}</span>
+          )}
         </h2>
         {/* Sous-titre (29/08/2026, nouveau champ de la réécriture) : tagline courte, pas en
             italique pour se distinguer visuellement du corps de texte juste en dessous. */}
@@ -181,9 +196,18 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
           style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
         >
           {archetype.subtitle}
+          {second && ` · ${second.subtitle}`}
         </p>
-        <p className="leading-relaxed mb-5 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
+        <p className="leading-relaxed mb-3 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
           {archetype.intro}
+        </p>
+        {second && (
+          <p className="leading-relaxed mb-5 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
+            {second.intro}
+          </p>
+        )}
+        <p className="mono mb-2 text-[11px] uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
+          Ce que tu as demandé
         </p>
         <div className="flex flex-wrap gap-2">
           {pills.map(({ icon: Icon, label }, i) => (
