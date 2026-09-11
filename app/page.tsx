@@ -118,10 +118,14 @@ export default function Home() {
       {demoItems.length > 0 && <HeroLandingPage items={demoItems} />}
 
       <main className="max-w-4xl mx-auto px-6 sm:px-8">
-        <div className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory">
+        {/* Sable doux (11/09/2026, demande Soumia — "trop blanc, pas assez de contraste") : l'ivoire
+            d'avant (#faf6f0) était indiscernable du fond de page (#faf7f0), et depuis le header
+            clair la page n'était plus qu'un seul aplat crème. Le Manifeste en sable, le bloc CTA
+            en crème et le footer sombre redonnent un rythme. */}
+        <div className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-sand/40">
           <div className="max-w-4xl mx-auto space-y-8 text-left">
             <span
-              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold block"
+              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block"
               style={{ fontFamily: "var(--font-display)" }}
             >
               À Propos — Le Manifeste
@@ -135,7 +139,7 @@ export default function Home() {
             </h2>
 
             <div
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2 text-lve-charcoal/80 text-base leading-relaxed"
+              className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-2 text-lve-charcoal/90 text-base leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <div>
@@ -164,11 +168,11 @@ export default function Home() {
         </div>
 
         <div
-          className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-ivory border-y border-lve-charcoal/5 text-center"
+          className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 text-center"
         >
           <div className="max-w-3xl mx-auto space-y-6">
             <span
-              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold block"
+              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block"
               style={{ fontFamily: "var(--font-display)" }}
             >
               9 questions — 2 minutes
@@ -184,7 +188,7 @@ export default function Home() {
             </h2>
 
             <p
-              className="text-base sm:text-lg text-lve-charcoal/70 max-w-xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-lve-charcoal/80 max-w-xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Ton match idéal et mes adresses, testées une par une.
