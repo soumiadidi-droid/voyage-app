@@ -85,9 +85,10 @@ const NAV_LINKS = [
   { href: "/pros", label: "On collabore ?" },
 ];
 
-// Header sombre permanent (charcoal, comme le footer) sur toutes les pages — décidé le 23/08/2026,
-// remplace l'ancien header transparent réservé à la homepage. Plus besoin de usePathname : même
-// habillage partout.
+// Header clair (11/09/2026, demande Soumia) : même fond et même encre que la page (tokens de
+// thème bg/text, donc il suit aussi le mode sombre du visiteur), pour qu'il s'efface et laisse la
+// place aux cartes et au contenu. Remplace le header charcoal permanent du 23/08/2026. Le footer
+// reste sombre.
 export function Nav() {
   const adminUnlocked = useAdminUnlocked();
   // Menu mobile (29/08/2026) : les liens (Favoris/Notre Philosophie/Espace Pros) étaient dans un
@@ -96,7 +97,7 @@ export function Nav() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-lve-charcoal text-lve-ivory border-b border-lve-ivory/10">
+    <nav className="sticky top-0 z-50 bg-bg text-text border-b border-border">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 h-20 flex items-center justify-between gap-6">
         <Link
           aria-label="Le Voyage des Émotions — accueil"
@@ -104,17 +105,17 @@ export function Nav() {
           className="flex items-center gap-3"
           onClick={() => setMobileOpen(false)}
         >
-          {/* Logo tout en blanc pur (29/08/2026, demande Gemini) : text-lve-ivory (#faf6f0) → white,
-              netteté max. Séparateur "|" (border-l, pas un vrai caractère) atténué à opacity-40 —
-              ce projet n'a pas de token zinc-500, même effet visé. */}
+          {/* Logo à l'encre de la page (11/09/2026) : la charte veut le monogramme en Charcoal sur
+              fond clair (blanc pur réservé aux fonds sombres). Séparateur "|" (border-l, pas un
+              vrai caractère) atténué à 40 %. */}
           <span
-            className="inline-block text-2xl tracking-[0.15em] leading-none text-white"
+            className="inline-block text-2xl tracking-[0.15em] leading-none text-text"
             style={{ fontFamily: "var(--font-title)" }}
           >
             LVE
           </span>
           <span
-            className="hidden sm:inline-block text-xs uppercase tracking-[0.2em] text-white border-l border-white/40 pl-3"
+            className="hidden sm:inline-block text-xs uppercase tracking-[0.2em] text-text border-l border-text/40 pl-3"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Voyage des Émotions
@@ -122,14 +123,13 @@ export function Nav() {
         </Link>
 
         <div className="flex items-center gap-3 sm:gap-6">
-          {/* Blanc éclatant (29/08/2026, demande Gemini) : white/90 → white plein, hover
-              terracotta. */}
+          {/* Encre de la page, hover terracotta (11/09/2026, header clair). */}
           <ul className="hidden sm:flex items-center gap-6 list-none m-0 p-0">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="no-underline text-sm text-white hover:text-lve-terracotta transition-colors"
+                  className="no-underline text-sm text-text hover:text-lve-terracotta transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {link.label}
@@ -142,28 +142,25 @@ export function Nav() {
               href="/admin"
               aria-label="Backoffice"
               title="Backoffice"
-              className="hidden sm:inline-block no-underline text-lve-ivory/50 hover:text-lve-sand transition-colors"
+              className="hidden sm:inline-block no-underline text-text-secondary hover:text-lve-terracotta transition-colors"
             >
               <Settings size={18} />
             </Link>
           )}
-          {/* Ghost/outline (29/08/2026, demande Gemini transmise par Soumia) : le bouton plein
-              rivalisait avec le gros CTA du Hero d'accueil — garder l'impact réservé à celui-là,
-              ce bouton de header reste discret. Uniquement CE bouton (validé explicitement par
-              Soumia) — "Voir les disponibilités" sur les cartes d'adresses reste inchangé, en
-              plein terracotta, elle a tranché pour le garder tel quel. */}
-          {/* Bordure blanche par défaut, terracotta au survol (29/08/2026, demande Gemini) : plus
-              de remplissage terracotta au hover, juste bordure + texte qui virent terracotta. */}
+          {/* Terracotta plein, texte blanc (11/09/2026, demande Soumia) : rappel de couleur avec le
+              badge "Ton profil Travel Match" de la carte profil, et c'est la règle de la charte pour
+              les CTA principaux (hover terracotta sombre). Remplace le contour blanc du 29/08/2026,
+              qui n'avait plus de sens sur un header clair. */}
           <Link
             href="/questionnaire"
-            className="no-underline border border-white text-white hover:border-lve-terracotta hover:text-lve-terracotta text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors"
+            className="no-underline bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors"
             style={{ fontFamily: "var(--font-display)" }}
           >
             Lancer Travel Match
           </Link>
           <button
             type="button"
-            className="sm:hidden inline-flex items-center justify-center rounded-lg p-2 -mr-2 text-lve-ivory/80 hover:text-lve-sand transition-colors"
+            className="sm:hidden inline-flex items-center justify-center rounded-lg p-2 -mr-2 text-text/80 hover:text-lve-terracotta transition-colors"
             aria-label={mobileOpen ? "Fermer le menu" : "Ouvrir le menu"}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen((open) => !open)}
@@ -174,14 +171,14 @@ export function Nav() {
       </div>
 
       {mobileOpen && (
-        <div className="sm:hidden border-t border-lve-ivory/10 bg-lve-charcoal">
+        <div className="sm:hidden border-t border-border bg-bg">
           <ul className="flex flex-col list-none m-0 p-5 gap-1">
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   onClick={() => setMobileOpen(false)}
-                  className="block no-underline py-3 text-base text-white hover:text-lve-terracotta transition-colors"
+                  className="block no-underline py-3 text-base text-text hover:text-lve-terracotta transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   {link.label}
@@ -193,7 +190,7 @@ export function Nav() {
                 <Link
                   href="/admin"
                   onClick={() => setMobileOpen(false)}
-                  className="flex items-center gap-2 no-underline py-3 text-base text-lve-ivory/60 hover:text-lve-sand transition-colors"
+                  className="flex items-center gap-2 no-underline py-3 text-base text-text-secondary hover:text-lve-terracotta transition-colors"
                   style={{ fontFamily: "var(--font-display)" }}
                 >
                   <Settings size={16} />

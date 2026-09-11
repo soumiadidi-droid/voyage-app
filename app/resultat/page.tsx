@@ -122,22 +122,12 @@ export default async function ResultatPage({
   const top = dedupeComboBadges(results.slice(0, 3), destinations);
 
   return (
-    <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-      {/* Wording (29/08/2026, demande Gemini) : "Votre diagnostic" sonnait clinique, "les voyages
-          qui te correspondent" mélangeait le tutoiement du questionnaire et le vouvoiement du
-          reste du site — uniformisé sur le vouvoiement ici. */}
-      <p
-        className="text-[11px] font-medium uppercase tracking-widest mb-3"
-        style={{ color: "var(--lve-terracotta-dark)" }}
-      >
-        Ton match émotionnel
-      </p>
-      <h1
-        className="font-light mb-10 text-3xl md:text-4xl"
-        style={{ fontFamily: "var(--font-title)" }}
-      >
-        Tes destinations idéales
-      </h1>
+    <div className="max-w-3xl mx-auto px-6 sm:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
+      {/* Surtitre "Ton match émotionnel" et titre "Tes destinations idéales" retirés (11/09/2026,
+          demande Soumia) : la carte profil arrive directement sous le header clair, son titre
+          d'archétype ouvre la section. Titre gardé pour les lecteurs d'écran et le référencement,
+          invisible à l'écran. */}
+      <h1 className="sr-only">Tes destinations idéales</h1>
 
       <TravelerProfileCard answers={answers} />
 

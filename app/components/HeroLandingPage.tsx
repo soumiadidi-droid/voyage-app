@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence, animate, useMotionValue } from "framer-motion";
-import { Sparkles, Check } from "lucide-react";
+import { Sparkles, Check, Compass } from "lucide-react";
 
 const AUTOPLAY_INTERVAL_MS = 5000;
 const MAIN_CTA_TEXT = "Lancer le Travel Match (2 min) →";
@@ -179,10 +179,12 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
           })}
         </div>
 
-        {/* Carte résultat — même traitement que la carte "Profil Voyageur" (TravelerProfileCard.tsx) :
-            fond sable/crème translucide, bordure terracotta, coins très arrondis. Épurée (1er
-            septembre 2026) : compteur de match animé, plus de ligne transport ni de pictos
-            "tout-en-un" (la promesse tout-en-un vit déjà dans le sous-titre du hero). */}
+        {/* Carte teaser habillée exactement comme la carte profil de /resultat (11/09/2026, demande
+            Soumia — continuité accueil → résultat) : fond ivoire, liseré terracotta doublé façon
+            page de passeport, boussole en filigrane, badge terracotta plein, titre en terracotta
+            sombre, pastille blanche. Contenu inchangé (titre teaser, tag, sous-titre d'archétype,
+            compteur animé du 01/09/2026, CTA unique). Si le style de TravelerProfileCard.tsx
+            change, changer celui-ci avec. */}
         <AnimatePresence mode="wait">
           <motion.div
             key={activeProfile.id}
@@ -192,57 +194,86 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
             transition={{ duration: 0.3, ease: "easeOut" }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="max-w-xl rounded-2xl p-6 sm:p-7 shadow-xl"
-            style={{ background: "rgba(250,246,240,0.95)", border: "1px solid var(--lve-terracotta)" }}
+            className="relative overflow-hidden max-w-xl rounded-2xl p-6 sm:p-7"
+            style={{
+              background: "var(--lve-ivory)",
+              border: "1px solid var(--lve-terracotta)",
+              boxShadow: "0 20px 40px -20px rgba(26, 26, 26, 0.35), inset 0 0 0 4px var(--lve-terracotta-bg)",
+            }}
           >
-            <div className="flex items-center justify-between mb-3">
-              <span
-                className="inline-flex items-center gap-1.5 uppercase tracking-[0.2em]"
-                style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.7rem", fontFamily: "var(--font-display)", fontWeight: 600 }}
+            <Compass
+              size={150}
+              strokeWidth={0.75}
+              className="pointer-events-none absolute -right-7 -top-7 opacity-[0.06]"
+              style={{ color: "var(--lve-terracotta-dark)" }}
+              aria-hidden="true"
+            />
+            <div className="relative">
+              <div className="flex items-center justify-between gap-3 mb-4">
+                <span
+                  className="inline-flex items-center gap-2 text-[11px] tracking-widest font-medium uppercase text-white rounded-full px-3.5 py-1.5"
+                  style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
+                >
+                  <Sparkles size={12} strokeWidth={2} />
+                  Profil Travel Match
+                </span>
+                <span
+                  className="inline-flex items-center gap-1.5"
+                  style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-title)", fontSize: "1.3rem", fontWeight: 700 }}
+                >
+                  {animatedScore}% Match
+                  <AnimatePresence>
+                    {scoreValidated && (
+                      <motion.span
+                        initial={{ opacity: 0, scale: 0.5 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.5 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        <Check size={14} strokeWidth={3} />
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </span>
+              </div>
+
+              <h2
+                className="font-semibold mb-2"
+                style={{
+                  fontFamily: "var(--font-title)",
+                  // Un cran sous la carte de /resultat : à 2.4rem "Parenthèse Nature & Grand Calme"
+                  // passait sur deux lignes et poussait la carte sous la ligne de flottaison.
+                  fontSize: "clamp(1.6rem, 3vw, 2rem)",
+                  color: "var(--lve-terracotta-dark)",
+                  lineHeight: 1.1,
+                }}
               >
-                Votre Match
-                <AnimatePresence>
-                  {scoreValidated && (
-                    <motion.span
-                      initial={{ opacity: 0, scale: 0.5 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.5 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Check size={12} strokeWidth={3} />
-                    </motion.span>
-                  )}
-                </AnimatePresence>
+                {activeProfile.destinationTitle}
+              </h2>
+              <p
+                className="mb-4 font-medium"
+                style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
+              >
+                {activeProfile.badge}
+              </p>
+
+              <span
+                className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-white mb-6"
+                style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}
+              >
+                {activeProfile.tag}
               </span>
-              <span style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-title)", fontSize: "1.3rem", fontWeight: 700 }}>
-                {animatedScore}% Match
-              </span>
+
+              <div>
+                <Link
+                  href="/questionnaire"
+                  className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-widest font-medium px-6 py-3.5 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  {MAIN_CTA_TEXT}
+                </Link>
+              </div>
             </div>
-
-            <span
-              className="inline-block rounded-full px-3 py-1 text-xs font-medium mb-3 bg-white"
-              style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}
-            >
-              {activeProfile.tag}
-            </span>
-
-            <h2
-              className="font-semibold mb-1"
-              style={{ fontFamily: "var(--font-title)", fontSize: "1.7rem", color: "var(--lve-charcoal)" }}
-            >
-              {activeProfile.destinationTitle}
-            </h2>
-            <p className="text-sm font-medium mb-6" style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}>
-              {activeProfile.badge}
-            </p>
-
-            <Link
-              href="/questionnaire"
-              className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-widest font-medium px-6 py-3.5 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
-              {MAIN_CTA_TEXT}
-            </Link>
           </motion.div>
         </AnimatePresence>
       </div>
