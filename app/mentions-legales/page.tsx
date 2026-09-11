@@ -52,8 +52,8 @@ export default function MentionsLegalesPage() {
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
       <h1
-        className="font-extrabold mb-10"
-        style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2rem, 5vw, 3rem)" }}
+        className="mb-10 leading-tight"
+        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
       >
         Mentions légales
       </h1>

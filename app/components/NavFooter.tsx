@@ -153,8 +153,7 @@ export function Nav() {
               qui n'avait plus de sens sur un header clair. */}
           <Link
             href="/questionnaire"
-            className="no-underline bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase font-medium tracking-[0.15em] px-5 py-2.5 rounded-lg transition-colors"
-            style={{ fontFamily: "var(--font-display)" }}
+            className="btn-principal px-5 py-2.5 text-xs tracking-[0.15em] shadow-none"
           >
             Lancer Travel Match
           </Link>

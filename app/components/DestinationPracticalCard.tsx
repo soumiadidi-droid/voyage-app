@@ -81,7 +81,7 @@ export function DestinationPracticalCard({
     // Même look que TripExtensionCard : dégradé slate-bg → blanc → sand, coins très arrondis,
     // barre d'accent latérale.
     <div
-      className="relative overflow-hidden rounded-3xl p-6 md:p-8 mb-8"
+      className="surface-claire relative overflow-hidden rounded-3xl p-6 md:p-8 mb-8"
       style={{
         background: "linear-gradient(135deg, var(--lve-slate-bg) 0%, #ffffff 55%, var(--lve-sand) 100%)",
         border: "1px solid color-mix(in srgb, var(--lve-slate-dark) 20%, transparent)",

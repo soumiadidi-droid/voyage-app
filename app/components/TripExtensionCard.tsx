@@ -25,7 +25,7 @@ export function TripExtensionCard({
 }) {
   return (
     <div
-      className="group relative overflow-hidden rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300"
+      className="surface-claire group relative overflow-hidden rounded-3xl p-6 md:p-8 shadow-md hover:shadow-xl transition-all duration-300"
       style={{
         background: "linear-gradient(135deg, var(--lve-plum-bg) 0%, #ffffff 55%, var(--lve-sand) 100%)",
         border: "1px solid color-mix(in srgb, var(--lve-plum-dark) 20%, transparent)",

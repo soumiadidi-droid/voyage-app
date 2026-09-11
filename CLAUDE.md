@@ -758,3 +758,33 @@ discontinu pour le repéré. C'est la distinction centrale du site, elle se lit 
 disponibilités", et pour les activités "Réservez votre activité" — réservé à celles qui se réservent
 vraiment, les trois gratuites (temple Meiji-jingu, aire de jeux Diana, piscine du Shimoda) affichent
 "Voir le site".
+
+## Relecture visuelle complète (11-12/09/2026)
+
+Première passe de `@agent-relecteur` (rapport : `.claude/relecteur/rapports/2026-09-11.md`),
+tout corrigé à la demande de Soumia ("on modifie tout"). Ce qui est désormais la règle :
+
+- **Mode sombre** : toute carte ou section posée sur une couleur de marque fixe (blanc, ivoire,
+  sable, dégradés) porte la classe `surface-claire` (`app/globals.css`), qui remet localement les
+  couleurs de texte claires. Sans elle, le texte passait en crème sur fond blanc. `/pros`,
+  `/philosophie`, `/carnets` et le questionnaire restent entièrement clairs en mode sombre.
+  Les blocs posés directement sur le fond de page utilisent `text-text` et `--accent-text`.
+- **Un seul bouton principal** : classe `btn-principal` (terracotta plein, Bricolage demi-gras,
+  capitales). Ne plus recréer un bouton à la main.
+- **Plus de police machine à écrire** (IBM Plex Mono) sur les pages publiques : Bricolage partout.
+  La classe `.mono` ne sert plus qu'au studio et à l'admin.
+- **Titres en Cormorant partout**, y compris `/pros` et les pages légales. Cormorant chargé en
+  600 et 700 (faux gras avant).
+- **Étiquettes** : affichées via `lib/etiquettes.ts` ("GrandesVilles" → "Grandes villes"), la base
+  garde la valeur brute. Tout nouveau tag mal écrit se règle dans ce fichier.
+- **Typographie** : `lib/typo.ts` (`insecables`) pose les espaces insécables avant ? ! : ; ».
+- **Vocabulaire unique** : les destinations disent "J'ai testé / Sur mon radar", comme les
+  adresses (fini "Testée / Curatée").
+- **Photos sous un titre** (cartes résultat, carnets) : dégradé sombre limité au bas de la photo.
+- Accueil : "8 questions", tutoiement ; `/carnets` et Favoris tutoient ; objets des mails tutoient.
+- Base : sous-titre de Lagoondy raccourci (il répétait la description).
+
+Non fait, en attente de Soumia : photo de couverture de la Côte Basque (4 candidates Unsplash
+proposées), Terracotta sombre charte (#B55F42) vs site (#8C4A32). Accents qui paraissent
+décollés sur les grands titres en Cormorant dans les captures automatiques : texte vérifié
+correct, à contrôler sur un vrai téléphone.

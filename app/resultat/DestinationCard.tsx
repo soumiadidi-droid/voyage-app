@@ -4,6 +4,7 @@ import { ShareButton } from "../components/ShareButton";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { ScoredDestination } from "@/lib/travel-match/engine";
 import { PHOTO_GRADE } from "@/lib/photo-grade";
+import { libellesEtiquettes } from "@/lib/etiquettes";
 
 // Refonte visuelle (27/08/2026) : cartes à plat → cartes blanches avec hiérarchie (titre serif,
 // score en pastille terracotta, tags en pills, alerte d'incompatibilité en encadré ambré au lieu
@@ -23,7 +24,7 @@ export function DestinationCard({
   const heroImage = DESTINATION_HERO_IMAGE[destination.content_slug];
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md">
+    <div className="surface-claire overflow-hidden rounded-2xl bg-white shadow-sm transition-shadow hover:shadow-md">
       {heroImage && (
         <div className="relative h-48 sm:h-56">
           <div
@@ -32,7 +33,10 @@ export function DestinationCard({
           />
           {/* Pas d'assombrissement de la photo (29/08/2026, "je veux que le texte soit direct sur
               l'image") : lisibilité du titre via text-shadow, badge/cœur ont leur propre fond
-              plein — aucun voile sur la photo. */}
+              plein. Exception (relecture du 11/09/2026) : un dégradé limité au bas de la photo,
+              sous le titre — sur une photo très claire comme Amalfi, l'ombre portée ne suffisait
+              plus et le nom de la destination devenait illisible. Le haut de la photo reste intact. */}
+          <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
           <div className="absolute right-4 top-4 flex items-center gap-2">
             <ShareButton
               path={href}
@@ -107,7 +111,7 @@ export function DestinationCard({
 
       {hasComboOpportunity && (
         <p
-          className="mono mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs"
+          className="font-display mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs"
           style={{ background: "var(--bg-guide)", color: "var(--aurora)" }}
         >
           🔀 Combo possible — cette destination propose une extension
@@ -115,7 +119,7 @@ export function DestinationCard({
       )}
 
       <ul className="mb-4 flex flex-wrap gap-2">
-        {destination.tags.map((tag) => (
+        {libellesEtiquettes(destination.tags).map((tag) => (
           <li
             key={tag}
             className="rounded-full px-3 py-1 text-xs"
@@ -142,7 +146,7 @@ export function DestinationCard({
 
       <a
         href={href}
-        className="mono group inline-flex items-center gap-1.5"
+        className="font-display group inline-flex items-center gap-1.5"
         style={{ color: "var(--lve-terracotta-dark)" }}
       >
         Voir la fiche voyage

@@ -16,7 +16,9 @@ export const metadata = {
 // entre sections resserré au même geste (py- réduits partout, plainte "trop d'espace haut/bas").
 export default function ProsPage() {
   return (
-    <div>
+    // Fond et encre claires fixes (relecture du 11/09/2026) : les sections sont sur des couleurs de
+    // marque qui ne changent pas en mode sombre, le texte, lui, passait en crème.
+    <div className="surface-claire bg-lve-bg">
       <div
         className="px-6 sm:px-8 py-10 sm:py-14"
         style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
@@ -30,9 +32,11 @@ export default function ProsPage() {
           </span>
           {/* Renommé (29/08/2026) : "Espace Pros" → "On collabore ?", plus chaleureux, cohérent
               avec le nav/footer et le ton perso du reste de la page. */}
+          {/* Cormorant comme les titres du reste du site (relecture du 11/09/2026) : c'est la page
+              que lit un partenaire, elle ne ressemblait pas au reste. */}
           <h1
-            className="font-extrabold mb-6"
-            style={{ fontFamily: "var(--font-display)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
+            className="mb-6 leading-tight text-lve-charcoal"
+            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 5.5vw, 3.6rem)" }}
           >
             On collabore ?
           </h1>
@@ -53,14 +57,14 @@ export default function ProsPage() {
 
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
         <span
-          className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold mb-2"
+          className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold mb-2"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Ce que je propose
         </span>
         <h2
-          className="font-extrabold mb-8"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
+          className="mb-8 leading-tight text-lve-charcoal"
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 4.5vw, 2.8rem)" }}
         >
           Deux façons de collaborer
         </h2>
@@ -71,14 +75,14 @@ export default function ProsPage() {
               <Camera size={18} strokeWidth={1.75} />
             </div>
             <p
-              className="mono mb-1 text-xs uppercase tracking-widest"
+              className="font-display mb-1 text-xs uppercase tracking-widest"
               style={{ color: "var(--lve-terracotta-dark)" }}
             >
               Option 1
             </p>
             <h3
-              className="font-semibold mb-3"
-              style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem" }}
+              className="font-semibold mb-3 leading-tight text-lve-terracotta-dark"
+              style={{ fontFamily: "var(--font-title)", fontSize: "1.6rem" }}
             >
               Je viens, je vis, je raconte
             </h3>
@@ -94,14 +98,14 @@ export default function ProsPage() {
               <Link2 size={18} strokeWidth={1.75} />
             </div>
             <p
-              className="mono mb-1 text-xs uppercase tracking-widest"
+              className="font-display mb-1 text-xs uppercase tracking-widest"
               style={{ color: "var(--lve-terracotta-dark)" }}
             >
               Option 2
             </p>
             <h3
-              className="font-semibold mb-3"
-              style={{ fontFamily: "var(--font-display)", fontSize: "1.3rem" }}
+              className="font-semibold mb-3 leading-tight text-lve-terracotta-dark"
+              style={{ fontFamily: "var(--font-title)", fontSize: "1.6rem" }}
             >
               Je vous recommande vraiment
             </h3>
@@ -123,8 +127,8 @@ export default function ProsPage() {
         style={{ background: "radial-gradient(ellipse 70% 70% at 50% 50%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
       >
         <h2
-          className="font-extrabold mb-3"
-          style={{ fontFamily: "var(--font-display)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}
+          className="mb-3 leading-tight text-lve-charcoal"
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 4.5vw, 2.8rem)" }}
         >
           On en parle ?
         </h2>
@@ -134,8 +138,7 @@ export default function ProsPage() {
         </p>
         <a
           href="mailto:contact@levoyagedesemotions.fr"
-          className="inline-block rounded-lg px-6 py-3 mono no-underline shadow-md transition-all hover:-translate-y-0.5"
-          style={{ background: "var(--lve-terracotta)", color: "#fff" }}
+          className="btn-principal px-6 py-3.5 text-sm normal-case tracking-normal"
         >
           contact@levoyagedesemotions.fr
         </a>

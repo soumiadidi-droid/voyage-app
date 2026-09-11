@@ -8,13 +8,14 @@ import { PHOTO_GRADE } from "@/lib/photo-grade";
 // Traitement visuel repris des cartes de /resultat et de Favoris (titre posé sur la photo, sans
 // voile, lisibilité par text-shadow — décidé le 29/08/2026) plutôt qu'un 3e style de carte.
 
-// Le site ne promet publiquement que deux niveaux (cf. le manifeste de l'accueil : "Testée" /
-// "Curatée"), alors que la base en distingue trois. bucket_list et discovery tombent donc tous
-// deux dans "Curatée" — ne pas inventer un 3e libellé public que le manifeste ne mentionne pas.
+// Le site ne promet publiquement que deux niveaux, alors que la base en distingue trois.
+// bucket_list et discovery tombent donc tous deux dans "Sur mon radar" — ne pas inventer un 3e
+// libellé public que le manifeste ne mentionne pas. Mêmes mots que les étiquettes des adresses
+// depuis la relecture du 11/09/2026 (c'était "Testée / Curatée").
 export const BADGE_LABEL: Record<AuthenticityBadge, string> = {
-  tested_approved: "Testée",
-  bucket_list: "Curatée",
-  discovery: "Curatée",
+  tested_approved: "J'ai testé",
+  bucket_list: "Sur mon radar",
+  discovery: "Sur mon radar",
 };
 
 // Ordre d'affichage : les destinations vécues d'abord (c'est la preuve de crédibilité qui compte
@@ -61,6 +62,9 @@ export function CarnetCard({
             filter: PHOTO_GRADE.filtre,
           }}
         />
+        {/* Dégradé limité au bas de la photo (relecture du 11/09/2026) : sur une photo claire,
+            le pays et le titre ne se lisaient plus malgré l'ombre portée. */}
+        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
         <span
           className="absolute left-4 top-4 inline-block rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-md"
           style={{
@@ -103,7 +107,7 @@ export function CarnetCard({
             pour décrocher le séjour), et le chiffre affiché était le plus faible du lot — deux ou
             trois sur plusieurs carnets. Pour le remettre : rajouter photoCount au type Carnet et
             le remplir dans lib/carnets.ts avec v.gallery.length. */}
-        <div className="flex items-center gap-4 font-mono-lve text-xs text-lve-charcoal/55">
+        <div className="flex items-center gap-4 font-display text-xs text-lve-charcoal/70">
           <span className="inline-flex items-center gap-1.5">
             <MapPin size={13} strokeWidth={1.75} />
             {carnet.addressCount} adresses

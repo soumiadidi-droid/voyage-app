@@ -13,6 +13,7 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import type { UserAnswers } from "@/lib/travel-match/types";
+import { insecables } from "@/lib/typo";
 
 // "Profil Voyageur" sur /resultat — décidé le 23/08/2026 (reste à faire noté dans CLAUDE.md depuis
 // la refonte du moteur Travel Match du 22/08). Titre d'archétype + phrase d'intro + pills calculés
@@ -154,7 +155,7 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
     // Compass en filigrane. Textes de l'archétype INCHANGÉS (validés par Soumia le 23/08/2026),
     // seul l'habillage visuel change.
     <div
-      className="relative overflow-hidden rounded-2xl p-6 md:p-8 mb-12"
+      className="surface-claire relative overflow-hidden rounded-2xl p-6 md:p-8 mb-12"
       style={{
         background: "var(--lve-ivory)",
         border: "1px solid var(--lve-terracotta)",
@@ -185,9 +186,9 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
           }}
         >
           {archetype.title}
-          {second && (
-            <span style={{ color: "var(--lve-terracotta)" }}> &amp; {second.title}</span>
-          )}
+          {/* Même couleur pour les deux noms (relecture du 11/09/2026) : le second, en terracotta
+              clair sur ivoire, passait sous le seuil de lisibilité. */}
+          {second && <> &amp; {second.title}</>}
         </h2>
         {/* Sous-titre (29/08/2026, nouveau champ de la réécriture) : tagline courte, pas en
             italique pour se distinguer visuellement du corps de texte juste en dessous. */}
@@ -199,14 +200,14 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
           {second && ` · ${second.subtitle}`}
         </p>
         <p className="leading-relaxed mb-3 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
-          {archetype.intro}
+          {insecables(archetype.intro)}
         </p>
         {second && (
           <p className="leading-relaxed mb-5 italic" style={{ color: "var(--text-secondary)", fontSize: "1.05rem" }}>
-            {second.intro}
+            {insecables(second.intro)}
           </p>
         )}
-        <p className="mono mb-2 text-[11px] uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
+        <p className="font-display mb-2 text-[11px] uppercase tracking-widest" style={{ color: "var(--text-secondary)" }}>
           Ce que tu as demandé
         </p>
         <div className="flex flex-wrap gap-2">

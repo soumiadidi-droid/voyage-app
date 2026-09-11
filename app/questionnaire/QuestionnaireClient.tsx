@@ -215,7 +215,7 @@ export function QuestionnaireClient() {
         </div>
       ) : (
         <div className="mt-8">
-          <p className="mono mb-6 text-center" style={{ color: "var(--text-secondary)" }}>
+          <p className="font-display mb-6 text-center" style={{ color: "var(--text-secondary)" }}>
             {question.helper}
           </p>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
@@ -289,11 +289,10 @@ export function QuestionnaireClient() {
           <button
             onClick={continueFromCards}
             disabled={intentions.length < question.min}
-            className="mt-8 w-full px-6 py-3.5 rounded-xl text-white transition-opacity disabled:opacity-40"
-            style={{ background: "var(--lve-terracotta)" }}
+            className="btn-principal mt-8 w-full"
           >
             {intentions.length < question.min
-              ? `Choisissez-en encore ${question.min - intentions.length}`
+              ? `Choisis-en encore ${question.min - intentions.length}`
               : "Continuer"}
           </button>
         </div>
@@ -302,7 +301,7 @@ export function QuestionnaireClient() {
       {step > 0 && (
         <button
           onClick={() => setStep(step - 1)}
-          className="mono mt-8"
+          className="font-display mt-8"
           style={{ color: "var(--text-secondary)" }}
         >
           ← Question précédente

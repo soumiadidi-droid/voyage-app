@@ -54,7 +54,15 @@ export function DestinationHero({
 
       <div className="relative z-10 min-h-screen flex flex-col justify-end p-6 sm:p-14 text-white">
         <div className="max-w-2xl">
-          <p className="mono opacity-90 mb-3">{eyebrow}</p>
+          {/* Bricolage en petites capitales, comme les surtitres de pays des carnets (relecture du
+              11/09/2026, était en police machine à écrire). Ombre portée : sur Londres, le surtitre
+              tombait sur le Parlement et se lisait mal. */}
+          <p
+            className="mb-3 text-xs sm:text-sm uppercase tracking-[0.2em]"
+            style={{ fontFamily: "var(--font-display)", textShadow: "0 1px 12px rgba(0,0,0,0.75)" }}
+          >
+            {eyebrow}
+          </p>
           {/* Serif éditoriale (29/08/2026, demande Gemini transmise par Soumia) : var(--font-title)
               = Cormorant Garamond, la vraie police "titres" du projet (pas de Playfair installé
               ici) — même police que le logo LVE et les H2 de Notre Philosophie, cohérence avec le

@@ -27,7 +27,9 @@ const PILLARS = [
 
 export default function PhilosophiePage() {
   return (
-    <div>
+    // Fond et encre claires fixes (relecture du 11/09/2026) : sections sur couleurs de marque fixes,
+    // le texte ne doit pas suivre le mode sombre.
+    <div className="surface-claire bg-lve-bg">
       {/* Halo terracotta (29/08/2026, "plus de peps") : dégradé radial très doux derrière le
           titre plutôt qu'un aplat ivoire plat — le texte reste inchangé, seul l'habillage change. */}
       <div
@@ -144,7 +146,9 @@ export default function PhilosophiePage() {
           className="text-lve-ivory max-w-2xl mx-auto leading-snug"
           style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.5rem, 3.5vw, 2.2rem)" }}
         >
-          « Un regard humain, des adresses incarnées et la vérité de l&apos;expérience. »
+          {/* Espaces insécables dans les guillemets (relecture du 11/09/2026) : sur téléphone, le
+              guillemet fermant partait seul sur sa ligne. */}
+          «&nbsp;Un regard humain, des adresses incarnées et la vérité de l&apos;expérience.&nbsp;»
         </p>
       </div>
 
@@ -152,11 +156,7 @@ export default function PhilosophiePage() {
         className="py-20 sm:py-28 px-6 text-center"
         style={{ background: "radial-gradient(ellipse 70% 70% at 50% 50%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
       >
-        <Link
-          href="/questionnaire"
-          className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white font-medium text-[11px] tracking-widest uppercase px-8 py-4 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
+        <Link href="/questionnaire" className="btn-principal">
           Lancer Travel Match
         </Link>
       </div>

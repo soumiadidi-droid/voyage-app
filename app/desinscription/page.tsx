@@ -43,11 +43,7 @@ export default async function DesinscriptionPage({
           </>
         )}
       </p>
-      <Link
-        href="/"
-        className="inline-block px-7 py-3.5 rounded-lg text-white text-xs uppercase tracking-[0.2em] font-medium no-underline"
-        style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
-      >
+      <Link href="/" className="btn-principal px-7 py-3.5">
         Retour au site
       </Link>
     </div>

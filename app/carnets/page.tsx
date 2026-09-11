@@ -38,10 +38,10 @@ export default async function CarnetsPage() {
   const testedCount = carnets.filter((c) => c.badge === "tested_approved").length;
 
   return (
-    <div className="bg-lve-ivory">
+    <div className="surface-claire bg-lve-ivory">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
         <span
-          className="text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold block mb-4"
+          className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block mb-4"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {/* "tous vécus" quand aucune destination n'est en curation : "15 carnets — 15 vécus"
@@ -62,9 +62,9 @@ export default async function CarnetsPage() {
           style={{ fontFamily: "var(--font-display)" }}
         >
           Chaque carnet indique clairement son statut :{" "}
-          <strong className="font-medium text-lve-charcoal">Testée</strong> quand la destination a
-          été vécue et photographiée sur le terrain,{" "}
-          <strong className="font-medium text-lve-charcoal">Curatée</strong> quand elle a été
+          <strong className="font-medium text-lve-charcoal">J&apos;ai testé</strong> quand la
+          destination a été vécue et photographiée sur le terrain,{" "}
+          <strong className="font-medium text-lve-charcoal">Sur mon radar</strong> quand elle a été
           sélectionnée pour sa pertinence. Jamais mélangés.
         </p>
 
@@ -83,19 +83,15 @@ export default async function CarnetsPage() {
             className="text-lve-charcoal mb-3"
             style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.6rem, 3.5vw, 2.2rem)" }}
           >
-            Vous ne savez pas par où commencer ?
+            Tu ne sais pas par où commencer&nbsp;?
           </h2>
           <p
             className="text-lve-charcoal/70 max-w-lg mx-auto mb-7 leading-relaxed"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            Neuf questions, deux minutes, et le carnet qui vous correspond.
+            Huit questions, deux minutes, et le carnet qui te correspond.
           </p>
-          <Link
-            href="/questionnaire"
-            className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
+          <Link href="/questionnaire" className="btn-principal">
             Trouver mon voyage sur-mesure
           </Link>
         </div>

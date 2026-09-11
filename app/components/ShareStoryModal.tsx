@@ -85,10 +85,10 @@ export function ShareStoryModal({
           className="text-center mb-1 font-semibold"
           style={{ fontFamily: "var(--font-title)", fontSize: "1.4rem", color: "var(--lve-charcoal)" }}
         >
-          Partagez votre match ✨
+          Partage ton match ✨
         </h3>
         <p className="text-xs text-center mb-6" style={{ color: "var(--text-secondary)" }}>
-          Téléchargez le visuel, copiez votre lien et collez-le dans votre Story Instagram.
+          Télécharge le visuel, copie ton lien et colle-le dans ta story Instagram.
         </p>
 
         {/* Aperçu visible de la Story (format 9:16), capturé via html2canvas au clic sur

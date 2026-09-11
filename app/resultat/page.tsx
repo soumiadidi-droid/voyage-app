@@ -110,7 +110,7 @@ export default async function ResultatPage({
         <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
           On dirait que tu es arrivé·e ici sans passer par le questionnaire.
         </p>
-        <a href="/questionnaire" className="mono" style={{ color: "var(--ember)" }}>
+        <a href="/questionnaire" className="font-display" style={{ color: "var(--ember)" }}>
           Faire le questionnaire →
         </a>
       </div>

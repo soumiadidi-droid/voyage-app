@@ -43,6 +43,13 @@
      précise (ex. "Budget différent de ta recherche"). */
   --lve-warning-bg: #fffbeb;
   --lve-warning-text: #92400e;
+
+  /* Relecture du 11/09/2026. `--accent-text` : petits titres terracotta posés sur le fond de page,
+     qui suivent le mode sombre (le terracotta sombre devenait invisible sur fond presque noir).
+     `--surface-sand` : le Sable doux des sections, en couleur pleine plutôt qu'en transparence,
+     pour qu'il reste sable en mode sombre au lieu de virer au brun terne. */
+  --accent-text: #8c4a32;
+  --surface-sand: color-mix(in srgb, #f1dab1 40%, #fbf9f5);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -58,6 +65,61 @@
     --tag-text: #e8dfc8;
     --ember: #e0793e;
     --aurora: #4fa593;
+    --accent-text: #e09a7c;
+  }
+}
+
+/* Surface claire (relecture du 11/09/2026) — pour les cartes et sections dont le fond est une
+   couleur de marque fixe (blanc, ivoire, sable, dégradés). Leur texte héritait des couleurs de
+   thème, qui passent en crème en mode sombre : texte crème sur carte blanche, illisible. Cette
+   classe remet localement les valeurs claires, donc tout ce qui est dedans reste lisible. */
+.surface-claire {
+  --text: #1a1714;
+  --text-secondary: #6b6154;
+  --border: #e4dfd3;
+  --bg-guide: #f1ece0;
+  --tag-bg: rgba(255, 255, 255, 0.85);
+  --tag-text: #1a1714;
+  --ember: #c4622d;
+  --aurora: #2f6b5e;
+  --accent-text: #8c4a32;
+  color: var(--text);
+}
+
+/* Bouton principal unique (relecture du 11/09/2026) — il en existait quatre : terracotta plein,
+   dégradé à empattements, orange hors palette, bouton pâle. Règle de la charte : terracotta plein,
+   Bricolage, hover terracotta sombre. Texte en demi-gras et un cran plus gros qu'avant : le blanc
+   sur terracotta est juste sous le seuil de contraste, la graisse compense à la lecture. Dans le
+   calque "components" pour qu'un utilitaire (px-5, w-full…) puisse ajuster une instance. */
+@layer components {
+  .btn-principal {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--lve-terracotta);
+    color: #fff;
+    font-family: var(--font-bricolage), sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 1rem 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    cursor: pointer;
+    transition: background-color 150ms, transform 150ms;
+  }
+  .btn-principal:hover {
+    background: var(--lve-terracotta-dark);
+    transform: translateY(-2px);
+  }
+  .btn-principal:disabled {
+    background: var(--lve-terracotta);
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
   }
 }
 

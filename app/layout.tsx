@@ -36,10 +36,13 @@ const giveYouGlory = Give_You_Glory({
   weight: "400",
 });
 
+// 600 et 700 ajoutés (relecture du 11/09/2026) : les titres en semibold/extrabold n'avaient que 300
+// et 500 à disposition, le navigateur fabriquait un faux gras — accents qui paraissent décollés
+// sur les grands titres ("Côte", "déjà").
 const cormorant = Cormorant_Garamond({
   variable: "--font-cormorant",
   subsets: ["latin"],
-  weight: ["300", "500"],
+  weight: ["300", "500", "600", "700"],
 });
 
 // metadataBase (31/08/2026, ajout OG tags) — nécessaire pour que Next résolve les URLs

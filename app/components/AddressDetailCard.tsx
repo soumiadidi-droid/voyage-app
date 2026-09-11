@@ -10,6 +10,8 @@ import { InstagramPopup } from "./InstagramPopup";
 import { LikeButton } from "./LikeButton";
 import { CATEGORY_META } from "./AddressGrid";
 import { InstagramGlyph } from "./BrandGlyphs";
+import { libellesEtiquettes } from "@/lib/etiquettes";
+import { insecables } from "@/lib/typo";
 
 const FAMILY_PROFILE_LABEL: Record<FamilyProfile, string> = Object.fromEntries(
   FAMILY_PROFILE_OPTIONS.map((o) => [o.value, o.label])
@@ -32,7 +34,7 @@ function FamilyFitBlock({ card, familyProfile }: { card: Card; familyProfile: Fa
 
   return (
     <div className="mt-4 p-3" style={{ background: "var(--bg-guide)", border: "1px solid var(--border)" }}>
-      <p className="mono flex items-center gap-1.5 mb-2" style={{ color: "var(--aurora)", fontSize: "0.75rem" }}>
+      <p className="font-display flex items-center gap-1.5 mb-2" style={{ color: "var(--aurora)", fontSize: "0.75rem" }}>
         <Users size={12} />
         Adapté aux Familles — {FAMILY_PROFILE_LABEL[familyProfile]}
       </p>
@@ -100,7 +102,7 @@ export function AddressDetailCard({
     // catégorie (categoryBg/categoryColor déjà utilisés pour le badge) plutôt qu'aplatie en
     // terracotta partout — cohérent avec la distinction existante hôtel/resto/activité.
     <div
-      className="relative flex h-full w-full flex-col overflow-hidden rounded-3xl p-5 pl-6"
+      className="surface-claire relative flex h-full w-full flex-col overflow-hidden rounded-3xl p-5 pl-6"
       style={{
         background: `linear-gradient(135deg, ${categoryBg} 0%, #ffffff 60%, ${categoryBg} 100%)`,
         border: `1px solid color-mix(in srgb, ${categoryColor} 20%, transparent)`,
@@ -121,12 +123,12 @@ export function AddressDetailCard({
             type="button"
             onClick={() => setIgOpen(true)}
             aria-label="Voir le post Instagram"
-            className="inline-flex items-center justify-center rounded-full border border-white/15 bg-black/30 p-2.5 text-white backdrop-blur-md transition-all hover:bg-black/50 cursor-pointer"
+            className="inline-flex items-center justify-center rounded-full border border-lve-border bg-white/80 p-2.5 text-lve-charcoal backdrop-blur-md transition-all hover:bg-white cursor-pointer"
           >
             <InstagramGlyph width={16} height={16} />
           </button>
         )}
-        {card.id && <LikeButton id={card.id} useStore={usePlaceFavorites} size="sm" />}
+        {card.id && <LikeButton id={card.id} useStore={usePlaceFavorites} size="sm" surface="claire" />}
       </div>
 
       {/* `min-h` (28/08/2026) : réserve la hauteur d'une rangée de badges — sans ça, une carte
@@ -142,7 +144,7 @@ export function AddressDetailCard({
           {categoryLabel}
         </span>
         {card.isPartner && (
-          <span className="mono px-2 py-1 text-xs font-semibold" style={{ background: "var(--ember)", color: "#fff" }}>
+          <span className="font-display px-2 py-1 text-xs font-semibold" style={{ background: "var(--ember)", color: "#fff" }}>
             Partenaire
           </span>
         )}
@@ -166,17 +168,19 @@ export function AddressDetailCard({
       >
         {card.name}
       </h3>
-      {/* Sans-serif moderne (29/08/2026, demande Gemini) : mono retiré, var(--font-display). */}
+      {/* Sans-serif moderne (29/08/2026, demande Gemini) : mono retiré, var(--font-display).
+          Interligne calé sur la hauteur réservée (11/09/2026) : avec une ligne plus basse que le
+          min-h, le haut de la 2e ligne coupée dépassait sous la 1re (vu sur Lagoondy). */}
       {card.location && (
         <p
-          className="mb-2 line-clamp-1 min-h-[1.3rem] text-xs font-medium"
+          className="mb-2 line-clamp-1 min-h-[1.3rem] text-xs font-medium leading-[1.3rem]"
           style={{ color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
         >
           {card.location}
         </p>
       )}
       {card.price && (
-        <p className="mono mb-2" style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.85rem" }}>
+        <p className="font-display mb-2" style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.85rem" }}>
           {card.price}
         </p>
       )}
@@ -185,7 +189,7 @@ export function AddressDetailCard({
           description longue vs courte décalait les tags et le bouton du dessous entre cartes. */}
       {card.review && (
         <p className="mb-3 line-clamp-3 min-h-[4.3rem] leading-relaxed" style={{ fontSize: "0.95rem" }}>
-          {card.review}
+          {insecables(card.review)}
         </p>
       )}
 
@@ -198,7 +202,7 @@ export function AddressDetailCard({
           (text-[11px], moins de padding) pour un rendu moins "grosse pilule". */}
       {card.tags.length > 0 && (
         <div className="mb-4 flex items-center flex-wrap gap-1.5">
-          {card.tags.slice(0, 2).map((tag) => (
+          {libellesEtiquettes(card.tags).slice(0, 2).map((tag) => (
             <span
               key={tag}
               className="rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] font-medium leading-tight shadow-sm"
@@ -221,7 +225,7 @@ export function AddressDetailCard({
         // chaque catégorie doivent avoir la couleur des catégories") : categoryColor (terracotta
         // hôtel/sauge resto/océan activité) au lieu du var(--ember) fixe utilisé partout avant.
         <a
-          className="mt-auto inline-block w-full rounded-lg px-4 py-2 mono text-sm text-center no-underline"
+          className="mt-auto inline-block w-full rounded-lg px-4 py-2 font-display text-sm text-center no-underline"
           href={card.link}
           target="_blank"
           rel="noopener noreferrer nofollow"

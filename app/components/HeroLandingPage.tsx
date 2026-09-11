@@ -6,7 +6,8 @@ import { motion, AnimatePresence, animate, useMotionValue } from "framer-motion"
 import { Sparkles, Check, Compass } from "lucide-react";
 
 const AUTOPLAY_INTERVAL_MS = 5000;
-const MAIN_CTA_TEXT = "Lancer le Travel Match (2 min) →";
+// Espaces insécables (relecture du 11/09/2026) : sur téléphone, la flèche passait seule à la ligne.
+const MAIN_CTA_TEXT = "Lancer le Travel Match (2 min) →";
 const SCORE_COUNT_UP_DURATION = 1.2;
 
 export type DemoItem = {
@@ -89,7 +90,9 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
   if (!activeProfile) return null;
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-end overflow-hidden">
+    // Hauteur d'écran moins le bandeau (h-20) (relecture du 11/09/2026) : la photo démarre sous le
+    // bandeau, un min-h-screen poussait le bouton de la carte sous la ligne de flottaison.
+    <div className="relative min-h-[calc(100svh-5rem)] flex flex-col justify-end overflow-hidden">
       <AnimatePresence mode="wait">
         {activeProfile.heroImage && (
           <motion.div
@@ -111,7 +114,9 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
           cohérent avec le reste du site plutôt que d'inventer un nouveau traitement photo. */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/30 to-black/10" />
 
-      <div className="relative z-10 px-6 sm:px-14 pt-28 pb-10 sm:pb-14">
+      {/* pt-12 sur téléphone (relecture du 11/09/2026, était pt-28 partout) : avec le texte et les
+          onglets sur trois rangées, le bouton de la carte tombait sous la ligne de flottaison. */}
+      <div className="relative z-10 px-6 sm:px-14 pt-12 sm:pt-28 pb-10 sm:pb-14">
         <span
           className="inline-flex items-center gap-2 text-[11px] tracking-widest font-medium uppercase text-white rounded-full px-3.5 py-1.5 mb-5"
           style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
@@ -136,12 +141,13 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
           className="italic text-white/90 max-w-xl mb-8"
           style={{ fontFamily: "var(--font-body)", fontSize: "clamp(1rem, 1.6vw, 1.15rem)" }}
         >
-          Découvrez des destinations testées sur le terrain ou trouvez le voyage qui vous
+          Découvre des destinations testées sur le terrain, ou trouve le voyage qui te
           correspond.
         </p>
 
-        {/* Onglets archétypes */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        {/* Onglets archétypes. Sur téléphone, une seule rangée qui défile au doigt (relecture du
+            11/09/2026) : sur trois rangées, ils repoussaient la carte sous la ligne de flottaison. */}
+        <div className="flex flex-nowrap sm:flex-wrap gap-2 mb-6 -mx-6 px-6 sm:mx-0 sm:px-0 overflow-x-auto sm:overflow-visible no-scrollbar">
           {items.map((item) => {
             const active = item.id === selectedId;
             return (
@@ -149,7 +155,7 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
                 key={item.id}
                 type="button"
                 onClick={() => handleTabClick(item.id)}
-                className="relative overflow-hidden rounded-full px-4 py-2.5 text-xs sm:text-sm font-medium transition-all cursor-pointer"
+                className="relative shrink-0 whitespace-nowrap overflow-hidden rounded-full px-4 py-2.5 text-xs sm:text-sm font-medium transition-all cursor-pointer"
                 style={
                   active
                     ? { background: "var(--lve-terracotta)", color: "#fff", fontFamily: "var(--font-display)", fontWeight: 600 }
@@ -194,7 +200,7 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
             transition={{ duration: 0.3, ease: "easeOut" }}
             onMouseEnter={() => setIsHovering(true)}
             onMouseLeave={() => setIsHovering(false)}
-            className="relative overflow-hidden max-w-xl rounded-2xl p-6 sm:p-7"
+            className="surface-claire relative overflow-hidden max-w-xl rounded-2xl p-6 sm:p-7"
             style={{
               background: "var(--lve-ivory)",
               border: "1px solid var(--lve-terracotta)",
@@ -209,16 +215,19 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
               aria-hidden="true"
             />
             <div className="relative">
-              <div className="flex items-center justify-between gap-3 mb-4">
+              {/* flex-wrap + whitespace-nowrap (relecture du 11/09/2026) : sur téléphone, le badge et
+                  le score se tassaient chacun sur deux lignes. Le score passe maintenant sous le
+                  badge quand la place manque. */}
+              <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 mb-4">
                 <span
-                  className="inline-flex items-center gap-2 text-[11px] tracking-widest font-medium uppercase text-white rounded-full px-3.5 py-1.5"
+                  className="inline-flex items-center gap-2 whitespace-nowrap text-[11px] tracking-widest font-medium uppercase text-white rounded-full px-3.5 py-1.5"
                   style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
                 >
                   <Sparkles size={12} strokeWidth={2} />
                   Profil Travel Match
                 </span>
                 <span
-                  className="inline-flex items-center gap-1.5"
+                  className="inline-flex items-center gap-1.5 whitespace-nowrap"
                   style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-title)", fontSize: "1.3rem", fontWeight: 700 }}
                 >
                   {animatedScore}% Match
@@ -265,11 +274,7 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
               </span>
 
               <div>
-                <Link
-                  href="/questionnaire"
-                  className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-widest font-medium px-6 py-3.5 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
-                  style={{ fontFamily: "var(--font-display)" }}
-                >
+                <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
                   {MAIN_CTA_TEXT}
                 </Link>
               </div>

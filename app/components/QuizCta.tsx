@@ -11,11 +11,16 @@ import { Compass } from "lucide-react";
 export function QuizCta() {
   return (
     <section className="my-16 sm:my-24">
-      <div className="rounded-2xl border border-lve-terracotta/25 bg-lve-terracotta-bg px-6 py-10 sm:px-10 sm:py-12">
+      {/* Sable doux (relecture du 11/09/2026) : en rosé juste après le bloc email pâle, les deux
+          pastels se collaient. Surtitre en terracotta sombre, le clair passait sous le seuil. */}
+      <div
+        className="surface-claire rounded-2xl border border-lve-terracotta/25 px-6 py-10 sm:px-10 sm:py-12"
+        style={{ background: "var(--surface-sand)" }}
+      >
         <div className="flex flex-col sm:flex-row sm:items-center gap-8">
           <div className="flex-1 space-y-3">
             <span
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-lve-terracotta font-semibold"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <Compass size={14} strokeWidth={2} />
@@ -35,11 +40,7 @@ export function QuizCta() {
             </p>
           </div>
           <div className="shrink-0">
-            <Link
-              href="/questionnaire"
-              className="inline-block whitespace-nowrap bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-[0.2em] font-medium px-7 py-4 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
-              style={{ fontFamily: "var(--font-display)" }}
-            >
+            <Link href="/questionnaire" className="btn-principal whitespace-nowrap px-7">
               Lancer le questionnaire
             </Link>
           </div>

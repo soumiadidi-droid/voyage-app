@@ -121,8 +121,13 @@ export default function Home() {
         {/* Sable doux (11/09/2026, demande Soumia — "trop blanc, pas assez de contraste") : l'ivoire
             d'avant (#faf6f0) était indiscernable du fond de page (#faf7f0), et depuis le header
             clair la page n'était plus qu'un seul aplat crème. Le Manifeste en sable, le bloc CTA
-            en crème et le footer sombre redonnent un rythme. */}
-        <div className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 bg-lve-sand/40">
+            en crème et le footer sombre redonnent un rythme.
+            Couleur pleine et encre claire fixes (relecture du 11/09/2026) : en transparence sur le
+            fond de page, le sable virait au brun terne en mode sombre et le texte y disparaissait. */}
+        <div
+          className="surface-claire my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20"
+          style={{ background: "var(--surface-sand)" }}
+        >
           <div className="max-w-4xl mx-auto space-y-8 text-left">
             <span
               className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block"
@@ -153,13 +158,16 @@ export default function Home() {
               <div className="space-y-4">
                 <p>Chaque destination bénéficie d&apos;une clarté absolue :</p>
                 <ul className="space-y-3 text-sm border-l-2 border-lve-terracotta pl-4 list-none m-0">
+                  {/* Même vocabulaire que les étiquettes des adresses (relecture du 11/09/2026) :
+                      "Testée / Curatée" ici, "J'ai testé / Sur mon radar" sur les fiches, deux
+                      mots pour la même idée. */}
                   <li>
-                    <strong className="text-lve-charcoal">Testée :</strong> Vécue, approuvée et
-                    photographiée sur le terrain.
+                    <strong className="text-lve-charcoal">J&apos;ai testé :</strong> vécue, approuvée
+                    et photographiée sur le terrain.
                   </li>
                   <li>
-                    <strong className="text-lve-charcoal">Curatée :</strong> Sélectionnée pour son
-                    potentiel émotif et sa pertinence.
+                    <strong className="text-lve-charcoal">Sur mon radar :</strong> sélectionnée pour
+                    son potentiel émotif et sa pertinence.
                   </li>
                 </ul>
               </div>
@@ -171,35 +179,34 @@ export default function Home() {
           className="my-16 sm:my-24 -mx-6 sm:-mx-8 px-6 sm:px-8 py-20 text-center"
         >
           <div className="max-w-3xl mx-auto space-y-6">
+            {/* Couleurs de thème (relecture du 11/09/2026) : ce bloc est posé sur le fond de page,
+                son texte doit suivre le mode sombre — en Charcoal fixe, il disparaissait sur fond
+                presque noir. 8 questions : le parcours en compte 8 depuis les cartes d'envies. */}
             <span
-              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block"
-              style={{ fontFamily: "var(--font-display)" }}
+              className="text-xs uppercase tracking-[0.25em] font-semibold block"
+              style={{ fontFamily: "var(--font-display)", color: "var(--accent-text)" }}
             >
-              9 questions — 2 minutes
+              8 questions — 2 minutes
             </span>
 
             {/* Synchronisé avec le hero du haut (29/08/2026) — les deux blocs avaient dérivé,
                 repéré par Soumia. */}
             <h2
-              className="text-3xl sm:text-5xl text-lve-charcoal leading-tight"
+              className="text-3xl sm:text-5xl text-text leading-tight"
               style={{ fontFamily: "var(--font-title)" }}
             >
               Le voyage qui te ressemble existe déjà.
             </h2>
 
             <p
-              className="text-base sm:text-lg text-lve-charcoal/80 max-w-xl mx-auto leading-relaxed"
+              className="text-base sm:text-lg text-text/80 max-w-xl mx-auto leading-relaxed"
               style={{ fontFamily: "var(--font-display)" }}
             >
               Ton match idéal et mes adresses, testées une par une.
             </p>
 
             <div className="pt-4">
-              <Link
-                href="/questionnaire"
-                className="inline-block bg-lve-terracotta hover:bg-lve-terracotta-dark text-white text-xs uppercase tracking-[0.2em] font-medium px-8 py-4 rounded-lg shadow-md transition-all hover:-translate-y-0.5 no-underline"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
+              <Link href="/questionnaire" className="btn-principal">
                 Lancer Travel Match
               </Link>
             </div>

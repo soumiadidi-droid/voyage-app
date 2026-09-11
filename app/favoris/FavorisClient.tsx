@@ -78,7 +78,7 @@ export function FavorisClient() {
           (font-extrabold → font-normal) au même geste, jugée trop lourde sur fond clair. */}
       <h1
         className="font-normal mb-10"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 5vw, 3rem)", color: "#2C2523" }}
+        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 5vw, 3rem)", color: "var(--text)" }}
       >
         Mes Favoris
       </h1>
@@ -86,17 +86,13 @@ export function FavorisClient() {
       {isEmpty ? (
         <div className="text-center py-16">
           <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-            Votre carnet de voyage est vide.
+            Ton carnet de voyage est vide.
           </p>
           {/* Repointé sur /questionnaire le 03/09/2026 : /carnets existe mais n'est plus lié
               depuis le site (page réservée au démarchage), donc aucune page publique ne doit y
               renvoyer — ni pour un visiteur, ni pour un moteur de recherche. */}
-          <Link
-            href="/questionnaire"
-            className="inline-block rounded-lg px-6 py-3 mono no-underline"
-            style={{ background: "var(--ember)", color: "#fff" }}
-          >
-            Découvrir mes destinations ↗
+          <Link href="/questionnaire" className="btn-principal">
+            Découvrir mes destinations
           </Link>
         </div>
       ) : (
@@ -109,7 +105,7 @@ export function FavorisClient() {
                   était sans-serif gras, harmonisé avec le H1. */}
               <h2
                 className="font-normal mb-6"
-                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "#2C2523" }}
+                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "var(--text)" }}
               >
                 Mes Carnets &amp; Voyages
               </h2>
@@ -156,7 +152,7 @@ export function FavorisClient() {
                       <p className="mb-3" style={{ color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 14px rgba(0,0,0,0.6)" }}>
                         {item.destination.summary}
                       </p>
-                      <div className="mono flex flex-wrap gap-2 mb-4" style={{ fontSize: "0.8rem" }}>
+                      <div className="font-display flex flex-wrap gap-2 mb-4" style={{ fontSize: "0.8rem" }}>
                         {item.destination.filters.transport.map((t) => (
                           <span
                             key={t}
@@ -177,7 +173,7 @@ export function FavorisClient() {
                       </div>
                       <a
                         href={`/voyages/${item.destination.content_slug}?id=${item.destination.id}`}
-                        className="mono"
+                        className="font-display"
                         style={{ color: "#fff", textDecoration: "underline", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
                       >
                         Voir la fiche voyage →
@@ -215,7 +211,7 @@ export function FavorisClient() {
                       </p>
                       <a
                         href={`/voyages/${item.voyage.slug}`}
-                        className="mono"
+                        className="font-display"
                         style={{ color: "#fff", textDecoration: "underline", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
                       >
                         Voir la fiche voyage →
@@ -234,7 +230,7 @@ export function FavorisClient() {
                   harmonisation que "Mes Carnets & Voyages" juste au-dessus. */}
               <h2
                 className="font-normal mb-6"
-                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "#2C2523" }}
+                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "var(--text)" }}
               >
                 Mes adresses enregistrées
               </h2>

@@ -110,7 +110,10 @@ function AddressesSection({
 
   return (
     <div className="my-16 sm:my-20">
-      <p className="mono mb-2" style={{ color: "var(--text-secondary)" }}>
+      <p
+        className="mb-2 text-xs uppercase tracking-[0.25em] font-semibold"
+        style={{ fontFamily: "var(--font-display)", color: "var(--accent-text)" }}
+      >
         Mes adresses
       </p>
       {/* Serif éditoriale (29/08/2026, demande Gemini) : var(--font-title), cohérent avec le H1

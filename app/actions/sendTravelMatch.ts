@@ -121,7 +121,7 @@ export async function sendResultsEmail(input: SendResultsEmailInput): Promise<Se
     const { error } = await resend.emails.send({
       from: "Voyage des Émotions <contact@levoyagedesemotions.fr>",
       to: input.email,
-      subject: "Votre itinéraire sur mesure 🌿",
+      subject: "Ton itinéraire sur mesure 🌿",
       html,
     });
     // Loggé (30/08/2026) : le message affiché à l'utilisateur reste volontairement générique,
@@ -188,7 +188,7 @@ export async function sendCarnetEmail(input: {
     const { error } = await new Resend(apiKey).emails.send({
       from: "Voyage des Émotions <contact@levoyagedesemotions.fr>",
       to: input.email,
-      subject: `Votre carnet : ${voyage.hero.title} 🌿`,
+      subject: `Ton carnet : ${voyage.hero.title} 🌿`,
       html,
     });
     if (error) {

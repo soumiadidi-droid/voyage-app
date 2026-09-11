@@ -66,7 +66,7 @@ function EmailCaptureShell({
   return (
     <section className="w-full my-12">
       <div
-        className="relative overflow-hidden rounded-3xl p-8 md:p-10 text-center"
+        className="surface-claire relative overflow-hidden rounded-3xl p-8 md:p-10 text-center"
         style={{
           background: "linear-gradient(135deg, var(--lve-terracotta-bg) 0%, #ffffff 55%, var(--lve-sand) 100%)",
           border: "1px solid var(--lve-border)",
@@ -125,17 +125,15 @@ function EmailCaptureShell({
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={status === "loading"}
-                className="flex-1 px-4 py-3.5 rounded-2xl text-sm outline-none shadow-sm transition-all disabled:opacity-70"
+                className="flex-1 px-4 py-3.5 rounded-lg text-sm outline-none shadow-sm transition-all disabled:opacity-70"
                 style={{ border: "1px solid var(--lve-border)", background: "rgba(255,255,255,0.9)", color: "var(--lve-charcoal)" }}
               />
               <button
                 type="submit"
                 disabled={status === "loading"}
-                className="inline-flex items-center justify-center px-6 py-3.5 rounded-2xl text-white font-medium text-sm shadow-lg active:scale-[0.98] transition-all disabled:opacity-70 disabled:cursor-not-allowed cursor-pointer whitespace-nowrap"
-                style={{
-                  background: "linear-gradient(135deg, var(--lve-terracotta) 0%, var(--lve-terracotta-dark) 100%)",
-                  boxShadow: "0 10px 25px -8px color-mix(in srgb, var(--lve-terracotta-dark) 40%, transparent)",
-                }}
+                // Bouton principal du site (relecture du 11/09/2026) : était un dégradé avec la
+                // police du corps de texte, un 2e style de bouton à côté du terracotta plein.
+                className="btn-principal px-6 py-3.5 whitespace-nowrap"
               >
                 {status === "loading" ? (
                   <Loader2 size={16} className="animate-spin" />
@@ -177,7 +175,9 @@ function EmailCaptureShell({
                 onChange={(e) => setConsent(e.target.checked)}
                 className="accent-[var(--lve-terracotta)] cursor-pointer"
               />
-              <span>Je veux aussi recevoir les nouvelles destinations.</span>
+              {/* text-left (11/09/2026) : sur téléphone le libellé passe sur deux lignes et
+                  héritait du centrage du bloc, loin de sa case. */}
+              <span className="text-left">Je veux aussi recevoir les nouvelles destinations.</span>
             </label>
 
             {status === "error" && (
