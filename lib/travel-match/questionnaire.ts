@@ -104,10 +104,10 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
       { image: "https://images.unsplash.com/photo-1669310097451-826ff0e66b9a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
       { image: "https://images.unsplash.com/photo-1787163427371-321e46e2a7a3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
-      // Île de palmiers et lagon turquoise, Punta Cana — Miltiadis Fragkidis, https://unsplash.com/photos/pwiqvi98VGo
-      { image: "https://images.unsplash.com/photo-1781901379467-0de4e6c5c7cb?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
-      // Manhattan Bridge au crépuscule — Maxim Klimashin, https://unsplash.com/photos/CDQRLACxIzw (même image que la fiche New York)
-      { image: "https://images.unsplash.com/photo-1761233139114-def1098bf2b5?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits" },
+      // Plage de sable, oyats et ciel pastel — Jake Hill, https://unsplash.com/photos/Fq4fOfcazog
+      { image: "https://images.unsplash.com/photo-1672593053587-c96c5163bb5b?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "plage", label: "Lâcher prise", hint: "La mer, le sel, le temps qui s'étire" },
+      // Avenue new-yorkaise à l'heure dorée, taxis — Look Again Digital, https://unsplash.com/photos/yEHQfGNKnZ4
+      { image: "https://images.unsplash.com/photo-1512868567929-384904a22a9a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "effervescence_urbaine", label: "Vibrer", hint: "De l'énergie, du monde, des nuits" },
       // Deux surfeurs entrant dans l'eau — Ivo Sousa Martins, https://unsplash.com/photos/f4UBbjjvkCg
       { image: "https://images.unsplash.com/photo-1745594151310-d771b97211cc?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "rythme", label: "Bouger", hint: "Des journées pleines, se dépenser" },
     ],
