@@ -98,10 +98,12 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     min: 2,
     max: 3,
     cards: [
-      // Ruelle blanche d'Oia, Grèce — Stephanie Harlacher, https://unsplash.com/photos/v8Wcrpb6_PU
-      { image: "https://images.unsplash.com/photo-1690611283232-fa6dea392217?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
-      // Table de bistrot dressée, marbre et verres — Max Griss, https://unsplash.com/photos/uX1tJgpDJqs
-      { image: "https://images.unsplash.com/photo-1669310097451-826ff0e66b9a?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      // Bouquiniste devant le cinéma Odeon, Florence — Dipen Patel, https://unsplash.com/photos/gJw2ZYRLo_8
+      // (remplace la ruelle d'Oia le 11/09/2026 : Santorin disait île et vacances, pas ville culturelle)
+      { image: "https://images.unsplash.com/photo-1751062177334-fc079a977977?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
+      // Longue table dressée au jardin, lumière dorée, Italie — Jacob Diehl, https://unsplash.com/photos/hV0y0KAJWno
+      // (remplace la table de bistrot le 11/09/2026 : gros plan qui ne tenait pas en plein écran sur l'accueil)
+      { image: "https://images.unsplash.com/photo-1681407980086-971a5defe219?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
       { image: "https://images.unsplash.com/photo-1787163427371-321e46e2a7a3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
       // Plage de sable, oyats et ciel pastel — Jake Hill, https://unsplash.com/photos/Fq4fOfcazog

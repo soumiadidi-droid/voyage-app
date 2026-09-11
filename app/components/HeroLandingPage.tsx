@@ -53,10 +53,10 @@ function useCountUpScore(target: number) {
 // fond change avec l'archétype sélectionné (même traitement dégradé que DestinationHero.tsx), la
 // carte résultat reprend le style "Profil Voyageur" du charte (fond sable/crème translucide,
 // bordure terracotta). Les 5 onglets restent les vrais "profils voyageur" (mêmes archétypes/textes
-// validés que TravelerProfileCard.tsx), chacun pointant vers la vraie destination du catalogue qui
-// le représente le mieux (calculée côté serveur dans app/page.tsx, jamais choisie/inventée à la
-// main) — seule la photo en est tirée, jamais son nom ni son adresse exacte (teaser). Seul
-// `matchScore` reste décoratif (pas de vrai calcul, pas de réponses utilisateur dans cette démo).
+// validés que TravelerProfileCard.tsx). Depuis le 11/09/2026, la photo de chaque onglet est celle
+// de la carte d'envie correspondante du questionnaire (voir AXIS_CARD_KEY dans app/page.tsx), plus
+// celle d'une destination du catalogue. Seul `matchScore` reste décoratif (pas de vrai calcul, pas
+// de réponses utilisateur dans cette démo).
 export function HeroLandingPage({ items }: { items: DemoItem[] }) {
   const [selectedId, setSelectedId] = useState(items[0]?.id ?? "");
   const activeProfile = items.find((item) => item.id === selectedId) ?? items[0];

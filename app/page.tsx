@@ -1,9 +1,7 @@
 import Link from "next/link";
 import { HeroLandingPage, type DemoItem } from "./components/HeroLandingPage";
-import { getDestinations } from "@/lib/travel-match/data";
-import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
+import { TRAVEL_MATCH_QUESTIONS } from "@/lib/travel-match/questionnaire";
 import { ARCHETYPES, SCORE_AXES, type ScoreAxis } from "./components/TravelerProfileCard";
-import type { Destination } from "@/lib/travel-match/types";
 
 // Relue en base à la requête (03/09/2026), comme /carnets : l'accueil affiche les 4 carnets mis
 // en avant et le compteur "Voir les N carnets". Laissée statique, elle pouvait annoncer un nombre
@@ -40,7 +38,8 @@ const AXIS_MATCH_SCORE: Record<ScoreAxis, number> = {
 // directement la destination + l'hôtel exacts, "l'utilisateur a déjà la réponse") — copy générique
 // par type d'expérience, jamais le nom de la vraie destination gagnante. Simplifié le 1er septembre
 // 2026 : plus de ligne transport ni de pictos "tout-en-un" (carte "épurée", CTA unique — voir
-// HeroLandingPage.tsx), seule la photo reste tirée de la vraie destination qui gagne l'axe.
+// HeroLandingPage.tsx). La photo vient des cartes du questionnaire depuis le 11/09/2026 (voir
+// AXIS_CARD_KEY).
 const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string }> = {
   repos: {
     title: "Parenthèse Nature & Grand Calme",
@@ -64,71 +63,50 @@ const AXIS_TEASER: Record<ScoreAxis, { title: string; tag: string }> = {
   },
 };
 
-// Override photo teaser (1er septembre 2026, demande Soumia) — indépendant du calcul "meilleure
-// destination réelle sur l'axe" (celui-ci reste la source pour tag/label/matchScore) : juste
-// l'image affichée. "new-york" est une vraie destination du catalogue (DESTINATION_HERO_IMAGE), les
-// autres sont de vraies photos Unsplash vérifiées, pas rattachées à une destination précise du
-// catalogue — cohérent avec le teaser qui ne montre que l'ambiance.
-const AXIS_HERO_IMAGE_OVERRIDE: Partial<Record<ScoreAxis, string>> = {
-  // Philipp Deus — https://unsplash.com/photos/ocean-wave-crashing-with-water-splashing-Nu3xicKn_ZY
-  nature_plage: "https://images.unsplash.com/photo-1774124941123-0d07a1546b57?fm=jpg&q=80&w=2400&auto=format&fit=crop",
-  effervescence_urbaine: DESTINATION_HERO_IMAGE["new-york"],
+// Photo du hero par archétype (11/09/2026, demande Soumia) : les mêmes photos que les cartes
+// d'envies du questionnaire, pour que l'accueil et le questionnaire partagent une seule ambiance
+// (lumière chaude et douce, photos choisies une par une par Soumia). Remplace la photo de la
+// destination du catalogue qui gagnait l'axe : L'Âme Curieuse et L'Électron Urbain tombaient tous
+// les deux sur New York. L'Âme Tranquille n'a pas de carte à elle ("Déconnecter" a été retirée) :
+// elle prend celle de "Lâcher prise". Changer une photo de carte change donc aussi l'accueil.
+const AXIS_CARD_KEY: Record<ScoreAxis, string> = {
+  repos: "plage",
+  exploration: "exploration",
+  gastronomie: "gastronomie",
+  nature_plage: "nature",
+  effervescence_urbaine: "effervescence_urbaine",
 };
 
-// Score dérivé d'une destination sur un axe d'archétype — même règle que
-// TravelerProfileCard.derivedAxisScores (nature_plage = MAX(nature, plage)), appliquée ici aux
-// scores d'une destination plutôt qu'aux réponses d'un utilisateur (même forme de données).
-function destinationAxisScore(scores: Destination["scores"], axis: ScoreAxis): number {
-  return axis === "nature_plage" ? Math.max(scores.nature, scores.plage) : scores[axis];
+function cardImageForAxis(axis: ScoreAxis): string | undefined {
+  const intentions = TRAVEL_MATCH_QUESTIONS.find((q) => q.type === "cards");
+  if (intentions?.type !== "cards") return undefined;
+  const card = intentions.cards.find((c) => c.key === AXIS_CARD_KEY[axis]);
+  // Les cartes sont servies en 1200px de large, le hero est plein écran.
+  return card?.image.replace("w=1200", "w=2400");
 }
 
-// Pour chaque archétype, la vraie destination du catalogue qui le représente le mieux (score max
-// sur l'axe) — calculé dynamiquement, jamais choisi/inventé à la main : reste correct même si le
-// catalogue évolue. `excluded` évite qu'une même destination gagne 2 archétypes à la fois (ex.
-// Crète en tête à la fois sur repos et nature_plage) : sans ça, la démo montrait la même
-// destination sur 2 des 5 puces, moins parlant pour montrer la variété du catalogue — on garde
-// quand même la meilleure réelle sur l'axe, juste parmi les destinations pas déjà utilisées.
-function bestDestinationForAxis(destinations: Destination[], axis: ScoreAxis, excluded: Set<string>): Destination {
-  const pool = destinations.filter((d) => !excluded.has(d.id));
-  const candidates = pool.length > 0 ? pool : destinations;
-  return candidates.reduce((best, d) =>
-    destinationAxisScore(d.scores, axis) > destinationAxisScore(best.scores, axis) ? d : best
-  );
-}
-
-async function buildDemoItems(): Promise<DemoItem[]> {
-  const destinations = await getDestinations();
-  if (destinations.length === 0) return [];
-
-  const usedIds = new Set<string>();
-  const items: DemoItem[] = [];
-  for (const axis of SCORE_AXES) {
-    // La vraie destination qui gagne l'axe sert uniquement à choisir la photo (ambiance réelle) —
-    // jamais affichée par son nom (teaser, voir AXIS_TEASER ci-dessus).
-    const destination = bestDestinationForAxis(destinations, axis, usedIds);
-    usedIds.add(destination.id);
+function buildDemoItems(): DemoItem[] {
+  return SCORE_AXES.map((axis) => {
     const archetype = ARCHETYPES[axis];
     const teaser = AXIS_TEASER[axis];
-
-    items.push({
+    return {
       id: axis,
       label: `${AXIS_EMOJI[axis]} ${archetype.title}`,
       tag: teaser.tag,
       badge: archetype.subtitle,
       matchScore: AXIS_MATCH_SCORE[axis],
       destinationTitle: teaser.title,
-      heroImage: AXIS_HERO_IMAGE_OVERRIDE[axis] ?? DESTINATION_HERO_IMAGE[destination.content_slug],
-    });
-  }
-  return items;
+      heroImage: cardImageForAxis(axis),
+    };
+  });
 }
 
-export default async function Home() {
+export default function Home() {
   // Section "Récits & destinations à la une" retirée le 03/09/2026, après que Soumia l'a vue en
   // preview : afficher les vraies destinations sur l'accueil révèle la réponse du Travel Match
   // avant que le visiteur ne le passe. Même raison que le retrait du nom des destinations sur la
   // carte teaser du hero le 01/09/2026. Ne pas la remettre sans son accord explicite.
-  const demoItems = await buildDemoItems();
+  const demoItems = buildDemoItems();
 
   return (
     <div>
