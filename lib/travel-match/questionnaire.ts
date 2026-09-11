@@ -100,8 +100,8 @@ export const TRAVEL_MATCH_QUESTIONS: TravelMatchQuestion[] = [
     cards: [
       // Ruelle blanche d'Oia, Grèce — Stephanie Harlacher, https://unsplash.com/photos/v8Wcrpb6_PU
       { image: "https://images.unsplash.com/photo-1690611283232-fa6dea392217?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "exploration", label: "Flâner", hint: "Des ruelles, des artisans, des histoires" },
-      // Table dressée aux bougies — Alena Torgonskaya, https://unsplash.com/photos/wO5DwEoyKjI
-      { image: "https://images.unsplash.com/photo-1646473315764-c6cd47fe74c3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
+      // Salle de restaurant, béton et chaises rouges — Katya Azimova, https://unsplash.com/photos/yiEtdxAadWU
+      { image: "https://images.unsplash.com/photo-1770801153496-762ce2ea91a6?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "gastronomie", label: "Se régaler", hint: "Prendre le temps de bien manger" },
       // Lac et montagnes vertes, Schliersee — Julian Kraus, https://unsplash.com/photos/XbeNe7UfWIo
       { image: "https://images.unsplash.com/photo-1787163427371-321e46e2a7a3?fm=jpg&q=80&w=1200&auto=format&fit=crop", key: "nature", label: "Respirer", hint: "De l'espace, du vert, du silence" },
       // Vague qui se brise — Philipp Deus, https://unsplash.com/photos/Nu3xicKn_ZY (déjà utilisée sur le hero de l'accueil)
