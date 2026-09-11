@@ -1,6 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import {
+  CalendarDays, CalendarRange, Compass, PiggyBank, Wallet, Gem, Home, Plane, Globe, Sparkles,
+  Sun, CloudSun, Snowflake, Footprints, TramFront, Car, Armchair, Mountain, User, Heart, Users,
+  Baby, type LucideIcon,
+} from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   TRAVEL_MATCH_QUESTIONS,
@@ -14,29 +19,33 @@ import { SCORE_KEYS, type ScoreKey } from "@/lib/travel-match/types";
 // questions (ex. deux "actif" différents sur deux questions n'existent pas ici, mais la clé
 // composée évite le risque). Couvre TOUTES les questions à choix, pas seulement l'exemple donné
 // (durée) — une carte sans icône dans le lot aurait détonné visuellement.
-const OPTION_ICON: Record<string, string> = {
-  "duration:week_end": "⏱️",
-  "duration:semaine": "🗓️",
-  "duration:grand_voyage": "🧭",
-  "budget:eco": "💰",
-  "budget:confort": "💳",
-  "budget:premium": "💎",
-  "distance:proche": "🏡",
-  "distance:europe": "✈️",
-  "distance:long_courrier": "🌍",
-  "distance:ouvert": "✨",
-  "climate:chaleur": "☀️",
-  "climate:douceur": "🌤️",
-  "climate:hiver_cosy": "❄️",
-  "transport:sans_voiture": "🚶",
-  "transport:transports_possibles": "🚌",
-  "transport:voiture_necessaire": "🚗",
-  "sport_level:tranquille": "🌴",
-  "sport_level:actif": "🏃",
-  "companions:solo": "🧍",
-  "companions:duo": "💑",
-  "companions:amis": "👯",
-  "companions:famille": "👨‍👩‍👧‍👦",
+// Icônes en trait fin plutôt qu'emojis (11/09/2026, demande de Soumia). Les emojis tiraient
+// l'écran vers le bas à côté des cartes photo de l'écran d'intentions, et surtout ils ne se
+// dessinent pas pareil d'un appareil à l'autre — la mise en page dépendait de glyphes système
+// qu'on ne contrôle pas. Lucide est déjà utilisé sur les fiches et la page collaboration.
+const OPTION_ICON: Record<string, LucideIcon> = {
+  "duration:week_end": CalendarDays,
+  "duration:semaine": CalendarRange,
+  "duration:grand_voyage": Compass,
+  "budget:eco": PiggyBank,
+  "budget:confort": Wallet,
+  "budget:premium": Gem,
+  "distance:proche": Home,
+  "distance:europe": Plane,
+  "distance:long_courrier": Globe,
+  "distance:ouvert": Sparkles,
+  "climate:chaleur": Sun,
+  "climate:douceur": CloudSun,
+  "climate:hiver_cosy": Snowflake,
+  "transport:sans_voiture": Footprints,
+  "transport:transports_possibles": TramFront,
+  "transport:voiture_necessaire": Car,
+  "sport_level:tranquille": Armchair,
+  "sport_level:actif": Mountain,
+  "companions:solo": User,
+  "companions:duo": Heart,
+  "companions:amis": Users,
+  "companions:famille": Baby,
 };
 
 // Convention typo française : espace avant "?" — remplacée par une espace insécable pour que le
@@ -161,7 +170,7 @@ export function QuestionnaireClient() {
           }
         >
           {question.options.map((option) => {
-            const icon = OPTION_ICON[`${question.id}:${option.value}`];
+            const Icon = OPTION_ICON[`${question.id}:${option.value}`];
             const selected = choices[question.id] === option.value;
             // Titre gras court + description 1 ligne max (29/08/2026, demande Gemini — "évite les
             // pavés de texte"), scale ramené à 1.01 (était 1.02, jugé trop marqué).
@@ -170,14 +179,17 @@ export function QuestionnaireClient() {
               <button
                 key={option.value}
                 onClick={() => chooseOption(option.value)}
-                className={`flex flex-col items-center gap-2 bg-white/70 hover:bg-white border rounded-2xl p-5 text-center transition-all duration-200 shadow-sm hover:shadow-lg hover:scale-[1.01] cursor-pointer group ${
+                className={`flex flex-col items-center justify-center gap-3 bg-white hover:bg-white border rounded-2xl px-5 py-8 text-center transition-all duration-200 shadow-sm hover:shadow-lg hover:scale-[1.01] cursor-pointer group ${
                   selected ? "border-lve-terracotta shadow-md" : "border-lve-border hover:border-lve-terracotta"
                 }`}
               >
-                {icon && (
-                  <span className="text-2xl" aria-hidden="true">
-                    {icon}
-                  </span>
+                {Icon && (
+                  <Icon
+                    size={26}
+                    strokeWidth={1.25}
+                    aria-hidden="true"
+                    style={{ color: "var(--lve-terracotta)" }}
+                  />
                 )}
                 <span
                   className="text-base md:text-lg text-lve-charcoal group-hover:text-lve-terracotta"
@@ -187,7 +199,7 @@ export function QuestionnaireClient() {
                 </span>
                 {description && (
                   <span
-                    className="text-xs line-clamp-1"
+                    className="text-xs line-clamp-2 max-w-[22ch]"
                     style={{ color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
                   >
                     {description}
