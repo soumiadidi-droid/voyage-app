@@ -130,12 +130,16 @@ function html(tuile, spec) {
   }
 
   if (tuile.type === "terracotta") {
+    const detail = tuile.detail ?? spec.villes ?? "";
+    // En capitales espacées, une ligne de plus de 33 signes passe à la ligne et laisse un mot seul
+    // en dessous. On descend d'un cran plutôt que de couper le nom d'un lieu.
+    const tailleDetail = detail.length > 33 ? 10 : 12;
     return {
       h: 1080,
       corps: `<div class="col" style="background:${COULEURS.terracotta};justify-content:center;align-items:center;text-align:center;gap:16px">
         <p class="titre" style="font-size:48px;color:#fff">${spec.destination}</p>
         <span class="filet" style="width:64px;background:${COULEURS.sable}"></span>
-        <p class="mono" style="font-size:12px;text-transform:uppercase;letter-spacing:.2em;color:${COULEURS.sable}">${tuile.detail ?? spec.villes ?? ""}</p>
+        <p class="mono" style="font-size:${tailleDetail}px;text-transform:uppercase;letter-spacing:.2em;color:${COULEURS.sable}">${detail}</p>
         <p class="titre" style="margin-top:24px;font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:#ffffffb3">${HANDLE}</p>
       </div>`,
     };
