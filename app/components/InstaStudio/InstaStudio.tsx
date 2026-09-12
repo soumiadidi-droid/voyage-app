@@ -3,7 +3,16 @@
 import { useRef, useState } from "react";
 import { toPng } from "html-to-image";
 import { Download, ImagePlus } from "lucide-react";
-import { PRESETS, FORMATS, FILTRES, type PresetId, type FormatId, type FiltreId } from "./presets";
+import {
+  PRESETS,
+  FORMATS,
+  FILTRES,
+  FACES,
+  type PresetId,
+  type FormatId,
+  type FiltreId,
+  type FaceId,
+} from "./presets";
 
 // Le compte Instagram, écrit une seule fois (11/09/2026) : la carte "minimalist" affichait
 // "@voyagedesemotions" alors que le pied de page du site pointe vers "@levoyagedesemotions".
@@ -19,6 +28,10 @@ export function InstaStudio() {
   );
   const [moodWord, setMoodWord] = useState("Farniente");
   const [moodDetail, setMoodDetail] = useState("Côte Basque · Été 2026");
+  const [face, setFace] = useState<FaceId>("mot");
+  const [emotionVerbe, setEmotionVerbe] = useState("Déguster");
+  const [emotionPhrase, setEmotionPhrase] = useState("Prendre le temps de bien manger");
+  const [emotionRang, setEmotionRang] = useState("2 / 6");
   const [coverSurtitre, setCoverSurtitre] = useState("Nouveau carnet");
   const [coverDestination, setCoverDestination] = useState("Côte Basque");
   const [coverVilles, setCoverVilles] = useState("Biarritz, Saint-Jean-de-Luz");
@@ -51,7 +64,10 @@ export function InstaStudio() {
         cacheBust: true,
       });
       const link = document.createElement("a");
-      link.download = `lve-${preset}-${format}.png`;
+      // Les deux faces d'une émotion s'exportent l'une après l'autre : sans le suffixe, le second
+      // téléchargement écrasait le premier.
+      const suffixe = preset === "emotion" ? `-${face}` : "";
+      link.download = `lve-${preset}${suffixe}-${format}.png`;
       link.href = dataUrl;
       link.click();
     } finally {
@@ -156,6 +172,70 @@ export function InstaStudio() {
                 onChange={(e) => setMoodDetail(e.target.value)}
                 className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
               />
+            </div>
+          )}
+
+          {preset === "emotion" && (
+            <div className="flex flex-col gap-3">
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Face
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {FACES.map((f) => (
+                  <button
+                    key={f.id}
+                    onClick={() => setFace(f.id)}
+                    className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                      face === f.id
+                        ? "border-lve-terracotta bg-lve-terracotta-bg text-lve-terracotta-dark"
+                        : "border-lve-border text-lve-charcoal hover:border-lve-terracotta"
+                    }`}
+                  >
+                    {f.label}
+                  </button>
+                ))}
+              </div>
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Verbe
+              </label>
+              <input
+                value={emotionVerbe}
+                onChange={(e) => setEmotionVerbe(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Phrase
+              </label>
+              <input
+                value={emotionPhrase}
+                onChange={(e) => setEmotionPhrase(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Rang dans la série
+              </label>
+              <input
+                value={emotionRang}
+                onChange={(e) => setEmotionRang(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              {face === "photo" && (
+                <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-lve-border bg-lve-bg p-4 text-sm text-lve-charcoal/60 hover:border-lve-terracotta">
+                  <ImagePlus size={16} />
+                  {photo ? "Changer la photo" : "Ajouter une photo"}
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handlePhotoUpload}
+                    className="hidden"
+                  />
+                </label>
+              )}
+              <p className="font-body text-xs leading-relaxed text-lve-charcoal/50">
+                Les six verbes sont ceux du questionnaire : Flâner, Déguster, Respirer, Lâcher
+                prise, Vibrer, Bouger. Les reprendre mot pour mot, c’est ce qui fait que la série
+                prépare l’écran que les gens verront ensuite.
+              </p>
             </div>
           )}
 
@@ -332,6 +412,87 @@ export function InstaStudio() {
                 <p className="mt-6 font-title text-[10px] uppercase tracking-[0.3em] text-white/70">
                   {HANDLE}
                 </p>
+              </div>
+            )}
+
+            {/* Série des six envies (12/09/2026). Deux faces pour un même post.
+
+                Face 1, le mot : fond obsidienne, et c'est délibérément la seule tuile sombre de
+                tout le compte. L'ivoire est pris par le teaser 1, le terracotta par le teaser 3,
+                le sable par la page de garde d'un carnet — réutiliser l'un des trois aurait fait
+                passer la série pour un carnet de plus. Les six mots posés sur deux rangées pleines
+                de la grille forment un bloc qu'on lit d'un coup : c'est le manifeste du compte.
+
+                Face 2, la photo : elle ne se voit qu'au swipe. Le verbe reste écrit en petit en
+                haut, pour qu'une capture de la seule deuxième image garde son sens. */}
+            {preset === "emotion" && face === "mot" && (
+              <div className="flex h-full w-full flex-col justify-between bg-lve-obsidian p-12">
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-lve-sand" />
+                  <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-sand">
+                    Une envie par jour · {emotionRang}
+                  </span>
+                </div>
+
+                <p className="font-title text-6xl leading-[1.02] text-lve-ivory">
+                  {emotionVerbe}
+                </p>
+
+                <div className="flex flex-col gap-4">
+                  <span className="h-px w-full bg-lve-ivory/20" />
+                  <div className="flex items-end justify-between gap-6">
+                    <p className="font-title text-[10px] uppercase tracking-[0.3em] text-lve-ivory/60">
+                      {HANDLE}
+                    </p>
+                    <span className="whitespace-nowrap font-mono-lve text-[10px] uppercase tracking-[0.2em] text-lve-ivory/60">
+                      Fais défiler →
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {preset === "emotion" && face === "photo" && (
+              <div className="relative h-full w-full bg-lve-obsidian">
+                {photo ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={photo}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover"
+                      style={{ filter: FILTRES.find((f) => f.id === filtre)!.css }}
+                    />
+                    {(() => {
+                      const voile = FILTRES.find((f) => f.id === filtre)!.voile;
+                      return voile ? (
+                        <div
+                          className="pointer-events-none absolute inset-0"
+                          style={{ background: voile.couleur, opacity: voile.opacite }}
+                        />
+                      ) : null;
+                    })()}
+                  </>
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center font-mono-lve text-xs uppercase tracking-wide text-white/40">
+                    Ajoute une photo
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+                {/* Second voile, en haut : le verbe est posé sur la partie la plus claire d'une
+                    photo de paysage (le ciel), où le sable seul devient illisible. */}
+                <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-black/45 to-transparent" />
+                <span className="absolute left-12 top-12 font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-sand">
+                  {emotionVerbe}
+                </span>
+                <div className="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
+                  <p className="font-title text-3xl leading-snug text-lve-ivory">
+                    {emotionPhrase}
+                  </p>
+                  <p className="font-title text-[10px] uppercase tracking-[0.3em] text-lve-ivory/60">
+                    {HANDLE}
+                  </p>
+                </div>
               </div>
             )}
 

@@ -829,3 +829,34 @@ Deux corrections faites dans la foulée, sans lesquelles le modèle ne servait �
 Détail typographique : la promesse est en Bricolage mono, pas en Cormorant. Cormorant dessine des
 chiffres en style ancien, et un "13" plus bas que les capitales qui l'entourent se lit mal dans une
 ligne espacée.
+
+## Série des six envies (12/09/2026)
+
+Six posts, un par jour, avant de reprendre les carnets : Soumia veut définir ce qu'est une émotion
+ici avant de parler de destinations. Le compte s'appelle Le Voyage des Émotions et rien dans la
+grille ne le disait.
+
+**Les six verbes sont ceux du questionnaire, mot pour mot** : Flâner, Déguster, Respirer, Lâcher
+prise, Vibrer, Bouger. Pas de liste inventée pour Instagram — quelqu'un qui a vu les six posts et
+qui arrive sur Travel Match reconnaît les mots et sait déjà quoi répondre. La série est la
+bande-annonce du questionnaire.
+
+**Un post = deux images**, modèle `emotion` du studio (libellé **Émotion**, sélecteur de face) :
+
+- **Face 1, le mot** — fond obsidienne, le verbe en Cormorant très grand, "Une envie par jour · n/6"
+  en haut, handle et "Fais défiler →" en bas. C'est la seule tuile sombre du compte, délibérément :
+  l'ivoire est pris par le teaser 1, le terracotta par le teaser 3, le sable par la page de garde
+  d'un carnet. Réutiliser l'un des trois aurait fait passer la série pour un carnet de plus.
+- **Face 2, la photo** — elle ne se découvre qu'au swipe, comme pour les carnets. Le verbe reste
+  écrit en petit en haut pour qu'une capture de la seule deuxième image garde son sens. Deux voiles,
+  en haut et en bas : le verbe est posé sur le ciel, la partie la plus claire d'une photo de paysage.
+
+Six posts sur trois colonnes font **deux rangées pleines** — le seul chiffre qui tombe juste, et qui
+règle au passage le décalage de rangées qui traînait d'un carnet à l'autre.
+
+**Ce qui fait tenir la famille, c'est l'étalonnage, pas le sujet.** La note du questionnaire parle
+de "matières" (sable, pierre, eau, verre) ; les images réellement en place sont des scènes — un étal
+de bouquinistes, une table dressée, une montagne, des oyats, une rue en lumière rasante, deux
+surfeurs. Elles tiennent ensemble par la chaleur, la désaturation et le cadrage large, pas par
+l'abstraction. Conséquence pratique : une vraie scène convient, tant qu'elle passe par le même
+filtre.

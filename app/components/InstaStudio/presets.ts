@@ -3,6 +3,7 @@ export type PresetId =
   | "editorial"
   | "terracotta-mood"
   | "couverture"
+  | "emotion"
   | "carnet";
 
 export const PRESETS: { id: PresetId; label: string }[] = [
@@ -17,6 +18,11 @@ export const PRESETS: { id: PresetId; label: string }[] = [
   // Décision de Soumia : dans un carrousel de carnet, les photos ne se découvrent qu'en défilant,
   // la première image ne montre rien. Elle annonce : la destination, et ce qu'il y a derrière.
   { id: "couverture", label: "Page de Garde" },
+  // Ajouté le 12/09/2026 pour la série des six envies (Flâner, Déguster, Respirer, Lâcher prise,
+  // Vibrer, Bouger — les six cartes du questionnaire). Un post = deux images : le mot seul sur
+  // fond obsidienne, puis la photo au swipe. Le sélecteur de face évite de ressaisir le texte
+  // entre les deux exports.
+  { id: "emotion", label: "Émotion" },
   { id: "carnet", label: "Carnet d'Adresse" },
 ];
 
@@ -69,4 +75,14 @@ export const FILTRES: {
     voile: { couleur: "#FAF7F0", opacite: 0.12 },
   },
   { id: "ocean", label: "Océan", css: "saturate(0.95) contrast(1.08) hue-rotate(-4deg)" },
+];
+
+// Les deux faces d'un post "Émotion" (12/09/2026). Même contenu, deux images : la grille du profil
+// ne montre que la première, donc les six posts y forment un bloc de six mots sur fond sombre, et
+// la photo ne se découvre qu'en défilant — la règle posée pour les carnets, tenue ici aussi.
+export type FaceId = "mot" | "photo";
+
+export const FACES: { id: FaceId; label: string }[] = [
+  { id: "mot", label: "1 · le mot" },
+  { id: "photo", label: "2 · la photo" },
 ];
