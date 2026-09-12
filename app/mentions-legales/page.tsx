@@ -1,3 +1,4 @@
+import { EnTetePage } from "../components/EnTetePage";
 // Mentions légales (10/09/2026) — rédigées après le grillage du 09/09.
 //
 // Choix assumé de Soumia : son nom n'apparaît pas. La loi l'autorise pour un site personnel non
@@ -50,13 +51,10 @@ const SECTIONS = [
 
 export default function MentionsLegalesPage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-      <h1
-        className="mb-10 leading-tight"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
-      >
-        Mentions légales
-      </h1>
+    <>
+    {/* En-tête commun (13/09/2026). */}
+    <EnTetePage pastille="Informations légales" titre="Mentions légales" />
+    <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
 
       {SECTIONS.map((section) => (
         <section key={section.title} className="mb-10">
@@ -78,5 +76,6 @@ export default function MentionsLegalesPage() {
         Dernière mise à jour : 11 septembre 2026.
       </p>
     </div>
+    </>
   );
 }

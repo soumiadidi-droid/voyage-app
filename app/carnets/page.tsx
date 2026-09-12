@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { getCarnets } from "@/lib/carnets";
 import { CarnetCard } from "../components/CarnetCard";
+import { EnTetePage } from "../components/EnTetePage";
 
 // Page liste de tous les carnets (03/09/2026). Remplace le stub "Page en cours de rédaction" et
 // annule la décision du 23/08/2026 qui avait délié /carnets de la nav ("pas de section blog") :
@@ -39,35 +40,24 @@ export default async function CarnetsPage() {
 
   return (
     <div className="surface-claire bg-lve-ivory">
-      <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
-        <span
-          className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold block mb-4"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
-          {/* "tous vécus" quand aucune destination n'est en curation : "15 carnets — 15 vécus"
-              se lit comme une redondance. */}
-          {carnets.length} carnets —{" "}
-          {testedCount === carnets.length ? "tous vécus" : `${testedCount} vécus`} sur le terrain
-        </span>
-
-        <h1
-          className="text-lve-charcoal font-extrabold leading-tight mb-5 max-w-2xl"
-          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5vw, 3.4rem)" }}
-        >
-          Les carnets
-        </h1>
-
-        <p
-          className="text-lve-charcoal/70 max-w-xl mb-12 text-base sm:text-lg leading-relaxed"
-          style={{ fontFamily: "var(--font-display)" }}
-        >
+      {/* En-tête commun (13/09/2026) : mêmes mots qu'avant. */}
+      <EnTetePage
+        largeur="6xl"
+        // "tous vécus" quand aucune destination n'est en curation : "15 carnets — 15 vécus" se lit
+        // comme une redondance.
+        pastille={`${carnets.length} carnets — ${testedCount === carnets.length ? "tous vécus" : `${testedCount} vécus`} sur le terrain`}
+        titre="Les carnets"
+      >
+        <p>
           Chaque carnet indique clairement son statut :{" "}
-          <strong className="font-medium text-lve-charcoal">J&apos;ai testé</strong> quand la
-          destination a été vécue et photographiée sur le terrain,{" "}
-          <strong className="font-medium text-lve-charcoal">Sur mon radar</strong> quand elle a été
-          sélectionnée pour sa pertinence. Jamais mélangés.
+          <strong className="font-semibold">J&apos;ai testé</strong> quand la destination a été vécue
+          et photographiée sur le terrain,{" "}
+          <strong className="font-semibold">Sur mon radar</strong> quand elle a été sélectionnée pour
+          sa pertinence. Jamais mélangés.
         </p>
+      </EnTetePage>
 
+      <div className="max-w-6xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 list-none m-0 p-0">
           {carnets.map((carnet) => (
             <li key={carnet.slug}>

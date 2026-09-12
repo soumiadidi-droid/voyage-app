@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { Bookmark, Compass, Eye, Heart, Layers, Send, type LucideIcon } from "lucide-react";
 import { getCarnets, getCompteursListe } from "@/lib/carnets";
-import { EnTetePage } from "../components/EnTetePage";
+import { BlocOrange, EnTetePage } from "../components/EnTetePage";
 
 // Relue en base à la requête depuis la section "Ma liste" (12/09/2026) : ses compteurs viennent de
 // la base, et une page prérendue resservirait des chiffres périmés.
@@ -88,16 +88,16 @@ export default async function PhilosophiePage() {
     // Fond et encre claires fixes (relecture du 11/09/2026) : sections sur couleurs de marque fixes,
     // le texte ne doit pas suivre le mode sombre.
     <div className="surface-claire bg-lve-bg">
-      {/* En-tête commun (13/09/2026). Chute = l'ancien grand titre de la page, mot pour mot ; ligne
-          en capitales = le début de la citation du Manifeste de l'accueil. */}
+      {/* En-tête commun (13/09/2026) : c'est le haut de cette page qui sert de modèle au site. */}
       <EnTetePage
-        avant="Ma "
-        accent="philosophie"
-        surtitre="Un regard humain, des adresses incarnées"
-        chute="L'art du voyage raconté sans filtre, libéré de la charge de la recherche."
+        pastille="Ma philosophie"
+        titre="L'art du voyage raconté sans filtre, libéré de la charge de la recherche."
+        citation={<>«&nbsp;Un regard humain, des adresses incarnées et la vérité de l&apos;expérience.&nbsp;»</>}
       />
 
+      {/* Textes posés dans des blocs orange clair (13/09/2026, demande de Soumia). */}
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+        <BlocOrange>
         <Surtitre>Le mot de la fondatrice</Surtitre>
         {/* Texte définitif de Soumia (23/08/2026) — ne plus modifier sans son accord. */}
         <TitreSection>Tout a commencé à 20 ans.</TitreSection>
@@ -124,15 +124,17 @@ export default async function PhilosophiePage() {
             que tu viens chercher — de l&apos;émotion.
           </p>
         </div>
+        </BlocOrange>
       </div>
 
       {/* "Ma liste" (12/09/2026, demande de Soumia) : la suite de son histoire, dictée par elle —
           je repère sans arrêt, je teste dès que je peux, et mes amis me demandent toujours où
           aller. Second chapitre, le mot de la fondatrice au-dessus reste intact. */}
       <div className="max-w-3xl mx-auto px-6 sm:px-8 pb-10 sm:pb-14">
+        <BlocOrange className="mb-8">
         <Surtitre>Et aujourd&apos;hui</Surtitre>
         <TitreSection>Et puis, il y a ma liste.</TitreSection>
-        <div className="leading-relaxed space-y-4 mb-8">
+        <div className="leading-relaxed space-y-4">
           <p>
             Je regarde beaucoup. Je repère, je note, je garde de côté des endroits où je ne suis pas
             encore allée. Ma liste est interminable.
@@ -147,6 +149,7 @@ export default async function PhilosophiePage() {
             c&apos;est ma liste, ouverte.
           </Citation>
         </div>
+        </BlocOrange>
 
         <ol className="grid gap-6 sm:grid-cols-3 list-none m-0 p-0">
           {ETAPES.map(({ verbe, chiffre, detail, icon: Icon }, i) => (

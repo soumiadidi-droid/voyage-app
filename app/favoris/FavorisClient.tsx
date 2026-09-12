@@ -154,10 +154,10 @@ export function FavorisClient() {
     // Fond et encre claires fixes, comme /pros et /philosophie.
     <div className="surface-claire bg-lve-bg min-h-[70vh]">
       <EnTetePage
-        avant="Mes "
-        accent="favoris"
-        surtitre="Mon carnet de voyage"
-        chute="Tout ce que tu as mis de côté, au même endroit."
+        pastille="Mon carnet de voyage"
+        titre="Mes favoris"
+        citation="Tout ce que tu as mis de côté, au même endroit."
+        largeur="5xl"
       />
 
       {!charge ? (

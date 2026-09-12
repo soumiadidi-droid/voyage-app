@@ -37,14 +37,15 @@ export default function SansFiltrePage() {
 
   return (
     <div className="surface-claire bg-lve-bg">
-      {/* En-tête commun (13/09/2026) — c'est celui de cette page qui a servi de modèle. */}
+      {/* En-tête commun (13/09/2026). */}
       <EnTetePage
-        avant="Sans "
-        accent="filtre"
-        surtitre="Mes photos telles que je les ai prises"
-        chute="Juste ce que j'ai vu."
+        pastille="Mes photos telles que je les ai prises"
+        titre="Sans filtre"
+        citation="Juste ce que j'ai vu."
+        largeur="6xl"
       />
 
+      <div className="h-1.5" />
       <GalerieSansFiltre photos={melange} />
     </div>
   );

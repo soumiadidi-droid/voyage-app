@@ -1,3 +1,4 @@
+import { EnTetePage } from "../components/EnTetePage";
 // Page Confidentialité (10/09/2026) — rédigée après le grillage du 09/09, qui a mis en évidence
 // qu'on collectait des adresses email depuis la veille alors que cette page était restée un
 // paragraphe "en cours de rédaction".
@@ -69,13 +70,10 @@ const SECTIONS = [
 
 export default function ConfidentialitePage() {
   return (
-    <div className="max-w-3xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-      <h1
-        className="mb-6 leading-tight"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
-      >
-        Confidentialité
-      </h1>
+    <>
+    {/* En-tête commun (13/09/2026). */}
+    <EnTetePage pastille="Informations légales" titre="Confidentialité" />
+    <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
       <p className="mb-12 leading-relaxed" style={{ color: "var(--text-secondary)" }}>
         Responsable du traitement : Le Voyage des Émotions — contact@levoyagedesemotions.fr. Les
         informations sur l&apos;éditeur du site figurent dans les mentions légales.
@@ -101,5 +99,6 @@ export default function ConfidentialitePage() {
         Dernière mise à jour : 10 septembre 2026.
       </p>
     </div>
+    </>
   );
 }

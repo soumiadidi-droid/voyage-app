@@ -1,51 +1,67 @@
-// En-tête commun des pages éditoriales (13/09/2026, demande de Soumia : "je veux que ce soit
-// cohérent, même pour le titre"). Modèle : l'en-tête de /sans-filtre validé la veille. Utilisé par
-// /pros, /philosophie, /favoris et /sans-filtre — toute nouvelle page de ce type le reprend plutôt
-// que de recréer un titre à la main.
+// En-tête commun des pages du site (13/09/2026, demande de Soumia : "l'actuel de Ma philosophie,
+// mets-moi ce titre partout"). Modèle : le haut de /philosophie tel qu'il était en ligne le 12/09 —
+// halo terracotta, pastille terracotta, grand titre Cormorant aligné à gauche, citation en italique
+// à filet terracotta, et au besoin un paragraphe d'introduction (children).
 //
-// Grand titre Cormorant avec UN mot en italique terracotta, une ligne en capitales encadrée de
-// filets (filets masqués sur téléphone pour tenir sur une ligne), une chute en italique, sur le
-// halo terracotta du site.
+// Utilisé par /pros, /philosophie, /favoris, /sans-filtre, /carnets, /mentions-legales et
+// /confidentialite. Toute nouvelle page le reprend plutôt que de recréer un titre à la main.
+// `largeur` aligne le bord gauche du titre sur la colonne de contenu de la page (même largeur maximale
+// et même marge intérieure que les sections : max-w-… mx-auto px-6 sm:px-8).
+//
+// Le bloc porte sa propre classe surface-claire : ses couleurs de marque ne changent pas en mode
+// sombre, même sur les pages légales dont le corps suit le thème.
 export function EnTetePage({
-  avant = "",
-  accent,
-  apres = "",
-  surtitre,
-  chute,
+  pastille,
+  titre,
+  citation,
+  largeur = "3xl",
+  children,
 }: {
-  avant?: string;
-  accent: string;
-  apres?: string;
-  surtitre: string;
-  chute: React.ReactNode;
+  pastille: React.ReactNode;
+  titre: React.ReactNode;
+  citation?: React.ReactNode;
+  largeur?: "3xl" | "5xl" | "6xl";
+  children?: React.ReactNode;
 }) {
+  const colonne = { "3xl": "max-w-3xl", "5xl": "max-w-5xl", "6xl": "max-w-6xl" }[largeur];
   return (
     <div
-      className="px-6 sm:px-8 pt-14 sm:pt-20 pb-10 sm:pb-14 text-center"
-      style={{ background: "radial-gradient(ellipse 70% 90% at 50% 0%, var(--lve-terracotta-bg), var(--lve-bg))" }}
+      className="surface-claire py-10 sm:py-14"
+      style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
     >
-      <h1
-        className="leading-[0.95] text-lve-charcoal mb-7 sm:mb-9"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3.2rem, 11vw, 8rem)", letterSpacing: "-0.02em" }}
-      >
-        {avant}
-        <em className="italic text-lve-terracotta-dark">{accent}</em>
-        {apres}
-      </h1>
-      <p
-        className="flex items-center justify-center gap-5 text-[10px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.3em] font-semibold text-lve-terracotta-ink mb-3"
-        style={{ fontFamily: "var(--font-display)" }}
-      >
-        <span className="hidden sm:block h-px w-16 shrink-0 bg-lve-terracotta/50" aria-hidden="true" />
-        {surtitre}
-        <span className="hidden sm:block h-px w-16 shrink-0 bg-lve-terracotta/50" aria-hidden="true" />
-      </p>
-      <p
-        className="italic text-lve-charcoal/75 max-w-2xl mx-auto leading-snug"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.3rem, 2.8vw, 1.8rem)" }}
-      >
-        {chute}
-      </p>
+      <div className={`${colonne} mx-auto px-6 sm:px-8`}>
+        <span
+          className="inline-block text-xs uppercase tracking-[0.25em] text-white bg-lve-terracotta font-semibold rounded-full px-4 py-1.5 mb-5"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          {pastille}
+        </span>
+        <h1
+          className={`${citation || children ? "mb-6" : ""} leading-tight text-lve-charcoal max-w-3xl`}
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
+        >
+          {titre}
+        </h1>
+        {citation && (
+          <p
+            className="italic border-l-4 border-lve-terracotta pl-4 text-lve-charcoal/90 max-w-3xl"
+            style={{ fontSize: "1.15rem" }}
+          >
+            {citation}
+          </p>
+        )}
+        {children && <div className="mt-8 leading-relaxed text-lve-charcoal max-w-3xl">{children}</div>}
+      </div>
+    </div>
+  );
+}
+
+// Bloc orange clair pour le texte (13/09/2026, demande de Soumia : "l'orange avec du texte, je
+// trouve ça beau") — même famille que les cartes terracotta clair de /pros et /philosophie.
+export function BlocOrange({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`surface-claire rounded-2xl bg-lve-terracotta-bg border border-lve-terracotta/20 p-6 sm:p-10 ${className}`}>
+      {children}
     </div>
   );
 }

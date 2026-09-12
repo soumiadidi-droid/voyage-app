@@ -1,5 +1,5 @@
 import { Camera, Link2 } from "lucide-react";
-import { EnTetePage } from "../components/EnTetePage";
+import { BlocOrange, EnTetePage } from "../components/EnTetePage";
 
 export const metadata = {
   title: "On collabore ? — Le Voyage des Émotions",
@@ -20,23 +20,22 @@ export default function ProsPage() {
     // Fond et encre claires fixes (relecture du 11/09/2026) : les sections sont sur des couleurs de
     // marque qui ne changent pas en mode sombre, le texte, lui, passait en crème.
     <div className="surface-claire bg-lve-bg">
-      {/* En-tête commun (13/09/2026) : mêmes mots qu'avant — la pastille devient la ligne en
-          capitales, la phrase à filet devient la chute. */}
+      {/* En-tête commun (13/09/2026) — mêmes mots qu'avant, dans le modèle de Ma philosophie. */}
       <EnTetePage
-        avant="On "
-        accent="collabore"
-        apres={"\u00a0?"}
-        surtitre="Hôtels & marques de voyage"
-        chute="Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage."
+        pastille="Hôtels & marques de voyage"
+        titre="On collabore ?"
+        citation="Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage."
       />
 
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+        <BlocOrange className="mb-10 sm:mb-14">
         {/* Réécrit par Soumia (29/08/2026) — remplace le paragraphe précédent. */}
-        <p className="leading-relaxed mb-10 sm:mb-14">
+        <p className="leading-relaxed">
           Je fonctionne à la sincérité : si j&apos;ai vécu l&apos;expérience, c&apos;est écrit ;
           si c&apos;est une pépite repérée, aussi. Cette ligne éditoriale claire, c&apos;est ce qui
           garantit un engagement réel auprès des voyageurs qui me suivent.
         </p>
+        </BlocOrange>
         <span
           className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold mb-2"
           style={{ fontFamily: "var(--font-display)" }}
