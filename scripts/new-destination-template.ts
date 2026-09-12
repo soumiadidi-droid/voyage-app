@@ -5,7 +5,7 @@
 // Supprimer le fichier une fois l'exécution réussie (fichier jetable, pas destiné à rester dans
 // le repo — comme les scripts _write-*.ts utilisés au fil de cette session).
 //
-// Règle du skill voyage-ingest (.claude/skills/voyage-ingest/SKILL.md), inchangée ici : ne JAMAIS
+// Règle de l'agent Carnets (.claude/agents/carnets.md), inchangée ici : ne JAMAIS
 // inventer une valeur. Un champ non renseigné doit rester vide/absent (undefined, tableau vide),
 // jamais rempli d'une supposition — Claude propose une première passe sur les champs devinables
 // (scores, filtres), Soumia valide avant exécution.

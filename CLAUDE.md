@@ -872,3 +872,12 @@ de bouquinistes, une table dressée, une montagne, des oyats, une rue en lumièr
 surfeurs. Elles tiennent ensemble par la chaleur, la désaturation et le cadrage large, pas par
 l'abstraction. Conséquence pratique : une vraie scène convient, tant qu'elle passe par le même
 filtre.
+
+## L'agent Carnets remplace le skill voyage-ingest (12/09/2026)
+
+Le skill `voyage-ingest` est supprimé. Tout ce qu'il portait — schéma réel, grille de prix en gammes,
+gabarits de rédaction par catégorie, profils famille, écriture via `lib/travel-match/ingest.ts`,
+import/export CSV, normalisation des liens Instagram, règle de la photo de couverture — vit
+désormais dans `.claude/agents/carnets.md`, avec en plus la recherche de doublons
+(`scripts/adresses.ts`) que le skill n'avait pas. Même règle qu'avant : Claude propose, Soumia
+valide, puis on écrit en base. `combo-voyage` reste un skill à part.

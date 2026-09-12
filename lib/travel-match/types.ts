@@ -125,7 +125,7 @@ export type RegionalTransport = {
 // de matching existants même si le sujet se recoupe parfois : `filters.transport`/`filters.duration`
 // servent au filtrage (valeurs fermées), `regional_transport` couvre la mobilité ENTRE les étapes
 // d'une destination multi-villes — `practical_info` est le pendant "fiche pratique" lisible
-// directement sur la page, jamais généré automatiquement (voir .claude/skills/voyage-ingest) :
+// directement sur la page, jamais généré automatiquement (voir .claude/agents/carnets.md) :
 // Claude rédige à partir de ce que Soumia donne, ou laisse le champ vide plutôt que d'inventer.
 export type PracticalInfo = {
   access?: string; // ex. "TGV direct depuis Paris (4h) ou vol vers Biarritz, voiture utile sur place"
@@ -140,7 +140,7 @@ export type PracticalInfo = {
 // de repli quand le climat demandé n'a pas d'entrée dédiée (ex. réponse "douceur", ou arrivée
 // directe sur la fiche sans être passé par le questionnaire). Jamais généré automatiquement —
 // vide tant que Soumia n'a pas donné le vrai conseil saisonnier destination par destination (voir
-// .claude/skills/voyage-ingest).
+// .claude/agents/carnets.md).
 export type WhenToGo = {
   default?: string; // ex. "Le printemps et l'automne restent les saisons les plus agréables."
   chaleur?: string; // ex. "Juillet-août, pour une vraie chaleur estivale."

@@ -1,6 +1,6 @@
 // Ingestion par lot d'adresses depuis un fichier CSV (28/08/2026) — pure plomberie (parsing +
 // validation + upsert), AUCUNE rédaction automatique : la colonne `review` doit déjà contenir le
-// texte final au gabarit éditorial (voir .claude/skills/voyage-ingest/SKILL.md). Si vous partez de
+// texte final au gabarit éditorial (voir .claude/agents/carnets.md). Si vous partez de
 // notes brutes, faites-les rédiger via une conversation avec Claude d'abord — ce script ne
 // transforme jamais du texte brut en review structurée.
 //

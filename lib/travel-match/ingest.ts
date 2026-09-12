@@ -1,7 +1,7 @@
 // Couche d'écriture Neon pour l'ajout/mise à jour de contenu, un élément à la fois — pensée pour
 // un usage interactif (Claude structure ce que Soumia dicte, puis appelle une de ces fonctions),
 // contrairement à scripts/seed.ts qui fait un resync complet en bloc depuis les fichiers statiques.
-// Voir .claude/skills/voyage-ingest/SKILL.md pour le workflow complet et le format attendu.
+// Voir .claude/agents/carnets.md pour le workflow complet et le format attendu.
 import { neon } from "@neondatabase/serverless";
 import type {
   AuthenticityBadge,
