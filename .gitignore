@@ -42,3 +42,4 @@ next-env.d.ts
 
 # Captures de l'agent relecteur (images lourdes, régénérées à chaque relecture)
 .claude/relecteur/captures/
+scripts/galerie/analyse
