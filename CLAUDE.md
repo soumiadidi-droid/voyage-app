@@ -924,3 +924,12 @@ photo d%atmosphère SANS texte, pour faire respirer la grille ; post 3 carrousel
 terracotta puis photo du lieu + annonce du carnet) ; post 4 carrousel de 6 (couverture sable, 4
 slides d%adresses, carte de conclusion + CTA Travel Match). La couverture du post 4 reste SABLE : le
 terracotta est pris par le post 3, et un crème ferait doublon avec l%ivoire des posts de concept.
+
+**Deux outils pour produire un cycle (12/09/2026)** : `scripts/photos-insta.mjs` recadre une photo
+au gabarit (1080 carré ou 1080 × 1350, toujours depuis les `hires-`), `scripts/tuiles-insta.mjs`
+fabrique les tuiles à partir d%un fichier de spec JSON — six types (`mot`, `definition`,
+`terracotta`, `garde`, `adresses`, `fin`), identiques aux modèles du Studio. Exemple complet :
+`scripts/exemples/insta-biarritz.json`. Le Studio reste la voie manuelle ; ces scripts existent
+parce que son export part d%un clic que personne ne peut déclencher à la place de Soumia. L%agent
+Instagram livre donc un dossier `~/Downloads/insta-<destination>/` avec les images, pas un mode
+d%emploi.

@@ -145,9 +145,48 @@ Quand Soumia prépare un carnet entier, donne les quatre posts d'un coup, dans l
 termine par ce qu'il lui reste à produire côté images (quelles tuiles sortir du Studio, quelles
 photos choisir).
 
+## Tu livres un dossier, pas un mode d'emploi
+
+Soumia te donne une destination et une envie. Tu rends un dossier prêt à programmer dans
+`~/Downloads/insta-<destination>/`, images comprises. Un mode d'emploi qui lui demande de
+refabriquer les tuiles à la main n'est pas une livraison.
+
+**1. Les photos, recadrées au gabarit.** Toujours depuis les `hires-` du carnet
+(`public/images/voyages/<slug>/`), jamais les `web-` :
+
+    node scripts/photos-insta.mjs public/images/voyages/<slug>/hires-IMG_xxxx.jpg 1080 1080 ~/Downloads/insta-<dest>/post-2-sensation/1-<nom>.jpg
+    node scripts/photos-insta.mjs public/images/voyages/<slug>/hires-IMG_xxxx.jpg 1080 1350 ~/Downloads/insta-<dest>/photos-source/le-matin.jpg
+
+Carré 1080 × 1080 pour les posts 1 à 3, portrait 1080 × 1350 pour le carrousel du carnet.
+
+**2. Les tuiles.** Tu écris un fichier de spec JSON, puis :
+
+    node scripts/tuiles-insta.mjs /tmp/<dest>.json ~/Downloads/insta-<dest>
+
+Le format de la spec est documenté en tête de `scripts/tuiles-insta.mjs`. Les six types de tuile
+sont `mot`, `definition`, `terracotta`, `garde`, `adresses`, `fin` — ce sont exactement les modèles
+du Studio, mêmes couleurs, mêmes polices, même ambiance photo.
+
+**3. Tu regardes chaque image produite.** Une ligne qui déborde, un sujet coupé par le recadrage,
+un texte posé sur la partie claire d'une photo : ça ne se voit pas autrement. Tu corriges la spec
+et tu relances.
+
+**4. Le rangement**, un dossier par post, numéroté dans l'ordre de publication :
+
+    post-1-emotion/1-tuile-<envie>.png, 2-definition-<envie>.png
+    post-2-sensation/1-<sujet>.jpg
+    post-3-destination/1-tuile-<destination>.png, 2-<sujet>.jpg
+    post-4-carnet/1-page-de-garde.png … 6-fin-de-carnet.png
+    photos-source/          (les photos de fond, si elle veut refaire une slide)
+    00-planning.md          (le calendrier, quelle image pour quel jour)
+    legendes.md             (les légendes, les appels, les stories)
+    textes-des-tuiles.md    (tous les textes figurant sur les images)
+
+**5. Tu termines par ce qui bloque** : une adresse citée mais invisible faute de lien Instagram, un
+chiffre à recompter, une photo faible. En clair, à la fin, hors voix du site.
+
 ## Ce que tu ne fais pas
 
 Tu ne publies rien : il n'y a pas d'accès Instagram sur ce projet, Soumia publie elle-même. Tu
-n'écris rien en base, tu ne modifies pas le site. Les images se fabriquent dans le Studio (`/studio`),
-et les fichiers d'un carnet se rangent dans `~/Downloads/insta-<destination>/` — légendes comprises,
-pour qu'elle ait tout au même endroit au moment de publier.
+n'écris rien en base, tu ne modifies pas le site ni ses modèles. Si un gabarit manque pour faire ce
+qu'elle demande, tu le dis — c'est la conversation principale qui touche au Studio.
