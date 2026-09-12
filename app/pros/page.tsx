@@ -1,4 +1,5 @@
 import { Camera, Link2 } from "lucide-react";
+import { EnTetePage } from "../components/EnTetePage";
 
 export const metadata = {
   title: "On collabore ? — Le Voyage des Émotions",
@@ -19,43 +20,23 @@ export default function ProsPage() {
     // Fond et encre claires fixes (relecture du 11/09/2026) : les sections sont sur des couleurs de
     // marque qui ne changent pas en mode sombre, le texte, lui, passait en crème.
     <div className="surface-claire bg-lve-bg">
-      <div
-        className="px-6 sm:px-8 py-10 sm:py-14"
-        style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
-      >
-        <div className="max-w-3xl mx-auto">
-          <span
-            className="inline-block text-xs uppercase tracking-[0.25em] text-white bg-lve-terracotta font-semibold rounded-full px-4 py-1.5 mb-5"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Hôtels &amp; marques de voyage
-          </span>
-          {/* Renommé (29/08/2026) : "Espace Pros" → "On collabore ?", plus chaleureux, cohérent
-              avec le nav/footer et le ton perso du reste de la page. */}
-          {/* Cormorant comme les titres du reste du site (relecture du 11/09/2026) : c'est la page
-              que lit un partenaire, elle ne ressemblait pas au reste. */}
-          <h1
-            className="mb-6 leading-tight text-lve-charcoal"
-            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 5.5vw, 3.6rem)" }}
-          >
-            On collabore ?
-          </h1>
-          <p
-            className="italic mb-8 border-l-4 border-lve-terracotta pl-4 text-lve-charcoal/90"
-            style={{ fontSize: "1.15rem" }}
-          >
-            Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage.
-          </p>
-          {/* Réécrit par Soumia (29/08/2026) — remplace le paragraphe précédent. */}
-          <p className="leading-relaxed">
-            Je fonctionne à la sincérité : si j&apos;ai vécu l&apos;expérience, c&apos;est écrit ;
-            si c&apos;est une pépite repérée, aussi. Cette ligne éditoriale claire, c&apos;est ce qui
-            garantit un engagement réel auprès des voyageurs qui me suivent.
-          </p>
-        </div>
-      </div>
+      {/* En-tête commun (13/09/2026) : mêmes mots qu'avant — la pastille devient la ligne en
+          capitales, la phrase à filet devient la chute. */}
+      <EnTetePage
+        avant="On "
+        accent="collabore"
+        apres={"\u00a0?"}
+        surtitre="Hôtels & marques de voyage"
+        chute="Du contenu éditorial honnête, jamais du placement de produit déguisé en récit de voyage."
+      />
 
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+        {/* Réécrit par Soumia (29/08/2026) — remplace le paragraphe précédent. */}
+        <p className="leading-relaxed mb-10 sm:mb-14">
+          Je fonctionne à la sincérité : si j&apos;ai vécu l&apos;expérience, c&apos;est écrit ;
+          si c&apos;est une pépite repérée, aussi. Cette ligne éditoriale claire, c&apos;est ce qui
+          garantit un engagement réel auprès des voyageurs qui me suivent.
+        </p>
         <span
           className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold mb-2"
           style={{ fontFamily: "var(--font-display)" }}

@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { Bus, Car, Footprints, Heart, TrainFront, type LucideIcon } from "lucide-react";
+import { EnTetePage } from "../components/EnTetePage";
 import { LikeButton } from "../components/LikeButton";
 import { AddressDetailCard } from "../components/AddressDetailCard";
 import { useFavorites, usePlaceFavorites } from "@/lib/favorites";
@@ -10,22 +12,20 @@ import type { TransportFilter } from "@/lib/travel-match/types";
 import { resolveFavorites, resolvePlaceFavorites, type LikedItem, type PlaceLikedItem } from "./actions";
 import { PHOTO_GRADE } from "@/lib/photo-grade";
 
-// Pills d'infos pratiques (28/08/2026, remplace les hashtags bruts) — construites uniquement à
-// partir de champs réels et jamais inventées : `filters.transport` est toujours renseigné (champ
-// de matching obligatoire), `regional_transport.recommended_mode` est du texte déjà rédigé par
-// Soumia quand il existe, sinon simplement absent de la carte plutôt que remplacé par un badge
-// générique inventé.
-const TRANSPORT_BADGE: Record<TransportFilter, string> = {
-  sans_voiture: "🚶 Sans voiture",
-  transports_possibles: "🚌 Transports possibles",
-  voiture_necessaire: "🚗 Voiture nécessaire",
+// Même habillage que /pros, /philosophie et /sans-filtre (13/09/2026, demande de Soumia :
+// "retravaille la page mes favoris") : en-tête commun EnTetePage, surtitre + titre par section, cartes de destination en grille avec dégradé bas (règle de la relecture du 11/09), plus
+// d'emojis (icônes Lucide en trait fin, comme le questionnaire), état vide en carte terracotta clair.
+
+// Pastilles d'infos pratiques (28/08/2026) — construites uniquement à partir de champs réels :
+// `filters.transport` est toujours renseigné, `regional_transport.recommended_mode` est du texte
+// rédigé par Soumia quand il existe, sinon simplement absent.
+const TRANSPORT_BADGE: Record<TransportFilter, { label: string; icon: LucideIcon }> = {
+  sans_voiture: { label: "Sans voiture", icon: Footprints },
+  transports_possibles: { label: "Transports possibles", icon: Bus },
+  voiture_necessaire: { label: "Voiture nécessaire", icon: Car },
 };
 
-// Filtres pilules "Mes adresses enregistrées" (29/08/2026, demande Gemini transmise par Soumia) —
-// adaptés aux 3 catégories RÉELLES du schéma (PlaceLikedItem.category : Hôtel/Resto/Activité, voir
-// app/favoris/actions.ts). La demande d'origine listait une 4e catégorie "Cafés & Bars" qui
-// n'existe pas dans les données (les cafés/bars sont rangés dans "Resto") — inventer un filtre qui
-// ne matcherait jamais rien aurait été pire que de s'en tenir au schéma réel.
+// Filtres des adresses (29/08/2026) — les 3 catégories RÉELLES du schéma (PlaceLikedItem.category).
 const PLACE_FILTERS = ["Tous", "Hôtel", "Resto", "Activité"] as const;
 type PlaceFilter = (typeof PLACE_FILTERS)[number];
 const PLACE_FILTER_LABEL: Record<PlaceFilter, string> = {
@@ -34,6 +34,90 @@ const PLACE_FILTER_LABEL: Record<PlaceFilter, string> = {
   Resto: "Restaurants",
   Activité: "Activités",
 };
+
+function pluriel(n: number, mot: string) {
+  return `${n} ${mot}${n > 1 ? "s" : ""}`;
+}
+
+function Surtitre({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold mb-2"
+      style={{ fontFamily: "var(--font-display)" }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function TitreSection({ children }: { children: React.ReactNode }) {
+  return (
+    <h2
+      className="mb-6 leading-tight text-lve-charcoal"
+      style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 4.5vw, 2.8rem)" }}
+    >
+      {children}
+    </h2>
+  );
+}
+
+// Carte de destination — une seule forme pour les deux sortes de favoris (destination du Travel
+// Match, ou ancienne clé de fiche). Photo dans un calque à part (11/09/2026) pour que le filtre ne
+// touche pas le texte ; dégradé limité au bas de la photo pour la lisibilité.
+function CarteVoyage({
+  cle,
+  image,
+  titre,
+  texte,
+  href,
+  pastilles = [],
+}: {
+  cle: string;
+  image: string;
+  titre: string;
+  texte: string;
+  href: string;
+  pastilles?: { label: string; icon: LucideIcon }[];
+}) {
+  return (
+    <div className="group relative flex min-h-[300px] sm:min-h-[340px] items-end overflow-hidden rounded-2xl shadow-sm">
+      <div
+        className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.03]"
+        style={{ backgroundImage: `url('${image}')`, backgroundSize: "cover", backgroundPosition: "center", filter: PHOTO_GRADE.filtre }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/0" />
+      <div className="absolute right-4 top-4 z-10">
+        <LikeButton id={cle} />
+      </div>
+      <div className="relative z-10 w-full p-6 sm:p-7">
+        <h3
+          className="mb-2 leading-tight text-white"
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.7rem, 3vw, 2.1rem)", textShadow: "0 2px 12px rgba(0,0,0,0.5)" }}
+        >
+          {titre}
+        </h3>
+        <p className="mb-4 text-white/90 leading-relaxed text-[15px] line-clamp-3">{texte}</p>
+        {pastilles.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-5">
+            {pastilles.map(({ label, icon: Icon }) => (
+              <span
+                key={label}
+                className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs text-white bg-white/15 backdrop-blur-sm border border-white/25"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                <Icon size={13} strokeWidth={1.75} />
+                {label}
+              </span>
+            ))}
+          </div>
+        )}
+        <a href={href} className="btn-principal px-5 py-2.5 text-xs">
+          Voir le carnet
+        </a>
+      </div>
+    </div>
+  );
+}
 
 export function FavorisClient() {
   const { favorites } = useFavorites();
@@ -62,180 +146,87 @@ export function FavorisClient() {
     };
   }, [placeFavorites]);
 
-  if (liked === null || likedPlaces === null) {
-    // Court instant pendant que la Server Action résout les favoris (localStorage → DB) — pas de
-    // contenu à afficher tant qu'on ne sait pas ce qui est vraiment liké.
-    return <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-24" />;
-  }
-
-  const isEmpty = liked.length === 0 && likedPlaces.length === 0;
+  const charge = liked !== null && likedPlaces !== null;
+  const isEmpty = charge && liked.length === 0 && likedPlaces.length === 0;
+  const adressesFiltrees = (likedPlaces ?? []).filter((item) => placeFilter === "Tous" || item.category === placeFilter);
 
   return (
-    <div className="max-w-6xl mx-auto px-6 sm:px-8 py-16 sm:py-24">
-      {/* Serif éditoriale (29/08/2026, demande Gemini) : var(--font-title), cohérence avec les H1
-          des fiches voyage et de Notre Philosophie. Noir pur → anthracite chaud (29/08/2026, 2e
-          passe Gemini) : #2C2523 sur fond crème, moins dur que le noir. Graisse allégée
-          (font-extrabold → font-normal) au même geste, jugée trop lourde sur fond clair. */}
-      <h1
-        className="font-normal mb-10"
-        style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 5vw, 3rem)", color: "var(--text)" }}
-      >
-        Mes Favoris
-      </h1>
+    // Fond et encre claires fixes, comme /pros et /philosophie.
+    <div className="surface-claire bg-lve-bg min-h-[70vh]">
+      <EnTetePage
+        avant="Mes "
+        accent="favoris"
+        surtitre="Mon carnet de voyage"
+        chute="Tout ce que tu as mis de côté, au même endroit."
+      />
 
-      {isEmpty ? (
-        <div className="text-center py-16">
-          <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-            Ton carnet de voyage est vide.
-          </p>
-          {/* Repointé sur /questionnaire le 03/09/2026 : /carnets existe mais n'est plus lié
-              depuis le site (page réservée au démarchage), donc aucune page publique ne doit y
-              renvoyer — ni pour un visiteur, ni pour un moteur de recherche. */}
-          <Link href="/questionnaire" className="btn-principal">
-            Découvrir mes destinations
-          </Link>
+      {!charge ? (
+        // Court instant pendant que la Server Action résout les favoris — rien à afficher tant qu'on
+        // ne sait pas ce qui est vraiment liké.
+        <div className="py-16" />
+      ) : isEmpty ? (
+        <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+          <div className="rounded-2xl bg-lve-terracotta-bg border border-lve-terracotta/20 p-8 sm:p-10 text-center">
+            <div className="w-12 h-12 rounded-full bg-lve-terracotta text-white flex items-center justify-center mb-5 mx-auto">
+              <Heart size={20} strokeWidth={1.75} />
+            </div>
+            <h2
+              className="mb-3 leading-tight text-lve-charcoal"
+              style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.8rem, 4vw, 2.3rem)" }}
+            >
+              Ton carnet de voyage est vide.
+            </h2>
+            <p className="mb-7 text-lve-charcoal/75">
+              Touche le cœur d&apos;une destination ou d&apos;une adresse pour la retrouver ici.
+            </p>
+            {/* Vers /questionnaire et jamais /carnets (page réservée au démarchage, 03/09/2026). */}
+            <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
+              Découvrir mes destinations
+            </Link>
+          </div>
         </div>
       ) : (
         <>
           {liked.length > 0 && (
-            <div>
-              {/* Sous-titre ajouté (29/08/2026, demande Gemini) : fait écho à "Mes adresses
-                  enregistrées" plus bas, même style que le H2 de cette section-là. Serif éditoriale
-                  + anthracite chaud (29/08/2026, 2e passe Gemini, option A "unité visuelle") :
-                  était sans-serif gras, harmonisé avec le H1. */}
-              <h2
-                className="font-normal mb-6"
-                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "var(--text)" }}
-              >
-                Mes Carnets &amp; Voyages
-              </h2>
-              <div className="flex flex-col gap-5 mb-16">
-              {liked.map((item) =>
-                item.kind === "destination" ? (
-                  // Carte horizontale avec photo de couverture en fond (28/08/2026).
-                  // `destinations.hero_image` en base est un champ jamais tenu à jour (encore un
-                  // "https://..." factice pour Montréal/New York, une vieille photo perso pour le
-                  // reste) — la vraie photo de couverture, la même que sur la fiche voyage, vit
-                  // dans DESTINATION_HERO_IMAGE (lib/hero-images.ts) depuis le 28/08/2026. Repéré
-                  // par Soumia : l'image manquait carrément sur la carte Montréal des favoris.
-                  //
-                  // Overlay retiré (29/08/2026, "je veux que le texte soit direct sur l'image") :
-                  // le dégradé montait jusqu'à 75% de noir en bas, jamais retouché pendant tout le
-                  // reste du ménage "voile noir" fait sur l'accueil/les fiches voyage — repéré par
-                  // Soumia ("j'en ai ras le bol de demander la même chose"). Lisibilité assurée par
-                  // text-shadow sur le texte, plus par l'assombrissement de la photo.
-                  <div
-                    key={item.key}
-                    className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl p-6 sm:p-8"
-                  >
-                    {/* L'image passe dans un calque à part (11/09/2026) : un filtre posé sur le
-                        bloc parent aurait aussi filtré le titre et le bouton par-dessus. */}
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.destination.content_slug] ?? item.destination.hero_image}')`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        filter: PHOTO_GRADE.filtre,
-                      }}
+            <section className="max-w-5xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
+              <Surtitre>{pluriel(liked.length, "carnet")}</Surtitre>
+              <TitreSection>Mes carnets &amp; voyages</TitreSection>
+              <div className="grid gap-5 sm:grid-cols-2">
+                {liked.map((item) =>
+                  item.kind === "destination" ? (
+                    <CarteVoyage
+                      key={item.key}
+                      cle={item.key}
+                      image={DESTINATION_HERO_IMAGE[item.destination.content_slug] ?? item.destination.hero_image}
+                      titre={item.destination.title}
+                      texte={item.destination.summary}
+                      href={`/voyages/${item.destination.content_slug}?id=${item.destination.id}`}
+                      pastilles={[
+                        ...item.destination.filters.transport.map((t) => TRANSPORT_BADGE[t]),
+                        ...(item.destination.regional_transport
+                          ? [{ label: item.destination.regional_transport.recommended_mode, icon: TrainFront }]
+                          : []),
+                      ]}
                     />
-                    <div className="absolute right-4 top-4 z-10">
-                      <LikeButton id={item.key} />
-                    </div>
-                    <div className="relative z-10 w-full">
-                      <h2
-                        className="font-extrabold mb-2 text-white"
-                        style={{ fontFamily: "var(--font-display)", fontSize: "1.7rem", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.6)" }}
-                      >
-                        {item.destination.title}
-                      </h2>
-                      <p className="mb-3" style={{ color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 14px rgba(0,0,0,0.6)" }}>
-                        {item.destination.summary}
-                      </p>
-                      <div className="font-display flex flex-wrap gap-2 mb-4" style={{ fontSize: "0.8rem" }}>
-                        {item.destination.filters.transport.map((t) => (
-                          <span
-                            key={t}
-                            className="rounded-full px-3 py-1"
-                            style={{ background: "rgba(0,0,0,0.55)", color: "#fff" }}
-                          >
-                            {TRANSPORT_BADGE[t]}
-                          </span>
-                        ))}
-                        {item.destination.regional_transport && (
-                          <span
-                            className="rounded-full px-3 py-1"
-                            style={{ background: "rgba(0,0,0,0.55)", color: "#fff" }}
-                          >
-                            🚆 {item.destination.regional_transport.recommended_mode}
-                          </span>
-                        )}
-                      </div>
-                      <a
-                        href={`/voyages/${item.destination.content_slug}?id=${item.destination.id}`}
-                        className="font-display"
-                        style={{ color: "#fff", textDecoration: "underline", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
-                      >
-                        Voir la fiche voyage →
-                      </a>
-                    </div>
-                  </div>
-                ) : (
-                  <div
-                    key={item.key}
-                    className="relative flex min-h-[220px] items-end overflow-hidden rounded-2xl p-6 sm:p-8"
-                  >
-                    {/* L'image passe dans un calque à part (11/09/2026) : un filtre posé sur le
-                        bloc parent aurait aussi filtré le titre et le bouton par-dessus. */}
-                    <div
-                      className="absolute inset-0"
-                      style={{
-                        backgroundImage: `url('${DESTINATION_HERO_IMAGE[item.voyage.slug] ?? item.voyage.hero.image}')`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                        filter: PHOTO_GRADE.filtre,
-                      }}
+                  ) : (
+                    <CarteVoyage
+                      key={item.key}
+                      cle={item.key}
+                      image={DESTINATION_HERO_IMAGE[item.voyage.slug] ?? item.voyage.hero.image}
+                      titre={item.voyage.hero.title}
+                      texte={item.voyage.hero.tagline}
+                      href={`/voyages/${item.voyage.slug}`}
                     />
-                    <div className="absolute right-4 top-4 z-10">
-                      <LikeButton id={item.key} />
-                    </div>
-                    <div className="relative z-10 w-full">
-                      <h2
-                        className="font-extrabold mb-2 text-white"
-                        style={{ fontFamily: "var(--font-display)", fontSize: "1.7rem", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 4px 20px rgba(0,0,0,0.6)" }}
-                      >
-                        {item.voyage.hero.title}
-                      </h2>
-                      <p className="mb-4" style={{ color: "#fff", textShadow: "0 1px 3px rgba(0,0,0,0.9), 0 2px 14px rgba(0,0,0,0.6)" }}>
-                        {item.voyage.hero.tagline}
-                      </p>
-                      <a
-                        href={`/voyages/${item.voyage.slug}`}
-                        className="font-display"
-                        style={{ color: "#fff", textDecoration: "underline", textShadow: "0 1px 8px rgba(0,0,0,0.6)" }}
-                      >
-                        Voir la fiche voyage →
-                      </a>
-                    </div>
-                  </div>
-                )
-              )}
+                  )
+                )}
               </div>
-            </div>
+            </section>
           )}
 
           {likedPlaces.length > 0 && (
-            <div>
-              {/* Serif éditoriale + anthracite chaud (29/08/2026, 2e passe Gemini) : même
-                  harmonisation que "Mes Carnets & Voyages" juste au-dessus. */}
-              <h2
-                className="font-normal mb-6"
-                style={{ fontFamily: "var(--font-title)", fontSize: "1.8rem", color: "var(--text)" }}
-              >
-                Mes adresses enregistrées
-              </h2>
-              {/* Filtres pilules (29/08/2026, demande Gemini) — purement client, ne re-résout
-                  rien côté serveur, juste un .filter() sur ce qui est déjà chargé. */}
+            <section className={`max-w-5xl mx-auto px-6 sm:px-8 pb-10 sm:pb-14 ${liked.length === 0 ? "pt-10 sm:pt-14" : ""}`}>
+              <Surtitre>{pluriel(likedPlaces.length, "adresse")}</Surtitre>
+              <TitreSection>Mes adresses enregistrées</TitreSection>
               <div className="flex flex-wrap gap-2 mb-6">
                 {PLACE_FILTERS.map((f) => {
                   const active = placeFilter === f;
@@ -244,10 +235,11 @@ export function FavorisClient() {
                       key={f}
                       type="button"
                       onClick={() => setPlaceFilter(f)}
-                      className="rounded-full px-4 py-1.5 text-xs font-medium transition-colors"
+                      className="rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.12em] transition-colors border"
                       style={{
                         fontFamily: "var(--font-display)",
                         background: active ? "var(--lve-terracotta)" : "var(--lve-terracotta-bg)",
+                        borderColor: active ? "var(--lve-terracotta)" : "color-mix(in srgb, var(--lve-terracotta) 20%, transparent)",
                         color: active ? "#fff" : "var(--lve-terracotta-ink)",
                       }}
                     >
@@ -256,19 +248,39 @@ export function FavorisClient() {
                   );
                 })}
               </div>
-              {/* Réutilise AddressDetailCard tel quel (28/08/2026) — même carte que sur les
-                  fiches voyage, badge/nom/description/tags/bouton Instagram/lien inclus, le
-                  cœur de retrait est déjà intégré au composant. */}
-              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {likedPlaces
-                  .filter((item) => placeFilter === "Tous" || item.category === placeFilter)
-                  .map((item) => (
+              {/* Même carte que sur les fiches voyage, cœur de retrait inclus (28/08/2026). */}
+              {adressesFiltrees.length > 0 ? (
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {adressesFiltrees.map((item) => (
                     <AddressDetailCard key={item.key} card={item.card} category={item.category} />
                   ))}
-              </div>
-            </div>
+                </div>
+              ) : (
+                <p className="text-lve-charcoal/70 italic">Aucune adresse dans cette catégorie pour l&apos;instant.</p>
+              )}
+            </section>
           )}
         </>
+      )}
+
+      {charge && !isEmpty && (
+        <div
+          className="text-center py-10 sm:py-14 px-6"
+          style={{ background: "radial-gradient(ellipse 70% 70% at 50% 50%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
+        >
+          <h2
+            className="mb-3 leading-tight text-lve-charcoal"
+            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 4.5vw, 2.8rem)" }}
+          >
+            Envie d&apos;allonger la liste&nbsp;?
+          </h2>
+          <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
+            8 questions pour trouver la destination qui répond à tes envies.
+          </p>
+          <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
+            Lancer Travel Match
+          </Link>
+        </div>
       )}
     </div>
   );

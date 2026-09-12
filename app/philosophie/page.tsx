@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Bookmark, Compass, Eye, Heart, Layers, Send, type LucideIcon } from "lucide-react";
 import { getCarnets, getCompteursListe } from "@/lib/carnets";
+import { EnTetePage } from "../components/EnTetePage";
 
 // Relue en base à la requête depuis la section "Ma liste" (12/09/2026) : ses compteurs viennent de
 // la base, et une page prérendue resservirait des chiffres périmés.
@@ -87,30 +88,14 @@ export default async function PhilosophiePage() {
     // Fond et encre claires fixes (relecture du 11/09/2026) : sections sur couleurs de marque fixes,
     // le texte ne doit pas suivre le mode sombre.
     <div className="surface-claire bg-lve-bg">
-      <div
-        className="px-6 sm:px-8 py-10 sm:py-14"
-        style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
-      >
-        <div className="max-w-3xl mx-auto">
-          <span
-            className="inline-block text-xs uppercase tracking-[0.25em] text-white bg-lve-terracotta font-semibold rounded-full px-4 py-1.5 mb-5"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            Ma philosophie
-          </span>
-          <h1
-            className="mb-6 leading-tight text-lve-charcoal"
-            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.2rem, 5vw, 3.2rem)" }}
-          >
-            L&apos;art du voyage raconté sans filtre, libéré de la charge de la recherche.
-          </h1>
-          {/* Citation reprise telle quelle de la section Manifeste de l'accueil. Espaces insécables
-              dans les guillemets (relecture du 11/09/2026). */}
-          <Citation>
-            «&nbsp;Un regard humain, des adresses incarnées et la vérité de l&apos;expérience.&nbsp;»
-          </Citation>
-        </div>
-      </div>
+      {/* En-tête commun (13/09/2026). Chute = l'ancien grand titre de la page, mot pour mot ; ligne
+          en capitales = le début de la citation du Manifeste de l'accueil. */}
+      <EnTetePage
+        avant="Ma "
+        accent="philosophie"
+        surtitre="Un regard humain, des adresses incarnées"
+        chute="L'art du voyage raconté sans filtre, libéré de la charge de la recherche."
+      />
 
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
         <Surtitre>Le mot de la fondatrice</Surtitre>
