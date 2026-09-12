@@ -9,9 +9,12 @@
 // propre photo distincte (avant : plusieurs partageaient une image générique par pays/région —
 // japon.jpg, grece.jpg, italie.jpg, portugal.jpg).
 export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
-  // Phare de Biarritz — Dani Fuentes Ortiz, https://unsplash.com/photos/IUCa8juTvjM
+  // Coucher de soleil et surfeurs sur la plage de Biarritz, montagnes basques au loin (choisie par
+  // Soumia le 12/09/2026, remplace le phare de Biarritz sous un ciel gris — la fiche parle de surf
+  // et de couchers de soleil, la photo montrait un jour terne) — Frederic Christian,
+  // https://unsplash.com/photos/a-beach-with-a-sunset-1pi5HWjOb2A
   "cote-basque":
-    "https://images.unsplash.com/photo-1451159289881-10709108b343?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1670278365321-1f205b318ab3?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   // Manhattan Bridge au crépuscule — Maxim Klimashin, https://unsplash.com/photos/manhattan-bridge-and-new-york-city-skyline-at-dusk-CDQRLACxIzw
   "new-york":
     "https://images.unsplash.com/photo-1761233139114-def1098bf2b5?fm=jpg&q=80&w=2400&auto=format&fit=crop",
