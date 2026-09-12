@@ -34,7 +34,7 @@ export default function SansFiltrePage() {
             className="inline-block text-xs uppercase tracking-[0.25em] text-white bg-lve-terracotta font-semibold rounded-full px-4 py-1.5 mb-5"
             style={{ fontFamily: "var(--font-display)" }}
           >
-            {total} photos · {voyages.length} voyages
+            {total} photos
           </span>
           <h1
             className="mb-6 leading-tight text-lve-charcoal"
