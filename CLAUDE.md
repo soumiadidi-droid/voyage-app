@@ -82,6 +82,16 @@ push régulièrement au fil du travail.
   `lib/carnets.ts`), et **même habillage que `/pros`** (colonne unique, pastille, citation à filet,
   cartes terracotta clair à icône ronde). Photos en éventail essayées puis retirées pour coller à
   `/pros`. Validé et mis en ligne par Soumia ("j'adore, go").
+- `/sans-filtre` — **galerie brute de Soumia** (en ligne le 12/09/2026, dans le menu et le footer).
+  Ressuscite l'idée de `/photos` à sa demande. Un mur d'images bord à bord, **mélangé à chaque
+  visite, sans lieu, sans date, sans section, sans compteur** : nommer les lieux révélerait les
+  réponses du Travel Match (même règle que `/carnets`). Le lieu n'existe ni dans
+  `lib/sans-filtre-photos.json` ni dans les adresses Blob (`sans-filtre/AAAA-MM/NNN.jpg`).
+  Photos jamais étalonnées (pas de PHOTO_GRADE, c'est la preuve brute). Tout ajout passe par :
+  retrait des photos avec des personnes, redimensionnement 1800/720 px, **suppression des
+  métadonnées dont le GPS**, envoi sur Blob. Scripts de préparation dans le scratchpad de la
+  session du 12/09 (non versionnés) — détection de personnes via le framework Vision d'Apple,
+  validée sur les 289 premières photos.
 - `/pros` — l'offre de collaboration (voir plus bas). Libellé de nav : "On collabore ?", validé par
   Soumia le 29/08/2026 — ne pas le renommer
 - `/mentions-legales`, `/confidentialite`
