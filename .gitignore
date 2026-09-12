@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Captures de l'agent relecteur (images lourdes, régénérées à chaque relecture)
+.claude/relecteur/captures/
