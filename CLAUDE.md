@@ -800,3 +800,27 @@ Suite, tranchée par Soumia le 12/09/2026 :
   toutes les graisses et avec EB Garamond : Cormorant pose ses accents haut et détachés du
   caractère, à toutes les graisses. Changer suppose de changer la police des titres (EB Garamond
   les pose normalement) — décision de Soumia, non prise à ce stade.
+
+## Page de garde du carrousel (12/09/2026)
+
+La première image du carrousel d'un carnet **n'est plus une photo**. Soumia tranche : dans un
+carrousel de carnet, les photos se découvrent en défilant — la couverture annonce, elle ne montre
+pas. C'est une tuile unie, troisième de la famille après l'ivoire (teaser 1) et le terracotta
+(teaser 3), donc la semaine de publication se lit comme une gradation dans la grille.
+
+Nouveau modèle `couverture` du studio, libellé **Page de Garde** : fond sable, surtitre "Nouveau
+carnet", destination en Cormorant, villes, promesse chiffrée ("13 adresses testées"), filet,
+handle et "Fais défiler →". Ce dernier n'est pas décoratif : sans lui, une tuile unie ressemble à
+un post simple et personne ne devine qu'il y a six images derrière.
+
+Deux corrections faites dans la foulée, sans lesquelles le modèle ne servait à rien :
+
+- **Format 4:5 (1080 × 1350)** ajouté au sélecteur. C'est le gabarit des carrousels et il
+  n'existait pas — la couverture serait sortie à un cadre différent des slides suivantes.
+- **Export à la largeur réelle du gabarit.** `toPng` tournait à `pixelRatio: 2` sur un aperçu de
+  420 px, soit des images de 840 px que les réseaux réétiraient. La finesse se calcule maintenant
+  à partir de `FORMATS[].largeur`. Vaut pour les cinq modèles.
+
+Détail typographique : la promesse est en Bricolage mono, pas en Cormorant. Cormorant dessine des
+chiffres en style ancien, et un "13" plus bas que les capitales qui l'entourent se lit mal dans une
+ligne espacée.

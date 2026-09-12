@@ -19,6 +19,10 @@ export function InstaStudio() {
   );
   const [moodWord, setMoodWord] = useState("Farniente");
   const [moodDetail, setMoodDetail] = useState("Côte Basque · Été 2026");
+  const [coverSurtitre, setCoverSurtitre] = useState("Nouveau carnet");
+  const [coverDestination, setCoverDestination] = useState("Côte Basque");
+  const [coverVilles, setCoverVilles] = useState("Biarritz, Saint-Jean-de-Luz");
+  const [coverPromesse, setCoverPromesse] = useState("13 adresses testées");
   const [addressName, setAddressName] = useState("Loco Polo");
   const [addressCity, setAddressCity] = useState("Saint-Jean-de-Luz");
   const [photo, setPhoto] = useState<string | null>(null);
@@ -38,8 +42,12 @@ export function InstaStudio() {
     if (!cardRef.current) return;
     setIsExporting(true);
     try {
+      // La carte est affichée à ~420 px : on calcule la finesse d'export pour tomber sur la
+      // largeur réelle du gabarit (1080 px pour Instagram) plutôt que sur un simple ×2.
+      const gabarit = FORMATS.find((f) => f.id === format)!;
+      const affichee = cardRef.current.offsetWidth || 420;
       const dataUrl = await toPng(cardRef.current, {
-        pixelRatio: 2,
+        pixelRatio: Math.max(2, gabarit.largeur / affichee),
         cacheBust: true,
       });
       const link = document.createElement("a");
@@ -148,6 +156,47 @@ export function InstaStudio() {
                 onChange={(e) => setMoodDetail(e.target.value)}
                 className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
               />
+            </div>
+          )}
+
+          {preset === "couverture" && (
+            <div className="flex flex-col gap-3">
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Surtitre
+              </label>
+              <input
+                value={coverSurtitre}
+                onChange={(e) => setCoverSurtitre(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Destination
+              </label>
+              <input
+                value={coverDestination}
+                onChange={(e) => setCoverDestination(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Villes
+              </label>
+              <input
+                value={coverVilles}
+                onChange={(e) => setCoverVilles(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Promesse
+              </label>
+              <input
+                value={coverPromesse}
+                onChange={(e) => setCoverPromesse(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <p className="font-body text-xs leading-relaxed text-lve-charcoal/50">
+                Recompte les adresses sur la fiche en ligne avant d’écrire la promesse : c’est le
+                seul chiffre du carrousel, et c’est celui qui fait défiler.
+              </p>
             </div>
           )}
 
@@ -283,6 +332,51 @@ export function InstaStudio() {
                 <p className="mt-6 font-title text-[10px] uppercase tracking-[0.3em] text-white/70">
                   {HANDLE}
                 </p>
+              </div>
+            )}
+
+            {/* Page de garde (12/09/2026). Troisième tuile unie, fond sable : posée entre
+                l'ivoire du teaser 1 et le terracotta du teaser 3, elle complète la gradation de la
+                semaine au lieu de la casser. Aucune photo — dans un carrousel de carnet, les images
+                se méritent en défilant, la couverture ne fait qu'annoncer. Trois blocs seulement :
+                le rituel en haut, la destination au milieu, la promesse et la signature en bas. */}
+            {preset === "couverture" && (
+              <div className="flex h-full w-full flex-col justify-between bg-lve-sand p-12">
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-lve-terracotta-ink" />
+                  <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-terracotta-ink">
+                    {coverSurtitre}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  <p className="font-title text-5xl leading-[1.05] text-lve-charcoal">
+                    {coverDestination}
+                  </p>
+                  <p className="font-body text-sm text-lve-charcoal/70">{coverVilles}</p>
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <span className="h-px w-full bg-lve-charcoal/15" />
+                  <div className="flex items-end justify-between gap-6">
+                    <div className="flex flex-col gap-2">
+                      {/* La promesse en Bricolage mono, comme le détail de la tuile terracotta :
+                          Cormorant dessine des chiffres en style ancien, et un « 13 » plus bas que
+                          les capitales qui l'entourent se lit mal dans une ligne espacée. */}
+                      <p className="font-mono-lve text-[11px] uppercase tracking-[0.22em] text-lve-terracotta-ink">
+                        {coverPromesse}
+                      </p>
+                      <p className="font-title text-[10px] uppercase tracking-[0.3em] text-lve-charcoal/60">
+                        {HANDLE}
+                      </p>
+                    </div>
+                    {/* L'invitation à défiler : sans elle, une tuile unie ressemble à un post
+                        simple et personne ne sait qu'il y a six images derrière. */}
+                    <span className="whitespace-nowrap font-mono-lve text-[10px] uppercase tracking-[0.2em] text-lve-charcoal/60">
+                      Fais défiler →
+                    </span>
+                  </div>
+                </div>
               </div>
             )}
 

@@ -1,4 +1,9 @@
-export type PresetId = "minimalist" | "editorial" | "terracotta-mood" | "carnet";
+export type PresetId =
+  | "minimalist"
+  | "editorial"
+  | "terracotta-mood"
+  | "couverture"
+  | "carnet";
 
 export const PRESETS: { id: PresetId; label: string }[] = [
   { id: "minimalist", label: "Citation Minimalist" },
@@ -7,18 +12,35 @@ export const PRESETS: { id: PresetId; label: string }[] = [
   // C'est ce procédé qui fait tenir une grille Instagram d'un post à l'autre.
   { id: "editorial", label: "Monogramme Éditorial" },
   { id: "terracotta-mood", label: "Terracotta Mood" },
+  // Ajouté le 12/09/2026 : la page de garde du carrousel d'un carnet. Troisième tuile unie de la
+  // famille, après l'ivoire (teaser 1) et le terracotta (teaser 3) — fond sable, aucune photo.
+  // Décision de Soumia : dans un carrousel de carnet, les photos ne se découvrent qu'en défilant,
+  // la première image ne montre rien. Elle annonce : la destination, et ce qu'il y a derrière.
+  { id: "couverture", label: "Page de Garde" },
   { id: "carnet", label: "Carnet d'Adresse" },
 ];
 
 // Formats de sortie (11/09/2026) : le même visuel sert sur plusieurs réseaux, mais pas au même
 // gabarit. Pinterest est un moteur de recherche vertical — une image carrée y prend deux fois
 // moins de place à l'écran et se fait dépasser par les épingles 2:3.
-export type FormatId = "square" | "pin" | "story";
+export type FormatId = "square" | "portrait" | "pin" | "story";
 
-export const FORMATS: { id: FormatId; label: string; ratio: string; hint: string }[] = [
-  { id: "square", label: "Instagram · carré", ratio: "1 / 1", hint: "1080 × 1080" },
-  { id: "pin", label: "Pinterest · vertical", ratio: "2 / 3", hint: "1000 × 1500" },
-  { id: "story", label: "Story · plein écran", ratio: "9 / 16", hint: "1080 × 1920" },
+// `largeur` sert au calcul de finesse de l'export (12/09/2026) : l'aperçu ne fait que 420 px, et un
+// export au double sortait des images de 840 px que les réseaux réétiraient. On vise la largeur
+// réelle du gabarit.
+export const FORMATS: {
+  id: FormatId;
+  label: string;
+  ratio: string;
+  hint: string;
+  largeur: number;
+}[] = [
+  { id: "square", label: "Instagram · carré", ratio: "1 / 1", hint: "1080 × 1080", largeur: 1080 },
+  // 4:5 ajouté le 12/09/2026 : c'est le gabarit des carrousels (1080 × 1350). Sans lui, la page de
+  // garde exportée n'avait pas le même cadre que les slides qui la suivent, et Instagram recadrait.
+  { id: "portrait", label: "Instagram · portrait", ratio: "4 / 5", hint: "1080 × 1350", largeur: 1080 },
+  { id: "pin", label: "Pinterest · vertical", ratio: "2 / 3", hint: "1000 × 1500", largeur: 1000 },
+  { id: "story", label: "Story · plein écran", ratio: "9 / 16", hint: "1080 × 1920", largeur: 1080 },
 ];
 
 // Ambiances photo (11/09/2026) — transposition en CSS des étalonnages testés sur les photos de la
