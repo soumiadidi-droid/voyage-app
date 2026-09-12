@@ -36,15 +36,32 @@ export default function SansFiltrePage() {
 
   return (
     <div className="surface-claire bg-lve-bg">
-      <div className="px-6 sm:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10 text-center">
+      {/* Titre "pimpé" (12/09/2026, demande de Soumia) : halo terracotta du site, "filtre" en
+          italique terracotta, sous-titre scindé en une ligne capitales encadrée de filets et une
+          chute en italique. Mêmes mots qu'avant, seule la mise en scène change. */}
+      <div
+        className="px-6 sm:px-8 pt-14 sm:pt-20 pb-10 sm:pb-14 text-center"
+        style={{ background: "radial-gradient(ellipse 70% 90% at 50% 0%, var(--lve-terracotta-bg), var(--lve-bg))" }}
+      >
         <h1
-          className="leading-none text-lve-charcoal mb-4"
-          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3rem, 9vw, 6.5rem)" }}
+          className="leading-[0.9] text-lve-charcoal mb-7 sm:mb-9"
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3.6rem, 12vw, 9rem)", letterSpacing: "-0.02em" }}
         >
-          Sans filtre
+          Sans <em className="italic text-lve-terracotta-dark">filtre</em>
         </h1>
-        <p className="italic text-lve-charcoal/70 max-w-xl mx-auto" style={{ fontSize: "1.1rem" }}>
-          Mes photos telles que je les ai prises. Juste ce que j&apos;ai vu.
+        <p
+          className="flex items-center justify-center gap-5 text-[10px] sm:text-xs uppercase tracking-[0.18em] sm:tracking-[0.3em] font-semibold text-lve-terracotta-ink mb-3"
+          style={{ fontFamily: "var(--font-display)" }}
+        >
+          <span className="hidden sm:block h-px w-16 bg-lve-terracotta/50" aria-hidden="true" />
+          Mes photos telles que je les ai prises
+          <span className="hidden sm:block h-px w-16 bg-lve-terracotta/50" aria-hidden="true" />
+        </p>
+        <p
+          className="italic text-lve-charcoal/75"
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.4rem, 3vw, 1.9rem)" }}
+        >
+          Juste ce que j&apos;ai vu.
         </p>
       </div>
 
