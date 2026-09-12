@@ -918,3 +918,9 @@ cartes d%adresse, en 10 px, est repassé dessus).
 teaser 2 = photo d%ambiance ; teaser 3 = deux images, tuile terracotta puis photo du lieu ;
 post 4 = carrousel ouvert par la page de garde sable. L%ivoire sort du cycle et devient la tuile des
 posts de concept, où Soumia parle en son nom.
+
+**Tunnel final validé le 12/09/2026 ("feed clean")** : post 1 carte couleur de l%envie ; post 2
+photo d%atmosphère SANS texte, pour faire respirer la grille ; post 3 carrousel de 2 (carte
+terracotta puis photo du lieu + annonce du carnet) ; post 4 carrousel de 6 (couverture sable, 4
+slides d%adresses, carte de conclusion + CTA Travel Match). La couverture du post 4 reste SABLE : le
+terracotta est pris par le post 3, et un crème ferait doublon avec l%ivoire des posts de concept.

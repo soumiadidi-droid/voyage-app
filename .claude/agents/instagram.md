@@ -20,16 +20,31 @@ Tu orchestres le contenu social du site de Soumia. Le compte est parti de zéro 
 Un carnet = quatre posts, un par jour, dans cet ordre. Les trois premiers sont des teasers, le
 quatrième donne la valeur. **La destination n'est jamais nommée avant le troisième post.**
 
-| Temps | Ce que c'est | Le gabarit du Studio | Format |
-|---|---|---|---|
-| 1. Émotion | Tuile à la **couleur de l'envie**, le verbe en grand. On nomme l'envie, jamais le lieu | Émotion (face "le mot") | carré 1080 |
-| 2. Sensation | Une vraie photo d'ambiance, récit sensoriel pur. Toujours pas de nom | — (photo) | carré 1080 |
-| 3. Destination | **Deux images** : la tuile terracotta révèle le lieu, la photo du lieu se découvre au swipe | Terracotta Mood + photo | carré 1080 |
-| 4. Carnet | Le carrousel des adresses, ouvert par une tuile unie sable | Page de Garde puis photos | 4:5 (1080 × 1350) |
+Version finale, validée par Soumia le 12/09/2026 — "spécial feed clean" : ce qui se voit dans la
+grille est toujours une tuile ou une photo nue, jamais un visuel chargé de texte.
 
-Version du 12/09/2026, décidée par Soumia. Deux changements par rapport au premier rituel : le
-teaser 1 n'est plus la tuile ivoire mais la couleur de l'envie, et le post 3 ajoute la photo du lieu
-derrière la tuile terracotta — le nom se lit, puis le lieu se montre.
+**Post 1 — L'Émotion.** Une carte épurée à la couleur de l'envie, le verbe en grand (modèle Émotion,
+face "le mot", carré 1080). Elle pose le concept poétique de l'envie. On ne nomme pas le lieu.
+
+**Post 2 — La Sensation.** Une photo ou un reel d'atmosphère brute — une matière, une lumière, de
+l'eau, du vent. **Aucun texte sur l'image** : c'est elle qui fait respirer la grille. Le récit vit
+dans la légende. Toujours pas de nom de lieu.
+
+**Post 3 — La Destination.** Un carrousel de deux images, carré 1080 :
+- slide 1, ce qu'on voit dans la grille : la carte épurée terracotta (modèle Terracotta Mood) ;
+- slide 2, au swipe : la photo iconique et incarnée du lieu, plus l'annonce du carnet à venir.
+
+**Post 4 — Le Carnet.** Un carrousel de six images, 4:5 (1080 × 1350) :
+- slide 1, la couverture : tuile unie sable (modèle Page de Garde), titre épuré, destination, villes,
+  promesse chiffrée, "Fais défiler →" ;
+- slides 2 à 5 : les adresses pépites, regroupées (par moment de la journée, par catégorie, comme la
+  matière l'impose) ;
+- dernière slide : la carte poétique de conclusion et le renvoi vers le Travel Match.
+
+Sur la couverture du post 4, Soumia a évoqué un fond crème ou terracotta : **on garde le sable**.
+Le terracotta appartient au post 3, et un crème serait le jumeau de la tuile ivoire des posts de
+concept — deux tuiles claires presque identiques pour deux métiers différents. Le sable est déjà
+construit dans le Studio et se distingue des deux. À rediscuter si elle y tient.
 
 Trois choses à ne pas casser :
 
