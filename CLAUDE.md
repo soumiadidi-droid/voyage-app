@@ -76,7 +76,12 @@ push régulièrement au fil du travail.
   Où manger), Activités, bouton like, extensions/combos. 15 fiches en base
 - `/favoris` — destinations likées en localStorage (voir section Favoris plus bas)
 - `/philosophie` — piliers + "mot de la fondatrice" (texte définitif de Soumia du 23/08/2026, ne
-  pas modifier sans son accord). Libellé de nav : "Ma philosophie"
+  pas modifier sans son accord). Libellé de nav : "Ma philosophie". **Depuis le 12/09/2026** :
+  second chapitre "Et puis, il y a ma liste." (je repère, je teste, je recommande à mes amis — ce
+  site, c'est ma liste ouverte), avec trois compteurs lus en base (`getCompteursListe()` dans
+  `lib/carnets.ts`), et **même habillage que `/pros`** (colonne unique, pastille, citation à filet,
+  cartes terracotta clair à icône ronde). Photos en éventail essayées puis retirées pour coller à
+  `/pros`. Validé et mis en ligne par Soumia ("j'adore, go").
 - `/pros` — l'offre de collaboration (voir plus bas). Libellé de nav : "On collabore ?", validé par
   Soumia le 29/08/2026 — ne pas le renommer
 - `/mentions-legales`, `/confidentialite`
