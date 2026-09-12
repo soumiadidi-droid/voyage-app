@@ -1,3 +1,5 @@
+import { LVE_COLORS } from "@/lib/design-tokens";
+
 export type PresetId =
   | "minimalist"
   | "editorial"
@@ -85,4 +87,22 @@ export type FaceId = "mot" | "photo";
 export const FACES: { id: FaceId; label: string }[] = [
   { id: "mot", label: "1 · le mot" },
   { id: "photo", label: "2 · la photo" },
+];
+
+// Les six envies, avec leur couleur (12/09/2026). Soumia : six tuiles identiques ne contrastent pas
+// dans la grille. On fait donc varier le fond — mais uniquement dans la charte, qui compte
+// justement six couleurs profondes déjà utilisées ailleurs sur le site. Rien d'inventé pour
+// l'occasion, et surtout six teintes de valeur équivalente : la grille varie en teinte, pas en
+// poids, donc les six posts restent un bloc au lieu de virer à l'arc-en-ciel.
+//
+// L'association n'est pas décorative : le cuivre pour la pierre chaude des vieilles rues, le
+// terracotta de la marque pour la table, la sauge pour le vert, l'océan pour la mer, la prune pour
+// la nuit, l'ardoise pour l'effort du matin.
+export const ENVIES: { verbe: string; phrase: string; fond: string }[] = [
+  { verbe: "Flâner", phrase: "Des ruelles, des artisans, des histoires", fond: LVE_COLORS.terracotta.copperSmoke },
+  { verbe: "Déguster", phrase: "Prendre le temps de bien manger", fond: LVE_COLORS.terracotta.dark },
+  { verbe: "Respirer", phrase: "De l'espace, du vert, du silence", fond: LVE_COLORS.sage.dark },
+  { verbe: "Lâcher prise", phrase: "La mer, le sel, le temps qui s'étire", fond: LVE_COLORS.ocean.dark },
+  { verbe: "Vibrer", phrase: "De l'énergie, du monde, des nuits", fond: LVE_COLORS.plum.dark },
+  { verbe: "Bouger", phrase: "Des journées pleines, se dépenser", fond: LVE_COLORS.slate.dark },
 ];

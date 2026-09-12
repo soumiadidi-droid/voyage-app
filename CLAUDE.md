@@ -843,10 +843,22 @@ bande-annonce du questionnaire.
 
 **Un post = deux images**, modèle `emotion` du studio (libellé **Émotion**, sélecteur de face) :
 
-- **Face 1, le mot** — fond obsidienne, le verbe en Cormorant très grand, "Une envie par jour · n/6"
-  en haut, handle et "Fais défiler →" en bas. C'est la seule tuile sombre du compte, délibérément :
-  l'ivoire est pris par le teaser 1, le terracotta par le teaser 3, le sable par la page de garde
-  d'un carnet. Réutiliser l'un des trois aurait fait passer la série pour un carnet de plus.
+- **Face 1, le mot** — fond profond, le verbe en Cormorant très grand, "Une envie par jour · n/6"
+  en haut, handle et "Fais défiler →" en bas. Les tuiles sont sombres, délibérément : l'ivoire est
+  pris par le teaser 1, le terracotta par le teaser 3, le sable par la page de garde d'un carnet.
+  Réutiliser l'un des trois aurait fait passer la série pour un carnet de plus.
+
+  **Une couleur par envie** (Soumia, 12/09/2026 : six tuiles identiques ne contrastent pas dans la
+  grille). La charte compte justement six couleurs profondes déjà utilisées ailleurs sur le site,
+  donc rien n'a été inventé — et elles sont de valeur équivalente, donc la grille varie en teinte
+  et pas en poids : un bloc, pas un arc-en-ciel. Cuivre pour Flâner (la pierre chaude des vieilles
+  rues), terracotta pour Déguster (la table), sauge pour Respirer, océan pour Lâcher prise, prune
+  pour Vibrer (la nuit), ardoise pour Bouger (l'effort du matin). La liste vit dans `ENVIES`
+  (`presets.ts`) : choisir une envie remplit le verbe, la phrase, le rang et la couleur d'un coup —
+  douze images à sortir, personne ne retape ça.
+
+  Les petits textes sont en **ivoire à 75 %, pas en sable** : le sable tombe à 4,3 de contraste sur
+  la sauge, sous le seuil de 4,5. Une règle unique pour les six fonds vaut mieux qu'une exception.
 - **Face 2, la photo** — elle ne se découvre qu'au swipe, comme pour les carnets. Le verbe reste
   écrit en petit en haut pour qu'une capture de la seule deuxième image garde son sens. Deux voiles,
   en haut et en bas : le verbe est posé sur le ciel, la partie la plus claire d'une photo de paysage.

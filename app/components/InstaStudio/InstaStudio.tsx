@@ -8,6 +8,7 @@ import {
   FORMATS,
   FILTRES,
   FACES,
+  ENVIES,
   type PresetId,
   type FormatId,
   type FiltreId,
@@ -29,9 +30,17 @@ export function InstaStudio() {
   const [moodWord, setMoodWord] = useState("Farniente");
   const [moodDetail, setMoodDetail] = useState("Côte Basque · Été 2026");
   const [face, setFace] = useState<FaceId>("mot");
-  const [emotionVerbe, setEmotionVerbe] = useState("Déguster");
-  const [emotionPhrase, setEmotionPhrase] = useState("Prendre le temps de bien manger");
-  const [emotionRang, setEmotionRang] = useState("2 / 6");
+  const [envie, setEnvie] = useState(0);
+  const [emotionVerbe, setEmotionVerbe] = useState(ENVIES[0].verbe);
+  const [emotionPhrase, setEmotionPhrase] = useState(ENVIES[0].phrase);
+
+  // Choisir une envie remplit le verbe, la phrase et la couleur d'un coup : douze images à sortir
+  // (six posts, deux faces), personne ne retape ça à la main.
+  function choisirEnvie(i: number) {
+    setEnvie(i);
+    setEmotionVerbe(ENVIES[i].verbe);
+    setEmotionPhrase(ENVIES[i].phrase);
+  }
   const [coverSurtitre, setCoverSurtitre] = useState("Nouveau carnet");
   const [coverDestination, setCoverDestination] = useState("Côte Basque");
   const [coverVilles, setCoverVilles] = useState("Biarritz, Saint-Jean-de-Luz");
@@ -66,7 +75,10 @@ export function InstaStudio() {
       const link = document.createElement("a");
       // Les deux faces d'une émotion s'exportent l'une après l'autre : sans le suffixe, le second
       // téléchargement écrasait le premier.
-      const suffixe = preset === "emotion" ? `-${face}` : "";
+      const suffixe =
+        preset === "emotion"
+          ? `-${envie + 1}-${ENVIES[envie].verbe.toLowerCase().replace(/\s+/g, "-")}-${face}`
+          : "";
       link.download = `lve-${preset}${suffixe}-${format}.png`;
       link.href = dataUrl;
       link.click();
@@ -178,6 +190,28 @@ export function InstaStudio() {
           {preset === "emotion" && (
             <div className="flex flex-col gap-3">
               <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Envie
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {ENVIES.map((e, i) => (
+                  <button
+                    key={e.verbe}
+                    onClick={() => choisirEnvie(i)}
+                    className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs transition-colors ${
+                      envie === i
+                        ? "border-lve-terracotta bg-lve-terracotta-bg text-lve-terracotta-dark"
+                        : "border-lve-border text-lve-charcoal hover:border-lve-terracotta"
+                    }`}
+                  >
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{ background: e.fond }}
+                    />
+                    {e.verbe}
+                  </button>
+                ))}
+              </div>
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
                 Face
               </label>
               <div className="flex flex-wrap gap-2">
@@ -209,14 +243,6 @@ export function InstaStudio() {
               <input
                 value={emotionPhrase}
                 onChange={(e) => setEmotionPhrase(e.target.value)}
-                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
-              />
-              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
-                Rang dans la série
-              </label>
-              <input
-                value={emotionRang}
-                onChange={(e) => setEmotionRang(e.target.value)}
                 className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
               />
               {face === "photo" && (
@@ -426,11 +452,17 @@ export function InstaStudio() {
                 Face 2, la photo : elle ne se voit qu'au swipe. Le verbe reste écrit en petit en
                 haut, pour qu'une capture de la seule deuxième image garde son sens. */}
             {preset === "emotion" && face === "mot" && (
-              <div className="flex h-full w-full flex-col justify-between bg-lve-obsidian p-12">
+              <div
+                className="flex h-full w-full flex-col justify-between p-12"
+                style={{ background: ENVIES[envie].fond }}
+              >
                 <div className="flex items-center gap-3">
                   <span className="h-px w-8 bg-lve-sand" />
-                  <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-sand">
-                    Une envie par jour · {emotionRang}
+                  {/* Ivoire à 75 % et pas sable : le sable tombe à 4,3 de contraste sur la sauge,
+                      sous le seuil de 4,5 pour du petit texte. Une seule règle pour les six fonds
+                      vaut mieux qu'une exception à retenir. */}
+                  <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory/75">
+                    Une envie par jour · {envie + 1} / 6
                   </span>
                 </div>
 
@@ -482,7 +514,7 @@ export function InstaStudio() {
                 {/* Second voile, en haut : le verbe est posé sur la partie la plus claire d'une
                     photo de paysage (le ciel), où le sable seul devient illisible. */}
                 <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-black/45 to-transparent" />
-                <span className="absolute left-12 top-12 font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-sand">
+                <span className="absolute left-12 top-12 font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory/75">
                   {emotionVerbe}
                 </span>
                 <div className="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
