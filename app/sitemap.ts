@@ -21,6 +21,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${SITE_URL}/`, lastModified: now, changeFrequency: "weekly", priority: 1 },
     { url: `${SITE_URL}/pros`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
     { url: `${SITE_URL}/philosophie`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${SITE_URL}/sans-filtre`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
     // Ajouté le 03/09/2026 : c'est la cible de tous les CTA du site, dont celui en fin de fiche —
     // donc une vraie page d'entrée, plus seulement un formulaire.
     { url: `${SITE_URL}/questionnaire`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
