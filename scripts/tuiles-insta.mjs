@@ -96,10 +96,16 @@ function html(tuile, spec) {
   const fond = ENVIES[spec.envie] ?? COULEURS.ardoise;
 
   if (tuile.type === "mot") {
+    // Le haut porte le surtitre quand il y en a un (série des six envies), sinon le monogramme :
+    // sur le post 1 d'un carnet il n'y a pas de surtitre, et laisser le coin vide prive la tuile de
+    // la seule marque qui tient la grille d'un post à l'autre.
+    const haut = tuile.surtitre
+      ? surtitre(tuile.surtitre, COULEURS.sable, COULEURS.ivoire + "bf")
+      : `<span class="titre" style="font-size:14px;letter-spacing:.4em;color:${COULEURS.ivoire}b3">LVE</span>`;
     return {
       h: 1080,
       corps: `<div class="col" style="background:${fond}">
-        <div></div>
+        <div>${haut}</div>
         <p class="titre" style="font-size:60px;line-height:1.02;color:${COULEURS.ivoire}">${spec.envie}</p>
         <div style="display:flex;flex-direction:column;gap:16px">
           <span class="filet" style="background:${COULEURS.ivoire}33"></span>
@@ -170,12 +176,17 @@ function html(tuile, spec) {
 
   if (tuile.type === "adresses") {
     // Quatre adresses tiennent, un cran plus petit. Au-delà, la slide devient une liste de courses.
-    const serre = (tuile.adresses ?? []).length >= 4;
+    // Une seule adresse : on passe en grand, sinon la slide a l'air vide plutôt qu'éditoriale.
+    const nombre = (tuile.adresses ?? []).length;
+    const serre = nombre >= 4;
+    const seule = nombre === 1;
+    const tailleNom = seule ? 32 : serre ? 21 : 24;
+    const tailleDetail = seule ? 16 : serre ? 12 : 14;
     const liste = (tuile.adresses ?? [])
       .map(
-        ([nom, detail]) => `<div style="display:flex;flex-direction:column;gap:4px">
-          <p class="titre" style="font-size:${serre ? 21 : 24}px;line-height:1.15;color:${COULEURS.ivoire}">${nom}</p>
-          ${detail ? `<p class="corps" style="font-size:${serre ? 12 : 14}px;line-height:1.3;color:${COULEURS.ivoire}bf">${detail}</p>` : ""}
+        ([nom, detail]) => `<div style="display:flex;flex-direction:column;gap:${seule ? 8 : 4}px">
+          <p class="titre" style="font-size:${tailleNom}px;line-height:1.15;color:${COULEURS.ivoire}">${nom}</p>
+          ${detail ? `<p class="corps" style="font-size:${tailleDetail}px;line-height:1.35;color:${COULEURS.ivoire}bf">${detail}</p>` : ""}
         </div>`
       )
       .join("");

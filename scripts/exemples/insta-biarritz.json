@@ -4,7 +4,10 @@
   "villes": "Biarritz · Saint-Jean-de-Luz · Côte des Basques",
   "promesse": "13 adresses testées",
   "tuiles": [
-    { "type": "mot", "fichier": "post-1-emotion/1-tuile-bouger" },
+    {
+      "type": "mot",
+      "fichier": "post-1-emotion/1-tuile-bouger"
+    },
     {
       "type": "definition",
       "fichier": "post-1-emotion/2-definition-bouger",
@@ -19,26 +22,32 @@
       "fichier": "post-3-destination/1-tuile-biarritz",
       "detail": "Côte des Basques · Rocher de la Vierge"
     },
-    { "type": "garde", "fichier": "post-4-carnet/1-page-de-garde" },
+    {
+      "type": "garde",
+      "fichier": "post-4-carnet/1-page-de-garde"
+    },
     {
       "type": "adresses",
       "fichier": "post-4-carnet/2-ou-dormir",
       "surtitre": "Où dormir",
       "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide5-ou-je-dors.jpg",
       "adresses": [
-        ["Le Talaia — Biarritz", "€€€ · front de mer, piscine sur le toit, à équidistance des spots"],
-        ["Bizipoz — Saint-Jean-de-Luz", "€€ · chambres familiales vastes, restaurant sur place"]
+        [
+          "Le Talaia — Biarritz",
+          "€€€ · front de mer, piscine sur le toit, à équidistance des spots de surf"
+        ]
       ]
     },
     {
       "type": "adresses",
       "fichier": "post-4-carnet/3-ou-manger-midi",
       "surtitre": "Où manger · le midi",
-      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide3-le-midi.jpg",
+      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/que-faire.jpg",
       "adresses": [
-        ["Les Halles de Biarritz", "Le bon plan du déjeuner, en plein centre"],
-        ["Marguerite", "Un des meilleurs souvenirs gourmands du séjour"],
-        ["Le Corsaire", "Poisson en bord de port, et une paella exceptionnelle"]
+        [
+          "Les Halles de Biarritz",
+          "Le bon plan du déjeuner, en plein cœur de la ville"
+        ]
       ]
     },
     {
@@ -47,9 +56,10 @@
       "surtitre": "Où manger · le café et le goûter",
       "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide2-le-matin.jpg",
       "adresses": [
-        ["Café Loky", "Le rituel simple avant de rejoindre la mer"],
-        ["Dunes Blanches, Chez Pascal", "La chouquette à la crème chiboust, si légère qu'on en reprend une"],
-        ["Loco Polo", "Des bâtonnets glacés enrobés sur mesure devant toi"]
+        [
+          "Café Loky",
+          "Le rituel simple avant de rejoindre la mer"
+        ]
       ]
     },
     {
@@ -58,26 +68,32 @@
       "surtitre": "Où manger · le soir",
       "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide4-le-soir.jpg",
       "adresses": [
-        ["Olatua", "Rooftop face au Rocher de la Vierge"],
-        ["Le Carlos", "Tapas et cocktails quand la lumière tombe"],
-        ["Eden Rock Café", "Un verre ou un dessert, face à l'océan"]
+        [
+          "Olatua",
+          "Rooftop face à l'océan et au Rocher de la Vierge"
+        ]
       ]
     },
     {
       "type": "adresses",
       "fichier": "post-4-carnet/6-que-faire",
       "surtitre": "Que faire",
-      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/que-faire.jpg",
+      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide3-le-midi.jpg",
       "adresses": [
-        ["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"],
-        ["The New Me", "Pilates reformer, des cours qui commencent tôt"]
+        [
+          "École de surf Lagoondy",
+          "Une heure, planche et combinaison fournies, 45 €"
+        ]
       ]
     },
     {
       "type": "fin",
       "fichier": "post-4-carnet/7-fin-de-carnet",
       "fond": "sable",
-      "lignes": ["Treize adresses,", "et une ville qui se lève tôt."],
+      "lignes": [
+        "Cinq adresses ici.",
+        "Les huit autres sur le site."
+      ],
       "cta": "Huit questions, et le site te dit où aller."
     }
   ]
