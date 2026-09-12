@@ -13,7 +13,11 @@ export const LVE_COLORS = {
   border: "#E8E3DA",
   terracotta: {
     DEFAULT: "#D27B5C",
-    dark: "#8C4A32",
+    // Valeur de la charte depuis le 12/09/2026 (était #8C4A32). Plus claire : réservée aux grands
+    // titres et aux aplats. Pour du petit texte, prendre `ink` — #B55F42 tombe à 4,2 de contraste
+    // sur ivoire, sous le seuil de 4,5.
+    dark: "#B55F42",
+    ink: "#8C4A32",
     bg: "#F7EBE1",
     copperSmoke: "#4A2E1F",
   },

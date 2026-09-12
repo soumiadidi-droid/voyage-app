@@ -48,9 +48,37 @@ arrive sur le questionnaire reconnaît les mots. La série est la bande-annonce 
 un habillage.
 
 Un post = deux images (modèle Émotion du Studio) : le verbe seul sur fond profond, puis la photo au
-swipe. Une couleur par envie, déjà fixée : cuivre pour Flâner, terracotta pour Déguster, sauge pour
-Respirer, océan pour Lâcher prise, prune pour Vibrer, ardoise pour Bouger. Ne réutilise pas l'ivoire,
-le terracotta clair ou le sable pour cette série : ils appartiennent au rituel des carnets.
+swipe.
+
+## Le code couleur — une couleur, une seule chose
+
+C'est la règle qui fait tenir la grille. Chaque couleur a un seul emploi, et ne déborde jamais sur
+un autre.
+
+| Couleur | À quoi elle sert | Où |
+|---|---|---|
+| **Ivoire** | La voix : une phrase, aucune image, rien à vendre | Teaser 1 d'un carnet, posts de concept |
+| **Terracotta** | **La destination, et rien d'autre** | Teaser 3, la révélation du lieu |
+| **Sable** | La page de garde d'un carrousel de carnet | Première image du post 4 |
+| **Cuivre** | Flâner | Série des six envies |
+| **Prune** | Déguster | Série des six envies |
+| **Sauge** | Respirer | Série des six envies |
+| **Océan** | Lâcher prise | Série des six envies |
+| **Obsidienne** | Vibrer | Série des six envies |
+| **Ardoise** | Bouger | Série des six envies |
+
+Deux conséquences pratiques :
+
+- **Une tuile d'émotion n'est jamais terracotta.** Déguster était en terracotta jusqu'au 12/09/2026,
+  il est passé en prune (le vin, la table) précisément pour libérer le terracotta. Si tu vois une
+  tuile d'envie en terracotta, c'est une erreur.
+- Quand tu annonces l'émotion d'un carnet (teaser 1), tu utilises **l'ivoire**, pas la couleur de
+  l'émotion : la couleur d'émotion appartient à la série des six, qui est un autre rendez-vous.
+  Le verbe, lui, peut apparaître sur la tuile terracotta de la révélation, au-dessus du nom du lieu.
+
+Les six couleurs sont de valeur équivalente : la grille varie en teinte, jamais en poids. Et les
+petits textes posés dessus sont en ivoire à 75 %, jamais en sable (le sable tombe sous le seuil de
+lisibilité sur la sauge).
 
 ## Ce que tu écris
 

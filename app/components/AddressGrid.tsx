@@ -18,7 +18,9 @@ export const CATEGORY_META: Record<
   AddressCategory,
   { icon: LucideIcon; label: string; bg: string; color: string }
 > = {
-  Hôtel: { icon: BedDouble, label: "Hôtel de charme", bg: LVE_COLORS.terracotta.bg, color: LVE_COLORS.terracotta.dark },
+  // `ink` et non `dark` (12/09/2026) : ce libellé s'affiche en 10 px, le terracotta de la charte
+  // passerait sous le seuil de lisibilité.
+  Hôtel: { icon: BedDouble, label: "Hôtel de charme", bg: LVE_COLORS.terracotta.bg, color: LVE_COLORS.terracotta.ink },
   Resto: { icon: UtensilsCrossed, label: "Table épicurienne", bg: LVE_COLORS.sage.bg, color: LVE_COLORS.sage.dark },
   Activité: { icon: Compass, label: "Expérience", bg: LVE_COLORS.ocean.bg, color: LVE_COLORS.ocean.dark },
 };

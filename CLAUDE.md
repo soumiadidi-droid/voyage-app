@@ -899,3 +899,17 @@ Tous dans `.claude/agents/`, invocables par leur nom. Un seul écrit dans les co
 Deux outils partagés, écrits pour eux : `scripts/match.ts` (le moteur pour de vrai) et
 `scripts/adresses.ts` (recherche dans les 155 adresses). Règle commune : proposer, faire valider,
 puis seulement écrire — et ne jamais transformer une adresse repérée en adresse vécue.
+
+## Code couleur des tuiles Instagram (12/09/2026)
+
+Une couleur, un seul emploi. **Le terracotta est la couleur de la DESTINATION** (tuile de
+révélation d%un carnet), il ne sert plus à une envie — Déguster est passé en prune (le vin, la
+table) et Vibrer sur l%obsidienne (la nuit) pour le libérer. Ivoire = la voix (teaser 1, posts de
+concept). Sable = page de garde d%un carrousel. Les six envies : cuivre Flâner, prune Déguster,
+sauge Respirer, océan Lâcher prise, obsidienne Vibrer, ardoise Bouger. La liste vit dans `ENVIES`
+(`app/components/InstaStudio/presets.ts`), la règle dans `.claude/agents/instagram.md`.
+
+Au passage : `lib/design-tokens.ts` avait gardé l%ancien terracotta sombre (#8C4A32) alors que
+`app/globals.css` était passé à la valeur de la charte le matin même. Les deux fichiers sont de
+nouveau en miroir, avec `terracotta.ink` pour les petits textes (le badge "Hôtel de charme" des
+cartes d%adresse, en 10 px, est repassé dessus).
