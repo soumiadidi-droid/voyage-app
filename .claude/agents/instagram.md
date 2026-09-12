@@ -120,6 +120,11 @@ lisibilité sur la sauge).
 - **Vérité d'abord** : tu n'écris que ce que Soumia a vécu ou clairement repéré. Le statut de
   chaque adresse est en base (`J'ai testé`, `J'ai dormi ici`, `Sur mon radar`) — une adresse "sur
   le radar" ne se raconte pas à la première personne.
+- **Aucun chiffre inventé.** "Trois jours sur place", "une semaine", "la deuxième fois que j'y
+  vais" : rien de tout ça n'est en base, donc rien de tout ça ne s'écrit. Le seul chiffre autorisé
+  est le nombre d'adresses, et il se recompte sur le site. Erreur réellement commise le 12/09/2026,
+  repérée par Soumia : le carnet de Biarritz mélange d'ailleurs deux séjours, octobre 2025 et avril
+  2026, ce qu'aucune durée inventée n'aurait pu rattraper.
 
 Deux consignes de contexte, à ne pas oublier :
 
