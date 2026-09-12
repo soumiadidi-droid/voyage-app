@@ -1,6 +1,8 @@
-import Link from "next/link";
 import photos from "@/lib/sans-filtre-photos.json";
-import { GalerieSansFiltre, type VoyageBrut } from "./GalerieSansFiltre";
+import { GalerieSansFiltre, type PhotoBrute } from "./GalerieSansFiltre";
+
+// Nouvel ordre tiré au hasard à chaque visite : la page ne doit pas se lire comme une chronologie.
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Sans filtre — Le Voyage des Émotions",
@@ -17,62 +19,36 @@ export const metadata = {
 // DÉBARRASSÉES DE LEURS MÉTADONNÉES (position GPS comprise) avant envoi sur Vercel Blob. Tout ajout
 // futur doit passer par le même nettoyage.
 //
-// Même habillage que /pros et /philosophie. La liste vit dans lib/sans-filtre-photos.json, du plus
-// récent au plus ancien.
+// Mise en page (12/09/2026, 2e version, Soumia : "un truc un peu artistique qui habite toute la
+// page") : un titre discret puis un mur d'images bord à bord, mélangé, sans lieu, sans date, sans
+// section. Remplace une première version rangée par voyage et datée.
+function melanger<T>(liste: T[]): T[] {
+  const copie = [...liste];
+  for (let i = copie.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+
 export default function SansFiltrePage() {
-  const voyages = photos as VoyageBrut[];
-  const total = voyages.reduce((s, v) => s + v.photos.length, 0);
+  const melange = melanger(photos as PhotoBrute[]);
 
   return (
     <div className="surface-claire bg-lve-bg">
-      <div
-        className="px-6 sm:px-8 py-10 sm:py-14"
-        style={{ background: "radial-gradient(ellipse 80% 60% at 50% 0%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
-      >
-        <div className="max-w-5xl mx-auto">
-          <span
-            className="inline-block text-xs uppercase tracking-[0.25em] text-white bg-lve-terracotta font-semibold rounded-full px-4 py-1.5 mb-5"
-            style={{ fontFamily: "var(--font-display)" }}
-          >
-            {total} photos
-          </span>
-          <h1
-            className="mb-6 leading-tight text-lve-charcoal"
-            style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2.4rem, 5.5vw, 3.6rem)" }}
-          >
-            Sans filtre
-          </h1>
-          <p
-            className="italic border-l-4 border-lve-terracotta pl-4 text-lve-charcoal/90 max-w-3xl"
-            style={{ fontSize: "1.15rem" }}
-          >
-            Mes photos telles que je les ai prises. Pas de retouche, pas de mise en scène&nbsp;: juste
-            ce que j&apos;ai vu.
-          </p>
-        </div>
-      </div>
-
-      <div className="pt-10 sm:pt-14">
-        <GalerieSansFiltre voyages={voyages} />
-      </div>
-
-      <div
-        className="text-center py-10 sm:py-14 px-6"
-        style={{ background: "radial-gradient(ellipse 70% 70% at 50% 50%, var(--lve-terracotta-bg), var(--lve-ivory))" }}
-      >
-        <h2
-          className="mb-3 leading-tight text-lve-charcoal"
-          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(2rem, 4.5vw, 2.8rem)" }}
+      <div className="px-6 sm:px-8 pt-12 sm:pt-16 pb-8 sm:pb-10 text-center">
+        <h1
+          className="leading-none text-lve-charcoal mb-4"
+          style={{ fontFamily: "var(--font-title)", fontSize: "clamp(3rem, 9vw, 6.5rem)" }}
         >
-          Et toi, tu cherches quoi&nbsp;?
-        </h2>
-        <p className="mb-6" style={{ color: "var(--text-secondary)" }}>
-          8 questions pour trouver la destination qui répond à tes envies.
+          Sans filtre
+        </h1>
+        <p className="italic text-lve-charcoal/70 max-w-xl mx-auto" style={{ fontSize: "1.1rem" }}>
+          Mes photos telles que je les ai prises. Juste ce que j&apos;ai vu.
         </p>
-        <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
-          Lancer Travel Match
-        </Link>
       </div>
+
+      <GalerieSansFiltre photos={melange} />
     </div>
   );
 }
