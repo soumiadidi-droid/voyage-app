@@ -22,10 +22,14 @@ quatrième donne la valeur. **La destination n'est jamais nommée avant le trois
 
 | Temps | Ce que c'est | Le gabarit du Studio | Format |
 |---|---|---|---|
-| 1. Émotion | Tuile ivoire, une phrase qui évoque la destination sans la nommer | Citation Minimalist | carré 1080 |
-| 2. Sensation | Une vraie photo d'ambiance, récit sensoriel pur | — (photo) | carré 1080 |
-| 3. Destination | Tuile terracotta : un verbe d'envie + DESTINATION · ANNÉE. C'est la révélation | Terracotta Mood | carré 1080 |
+| 1. Émotion | Tuile à la **couleur de l'envie**, le verbe en grand. On nomme l'envie, jamais le lieu | Émotion (face "le mot") | carré 1080 |
+| 2. Sensation | Une vraie photo d'ambiance, récit sensoriel pur. Toujours pas de nom | — (photo) | carré 1080 |
+| 3. Destination | **Deux images** : la tuile terracotta révèle le lieu, la photo du lieu se découvre au swipe | Terracotta Mood + photo | carré 1080 |
 | 4. Carnet | Le carrousel des adresses, ouvert par une tuile unie sable | Page de Garde puis photos | 4:5 (1080 × 1350) |
+
+Version du 12/09/2026, décidée par Soumia. Deux changements par rapport au premier rituel : le
+teaser 1 n'est plus la tuile ivoire mais la couleur de l'envie, et le post 3 ajoute la photo du lieu
+derrière la tuile terracotta — le nom se lit, puis le lieu se montre.
 
 Trois choses à ne pas casser :
 
@@ -57,24 +61,27 @@ un autre.
 
 | Couleur | À quoi elle sert | Où |
 |---|---|---|
-| **Ivoire** | La voix : une phrase, aucune image, rien à vendre | Teaser 1 d'un carnet, posts de concept |
+| **Cuivre** | Flâner | Série des six envies · teaser 1 d'un carnet |
+| **Prune** | Déguster | Série des six envies · teaser 1 d'un carnet |
+| **Sauge** | Respirer | Série des six envies · teaser 1 d'un carnet |
+| **Océan** | Lâcher prise | Série des six envies · teaser 1 d'un carnet |
+| **Obsidienne** | Vibrer | Série des six envies · teaser 1 d'un carnet |
+| **Ardoise** | Bouger | Série des six envies · teaser 1 d'un carnet |
 | **Terracotta** | **La destination, et rien d'autre** | Teaser 3, la révélation du lieu |
 | **Sable** | La page de garde d'un carrousel de carnet | Première image du post 4 |
-| **Cuivre** | Flâner | Série des six envies |
-| **Prune** | Déguster | Série des six envies |
-| **Sauge** | Respirer | Série des six envies |
-| **Océan** | Lâcher prise | Série des six envies |
-| **Obsidienne** | Vibrer | Série des six envies |
-| **Ardoise** | Bouger | Série des six envies |
+| **Ivoire** | La voix : une phrase, aucune image, rien à vendre | Posts de concept, hors cycle des carnets |
 
-Deux conséquences pratiques :
+Trois conséquences pratiques :
 
-- **Une tuile d'émotion n'est jamais terracotta.** Déguster était en terracotta jusqu'au 12/09/2026,
-  il est passé en prune (le vin, la table) précisément pour libérer le terracotta. Si tu vois une
-  tuile d'envie en terracotta, c'est une erreur.
-- Quand tu annonces l'émotion d'un carnet (teaser 1), tu utilises **l'ivoire**, pas la couleur de
-  l'émotion : la couleur d'émotion appartient à la série des six, qui est un autre rendez-vous.
-  Le verbe, lui, peut apparaître sur la tuile terracotta de la révélation, au-dessus du nom du lieu.
+- **Une tuile d'envie n'est jamais terracotta.** Déguster l'était jusqu'au 12/09/2026, il est passé
+  en prune (le vin, la table) précisément pour libérer le terracotta. Une tuile d'envie en
+  terracotta est une erreur.
+- **La couleur de l'envie fait deux services**, et c'est volontaire : elle porte la série des six
+  envies, et elle ouvre le cycle d'un carnet. Dans les deux cas elle dit la même chose — une envie,
+  pas un lieu.
+- **L'ivoire ne fait plus partie du cycle d'un carnet.** C'est la tuile où Soumia parle en son nom :
+  un post de concept, une phrase, rien à vendre. Ne l'utilise pas pour une citation décorative — si
+  elle se met à tout dire, elle ne dira plus rien.
 
 Les six couleurs sont de valeur équivalente : la grille varie en teinte, jamais en poids. Et les
 petits textes posés dessus sont en ivoire à 75 %, jamais en sable (le sable tombe sous le seuil de

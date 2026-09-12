@@ -913,3 +913,8 @@ Au passage : `lib/design-tokens.ts` avait gardé l%ancien terracotta sombre (#8C
 `app/globals.css` était passé à la valeur de la charte le matin même. Les deux fichiers sont de
 nouveau en miroir, avec `terracotta.ink` pour les petits textes (le badge "Hôtel de charme" des
 cartes d%adresse, en 10 px, est repassé dessus).
+
+**Cycle révisé le 12/09/2026** : teaser 1 = tuile à la couleur de l%envie (plus l%ivoire) ;
+teaser 2 = photo d%ambiance ; teaser 3 = deux images, tuile terracotta puis photo du lieu ;
+post 4 = carrousel ouvert par la page de garde sable. L%ivoire sort du cycle et devient la tuile des
+posts de concept, où Soumia parle en son nom.
