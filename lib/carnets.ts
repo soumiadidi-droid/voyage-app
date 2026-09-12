@@ -34,3 +34,24 @@ export async function getCarnets(): Promise<Carnet[]> {
       (a, b) => BADGE_RANK[a.badge] - BADGE_RANK[b.badge] || a.title.localeCompare(b.title, "fr")
     );
 }
+
+// Compteurs de la section "Ma liste" de /philosophie (12/09/2026). Lus en base, jamais écrits en
+// dur : c'est la preuve concrète de l'histoire de Soumia (je repère beaucoup, je teste dès que je
+// peux), elle doit rester vraie à chaque ajout d'adresse.
+// Même partage vécu / repéré que les pastilles d'AddressDetailCard ("J'ai dormi ici" compte comme
+// vécu). Recopié ici plutôt qu'importé : ce fichier-là est un composant client.
+const STATUT_VECU = /^(j[’']ai testé|j[’']ai dormi ici|testé)$/i;
+
+export async function getCompteursListe() {
+  const voyages = await getVoyages();
+  let vecues = 0;
+  let radar = 0;
+  for (const v of voyages) {
+    for (const a of [...v.stays, ...v.eats, ...v.activities]) {
+      if (!a.status) continue;
+      if (STATUT_VECU.test(a.status.trim())) vecues++;
+      else radar++;
+    }
+  }
+  return { vecues, radar };
+}

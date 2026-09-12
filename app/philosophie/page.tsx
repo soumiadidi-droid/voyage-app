@@ -1,5 +1,12 @@
 import Link from "next/link";
-import { Quote, Sparkles } from "lucide-react";
+import { ArrowRight, Quote, Sparkles } from "lucide-react";
+import { getCarnets, getCompteursListe } from "@/lib/carnets";
+import { BADGE_LABEL } from "../components/CarnetCard";
+import { PHOTO_GRADE } from "@/lib/photo-grade";
+
+// Relue en base à la requête depuis la section "Ma liste" (12/09/2026) : ses compteurs et ses
+// vignettes viennent de la base, et une page prérendue resservirait des chiffres périmés.
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Ma philosophie — Le Voyage des Émotions",
@@ -25,7 +32,24 @@ const PILLARS = [
   },
 ];
 
-export default function PhilosophiePage() {
+// Inclinaisons des trois vignettes empilées de la section "Ma liste" — un carnet posé sur la table,
+// pas une grille.
+const TILTS = ["-rotate-6", "rotate-3", "-rotate-2"];
+
+export default async function PhilosophiePage() {
+  const [carnets, { vecues, radar }] = await Promise.all([getCarnets(), getCompteursListe()]);
+  // Une vignette vécue et, s'il en existe, une repérée : la pile montre les deux moitiés de la liste.
+  const vecus = carnets.filter((c) => c.badge === "tested_approved");
+  const reperes = carnets.filter((c) => c.badge !== "tested_approved");
+  const vignettes = [vecus[0], reperes[0], vecus[1]].filter((c) => c !== undefined);
+  while (vignettes.length < 3 && carnets[vignettes.length]) vignettes.push(carnets[vignettes.length]);
+
+  const ETAPES = [
+    { verbe: "Je repère", chiffre: radar, detail: "adresses sur mon radar", couleur: "var(--lve-slate-dark)" },
+    { verbe: "Je teste", chiffre: vecues, detail: "adresses vécues", couleur: "var(--lve-sage-dark)" },
+    { verbe: "Je te recommande", chiffre: carnets.length, detail: "carnets ouverts", couleur: "var(--lve-terracotta-ink)" },
+  ];
+
   return (
     // Fond et encre claires fixes (relecture du 11/09/2026) : sections sur couleurs de marque fixes,
     // le texte ne doit pas suivre le mode sombre.
@@ -96,6 +120,121 @@ export default function PhilosophiePage() {
             </p>
           </div>
         </div>
+      </div>
+
+      {/* "Ma liste" (12/09/2026, demande de Soumia) : la suite de son histoire, dictée par elle —
+          je repère sans arrêt, je teste dès que je peux, et mes amis me demandent toujours où
+          aller. Le mot de la fondatrice au-dessus reste intact ; ceci est un second chapitre.
+          Les chiffres viennent de la base, jamais inventés. */}
+      <div className="bg-lve-sand/60 py-16 sm:py-24 px-6 overflow-hidden">
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-16 items-center">
+          <div>
+            <span
+              className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold mb-4"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Et aujourd&apos;hui
+            </span>
+            <h2
+              className="text-3xl sm:text-4xl text-lve-charcoal leading-tight mb-6"
+              style={{ fontFamily: "var(--font-title)" }}
+            >
+              Et puis, il y a ma liste.
+            </h2>
+            <div
+              className="text-lve-charcoal/80 leading-relaxed space-y-4"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              <p>
+                Je regarde beaucoup. Je repère, je note, je garde de côté des endroits où je ne
+                suis pas encore allée. Ma liste est interminable.
+              </p>
+              <p>Alors dès que je peux, je teste. Une table, un hôtel, une ville entière.</p>
+              <p>
+                Et quand j&apos;aime, je recommande. Mes amis le savent&nbsp;: c&apos;est à moi qu&apos;ils
+                demandent où partir, où dormir, où aller manger.
+              </p>
+              <p className="text-lve-charcoal font-medium">
+                Un jour, je me suis dit&nbsp;: pourquoi garder tout ça pour quelques-uns&nbsp;? Ce
+                site, c&apos;est ma liste, ouverte.
+              </p>
+            </div>
+          </div>
+
+          {/* Trois photos posées en éventail, façon carnet : de vrais carnets du site, avec leur
+              vrai statut. Légende = le pays, court, pour qu'aucune ne soit coupée ni recouverte. */}
+          <div className="relative h-64 sm:h-80 mx-auto w-[92%] sm:w-full max-w-md" aria-hidden="true">
+            {vignettes.map((c, i) => (
+              <div
+                key={c.slug}
+                className={`absolute bg-white p-2.5 pb-9 shadow-xl ${TILTS[i]} w-36 sm:w-48`}
+                style={{ left: `${i * 31}%`, top: ["10%", "0%", "16%"][i], zIndex: i === 1 ? 3 : i }}
+              >
+                <div
+                  className="relative h-40 sm:h-52 bg-lve-border"
+                  style={{
+                    backgroundImage: `url('${c.image}')`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    filter: PHOTO_GRADE.filtre,
+                  }}
+                >
+                  <span
+                    className={`absolute ${i === 2 ? "right-2" : "left-2"} top-2 rounded-full px-2 py-0.5 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.1em]`}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      ...(c.badge === "tested_approved"
+                        ? { background: "var(--lve-sage-bg)", color: "var(--lve-sage-dark)" }
+                        : {
+                            background: "var(--lve-slate-bg)",
+                            color: "var(--lve-slate-dark)",
+                            border: "1px dashed var(--lve-slate-dark)",
+                          }),
+                    }}
+                  >
+                    {BADGE_LABEL[c.badge]}
+                  </span>
+                </div>
+                <span
+                  className="absolute bottom-2 left-3 right-3 text-lve-charcoal text-lg sm:text-xl leading-none truncate"
+                  style={{ fontFamily: "var(--font-title)" }}
+                >
+                  {c.country}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Les trois temps de la liste, chiffrés en direct. */}
+        <ol className="max-w-5xl mx-auto mt-16 grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 list-none p-0">
+          {ETAPES.map((e, i) => (
+            <li key={e.verbe} className="relative bg-white rounded-2xl p-6 shadow-sm text-center sm:text-left">
+              <span
+                className="block text-xs uppercase tracking-[0.2em] font-semibold mb-2"
+                style={{ fontFamily: "var(--font-display)", color: e.couleur }}
+              >
+                {String(i + 1).padStart(2, "0")} · {e.verbe}
+              </span>
+              <span
+                className="block text-5xl font-semibold text-lve-charcoal leading-none mb-2"
+                // Bricolage et pas Cormorant : ses chiffres à l'ancienne font lire "61" comme "6I".
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {e.chiffre}
+              </span>
+              <span className="text-sm text-lve-charcoal/70" style={{ fontFamily: "var(--font-display)" }}>
+                {e.detail}
+              </span>
+              {i < ETAPES.length - 1 && (
+                <ArrowRight
+                  className="hidden sm:block absolute -right-5 top-1/2 -translate-y-1/2 text-lve-terracotta z-10"
+                  size={22}
+                />
+              )}
+            </li>
+          ))}
+        </ol>
       </div>
 
       {/* Piliers (29/08/2026) : trait fin remplacé par un badge numéroté rond terracotta + carte
