@@ -881,3 +881,21 @@ import/export CSV, normalisation des liens Instagram, règle de la photo de couv
 désormais dans `.claude/agents/carnets.md`, avec en plus la recherche de doublons
 (`scripts/adresses.ts`) que le skill n'avait pas. Même règle qu'avant : Claude propose, Soumia
 valide, puis on écrit en base. `combo-voyage` reste un skill à part.
+
+## Les cinq agents du site (12/09/2026)
+
+Tous dans `.claude/agents/`, invocables par leur nom. Un seul écrit dans les contenus : Carnets.
+
+| Agent | Rôle | Écrit où |
+|---|---|---|
+| `travel-match` | Fait tourner le vrai moteur (scripts/match.ts), rend le profil combiné, la destination et le récit | rien, propose |
+| `carnets` | Documentaliste : vrac → fiches, dédoublonnage (scripts/adresses.ts), écriture en base après validation. Remplace le skill voyage-ingest | base de contenu |
+| `editorial` | La plume : accroches, introductions, descriptions, articles | rien, propose |
+| `instagram` | Le cycle en 4 temps et la série des six envies, branchés sur les gabarits du Studio | rien, propose |
+| `veille` | Contrôle qualité : adresses toujours ouvertes, prix, liens, nouvelles pépites | `.claude/veille/rapports/` |
+
+À quoi s%ajoute `agent-relecteur` (design et contraste du site en ligne) et le skill `combo-voyage`.
+
+Deux outils partagés, écrits pour eux : `scripts/match.ts` (le moteur pour de vrai) et
+`scripts/adresses.ts` (recherche dans les 155 adresses). Règle commune : proposer, faire valider,
+puis seulement écrire — et ne jamais transformer une adresse repérée en adresse vécue.
