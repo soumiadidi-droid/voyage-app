@@ -513,8 +513,8 @@ export function InstaStudio() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
                 {/* Second voile, en haut : le verbe est posé sur la partie la plus claire d'une
                     photo de paysage (le ciel), où le sable seul devient illisible. */}
-                <div className="absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-black/45 to-transparent" />
-                <span className="absolute left-12 top-12 font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory/75">
+                <div className="absolute inset-x-0 top-0 h-1/3 bg-gradient-to-b from-black/60 to-transparent" />
+                <span className="absolute left-12 top-12 font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory">
                   {emotionVerbe}
                 </span>
                 <div className="absolute bottom-12 left-12 right-12 flex flex-col gap-4">
