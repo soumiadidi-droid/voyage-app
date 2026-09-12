@@ -91,11 +91,15 @@ export const FILTRES: {
 // Les deux faces d'un post "Émotion" (12/09/2026). Même contenu, deux images : la grille du profil
 // ne montre que la première, donc les six posts y forment un bloc de six mots sur fond sombre, et
 // la photo ne se découvre qu'en défilant — la règle posée pour les carnets, tenue ici aussi.
-export type FaceId = "mot" | "photo";
+export type FaceId = "mot" | "definition" | "photo";
 
+// La face "définition" est arrivée le 12/09/2026, pour le post 1 d'un carnet : le mot seul dans la
+// grille, sa définition au swipe. Le texte de cette face est aussi celui qui ouvre la légende, donc
+// l'image et la description se répondent au lieu de se répéter.
 export const FACES: { id: FaceId; label: string }[] = [
-  { id: "mot", label: "1 · le mot" },
-  { id: "photo", label: "2 · la photo" },
+  { id: "mot", label: "Le mot" },
+  { id: "definition", label: "La définition" },
+  { id: "photo", label: "La photo" },
 ];
 
 // Les six envies, avec leur couleur (12/09/2026). Soumia : six tuiles identiques ne contrastent pas

@@ -53,6 +53,9 @@ export function InstaStudio() {
   // post 1 d'un carnet, qui est une image seule). Même raison pour "Fais défiler →", désormais
   // optionnel : sur une image seule, il n'y a rien à faire défiler.
   const [emotionSurtitre, setEmotionSurtitre] = useState("Une envie par jour · 1 / 6");
+  // Face "définition" : les lignes longues passent en Cormorant, la dernière ligne en corps de
+  // texte sert de respiration. Vide par défaut — ce texte s'écrit, il ne se devine pas.
+  const [emotionDefinition, setEmotionDefinition] = useState("");
   const [emotionDefiler, setEmotionDefiler] = useState(true);
   // Slides d'adresses du carrousel d'un carnet. Une adresse par ligne, "Nom | ce qu'on en dit" —
   // le format le plus rapide à coller depuis un texte préparé, sans quatre champs par adresse.
@@ -281,6 +284,20 @@ export function InstaStudio() {
                 onChange={(e) => setEmotionPhrase(e.target.value)}
                 className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
               />
+              {face === "definition" && (
+                <>
+                  <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                    Définition — une phrase par ligne, la dernière en petit
+                  </label>
+                  <textarea
+                    value={emotionDefinition}
+                    onChange={(e) => setEmotionDefinition(e.target.value)}
+                    rows={5}
+                    placeholder={"Ce n'est pas cocher des kilomètres.\nC'est se réveiller avec une envie dans les jambes.\nSortir avant que la rue soit pleine."}
+                    className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+                  />
+                </>
+              )}
               {face === "photo" && (
                 <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-lve-border bg-lve-bg p-4 text-sm text-lve-charcoal/60 hover:border-lve-terracotta">
                   <ImagePlus size={16} />
@@ -597,6 +614,48 @@ export function InstaStudio() {
                       </span>
                     )}
                   </div>
+                </div>
+              </div>
+            )}
+
+            {/* Face 2 d'un post d'envie : la définition, au swipe. Même fond que le mot — c'est le
+                même post, on ne change pas de matière en route. Le verbe reste écrit en petit en
+                haut pour qu'une capture de cette seule image garde son sens. */}
+            {preset === "emotion" && face === "definition" && (
+              <div
+                className="flex h-full w-full flex-col justify-between p-12"
+                style={{ background: ENVIES[envie].fond }}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="h-px w-8 bg-lve-sand" />
+                  <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory/75">
+                    {emotionVerbe}
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-3">
+                  {(() => {
+                    const lignes = emotionDefinition.split("\n").map((l) => l.trim()).filter(Boolean);
+                    return lignes.map((ligne, i) => (
+                      <p
+                        key={i}
+                        className={
+                          i === lignes.length - 1 && lignes.length > 1
+                            ? "font-body text-sm leading-relaxed text-lve-ivory/75"
+                            : "font-title text-2xl leading-snug text-lve-ivory"
+                        }
+                      >
+                        {ligne}
+                      </p>
+                    ));
+                  })()}
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <span className="h-px w-full bg-lve-ivory/20" />
+                  <p className="font-title text-[10px] uppercase tracking-[0.3em] text-lve-ivory/60">
+                    {HANDLE}
+                  </p>
                 </div>
               </div>
             )}
