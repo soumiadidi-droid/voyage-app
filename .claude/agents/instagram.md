@@ -23,8 +23,14 @@ quatrième donne la valeur. **La destination n'est jamais nommée avant le trois
 Version finale, validée par Soumia le 12/09/2026 — "spécial feed clean" : ce qui se voit dans la
 grille est toujours une tuile ou une photo nue, jamais un visuel chargé de texte.
 
-**Post 1 — L'Émotion.** Une carte épurée à la couleur de l'envie, le verbe en grand (modèle Émotion,
-face "le mot", carré 1080). Elle pose le concept poétique de l'envie. On ne nomme pas le lieu.
+**Post 1 — L'Émotion.** Un carrousel de deux images, carré 1080, même fond à la couleur de l'envie
+(modèle Émotion) :
+- slide 1, ce qu'on voit dans la grille : le verbe en grand, face "le mot" ;
+- slide 2, au swipe : la définition de l'envie, face "la définition".
+
+**Le texte de la slide 2 est aussi celui qui ouvre la légende** (décidé le 12/09/2026) : l'image et
+la description se répondent au lieu de se répéter. On pose le concept poétique de l'envie, on ne
+nomme pas le lieu.
 
 **Post 2 — La Sensation.** Une photo ou un reel d'atmosphère brute — une matière, une lumière, de
 l'eau, du vent. **Aucun texte sur l'image** : c'est elle qui fait respirer la grille. Le récit vit
