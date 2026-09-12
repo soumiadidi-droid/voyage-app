@@ -6,7 +6,9 @@ export type PresetId =
   | "terracotta-mood"
   | "couverture"
   | "emotion"
-  | "carnet";
+  | "carnet"
+  | "adresses"
+  | "fin";
 
 export const PRESETS: { id: PresetId; label: string }[] = [
   { id: "minimalist", label: "Citation Minimalist" },
@@ -26,6 +28,13 @@ export const PRESETS: { id: PresetId; label: string }[] = [
   // entre les deux exports.
   { id: "emotion", label: "Émotion" },
   { id: "carnet", label: "Carnet d'Adresse" },
+  // Ajoutés le 12/09/2026 : les deux tuiles qui manquaient au carrousel d'un carnet. Sans elles,
+  // cinq slides sur six se fabriquaient hors du Studio, à chaque carnet.
+  // "Adresses" porte trois ou quatre pépites sur une photo ; "Fin de carnet" ferme le carrousel
+  // avec une phrase et le renvoi au Travel Match — et surtout sans "Fais défiler →", faux sur une
+  // dernière image.
+  { id: "adresses", label: "Adresses" },
+  { id: "fin", label: "Fin de carnet" },
 ];
 
 // Formats de sortie (11/09/2026) : le même visuel sert sur plusieurs réseaux, mais pas au même

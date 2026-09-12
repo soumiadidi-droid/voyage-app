@@ -40,6 +40,7 @@ export function InstaStudio() {
     setEnvie(i);
     setEmotionVerbe(ENVIES[i].verbe);
     setEmotionPhrase(ENVIES[i].phrase);
+    setEmotionSurtitre(`Une envie par jour · ${i + 1} / 6`);
   }
   const [coverSurtitre, setCoverSurtitre] = useState("Nouveau carnet");
   const [coverDestination, setCoverDestination] = useState("Côte Basque");
@@ -47,6 +48,23 @@ export function InstaStudio() {
   const [coverPromesse, setCoverPromesse] = useState("13 adresses testées");
   const [addressName, setAddressName] = useState("Loco Polo");
   const [addressCity, setAddressCity] = useState("Saint-Jean-de-Luz");
+  // Surtitre de la tuile Émotion, libre depuis le 12/09/2026 : la mention "Une envie par jour · n/6"
+  // était écrite en dur, donc fausse dès qu'on sort la tuile de la série des six (c'est le cas du
+  // post 1 d'un carnet, qui est une image seule). Même raison pour "Fais défiler →", désormais
+  // optionnel : sur une image seule, il n'y a rien à faire défiler.
+  const [emotionSurtitre, setEmotionSurtitre] = useState("Une envie par jour · 1 / 6");
+  const [emotionDefiler, setEmotionDefiler] = useState(true);
+  // Slides d'adresses du carrousel d'un carnet. Une adresse par ligne, "Nom | ce qu'on en dit" —
+  // le format le plus rapide à coller depuis un texte préparé, sans quatre champs par adresse.
+  const [adressesSurtitre, setAdressesSurtitre] = useState("Le matin");
+  const [adressesListe, setAdressesListe] = useState(
+    "École de surf Lagoondy | Une heure, planche et combinaison fournies\nThe New Me | Pilates très tôt, et un matcha en sortant\nCafé Loky | Le premier café, avant d'aller voir la mer"
+  );
+  const [finCitation, setFinCitation] = useState(
+    "Treize adresses, trois jours,\net une ville qui se lève tôt."
+  );
+  const [finCta, setFinCta] = useState("Huit questions, et le site te dit où aller.");
+  const [finFond, setFinFond] = useState<"sable" | "terracotta">("sable");
   const [photo, setPhoto] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
 
@@ -230,6 +248,24 @@ export function InstaStudio() {
                 ))}
               </div>
               <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Surtitre
+              </label>
+              <input
+                value={emotionSurtitre}
+                onChange={(e) => setEmotionSurtitre(e.target.value)}
+                placeholder="Laisser vide pour ne rien afficher"
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="flex cursor-pointer items-center gap-2 text-sm text-lve-charcoal">
+                <input
+                  type="checkbox"
+                  checked={emotionDefiler}
+                  onChange={(e) => setEmotionDefiler(e.target.checked)}
+                  className="accent-[var(--lve-terracotta)]"
+                />
+                Afficher « Fais défiler → »
+              </label>
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
                 Verbe
               </label>
               <input
@@ -337,6 +373,81 @@ export function InstaStudio() {
                 onChange={(e) => setAddressCity(e.target.value)}
                 className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
               />
+            </div>
+          )}
+
+          {preset === "adresses" && (
+            <div className="flex flex-col gap-3">
+              <label className="flex cursor-pointer items-center justify-center gap-2 rounded-lg border border-dashed border-lve-border bg-lve-bg p-4 text-sm text-lve-charcoal/60 hover:border-lve-terracotta">
+                <ImagePlus size={16} />
+                {photo ? "Changer la photo" : "Ajouter une photo"}
+                <input type="file" accept="image/*" onChange={handlePhotoUpload} className="hidden" />
+              </label>
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Surtitre (le moment)
+              </label>
+              <input
+                value={adressesSurtitre}
+                onChange={(e) => setAdressesSurtitre(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Adresses — une par ligne, « Nom | ce qu&apos;on en dit »
+              </label>
+              <textarea
+                value={adressesListe}
+                onChange={(e) => setAdressesListe(e.target.value)}
+                rows={6}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <p className="font-body text-xs leading-relaxed text-lve-charcoal/50">
+                Trois adresses respirent, quatre tiennent encore. Au-delà, la slide devient une
+                liste de courses et personne ne la lit.
+              </p>
+            </div>
+          )}
+
+          {preset === "fin" && (
+            <div className="flex flex-col gap-3">
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Fond
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {(["sable", "terracotta"] as const).map((f) => (
+                  <button
+                    key={f}
+                    onClick={() => setFinFond(f)}
+                    className={`rounded-full border px-3 py-1.5 text-xs capitalize transition-colors ${
+                      finFond === f
+                        ? "border-lve-terracotta bg-lve-terracotta-bg text-lve-terracotta-ink"
+                        : "border-lve-border text-lve-charcoal hover:border-lve-terracotta"
+                    }`}
+                  >
+                    {f}
+                  </button>
+                ))}
+              </div>
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Phrase de conclusion (une ligne par retour à la ligne)
+              </label>
+              <textarea
+                value={finCitation}
+                onChange={(e) => setFinCitation(e.target.value)}
+                rows={3}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <label className="font-mono-lve text-xs uppercase tracking-wide text-lve-charcoal/60">
+                Appel au Travel Match
+              </label>
+              <input
+                value={finCta}
+                onChange={(e) => setFinCta(e.target.value)}
+                className="rounded-lg border border-lve-border bg-lve-bg p-3 text-sm text-lve-charcoal"
+              />
+              <p className="font-body text-xs leading-relaxed text-lve-charcoal/50">
+                Le sable ferme le carrousel comme la couverture l&apos;ouvre. Le terracotta est
+                possible, mais il appartient d&apos;abord à la tuile qui révèle la destination.
+              </p>
             </div>
           )}
 
@@ -457,13 +568,17 @@ export function InstaStudio() {
                 style={{ background: ENVIES[envie].fond }}
               >
                 <div className="flex items-center gap-3">
-                  <span className="h-px w-8 bg-lve-sand" />
-                  {/* Ivoire à 75 % et pas sable : le sable tombe à 4,3 de contraste sur la sauge,
-                      sous le seuil de 4,5 pour du petit texte. Une seule règle pour les six fonds
-                      vaut mieux qu'une exception à retenir. */}
-                  <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory/75">
-                    Une envie par jour · {envie + 1} / 6
-                  </span>
+                  {emotionSurtitre.trim() && (
+                    <>
+                      <span className="h-px w-8 bg-lve-sand" />
+                      {/* Ivoire à 75 % et pas sable : le sable tombe à 4,3 de contraste sur la sauge,
+                          sous le seuil de 4,5 pour du petit texte. Une seule règle pour les six fonds
+                          vaut mieux qu'une exception à retenir. */}
+                      <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory/75">
+                        {emotionSurtitre}
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 <p className="font-title text-6xl leading-[1.02] text-lve-ivory">
@@ -476,9 +591,11 @@ export function InstaStudio() {
                     <p className="font-title text-[10px] uppercase tracking-[0.3em] text-lve-ivory/60">
                       {HANDLE}
                     </p>
-                    <span className="whitespace-nowrap font-mono-lve text-[10px] uppercase tracking-[0.2em] text-lve-ivory/60">
-                      Fais défiler →
-                    </span>
+                    {emotionDefiler && (
+                      <span className="whitespace-nowrap font-mono-lve text-[10px] uppercase tracking-[0.2em] text-lve-ivory/60">
+                        Fais défiler →
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -611,6 +728,134 @@ export function InstaStudio() {
                     {addressCity}
                   </p>
                   <p className="mt-4 font-title text-[10px] uppercase tracking-[0.3em] text-white/70">
+                    {HANDLE}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Slide d'adresses du carrousel d'un carnet (12/09/2026). Photo en fond, voile sombre
+                remonté haut : ici le texte occupe les deux tiers de l'image, pas seulement le bas.
+                Le nom en Cormorant, la ligne de commentaire en corps de texte — même hiérarchie que
+                sur une carte d'adresse du site, pour qu'on reconnaisse la maison. */}
+            {preset === "adresses" && (
+              <div className="relative h-full w-full bg-lve-obsidian">
+                {photo ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={photo}
+                      alt=""
+                      className="absolute inset-0 h-full w-full object-cover"
+                      style={{ filter: FILTRES.find((f) => f.id === filtre)!.css }}
+                    />
+                    {(() => {
+                      const voile = FILTRES.find((f) => f.id === filtre)!.voile;
+                      return voile ? (
+                        <div
+                          className="pointer-events-none absolute inset-0"
+                          style={{ background: voile.couleur, opacity: voile.opacite }}
+                        />
+                      ) : null;
+                    })()}
+                  </>
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center font-mono-lve text-xs uppercase tracking-wide text-white/40">
+                    Ajoute une photo
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/55 to-transparent" />
+                <div className="absolute inset-x-10 bottom-10 flex flex-col gap-5">
+                  <div className="flex items-center gap-3">
+                    <span className="h-px w-8 bg-lve-terracotta" />
+                    <span className="font-mono-lve text-[10px] uppercase tracking-[0.28em] text-lve-ivory">
+                      {adressesSurtitre}
+                    </span>
+                  </div>
+                  <div className="flex flex-col gap-4">
+                    {adressesListe
+                      .split("\n")
+                      .map((ligne) => ligne.trim())
+                      .filter(Boolean)
+                      .map((ligne, i) => {
+                        const [nom, ...reste] = ligne.split("|");
+                        const detail = reste.join("|").trim();
+                        return (
+                          <div key={i} className="flex flex-col gap-1">
+                            <p className="font-title text-2xl leading-tight text-lve-ivory">
+                              {nom.trim()}
+                            </p>
+                            {detail && (
+                              <p className="font-body text-sm leading-snug text-lve-ivory/75">
+                                {detail}
+                              </p>
+                            )}
+                          </div>
+                        );
+                      })}
+                  </div>
+                  <p className="font-title text-[10px] uppercase tracking-[0.3em] text-lve-ivory/60">
+                    {HANDLE}
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {/* Dernière slide d'un carnet (12/09/2026). Même matière que la couverture : le
+                carrousel s'ouvre et se ferme sur une tuile unie. Aucun "Fais défiler →" — il n'y a
+                plus rien après. Le renvoi au Travel Match est discret par construction : une ligne
+                en bas, pas un bouton. */}
+            {preset === "fin" && (
+              <div
+                className={`flex h-full w-full flex-col justify-between p-12 ${
+                  finFond === "sable" ? "bg-lve-sand" : "bg-lve-terracotta"
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span
+                    className={`h-px w-8 ${finFond === "sable" ? "bg-lve-terracotta-ink" : "bg-lve-sand"}`}
+                  />
+                  <span
+                    className={`font-mono-lve text-[10px] uppercase tracking-[0.28em] ${
+                      finFond === "sable" ? "text-lve-terracotta-ink" : "text-lve-sand"
+                    }`}
+                  >
+                    Fin du carnet
+                  </span>
+                </div>
+
+                <div className="flex flex-col gap-2">
+                  {finCitation
+                    .split("\n")
+                    .filter(Boolean)
+                    .map((ligne, i) => (
+                      <p
+                        key={i}
+                        className={`font-title text-3xl leading-snug ${
+                          finFond === "sable" ? "text-lve-charcoal" : "text-white"
+                        }`}
+                      >
+                        {ligne}
+                      </p>
+                    ))}
+                </div>
+
+                <div className="flex flex-col gap-4">
+                  <span
+                    className={`h-px w-full ${finFond === "sable" ? "bg-lve-charcoal/15" : "bg-white/20"}`}
+                  />
+                  <p
+                    className={`font-body text-sm leading-snug ${
+                      finFond === "sable" ? "text-lve-charcoal/75" : "text-white/85"
+                    }`}
+                  >
+                    {finCta}
+                  </p>
+                  <p
+                    className={`font-title text-[10px] uppercase tracking-[0.3em] ${
+                      finFond === "sable" ? "text-lve-charcoal/60" : "text-white/70"
+                    }`}
+                  >
                     {HANDLE}
                   </p>
                 </div>
