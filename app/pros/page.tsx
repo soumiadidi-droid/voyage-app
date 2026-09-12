@@ -57,7 +57,7 @@ export default function ProsPage() {
 
       <div className="max-w-3xl mx-auto px-6 sm:px-8 py-10 sm:py-14">
         <span
-          className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold mb-2"
+          className="inline-block text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold mb-2"
           style={{ fontFamily: "var(--font-display)" }}
         >
           Ce que je propose
@@ -76,7 +76,7 @@ export default function ProsPage() {
             </div>
             <p
               className="font-display mb-1 text-xs uppercase tracking-widest"
-              style={{ color: "var(--lve-terracotta-dark)" }}
+              style={{ color: "var(--lve-terracotta-ink)" }}
             >
               Option 1
             </p>
@@ -99,7 +99,7 @@ export default function ProsPage() {
             </div>
             <p
               className="font-display mb-1 text-xs uppercase tracking-widest"
-              style={{ color: "var(--lve-terracotta-dark)" }}
+              style={{ color: "var(--lve-terracotta-ink)" }}
             >
               Option 2
             </p>

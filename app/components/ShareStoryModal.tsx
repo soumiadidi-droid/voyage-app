@@ -76,7 +76,7 @@ export function ShareStoryModal({
           onClick={onClose}
           aria-label="Fermer"
           className="absolute top-4 right-4 inline-flex h-8 w-8 items-center justify-center rounded-full cursor-pointer"
-          style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+          style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-ink)" }}
         >
           <CloseIcon size={16} />
         </button>
@@ -104,7 +104,7 @@ export function ShareStoryModal({
             <div className="text-center pt-4 pb-3 px-4">
               <p
                 className="font-display uppercase"
-                style={{ fontSize: 9, letterSpacing: "0.15em", color: "var(--lve-terracotta-dark)", fontWeight: 700, lineHeight: 1.6 }}
+                style={{ fontSize: 9, letterSpacing: "0.15em", color: "var(--lve-terracotta-ink)", fontWeight: 700, lineHeight: 1.6 }}
               >
                 ✨ Voyage des Émotions
                 <br />x Travel Match
@@ -125,11 +125,11 @@ export function ShareStoryModal({
             <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-4">
               {profile && (
                 <p className="font-display mb-2" style={{ fontSize: 12, fontWeight: 600, color: "var(--lve-charcoal)" }}>
-                  🧭 Profil : <span style={{ color: "var(--lve-terracotta-dark)" }}>{profile}</span>
+                  🧭 Profil : <span style={{ color: "var(--lve-terracotta-ink)" }}>{profile}</span>
                 </p>
               )}
               {matchScore != null && (
-                <p className="font-title mb-3" style={{ fontSize: 20, fontWeight: 700, color: "var(--lve-terracotta-dark)" }}>
+                <p className="font-title mb-3" style={{ fontSize: 20, fontWeight: 700, color: "var(--lve-terracotta-ink)" }}>
                   🎯 {matchScore}% DE MATCH
                 </p>
               )}
@@ -140,7 +140,7 @@ export function ShareStoryModal({
 
             {/* Rappel lien — Instagram ne permet pas de lien cliquable dans une image, on le dit. */}
             <div className="text-center pb-4 px-4">
-              <p className="font-display" style={{ fontSize: 10, fontWeight: 600, color: "var(--lve-terracotta-dark)" }}>
+              <p className="font-display" style={{ fontSize: 10, fontWeight: 600, color: "var(--lve-terracotta-ink)" }}>
                 🔗 Découvre ta destination idéale
               </p>
               <p className="font-display" style={{ fontSize: 8, color: "var(--text-secondary)" }}>

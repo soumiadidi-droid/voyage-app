@@ -7,7 +7,7 @@ export function FallbackNotice() {
       className="mb-10 rounded-r-xl py-5 pl-5 pr-6"
       style={{ background: "var(--lve-terracotta-bg)", borderLeft: "4px solid var(--lve-terracotta)" }}
     >
-      <p className="leading-relaxed" style={{ color: "var(--lve-terracotta-dark)" }}>
+      <p className="leading-relaxed" style={{ color: "var(--lve-terracotta-ink)" }}>
         Aucune destination ne coche 100 % de tes critères logistiques, mais voici celles qui
         correspondent le plus à tes envies de voyage :
       </p>

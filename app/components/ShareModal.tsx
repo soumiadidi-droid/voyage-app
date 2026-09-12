@@ -110,7 +110,7 @@ export function ShareModal({
       >
         <span
           className="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full"
-          style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-dark)" }}
+          style={{ background: "var(--lve-terracotta-bg)", color: "var(--lve-terracotta-ink)" }}
         >
           {copied ? <Check size={16} /> : <Link2 size={16} />}
         </span>

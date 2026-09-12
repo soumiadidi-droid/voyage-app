@@ -261,14 +261,14 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
               </h2>
               <p
                 className="mb-4 font-medium"
-                style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
+                style={{ color: "var(--lve-terracotta-ink)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
               >
                 {activeProfile.badge}
               </p>
 
               <span
                 className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-medium bg-white mb-6"
-                style={{ color: "var(--lve-terracotta-dark)", fontFamily: "var(--font-display)" }}
+                style={{ color: "var(--lve-terracotta-ink)", fontFamily: "var(--font-display)" }}
               >
                 {activeProfile.tag}
               </span>

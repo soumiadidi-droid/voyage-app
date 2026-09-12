@@ -23,7 +23,12 @@
   --lve-sand: #f1dab1;
   --lve-border: #e8e3da;
   --lve-terracotta: #d27b5c;
-  --lve-terracotta-dark: #8c4a32;
+  /* Terracotta sombre de la charte (tranché le 12/09/2026 : "suit la charte"). Il est plus clair
+     que celui utilisé jusque-là (#8c4a32) : parfait pour un grand titre, mais sous le seuil de
+     lisibilité pour du petit texte (4,2 mesuré sur ivoire, il en faut 4,5). D'où l'encre ci-dessous,
+     réservée aux petites lignes — surtitres, étiquettes, prix, pastilles. */
+  --lve-terracotta-dark: #b55f42;
+  --lve-terracotta-ink: #8c4a32;
   --lve-terracotta-bg: #f7ebe1;
   --lve-copper-smoke: #4a2e1f;
   --lve-sage-dark: #4a6b48;
@@ -145,6 +150,7 @@
   --color-lve-border: var(--lve-border);
   --color-lve-terracotta: var(--lve-terracotta);
   --color-lve-terracotta-dark: var(--lve-terracotta-dark);
+  --color-lve-terracotta-ink: var(--lve-terracotta-ink);
   --color-lve-terracotta-bg: var(--lve-terracotta-bg);
   --color-lve-copper-smoke: var(--lve-copper-smoke);
   --color-lve-sage-dark: var(--lve-sage-dark);

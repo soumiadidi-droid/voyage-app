@@ -194,7 +194,7 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
             italique pour se distinguer visuellement du corps de texte juste en dessous. */}
         <p
           className="mb-4 font-medium"
-          style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
+          style={{ color: "var(--lve-terracotta-ink)", fontSize: "0.95rem", fontFamily: "var(--font-display)" }}
         >
           {archetype.subtitle}
           {second && ` · ${second.subtitle}`}
@@ -215,7 +215,7 @@ export function TravelerProfileCard({ answers }: { answers: UserAnswers }) {
             <span
               key={i}
               className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-medium bg-white"
-              style={{ color: "var(--lve-terracotta-dark)" }}
+              style={{ color: "var(--lve-terracotta-ink)" }}
             >
               <Icon size={14} strokeWidth={1.75} />
               {label}

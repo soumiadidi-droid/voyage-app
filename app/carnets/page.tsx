@@ -41,7 +41,7 @@ export default async function CarnetsPage() {
     <div className="surface-claire bg-lve-ivory">
       <div className="max-w-6xl mx-auto px-5 sm:px-8 py-16 sm:py-24">
         <span
-          className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block mb-4"
+          className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold block mb-4"
           style={{ fontFamily: "var(--font-display)" }}
         >
           {/* "tous vécus" quand aucune destination n'est en curation : "15 carnets — 15 vécus"

@@ -20,7 +20,7 @@ export function QuizCta() {
         <div className="flex flex-col sm:flex-row sm:items-center gap-8">
           <div className="flex-1 space-y-3">
             <span
-              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold"
+              className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold"
               style={{ fontFamily: "var(--font-display)" }}
             >
               <Compass size={14} strokeWidth={2} />

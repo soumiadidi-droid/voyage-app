@@ -180,7 +180,7 @@ export function AddressDetailCard({
         </p>
       )}
       {card.price && (
-        <p className="font-display mb-2" style={{ color: "var(--lve-terracotta-dark)", fontSize: "0.85rem" }}>
+        <p className="font-display mb-2" style={{ color: "var(--lve-terracotta-ink)", fontSize: "0.85rem" }}>
           {card.price}
         </p>
       )}
@@ -207,7 +207,7 @@ export function AddressDetailCard({
               key={tag}
               className="rounded-full bg-white/90 px-2.5 py-0.5 text-[11px] font-medium leading-tight shadow-sm"
               style={{
-                color: "var(--lve-terracotta-dark)",
+                color: "var(--lve-terracotta-ink)",
                 fontFamily: "var(--font-display)",
                 border: "1px solid color-mix(in srgb, var(--lve-terracotta) 20%, transparent)",
               }}

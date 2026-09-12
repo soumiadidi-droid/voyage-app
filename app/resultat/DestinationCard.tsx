@@ -147,7 +147,7 @@ export function DestinationCard({
       <a
         href={href}
         className="font-display group inline-flex items-center gap-1.5"
-        style={{ color: "var(--lve-terracotta-dark)" }}
+        style={{ color: "var(--lve-terracotta-ink)" }}
       >
         Voir la fiche voyage
         <span className="transition-transform duration-200 group-hover:translate-x-1">→</span>

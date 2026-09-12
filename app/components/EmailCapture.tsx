@@ -102,7 +102,7 @@ function EmailCaptureShell({
             <div className="space-y-2">
               <span
                 className="inline-block px-3 py-1 text-xs font-semibold tracking-wider uppercase rounded-full"
-                style={{ color: "var(--lve-terracotta-dark)", background: "var(--lve-terracotta-bg)" }}
+                style={{ color: "var(--lve-terracotta-ink)", background: "var(--lve-terracotta-bg)" }}
               >
                 {badge}
               </span>

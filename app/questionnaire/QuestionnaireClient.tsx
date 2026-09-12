@@ -261,7 +261,7 @@ export function QuestionnaireClient() {
                     }}
                   />
                   {choisie && (
-                    <span className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-lve-terracotta-dark">
+                    <span className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-lve-terracotta-ink">
                       ✓
                     </span>
                   )}

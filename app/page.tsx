@@ -130,7 +130,7 @@ export default function Home() {
         >
           <div className="max-w-4xl mx-auto space-y-8 text-left">
             <span
-              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-dark font-semibold block"
+              className="text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold block"
               style={{ fontFamily: "var(--font-display)" }}
             >
               À Propos — Le Manifeste

@@ -248,7 +248,7 @@ export function FavorisClient() {
                       style={{
                         fontFamily: "var(--font-display)",
                         background: active ? "var(--lve-terracotta)" : "var(--lve-terracotta-bg)",
-                        color: active ? "#fff" : "var(--lve-terracotta-dark)",
+                        color: active ? "#fff" : "var(--lve-terracotta-ink)",
                       }}
                     >
                       {PLACE_FILTER_LABEL[f]}

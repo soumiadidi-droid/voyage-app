@@ -784,7 +784,18 @@ tout corrigé à la demande de Soumia ("on modifie tout"). Ce qui est désormais
 - Accueil : "8 questions", tutoiement ; `/carnets` et Favoris tutoient ; objets des mails tutoient.
 - Base : sous-titre de Lagoondy raccourci (il répétait la description).
 
-Non fait, en attente de Soumia : photo de couverture de la Côte Basque (4 candidates Unsplash
-proposées), Terracotta sombre charte (#B55F42) vs site (#8C4A32). Accents qui paraissent
-décollés sur les grands titres en Cormorant dans les captures automatiques : texte vérifié
-correct, à contrôler sur un vrai téléphone.
+Suite, tranchée par Soumia le 12/09/2026 :
+
+- **Photo de couverture Côte Basque** remplacée : coucher de soleil avec surfeurs à Biarritz
+  (Frederic Christian), choisie parmi 4 candidates. L'ancienne (phare sous un ciel gris)
+  contredisait la fiche, qui parle de surf et de couchers de soleil.
+- **Terracotta sombre : on suit la charte.** `--lve-terracotta-dark` vaut désormais `#b55f42`.
+  Mais il tombe à 4,2 de contraste sur ivoire, sous le seuil de 4,5 pour du petit texte : les
+  surtitres, étiquettes, prix, pastilles et liens utilisent donc `--lve-terracotta-ink` (`#8c4a32`).
+  Règle simple : grand titre ou aplat = terracotta-dark ; petite ligne = terracotta-ink.
+- **Agent relecteur et ses outils versionnés** (`.claude/agents/`, `.claude/relecteur/`) ; les
+  captures restent ignorées (32 Mo, régénérées à chaque relecture).
+- **Accents "décollés" : ce n'est pas un bug, c'est Cormorant Garamond.** Comparaison faite à
+  toutes les graisses et avec EB Garamond : Cormorant pose ses accents haut et détachés du
+  caractère, à toutes les graisses. Changer suppose de changer la police des titres (EB Garamond
+  les pose normalement) — décision de Soumia, non prise à ce stade.
