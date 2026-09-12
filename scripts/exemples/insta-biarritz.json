@@ -2,7 +2,7 @@
   "destination": "Biarritz",
   "envie": "Bouger",
   "villes": "Biarritz · Saint-Jean-de-Luz · Côte des Basques",
-  "promesse": "14 adresses testées",
+  "promesse": "13 adresses testées",
   "tuiles": [
     { "type": "mot", "fichier": "post-1-emotion/1-tuile-bouger" },
     {
@@ -22,52 +22,62 @@
     { "type": "garde", "fichier": "post-4-carnet/1-page-de-garde" },
     {
       "type": "adresses",
-      "fichier": "post-4-carnet/2-le-matin",
-      "surtitre": "Le matin",
-      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide2-le-matin.jpg",
+      "fichier": "post-4-carnet/2-ou-dormir",
+      "surtitre": "Où dormir",
+      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide5-ou-je-dors.jpg",
       "adresses": [
-        ["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"],
-        ["The New Me", "Pilates reformer très tôt, et un matcha en sortant"],
-        ["Café Loky", "Le premier café, avant d'aller voir où en est la mer"]
+        ["Le Talaia — Biarritz", "€€€ · front de mer, piscine sur le toit, à équidistance des spots"],
+        ["Bizipoz — Saint-Jean-de-Luz", "€€ · chambres familiales vastes, restaurant sur place"]
       ]
     },
     {
       "type": "adresses",
-      "fichier": "post-4-carnet/3-le-midi",
-      "surtitre": "Le midi",
+      "fichier": "post-4-carnet/3-ou-manger-midi",
+      "surtitre": "Où manger · le midi",
       "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide3-le-midi.jpg",
       "adresses": [
-        ["Les Halles de Biarritz", "J'y déjeune quand je ne veux pas choisir"],
-        ["Marguerite", "La pizza qui m'a fait revenir le lendemain"],
-        ["Dunes Blanches, Chez Pascal", "La chouquette à la crème chiboust, à Saint-Jean-de-Luz"]
+        ["Les Halles de Biarritz", "Le bon plan du déjeuner, en plein centre"],
+        ["Marguerite", "Un des meilleurs souvenirs gourmands du séjour"],
+        ["Le Corsaire", "Poisson en bord de port, et une paella exceptionnelle"]
       ]
     },
     {
       "type": "adresses",
-      "fichier": "post-4-carnet/4-le-soir",
-      "surtitre": "Le soir, face à l'ouest",
+      "fichier": "post-4-carnet/4-ou-manger-gouter",
+      "surtitre": "Où manger · le café et le goûter",
+      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide2-le-matin.jpg",
+      "adresses": [
+        ["Café Loky", "Le rituel simple avant de rejoindre la mer"],
+        ["Dunes Blanches, Chez Pascal", "La chouquette à la crème chiboust, si légère qu'on en reprend une"],
+        ["Loco Polo", "Des bâtonnets glacés enrobés sur mesure devant toi"]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/5-ou-manger-soir",
+      "surtitre": "Où manger · le soir",
       "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide4-le-soir.jpg",
       "adresses": [
         ["Olatua", "Rooftop face au Rocher de la Vierge"],
         ["Le Carlos", "Tapas et cocktails quand la lumière tombe"],
-        ["Le Corsaire", "Poisson au bord du port, et la paella"]
+        ["Eden Rock Café", "Un verre ou un dessert, face à l'océan"]
       ]
     },
     {
       "type": "adresses",
-      "fichier": "post-4-carnet/5-ou-je-dors",
-      "surtitre": "Où je dors",
-      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/post4-slide5-ou-je-dors.jpg",
+      "fichier": "post-4-carnet/6-que-faire",
+      "surtitre": "Que faire",
+      "photo": "/Users/soumiadidi/Downloads/insta-biarritz/photos-source/que-faire.jpg",
       "adresses": [
-        ["Le Talaia — Biarritz", "€€€ · front de mer, piscine sur le toit, petit-déjeuner avec la vue"],
-        ["Bizipoz — Saint-Jean-de-Luz", "€€ · chambre familiale immense, restaurant en bas"]
+        ["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"],
+        ["The New Me", "Pilates reformer, des cours qui commencent tôt"]
       ]
     },
     {
       "type": "fin",
-      "fichier": "post-4-carnet/6-fin-de-carnet",
+      "fichier": "post-4-carnet/7-fin-de-carnet",
       "fond": "sable",
-      "lignes": ["Quatorze adresses, trois jours,", "et une ville qui se lève tôt."],
+      "lignes": ["Treize adresses,", "et une ville qui se lève tôt."],
       "cta": "Huit questions, et le site te dit où aller."
     }
   ]
