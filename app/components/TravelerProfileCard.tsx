@@ -112,7 +112,7 @@ function derivedAxisScores(scores: UserAnswers["scores"]): Record<ScoreAxis, num
 // Avec les curseurs, deux axes atteignaient rarement exactement la même valeur. Avec les cartes,
 // chaque intention choisie vaut 5 : l'égalité est devenue la règle, et un ">" strict faisait
 // gagner le premier axe de SCORE_AXES à chaque fois. Concrètement, quelqu'un qui choisissait
-// "Se régaler" et "Vibrer" voyait toujours Le Cœur Gourmand, jamais L'Électron Urbain.
+// "Déguster" et "Vibrer" voyait toujours Le Cœur Gourmand, jamais L'Électron Urbain.
 //
 // On retourne donc tous les axes à la valeur maximale, dans l'ordre, et le profil affiché combine
 // les deux premiers. C'est plus fidèle : la personne a explicitement choisi deux envies, elle doit

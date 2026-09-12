@@ -629,8 +629,13 @@ passe de 9 à 8 écrans.
 valeurs exactes que produisaient les curseurs (dont le défaut était 3). L'adresse transmise à
 `/resultat` est identique. Toute la conversion vit dans `QuestionnaireClient.scoresDepuisIntentions`.
 
-**Les six cartes sont des verbes** : Flâner (exploration), Se régaler (gastronomie), Respirer
+**Les six cartes sont des verbes** : Flâner (exploration), Déguster (gastronomie), Respirer
 (nature), Lâcher prise (plage), Vibrer (effervescence_urbaine), Bouger (rythme).
+
+"Se régaler" est devenu **"Déguster"** le 12/09/2026 (Soumia : "c'est plus classe, c'est moins
+enfantin"). Effet de bord bienvenu : c'était le seul libellé pronominal et en deux mots de la série,
+les six cartes sont maintenant six infinitifs d'un seul mot. La clé de score reste `gastronomie` —
+le moteur ne connaît pas les libellés.
 
 **"Déconnecter" a été retirée** (axe `repos`). Ce n'était pas un choix de même nature : déconnecter
 est le RÉSULTAT de respirer, lâcher prise, vibrer ou bouger. La donnée le confirmait — 14
@@ -679,7 +684,7 @@ Soumia y tient.
 **Le profil affiché combine les deux axes arrivés au maximum.** C'est une correction de régression :
 avec les cartes, chaque intention choisie vaut 5, donc les égalités sont devenues la règle, et le
 `>` strict de `topAxis` faisait gagner le premier axe de `SCORE_AXES` à chaque fois. Quelqu'un qui
-choisissait "Se régaler" et "Vibrer" voyait toujours Le Cœur Gourmand, jamais L'Électron Urbain.
+choisissait "Déguster" et "Vibrer" voyait toujours Le Cœur Gourmand, jamais L'Électron Urbain.
 
 Les pastilles sous le profil décrivent **le visiteur**, pas les destinations — d'où l'intertitre
 "Ce que tu as demandé" ajouté le 12/09 : Soumia avait lu "Sport & Aventure" comme une description de
