@@ -2,7 +2,7 @@
   "destination": "Biarritz",
   "envie": "Bouger",
   "villes": "Une journée, cinq adresses",
-  "promesse": "13 adresses testées",
+  "promesse": "15 adresses testées",
   "tuiles": [
     {
       "type": "garde",
@@ -77,7 +77,7 @@
         "de la première vague",
         "au dernier verre."
       ],
-      "cta": "Les huit autres adresses du carnet t'attendent sur le site."
+      "cta": "Les dix autres adresses du carnet t'attendent sur le site."
     },
     {
       "type": "sans-filtre",
