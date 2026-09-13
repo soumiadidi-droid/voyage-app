@@ -65,7 +65,16 @@ push régulièrement au fil du travail.
   (corps), via Google Fonts
 - Palette sombre chaleureuse observée sur le site en ligne : `#1A1714` / `#E8DFC8`, accents
   `--ember` et `--aurora`
-- Images stockées sur Vercel Blob storage sur le site original (`*.public.blob.vercel-storage.com`)
+- **Images dans le projet (`public/images/`), plus sur Vercel Blob** — depuis le 13/09/2026. Le
+  stockage Blob répond "Your store is blocked" (403) sur TOUTES ses images : plus de 1 600 envois et
+  suppressions en une nuit (galerie Sans filtre) ont très probablement dépassé le quota de l'offre
+  gratuite. Les 269 photos de `/sans-filtre` et les 100 fichiers de galerie des carnets ont été
+  recréés depuis les originaux dans `public/images/sans-filtre/` et `public/images/voyages/`.
+  **Ne plus envoyer de photos en masse sur Blob** : les ajouter dans `public/images/`.
+  Reste à faire (refusé par le garde-fou automatique le 13/09, à valider par Soumia) : remplacer en
+  base les adresses Blob de `voyages.hero`, `voyages.gallery` et `destinations.hero_image` par
+  `/images/voyages/…` (mêmes chemins). Sans effet visible aujourd'hui : les couvertures passent par
+  `lib/hero-images.ts` et les galeries ne sont affichées nulle part.
 
 ## Pages — état au 03/09/2026
 
@@ -86,10 +95,10 @@ push régulièrement au fil du travail.
   Ressuscite l'idée de `/photos` à sa demande. Un mur d'images bord à bord, **mélangé à chaque
   visite, sans lieu, sans date, sans section, sans compteur** : nommer les lieux révélerait les
   réponses du Travel Match (même règle que `/carnets`). Le lieu n'existe ni dans
-  `lib/sans-filtre-photos.json` ni dans les adresses Blob (`sans-filtre/AAAA-MM/NNN.jpg`).
+  `lib/sans-filtre-photos.json` ni dans les chemins des images (`/images/sans-filtre/AAAA-MM/NNN.jpg`).
   Photos jamais étalonnées (pas de PHOTO_GRADE, c'est la preuve brute). Tout ajout passe par :
-  retrait des photos avec des personnes, redimensionnement 1800/720 px, **suppression des
-  métadonnées dont le GPS**, envoi sur Blob. Scripts de préparation dans le scratchpad de la
+  retrait des photos avec des personnes, redimensionnement 1600/720 px, **suppression des
+  métadonnées dont le GPS**, dépôt dans `public/images/sans-filtre/` (plus sur Blob, bloqué). Scripts de préparation dans le scratchpad de la
   session du 12/09 (non versionnés) — détection de personnes via le framework Vision d'Apple,
   validée sur les 289 premières photos.
 - `/pros` — l'offre de collaboration (voir plus bas). Libellé de nav : "On collabore ?", validé par
