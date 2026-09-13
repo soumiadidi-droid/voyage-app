@@ -81,6 +81,11 @@ const PICTOS = {
   ballon: `<circle cx="24" cy="24" r="17"/><path d="m24 16 7 5-3 8h-8l-3-8Z"/><path d="M24 16V8M31 21l8-3M28 29l5 7M20 29l-5 7M17 21l-8-3"/>`,
   poisson: `<path d="M6 24c6-9 18-12 28-4l8-6v20l-8-6C24 36 12 33 6 24Z"/><circle cx="14" cy="22" r="1.4"/><path d="M22 18c2 4 2 8 0 12"/>`,
   beret: `<g transform="rotate(-12 24 26)"><path d="M5 27c0-8 11-12 21-11 11 1 18 5 17 10-1 6-38 8-38 1Z"/><path d="M12 31c6 3 20 2 26-2"/><path d="M22 16c0-3 2-5 5-4"/></g>`,
+  // Val d'Europe (13/09/2026) : le château de conte, le lac, le sac de shopping, le paddle.
+  chateau: `<path d="M6 42h36"/><path d="M17 42V22h14v20"/><path d="M16 22l8-11 8 11"/><path d="M24 11V5l4 1.5-4 1.5"/><path d="M8 42V27h6v15M7 27l4-8 4 8"/><path d="M34 42V27h6v15M33 27l4-8 4 8"/><path d="M21 42v-5a3 3 0 0 1 6 0v5"/><path d="M24 26v3"/>`,
+  lac: `<path d="M15 26a9 9 0 0 1 18 0"/><path d="M24 11V8M14 15l-2-2M34 15l2-2"/><path d="M5 26h38"/><path d="M11 32h26"/><path d="M16 37h16"/><path d="M21 42h6"/>`,
+  sac: `<path d="M10 19h28l-2.5 23h-23Z"/><path d="M18 23v-7a6 6 0 0 1 12 0v7"/>`,
+  paddle: `<path d="M4 34c0-1.6 2.5-2.6 6-2.6h17c3.5 0 6 1 6 2.6s-2.5 2.6-6 2.6H10c-3.5 0-6-1-6-2.6Z"/><path d="M40 6v28"/><path d="M37 6h6"/><path d="M38 34h4l-.5 6h-3Z"/><path d="M2 45c3.5 0 3.5-2 7-2s3.5 2 7 2 3.5-2 7-2 3.5 2 7 2 3.5-2 7-2 3.5 2 7 2"/>`,
 };
 const AMBIANCE_SABLE = "saturate(0.88) contrast(0.95) sepia(0.08) brightness(1.02)";
 const CAPTURE = resolve(process.argv[1], "../../.claude/relecteur/capture.mjs");

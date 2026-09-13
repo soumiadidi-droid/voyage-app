@@ -1,0 +1,137 @@
+{
+  "destination": "Val d'Europe",
+  "envie": "Bouger",
+  "villes": "Une journée, cinq adresses",
+  "promesse": "18 adresses testées",
+  "tuiles": [
+    {
+      "type": "mot",
+      "fichier": "post-1-emotion/1-tuile-bouger"
+    },
+    {
+      "type": "definition",
+      "fichier": "post-1-emotion/2-definition-bouger",
+      "lignes": [
+        "Bouger, c'est des journées pleines.",
+        "Se lever tôt parce qu'il y a quelque chose à voir.",
+        "Se dépenser, rentrer fatiguée, et trouver que c'était une bonne journée."
+      ]
+    },
+    {
+      "type": "rebus",
+      "fichier": "post-3-destination/1-rebus",
+      "pictos": [
+        "chateau",
+        "lac",
+        "sac",
+        "paddle"
+      ]
+    },
+    {
+      "type": "terracotta",
+      "fichier": "post-3-destination/2-tuile-val-d-europe",
+      "detail": "Serris · Chessy · Montévrain"
+    },
+    {
+      "type": "garde",
+      "fichier": "post-4-carnet/1-page-de-garde",
+      "surtitre": "Carnet d'adresses"
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/2-le-matin",
+      "surtitre": "Le matin",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-matin-pilates.jpg",
+      "adresses": [
+        [
+          "Slow Studio",
+          "Un cours de Pilates Reformer chez Margot, dans un petit studio"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/3-le-cafe",
+      "surtitre": "Le café",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-cafe-the-et-flan.jpg",
+      "adresses": [
+        [
+          "Mucette",
+          "Un flan à tomber, et une salle de jeux pour les enfants"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/4-le-dejeuner",
+      "surtitre": "Le déjeuner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-dejeuner-pates.jpg",
+      "adresses": [
+        [
+          "Zaza",
+          "Une italienne au service irréprochable, où les enfants sont vraiment les bienvenus"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/5-l-apres-midi",
+      "surtitre": "L'après-midi",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/l-apres-midi-paddle.jpg",
+      "adresses": [
+        [
+          "Loc'Adventure",
+          "Crécy-la-Chapelle, à découvrir depuis l'eau, en paddle ou en kayak"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/6-le-diner",
+      "surtitre": "Le dîner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-diner-bougies.jpg",
+      "adresses": [
+        [
+          "Poolette",
+          "Une cuisine fusion asiatique très réussie, pour un dîner à deux"
+        ]
+      ]
+    },
+    {
+      "type": "fin",
+      "fichier": "post-4-carnet/7-fin-de-carnet",
+      "lignes": [
+        "Une journée au Val d'Europe,",
+        "de la première séance",
+        "au dîner à deux."
+      ],
+      "cta": "Ici, cinq adresses. Sur le site, dix-neuf, et Travel Match te trouve ta prochaine destination en 8 questions.",
+      "promesse": "Sans inscription · Sans e-mail · Résultat immédiat",
+      "url": "levoyagedesemotions.fr · lien en bio"
+    },
+    {
+      "type": "sans-filtre",
+      "fichier": "post-5-sans-filtre/01-page-de-garde"
+    },
+    {
+      "type": "photo-legendee",
+      "fichier": "post-5-sans-filtre/02-photo",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/oies-lever-du-jour.jpg",
+      "numero": "01 · Val d'Europe",
+      "legende": "Un vol d'oies, au lever du jour."
+    },
+    {
+      "type": "fin",
+      "fond": "ivoire",
+      "surtitre": "Sans filtre",
+      "fichier": "post-5-sans-filtre/99-fin",
+      "lignes": [
+        "Val d'Europe,",
+        "tel que je l'ai vu."
+      ],
+      "cta": "Toutes mes photos sans filtre et bien plus d'adresses t'attendent sur le site. Fais le test Travel Match : 8 questions.",
+      "promesse": "Sans inscription · Sans e-mail · Résultat immédiat",
+      "url": "levoyagedesemotions.fr · lien en bio"
+    }
+  ]
+}
