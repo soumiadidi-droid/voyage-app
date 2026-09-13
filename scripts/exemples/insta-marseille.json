@@ -98,6 +98,17 @@
     {
       "type": "sans-filtre",
       "fichier": "post-5-sans-filtre/01-page-de-garde"
+    },
+    {
+      "type": "fin",
+      "fond": "ivoire",
+      "surtitre": "Sans filtre",
+      "fichier": "post-5-sans-filtre/12-fin",
+      "lignes": [
+        "Marseille,",
+        "telle que je l'ai vue."
+      ],
+      "cta": "Toutes mes photos sans filtre t'attendent sur le site, lien en bio."
     }
   ]
 }

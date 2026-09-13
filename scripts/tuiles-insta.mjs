@@ -224,13 +224,14 @@ function html(tuile, spec) {
   }
 
   if (tuile.type === "fin") {
-    const fondFin = tuile.fond === "terracotta" ? COULEURS.terracotta : COULEURS.sable;
-    const surSable = fondFin === COULEURS.sable;
+    // Fond ivoire (13/09/2026) : dernière page du post 5 Sans filtre, assortie à sa page de garde.
+    const fondFin = tuile.fond === "terracotta" ? COULEURS.terracotta : tuile.fond === "ivoire" ? COULEURS.ivoire : COULEURS.sable;
+    const surSable = fondFin !== COULEURS.terracotta;
     const encre = surSable ? COULEURS.charcoal : "#ffffff";
     return {
       h: 1350,
       corps: `<div class="col" style="background:${fondFin}">
-        ${surtitre("Fin du carnet", surSable ? COULEURS.ink : COULEURS.sable, surSable ? COULEURS.ink : COULEURS.sable)}
+        ${surtitre(tuile.surtitre ?? "Fin du carnet", surSable ? COULEURS.ink : COULEURS.sable, surSable ? COULEURS.ink : COULEURS.sable)}
         <div style="display:flex;flex-direction:column;gap:8px">
           ${(tuile.lignes ?? []).map((l) => `<p class="titre" style="font-size:26px;line-height:1.35;color:${encre}">${l}</p>`).join("")}
         </div>

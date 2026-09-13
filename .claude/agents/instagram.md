@@ -80,7 +80,9 @@ bas de l'image s'assombrit sous le texte, et une ombre douce est posée sur les 
 **Post 5 — Sans filtre.** Le dernier post, qui referme la série. Un carrousel 4:5 :
 - slide 1 : la tuile **Sans filtre** (fond ivoire, "Sans *filtre*", "Mes photos telles que je les
   ai prises.", la destination en surtitre, "Fais défiler →") ;
-- slides suivantes : **les photos de Soumia de cette destination, telles qu'elle les a prises** —
+- dernière slide : la page de fin ivoire (tuile `fin`, `"fond": "ivoire"`, surtitre « Sans filtre ») —
+  « [Destination], telle que je l'ai vue. » et le renvoi vers la page Sans filtre du site ;
+- slides du milieu : **les photos de Soumia de cette destination, telles qu'elle les a prises** —
   recadrées au 4:5, aucun étalonnage, aucun texte. Dix-neuf au plus (Instagram limite un carrousel à vingt images). Jamais une
   photo où l'on reconnaît quelqu'un.
 
