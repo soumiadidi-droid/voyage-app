@@ -4,20 +4,84 @@
   "villes": "Une journée, cinq adresses",
   "promesse": "13 adresses testées",
   "tuiles": [
-    { "type": "garde", "fichier": "post-4-carnet/1-page-de-garde", "surtitre": "Carnet d'adresses" },
-    { "type": "adresses", "fichier": "post-4-carnet/2-la-nuit", "surtitre": "La nuit", "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-1-hotel.jpg",
-      "adresses": [["Le Talaia", "Une nuit face à l'océan, petit-déjeuner compris"]] },
-    { "type": "adresses", "fichier": "post-4-carnet/3-le-matin", "surtitre": "Le matin", "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-2-surf.jpg",
-      "adresses": [["École de surf Lagoondy", "Une heure à l'eau, planche et combinaison fournies"]] },
-    { "type": "adresses", "fichier": "post-4-carnet/4-le-cafe", "surtitre": "Le café", "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-3-cafe.jpg",
-      "adresses": [["Café Loky", "Le petit rituel simple de la matinée"]] },
-    { "type": "adresses", "fichier": "post-4-carnet/5-le-dejeuner", "surtitre": "Le déjeuner", "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-4-dejeuner.jpg",
-      "adresses": [["Le Corsaire", "Poisson en bord de port, et une paella exceptionnelle"]] },
-    { "type": "adresses", "fichier": "post-4-carnet/6-le-diner", "surtitre": "Le dîner", "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-5-diner.jpg",
-      "adresses": [["Olatua", "Le rooftop face à l'océan et au Rocher de la Vierge"]] },
-    { "type": "fin", "fichier": "post-4-carnet/7-fin-de-carnet",
-      "lignes": ["Une journée à Biarritz,", "de la première vague", "au dernier verre."],
-      "cta": "Les huit autres adresses du carnet t'attendent sur le site." },
-    { "type": "sans-filtre", "fichier": "post-5-sans-filtre/01-page-de-garde" }
+    {
+      "type": "garde",
+      "fichier": "post-4-carnet/1-page-de-garde",
+      "surtitre": "Carnet d'adresses"
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/2-la-nuit",
+      "surtitre": "La nuit",
+      "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-1-hotel.jpg",
+      "adresses": [
+        [
+          "Le Talaia",
+          "Une nuit face à l'océan, petit-déjeuner compris"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/3-le-matin",
+      "surtitre": "Le matin",
+      "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-2-surf.jpg",
+      "adresses": [
+        [
+          "École de surf Lagoondy",
+          "Une heure à l'eau, planche et combinaison fournies"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/4-le-cafe",
+      "surtitre": "Le café",
+      "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-3-cafe.jpg",
+      "adresses": [
+        [
+          "Café Loky",
+          "Le petit rituel simple de la matinée"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/5-le-dejeuner",
+      "surtitre": "Le déjeuner",
+      "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-4-dejeuner.jpg",
+      "adresses": [
+        [
+          "Le Corsaire",
+          "Poisson en bord de port, et une paella exceptionnelle"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/6-le-diner",
+      "surtitre": "Le dîner",
+      "photo": "/Users/soumiadidi/Documents/Posts Insta/insta-biarritz/photos-source/emotion-5-diner-rocher.jpg",
+      "adresses": [
+        [
+          "Olatua",
+          "Le rooftop face à l'océan et au Rocher de la Vierge"
+        ]
+      ]
+    },
+    {
+      "type": "fin",
+      "fichier": "post-4-carnet/7-fin-de-carnet",
+      "lignes": [
+        "Une journée à Biarritz,",
+        "de la première vague",
+        "au dernier verre."
+      ],
+      "cta": "Les huit autres adresses du carnet t'attendent sur le site."
+    },
+    {
+      "type": "sans-filtre",
+      "fichier": "post-5-sans-filtre/01-page-de-garde"
+    }
   ]
 }
