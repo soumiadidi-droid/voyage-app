@@ -8,7 +8,8 @@ import { EnTetePage } from "../components/EnTetePage";
 import { LikeButton } from "../components/LikeButton";
 import { AddressDetailCard } from "../components/AddressDetailCard";
 import { useFavorites, usePlaceFavorites } from "@/lib/favorites";
-import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
+import { DESTINATION_HERO_IMAGE, HERO_IMAGE_CREDIT } from "@/lib/hero-images";
+import { CreditPhoto } from "@/app/components/CreditPhoto";
 import type { TransportFilter } from "@/lib/travel-match/types";
 import { resolveFavorites, resolvePlaceFavorites, type LikedItem, type PlaceLikedItem } from "./actions";
 
@@ -71,6 +72,7 @@ function CarteVoyage({
   texte,
   href,
   pastilles = [],
+  credit,
 }: {
   cle: string;
   image: string;
@@ -78,6 +80,7 @@ function CarteVoyage({
   texte: string;
   href: string;
   pastilles?: { label: string; icon: LucideIcon }[];
+  credit?: { texte: string; lien: string };
 }) {
   return (
     <div className="group relative flex min-h-[300px] sm:min-h-[340px] items-end overflow-hidden rounded-2xl shadow-sm">
@@ -86,6 +89,7 @@ function CarteVoyage({
         style={{ backgroundImage: `url('${image}')`, backgroundSize: "cover", backgroundPosition: "center" }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/0" />
+      <CreditPhoto credit={credit} className="left-2 top-2" />
       <div className="absolute right-4 top-4 z-10">
         <LikeButton id={cle} />
       </div>
@@ -202,6 +206,7 @@ export function FavorisClient() {
                       titre={item.destination.title}
                       texte={item.destination.summary}
                       href={`/voyages/${item.destination.content_slug}?id=${item.destination.id}`}
+                      credit={HERO_IMAGE_CREDIT[item.destination.content_slug]}
                       pastilles={[
                         ...item.destination.filters.transport.map((t) => TRANSPORT_BADGE[t]),
                         ...(item.destination.regional_transport
@@ -217,6 +222,7 @@ export function FavorisClient() {
                       titre={item.voyage.hero.title}
                       texte={item.voyage.hero.tagline}
                       href={`/voyages/${item.voyage.slug}`}
+                      credit={HERO_IMAGE_CREDIT[item.voyage.slug]}
                     />
                   )
                 )}

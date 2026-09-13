@@ -22,7 +22,7 @@ import {
 } from "@/lib/travel-match/types";
 
 const FAMILY_PROFILE_VALUES: FamilyProfile[] = FAMILY_PROFILE_OPTIONS.map((o) => o.value);
-import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
+import { DESTINATION_HERO_IMAGE, HERO_IMAGE_CREDIT } from "@/lib/hero-images";
 
 // generateStaticParams retiré (27/08/2026, migration DB) : la page était déjà rendue
 // dynamiquement à chaque requête (searchParams la force en `ƒ`), donc la pré-génération
@@ -193,6 +193,7 @@ export default async function VoyagePage({
         intro={voyage.intro}
         favoriteId={favoriteId ?? slug}
         heroImage={DESTINATION_HERO_IMAGE[voyage.slug]}
+        heroCredit={HERO_IMAGE_CREDIT[voyage.slug]}
         sharePath={`/voyages/${slug}`}
       />
 

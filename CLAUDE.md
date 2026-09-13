@@ -789,8 +789,7 @@ adresse sans étiquette.
 **La couleur dit la même chose que le mot** : vert plein pour le vécu, gris ardoise à trait
 discontinu pour le repéré. C'est la distinction centrale du site, elle se lit maintenant sans lire.
 
-**Libellés de liens** : "Voir sur Google Maps", "Voir l'adresse", "Voir le site officiel", "Voir les
-disponibilités", et pour les activités "Réservez votre activité" — réservé à celles qui se réservent
+**Libellés de liens** : "Voir sur Google Maps", "Voir l'adresse", "Voir le site officiel", "Réserve ton séjour" (ex-"Voir les disponibilités", 13/09/2026), "Réserve ta table" (resto réservable), et pour les activités "Réserve ton activité" (tutoiement, renommé partout le 13/09/2026) — réservé à celles qui se réservent
 vraiment, les trois gratuites (temple Meiji-jingu, aire de jeux Diana, piscine du Shimoda) affichent
 "Voir le site".
 

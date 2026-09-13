@@ -1,3 +1,4 @@
+import { CreditPhoto } from "./CreditPhoto";
 import { LikeButton } from "./LikeButton";
 import { ShareButton } from "./ShareButton";
 import type { VoyageContent } from "@/content/voyages";
@@ -39,12 +40,14 @@ export function DestinationHero({
   intro,
   favoriteId,
   heroImage,
+  heroCredit,
   sharePath,
 }: {
   hero: VoyageContent["hero"];
   intro: string;
   favoriteId: string;
   heroImage?: string;
+  heroCredit?: { texte: string; lien: string };
   sharePath: string;
 }) {
   const eyebrow = hero.country + (hero.tags.length > 0 ? ` — ${hero.tags.join(" · ")}` : "");
@@ -56,7 +59,9 @@ export function DestinationHero({
         <div
           className="absolute inset-x-0 top-0 h-screen"
           style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
-        />
+        >
+          <CreditPhoto credit={heroCredit} className="bottom-2 right-2" />
+        </div>
       ) : (
         // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu.
         <div className="absolute inset-0" style={{ backgroundColor: "rgba(0,0,0,0.6)" }} />

@@ -1,7 +1,8 @@
 import { TriangleAlert } from "lucide-react";
 import { LikeButton } from "../components/LikeButton";
 import { ShareButton } from "../components/ShareButton";
-import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
+import { DESTINATION_HERO_IMAGE, HERO_IMAGE_CREDIT } from "@/lib/hero-images";
+import { CreditPhoto } from "@/app/components/CreditPhoto";
 import type { ScoredDestination } from "@/lib/travel-match/engine";
 import { libellesEtiquettes } from "@/lib/etiquettes";
 
@@ -35,6 +36,7 @@ export function DestinationCard({
               plein. Exception (relecture du 11/09/2026) : un dégradé limité au bas de la photo,
               sous le titre — sur une photo très claire comme Amalfi, l'ombre portée ne suffisait
               plus et le nom de la destination devenait illisible. Le haut de la photo reste intact. */}
+          <CreditPhoto credit={HERO_IMAGE_CREDIT[destination.content_slug]} className="left-2 top-2" />
           <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
           <div className="absolute right-4 top-4 flex items-center gap-2">
             <ShareButton

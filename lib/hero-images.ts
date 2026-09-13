@@ -74,7 +74,19 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // février, hors saison, plutôt qu'une crique turquoise de carte postale)
   ibiza:
     "https://images.unsplash.com/photo-1756968169980-846ac2e81430?fm=jpg&q=80&w=2400&auto=format&fit=crop",
-  // Vol d'oies au lever du jour sur Serris — photo de Soumia (10/09/2026), recadrée en 3:2, sans
-  // filtre, métadonnées GPS supprimées. Aucune photo libre de droit de Serris n'existait (13/09/2026).
-  "val-d-europe": "/images/voyages/val-d-europe/hero.jpg",
+  // Lac de Serris — Lipton1989, Wikimedia Commons, CC BY-SA 4.0 :
+  // https://commons.wikimedia.org/wiki/File:Lac_de_Serris_77.jpg — aucune photo Unsplash de Serris
+  // n'existe. Licence à attribution obligatoire : crédit visible via HERO_IMAGE_CREDIT ci-dessous.
+  // La photo de Soumia (vol d'oies au lever du jour, oies-serris.jpg) a été essayée puis remplacée
+  // le 13/09/2026 ; elle reste dans le dossier, sans GPS, pour Instagram.
+  "val-d-europe": "/images/voyages/val-d-europe/lac-serris.jpg",
+};
+
+// Crédit affiché sur la photo quand sa licence l'exige (CC BY-SA, etc.). Les photos Unsplash n'en
+// ont pas besoin et n'ont pas d'entrée ici.
+export const HERO_IMAGE_CREDIT: Partial<Record<string, { texte: string; lien: string }>> = {
+  "val-d-europe": {
+    texte: "Photo : Lipton1989, CC BY-SA 4.0",
+    lien: "https://commons.wikimedia.org/wiki/File:Lac_de_Serris_77.jpg",
+  },
 };
