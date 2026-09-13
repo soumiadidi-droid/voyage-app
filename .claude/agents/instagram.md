@@ -159,9 +159,15 @@ lisibilité sur la sauge).
 
 Deux consignes de contexte, à ne pas oublier :
 
-- **Ne tague aucun hôtel ni établissement pour l'instant.** Le compte part de zéro, un tag sans
-  audience dessert le démarchage plus qu'il ne le sert. Décidé le 11/09/2026, à rouvrir quand le
-  compte aura de quoi peser.
+- **Les tags (règle revue le 13/09/2026, remplace le « aucun tag » du 11/09)** :
+  - **adresse testée** (J'ai testé, J'ai dormi ici) → on tague, dans la légende (@compte) ET sur la
+    photo de la slide. Les petites adresses repartagent, c'est de la visibilité gratuite et vraie ;
+  - **cible de démarchage** (Le Talaia, Bleu Hôtel, RockyPop, Bizipoz…) → on tague, idéalement
+    quelques jours avant le mail, pour que le nom leur dise déjà quelque chose ;
+  - **adresse sur le radar** → jamais de tag : il laisserait croire qu'elle y est allée.
+  Le compte à taguer est celui de l'établissement, jamais celui d'un blogueur : le lien Instagram
+  enregistré sur le site vient parfois d'un tiers (vérifier l'auteur du post avant de reprendre
+  son @). Les comptes vérifiés le 13/09 sont notés dans les `legendes.md` des cycles.
 - **Deux familles de photos, jamais mélangées** (13/09/2026) : les photos d'émotion (Unsplash
   gratuit, crédit noté) illustrent les teasers et les adresses du post 4 ; les photos de Soumia
   n'apparaissent que dans le post 5 Sans filtre, sans retouche.
