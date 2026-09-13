@@ -25,6 +25,7 @@
 //     { "type": "adresses",   "fichier": "post-4-carnet/2-le-matin", "surtitre": "Le matin",
 //       "photo": "/chemin/absolu/photo.jpg",
 //       "adresses": [["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"]] },
+//     { "type": "sans-filtre", "fichier": "post-5-sans-filtre/01-page-de-garde" },
 //     { "type": "fin",        "fichier": "post-4-carnet/6-fin-de-carnet",
 //       "lignes": ["Quatorze adresses, trois jours,", "et une ville qui se lève tôt."],
 //       "cta": "Huit questions, et le site te dit où aller." }
@@ -220,6 +221,29 @@ function html(tuile, spec) {
           <span class="filet" style="background:${surSable ? COULEURS.charcoal + "26" : "#ffffff33"}"></span>
           <p class="corps" style="font-size:14px;line-height:1.4;color:${encre}bf">${tuile.cta ?? ""}</p>
           ${signature(encre + "99")}
+        </div>
+      </div>`,
+    };
+  }
+
+  if (tuile.type === "sans-filtre") {
+    // Page de garde du post 5, qui referme le cycle d'un carnet (13/09/2026, demande de Soumia) :
+    // ses photos telles qu'elle les a prises, comme la page /sans-filtre du site. Fond ivoire — la
+    // tuile de la voix de Soumia — et "filtre" en italique terracotta, comme le titre du site.
+    return {
+      h: 1350,
+      corps: `<div class="col" style="background:${COULEURS.ivoire}">
+        ${surtitre(tuile.surtitre ?? spec.destination, COULEURS.ink, COULEURS.ink)}
+        <div style="display:flex;flex-direction:column;gap:18px">
+          <p class="titre" style="font-size:64px;line-height:.95;color:${COULEURS.charcoal}">Sans <em style="font-style:italic;color:#B55F42">filtre</em></p>
+          <p class="corps" style="font-size:15px;line-height:1.45;color:${COULEURS.charcoal}b3">${tuile.sousTitre ?? "Mes photos telles que je les ai prises."}</p>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span class="filet" style="background:${COULEURS.charcoal}26"></span>
+          <div class="bas">
+            ${signature(COULEURS.charcoal + "99")}
+            <span class="mono" style="white-space:nowrap;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:${COULEURS.charcoal}99">Fais défiler →</span>
+          </div>
         </div>
       </div>`,
     };
