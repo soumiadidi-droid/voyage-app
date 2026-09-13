@@ -23,7 +23,8 @@ const HANDLE = "@levoyagedesemotions";
 export function InstaStudio() {
   const [preset, setPreset] = useState<PresetId>("minimalist");
   const [format, setFormat] = useState<FormatId>("square");
-  const [filtre, setFiltre] = useState<FiltreId>("sable");
+  // "aucun" par défaut depuis le 13/09/2026 : Soumia ne veut pas de filtre sur ses photos.
+  const [filtre, setFiltre] = useState<FiltreId>("aucun");
   const [quote, setQuote] = useState(
     "Un pays, une histoire, une photo à la fois."
   );

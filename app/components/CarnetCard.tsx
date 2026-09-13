@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import type { AuthenticityBadge } from "@/lib/travel-match/types";
-import { PHOTO_GRADE } from "@/lib/photo-grade";
 
 // Carte de carnet (03/09/2026) — partagée par la liste complète (/carnets) et la section "à la
 // une" de l'accueil, pour qu'une destination ait exactement la même apparence aux deux endroits.
@@ -59,7 +58,6 @@ export function CarnetCard({
             backgroundImage: `url('${carnet.image}')`,
             backgroundSize: "cover",
             backgroundPosition: "center",
-            filter: PHOTO_GRADE.filtre,
           }}
         />
         {/* Dégradé limité au bas de la photo (relecture du 11/09/2026) : sur une photo claire,

@@ -1,7 +1,6 @@
 import { LikeButton } from "./LikeButton";
 import { ShareButton } from "./ShareButton";
 import type { VoyageContent } from "@/content/voyages";
-import { PHOTO_GRADE } from "@/lib/photo-grade";
 
 // Hero fixe (décidé le 26/08/2026 — plus de carrousel). La PHOTO vit dans son propre calque à
 // hauteur FIXE (`h-screen`, jamais de zoom/crop quel que soit le texte), le TEXTE vit dans un calque
@@ -56,7 +55,7 @@ export function DestinationHero({
       {heroImage ? (
         <div
           className="absolute inset-x-0 top-0 h-screen"
-          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center", filter: PHOTO_GRADE.filtre }}
+          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
         />
       ) : (
         // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu.

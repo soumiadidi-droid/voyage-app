@@ -759,7 +759,11 @@ est pire qu'une page absente.
 Attention : l'activation se fait aussi **dans le tableau de bord Vercel** (onglet Analytics →
 Enable). Le code seul ne collecte rien.
 
-## Étalonnage photo et studio (11/09/2026)
+## Étalonnage photo et studio (11/09/2026) — FILTRE RETIRÉ LE 13/09/2026
+
+**Le filtre « Sable » n'est plus appliqué nulle part** (site, tuiles Instagram, Studio par défaut) :
+Soumia le trouve « dégueulasse », ses photos doivent garder leurs couleurs d'origine. Ce qui suit est
+l'historique. Ne pas le réappliquer sans avant/après et accord explicite.
 
 `lib/photo-grade.ts` — une seule définition de l'ambiance "Sable" (réchauffe, désature légèrement,
 remonte les noirs vers l'ivoire), appliquée aux couvertures de fiches, aux cartes de résultats, aux

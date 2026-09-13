@@ -10,7 +10,6 @@ import { useFavorites, usePlaceFavorites } from "@/lib/favorites";
 import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 import type { TransportFilter } from "@/lib/travel-match/types";
 import { resolveFavorites, resolvePlaceFavorites, type LikedItem, type PlaceLikedItem } from "./actions";
-import { PHOTO_GRADE } from "@/lib/photo-grade";
 
 // Même habillage que /pros, /philosophie et /sans-filtre (13/09/2026, demande de Soumia :
 // "retravaille la page mes favoris") : en-tête commun EnTetePage, surtitre + titre par section, cartes de destination en grille avec dégradé bas (règle de la relecture du 11/09), plus
@@ -83,7 +82,7 @@ function CarteVoyage({
     <div className="group relative flex min-h-[300px] sm:min-h-[340px] items-end overflow-hidden rounded-2xl shadow-sm">
       <div
         className="absolute inset-0 transition-transform duration-700 group-hover:scale-[1.03]"
-        style={{ backgroundImage: `url('${image}')`, backgroundSize: "cover", backgroundPosition: "center", filter: PHOTO_GRADE.filtre }}
+        style={{ backgroundImage: `url('${image}')`, backgroundSize: "cover", backgroundPosition: "center" }}
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/0" />
       <div className="absolute right-4 top-4 z-10">

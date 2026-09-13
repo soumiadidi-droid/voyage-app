@@ -1,3 +1,8 @@
+// RETIRÉ DU SITE le 13/09/2026 (Soumia : « j'aime pas le filtre, vraiment ») : les photos s'affichent
+// dans leurs couleurs d'origine partout (couvertures de fiches, cartes de carnets, résultats,
+// favoris), comme sur les tuiles Instagram. Ces définitions ne sont plus importées nulle part ; elles
+// restent pour mémoire. Ne pas les réappliquer sans lui montrer un avant/après et obtenir son accord.
+//
 // Étalonnage photo du site (11/09/2026) — une seule définition, partagée.
 //
 // Objectif : que des photos venant de sources différentes (banque d'images, appareils, moments de
