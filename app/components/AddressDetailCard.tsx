@@ -135,7 +135,7 @@ export function AddressDetailCard({
           avec juste le badge catégorie vs une autre avec catégorie + "Partenaire" + statut
           décalait tout le contenu en dessous entre les deux. `pr-24` (29/08/2026, était `pr-9`)
           laisse la place aux deux icônes du coin haut-droit désormais côte à côte. */}
-      <div className="mb-3 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-24">
+      <div className="mb-2 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-24">
         <span
           className="inline-flex items-center gap-1.5 rounded-full py-0.5 px-2.5 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
@@ -158,32 +158,43 @@ export function AddressDetailCard({
         )}
       </div>
 
-      {/* `line-clamp-2` + `min-h` (28/08/2026) : sans ça, un nom court (1 ligne) vs un nom long
-          (3 lignes, ex. "Le Talaia Hôtel & Spa Biarritz - MGallery Collection") décalait tout le
-          contenu en dessous — repéré par Soumia. Hauteur réservée fixe pour 2 lignes max, peu
-          importe le nombre réel de lignes du nom. */}
+      {/* Nom + lieu dans un même bloc à hauteur réservée (13/09/2026, Soumia : "remonter le titre,
+          l'adresse et le sigle"). Avant, la hauteur de 2 lignes était réservée au nom seul : un nom
+          court laissait un trou entre lui et le lieu. Le lieu colle maintenant au nom, et c'est
+          sous le lieu que l'espace libre se loge, pour que les avis restent alignés d'une carte à
+          l'autre (règle du 28/08/2026 : "Le Talaia Hôtel & Spa Biarritz - MGallery Collection"
+          tient sur 2 lignes). */}
+      <div className="mb-2 min-h-[4.4rem]">
       <h3
-        className="mb-1 line-clamp-2 min-h-[3.5rem] font-semibold"
+        className="mb-0.5 line-clamp-2 font-semibold leading-snug"
         style={{ fontFamily: "var(--font-display)", fontSize: "1.15rem" }}
       >
         {card.name}
+        {/* Gamme de prix à côté du nom (13/09/2026, demande de Soumia), plutôt que sur sa propre
+            ligne sous le lieu : elle ne décale plus le contenu entre une carte avec prix et une
+            carte sans. Insécable pour ne jamais se retrouver seule en début de ligne. */}
+        {card.price && (
+          <span
+            className="whitespace-nowrap font-medium"
+            style={{ color: "var(--lve-terracotta-ink)", fontSize: "0.85rem" }}
+          >
+            {"\u00a0\u00a0·\u00a0"}
+            {card.price}
+          </span>
+        )}
       </h3>
       {/* Sans-serif moderne (29/08/2026, demande Gemini) : mono retiré, var(--font-display).
           Interligne calé sur la hauteur réservée (11/09/2026) : avec une ligne plus basse que le
           min-h, le haut de la 2e ligne coupée dépassait sous la 1re (vu sur Lagoondy). */}
       {card.location && (
         <p
-          className="mb-2 line-clamp-1 min-h-[1.3rem] text-xs font-medium leading-[1.3rem]"
+          className="line-clamp-1 text-xs font-medium leading-[1.3rem]"
           style={{ color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
         >
           {card.location}
         </p>
       )}
-      {card.price && (
-        <p className="font-display mb-2" style={{ color: "var(--lve-terracotta-ink)", fontSize: "0.85rem" }}>
-          {card.price}
-        </p>
-      )}
+      </div>
 
       {/* `line-clamp-3` + `min-h` (28/08/2026) : même logique que le nom/la localisation — une
           description longue vs courte décalait les tags et le bouton du dessous entre cartes. */}
