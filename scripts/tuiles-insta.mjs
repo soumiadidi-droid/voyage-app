@@ -26,6 +26,8 @@
 //       "photo": "/chemin/absolu/photo.jpg",
 //       "adresses": [["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"]] },
 //     { "type": "sans-filtre", "fichier": "post-5-sans-filtre/01-page-de-garde" },
+//     { "type": "story",      "fichier": "stories/03-j3-matin", "fond": "terracotta", "surtitre": "Ce soir",
+//       "lignes": ["Ce soir,", "je te dis où."], "texte": "…" },
 //     { "type": "rebus",      "fichier": "post-3-destination/1-rebus", "pictos": ["vague", "phare", "planche", "beret"] },
 //     // "promesse" et "url" (13/09/2026) : pousser vers le site et le test Travel Match.
 //     { "type": "fin",        "fichier": "post-4-carnet/6-fin-de-carnet",
@@ -270,6 +272,35 @@ function html(tuile, spec) {
             ${signature("#ffffffb3")}
             <span class="mono" style="white-space:nowrap;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#ffffffcc">Fais défiler →</span>
           </div>
+        </div>
+      </div>`,
+    };
+  }
+
+  if (tuile.type === "story") {
+    // Story de transition entre deux posts (13/09/2026), format 9:16. La moitié basse reste libre :
+    // c'est là que Soumia pose le sticker (sondage, quiz, compte à rebours, lien) dans l'appli.
+    // "fond" : "envie" (couleur de l'envie du cycle), "terracotta", "sable" ou "ivoire".
+    const fonds = { envie: fond, terracotta: COULEURS.terracotta, sable: COULEURS.sable, ivoire: COULEURS.ivoire };
+    const bg = fonds[tuile.fond ?? "envie"] ?? fond;
+    const clair = bg === COULEURS.sable || bg === COULEURS.ivoire;
+    const encre = clair ? COULEURS.charcoal : "#ffffff";
+    const accent = clair ? COULEURS.ink : COULEURS.sable;
+    const lignes = (tuile.lignes ?? [])
+      .map((l) => `<p class="titre" style="font-size:34px;line-height:1.12;color:${encre}">${l}</p>`)
+      .join("");
+    return {
+      h: 1920,
+      corps: `<div class="col" style="background:${bg};padding:56px 40px 64px">
+        <div style="display:flex;flex-direction:column;gap:22px">
+          ${surtitre(tuile.surtitre ?? "", accent, accent)}
+          <div style="display:flex;flex-direction:column;gap:6px;margin-top:40px">${lignes}</div>
+          ${tuile.texte ? `<p class="corps" style="font-size:15px;line-height:1.45;color:${encre}bf;margin-top:6px">${tuile.texte}</p>` : ""}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          ${tuile.promesse ? `<p class="mono" style="white-space:nowrap;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:${accent}">${tuile.promesse}</p>` : ""}
+          ${tuile.url ? `<p class="titre" style="font-size:18px;color:${encre}">${tuile.url}</p>` : ""}
+          ${signature(encre + "99")}
         </div>
       </div>`,
     };

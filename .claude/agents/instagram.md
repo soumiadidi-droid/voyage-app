@@ -145,6 +145,15 @@ Les six couleurs sont de valeur équivalente : la grille varie en teinte, jamais
 petits textes posés dessus sont en ivoire à 75 %, jamais en sable (le sable tombe sous le seuil de
 lisibilité sur la sauge).
 
+## Les stories de transition (13/09/2026)
+
+Huit stories par cycle, tuile `story` (1080 × 1920, moitié basse libre pour le sticker), livrées dans
+`stories/` avec un `01-stories.md` (jour, heure, sticker, lien) :
+J1 soir sondage (couleur de l'envie) · J2 boîte à questions, un indice · J3 matin compte à rebours
+(terracotta) · J3 soir quiz + repartage de l'énigme · J4 matin compte à rebours (sable) · J4 soir
+**sticker Lien vers la fiche du carnet** + tags · J5 matin compte à rebours (ivoire) · J5 soir
+**sticker Lien vers /questionnaire**. Exemples : `scripts/exemples/stories-*.json`.
+
 ## L'appel au site, sur les pages de fin et dans les légendes (13/09/2026)
 
 Chaque page de fin (post 4 et post 5) et chaque légende de ces posts poussent vers le site :
