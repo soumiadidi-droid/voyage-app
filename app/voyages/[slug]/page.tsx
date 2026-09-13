@@ -145,7 +145,7 @@ export default async function VoyagePage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ id?: string; duration?: string; familyProfile?: string; climate?: string }>;
+  searchParams: Promise<{ id?: string; duration?: string; familyProfile?: string; climate?: string; titre?: string }>;
 }) {
   const { slug } = await params;
   const voyage = await getVoyage(slug);
@@ -156,7 +156,7 @@ export default async function VoyagePage({
   // le lien depuis /resultat. Sans lui (accès direct à la fiche), on retombe sur le slug de
   // contenu — correct pour les 7 destinations à fiche dédiée, approximatif pour Italie/Amérique du
   // Nord qui partagent une fiche entre plusieurs destinations de matching.
-  const { id: favoriteId, duration, familyProfile: rawFamilyProfile } = await searchParams;
+  const { id: favoriteId, duration, familyProfile: rawFamilyProfile, titre } = await searchParams;
   // Absent en accès direct à la fiche, ou si companions ≠ "famille" au questionnaire — le pavé ne
   // s'affiche simplement pas (27/08/2026).
   const familyProfile = FAMILY_PROFILE_VALUES.includes(rawFamilyProfile as FamilyProfile)
@@ -190,6 +190,9 @@ export default async function VoyagePage({
         favoriteId={favoriteId ?? slug}
         heroImage={DESTINATION_HERO_IMAGE[voyage.slug]}
         sharePath={`/voyages/${slug}`}
+        // Essai du 13/09/2026 : ?titre=voile ou ?titre=bloc, pour comparer les deux options de
+        // lisibilité sur la même version de test. À retirer une fois l'option choisie.
+        variante={titre === "voile" || titre === "bloc" ? titre : undefined}
       />
 
       {/* <div>, pas <main> (29/08/2026, bug trouvé au passage) : app/layout.tsx a déjà SON <main>
