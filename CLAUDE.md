@@ -957,5 +957,5 @@ fabrique les tuiles à partir d%un fichier de spec JSON — six types (`mot`, `d
 `terracotta`, `garde`, `adresses`, `fin`), identiques aux modèles du Studio. Exemple complet :
 `scripts/exemples/insta-biarritz.json`. Le Studio reste la voie manuelle ; ces scripts existent
 parce que son export part d%un clic que personne ne peut déclencher à la place de Soumia. L%agent
-Instagram livre donc un dossier `~/Documents/Posts Insta/insta-<destination>/` (depuis le 13/09/2026, plus Téléchargements) avec les images, pas un mode
+Instagram livre donc un dossier `~/Documents/Le Voyage des Émotions/Posts Insta/insta-<destination>/` (depuis le 13/09/2026, plus Téléchargements) avec les images, pas un mode
 d%emploi.

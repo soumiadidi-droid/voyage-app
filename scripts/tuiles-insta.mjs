@@ -7,7 +7,7 @@
 //
 // Usage :
 //   node scripts/tuiles-insta.mjs <spec.json> [dossier de sortie]
-//   (dossier par défaut : ~/Documents/Posts Insta/insta-<destination>)
+//   (dossier par défaut : ~/Documents/Le Voyage des Émotions/Posts Insta/insta-<destination>)
 //
 // Le fichier de spec est un JSON :
 // {
@@ -304,7 +304,7 @@ if (!ENVIES[spec.envie]) {
 }
 const sortie =
   dossierArg ??
-  join(homedir(), "Documents", "Posts Insta", `insta-${spec.destination.toLowerCase().replace(/[^a-z0-9]+/gi, "-")}`);
+  join(homedir(), "Documents", "Le Voyage des Émotions", "Posts Insta", `insta-${spec.destination.toLowerCase().replace(/[^a-z0-9]+/gi, "-")}`);
 const travail = join(tmpdir(), `lve-tuiles-${Date.now()}`);
 mkdirSync(travail, { recursive: true });
 
