@@ -73,6 +73,10 @@ const PICTOS = {
   vague: `<path d="M6 20c3-7 11-9 16-4-5 0-7 4-4 7"/><path d="M4 30c4 0 4-4 8-4s4 4 8 4 4-4 8-4 4 4 8 4 4-4 8-4"/><path d="M4 38c4 0 4-4 8-4s4 4 8 4 4-4 8-4 4 4 8 4 4-4 8-4"/>`,
   phare: `<path d="M19 42 21 17h6l2 25Z"/><path d="M20 17v-5h8v5"/><path d="M19 12l5-5 5 5"/><path d="M20.4 26h7.2M19.8 34h8.4"/><path d="M31 12l6-3M31 15l6 2M17 12l-6-3M17 15l-6 2"/><path d="M12 42h24"/>`,
   planche: `<g transform="rotate(35 24 24)"><path d="M24 3c8 9 8 33 0 42-8-9-8-33 0-42Z"/><path d="M24 8v33"/><path d="M24 37l-3 5"/></g>`,
+  voilier: `<path d="M24 6v30"/><path d="M24 8 11 32h13"/><path d="M27 12c7 5 10 12 10 20H27"/><path d="M7 37h34l-4 5H11Z"/>`,
+  savon: `<rect x="8" y="20" width="32" height="18" rx="5"/><path d="M14 20c0-4 3-6 6-6h8c3 0 6 2 6 6"/><circle cx="36" cy="10" r="3"/><circle cx="29" cy="7" r="2"/><circle cx="41" cy="16" r="1.6"/><path d="M17 29h14"/>`,
+  ballon: `<circle cx="24" cy="24" r="17"/><path d="m24 16 7 5-3 8h-8l-3-8Z"/><path d="M24 16V8M31 21l8-3M28 29l5 7M20 29l-5 7M17 21l-8-3"/>`,
+  poisson: `<path d="M6 24c6-9 18-12 28-4l8-6v20l-8-6C24 36 12 33 6 24Z"/><circle cx="14" cy="22" r="1.4"/><path d="M22 18c2 4 2 8 0 12"/>`,
   beret: `<g transform="rotate(-12 24 26)"><path d="M5 27c0-8 11-12 21-11 11 1 18 5 17 10-1 6-38 8-38 1Z"/><path d="M12 31c6 3 20 2 26-2"/><path d="M22 16c0-3 2-5 5-4"/></g>`,
 };
 const AMBIANCE_SABLE = "saturate(0.88) contrast(0.95) sepia(0.08) brightness(1.02)";

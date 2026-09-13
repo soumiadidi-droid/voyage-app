@@ -1,0 +1,26 @@
+{
+  "destination": "Marseille",
+  "envie": "Déguster",
+  "villes": "Une journée, quatre adresses",
+  "promesse": "9 adresses testées",
+  "tuiles": [
+    { "type": "mot", "fichier": "post-1-emotion/1-tuile-deguster" },
+    { "type": "definition", "fichier": "post-1-emotion/2-definition-deguster",
+      "lignes": ["Ce n'est pas manger vite entre deux visites.", "C'est choisir sa journée d'après ses tables.", "Un brunch qui traîne, un sandwich sur un banc, un poisson face au port."] },
+    { "type": "rebus", "fichier": "post-3-destination/1-rebus", "pictos": ["voilier", "savon", "ballon", "poisson"] },
+    { "type": "terracotta", "fichier": "post-3-destination/2-tuile-marseille", "detail": "Vieux-Port · Les Goudes · Calanques" },
+    { "type": "garde", "fichier": "post-4-carnet/1-page-de-garde", "surtitre": "Carnet d'adresses" },
+    { "type": "adresses", "fichier": "post-4-carnet/2-la-nuit", "surtitre": "La nuit", "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-marseille/photos-source/nuit-corniche.jpg",
+      "adresses": [["Les Bords de Mer", "L'hôtel de la Corniche sur ma liste, face à la Méditerranée"]] },
+    { "type": "adresses", "fichier": "post-4-carnet/3-le-brunch", "surtitre": "Le brunch", "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-marseille/photos-source/brunch.jpg",
+      "adresses": [["Deïa", "De très bons petits plats de brunch, en plein centre-ville"]] },
+    { "type": "adresses", "fichier": "post-4-carnet/4-le-midi", "surtitre": "Le midi", "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-marseille/photos-source/vieux-port.jpg",
+      "adresses": [["Treize Envie", "Le sandwich au poulpe, sur un banc face au Vieux-Port"]] },
+    { "type": "adresses", "fichier": "post-4-carnet/5-le-diner", "surtitre": "Le dîner", "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-marseille/photos-source/diner-poisson.jpg",
+      "adresses": [["La Marine des Goudes", "Le poisson du jour face au petit port des Goudes"]] },
+    { "type": "fin", "fichier": "post-4-carnet/6-fin-de-carnet",
+      "lignes": ["Une journée à Marseille,", "de la Corniche", "au port des Goudes."],
+      "cta": "Les treize autres adresses du carnet t'attendent sur le site." },
+    { "type": "sans-filtre", "fichier": "post-5-sans-filtre/01-page-de-garde" }
+  ]
+}
