@@ -3,7 +3,7 @@
 //
 // Usage :
 //   node scripts/photos-insta.mjs <source> <largeur> <hauteur> <sortie>
-//   node scripts/photos-insta.mjs public/images/voyages/cote-basque/hires-IMG_1234.jpg 1080 1350 ~/Downloads/insta-biarritz/photos-source/le-matin.jpg
+//   node scripts/photos-insta.mjs public/images/voyages/cote-basque/hires-IMG_1234.jpg 1080 1350 ~/Documents/"Posts Insta"/insta-biarritz/photos-source/le-matin.jpg
 //
 // Le recadrage est centré : c'est un défaut raisonnable, pas un choix artistique. Regarde l'image
 // après coup — une photo peut perdre son sujet dans l'opération.

@@ -178,15 +178,15 @@ photos choisir).
 ## Tu livres un dossier, pas un mode d'emploi
 
 Soumia te donne une destination et une envie. Tu rends un dossier prêt à programmer dans
-`~/Downloads/insta-<destination>/`, images comprises. Un mode d'emploi qui lui demande de
+`~/Documents/Posts Insta/insta-<destination>/` (rangement demandé par Soumia le 13/09/2026, plus jamais dans Téléchargements), images comprises. Un mode d'emploi qui lui demande de
 refabriquer les tuiles à la main n'est pas une livraison.
 
 **1. Les photos, recadrées au gabarit.** Les photos d'émotion se téléchargent depuis Unsplash en
 grande taille. Les photos de Soumia du post 5 partent de ses originaux ou des `hires-` du carnet
 (`public/images/voyages/<slug>/`), jamais des `web-` :
 
-    node scripts/photos-insta.mjs public/images/voyages/<slug>/hires-IMG_xxxx.jpg 1080 1080 ~/Downloads/insta-<dest>/post-2-sensation/1-<nom>.jpg
-    node scripts/photos-insta.mjs public/images/voyages/<slug>/hires-IMG_xxxx.jpg 1080 1350 ~/Downloads/insta-<dest>/photos-source/le-matin.jpg
+    node scripts/photos-insta.mjs public/images/voyages/<slug>/hires-IMG_xxxx.jpg 1080 1080 ~/Documents/"Posts Insta"/insta-<dest>/post-2-sensation/1-<nom>.jpg
+    node scripts/photos-insta.mjs public/images/voyages/<slug>/hires-IMG_xxxx.jpg 1080 1350 ~/Documents/"Posts Insta"/insta-<dest>/photos-source/le-matin.jpg
 
 Carré 1080 × 1080 pour les posts 1 à 3, portrait 1080 × 1350 pour les posts 4 et 5.
 Attention : `photos-insta.mjs` ne redresse pas les photos de téléphone prises à la verticale. Si
@@ -194,7 +194,7 @@ une photo sort couchée, recadre-la en appliquant l'orientation (Python, `ImageO
 
 **2. Les tuiles.** Tu écris un fichier de spec JSON, puis :
 
-    node scripts/tuiles-insta.mjs /tmp/<dest>.json ~/Downloads/insta-<dest>
+    node scripts/tuiles-insta.mjs /tmp/<dest>.json ~/Documents/"Posts Insta"/insta-<dest>
 
 Le format de la spec est documenté en tête de `scripts/tuiles-insta.mjs`. Les sept types de tuile
 sont `mot`, `definition`, `terracotta`, `garde`, `adresses`, `fin`, `sans-filtre` — ce sont exactement les modèles
