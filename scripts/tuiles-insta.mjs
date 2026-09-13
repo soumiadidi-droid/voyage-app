@@ -209,10 +209,12 @@ function html(tuile, spec) {
     return {
       h: 1350,
       corps: `<div style="position:relative;width:100%;height:100%;background:${COULEURS.obsidienne}">
-        <img src="file://${tuile.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:${AMBIANCE_SABLE}">
-        <div style="position:absolute;inset:0;background:#E8DFC8;opacity:.07"></div>
-        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.85), rgba(0,0,0,.55) 45%, transparent)"></div>
-        <div style="position:absolute;left:40px;right:40px;bottom:40px;display:flex;flex-direction:column;gap:${serre ? 16 : 20}px">
+        <!-- Photo SANS filtre (13/09/2026, Soumia : "ma photo est super belle et tu m'as mis un
+             filtre bizarre, on ne voit plus la mer") : ni étalonnage Sable, ni voile crème. Seul le
+             bas de l'image s'assombrit, juste ce qu'il faut sous le texte. -->
+        <img src="file://${tuile.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.45) 26%, rgba(0,0,0,0) 48%)"></div>
+        <div style="position:absolute;left:40px;right:40px;bottom:40px;display:flex;flex-direction:column;gap:${serre ? 16 : 20}px;text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 14px rgba(0,0,0,.45)">
           ${surtitre(tuile.surtitre ?? "", COULEURS.terracotta, COULEURS.ivoire)}
           <div style="display:flex;flex-direction:column;gap:${serre ? 12 : 16}px">${liste}</div>
           ${signature(COULEURS.ivoire + "99")}

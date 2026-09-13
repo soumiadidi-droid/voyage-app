@@ -73,6 +73,10 @@ une paella, un coucher de soleil depuis un toit — jamais une photo qui préten
 lui-même. Source : Unsplash, **gratuites uniquement** (jamais Unsplash+), crédit du photographe noté
 dans `00-planning.md`. Pas de visage reconnaissable en gros plan.
 
+**Aucun filtre sur les photos des slides d'adresses** (13/09/2026, Soumia : « ma photo est super belle et
+tu m'as mis un filtre bizarre, on ne voit même plus la mer ») : ni étalonnage Sable, ni voile. Seul le
+bas de l'image s'assombrit sous le texte, et une ombre douce est posée sur les lettres, pas sur la photo.
+
 **Post 5 — Sans filtre.** Le dernier post, qui referme la série. Un carrousel 4:5 :
 - slide 1 : la tuile **Sans filtre** (fond ivoire, "Sans *filtre*", "Mes photos telles que je les
   ai prises.", la destination en surtitre, "Fais défiler →") ;
