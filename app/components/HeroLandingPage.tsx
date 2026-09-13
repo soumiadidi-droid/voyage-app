@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PromesseTravelMatch } from "@/app/components/PromesseTravelMatch";
 import Link from "next/link";
 import { motion, AnimatePresence, animate, useMotionValue } from "framer-motion";
 import { Sparkles, Check, Compass } from "lucide-react";
@@ -277,6 +278,7 @@ export function HeroLandingPage({ items }: { items: DemoItem[] }) {
                 <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
                   {MAIN_CTA_TEXT}
                 </Link>
+                <PromesseTravelMatch className="mt-3" />
               </div>
             </div>
           </motion.div>

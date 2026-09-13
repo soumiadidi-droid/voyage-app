@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PromesseTravelMatch } from "@/app/components/PromesseTravelMatch";
 import { HeroLandingPage, type DemoItem } from "./components/HeroLandingPage";
 import { TRAVEL_MATCH_QUESTIONS } from "@/lib/travel-match/questionnaire";
 import { ARCHETYPES, SCORE_AXES, type ScoreAxis } from "./components/TravelerProfileCard";
@@ -209,6 +210,7 @@ export default function Home() {
               <Link href="/questionnaire" className="btn-principal">
                 Lancer Travel Match
               </Link>
+              <PromesseTravelMatch className="mt-3 justify-center" />
             </div>
           </div>
         </div>

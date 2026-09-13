@@ -27,6 +27,7 @@
 //       "adresses": [["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"]] },
 //     { "type": "sans-filtre", "fichier": "post-5-sans-filtre/01-page-de-garde" },
 //     { "type": "rebus",      "fichier": "post-3-destination/1-rebus", "pictos": ["vague", "phare", "planche", "beret"] },
+//     // "promesse" et "url" (13/09/2026) : pousser vers le site et le test Travel Match.
 //     { "type": "fin",        "fichier": "post-4-carnet/6-fin-de-carnet",
 //       "lignes": ["Quatorze adresses, trois jours,", "et une ville qui se lève tôt."],
 //       "cta": "Huit questions, et le site te dit où aller." }
@@ -238,6 +239,8 @@ function html(tuile, spec) {
         <div style="display:flex;flex-direction:column;gap:16px">
           <span class="filet" style="background:${surSable ? COULEURS.charcoal + "26" : "#ffffff33"}"></span>
           <p class="corps" style="font-size:14px;line-height:1.4;color:${encre}bf">${tuile.cta ?? ""}</p>
+          ${tuile.promesse ? `<p class="mono" style="white-space:nowrap;font-size:9px;text-transform:uppercase;letter-spacing:.06em;color:${surSable ? COULEURS.ink : "#ffffffcc"}">${tuile.promesse}</p>` : ""}
+          ${tuile.url ? `<p class="titre" style="font-size:19px;color:${encre}">${tuile.url}</p>` : ""}
           ${signature(encre + "99")}
         </div>
       </div>`,

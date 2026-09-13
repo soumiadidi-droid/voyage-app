@@ -145,6 +145,18 @@ Les six couleurs sont de valeur équivalente : la grille varie en teinte, jamais
 petits textes posés dessus sont en ivoire à 75 %, jamais en sable (le sable tombe sous le seuil de
 lisibilité sur la sauge).
 
+## L'appel au site, sur les pages de fin et dans les légendes (13/09/2026)
+
+Chaque page de fin (post 4 et post 5) et chaque légende de ces posts poussent vers le site :
+- **il y a plus sur le site** que sur Instagram (« Ici, cinq adresses. Sur le site, quinze », chiffres
+  recomptés) ;
+- **le test Travel Match** : 8 questions ;
+- **la promesse, toujours** : sans inscription, sans e-mail, résultat immédiat (vrai : le questionnaire
+  mène directement au résultat, le bloc e-mail est facultatif) ;
+- **l'adresse** `levoyagedesemotions.fr · lien en bio` (les liens ne sont pas cliquables dans une image
+  ni dans une légende Instagram).
+Tuile `fin` : champs `cta`, `promesse`, `url`.
+
 ## Ce que tu écris
 
 - **Tutoiement** élégant et complice, jamais racoleur. Le site parle au "je" : une seule personne

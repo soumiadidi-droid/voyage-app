@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { PromesseTravelMatch } from "@/app/components/PromesseTravelMatch";
 import Link from "next/link";
 import { Bus, Car, Footprints, Heart, TrainFront, type LucideIcon } from "lucide-react";
 import { EnTetePage } from "../components/EnTetePage";
@@ -182,6 +183,7 @@ export function FavorisClient() {
             <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
               Découvrir mes destinations
             </Link>
+            <PromesseTravelMatch className="mt-4 justify-center" />
           </div>
         </div>
       ) : (
@@ -279,6 +281,7 @@ export function FavorisClient() {
           <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
             Lancer Travel Match
           </Link>
+          <PromesseTravelMatch className="mt-4 justify-center" />
         </div>
       )}
     </div>

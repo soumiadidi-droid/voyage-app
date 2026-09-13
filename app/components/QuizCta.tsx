@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PromesseTravelMatch } from "@/app/components/PromesseTravelMatch";
 import { Compass } from "lucide-react";
 
 // Bloc d'engagement vers le questionnaire (03/09/2026), affiché en fin de fiche voyage. Contexte :
@@ -43,6 +44,7 @@ export function QuizCta() {
             <Link href="/questionnaire" className="btn-principal whitespace-nowrap px-7">
               Lancer le questionnaire
             </Link>
+            <PromesseTravelMatch className="mt-3" />
           </div>
         </div>
       </div>

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PromesseTravelMatch } from "@/app/components/PromesseTravelMatch";
 import { Bookmark, Compass, Eye, Heart, Layers, Send, type LucideIcon } from "lucide-react";
 import { getCarnets, getCompteursListe } from "@/lib/carnets";
 import { BlocOrange, EnTetePage } from "../components/EnTetePage";
@@ -217,6 +218,7 @@ export default async function PhilosophiePage() {
         <Link href="/questionnaire" className="btn-principal px-6 py-3.5">
           Lancer Travel Match
         </Link>
+        <PromesseTravelMatch className="mt-4 justify-center" />
       </div>
     </div>
   );
