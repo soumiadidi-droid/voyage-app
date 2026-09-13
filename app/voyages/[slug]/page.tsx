@@ -8,6 +8,10 @@ import { QuizCta } from "../../components/QuizCta";
 import { CarnetEmailCapture } from "../../components/EmailCapture";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
+
+// Les brouillons sont lisibles sur les liens de test (preview Vercel) et en local, jamais en
+// production : Soumia relit un carnet complet avant de le publier (13/09/2026).
+const BROUILLONS_VISIBLES = process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development";
 import { withVisibleAddresses } from "@/lib/visible-addresses";
 import { estVecue } from "@/lib/carnets";
 import { getCombosFor } from "@/lib/travel-match/combos";
@@ -30,10 +34,10 @@ import { DESTINATION_HERO_IMAGE } from "@/lib/hero-images";
 // le reste du fichier, pas de cache/dedup particulier mis en place).
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const voyage = await getVoyage(slug);
+  const voyage = await getVoyage(slug, BROUILLONS_VISIBLES);
   if (!voyage) return { title: "Voyage" };
 
-  const destinations = await getDestinations();
+  const destinations = await getDestinations(BROUILLONS_VISIBLES);
   // Résolution par content_slug, sans `id` (pas transmis à generateMetadata) — même approximation
   // déjà acceptée ailleurs dans ce fichier pour Italie/Amérique du Nord (plusieurs destinations,
   // un seul content_slug) : la 1ère correspondance suffit pour une preview de partage.
@@ -148,7 +152,7 @@ export default async function VoyagePage({
   searchParams: Promise<{ id?: string; duration?: string; familyProfile?: string; climate?: string }>;
 }) {
   const { slug } = await params;
-  const voyage = await getVoyage(slug);
+  const voyage = await getVoyage(slug, BROUILLONS_VISIBLES);
   if (!voyage) notFound();
   const visible = withVisibleAddresses(voyage);
 
@@ -162,7 +166,7 @@ export default async function VoyagePage({
   const familyProfile = FAMILY_PROFILE_VALUES.includes(rawFamilyProfile as FamilyProfile)
     ? (rawFamilyProfile as FamilyProfile)
     : undefined;
-  const destinations = await getDestinations();
+  const destinations = await getDestinations(BROUILLONS_VISIBLES);
   const destination = destinations.find((d) => d.id === (favoriteId ?? slug));
 
   // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par

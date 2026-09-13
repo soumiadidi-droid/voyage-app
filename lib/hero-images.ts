@@ -74,4 +74,7 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // février, hors saison, plutôt qu'une crique turquoise de carte postale)
   ibiza:
     "https://images.unsplash.com/photo-1756968169980-846ac2e81430?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+  // Vol d'oies au lever du jour sur Serris — photo de Soumia (10/09/2026), recadrée en 3:2, sans
+  // filtre, métadonnées GPS supprimées. Aucune photo libre de droit de Serris n'existait (13/09/2026).
+  "val-d-europe": "/images/voyages/val-d-europe/hero.jpg",
 };
