@@ -82,7 +82,8 @@ bas de l'image s'assombrit sous le texte, et une ombre douce est posée sur les 
   ai prises.", la destination en surtitre, "Fais défiler →") ;
 - dernière slide : la page de fin ivoire (tuile `fin`, `"fond": "ivoire"`, surtitre « Sans filtre ») —
   « [Destination], telle que je l'ai vue. » et le renvoi vers la page Sans filtre du site ;
-- slides du milieu : **les photos de Soumia de cette destination, telles qu'elle les a prises** —
+- slides du milieu : chaque photo en tuile `photo-legendee` (13/09/2026) — photo intacte en haut, sa légende
+  courte dans une bande crème en dessous, jamais par-dessus ; **les photos de Soumia de cette destination, telles qu'elle les a prises** —
   recadrées au 4:5, aucun étalonnage, aucun texte. Dix-neuf au plus (Instagram limite un carrousel à vingt images). Jamais une
   photo où l'on reconnaît quelqu'un.
 

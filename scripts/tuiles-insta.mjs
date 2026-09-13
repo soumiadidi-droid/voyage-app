@@ -306,6 +306,22 @@ function html(tuile, spec) {
     };
   }
 
+  if (tuile.type === "photo-legendee") {
+    // Photo du post Sans filtre avec sa légende (13/09/2026, demande de Soumia : sur Instagram la
+    // légende du post ne se voit qu'une fois). Façon tirage : la photo en haut, intacte — aucun
+    // filtre, aucun texte posé dessus — et la légende dans la bande crème en dessous.
+    return {
+      h: 1350,
+      corps: `<div style="width:100%;height:100%;background:${COULEURS.ivoire};display:flex;flex-direction:column;padding:22px 22px 0">
+        <div style="flex:1;min-height:0;background:#ddd url('file://${tuile.photo}') center/cover no-repeat"></div>
+        <div style="height:118px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 6px">
+          <p class="mono" style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:${COULEURS.ink}">${tuile.numero ?? ""}</p>
+          <p class="titre" style="font-size:21px;line-height:1.2;color:${COULEURS.charcoal}">${tuile.legende ?? ""}</p>
+        </div>
+      </div>`,
+    };
+  }
+
   if (tuile.type === "sans-filtre") {
     // Page de garde du post 5, qui referme le cycle d'un carnet (13/09/2026, demande de Soumia) :
     // ses photos telles qu'elle les a prises, comme la page /sans-filtre du site. Fond ivoire — la
