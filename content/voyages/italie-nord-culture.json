@@ -1,7 +1,7 @@
 {
   "slug": "italie-nord-culture",
   "hero": {
-    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260719_200001.jpg",
+    "image": "/images/voyages/italie/web-IMG_20260719_200001.jpg",
     "country": "Italie",
     "tags": [
       "villes",
@@ -15,22 +15,22 @@
   "intro": "Trois étapes très différentes en une semaine : la tour penchée de Pise dès le matin, les trésors de la Renaissance à Florence, et la masse écrasante du Colisée sous la chaleur de juillet à Rome.",
   "gallery": [
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260718_111014.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260718_111014.jpg",
+      "hiresUrl": "/images/voyages/italie/hires-IMG_20260718_111014.jpg",
+      "webUrl": "/images/voyages/italie/web-IMG_20260718_111014.jpg",
       "alt": "Piazza dei Miracoli, matinée — première étape du voyage",
       "caption": "Piazza dei Miracoli, matinée — première étape du voyage",
       "emotionalText": "Elle penche vraiment plus qu'on ne l'imagine sur les photos, et il faut lever la tête d'un cran de plus que prévu pour la cadrer en entier. Autour, la pelouse et le marbre blanc de la cathédrale absorbent toute la lumière du matin."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260719_200001.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260719_200001.jpg",
+      "hiresUrl": "/images/voyages/italie/hires-IMG_20260719_200001.jpg",
+      "webUrl": "/images/voyages/italie/web-IMG_20260719_200001.jpg",
       "alt": "Cathédrale Santa Maria del Fiore, fin de journée",
       "caption": "Cathédrale Santa Maria del Fiore, fin de journée",
       "emotionalText": "Le marbre rose et vert du Duomo prend une teinte presque grise sous ce ciel voilé, et sa masse écrase littéralement la rue en contrebas. Impossible de reculer assez pour tout cadrer d'un coup — il faut lever les yeux et accepter de ne voir qu'un morceau à la fois."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/hires-IMG_20260721_130114.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260721_130114.jpg",
+      "hiresUrl": "/images/voyages/italie/hires-IMG_20260721_130114.jpg",
+      "webUrl": "/images/voyages/italie/web-IMG_20260721_130114.jpg",
       "alt": "Colisée, milieu de journée — chaleur de juillet",
       "caption": "Colisée, milieu de journée — chaleur de juillet",
       "emotionalText": "Vu d'en bas, en contre-plongée, il paraît encore plus massif que dans le souvenir qu'on en a avant d'y aller. La pierre est presque blanche sous le soleil de juillet, et les arches vides laissent deviner deux mille ans d'usure sans un mot d'explication nécessaire."

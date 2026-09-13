@@ -19,7 +19,7 @@ export const DESTINATIONS: Destination[] = [
     content_slug: "italie-nord-culture",
     summary:
       "Les trésors de la Renaissance, l'histoire romaine et les ruelles animées de la Toscane au Latium.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260719_200001.jpg",
+    hero_image: "/images/voyages/italie/web-IMG_20260719_200001.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur", "douceur"],
@@ -44,7 +44,7 @@ export const DESTINATIONS: Destination[] = [
     authenticity_badge: "tested_approved",
     content_slug: "italie-sorrente-amalfe",
     summary: "Falaises escarpées, citronniers, cités perchées et douceur méditerranéenne face à la mer.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260723_201932.jpg",
+    hero_image: "/images/voyages/italie/web-IMG_20260723_201932.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur", "douceur"],
@@ -64,7 +64,7 @@ export const DESTINATIONS: Destination[] = [
     authenticity_badge: "tested_approved",
     content_slug: "italie-pouilles",
     summary: "Eaux turquoises, ruelles blanchies à la chaux, trulli et gastronomie authentique du Sud.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/italie/web-IMG_20260730_185631.jpg",
+    hero_image: "/images/voyages/italie/web-IMG_20260730_185631.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur"],
@@ -147,7 +147,7 @@ export const DESTINATIONS: Destination[] = [
     authenticity_badge: "tested_approved",
     content_slug: "crete",
     summary: "Agios Nikolaos, la baie de Mirabello, et une eau d'un bleu qu'on n'attendait pas.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hero-eau-turquoise.jpg",
+    hero_image: "/images/voyages/crete/hero-eau-turquoise.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur", "douceur"],
@@ -238,7 +238,7 @@ export const DESTINATIONS: Destination[] = [
     content_slug: "mykonos",
     summary:
       "Quatre jours entre copines en juin — plages, ruelles blanches et moulins au coucher du soleil.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/mykonos/web-IMG_20260628_111432.jpg",
+    hero_image: "/images/voyages/mykonos/web-IMG_20260628_111432.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur"],
@@ -262,7 +262,7 @@ export const DESTINATIONS: Destination[] = [
     authenticity_badge: "tested_approved",
     content_slug: "dubai",
     summary: "Gratte-ciel, plages et vieux quartier — le grand écart entre skyline et Al Fahidi.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/dubai/web-IMG_1047.jpg",
+    hero_image: "/images/voyages/dubai/web-IMG_1047.jpg",
     filters: {
       distance: ["long_courrier"],
       climate: ["chaleur"],
@@ -283,7 +283,7 @@ export const DESTINATIONS: Destination[] = [
     content_slug: "cote-basque",
     summary:
       "Biarritz, Saint-Jean-de-Luz — surf, couchers de soleil et gâteau basque, en attendant Cap Breton, Seignosse et Hossegor.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/biarritz/web-IMG_20260429_210725.jpg",
+    hero_image: "/images/voyages/biarritz/web-IMG_20260429_210725.jpg",
     filters: {
       distance: ["proche"],
       climate: ["chaleur", "douceur"],
@@ -307,7 +307,7 @@ export const DESTINATIONS: Destination[] = [
     authenticity_badge: "tested_approved",
     content_slug: "lisbonne",
     summary: "Collines, azulejos et lumière atlantique — Lisbonne et une excursion à Sintra.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/lisbonne/web-IMG_9475.jpg",
+    hero_image: "/images/voyages/lisbonne/web-IMG_9475.jpg",
     filters: {
       distance: ["europe"],
       climate: ["chaleur", "douceur"],
@@ -327,7 +327,7 @@ export const DESTINATIONS: Destination[] = [
     authenticity_badge: "tested_approved",
     content_slug: "porto",
     summary: "Toits en tuile, ruelles escarpées et la Douro en contrebas — l'autre grande ville du Portugal.",
-    hero_image: "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/porto/web-IMG_20231026_152531.jpg",
+    hero_image: "/images/voyages/porto/web-IMG_20231026_152531.jpg",
     filters: {
       distance: ["europe"],
       climate: ["douceur", "chaleur"],

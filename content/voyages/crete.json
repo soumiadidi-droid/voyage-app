@@ -1,7 +1,7 @@
 {
   "slug": "crete",
   "hero": {
-    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hero-eau-turquoise.jpg",
+    "image": "/images/voyages/crete/hero-eau-turquoise.jpg",
     "country": "Grèce",
     "tags": [
       "île",
@@ -15,36 +15,36 @@
   "intro": "Cinq jours à Agios Nikolaos, sur la baie de Mirabello — l'eau la plus transparente qu'on ait vue depuis longtemps, des oliviers qui encadrent la mer comme s'ils l'avaient fait exprès, et des couchers de soleil regardés depuis la terrasse de l'hôtel sans jamais s'en lasser.",
   "gallery": [
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260730_055047.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260730_055047.jpg",
+      "hiresUrl": "/images/voyages/crete/hires-IMG_20260730_055047.jpg",
+      "webUrl": "/images/voyages/crete/web-IMG_20260730_055047.jpg",
       "alt": "Coucher de soleil sur la baie de Mirabello — dernière soirée",
       "caption": "Coucher de soleil sur la baie de Mirabello — dernière soirée",
       "emotionalText": "Le ciel passe du orange au rose en quelques minutes, les transats vides en silhouette, et la mer qui garde la lumière un peu plus longtemps que le ciel. Une des dernières images du séjour, et une des plus fortes."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260727_180253.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260727_180253.jpg",
+      "hiresUrl": "/images/voyages/crete/hires-IMG_20260727_180253.jpg",
+      "webUrl": "/images/voyages/crete/web-IMG_20260727_180253.jpg",
       "alt": "Promenade du bord de mer, Agios Nikolaos",
       "caption": "Promenade du bord de mer, Agios Nikolaos",
       "emotionalText": "Les branches d'olivier se referment presque en arche au-dessus du chemin, et la mer apparaît par fragments entre les feuilles — comme si le paysage avait été cadré exprès."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260728_102459.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260728_102459.jpg",
+      "hiresUrl": "/images/voyages/crete/hires-IMG_20260728_102459.jpg",
+      "webUrl": "/images/voyages/crete/web-IMG_20260728_102459.jpg",
       "alt": "Plage, après-midi — baie de Mirabello",
       "caption": "Plage, après-midi — baie de Mirabello",
       "emotionalText": "Des parasols en rangs serrés, une eau si claire qu'on voit les pieds des nageurs à vingt mètres, et cette lumière de fin d'après-midi qui rend tout un peu plus doré que la réalité."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260728_072400.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260728_072400.jpg",
+      "hiresUrl": "/images/voyages/crete/hires-IMG_20260728_072400.jpg",
+      "webUrl": "/images/voyages/crete/web-IMG_20260728_072400.jpg",
       "alt": "Chambre, InterContinental Crete — tôt le matin",
       "caption": "Chambre, InterContinental Crete — tôt le matin",
       "emotionalText": "Un thé encore fumant, la baie de Mirabello qui s'étire derrière la vitre, les transats déjà alignés en bas alors que personne n'est encore descendu. Le meilleur moment de la journée, systématiquement."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/hires-IMG_20260729_161923.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/crete/web-IMG_20260729_161923.jpg",
+      "hiresUrl": "/images/voyages/crete/hires-IMG_20260729_161923.jpg",
+      "webUrl": "/images/voyages/crete/web-IMG_20260729_161923.jpg",
       "alt": "Boutique de céramique traditionnelle, Agios Nikolaos",
       "caption": "Boutique de céramique traditionnelle, Agios Nikolaos",
       "emotionalText": "Des étagères pleines à craquer de céramiques peintes à la main — motifs grecs classiques, amphores miniatures, assiettes qui se déclinent en trente couleurs. Impossible de repartir les mains vides."

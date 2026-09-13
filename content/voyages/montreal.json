@@ -1,7 +1,7 @@
 {
   "slug": "montreal",
   "hero": {
-    "image": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250216_094458.jpg",
+    "image": "/images/voyages/amerique-du-nord-hiver/web-IMG_20250216_094458.jpg",
     "country": "Canada",
     "tags": [
       "ville",
@@ -14,15 +14,15 @@
   "intro": "Une tempête de neige à Montréal — les flèches d'une église presque effacées par la neige qui tombe, la pierre couverte d'un centimètre de blanc frais. Quelques jours avant de filer vers New York.",
   "gallery": [
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250216_094458.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250216_094458.jpg",
+      "hiresUrl": "/images/voyages/amerique-du-nord-hiver/hires-IMG_20250216_094458.jpg",
+      "webUrl": "/images/voyages/amerique-du-nord-hiver/web-IMG_20250216_094458.jpg",
       "alt": "Montréal, matinée, chute de neige",
       "caption": "Montréal, matinée, chute de neige",
       "emotionalText": "Les flèches d'une église presque effacées par la neige qui tombe, la pierre couverte d'un centimètre de blanc frais — Montréal en pleine tempête, quelques jours avant New York."
     },
     {
-      "hiresUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/hires-IMG_20250216_114135.jpg",
-      "webUrl": "https://p65bp5tzcfivkgmn.public.blob.vercel-storage.com/amerique-du-nord-hiver/web-IMG_20250216_114135.jpg",
+      "hiresUrl": "/images/voyages/amerique-du-nord-hiver/hires-IMG_20250216_114135.jpg",
+      "webUrl": "/images/voyages/amerique-du-nord-hiver/web-IMG_20250216_114135.jpg",
       "alt": "Montréal, milieu de journée, chute de neige",
       "caption": "Montréal, milieu de journée, chute de neige",
       "emotionalText": "Un immeuble en brique à peine visible derrière les flocons, la rue déjà recouverte malgré l'heure encore matinale — l'hiver montréalais dans toute sa franchise, sans filtre pour l'adoucir."
