@@ -214,7 +214,7 @@ export function EmailCapture({
     <EmailCaptureShell
       badge="Ton itinéraire, par écrit"
       title="Recevoir mon itinéraire par email"
-      description="Tes trois destinations et un avant-goût de mes adresses testées sur place, directement dans ta boîte mail."
+      description="Tes trois destinations et un avant-goût de mes adresses, directement dans ta boîte mail."
       successText="Ton itinéraire complet vient d'être envoyé à"
       onSend={(email, { consent, trap }) =>
         sendResultsEmail({ email, archetypeTitle, destinations, consent, trap })

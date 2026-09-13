@@ -9,6 +9,7 @@ import { CarnetEmailCapture } from "../../components/EmailCapture";
 import { type Card } from "@/content/voyages";
 import { getVoyage, getDestinations } from "@/lib/travel-match/data";
 import { withVisibleAddresses } from "@/lib/visible-addresses";
+import { estVecue } from "@/lib/carnets";
 import { getCombosFor } from "@/lib/travel-match/combos";
 import {
   FAMILY_PROFILE_OPTIONS,
@@ -48,9 +49,19 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   //
   // Google tronque l'extrait autour de 160 caractères : la logistique transport n'est ajoutée que
   // si elle tient dans ce budget, l'essentiel (pays, accroche, nombre d'adresses) passe d'abord.
-  const addressCount = voyage.stays.length + voyage.eats.length + voyage.activities.length;
+  //
+  // Corrigé le 13/09/2026 (repéré sur Marseille : "18 adresses testées" alors que 9 étaient sur le
+  // radar) : on compte les seules adresses visibles, et on sépare le vécu du repéré — c'est la
+  // distinction centrale du site, elle vaut aussi dans Google.
+  const visibles = withVisibleAddresses(voyage);
+  const adresses = [...visibles.stays, ...visibles.eats, ...visibles.activities];
+  const vecues = adresses.filter((a) => estVecue(a.status)).length;
+  const reperees = adresses.length - vecues;
+  const pluriel = (n: number, mot: string) => `${n} ${mot}${n > 1 ? "s" : ""}`;
   const sentences = [`${voyage.hero.country} — ${voyage.hero.tagline}`];
-  if (addressCount > 0) sentences.push(`${addressCount} adresses testées et racontées.`);
+  if (vecues > 0 && reperees > 0) sentences.push(`${pluriel(vecues, "adresse testée")}, ${reperees} sur mon radar.`);
+  else if (vecues > 0) sentences.push(`${pluriel(vecues, "adresse testée")} et racontée${vecues > 1 ? "s" : ""}.`);
+  else if (reperees > 0) sentences.push(`${pluriel(reperees, "adresse")} sur mon radar.`);
   const essential = sentences.join(" ");
   const withTravel = travelInfo ? `${essential} ${travelInfo}.` : essential;
   const metaDescription = withTravel.length <= 160 ? withTravel : essential;

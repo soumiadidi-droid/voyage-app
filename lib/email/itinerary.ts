@@ -198,7 +198,7 @@ export function buildItineraryEmailHtml(input: ItineraryEmailInput): string {
         </h1>
         <p style="font-size:15px;line-height:1.6;margin:0;color:${C.muted};">
           Voici ton itinéraire : les trois destinations qui te correspondent le plus, et un
-          avant-goût de mes adresses testées sur place. Le carnet complet t'attend sur le site.
+          avant-goût de mes adresses. Le carnet complet t'attend sur le site.
         </p>
       </td></tr>
     </table>

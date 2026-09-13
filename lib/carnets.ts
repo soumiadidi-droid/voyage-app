@@ -42,6 +42,12 @@ export async function getCarnets(): Promise<Carnet[]> {
 // vécu). Recopié ici plutôt qu'importé : ce fichier-là est un composant client.
 const STATUT_VECU = /^(j[’']ai testé|j[’']ai dormi ici|testé)$/i;
 
+// Vécu (J'ai testé, J'ai dormi ici) ou repéré (Sur mon radar) — partagé avec la description Google
+// des fiches (13/09/2026) pour ne jamais annoncer "testées" des adresses encore sur le radar.
+export function estVecue(status: string | undefined): boolean {
+  return !!status && STATUT_VECU.test(status.trim());
+}
+
 export async function getCompteursListe() {
   const voyages = await getVoyages();
   let vecues = 0;
@@ -49,7 +55,7 @@ export async function getCompteursListe() {
   for (const v of voyages) {
     for (const a of [...v.stays, ...v.eats, ...v.activities]) {
       if (!a.status) continue;
-      if (STATUT_VECU.test(a.status.trim())) vecues++;
+      if (estVecue(a.status)) vecues++;
       else radar++;
     }
   }

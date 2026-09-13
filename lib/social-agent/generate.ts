@@ -180,7 +180,7 @@ export function generatePost(
     ].join("\n");
   } else {
     const body = hasAddresses
-      ? `\n\nNos adresses testées :\n${addresses.map((p) => formatAddressLine(p, "📍")).join("\n")}`
+      ? `\n\nMes adresses :\n${addresses.map((p) => formatAddressLine(p, "📍")).join("\n")}`
       : "";
     text = `Objet : ${destination.title} — ${hook}\n\nBonjour,\n\n${hook} ${destination.summary}${body}\n\n${CTA_NEWSLETTER}\n\n— L'équipe Voyage des Émotions`;
   }
