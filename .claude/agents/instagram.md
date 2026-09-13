@@ -37,9 +37,16 @@ nomme pas le lieu.
 l'eau, du vent. **Aucun texte sur l'image** : c'est elle qui fait respirer la grille. Le récit vit
 dans la légende. Toujours pas de nom de lieu.
 
-**Post 3 — La Destination.** Un carrousel de deux images, carré 1080 :
-- slide 1, ce qu'on voit dans la grille : la carte épurée terracotta (modèle Terracotta Mood) ;
-- slide 2, au swipe : la photo iconique et incarnée du lieu, plus l'annonce du carnet à venir.
+**Post 3 — La Destination.** Un carrousel de deux images, carré 1080 (refait le 13/09/2026) :
+- slide 1, ce qu'on voit dans la grille : **une énigme en images** sur fond terracotta (tuile
+  `rebus`) — quatre pictogrammes au trait qui font deviner le lieu (Biarritz : vague + phare +
+  planche de surf + béret = ?), surtitre « Devine où je t'emmène », « Fais défiler → » ;
+- slide 2, au swipe : **la révélation**, la carte épurée terracotta avec le nom (modèle Terracotta
+  Mood).
+
+Plus de photo de Soumia dans le post 3 : ses photos appartiennent au post 5 Sans filtre. Les
+pictogrammes disponibles sont dans `PICTOS` (`scripts/tuiles-insta.mjs`) ; s'il en manque un pour
+une nouvelle destination, il se dessine là, au même trait.
 
 **Post 4 — Le Carnet d'adresses, le déroulé d'une journée.** Refondu le 13/09/2026 à la demande de
 Soumia. Un carrousel 4:5 (1080 × 1350), **une adresse par slide, dans l'ordre d'une vraie
@@ -70,7 +77,7 @@ dans `00-planning.md`. Pas de visage reconnaissable en gros plan.
 - slide 1 : la tuile **Sans filtre** (fond ivoire, "Sans *filtre*", "Mes photos telles que je les
   ai prises.", la destination en surtitre, "Fais défiler →") ;
 - slides suivantes : **les photos de Soumia de cette destination, telles qu'elle les a prises** —
-  recadrées au 4:5, aucun étalonnage, aucun texte. Neuf au plus (dix slides en tout). Jamais une
+  recadrées au 4:5, aucun étalonnage, aucun texte. Dix-neuf au plus (Instagram limite un carrousel à vingt images). Jamais une
   photo où l'on reconnaît quelqu'un.
 
 C'est l'écho de la page `/sans-filtre` du site : le post 4 vend l'émotion, le post 5 prouve qu'elle
@@ -196,8 +203,8 @@ une photo sort couchée, recadre-la en appliquant l'orientation (Python, `ImageO
 
     node scripts/tuiles-insta.mjs /tmp/<dest>.json ~/Documents/"Posts Insta"/insta-<dest>
 
-Le format de la spec est documenté en tête de `scripts/tuiles-insta.mjs`. Les sept types de tuile
-sont `mot`, `definition`, `terracotta`, `garde`, `adresses`, `fin`, `sans-filtre` — ce sont exactement les modèles
+Le format de la spec est documenté en tête de `scripts/tuiles-insta.mjs`. Les huit types de tuile
+sont `mot`, `definition`, `rebus`, `terracotta`, `garde`, `adresses`, `fin`, `sans-filtre` — ce sont exactement les modèles
 du Studio, mêmes couleurs, mêmes polices, même ambiance photo.
 
 **3. Tu regardes chaque image produite.** Une ligne qui déborde, un sujet coupé par le recadrage,
@@ -208,7 +215,7 @@ et tu relances.
 
     post-1-emotion/1-tuile-<envie>.png, 2-definition-<envie>.png
     post-2-sensation/1-<sujet>.jpg
-    post-3-destination/1-tuile-<destination>.png, 2-<sujet>.jpg
+    post-3-destination/1-rebus.png, 2-tuile-<destination>.png
     post-4-carnet/1-page-de-garde.png, 2-la-nuit.png … 7-fin-de-carnet.png
     post-5-sans-filtre/01-page-de-garde.png, 02-photo.jpg … 10-photo.jpg
     photos-source/          (les photos de fond, si elle veut refaire une slide)

@@ -26,6 +26,7 @@
 //       "photo": "/chemin/absolu/photo.jpg",
 //       "adresses": [["École de surf Lagoondy", "Une heure, planche et combinaison fournies, 45 €"]] },
 //     { "type": "sans-filtre", "fichier": "post-5-sans-filtre/01-page-de-garde" },
+//     { "type": "rebus",      "fichier": "post-3-destination/1-rebus", "pictos": ["vague", "phare", "planche", "beret"] },
 //     { "type": "fin",        "fichier": "post-4-carnet/6-fin-de-carnet",
 //       "lignes": ["Quatorze adresses, trois jours,", "et une ville qui se lève tôt."],
 //       "cta": "Huit questions, et le site te dit où aller." }
@@ -64,6 +65,16 @@ const ENVIES = {
 };
 
 const HANDLE = "@levoyagedesemotions";
+
+// Pictogrammes au trait de la tuile rébus (13/09/2026). Dessinés ici plutôt que pris dans une
+// bibliothèque d'icônes : aucune ne propose un phare, une planche de surf ou un béret. Même
+// épaisseur de trait pour tous, pour qu'ils se lisent comme une seule famille.
+const PICTOS = {
+  vague: `<path d="M6 20c3-7 11-9 16-4-5 0-7 4-4 7"/><path d="M4 30c4 0 4-4 8-4s4 4 8 4 4-4 8-4 4 4 8 4 4-4 8-4"/><path d="M4 38c4 0 4-4 8-4s4 4 8 4 4-4 8-4 4 4 8 4 4-4 8-4"/>`,
+  phare: `<path d="M19 42 21 17h6l2 25Z"/><path d="M20 17v-5h8v5"/><path d="M19 12l5-5 5 5"/><path d="M20.4 26h7.2M19.8 34h8.4"/><path d="M31 12l6-3M31 15l6 2M17 12l-6-3M17 15l-6 2"/><path d="M12 42h24"/>`,
+  planche: `<g transform="rotate(35 24 24)"><path d="M24 3c8 9 8 33 0 42-8-9-8-33 0-42Z"/><path d="M24 8v33"/><path d="M24 37l-3 5"/></g>`,
+  beret: `<g transform="rotate(-12 24 26)"><path d="M5 27c0-8 11-12 21-11 11 1 18 5 17 10-1 6-38 8-38 1Z"/><path d="M12 31c6 3 20 2 26-2"/><path d="M22 16c0-3 2-5 5-4"/></g>`,
+};
 const AMBIANCE_SABLE = "saturate(0.88) contrast(0.95) sepia(0.08) brightness(1.02)";
 const CAPTURE = resolve(process.argv[1], "../../.claude/relecteur/capture.mjs");
 
@@ -221,6 +232,34 @@ function html(tuile, spec) {
           <span class="filet" style="background:${surSable ? COULEURS.charcoal + "26" : "#ffffff33"}"></span>
           <p class="corps" style="font-size:14px;line-height:1.4;color:${encre}bf">${tuile.cta ?? ""}</p>
           ${signature(encre + "99")}
+        </div>
+      </div>`,
+    };
+  }
+
+  if (tuile.type === "rebus") {
+    // Page de garde du post 3 (13/09/2026, demande de Soumia) : une énigme en images, la
+    // destination ne se révèle qu'à la slide 2 (la tuile terracotta). Même fond terracotta : le
+    // post 3 reste celui de la destination, dans la grille comme au swipe.
+    const icone = (nom) =>
+      `<svg viewBox="0 0 48 48" width="74" height="74" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${PICTOS[nom] ?? ""}</svg>`;
+    const plus = `<span class="titre" style="font-size:30px;color:${COULEURS.sable}">+</span>`;
+    const [a, b, c, d] = tuile.pictos ?? ["vague", "phare", "planche", "beret"];
+    return {
+      h: 1080,
+      corps: `<div class="col" style="background:${COULEURS.terracotta}">
+        ${surtitre(tuile.surtitre ?? "Devine où je t'emmène", COULEURS.sable, "#fff")}
+        <div style="display:flex;flex-direction:column;align-items:center;gap:10px">
+          <div class="rang" style="gap:18px">${icone(a)}${plus}${icone(b)}${plus}</div>
+          <div class="rang" style="gap:18px">${icone(c)}${plus}${icone(d)}
+            <span class="titre" style="font-size:44px;line-height:1;color:#fff;margin-left:6px">= ?</span></div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span class="filet" style="background:#ffffff40"></span>
+          <div class="bas">
+            ${signature("#ffffffb3")}
+            <span class="mono" style="white-space:nowrap;font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:#ffffffcc">Fais défiler →</span>
+          </div>
         </div>
       </div>`,
     };
