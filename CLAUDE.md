@@ -81,7 +81,9 @@ push régulièrement au fil du travail.
 - `/` — accueil : hero fusionné avec la démo Travel Match, manifeste, CTA questionnaire
 - `/questionnaire` — les écrans du moteur Travel Match, voir section dédiée plus bas
 - `/resultat` — résultats du moteur Travel Match
-- `/voyages/[slug]` — fiche voyage complète par destination : galerie, "Mes adresses" (Où dormir /
+- `/voyages/[slug]` — fiche voyage complète par destination (haut de page depuis le 13/09/2026 :
+  **bloc beige** semi-transparent et flouté posé sur la photo, texte bleu nuit, intro coupée en deux
+  paragraphes — choisi par Soumia contre un voile noir à 45 %, qui ternissait la photo) : galerie, "Mes adresses" (Où dormir /
   Où manger), Activités, bouton like, extensions/combos. 15 fiches en base
 - `/favoris` — destinations likées en localStorage (voir section Favoris plus bas)
 - `/philosophie` — piliers + "mot de la fondatrice" (texte définitif de Soumia du 23/08/2026, ne
