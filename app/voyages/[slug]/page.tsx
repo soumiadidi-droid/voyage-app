@@ -57,11 +57,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const adresses = [...visibles.stays, ...visibles.eats, ...visibles.activities];
   const vecues = adresses.filter((a) => estVecue(a.status)).length;
   const reperees = adresses.length - vecues;
-  const pluriel = (n: number, mot: string) => `${n} ${mot}${n > 1 ? "s" : ""}`;
+  const s = (n: number) => (n > 1 ? "s" : "");
   const sentences = [`${voyage.hero.country} — ${voyage.hero.tagline}`];
-  if (vecues > 0 && reperees > 0) sentences.push(`${pluriel(vecues, "adresse testée")}, ${reperees} sur mon radar.`);
-  else if (vecues > 0) sentences.push(`${pluriel(vecues, "adresse testée")} et racontée${vecues > 1 ? "s" : ""}.`);
-  else if (reperees > 0) sentences.push(`${pluriel(reperees, "adresse")} sur mon radar.`);
+  if (vecues > 0 && reperees > 0) sentences.push(`${vecues} adresse${s(vecues)} testée${s(vecues)}, ${reperees} sur mon radar.`);
+  else if (vecues > 0) sentences.push(`${vecues} adresse${s(vecues)} testée${s(vecues)} et racontée${s(vecues)}.`);
+  else if (reperees > 0) sentences.push(`${reperees} adresse${s(reperees)} sur mon radar.`);
   const essential = sentences.join(" ");
   const withTravel = travelInfo ? `${essential} ${travelInfo}.` : essential;
   const metaDescription = withTravel.length <= 160 ? withTravel : essential;
