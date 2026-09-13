@@ -259,7 +259,7 @@ Testé : `tsc --noEmit` propre, `npm run build` propre, smoke-test manuel via `n
 5 cas (arrivée directe sans réponses, match nominal Italie, filtres trop restrictifs → fallback,
 match exact Japon, famille avec enfant <6 ans exclue de Mykonos par `logistics`) — tous corrects.
 
-**Note** : `~/Downloads/Voyage_des_Emotions_x_Travel_Match_Business_Plan.docx` et
+**Note** : `~/Documents/Le Voyage des Émotions/Documents de référence/Voyage_des_Emotions_x_Travel_Match_Business_Plan.docx` et
 `..._Texte_Integral.docx` (rédigés avec Gemini le 21/08/2026) décrivent un premier algo (10
 critères à plat, score unique, 3 badges de statut, mécanisme "Top Match débloqué"). Ce n'était pas
 une mauvaise base, mais elle est **dépassée** par le moteur Travel Match ci-dessus (filtrage strict

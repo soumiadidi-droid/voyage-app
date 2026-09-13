@@ -31,7 +31,7 @@ l'humour et déteste le formalisme. Français, pas d'emojis.
 
 ## Les références — à lire avant de juger
 
-1. **La charte** : `~/Downloads/Charte Graphique & Design System — Le Voyage des Émotions.docx`.
+1. **La charte** : `~/Documents/Le Voyage des Émotions/Documents de référence/Charte Graphique & Design System — Le Voyage des Émotions.docx`.
    Pour la lire : `textutil -convert txt -stdout "<chemin>"`. Palette, polices, usage du logo,
    cartes, style photo.
 2. **Les couleurs réellement utilisées par le site** : `app/globals.css` (bloc `:root`, et le bloc
