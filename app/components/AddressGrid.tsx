@@ -1,6 +1,7 @@
 "use client";
 
-import { BedDouble, UtensilsCrossed, Compass, type LucideIcon } from "lucide-react";
+import { BedDouble, UtensilsCrossed, Compass, Dumbbell, ShoppingBag, Landmark, type LucideIcon } from "lucide-react";
+import { type TypeActivite } from "@/lib/type-activite";
 import { type Card } from "@/content/voyages";
 import { LVE_COLORS } from "@/lib/design-tokens";
 import { type AddressCategory } from "@/lib/category-images";
@@ -23,6 +24,14 @@ export const CATEGORY_META: Record<
   Hôtel: { icon: BedDouble, label: "Hôtel de charme", bg: LVE_COLORS.terracotta.bg, color: LVE_COLORS.terracotta.ink },
   Resto: { icon: UtensilsCrossed, label: "Table épicurienne", bg: LVE_COLORS.sage.bg, color: LVE_COLORS.sage.dark },
   Activité: { icon: Compass, label: "Expérience", bg: LVE_COLORS.ocean.bg, color: LVE_COLORS.ocean.dark },
+};
+
+// Libellé et icône du badge selon le type d'activité (14/09/2026). Même couleur océan que la catégorie.
+export const ACTIVITY_TYPE_META: Record<TypeActivite, { icon: LucideIcon; label: string }> = {
+  Sport: { icon: Dumbbell, label: "Sport" },
+  Shopping: { icon: ShoppingBag, label: "Shopping" },
+  Culture: { icon: Landmark, label: "Culture" },
+  Expérience: { icon: Compass, label: "Expérience" },
 };
 
 const CATEGORY_SECTION_TITLE: Record<AddressCategory, string> = {

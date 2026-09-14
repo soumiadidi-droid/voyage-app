@@ -8,7 +8,8 @@ import { usePlaceFavorites } from "@/lib/favorites";
 import { FAMILY_PROFILE_OPTIONS, type FamilyProfile } from "@/lib/travel-match/types";
 import { InstagramPopup } from "./InstagramPopup";
 import { LikeButton } from "./LikeButton";
-import { CATEGORY_META } from "./AddressGrid";
+import { CATEGORY_META, ACTIVITY_TYPE_META } from "./AddressGrid";
+import { typeActivite } from "@/lib/type-activite";
 import { InstagramGlyph } from "./BrandGlyphs";
 import { libellesEtiquettes } from "@/lib/etiquettes";
 import { insecables } from "@/lib/typo";
@@ -88,7 +89,9 @@ export function AddressDetailCard({
   category: AddressCategory;
   familyProfile?: FamilyProfile;
 }) {
-  const { icon: CategoryIcon, label: categoryLabel, bg: categoryBg, color: categoryColor } = CATEGORY_META[category];
+  // Les activités affichent leur type (Sport, Shopping, Culture) à la place d'« Expérience ».
+  const meta = category === "Activité" ? { ...CATEGORY_META[category], ...ACTIVITY_TYPE_META[typeActivite(card.name, card.tags)] } : CATEGORY_META[category];
+  const { icon: CategoryIcon, label: categoryLabel, bg: categoryBg, color: categoryColor } = meta;
   const [igOpen, setIgOpen] = useState(false);
 
   return (

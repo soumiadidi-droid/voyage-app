@@ -80,6 +80,11 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // La photo de Soumia (vol d'oies au lever du jour, oies-serris.jpg) a été essayée puis remplacée
   // le 13/09/2026 ; elle reste dans le dossier, sans GPS, pour Instagram.
   "val-d-europe": "/images/voyages/val-d-europe/lac-serris.jpg",
+  // Palais Garnier vu du toit des Galeries Lafayette, tour Eiffel à l'horizon — Nathan Staz,
+  // https://unsplash.com/photos/h8uvhdrCpr4 (14/09/2026). Pile le quartier du premier univers Paris,
+  // et le toit où se trouve Balcon.
+  paris:
+    "https://images.unsplash.com/photo-1624887965527-b00388a5b38d?fm=jpg&q=80&w=2400&auto=format&fit=crop",
 };
 
 // Crédit affiché sur la photo quand sa licence l'exige (CC BY-SA, etc.). Les photos Unsplash n'en
