@@ -60,8 +60,7 @@ export function DestinationHero({
   const blocs = intro ? decouperIntro(intro) : [];
 
   return (
-    <div>
-      <div className="relative min-h-screen">
+    <div className="relative min-h-screen">
       {heroImage ? (
         <div
           className="absolute inset-x-0 top-0 h-screen"
@@ -108,32 +107,36 @@ export function DestinationHero({
             {hero.tagline}
           </p>
           {blocs.length > 0 && (
-            <a
-              href="#intro"
-              className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold no-underline"
-              style={{ fontFamily: "var(--font-display)", color: "var(--lve-terracotta-ink)" }}
+            <div
+              className="mt-6 pt-6 space-y-4"
+              style={{
+                borderTop: `1px solid ${ENCRE}26`,
+                fontFamily: "var(--font-body)",
+                fontSize: "clamp(0.98rem, 1.5vw, 1.08rem)",
+                lineHeight: 1.8,
+              }}
             >
-              Lire mon intro <span aria-hidden="true">↓</span>
-            </a>
+              {/* Sur téléphone, la suite de l'intro se déplie (relecture du 14/09/2026 : une intro longue
+                  recouvrait toute la photo). Sur ordinateur, tout est affiché. */}
+              {blocs.map((b, i) =>
+                i === 0 ? (
+                  <p key={b.slice(0, 24)}>{b}</p>
+                ) : (
+                  <div key={b.slice(0, 24)}>
+                    <p className="hidden sm:block">{b}</p>
+                    <details className="sm:hidden">
+                      <summary className="cursor-pointer text-sm font-semibold" style={{ fontFamily: "var(--font-display)", color: "var(--lve-terracotta-ink)" }}>
+                        Lire la suite
+                      </summary>
+                      <p className="mt-3">{b}</p>
+                    </details>
+                  </div>
+                )
+              )}
+            </div>
           )}
         </div>
       </div>
-      </div>
-
-      {/* Intro sortie du pavé (14/09/2026, Soumia : « toujours coupée par le pavé blanc ») : le pavé
-          ne garde que le titre et l'accroche, la photo respire ; l'intro se lit juste en dessous. */}
-      {blocs.length > 0 && (
-        <section id="intro" className="max-w-3xl mx-auto px-6 sm:px-8 pt-12 sm:pt-16 scroll-mt-24">
-          <div
-            className="space-y-5 border-l-2 pl-6 sm:pl-8"
-            style={{ borderColor: "var(--lve-terracotta)", fontFamily: "var(--font-body)", fontSize: "clamp(1.05rem, 1.6vw, 1.2rem)", lineHeight: 1.85, color: "var(--text)" }}
-          >
-            {blocs.map((b) => (
-              <p key={b.slice(0, 24)}>{b}</p>
-            ))}
-          </div>
-        </section>
-      )}
     </div>
   );
 }
