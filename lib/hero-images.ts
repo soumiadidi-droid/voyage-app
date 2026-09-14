@@ -98,4 +98,5 @@ export const HERO_IMAGE_CREDIT: Partial<Record<string, { texte: string; lien: st
 
 // Couvertures dont le sujet est à gauche : le bloc de texte passe à droite sur ordinateur
 // (relecture du 14/09/2026 : sur Paris, le bloc cachait l'Opéra Garnier).
-export const HERO_PANNEAU_A_DROITE = new Set<string>(["paris"]);
+export const HERO_PANNEAU_A_DROITE = new Set<string>([]);
+// Paris retiré le 14/09/2026 : Soumia préfère la photo telle qu'elle était, bloc à gauche.
