@@ -16,6 +16,8 @@ export type Univers = {
   nom: string;
   phrase: string;
   lieux: string;
+  // Dernière phrase de l'intro de la fiche quand cet univers est ouvert (« On commence par l'Opéra… »).
+  entree: string;
   envies: ScoreKey[];
   position: number;
 };

@@ -146,3 +146,5 @@ create table if not exists univers (
   primary key (destination_id, slug)
 );
 alter table voyage_addresses add column if not exists univers text[] not null default '{}';
+-- 14/09/2026 : dernière phrase de l'intro, propre à l'univers ouvert (« On commence par l'Opéra… »).
+alter table univers add column if not exists entree text not null default '';

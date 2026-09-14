@@ -206,6 +206,15 @@ export default async function VoyagePage({
 
   // Univers de la destination (onglets de la fiche), dans l'ordre éditorial.
   const universAffiches = (await getUniversParDestination()).get(destination?.id ?? slug) ?? [];
+  // Univers ouvert : celui du visiteur s'il a des adresses, sinon le premier rempli. Sa phrase
+  // d'entrée termine l'intro — jamais celle d'un univers vide (on n'écrit pas « On commence par
+  // Saint-Germain » au-dessus d'un onglet « bientôt »).
+  const aDesAdresses = (s: string) =>
+    [...visible.stays, ...visible.eats, ...visible.activities].some((c) => (c.univers ?? []).includes(s));
+  const universOuvert =
+    universAffiches.find((u) => u.slug === universDemande && aDesAdresses(u.slug)) ??
+    universAffiches.find((u) => aDesAdresses(u.slug));
+  const intro = universOuvert?.entree ? `${voyage.intro} ${universOuvert.entree}` : voyage.intro;
 
   // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par
   // le combo (décidé le 23/08/2026). Sans `duration` transmis (accès direct), on n'affiche rien —
@@ -228,7 +237,7 @@ export default async function VoyagePage({
           plus destination par destination si renseignée dans DESTINATION_HERO_IMAGE. */}
       <DestinationHero
         hero={voyage.hero}
-        intro={voyage.intro}
+        intro={intro}
         favoriteId={favoriteId ?? slug}
         heroImage={DESTINATION_HERO_IMAGE[voyage.slug]}
         heroCredit={HERO_IMAGE_CREDIT[voyage.slug]}
@@ -265,7 +274,7 @@ export default async function VoyagePage({
           activities={visible.activities}
           familyProfile={familyProfile}
           univers={universAffiches}
-          universInitial={universDemande}
+          universInitial={universOuvert?.slug ?? universDemande}
           destinationTitle={voyage.hero.title}
         />
 

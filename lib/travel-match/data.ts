@@ -181,13 +181,13 @@ export async function getVoyages(inclureBrouillons = false): Promise<VoyageConte
 
 // Univers des grandes destinations (14/09/2026, cf. lib/travel-match/univers.ts), regroupés par
 // destination. Une destination sans univers n'a simplement pas d'entrée.
-type UniversRow = { destination_id: string; slug: string; nom: string; phrase: string; lieux: string; envies: string[]; position: number };
+type UniversRow = { destination_id: string; slug: string; nom: string; phrase: string; lieux: string; entree: string; envies: string[]; position: number };
 
 export async function getUniversParDestination(): Promise<Map<string, Univers[]>> {
   const rows = (await sql.query(`select * from univers order by destination_id, position`)) as unknown as UniversRow[];
   const parDestination = new Map<string, Univers[]>();
   for (const r of rows) {
-    const u: Univers = { destinationId: r.destination_id, slug: r.slug, nom: r.nom, phrase: r.phrase, lieux: r.lieux, envies: r.envies as ScoreKey[], position: r.position };
+    const u: Univers = { destinationId: r.destination_id, slug: r.slug, nom: r.nom, phrase: r.phrase, lieux: r.lieux, entree: r.entree ?? "", envies: r.envies as ScoreKey[], position: r.position };
     parDestination.set(r.destination_id, [...(parDestination.get(r.destination_id) ?? []), u]);
   }
   return parDestination;
