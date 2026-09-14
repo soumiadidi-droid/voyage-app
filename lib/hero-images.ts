@@ -80,11 +80,12 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // La photo de Soumia (vol d'oies au lever du jour, oies-serris.jpg) a été essayée puis remplacée
   // le 13/09/2026 ; elle reste dans le dossier, sans GPS, pour Instagram.
   "val-d-europe": "/images/voyages/val-d-europe/lac-serris.jpg",
-  // Palais Garnier vu du toit des Galeries Lafayette, tour Eiffel à l'horizon — Nathan Staz,
-  // https://unsplash.com/photos/h8uvhdrCpr4 (14/09/2026). Pile le quartier du premier univers Paris,
-  // et le toit où se trouve Balcon.
+  // Façade avant du Palais Garnier et ses statues dorées — Francesco Zivoli,
+  // https://unsplash.com/photos/OYSKRsmgpmg (14/09/2026). Remplace la vue depuis le toit des Galeries
+  // Lafayette (Nathan Staz) : l'Opéra y était en bas à gauche, pile sous le bloc de texte. Ici le
+  // sujet est dans le haut de l'image, visible au-dessus du bloc sur ordinateur comme sur téléphone.
   paris:
-    "https://images.unsplash.com/photo-1624887965527-b00388a5b38d?fm=jpg&q=80&w=2400&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1645956734722-ac84c86fa4da?fm=jpg&q=80&w=2400&auto=format&fit=crop",
 };
 
 // Crédit affiché sur la photo quand sa licence l'exige (CC BY-SA, etc.). Les photos Unsplash n'en
@@ -104,5 +105,4 @@ export const HERO_PANNEAU_A_DROITE = new Set<string>([]);
 // Cadrage de la couverture quand le sujet n'est pas au centre (14/09/2026) : sur téléphone, l'écran
 // étroit ne garde qu'une bande verticale de la photo, et l'Opéra Garnier (à gauche) disparaissait.
 export const HERO_POSITION: Partial<Record<string, string>> = {
-  paris: "18% center",
 };
