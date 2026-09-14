@@ -95,3 +95,7 @@ export const HERO_IMAGE_CREDIT: Partial<Record<string, { texte: string; lien: st
     lien: "https://commons.wikimedia.org/wiki/File:Lac_de_Serris_77.jpg",
   },
 };
+
+// Couvertures dont le sujet est à gauche : le bloc de texte passe à droite sur ordinateur
+// (relecture du 14/09/2026 : sur Paris, le bloc cachait l'Opéra Garnier).
+export const HERO_PANNEAU_A_DROITE = new Set<string>(["paris"]);

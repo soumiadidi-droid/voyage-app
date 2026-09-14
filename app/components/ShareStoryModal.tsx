@@ -7,7 +7,7 @@ import { Check, Link2, X as CloseIcon } from "lucide-react";
 // Citation générique (1er septembre 2026, wireframe fourni par Soumia) — parle de l'expérience
 // Travel Match elle-même, pas de la destination précise (qui reste masquée, cf. teaser du hero) :
 // texte fixe, pas de donnée à récupérer.
-const SHARE_QUOTE = "Mon prochain voyage a été trouvé en 2 min selon mon état d'esprit. ✨";
+const SHARE_QUOTE = "Mon prochain voyage a été trouvé en 2 min selon mon état d'esprit.";
 
 // Modale de partage Story Instagram (1er septembre 2026, carte reprise sur le wireframe fourni par
 // Soumia — remplace l'export caché de la 1ère version puis la carte photo+badges de la 2e, jugée
@@ -85,7 +85,7 @@ export function ShareStoryModal({
           className="text-center mb-1 font-semibold"
           style={{ fontFamily: "var(--font-title)", fontSize: "1.4rem", color: "var(--lve-charcoal)" }}
         >
-          Partage ton match ✨
+          Partage ton match
         </h3>
         <p className="text-xs text-center mb-6" style={{ color: "var(--text-secondary)" }}>
           Télécharge le visuel, copie ton lien et colle-le dans ta story Instagram.
@@ -106,7 +106,7 @@ export function ShareStoryModal({
                 className="font-display uppercase"
                 style={{ fontSize: 9, letterSpacing: "0.15em", color: "var(--lve-terracotta-ink)", fontWeight: 700, lineHeight: 1.6 }}
               >
-                ✨ Voyage des Émotions
+                Voyage des Émotions
                 <br />x Travel Match
               </p>
             </div>
@@ -125,12 +125,12 @@ export function ShareStoryModal({
             <div className="flex-1 flex flex-col items-center justify-center text-center px-6 py-4">
               {profile && (
                 <p className="font-display mb-2" style={{ fontSize: 12, fontWeight: 600, color: "var(--lve-charcoal)" }}>
-                  🧭 Profil : <span style={{ color: "var(--lve-terracotta-ink)" }}>{profile}</span>
+                  Profil : <span style={{ color: "var(--lve-terracotta-ink)" }}>{profile}</span>
                 </p>
               )}
               {matchScore != null && (
                 <p className="font-title mb-3" style={{ fontSize: 20, fontWeight: 700, color: "var(--lve-terracotta-ink)" }}>
-                  🎯 {matchScore}% DE MATCH
+                  {matchScore}% DE MATCH
                 </p>
               )}
               <p className="font-body italic" style={{ fontSize: 11, color: "var(--text-secondary)", lineHeight: 1.4 }}>
@@ -141,7 +141,7 @@ export function ShareStoryModal({
             {/* Rappel lien — Instagram ne permet pas de lien cliquable dans une image, on le dit. */}
             <div className="text-center pb-4 px-4">
               <p className="font-display" style={{ fontSize: 10, fontWeight: 600, color: "var(--lve-terracotta-ink)" }}>
-                🔗 Découvre ta destination idéale
+                Découvre ta destination idéale
               </p>
               <p className="font-display" style={{ fontSize: 8, color: "var(--text-secondary)" }}>
                 (Lien dans ma Story)
@@ -158,7 +158,7 @@ export function ShareStoryModal({
             className="w-full py-3 px-4 rounded-xl text-white font-semibold text-sm shadow-md flex items-center justify-center gap-2 transition-all cursor-pointer disabled:opacity-60"
             style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
           >
-            {isGenerating ? "Création du visuel..." : "📥 1. Télécharger l'image Story"}
+            {isGenerating ? "Création du visuel..." : "1. Télécharger l'image Story"}
           </button>
 
           <button
@@ -190,7 +190,7 @@ export function ShareStoryModal({
             className="w-full py-2.5 px-4 rounded-xl text-xs text-center block transition-all font-medium"
             style={{ color: "var(--text-secondary)", fontFamily: "var(--font-display)" }}
           >
-            📸 3. Ouvrir Instagram →
+            3. Ouvrir Instagram →
           </a>
         </div>
       </div>

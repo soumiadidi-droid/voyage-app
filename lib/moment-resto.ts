@@ -2,11 +2,12 @@
 // par le moment où l'on y va). « Café » vaut aussi pour le petit-déjeuner, sans le dire.
 import { Coffee, UtensilsCrossed, Moon, Wine, type LucideIcon } from "lucide-react";
 
-export const MOMENTS_RESTO = ["Café", "Déjeuner", "Dîner", "Déjeuner & dîner", "Pour un verre"] as const;
+export const MOMENTS_RESTO = ["Café", "Café & brunch", "Déjeuner", "Dîner", "Déjeuner & dîner", "Pour un verre"] as const;
 export type MomentResto = (typeof MOMENTS_RESTO)[number];
 
 export const MOMENT_ICON: Record<MomentResto, LucideIcon> = {
   Café: Coffee,
+  "Café & brunch": Coffee,
   Déjeuner: UtensilsCrossed,
   Dîner: Moon,
   "Déjeuner & dîner": UtensilsCrossed,

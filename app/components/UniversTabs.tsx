@@ -1,7 +1,7 @@
 "use client";
 
 // Univers d'une grande destination en onglets (14/09/2026, demande Soumia : « comme la météo, été,
-// hiver… chaque fois que tu cliques, ça change »). Même pastilles que les saisons de
+// hiver… chaque fois que tu cliques, ça change »). Mêmes pastilles que les saisons, onglet actif en terracotta de
 // DestinationPracticalCard. L'onglet ouvert par défaut est l'univers du visiteur (?univers= venu de
 // /resultat), sinon le premier qui a des adresses. Les univers encore vides restent cliquables et
 // l'annoncent : Soumia voulait voir la forme complète avant de les remplir.
@@ -50,8 +50,8 @@ export function UniversTabs({
               className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-colors cursor-pointer"
               style={
                 active
-                  ? { background: "var(--lve-slate-dark)", color: "#fff" }
-                  : { background: "#fff", color: "var(--text-secondary)", border: "1px solid var(--lve-border)" }
+                  ? { background: "var(--lve-terracotta-dark)", color: "#fff", fontWeight: 600 }
+                  : { background: "#fff", color: "var(--lve-charcoal)", border: "1px solid var(--lve-border)" }
               }
             >
               {u.nom}
@@ -71,7 +71,7 @@ export function UniversTabs({
       {courant.lieux && (
         <p
           className="mb-6 text-xs uppercase tracking-[0.2em] font-semibold"
-          style={{ fontFamily: "var(--font-display)", color: "var(--lve-terracotta-ink)" }}
+          style={{ fontFamily: "var(--font-display)", color: "var(--accent-text)" }}
         >
           {courant.lieux}
         </p>
@@ -82,7 +82,7 @@ export function UniversTabs({
           className="surface-claire rounded-2xl px-6 py-8 text-center"
           style={{ background: "var(--surface-sand)", color: "var(--lve-charcoal)" }}
         >
-          Je prépare mes adresses pour ce Paris-là. Elles arrivent bientôt.
+          Je prépare mes adresses pour ce Paris‑là. Elles arrivent bientôt.
         </p>
       ) : (
         <AddressGrid

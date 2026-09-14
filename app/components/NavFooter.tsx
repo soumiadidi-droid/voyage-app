@@ -334,7 +334,7 @@ export function Footer() {
               photos des carnets sont celles de Soumia, toutes les autres (couvertures des fiches,
               accueil, cartes du questionnaire) viennent d'Unsplash. */}
           <p className="text-center md:text-left">
-            © 2026 Voyage des Émotions — Photos des carnets : les miennes. Les autres : Unsplash.
+            © 2026 Voyage des Émotions — Photos des carnets : les miennes. Les autres : Unsplash et Wikimedia Commons, crédits sur les photos.
           </p>
           <div className="flex gap-6">
             <Link href="/mentions-legales" className="hover:text-lve-ivory transition-colors">

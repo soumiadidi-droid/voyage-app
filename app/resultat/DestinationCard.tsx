@@ -59,7 +59,7 @@ export function DestinationCard({
               className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs font-bold text-white shadow-md mb-2"
               style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
             >
-              ✨ {score}% Match
+              {score}% Match
             </span>
             <h2
               className="font-semibold text-white"
@@ -92,7 +92,7 @@ export function DestinationCard({
                 className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold text-white"
                 style={{ background: "var(--lve-terracotta)", fontFamily: "var(--font-display)" }}
               >
-                ✨ {score}% Match
+                {score}% Match
               </span>
               <ShareButton
                 path={href}
@@ -123,7 +123,7 @@ export function DestinationCard({
           className="font-display mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs"
           style={{ background: "var(--bg-guide)", color: "var(--aurora)" }}
         >
-          🔀 Combo possible — cette destination propose une extension
+          Combo possible — cette destination propose une extension
         </p>
       )}
 

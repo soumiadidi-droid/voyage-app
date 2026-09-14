@@ -90,7 +90,7 @@ function EmailCaptureShell({
               className="text-xl font-semibold"
               style={{ fontFamily: "var(--font-title)", color: "var(--lve-charcoal)" }}
             >
-              C&apos;est envoyé ! 💌
+              C&apos;est envoyé !
             </h3>
             <p className="text-sm max-w-md" style={{ color: "var(--text-secondary)" }}>
               {successText}{" "}

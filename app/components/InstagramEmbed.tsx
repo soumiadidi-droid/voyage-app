@@ -102,7 +102,7 @@ export function InstagramEmbed({ url, autoLoad = false }: { url: string; autoLoa
           color: "var(--text-secondary)",
         }}
       >
-        📸 Voir l&apos;ambiance sur Instagram ↗
+        Voir l&apos;ambiance sur Instagram ↗
       </button>
     );
   }

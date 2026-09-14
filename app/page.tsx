@@ -16,15 +16,7 @@ export const metadata = {
 };
 
 // 5 puces = les 5 vrais "profils voyageur" (mêmes archétypes/textes validés que TravelerProfileCard,
-// affichés sur /resultat) — décidé le 31/08/2026, reskin teaser sombre. Emoji cosmétique par axe
-// pour le libellé du bouton, pas dans les textes validés eux-mêmes.
-const AXIS_EMOJI: Record<ScoreAxis, string> = {
-  repos: "🌿",
-  exploration: "🎨",
-  gastronomie: "🍷",
-  nature_plage: "🌊",
-  effervescence_urbaine: "🏙️",
-};
+// affichés sur /resultat) — décidé le 31/08/2026, reskin teaser sombre. Emojis retirés le 14/09/2026.
 
 // Décoratif (31/08/2026) — pas un vrai calcul, pas de réponses utilisateur dans cette démo.
 const AXIS_MATCH_SCORE: Record<ScoreAxis, number> = {
@@ -92,7 +84,7 @@ function buildDemoItems(): DemoItem[] {
     const teaser = AXIS_TEASER[axis];
     return {
       id: axis,
-      label: `${AXIS_EMOJI[axis]} ${archetype.title}`,
+      label: archetype.title,
       tag: teaser.tag,
       badge: archetype.subtitle,
       matchScore: AXIS_MATCH_SCORE[axis],

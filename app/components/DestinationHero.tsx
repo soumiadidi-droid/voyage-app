@@ -41,6 +41,7 @@ export function DestinationHero({
   favoriteId,
   heroImage,
   heroCredit,
+  panneauADroite = false,
   sharePath,
 }: {
   hero: VoyageContent["hero"];
@@ -48,6 +49,8 @@ export function DestinationHero({
   favoriteId: string;
   heroImage?: string;
   heroCredit?: { texte: string; lien: string };
+  // Bloc de texte à droite, pour laisser voir le sujet de la photo quand il est à gauche (Paris : Garnier).
+  panneauADroite?: boolean;
   sharePath: string;
 }) {
   const eyebrow = hero.country + (hero.tags.length > 0 ? ` — ${hero.tags.join(" · ")}` : "");
@@ -60,7 +63,7 @@ export function DestinationHero({
           className="absolute inset-x-0 top-0 h-screen"
           style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
         >
-          <CreditPhoto credit={heroCredit} className="bottom-2 right-2" />
+          <CreditPhoto credit={heroCredit} className="left-2 top-2 sm:left-auto sm:top-auto sm:bottom-2 sm:right-2" />
         </div>
       ) : (
         // Sans image, le fond reste un noir plat uniforme sur toute la hauteur du contenu.
@@ -72,7 +75,7 @@ export function DestinationHero({
         <LikeButton id={favoriteId} />
       </div>
 
-      <div className="relative z-10 min-h-screen flex flex-col justify-end p-4 pt-24 sm:p-14">
+      <div className={`relative z-10 min-h-screen flex flex-col justify-end p-4 pt-24 sm:p-14 ${panneauADroite ? "sm:items-end" : ""}`}>
         {/* surface-claire : le panneau garde son encre sombre même en mode sombre. Marges latérales
             élargies (13/09/2026, Soumia : "que le texte ne frôle pas les bords"). */}
         <div
@@ -110,9 +113,23 @@ export function DestinationHero({
                 lineHeight: 1.8,
               }}
             >
-              {blocs.map((b) => (
-                <p key={b.slice(0, 24)}>{b}</p>
-              ))}
+              {/* Sur téléphone, la suite de l'intro se déplie (relecture du 14/09/2026 : une intro longue
+                  recouvrait toute la photo). Sur ordinateur, tout est affiché. */}
+              {blocs.map((b, i) =>
+                i === 0 ? (
+                  <p key={b.slice(0, 24)}>{b}</p>
+                ) : (
+                  <div key={b.slice(0, 24)}>
+                    <p className="hidden sm:block">{b}</p>
+                    <details className="sm:hidden">
+                      <summary className="cursor-pointer text-sm font-semibold" style={{ fontFamily: "var(--font-display)", color: "var(--lve-terracotta-ink)" }}>
+                        Lire la suite
+                      </summary>
+                      <p className="mt-3">{b}</p>
+                    </details>
+                  </div>
+                )
+              )}
             </div>
           )}
         </div>

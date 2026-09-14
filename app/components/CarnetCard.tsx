@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { CreditPhoto } from "./CreditPhoto";
+import { HERO_IMAGE_CREDIT } from "@/lib/hero-images";
 import { MapPin } from "lucide-react";
 import type { AuthenticityBadge } from "@/lib/travel-match/types";
 
@@ -63,6 +65,7 @@ export function CarnetCard({
         {/* Dégradé limité au bas de la photo (relecture du 11/09/2026) : sur une photo claire,
             le pays et le titre ne se lisaient plus malgré l'ombre portée. */}
         <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/60 via-black/25 to-transparent" />
+        <CreditPhoto credit={HERO_IMAGE_CREDIT[carnet.slug]} className="right-2 top-2" sansLien />
         <span
           className="absolute left-4 top-4 inline-block rounded-full px-3 py-1.5 text-[11px] font-bold uppercase tracking-[0.12em] text-white shadow-md"
           style={{

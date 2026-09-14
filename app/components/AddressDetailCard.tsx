@@ -145,7 +145,7 @@ export function AddressDetailCard({
           avec juste le badge catégorie vs une autre avec catégorie + "Partenaire" + statut
           décalait tout le contenu en dessous entre les deux. `pr-24` (29/08/2026, était `pr-9`)
           laisse la place aux deux icônes du coin haut-droit désormais côte à côte. */}
-      <div className="mb-2 flex min-h-[1.75rem] flex-wrap items-center gap-2 pr-24">
+      <div className="mb-2 flex min-h-[3.75rem] flex-wrap content-start items-center gap-2 pr-24">
         <span
           className="inline-flex items-center gap-1.5 rounded-full py-0.5 px-2.5 text-[10px] font-medium tracking-widest uppercase"
           style={{ background: categoryBg, color: categoryColor }}
