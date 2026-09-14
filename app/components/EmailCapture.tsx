@@ -213,7 +213,7 @@ export function EmailCapture({
   return (
     <EmailCaptureShell
       badge="Ton itinéraire, par écrit"
-      title="Reçois mon itinéraire par email"
+      title="Reçois ton itinéraire par email"
       description="Tes trois destinations et un avant-goût de mes adresses, directement dans ta boîte mail."
       successText="Ton itinéraire complet vient d'être envoyé à"
       onSend={(email, { consent, trap }) =>
@@ -230,7 +230,7 @@ export function CarnetEmailCapture({ slug, destinationTitle }: { slug: string; d
   return (
     <EmailCaptureShell
       badge="Emporter ce carnet"
-      title={`Reçois mes adresses de ${destinationTitle} par email`}
+      title={`Reçois tes adresses de ${destinationTitle} par email`}
       description="Toutes les adresses de ce carnet — où dormir, où manger, quoi faire — dans ta boîte mail, pour les retrouver une fois sur place."
       successText="Ton carnet vient d'être envoyé à"
       onSend={(email, { consent, trap }) => sendCarnetEmail({ email, slug, consent, trap })}
