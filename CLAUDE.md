@@ -981,3 +981,17 @@ d%emploi.
   intro dictée par Soumia. Le découpage en univers (voir son document « Architecture de Paris dans
   Travel Match ») n'est PAS construit : Opéra = « Effervescent, urbain & culturel », 4 univers
   retenus (Chic & romantique, Arty & créatif, Effervescent urbain & culturel, Familial & paisible).
+
+## Univers de Paris — en ligne (14/09/2026)
+
+Construit et publié. Table `univers` (nom, phrase, lieux, `entree`, envies, position) +
+`voyage_addresses.univers` (slugs). `lib/travel-match/univers.ts` choisit l'univers : le plus
+d'envies en commun, égalité → univers qui a des adresses, puis position ; jamais un univers vide.
+- `/resultat` : « Ton Paris : X » sous la carte, lien `?univers=slug`.
+- Fiche : onglets façon météo (`app/components/UniversTabs.tsx`), univers du visiteur ouvert ;
+  les univers vides sont visibles et disent « Je prépare mes adresses pour ce Paris-là ».
+- Intro : texte commun (`voyages.intro`) + phrase `entree` de l'univers ouvert, jamais celle d'un
+  univers vide.
+- Envies : Effervescent = Vibrer + Bouger ; Arty = Flâner + Vibrer ; Chic = Flâner + Déguster ;
+  Lent & bucolique = Respirer + Lâcher prise. Pas d'univers « famille » ni « gastronomique ».
+- Soumia juge le carnet assez riche (24 adresses Opéra) : ne pas lui réclamer d'autres adresses.
