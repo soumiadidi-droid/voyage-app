@@ -1,6 +1,6 @@
 "use client";
 
-import { BedDouble, UtensilsCrossed, Compass, Dumbbell, ShoppingBag, Landmark, type LucideIcon } from "lucide-react";
+import { BedDouble, UtensilsCrossed, Compass, Dumbbell, ShoppingBag, Landmark, Trees, type LucideIcon } from "lucide-react";
 import { type TypeActivite } from "@/lib/type-activite";
 import { type Card } from "@/content/voyages";
 import { LVE_COLORS } from "@/lib/design-tokens";
@@ -31,6 +31,7 @@ export const ACTIVITY_TYPE_META: Record<TypeActivite, { icon: LucideIcon; label:
   Sport: { icon: Dumbbell, label: "Sport" },
   Shopping: { icon: ShoppingBag, label: "Shopping" },
   Culture: { icon: Landmark, label: "Culture" },
+  Nature: { icon: Trees, label: "Nature" },
   Expérience: { icon: Compass, label: "Expérience" },
 };
 

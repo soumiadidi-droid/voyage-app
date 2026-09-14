@@ -58,6 +58,7 @@ create table if not exists voyage_addresses (
   price        text,
   instagram_url text,
   family_fit   jsonb,
+  moment       text,
   created_at   timestamptz not null default now(),
   updated_at   timestamptz not null default now(),
   unique (voyage_slug, category, position)
@@ -127,3 +128,6 @@ create index if not exists send_throttle_ip_idx on send_throttle(ip_hash, create
 -- coup. Par défaut à true pour que les 18 destinations existantes restent publiées.
 alter table destinations add column if not exists published boolean not null default true;
 alter table voyages add column if not exists published boolean not null default true;
+
+-- 14/09/2026 : moment d'un resto (Café, Déjeuner, Dîner, Déjeuner & dîner, Pour un verre), badge de la carte.
+alter table voyage_addresses add column if not exists moment text;

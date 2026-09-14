@@ -100,6 +100,7 @@ type AddressRow = {
   price: string | null;
   instagram_url: string | null;
   family_fit: Card["familyFit"] | null;
+  moment: string | null;
 };
 
 function rowToCard(a: AddressRow): Card {
@@ -117,6 +118,7 @@ function rowToCard(a: AddressRow): Card {
     price: a.price ?? undefined,
     instagramUrl: a.instagram_url ?? undefined,
     familyFit: a.family_fit ?? undefined,
+    moment: a.moment ?? undefined,
   };
 }
 

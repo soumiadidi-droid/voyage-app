@@ -1,11 +1,12 @@
 // Type d'une activité affiché sur sa carte (14/09/2026, demande Soumia : remplacer le badge générique
 // « Expérience » par Sport, Shopping ou Culture). Déduit des étiquettes et du nom de l'adresse, pour
 // ne rien avoir à ressaisir en base ; une activité qui ne rentre dans aucun type garde « Expérience ».
-export type TypeActivite = "Sport" | "Shopping" | "Culture" | "Expérience";
+export type TypeActivite = "Sport" | "Shopping" | "Culture" | "Nature" | "Expérience";
 
 const MOTS: [Exclude<TypeActivite, "Expérience">, string[]][] = [
   ["Sport", ["sport", "surf", "pilates", "golf", "paddle", "kayak", "canoë", "randonnée", "yoga", "vélo"]],
   ["Shopping", ["shopping", "mode", "bijoux", "outlet", "boutique", "concept store"]],
+  ["Nature", ["nature", "balade", "jardin", "parc", "park", "lac", "forêt", "calanque", "point de vue", "coucher de soleil"]],
   ["Culture", ["culture", "musée", "musee", "opéra", "théâtre", "comédie musicale", "patrimoine", "temple", "galerie d'art", "expo"]],
 ];
 

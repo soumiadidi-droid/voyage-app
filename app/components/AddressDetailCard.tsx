@@ -10,6 +10,7 @@ import { InstagramPopup } from "./InstagramPopup";
 import { LikeButton } from "./LikeButton";
 import { CATEGORY_META, ACTIVITY_TYPE_META } from "./AddressGrid";
 import { typeActivite } from "@/lib/type-activite";
+import { estMomentResto, MOMENT_ICON } from "@/lib/moment-resto";
 import { InstagramGlyph } from "./BrandGlyphs";
 import { libellesEtiquettes } from "@/lib/etiquettes";
 import { insecables } from "@/lib/typo";
@@ -90,7 +91,13 @@ export function AddressDetailCard({
   familyProfile?: FamilyProfile;
 }) {
   // Les activités affichent leur type (Sport, Shopping, Culture) à la place d'« Expérience ».
-  const meta = category === "Activité" ? { ...CATEGORY_META[category], ...ACTIVITY_TYPE_META[typeActivite(card.name, card.tags)] } : CATEGORY_META[category];
+  // Les restos affichent leur moment (Café, Dîner…) quand il est renseigné.
+  const meta =
+    category === "Activité"
+      ? { ...CATEGORY_META[category], ...ACTIVITY_TYPE_META[typeActivite(card.name, card.tags)] }
+      : category === "Resto" && estMomentResto(card.moment)
+        ? { ...CATEGORY_META[category], icon: MOMENT_ICON[card.moment], label: card.moment }
+        : CATEGORY_META[category];
   const { icon: CategoryIcon, label: categoryLabel, bg: categoryBg, color: categoryColor } = meta;
   const [igOpen, setIgOpen] = useState(false);
 

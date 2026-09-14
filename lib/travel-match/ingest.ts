@@ -136,6 +136,8 @@ export type NewAddressInput = {
   // Seulement les 4 profils tribu (tout_petits/enfants_juniors/ados/tribu_multi_ages). Jamais de
   // sous-scoring solo/couple/amis inventé sur une adresse — ça n'existe pas dans le schéma.
   familyFit?: Partial<Record<FamilyProfile, FamilyFit>>;
+  // Moment d'un resto (14/09/2026), valeurs de MOMENTS_RESTO. Absent = inchangé à la mise à jour.
+  moment?: string | null;
 };
 
 // Valide et normalise une URL de post/reel Instagram : accepte /p/{id}/ ou /reel/{id}/, avec ou
@@ -175,7 +177,7 @@ export async function upsertAddress(input: NewAddressInput): Promise<void> {
       `update voyage_addresses set
          status = $1, location = $2, review = $3, tags = $4, link = $5, link_label = $6,
          is_partner = $7, image = $8, price = $9, instagram_url = $10, family_fit = $11::jsonb,
-         updated_at = now()
+         moment = coalesce($13, moment), updated_at = now()
        where id = $12`,
       [
         input.status ?? "",
@@ -190,6 +192,7 @@ export async function upsertAddress(input: NewAddressInput): Promise<void> {
         instagramUrl,
         familyFit,
         existing[0].id,
+        input.moment ?? null,
       ]
     );
     return;
@@ -202,8 +205,8 @@ export async function upsertAddress(input: NewAddressInput): Promise<void> {
 
   await sql.query(
     `insert into voyage_addresses
-       (voyage_slug, category, position, name, status, location, review, tags, link, link_label, is_partner, image, price, instagram_url, family_fit)
-     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15::jsonb)`,
+       (voyage_slug, category, position, name, status, location, review, tags, link, link_label, is_partner, image, price, instagram_url, family_fit, moment)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15::jsonb,$16)`,
     [
       input.voyageSlug,
       input.category,
@@ -220,6 +223,7 @@ export async function upsertAddress(input: NewAddressInput): Promise<void> {
       input.price ?? null,
       instagramUrl,
       familyFit,
+      input.moment ?? null,
     ]
   );
 }
