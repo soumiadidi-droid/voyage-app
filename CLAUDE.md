@@ -484,8 +484,10 @@ seul `/carnets` les utilise depuis la fermeture. La carte n'affiche que le nombr
 compteur de photos a été retiré, les photos étant ce que Soumia **livre** au partenaire et pas ce
 qu'elle montre pour décrocher le séjour.
 
-**Les 15 destinations sont toutes en `tested_approved`** (Londres corrigée en base ce jour-là,
-Marseille l'était déjà). Le bandeau de `/carnets` affiche donc "tous vécus sur le terrain", et le
+**Les 15 destinations de l'époque étaient toutes en `tested_approved`** (Londres corrigée en base ce jour-là,
+Marseille l'était déjà). **Correction du 14/09/2026** : les deux carnets Chine (`chine-urbaine`,
+`chine-nature`) sont en `bucket_list`, à juste titre — voyage prévu l'été 2027, adresses toutes
+"Sur mon radar". Ne pas les passer en testé avant le retour de Soumia. Le bandeau de `/carnets` affiche donc "tous vécus sur le terrain", et le
 libellé "Curatée" n'apparaît nulle part aujourd'hui — il reste prévu pour une future destination
 non vécue. `authenticity_badge` ne sert qu'à l'affichage et au tri, jamais au calcul du matching.
 
@@ -962,3 +964,20 @@ fabrique les tuiles à partir d%un fichier de spec JSON — six types (`mot`, `d
 parce que son export part d%un clic que personne ne peut déclencher à la place de Soumia. L%agent
 Instagram livre donc un dossier `~/Documents/Le Voyage des Émotions/Posts Insta/insta-<destination>/` (depuis le 13/09/2026, plus Téléchargements) avec les images, pas un mode
 d%emploi.
+
+## Badges et boutons des adresses, carnet Paris (14/09/2026)
+
+- **Activités** : le badge « Expérience » affiche le type, déduit du nom et des étiquettes
+  (`lib/type-activite.ts`) : Sport, Shopping, Nature, Culture ; « Expérience » reste pour le reste
+  (beach clubs, Disney, sorties famille). Ajouter un mot-clé là plutôt que de toucher la base.
+- **Restos** : colonne `voyage_addresses.moment` (Café, Déjeuner, Dîner, Déjeuner & dîner, Pour un
+  verre — `lib/moment-resto.ts`). « Café » vaut aussi petit-déjeuner (choix de Soumia). Sans moment,
+  le badge reste « Table épicurienne ». Renseigné pour Paris uniquement à ce jour.
+- **Boutons** : réservation possible → « Réserve ton séjour / ta table / ton activité » ; sinon
+  (balade, café sans résa, boutique) → « Voir sur Google Maps »
+  (`https://www.google.com/maps/search/?api=1&query=…`). Appliqué à Paris et Val d'Europe ; les
+  autres carnets gardent leurs anciens liens.
+- **Paris** publié le 14/09/2026 : quartier Opéra, 22 adresses, couverture Garnier (Unsplash),
+  intro dictée par Soumia. Le découpage en univers (voir son document « Architecture de Paris dans
+  Travel Match ») n'est PAS construit : Opéra = « Effervescent, urbain & culturel », 4 univers
+  retenus (Chic & romantique, Arty & créatif, Effervescent urbain & culturel, Familial & paisible).
