@@ -131,3 +131,18 @@ alter table voyages add column if not exists published boolean not null default 
 
 -- 14/09/2026 : moment d'un resto (Café, Déjeuner, Dîner, Déjeuner & dîner, Pour un verre), badge de la carte.
 alter table voyage_addresses add column if not exists moment text;
+
+-- 14/09/2026 : univers d'une grande destination (« façons de vivre Paris »). Le questionnaire ne change
+-- pas : l'univers se déduit des envies choisies (lib/travel-match/univers.ts). Une adresse peut
+-- appartenir à plusieurs univers (voyage_addresses.univers, slugs).
+create table if not exists univers (
+  destination_id text not null references destinations(id) on delete cascade,
+  slug           text not null,
+  nom            text not null,
+  phrase         text not null default '',
+  lieux          text not null default '',
+  envies         text[] not null default '{}',
+  position       int not null default 0,
+  primary key (destination_id, slug)
+);
+alter table voyage_addresses add column if not exists univers text[] not null default '{}';

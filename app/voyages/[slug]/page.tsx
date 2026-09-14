@@ -7,7 +7,8 @@ import { DestinationPracticalCard } from "../../components/DestinationPracticalC
 import { QuizCta } from "../../components/QuizCta";
 import { CarnetEmailCapture } from "../../components/EmailCapture";
 import { type Card } from "@/content/voyages";
-import { getVoyage, getDestinations } from "@/lib/travel-match/data";
+import { getVoyage, getDestinations, getUniversParDestination } from "@/lib/travel-match/data";
+import type { Univers } from "@/lib/travel-match/univers";
 
 // Les brouillons sont lisibles sur les liens de test (preview Vercel) et en local, jamais en
 // production : Soumia relit un carnet complet avant de le publier (13/09/2026).
@@ -115,13 +116,59 @@ function AddressesSection({
   eats,
   activities,
   familyProfile,
+  univers = [],
+  destinationTitle,
 }: {
   stays: Card[];
   eats: Card[];
   activities: Card[];
   familyProfile?: FamilyProfile;
+  // Univers qui ont au moins une adresse visible, l'univers du visiteur en premier (14/09/2026).
+  univers?: Univers[];
+  destinationTitle: string;
 }) {
   if (stays.length === 0 && eats.length === 0 && activities.length === 0) return null;
+
+  // Grande destination découpée en univers (Paris) : une section par façon de la vivre, puis les
+  // adresses qui n'appartiennent à aucun univers. Les autres carnets gardent l'affichage d'origine.
+  if (univers.length > 0) {
+    const dans = (slug: string) => (c: Card) => (c.univers ?? []).includes(slug);
+    const sansUnivers = (c: Card) => (c.univers ?? []).length === 0;
+    const reste = { stays: stays.filter(sansUnivers), eats: eats.filter(sansUnivers), activities: activities.filter(sansUnivers) };
+    return (
+      <div className="my-16 sm:my-20">
+        <p
+          className="mb-2 text-xs uppercase tracking-[0.25em] font-semibold"
+          style={{ fontFamily: "var(--font-display)", color: "var(--accent-text)" }}
+        >
+          Mes adresses
+        </p>
+        <h2 className="font-extrabold mb-10" style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.9rem, 4vw, 2.6rem)" }}>
+          {univers.length === 1 ? `Mon ${destinationTitle}` : `${univers.length} façons de vivre ${destinationTitle}`}
+        </h2>
+        {univers.map((u) => (
+          <section key={u.slug} id={`univers-${u.slug}`} className="mb-14 sm:mb-16">
+            <h3 className="mb-2 font-semibold" style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.5rem, 3vw, 2rem)" }}>
+              {u.nom}
+            </h3>
+            {u.phrase && <p className="mb-1 max-w-2xl" style={{ color: "var(--text-secondary)" }}>{u.phrase}</p>}
+            {u.lieux && (
+              <p className="mb-6 text-xs uppercase tracking-[0.2em] font-semibold" style={{ fontFamily: "var(--font-display)", color: "var(--lve-terracotta-ink)" }}>
+                {u.lieux}
+              </p>
+            )}
+            <AddressGrid stays={stays.filter(dans(u.slug))} eats={eats.filter(dans(u.slug))} activities={activities.filter(dans(u.slug))} familyProfile={familyProfile} />
+          </section>
+        ))}
+        {reste.stays.length + reste.eats.length + reste.activities.length > 0 && (
+          <section className="mb-14">
+            <h3 className="mb-6 font-semibold" style={{ fontFamily: "var(--font-title)", fontSize: "clamp(1.5rem, 3vw, 2rem)" }}>Et aussi</h3>
+            <AddressGrid {...reste} familyProfile={familyProfile} />
+          </section>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="my-16 sm:my-20">
@@ -149,7 +196,7 @@ export default async function VoyagePage({
   searchParams,
 }: {
   params: Promise<{ slug: string }>;
-  searchParams: Promise<{ id?: string; duration?: string; familyProfile?: string; climate?: string }>;
+  searchParams: Promise<{ id?: string; duration?: string; familyProfile?: string; climate?: string; univers?: string }>;
 }) {
   const { slug } = await params;
   const voyage = await getVoyage(slug, BROUILLONS_VISIBLES);
@@ -160,7 +207,7 @@ export default async function VoyagePage({
   // le lien depuis /resultat. Sans lui (accès direct à la fiche), on retombe sur le slug de
   // contenu — correct pour les 7 destinations à fiche dédiée, approximatif pour Italie/Amérique du
   // Nord qui partagent une fiche entre plusieurs destinations de matching.
-  const { id: favoriteId, duration, familyProfile: rawFamilyProfile } = await searchParams;
+  const { id: favoriteId, duration, familyProfile: rawFamilyProfile, univers: universDemande } = await searchParams;
   // Absent en accès direct à la fiche, ou si companions ≠ "famille" au questionnaire — le pavé ne
   // s'affiche simplement pas (27/08/2026).
   const familyProfile = FAMILY_PROFILE_VALUES.includes(rawFamilyProfile as FamilyProfile)
@@ -168,6 +215,13 @@ export default async function VoyagePage({
     : undefined;
   const destinations = await getDestinations(BROUILLONS_VISIBLES);
   const destination = destinations.find((d) => d.id === (favoriteId ?? slug));
+
+  // Univers qui ont des adresses visibles, celui du visiteur (?univers=, venu de /resultat) en premier.
+  const tousUnivers = (await getUniversParDestination()).get(destination?.id ?? slug) ?? [];
+  const visibles = [...visible.stays, ...visible.eats, ...visible.activities];
+  const universAffiches = tousUnivers
+    .filter((u) => visibles.some((c) => (c.univers ?? []).includes(u.slug)))
+    .sort((a, b) => (a.slug === universDemande ? -1 : b.slug === universDemande ? 1 : a.position - b.position));
 
   // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par
   // le combo (décidé le 23/08/2026). Sans `duration` transmis (accès direct), on n'affiche rien —
@@ -226,6 +280,8 @@ export default async function VoyagePage({
           eats={visible.eats}
           activities={visible.activities}
           familyProfile={familyProfile}
+          univers={universAffiches}
+          destinationTitle={voyage.hero.title}
         />
 
         {/* Juste après les adresses (09/09/2026, demande Soumia) : c'est le moment où le lecteur

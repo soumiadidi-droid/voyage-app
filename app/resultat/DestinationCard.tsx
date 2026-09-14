@@ -20,7 +20,8 @@ export function DestinationCard({
   hasComboOpportunity,
   href,
   archetypeTitle,
-}: ScoredDestination & { href: string; archetypeTitle?: string }) {
+  univers,
+}: ScoredDestination & { href: string; archetypeTitle?: string; univers?: { nom: string } }) {
   const heroImage = DESTINATION_HERO_IMAGE[destination.content_slug];
 
   return (
@@ -106,6 +107,13 @@ export function DestinationCard({
           </div>
         )}
 
+        {/* « Ton Paris : Effervescent, urbain & culturel » (14/09/2026) : la façon de vivre la
+            destination qui correspond aux envies choisies, sous le pourcentage de la destination. */}
+        {univers && (
+          <p className="mb-2 text-sm font-semibold" style={{ color: "var(--lve-terracotta-ink)", fontFamily: "var(--font-display)" }}>
+            Ton {destination.title} : {univers.nom}
+          </p>
+        )}
         <p className="mb-4" style={{ color: "var(--text-secondary)" }}>
           {destination.summary}
         </p>

@@ -53,6 +53,8 @@ export type Card = {
   // Moment d'un resto (14/09/2026) : Café, Déjeuner, Dîner, Déjeuner & dîner ou Pour un verre. Remplace le
   // badge « Table épicurienne » quand il est renseigné (voir lib/moment-resto.ts).
   moment?: string;
+  // Univers de la grande destination auxquels l'adresse appartient (slugs, 14/09/2026).
+  univers?: string[];
   // Prix (28/08/2026) — texte libre, ex. "45€ la nuit", "Menu à partir de 25€". Optionnel : aucune
   // adresse existante n'en a pour l'instant (aucun vrai prix n'a jamais été donné), à renseigner
   // adresse par adresse, jamais inventé.

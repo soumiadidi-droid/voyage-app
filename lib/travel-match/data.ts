@@ -3,7 +3,8 @@
 // provenance des données change. Voir le plan de migration
 // (~/.claude/plans/moonlit-noodling-dolphin.md).
 import { neon } from "@neondatabase/serverless";
-import type { Destination, SuggestedCombo } from "./types";
+import type { Destination, ScoreKey, SuggestedCombo } from "./types";
+import type { Univers } from "./univers";
 import type { Card, VoyageContent } from "@/content/voyages";
 
 const sql = neon(process.env.DATABASE_URL!);
@@ -101,6 +102,7 @@ type AddressRow = {
   instagram_url: string | null;
   family_fit: Card["familyFit"] | null;
   moment: string | null;
+  univers: string[] | null;
 };
 
 function rowToCard(a: AddressRow): Card {
@@ -119,6 +121,7 @@ function rowToCard(a: AddressRow): Card {
     instagramUrl: a.instagram_url ?? undefined,
     familyFit: a.family_fit ?? undefined,
     moment: a.moment ?? undefined,
+    univers: a.univers ?? [],
   };
 }
 
@@ -174,4 +177,29 @@ export async function getVoyages(inclureBrouillons = false): Promise<VoyageConte
     gallery: v.gallery,
     ...(addressesBySlug.get(v.slug) ?? { stays: [], eats: [], activities: [] }),
   }));
+}
+
+// Univers des grandes destinations (14/09/2026, cf. lib/travel-match/univers.ts), regroupés par
+// destination. Une destination sans univers n'a simplement pas d'entrée.
+type UniversRow = { destination_id: string; slug: string; nom: string; phrase: string; lieux: string; envies: string[]; position: number };
+
+export async function getUniversParDestination(): Promise<Map<string, Univers[]>> {
+  const rows = (await sql.query(`select * from univers order by destination_id, position`)) as unknown as UniversRow[];
+  const parDestination = new Map<string, Univers[]>();
+  for (const r of rows) {
+    const u: Univers = { destinationId: r.destination_id, slug: r.slug, nom: r.nom, phrase: r.phrase, lieux: r.lieux, envies: r.envies as ScoreKey[], position: r.position };
+    parDestination.set(r.destination_id, [...(parDestination.get(r.destination_id) ?? []), u]);
+  }
+  return parDestination;
+}
+
+// Slugs d'univers qui ont au moins une adresse visible (lien Instagram), par carnet. Même règle de
+// visibilité que lib/visible-addresses.ts : un univers ne s'affiche pas s'il n'a rien à montrer.
+export async function getUniversAvecAdresses(): Promise<Map<string, Set<string>>> {
+  const rows = (await sql.query(
+    `select voyage_slug, unnest(univers) as slug from voyage_addresses where instagram_url is not null and instagram_url <> '' group by 1, 2`
+  )) as unknown as { voyage_slug: string; slug: string }[];
+  const parCarnet = new Map<string, Set<string>>();
+  for (const r of rows) parCarnet.set(r.voyage_slug, (parCarnet.get(r.voyage_slug) ?? new Set()).add(r.slug));
+  return parCarnet;
 }

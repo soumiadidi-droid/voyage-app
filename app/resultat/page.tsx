@@ -3,7 +3,8 @@ import { EmailCapture } from "../components/EmailCapture";
 import { FallbackNotice } from "./FallbackNotice";
 import { DestinationCard } from "./DestinationCard";
 import { matchTravel, dedupeComboBadges } from "@/lib/travel-match/engine";
-import { getDestinations } from "@/lib/travel-match/data";
+import { getDestinations, getUniversParDestination, getUniversAvecAdresses } from "@/lib/travel-match/data";
+import { choisirUnivers } from "@/lib/travel-match/univers";
 import {
   SCORE_KEYS,
   FAMILY_PROFILE_OPTIONS,
@@ -120,6 +121,11 @@ export default async function ResultatPage({
   const destinations = await getDestinations();
   const { fallback, results } = matchTravel(answers, destinations);
   const top = dedupeComboBadges(results.slice(0, 3), destinations);
+  // Univers (14/09/2026) : pour une grande destination découpée (Paris), la façon de la vivre qui
+  // correspond aux envies choisies. Le pourcentage reste celui de la destination.
+  const [universParDestination, universAvecAdresses] = await Promise.all([getUniversParDestination(), getUniversAvecAdresses()]);
+  const universDe = (destinationId: string, contentSlug: string) =>
+    choisirUnivers(answers.scores, universParDestination.get(destinationId) ?? [], universAvecAdresses.get(contentSlug) ?? new Set());
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">
@@ -134,7 +140,9 @@ export default async function ResultatPage({
       {fallback && <FallbackNotice />}
 
       <div className="flex flex-col gap-8">
-        {top.map((result) => (
+        {top.map((result) => {
+          const univers = universDe(result.destination.id, result.destination.content_slug);
+          return (
           <DestinationCard
             key={result.destination.id}
             {...result}
@@ -143,12 +151,14 @@ export default async function ResultatPage({
             // Montréal en résultat → afficher juillet-août, pas un conseil toutes saisons).
             href={`/voyages/${result.destination.content_slug}?id=${result.destination.id}&duration=${answers.filters.duration}&climate=${answers.filters.climate}${
               answers.familyProfile ? `&familyProfile=${answers.familyProfile}` : ""
-            }`}
+            }${univers ? `&univers=${univers.slug}` : ""}`}
+            univers={univers ? { nom: univers.nom } : undefined}
             // Profil voyageur réel (1er septembre 2026, demande Soumia — carte de partage Story
             // "Profil : X") : même archétype que TravelerProfileCard juste au-dessus, pas recalculé.
             archetypeTitle={getArchetypeTitle(answers)}
           />
-        ))}
+          );
+        })}
       </div>
 
       {/* Activé le 09/09/2026 : domaine levoyagedesemotions.fr vérifié chez Resend (DKIM, les deux
