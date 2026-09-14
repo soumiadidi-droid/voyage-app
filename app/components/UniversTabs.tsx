@@ -68,6 +68,11 @@ export function UniversTabs({
           {courant.phrase}
         </p>
       )}
+      {courant.entree && (
+        <p className="mb-2 max-w-2xl italic" style={{ fontFamily: "var(--font-body)", fontSize: "1.1rem", color: "var(--text)" }}>
+          {courant.entree}
+        </p>
+      )}
       {courant.lieux && (
         <p
           className="mb-6 text-xs uppercase tracking-[0.2em] font-semibold"

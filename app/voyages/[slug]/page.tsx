@@ -214,7 +214,9 @@ export default async function VoyagePage({
   const universOuvert =
     universAffiches.find((u) => u.slug === universDemande && aDesAdresses(u.slug)) ??
     universAffiches.find((u) => aDesAdresses(u.slug));
-  const intro = universOuvert?.entree ? `${voyage.intro} ${universOuvert.entree}` : voyage.intro;
+  // La phrase d'entrée de l'univers ne termine plus l'intro (14/09/2026, Soumia) : elle s'affiche en
+  // tête de chaque onglet, là où le clic la fait changer sous les yeux du visiteur.
+  const intro = voyage.intro;
 
   // Combos affichés seulement si la durée choisie par l'utilisateur couvre le minimum requis par
   // le combo (décidé le 23/08/2026). Sans `duration` transmis (accès direct), on n'affiche rien —
