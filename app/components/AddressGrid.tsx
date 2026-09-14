@@ -1,7 +1,7 @@
 "use client";
 
 import { BedDouble, UtensilsCrossed, Compass, Dumbbell, ShoppingBag, Landmark, Trees, type LucideIcon } from "lucide-react";
-import { type TypeActivite } from "@/lib/type-activite";
+import { type TypeActivite, ORDRE_TYPES_ACTIVITE, typeActivite } from "@/lib/type-activite";
 import { type Card } from "@/content/voyages";
 import { LVE_COLORS } from "@/lib/design-tokens";
 import { type AddressCategory } from "@/lib/category-images";
@@ -55,7 +55,16 @@ export function AddressGrid({
   const allGroups: { category: AddressCategory; cards: Card[] }[] = [
     { category: "Hôtel", cards: stays },
     { category: "Resto", cards: eats },
-    { category: "Activité", cards: activities },
+    // Activités regroupées par type, dans l'ordre Sport, Nature, Shopping, Culture, Expérience
+    // (14/09/2026, demande Soumia) ; l'ordre saisi en base départage à l'intérieur d'un type.
+    {
+      category: "Activité",
+      cards: [...activities].sort(
+        (a, b) =>
+          ORDRE_TYPES_ACTIVITE.indexOf(typeActivite(a.name, a.tags)) -
+          ORDRE_TYPES_ACTIVITE.indexOf(typeActivite(b.name, b.tags))
+      ),
+    },
   ];
   const groups = allGroups.filter((g) => g.cards.length > 0);
 

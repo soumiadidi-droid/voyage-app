@@ -3,6 +3,9 @@
 // ne rien avoir à ressaisir en base ; une activité qui ne rentre dans aucun type garde « Expérience ».
 export type TypeActivite = "Sport" | "Shopping" | "Culture" | "Nature" | "Expérience";
 
+// Ordre d'affichage des activités sur une fiche.
+export const ORDRE_TYPES_ACTIVITE: TypeActivite[] = ["Sport", "Nature", "Shopping", "Culture", "Expérience"];
+
 const MOTS: [Exclude<TypeActivite, "Expérience">, string[]][] = [
   ["Sport", ["sport", "surf", "pilates", "golf", "paddle", "kayak", "canoë", "randonnée", "yoga", "vélo"]],
   ["Shopping", ["shopping", "mode", "bijoux", "outlet", "boutique", "concept store"]],
