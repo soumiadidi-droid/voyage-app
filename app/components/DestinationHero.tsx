@@ -42,6 +42,7 @@ export function DestinationHero({
   heroImage,
   heroCredit,
   panneauADroite = false,
+  heroPosition = "center",
   sharePath,
 }: {
   hero: VoyageContent["hero"];
@@ -51,6 +52,8 @@ export function DestinationHero({
   heroCredit?: { texte: string; lien: string };
   // Bloc de texte à droite, pour laisser voir le sujet de la photo quand il est à gauche (Paris : Garnier).
   panneauADroite?: boolean;
+  // Cadrage de la photo (ex. « 18% center » pour garder le sujet visible sur téléphone).
+  heroPosition?: string;
   sharePath: string;
 }) {
   const eyebrow = hero.country + (hero.tags.length > 0 ? ` — ${hero.tags.join(" · ")}` : "");
@@ -61,7 +64,7 @@ export function DestinationHero({
       {heroImage ? (
         <div
           className="absolute inset-x-0 top-0 h-screen"
-          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: "center" }}
+          style={{ backgroundImage: `url('${heroImage}')`, backgroundSize: "cover", backgroundPosition: heroPosition }}
         >
           <CreditPhoto credit={heroCredit} className="left-2 top-2 sm:left-auto sm:top-auto sm:bottom-2 sm:right-2" />
         </div>

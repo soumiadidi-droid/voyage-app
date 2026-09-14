@@ -100,3 +100,9 @@ export const HERO_IMAGE_CREDIT: Partial<Record<string, { texte: string; lien: st
 // (relecture du 14/09/2026 : sur Paris, le bloc cachait l'Opéra Garnier).
 export const HERO_PANNEAU_A_DROITE = new Set<string>([]);
 // Paris retiré le 14/09/2026 : Soumia préfère la photo telle qu'elle était, bloc à gauche.
+
+// Cadrage de la couverture quand le sujet n'est pas au centre (14/09/2026) : sur téléphone, l'écran
+// étroit ne garde qu'une bande verticale de la photo, et l'Opéra Garnier (à gauche) disparaissait.
+export const HERO_POSITION: Partial<Record<string, string>> = {
+  paris: "18% center",
+};
