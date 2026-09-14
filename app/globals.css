@@ -250,3 +250,11 @@ body {
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* Hors calque (14/09/2026) : un soulignement hérité passait devant la règle du calque "components"
+   et soulignait le « Q » de « Lancer le questionnaire ». Un bouton n'est jamais souligné. */
+.btn-principal,
+.btn-principal:hover,
+.btn-principal:focus-visible {
+  text-decoration: none;
+}

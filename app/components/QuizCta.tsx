@@ -18,7 +18,7 @@ export function QuizCta() {
         className="surface-claire rounded-2xl border border-lve-terracotta/25 px-6 py-10 sm:px-10 sm:py-12"
         style={{ background: "var(--surface-sand)" }}
       >
-        <div className="flex flex-col sm:flex-row sm:items-center gap-8">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
           <div className="flex-1 space-y-3">
             <span
               className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-lve-terracotta-ink font-semibold"
@@ -40,11 +40,13 @@ export function QuizCta() {
               Passe mon questionnaire sur-mesure pour trouver l&apos;expérience qui te ressemble.
             </p>
           </div>
-          <div className="shrink-0">
-            <Link href="/questionnaire" className="btn-principal whitespace-nowrap px-7">
+          {/* Bloc droit centré, bouton et promesse ensemble ; `no-underline` en utilitaire pour
+              battre tout soulignement hérité sur le lien (14/09/2026, soulignement parasite sous le « Q »). */}
+          <div className="shrink-0 flex flex-col items-center gap-3">
+            <Link href="/questionnaire" className="btn-principal no-underline whitespace-nowrap px-7">
               Lancer le questionnaire
             </Link>
-            <PromesseTravelMatch className="mt-3" />
+            <PromesseTravelMatch className="justify-center" />
           </div>
         </div>
       </div>
