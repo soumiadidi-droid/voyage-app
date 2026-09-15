@@ -175,6 +175,25 @@ function html(tuile, spec) {
     };
   }
 
+  if (tuile.type === "garde" && tuile.centree) {
+    // Page de garde « zone sûre » (15/09/2026) : le premier post carnet de Biarritz a été recadré en
+    // carré à la publication et ses lignes du haut et du bas ont disparu. Tout le texte tient ici dans
+    // le carré central (1080 × 1080) de l'image 4:5, et le titre est plus gros.
+    return {
+      h: 1350,
+      corps: `<div style="width:100%;height:100%;background:${COULEURS.sable};display:flex;align-items:center;justify-content:center">
+        <div style="width:300px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:14px">
+          ${surtitre(tuile.surtitre ?? "Nouveau carnet", COULEURS.ink, COULEURS.ink)}
+          <p class="titre" style="font-size:66px;line-height:1;color:${COULEURS.charcoal}">${spec.destination}</p>
+          <p class="corps" style="font-size:15px;color:${COULEURS.charcoal}cc">${spec.villes ?? ""}</p>
+          <span class="filet" style="width:60px;background:${COULEURS.charcoal}40;margin:4px 0"></span>
+          <p class="mono" style="font-size:11px;text-transform:uppercase;letter-spacing:.2em;color:${COULEURS.ink}">${spec.promesse ?? ""}</p>
+          <p class="mono" style="font-size:10px;text-transform:uppercase;letter-spacing:.2em;color:${COULEURS.charcoal}99;margin-top:6px">Fais défiler →</p>
+        </div>
+      </div>`,
+    };
+  }
+
   if (tuile.type === "garde") {
     return {
       h: 1350,

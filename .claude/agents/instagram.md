@@ -44,6 +44,11 @@ dans la légende. Toujours pas de nom de lieu.
 - slide 2, au swipe : **la révélation**, la carte épurée terracotta avec le nom (modèle Terracotta
   Mood).
 
+**Page de garde « zone sûre » (15/09/2026)** : `"centree": true` sur la tuile `garde` — tout le texte dans le
+carré central, parce qu'Instagram recadre en carré si Soumia ne touche pas « étendre » à la publication
+(arrivé sur le premier carnet Biarritz, archivé et republié). Rappeler dans le planning : publier depuis
+le téléphone, page de garde en premier, bouton « étendre » avant d'ajouter les autres images.
+
 Plus de photo de Soumia dans le post 3 : ses photos appartiennent au post 5 Sans filtre. Les
 pictogrammes disponibles sont dans `PICTOS` (`scripts/tuiles-insta.mjs`) ; s'il en manque un pour
 une nouvelle destination, il se dessine là, au même trait.

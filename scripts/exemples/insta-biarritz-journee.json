@@ -7,7 +7,8 @@
     {
       "type": "garde",
       "fichier": "post-4-carnet/1-page-de-garde",
-      "surtitre": "Carnet d'adresses"
+      "surtitre": "Carnet d'adresses",
+      "centree": true
     },
     {
       "type": "adresses",
