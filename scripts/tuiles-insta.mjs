@@ -353,8 +353,10 @@ function html(tuile, spec) {
       h: 1920,
       corps: `<div style="position:relative;width:100%;height:100%;background:#000">
         <img src="file://${tuile.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,0) 38%)"></div>
-        <div style="position:absolute;left:30px;right:70px;bottom:150px;display:flex;flex-direction:column;gap:8px;text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 14px rgba(0,0,0,.4)">
+        <!-- Légende remontée (16/09/2026) : sur Instagram, le tiers bas du reel est couvert par le
+             pseudo, la légende et les boutons. Le texte vit au-dessus de cette zone. -->
+        <div style="position:absolute;left:0;right:0;bottom:0;height:62%;background:linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,.38) 45%, rgba(0,0,0,0) 100%)"></div>
+        <div style="position:absolute;left:30px;right:70px;bottom:300px;display:flex;flex-direction:column;gap:8px;text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 14px rgba(0,0,0,.4)">
           <p class="mono" style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:${COULEURS.sable}">${tuile.numero ?? ""}</p>
           <p class="titre" style="font-size:30px;line-height:1.15;color:#fff">${tuile.legende ?? ""}</p>
         </div>
