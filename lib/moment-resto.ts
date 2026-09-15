@@ -1,8 +1,9 @@
 // Moment d'un resto affiché sur sa carte (14/09/2026, demande Soumia : remplacer « Table épicurienne »
 // par le moment où l'on y va). « Café » vaut aussi pour le petit-déjeuner, sans le dire.
-import { Coffee, UtensilsCrossed, Moon, Wine, type LucideIcon } from "lucide-react";
+import { CakeSlice, Coffee, UtensilsCrossed, Moon, Wine, type LucideIcon } from "lucide-react";
 
-export const MOMENTS_RESTO = ["Café", "Café & brunch", "Déjeuner", "Dîner", "Déjeuner & dîner", "Pour un verre"] as const;
+export const MOMENTS_RESTO = ["Café", "Café & brunch", "Déjeuner", "Dîner", "Déjeuner & dîner", "Pour un verre", "Gourmandise"] as const;
+// « Gourmandise » ajouté le 15/09/2026 (Soumia, carnet Biarritz) : pâtisseries, glaces, goûters.
 export type MomentResto = (typeof MOMENTS_RESTO)[number];
 
 export const MOMENT_ICON: Record<MomentResto, LucideIcon> = {
@@ -12,6 +13,7 @@ export const MOMENT_ICON: Record<MomentResto, LucideIcon> = {
   Dîner: Moon,
   "Déjeuner & dîner": UtensilsCrossed,
   "Pour un verre": Wine,
+  Gourmandise: CakeSlice,
 };
 
 export function estMomentResto(v: string | undefined): v is MomentResto {
