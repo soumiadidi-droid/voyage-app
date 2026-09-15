@@ -79,7 +79,10 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // n'existe. Licence à attribution obligatoire : crédit visible via HERO_IMAGE_CREDIT ci-dessous.
   // La photo de Soumia (vol d'oies au lever du jour, oies-serris.jpg) a été essayée puis remplacée
   // le 13/09/2026 ; elle reste dans le dossier, sans GPS, pour Instagram.
-  "val-d-europe": "/images/voyages/val-d-europe/lac-serris.jpg",
+  // Photo de Soumia (15/09/2026, à sa demande) : les résidences et le lac de Serris par un matin
+  // de ciel bleu. Remplace la photo Wikimedia (lac-serris.jpg, crédit obligatoire), gardée dans le
+  // dossier. Métadonnées GPS retirées.
+  "val-d-europe": "/images/voyages/val-d-europe/serris-soumia.jpg",
   // Façade avant du Palais Garnier et ses statues dorées — Francesco Zivoli,
   // https://unsplash.com/photos/OYSKRsmgpmg (14/09/2026). Remplace la vue depuis le toit des Galeries
   // Lafayette (Nathan Staz) : l'Opéra y était en bas à gauche, pile sous le bloc de texte. Ici le
@@ -91,15 +94,12 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
 // Crédit affiché sur la photo quand sa licence l'exige (CC BY-SA, etc.). Les photos Unsplash n'en
 // ont pas besoin et n'ont pas d'entrée ici.
 export const HERO_IMAGE_CREDIT: Partial<Record<string, { texte: string; lien: string }>> = {
-  "val-d-europe": {
-    texte: "Photo : Lipton1989, CC BY-SA 4.0",
-    lien: "https://commons.wikimedia.org/wiki/File:Lac_de_Serris_77.jpg",
-  },
 };
 
 // Couvertures dont le sujet est à gauche : le bloc de texte passe à droite sur ordinateur
 // (relecture du 14/09/2026 : sur Paris, le bloc cachait l'Opéra Garnier).
-export const HERO_PANNEAU_A_DROITE = new Set<string>([]);
+// Val d'Europe (15/09/2026) : sur la photo de Soumia, les résidences et le lac sont à gauche.
+export const HERO_PANNEAU_A_DROITE = new Set<string>(["val-d-europe"]);
 // Paris retiré le 14/09/2026 : Soumia préfère la photo telle qu'elle était, bloc à gauche.
 
 // Cadrage de la couverture quand le sujet n'est pas au centre (14/09/2026) : sur téléphone, l'écran
