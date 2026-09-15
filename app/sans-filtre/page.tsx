@@ -33,7 +33,10 @@ function melanger<T>(liste: T[]): T[] {
 }
 
 export default function SansFiltrePage() {
-  const melange = melanger(photos as PhotoBrute[]);
+  // Essai du 15/09/2026 : sur la version de test, les photos légendées passent en tête pour qu'on
+  // les trouve. À retirer quand toutes les photos auront leur légende.
+  const toutes = melanger(photos as PhotoBrute[]);
+  const melange = [...toutes.filter((p) => p.legende), ...toutes.filter((p) => !p.legende)];
 
   return (
     <div className="surface-claire bg-lve-bg">

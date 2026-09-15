@@ -1,9 +1,12 @@
 "use client";
 
 import { useCallback, useEffect, useState } from "react";
+import Link from "next/link";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
 
-export type PhotoBrute = { w: number; h: number; src: string; vignette: string };
+// legende / carnet (15/09/2026, essai sur une photo) : affichés UNIQUEMENT dans la vue agrandie, jamais
+// sur le mur, qui reste sans texte. `carnet` = slug de la fiche voyage, pour le lien « Voir le carnet ».
+export type PhotoBrute = { w: number; h: number; src: string; vignette: string; legende?: string; carnet?: string };
 
 // Galerie "Sans filtre" (12/09/2026) : les photos de Soumia telles qu'elle les a prises. Aucun
 // PHOTO_GRADE ici, volontairement — c'est la preuve brute qu'elle y était, pas un visuel de marque.
@@ -72,10 +75,29 @@ export function GalerieSansFiltre({ photos }: { photos: PhotoBrute[] }) {
           {/* eslint-disable-next-line @next/next/no-img-element -- voir plus haut */}
           <img
             src={photos[ouverte].src}
-            alt="Photo de voyage"
-            className="max-h-[92vh] max-w-[94vw] object-contain"
+            alt={photos[ouverte].legende ?? "Photo de voyage"}
+            className="max-h-[84vh] max-w-[94vw] object-contain"
             onClick={(e) => e.stopPropagation()}
           />
+          {photos[ouverte].legende && (
+            <div
+              className="absolute bottom-5 left-0 right-0 flex flex-col items-center gap-1.5 px-6 text-center"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <p className="italic text-white/90" style={{ fontFamily: "var(--font-title)", fontSize: "1.35rem" }}>
+                {photos[ouverte].legende}
+              </p>
+              {photos[ouverte].carnet && (
+                <Link
+                  href={`/voyages/${photos[ouverte].carnet}`}
+                  className="text-xs uppercase tracking-[0.2em] text-white/75 underline underline-offset-4 hover:text-white"
+                  style={{ fontFamily: "var(--font-display)" }}
+                >
+                  Voir le carnet →
+                </Link>
+              )}
+            </div>
+          )}
           <button type="button" onClick={fermer} aria-label="Fermer" className="absolute top-4 right-4 text-white p-2">
             <X size={28} />
           </button>
