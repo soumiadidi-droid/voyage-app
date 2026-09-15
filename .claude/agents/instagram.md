@@ -151,6 +151,16 @@ Les six couleurs sont de valeur équivalente : la grille varie en teinte, jamais
 petits textes posés dessus sont en ivoire à 75 %, jamais en sable (le sable tombe sous le seuil de
 lisibilité sur la sauge).
 
+## Le reel Sans filtre (16/09/2026)
+
+Soumia publie le post 5 en **reel** plutôt qu'en carrousel (plus de portée hors abonnés). Tuiles
+`reel-titre` (ouverture ivoire « Sans filtre », fin avec l'appel au site) et `reel-photo` (photo plein
+écran 9:16 SANS filtre, légende courte en bas, au-dessus de la zone des boutons Instagram). Les images
+sont ensuite assemblées en vidéo (21 s : 2,2 s ouverture, 1,6 s par photo, 3 s fin, fondus 0,35 s,
+zoom lent 4 %) — sans musique : Soumia ajoute une musique tendance dans Instagram. Livraison :
+`reel-sans-filtre/reel-sans-filtre-<destination>.mp4` + `images/` + `00-mode-emploi.md`. Exemple :
+`scripts/exemples/reel-biarritz-sans-filtre.json`.
+
 ## Les stories de transition (13/09/2026)
 
 Huit stories par cycle, tuile `story` (1080 × 1920, moitié basse libre pour le sticker), livrées dans

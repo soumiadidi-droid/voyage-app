@@ -346,6 +346,36 @@ function html(tuile, spec) {
     };
   }
 
+  if (tuile.type === "reel-photo") {
+    // Image de reel Sans filtre (16/09/2026) : photo plein écran 9:16, SANS filtre, légende courte en
+    // bas dans une bande assombrie uniquement sous le texte, hors de la zone des boutons Instagram.
+    return {
+      h: 1920,
+      corps: `<div style="position:relative;width:100%;height:100%;background:#000">
+        <img src="file://${tuile.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
+        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.62) 0%, rgba(0,0,0,.28) 22%, rgba(0,0,0,0) 38%)"></div>
+        <div style="position:absolute;left:30px;right:70px;bottom:150px;display:flex;flex-direction:column;gap:8px;text-shadow:0 1px 2px rgba(0,0,0,.5),0 2px 14px rgba(0,0,0,.4)">
+          <p class="mono" style="font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:${COULEURS.sable}">${tuile.numero ?? ""}</p>
+          <p class="titre" style="font-size:30px;line-height:1.15;color:#fff">${tuile.legende ?? ""}</p>
+        </div>
+      </div>`,
+    };
+  }
+
+  if (tuile.type === "reel-titre") {
+    // Écran d'ouverture ou de fin du reel (16/09/2026), fond ivoire comme le post Sans filtre.
+    return {
+      h: 1920,
+      corps: `<div style="width:100%;height:100%;background:${COULEURS.ivoire};display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;padding:40px">
+        ${tuile.surtitre ? surtitre(tuile.surtitre, COULEURS.ink, COULEURS.ink) : ""}
+        <p class="titre" style="font-size:${tuile.grand ? 70 : 42}px;line-height:1.05;color:${COULEURS.charcoal}">${tuile.titre ?? ""}</p>
+        ${tuile.texte ? `<p class="corps" style="font-size:16px;line-height:1.45;color:${COULEURS.charcoal}b3">${tuile.texte}</p>` : ""}
+        ${tuile.url ? `<p class="titre" style="font-size:20px;color:${COULEURS.charcoal};margin-top:14px">${tuile.url}</p>` : ""}
+        ${tuile.promesse ? `<p class="mono" style="white-space:nowrap;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:${COULEURS.ink}">${tuile.promesse}</p>` : ""}
+      </div>`,
+    };
+  }
+
   if (tuile.type === "sans-filtre") {
     // Page de garde du post 5, qui referme le cycle d'un carnet (13/09/2026, demande de Soumia) :
     // ses photos telles qu'elle les a prises, comme la page /sans-filtre du site. Fond ivoire — la
