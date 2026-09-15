@@ -1,5 +1,6 @@
 import { Camera, Link2 } from "lucide-react";
 import { BlocOrange, EnTetePage } from "../components/EnTetePage";
+import { ContactProForm } from "../components/ContactProForm";
 
 export const metadata = {
   title: "On collabore ? — Le Voyage des Émotions",
@@ -116,12 +117,13 @@ export default function ProsPage() {
           Écrivez-moi directement : dites-moi qui vous êtes et ce qui vous tente. Je vous envoie mon
           portfolio et des exemples de récits sans problème.
         </p>
-        <a
-          href="mailto:contact@levoyagedesemotions.fr"
-          className="btn-principal px-6 py-3.5 text-sm normal-case tracking-normal"
-        >
-          contact@levoyagedesemotions.fr
-        </a>
+        {/* Formulaire (15/09/2026) à la place du lien mailto, qui dépendait de la messagerie du
+            visiteur. L'adresse reste lisible et copiable pour ceux qui préfèrent écrire eux-mêmes. */}
+        <ContactProForm />
+        <p className="mt-6 text-sm" style={{ color: "var(--text-secondary)" }}>
+          Vous préférez votre messagerie ? Écrivez à{" "}
+          <span className="font-semibold text-lve-charcoal select-all">contact@levoyagedesemotions.fr</span>
+        </p>
       </div>
     </div>
   );

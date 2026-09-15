@@ -16,7 +16,7 @@ const SECTIONS = [
     title: "Le principe",
     body: [
       "Ce site est un site personnel de récits de voyage. Il ne vend rien, n'utilise aucun outil publicitaire et ne revend aucune donnée — cette dernière phrase n'a pas d'exception.",
-      "La seule situation où vous me confiez une donnée personnelle, c'est lorsque vous demandez à recevoir un itinéraire ou un carnet d'adresses par email.",
+      "Vous me confiez une donnée personnelle dans deux situations seulement : lorsque vous demandez à recevoir un itinéraire ou un carnet d'adresses par email, et lorsque vous m'écrivez via le formulaire de la page « On collabore ? ».",
     ],
   },
   {
@@ -24,7 +24,8 @@ const SECTIONS = [
     body: [
       "Quand vous demandez un envoi par email : votre adresse email est utilisée pour vous envoyer le message demandé, ainsi que la ou les destinations concernées et la date de la demande.",
       "Votre adresse n'est conservée que si vous avez coché la case « je veux aussi être prévenu(e) des nouvelles destinations ». Si vous ne l'avez pas cochée, l'envoi est comptabilisé de façon anonyme — la destination et la date, rien d'autre — et votre adresse n'est enregistrée nulle part.",
-      "Pour éviter que le formulaire ne serve à envoyer des messages en masse, une empreinte technique de votre connexion est conservée moins d'une heure, puis effacée automatiquement. Elle ne permet pas de vous identifier et n'est utilisée pour rien d'autre.",
+      "Quand vous m'écrivez via le formulaire « On collabore ? » : votre nom, votre établissement, votre email et votre message me sont transmis par email pour que je puisse vous répondre. Rien n'est enregistré sur le site ; le message reste dans ma boîte mail le temps de notre échange.",
+      "Pour éviter que les formulaires ne servent à envoyer des messages en masse, une empreinte technique de votre connexion est conservée moins d'une heure, puis effacée automatiquement. Elle ne permet pas de vous identifier et n'est utilisée pour rien d'autre.",
     ],
   },
   {
