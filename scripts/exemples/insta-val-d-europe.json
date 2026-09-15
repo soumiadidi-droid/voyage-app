@@ -35,7 +35,8 @@
     {
       "type": "garde",
       "fichier": "post-4-carnet/1-page-de-garde",
-      "surtitre": "Carnet d'adresses"
+      "surtitre": "Carnet d'adresses",
+      "centree": true
     },
     {
       "type": "adresses",
@@ -53,7 +54,7 @@
       "type": "adresses",
       "fichier": "post-4-carnet/3-le-cafe",
       "surtitre": "Le café",
-      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-cafe-the-et-flan.jpg",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-cafe-flan-mucette.jpg",
       "adresses": [
         [
           "Mucette",
