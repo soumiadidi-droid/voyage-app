@@ -117,6 +117,15 @@ const signature = (couleur) =>
   `<p class="titre" style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:${couleur}">${HANDLE}</p>`;
 
 function html(tuile, spec) {
+  const r = htmlBrut(tuile, spec);
+  // "portrait": true (16/09/2026) : Instagram affiche la grille en 3:4 et rogne les côtés des posts
+  // carrés (le « L » de LVE, les surtitres…). En 4:5 (1080 × 1350), seuls ~35 px par côté disparaissent,
+  // absorbés par les marges. À utiliser pour les tuiles carrées des posts 1 et 3.
+  if (tuile.portrait && r.h === 1080) return { ...r, h: 1350 };
+  return r;
+}
+
+function htmlBrut(tuile, spec) {
   const fond = ENVIES[spec.envie] ?? COULEURS.ardoise;
 
   if (tuile.type === "mot") {

@@ -44,6 +44,10 @@ dans la légende. Toujours pas de nom de lieu.
 - slide 2, au swipe : **la révélation**, la carte épurée terracotta avec le nom (modèle Terracotta
   Mood).
 
+**Tout en portrait (16/09/2026)** : Instagram affiche la grille du profil en 3:4 et rogne les côtés des
+posts carrés (constaté sur le premier post, « Bouger » et l'énigme de Biarritz). Les tuiles des posts 1 et 3
+se font en 4:5 (`"portrait": true`), la photo du post 2 aussi (1080 × 1350).
+
 **Page de garde « zone sûre » (15/09/2026)** : `"centree": true` sur la tuile `garde` — tout le texte dans le
 carré central, parce qu'Instagram recadre en carré si Soumia ne touche pas « étendre » à la publication
 (arrivé sur le premier carnet Biarritz, archivé et republié). Rappeler dans le planning : publier depuis

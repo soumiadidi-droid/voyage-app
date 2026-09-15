@@ -6,7 +6,8 @@
   "tuiles": [
     {
       "type": "mot",
-      "fichier": "post-1-emotion/1-tuile-deguster"
+      "fichier": "post-1-emotion/1-tuile-deguster",
+      "portrait": true
     },
     {
       "type": "definition",
@@ -15,7 +16,8 @@
         "Ce n'est pas manger vite entre deux visites.",
         "C'est choisir sa journée d'après ses tables.",
         "Un brunch qui traîne, un sandwich sur un banc, un poisson face au port."
-      ]
+      ],
+      "portrait": true
     },
     {
       "type": "rebus",
@@ -25,12 +27,14 @@
         "savon",
         "ballon",
         "poisson"
-      ]
+      ],
+      "portrait": true
     },
     {
       "type": "terracotta",
       "fichier": "post-3-destination/2-tuile-marseille",
-      "detail": "Vieux-Port · Les Goudes · Calanques"
+      "detail": "Vieux-Port · Les Goudes · Calanques",
+      "portrait": true
     },
     {
       "type": "garde",
