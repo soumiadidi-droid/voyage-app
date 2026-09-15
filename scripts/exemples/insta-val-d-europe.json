@@ -6,7 +6,8 @@
   "tuiles": [
     {
       "type": "mot",
-      "fichier": "post-1-emotion/1-tuile-bouger"
+      "fichier": "post-1-emotion/1-tuile-bouger",
+      "portrait": true
     },
     {
       "type": "definition",
@@ -15,7 +16,8 @@
         "Bouger, c'est des journées pleines.",
         "Se lever tôt parce qu'il y a quelque chose à voir.",
         "Se dépenser, rentrer fatiguée, et trouver que c'était une bonne journée."
-      ]
+      ],
+      "portrait": true
     },
     {
       "type": "rebus",
@@ -25,12 +27,14 @@
         "lac",
         "sac",
         "paddle"
-      ]
+      ],
+      "portrait": true
     },
     {
       "type": "terracotta",
       "fichier": "post-3-destination/2-tuile-val-d-europe",
-      "detail": "Serris · Chessy · Montévrain"
+      "detail": "Serris · Chessy · Montévrain",
+      "portrait": true
     },
     {
       "type": "garde",
