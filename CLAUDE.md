@@ -1001,7 +1001,7 @@ les existants, `lent` renommé `familial`), dans cet ordre (= ordre des onglets 
 
 | Slug | Nom | Envies |
 |---|---|---|
-| `arty` | Faubourgs & street food (ex-« Arty & vivant », renommé le 18/09 : rien d’arty dedans ; Strasbourg-Saint-Denis → Bastille) | Flâner + Vibrer |
+| `arty` | Bobo & street food (ex-« Arty & vivant » puis « Faubourgs & street food », renommé le 18/09 : rien d’arty dedans, « branché » écarté car doublon de « tendance » ; Strasbourg-Saint-Denis → Bastille) | Flâner + Vibrer |
 | `effervescent` | Culturel & effervescent (Opéra, les 23 adresses d'origine) | Vibrer + Bouger |
 | `creatif` | Créatif & tendance (Marais) | Déguster + Vibrer |
 | `chic` | Chic & culturel (Saint-Germain) | Flâner + Déguster |
