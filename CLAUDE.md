@@ -1036,3 +1036,6 @@ les existants, `lent` renommé `familial`), dans cet ordre (= ordre des onglets 
    jardin du Luxembourg, Monsieur Bleu, Bambini, piscine Molitor, parc André-Citroën, Beaugrenelle.
 5. **16 adresses sans avis** : une phrase dictée par Soumia quand elle veut.
 6. **Code « famille → Familial & paisible »** : sur la branche `paris-six-univers`, pas en prod.
+7. **La Felicità** (ajoutée le 18/09 en « Sur mon radar », Familial) : Soumia ne l'a pas dit
+   testée — à lui redemander. Ajoutés le même jour en Familial, visibles : Bercy Village, Junk,
+   Amorino, UGC Ciné Cité Bercy, Acá Olympiades. Paris : 44 visibles sur 60, Familial 7 sur 13.
