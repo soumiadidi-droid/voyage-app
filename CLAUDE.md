@@ -1039,4 +1039,4 @@ Dalmata : un même reel officiel pour les deux adresses.
    Tokyo, Brach Paris, The New Me Sentier, Novotel. Et « J'ai dormi ici » possible pour HOY, Molitor,
    Novotel.
 2. **Avis manquants** : une phrase dictée par Soumia quand elle veut.
-3. **Code « famille → Familial & paisible »** : sur la branche `paris-six-univers`, pas en prod.
+3. **Code « famille → Familial & paisible »** : en prod depuis le 18/09/2026.
