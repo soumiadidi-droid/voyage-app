@@ -1016,4 +1016,23 @@ les existants, `lent` renommé `familial`), dans cet ordre (= ordre des onglets 
   Instagram donc invisibles** tant qu'elle ne les a pas fournis. « Pierre Coffee Shop » = Pear Coffee
   Shop, « ITALY » = Eataly, « Bambino » = Bambini (Palais de Tokyo), PAPAPA = café au pied de la
   maison de Victor Hugo. Dalmata = deux fiches (Tiquetonne, Charonne).
-- En suspens, pas en base : Omer/Homer Lobster, Lutetia (hôtel ou bar ?), Le Littéraire.
+- Ajoutés ensuite : Homer Lobster, Bar du Lutetia (bar Joséphine). Le Littéraire abandonné.
+  Renommés : BigLove (ex-« Love Café »), Maurice Sfez Café, Saint Pearl (ex-« Pear Coffee Shop »,
+  38 rue des Saints-Pères, Chic seulement). 15 liens Instagram vérifiés écrits le 18/09 (compte lu
+  dans l'embed `/p/<code>/embed/captioned/`) : 38 adresses Paris visibles sur 54.
+
+### À reprendre — liste gardée par Soumia (18/09/2026)
+
+1. **Peppe** (= « Pépé Pizzeria ») : proposition de deux fiches, Peppe Saint-Charles (120 rue
+   Saint-Charles, 15e → Familial, avis « très bon, les enfants adorent ») et Peppe Étienne-Marcel
+   (11 rue Étienne-Marcel, 1er → Culturel). Autres adresses : Martyrs (9e), Saint-Blaise (20e),
+   Tocqueville (17e). Pas encore validé — la fiche « Pépé Pizzeria » est toujours en base.
+2. **Liens à copier par Soumia depuis l'appli** (Instagram cache ces posts hors connexion) :
+   Dalmata Tiquetonne + Charonne (@dalmatapizza), Yakuza (@yakuza_byolivierparis, pas
+   @yakuza_byolivier = Portugal), Istanbul Grill Pizza (@pizza.grill.istanbul).
+3. **Saint Pearl** : seul post trouvé = https://www.instagram.com/p/DdQipO3DD1U/ (adresse
+   Luxembourg, pas Saints-Pères) — à faire valider.
+4. **Pas encore cherchés** : maison de Victor Hugo, place des Vosges, square Louis-XIII, Bon Marché,
+   jardin du Luxembourg, Monsieur Bleu, Bambini, piscine Molitor, parc André-Citroën, Beaugrenelle.
+5. **16 adresses sans avis** : une phrase dictée par Soumia quand elle veut.
+6. **Code « famille → Familial & paisible »** : sur la branche `paris-six-univers`, pas en prod.
