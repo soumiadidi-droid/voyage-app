@@ -1035,8 +1035,7 @@ André-Citroën (compte d'un particulier, le plus fragile), Istanbul Grill Pizza
 Dalmata : un même reel officiel pour les deux adresses.
 
 À reprendre :
-1. **Statuts à confirmer par Soumia** (mis par défaut en « Sur mon radar ») : La Felicità, Palais de
-   Tokyo, Brach Paris, The New Me Sentier, Novotel. Et « J'ai dormi ici » possible pour HOY, Molitor,
-   Novotel.
+1. **Statuts** : Palais de Tokyo, Brach, Novotel, HOY et Molitor confirmés « Sur mon radar » par
+   Soumia le 18/09. Restent à confirmer : La Felicità, The New Me Sentier.
 2. **Avis manquants** : une phrase dictée par Soumia quand elle veut.
 3. **Code « famille → Familial & paisible »** : en prod depuis le 18/09/2026.
