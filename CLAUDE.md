@@ -1028,8 +1028,9 @@ les existants, `lent` renommé `familial`), dans cet ordre (= ordre des onglets 
    (11 rue Étienne-Marcel, 1er → Culturel). Autres adresses : Martyrs (9e), Saint-Blaise (20e),
    Tocqueville (17e). Pas encore validé — la fiche « Pépé Pizzeria » est toujours en base.
 2. **Liens à copier par Soumia depuis l'appli** (Instagram cache ces posts hors connexion) :
-   Dalmata Tiquetonne + Charonne (@dalmatapizza), Yakuza (@yakuza_byolivierparis, pas
-   @yakuza_byolivier = Portugal), Istanbul Grill Pizza (@pizza.grill.istanbul).
+   Dalmata Tiquetonne + Charonne (@dalmatapizza), Istanbul Grill Pizza (@pizza.grill.istanbul).
+   **Yakuza by Olivier (Paris) : fermé définitivement** (Soumia, 18/09) — fiche supprimée de la
+   base. Ne pas le reproposer ; le compte @yakuza_byolivier restant est celui du Portugal.
 3. **Saint Pearl** : seul post trouvé = https://www.instagram.com/p/DdQipO3DD1U/ (adresse
    Luxembourg, pas Saints-Pères) — à faire valider.
 4. **Pas encore cherchés** : maison de Victor Hugo, place des Vosges, square Louis-XIII, Bon Marché,
