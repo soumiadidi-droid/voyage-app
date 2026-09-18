@@ -1021,22 +1021,22 @@ les existants, `lent` renommé `familial`), dans cet ordre (= ordre des onglets 
   38 rue des Saints-Pères, Chic seulement). 15 liens Instagram vérifiés écrits le 18/09 (compte lu
   dans l'embed `/p/<code>/embed/captioned/`) : 38 adresses Paris visibles sur 54.
 
-### À reprendre — liste gardée par Soumia (18/09/2026)
+### État en fin de journée (18/09/2026) — les 64 adresses de Paris sont visibles
 
-1. **Peppe** (= « Pépé Pizzeria ») : proposition de deux fiches, Peppe Saint-Charles (120 rue
-   Saint-Charles, 15e → Familial, avis « très bon, les enfants adorent ») et Peppe Étienne-Marcel
-   (11 rue Étienne-Marcel, 1er → Culturel). Autres adresses : Martyrs (9e), Saint-Blaise (20e),
-   Tocqueville (17e). Pas encore validé — la fiche « Pépé Pizzeria » est toujours en base.
-2. **Liens à copier par Soumia depuis l'appli** (Instagram cache ces posts hors connexion) :
-   Dalmata Tiquetonne + Charonne (@dalmatapizza), Istanbul Grill Pizza (@pizza.grill.istanbul).
-   **Yakuza by Olivier (Paris) : fermé définitivement** (Soumia, 18/09) — fiche supprimée de la
-   base. Ne pas le reproposer ; le compte @yakuza_byolivier restant est celui du Portugal.
-3. **Saint Pearl** : seul post trouvé = https://www.instagram.com/p/DdQipO3DD1U/ (adresse
-   Luxembourg, pas Saints-Pères) — à faire valider.
-4. **Pas encore cherchés** : maison de Victor Hugo, place des Vosges, square Louis-XIII, Bon Marché,
-   jardin du Luxembourg, Monsieur Bleu, Bambini, piscine Molitor, parc André-Citroën, Beaugrenelle.
-5. **16 adresses sans avis** : une phrase dictée par Soumia quand elle veut.
-6. **Code « famille → Familial & paisible »** : sur la branche `paris-six-univers`, pas en prod.
-7. **La Felicità** (ajoutée le 18/09 en « Sur mon radar », Familial) : Soumia ne l'a pas dit
-   testée — à lui redemander. Ajoutés le même jour en Familial, visibles : Bercy Village, Junk,
-   Amorino, UGC Ciné Cité Bercy, Acá Olympiades. Paris : 44 visibles sur 60, Familial 7 sur 13.
+Tous les liens Instagram sont posés (vérifiés par l'embed). Ajouts du jour après la première passe :
+Bercy Village, Junk, Amorino, UGC Ciné Cité Bercy, Acá Olympiades, La Felicità, Novotel Paris
+Centre Tour Eiffel (Familial) ; Brach Paris, Palais de Tokyo, Hôtel Molitor (ex-« Piscine
+Molitor », passé en hôtel), HOY passé en hôtel (Romantique) ; The New Me Sentier (Culturel).
+« Pépé Pizzeria » = **Peppe** : deux fiches, Saint-Charles (15e, Familial, avis enfants) et
+Étienne-Marcel (1er, Culturel). Yakuza supprimé (fermé).
+
+Liens tiers (pas le compte officiel, faute de mieux) : place des Vosges, square Louis-XIII, parc
+André-Citroën (compte d'un particulier, le plus fragile), Istanbul Grill Pizza (guide halal).
+Dalmata : un même reel officiel pour les deux adresses.
+
+À reprendre :
+1. **Statuts à confirmer par Soumia** (mis par défaut en « Sur mon radar ») : La Felicità, Palais de
+   Tokyo, Brach Paris, The New Me Sentier, Novotel. Et « J'ai dormi ici » possible pour HOY, Molitor,
+   Novotel.
+2. **Avis manquants** : une phrase dictée par Soumia quand elle veut.
+3. **Code « famille → Familial & paisible »** : sur la branche `paris-six-univers`, pas en prod.
