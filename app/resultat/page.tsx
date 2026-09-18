@@ -125,7 +125,12 @@ export default async function ResultatPage({
   // correspond aux envies choisies. Le pourcentage reste celui de la destination.
   const [universParDestination, universAvecAdresses] = await Promise.all([getUniversParDestination(), getUniversAvecAdresses()]);
   const universDe = (destinationId: string, contentSlug: string) =>
-    choisirUnivers(answers.scores, universParDestination.get(destinationId) ?? [], universAvecAdresses.get(contentSlug) ?? new Set());
+    choisirUnivers(
+      answers.scores,
+      universParDestination.get(destinationId) ?? [],
+      universAvecAdresses.get(contentSlug) ?? new Set(),
+      answers.companions
+    );
 
   return (
     <div className="max-w-3xl mx-auto px-6 sm:px-8 pt-10 sm:pt-14 pb-16 sm:pb-24">

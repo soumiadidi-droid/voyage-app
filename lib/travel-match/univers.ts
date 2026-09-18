@@ -25,11 +25,22 @@ export type Univers = {
 // Une carte choisie envoie 5 (cf. QuestionnaireClient.scoresDepuisIntentions).
 const CHOISIE = 5;
 
+// Univers ouvert d'office quand le visiteur part en famille (18/09/2026, Soumia) : « famille » n'est
+// pas une envie mais une réponse à « avec qui pars-tu », elle passe donc avant le calcul par envies.
+// Reste soumis à la règle commune : sans adresse visible, on retombe sur les envies.
+export const UNIVERS_FAMILLE = "familial";
+
 export function choisirUnivers(
   scores: UserAnswers["scores"],
   univers: Univers[],
-  slugsAvecAdresses: Set<string>
+  slugsAvecAdresses: Set<string>,
+  companions?: UserAnswers["companions"]
 ): Univers | undefined {
+  if (companions === "famille") {
+    const famille = univers.find((u) => u.slug === UNIVERS_FAMILLE && slugsAvecAdresses.has(u.slug));
+    if (famille) return famille;
+  }
+
   const candidats = univers
     .filter((u) => slugsAvecAdresses.has(u.slug))
     .map((u) => ({ u, communs: u.envies.filter((e) => scores[e] >= CHOISIE).length }))
