@@ -992,6 +992,28 @@ d'envies en commun, égalité → univers qui a des adresses, puis position ; ja
   les univers vides sont visibles et disent « Je prépare mes adresses pour ce Paris-là ».
 - Intro : texte commun (`voyages.intro`) + phrase `entree` de l'univers ouvert, jamais celle d'un
   univers vide.
-- Envies : Effervescent = Vibrer + Bouger ; Arty = Flâner + Vibrer ; Chic = Flâner + Déguster ;
-  Lent & bucolique = Respirer + Lâcher prise. Pas d'univers « famille » ni « gastronomique ».
 - Soumia juge le carnet assez riche (24 adresses Opéra) : ne pas lui réclamer d'autres adresses.
+
+## Paris en six ambiances (18/09/2026)
+
+Document de Soumia « Paris — adresses par ambiance ». Les 4 univers deviennent 6 (slugs gardés pour
+les existants, `lent` renommé `familial`), dans cet ordre (= ordre des onglets et départage) :
+
+| Slug | Nom | Envies |
+|---|---|---|
+| `arty` | Arty & vivant (Strasbourg-Saint-Denis → Bastille) | Flâner + Vibrer |
+| `effervescent` | Culturel & effervescent (Opéra, les 23 adresses d'origine) | Vibrer + Bouger |
+| `creatif` | Créatif & tendance (Marais) | Déguster + Vibrer |
+| `chic` | Chic & culturel (Saint-Germain) | Flâner + Déguster |
+| `romantique` | Romantique & panoramique (16e + adresses chic d'ailleurs) | Lâcher prise + Déguster |
+| `familial` | Familial & paisible (adresses kids-friendly, partout) | Respirer + Lâcher prise |
+
+- **Une adresse peut appartenir à plusieurs ambiances** (règle de Soumia : une adresse appartient à
+  une expérience, pas à un arrondissement) — `voyage_addresses.univers` est un tableau.
+- **Famille** : quand le visiteur part en famille, `choisirUnivers` ouvre `familial` d'office
+  (`UNIVERS_FAMILLE`), avant le calcul par envies — s'il a des adresses visibles.
+- 29 adresses ajoutées le 18/09, toutes « J'ai testé » (Soumia : « j'ai tout testé »), **sans lien
+  Instagram donc invisibles** tant qu'elle ne les a pas fournis. « Pierre Coffee Shop » = Pear Coffee
+  Shop, « ITALY » = Eataly, « Bambino » = Bambini (Palais de Tokyo), PAPAPA = café au pied de la
+  maison de Victor Hugo. Dalmata = deux fiches (Tiquetonne, Charonne).
+- En suspens, pas en base : Omer/Homer Lobster, Lutetia (hôtel ou bar ?), Le Littéraire.
