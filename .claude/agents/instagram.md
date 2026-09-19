@@ -167,9 +167,9 @@ zoom lent 4 %) — sans musique : Soumia ajoute une musique tendance dans Instag
 
 ## Les stories de transition (13/09/2026)
 
-Huit stories par cycle, tuile `story` (1080 × 1920, moitié basse libre pour le sticker), livrées dans
+Neuf stories par cycle, tuile `story` (1080 × 1920, moitié basse libre pour le sticker), livrées dans
 `stories/` avec un `01-stories.md` (jour, heure, sticker, lien) :
-J1 soir sondage (couleur de l'envie) · J2 boîte à questions, un indice · J3 matin compte à rebours
+**J1 matin teaser de l'envie** (couleur de l'envie, « Ce soir, une nouvelle envie. », compte à rebours sur l'heure du post 1 — ajoutée le 19/09/2026 à la demande de Soumia) · J1 soir sondage (couleur de l'envie) · J2 boîte à questions, un indice · J3 matin compte à rebours
 (terracotta) · J3 soir quiz + repartage de l'énigme · J4 matin compte à rebours (sable) · J4 soir
 **sticker Lien vers la fiche du carnet** + tags · J5 matin compte à rebours (ivoire) · J5 soir
 **sticker Lien vers /questionnaire**. Exemples : `scripts/exemples/stories-*.json`.
