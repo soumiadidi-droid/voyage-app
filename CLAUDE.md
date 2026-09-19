@@ -1034,8 +1034,12 @@ Liens tiers (pas le compte officiel, faute de mieux) : place des Vosges, square 
 André-Citroën (compte d'un particulier, le plus fragile), Istanbul Grill Pizza (guide halal).
 Dalmata : un même reel officiel pour les deux adresses.
 
+État au 19/09/2026 : **65 adresses, toutes visibles, toutes avec un avis** (dictés par Soumia une par
+une le 19/09 ; Parc André-Citroën rédigé d'après des sites famille, PAPAPA d'après le site du café,
+tous deux en « Sur mon radar »). 51 vécues. Ajouts du 19/09 : Maslow Temple (Créatif). Passés en
+« Sur mon radar » car non testés : PAPAPA, Parc André-Citroën, Monsieur Bleu, Molitor. Passés en
+« J'ai testé » : La Felicità, Maslow Temple, The New Me. Novotel aussi dans Romantique.
+
 À reprendre :
-1. **Statuts** : Palais de Tokyo, Brach, Novotel, HOY et Molitor confirmés « Sur mon radar » par
-   Soumia le 18/09. Restent à confirmer : La Felicità, The New Me Sentier.
-2. **Avis manquants** : une phrase dictée par Soumia quand elle veut.
-3. **Code « famille → Familial & paisible »** : en prod depuis le 18/09/2026.
+1. **Gammes de prix** : aucune sur Paris sauf Homer Lobster et PAPAPA (€€). Proposer par recherche,
+   validation en bloc par Soumia comme pour les autres carnets.
