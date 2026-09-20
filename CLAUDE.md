@@ -1040,6 +1040,36 @@ tous deux en « Sur mon radar »). 51 vécues. Ajouts du 19/09 : Maslow Temple (
 « Sur mon radar » car non testés : PAPAPA, Parc André-Citroën, Monsieur Bleu, Molitor. Passés en
 « J'ai testé » : La Felicità, Maslow Temple, The New Me. Novotel aussi dans Romantique.
 
-À reprendre :
-1. **Gammes de prix** : aucune sur Paris sauf Homer Lobster et PAPAPA (€€). Proposer par recherche,
-   validation en bloc par Soumia comme pour les autres carnets.
+### 20/09/2026 — le carnet Paris est complet
+
+71 adresses, 70 visibles (seul l'hôtel Le Lapin Blanc attend son lien Instagram), toutes avec un
+avis, **une gamme de prix et, pour les restos, un moment**. Ajouts du 20/09 : Clasico Argentino
+(Culturel), Ischia et Mama Shelter Paris West (Familial ; premier « J'ai dormi ici » du 15e),
+TOO Hôtel + TOO TacTac et Palais de Tokyo (Romantique), Hôtel Le Lapin Blanc (Chic, à compléter).
+Yakuza supprimé (fermé). « Piscine Molitor » et HOY sont devenus des hôtels.
+
+Ce qui manque encore, par ordre d'importance :
+1. **Bobo & street food (4 adresses) et Chic & culturel (5)** sont trop maigres pour un cycle
+   Instagram, et Bobo n'a aucune activité.
+2. **Romantique & panoramique** : 5 adresses vécues sur 13, six hôtels dont un seul testé. C'est
+   l'ambiance qui servira au démarchage hôtelier.
+3. **Le Lapin Blanc** : adresse exacte (Soumia dit le 6e, le nom pointe plutôt vers le Quartier
+   latin), lien Instagram, statut et avis.
+
+## Instagram — le calendrier des cycles (20/09/2026)
+
+`~/Documents/Le Voyage des Émotions/Posts Insta/calendrier-duos.md` porte tout le plan :
+- **Premier tour** (une envie par cycle) : Biarritz (Bouger, fait), Marseille (Déguster, 19→27/09),
+  puis **Paris en alternance, un cycle sur deux**, découpé par ambiance. **Deauville est abandonné**
+  (Soumia n'a pas pu y aller), la **Crète** reprend l'envie Lâcher prise.
+- **Deuxième tour** : les **15 duos d'envies** (Paris en couvre 6 grâce à ses ambiances), un cycle
+  tous les 10 jours, plus un **post de marque toutes les deux semaines** (Travel Match le 28/09,
+  la fondatrice le 12/10, etc.).
+- **Stories : neuf par cycle** depuis le 19/09, avec un **teaser de l'envie le matin du post 1**.
+- Photos du cycle Paris-Opéra prêtes dans `insta-paris-opera/photos-source/` (avenue de l'Opéra,
+  Kitsuné, Clasico, Popolare extrait d'une vidéo, Repetto, coupole des Galeries Lafayette, Trinité).
+  Val d'Europe : Yelloco et Sidi Bou Saïd recadrées ; manquent le déjeuner, Slow Studio et
+  La Vallée Village, que Soumia photographiera.
+- **Pas de ffmpeg sur le Mac** : pour extraire une image d'une vidéo, un petit script Swift
+  (AVAssetImageGenerator) fait le travail ; `sips` suffit pour recadrer en 1080×1350 ou 1080×1080.
+
