@@ -35,6 +35,10 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   mykonos:
     "https://images.unsplash.com/photo-1494356830678-78f6cd754f1a?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   // Duomo de Florence au lever du jour — Henrique Ferreira, https://unsplash.com/photos/florence-cityscape-with-duomo-cathedral-at-sunrise-zMFxCtkn9vI
+  // Le carnet « Italie : Florence, Rome & Pise » a été découpé en trois le 20/09/2026 : cette photo
+  // suit Florence. Rome et Pise attendent la leur (elles sont en brouillon en attendant).
+  florence:
+    "https://images.unsplash.com/photo-1776377231754-d36928e6ee4d?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   "italie-nord-culture":
     "https://images.unsplash.com/photo-1776377231754-d36928e6ee4d?fm=jpg&q=80&w=2400&auto=format&fit=crop",
   // Falaises colorées d'Amalfi — Tom Podmore, https://unsplash.com/photos/colorful-buildings-on-amalfi-cliffside-1zkHXas1GIo
