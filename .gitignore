@@ -43,3 +43,6 @@ next-env.d.ts
 # Captures de l'agent relecteur (images lourdes, régénérées à chaque relecture)
 .claude/relecteur/captures/
 scripts/galerie/analyse
+
+# Binaires Swift compilés localement (scripts/montage, scripts/galerie/analyse)
+scripts/montage

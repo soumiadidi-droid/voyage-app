@@ -1070,6 +1070,15 @@ Ce qui manque encore, par ordre d'importance :
   Kitsuné, Clasico, Popolare extrait d'une vidéo, Repetto, coupole des Galeries Lafayette, Trinité).
   Val d'Europe : Yelloco et Sidi Bou Saïd recadrées ; manquent le déjeuner, Slow Studio et
   La Vallée Village, que Soumia photographiera.
-- **Pas de ffmpeg sur le Mac** : pour extraire une image d'une vidéo, un petit script Swift
-  (AVAssetImageGenerator) fait le travail ; `sips` suffit pour recadrer en 1080×1350 ou 1080×1080.
+- **Pas de ffmpeg ni Homebrew sur le Mac** (installer Homebrew demande le mot de passe admin de
+  Soumia). Tout le traitement vidéo passe donc par AVFoundation :
+  - **`scripts/montage.swift`** (20/09/2026) monte un reel vertical 1080 × 1920 **sans son** à partir
+    d'images et d'extraits vidéo : `swiftc -O scripts/montage.swift -o scripts/montage`, puis
+    `scripts/montage <spec.json> <sortie.mp4>`. La spec liste des segments
+    `{type: "image"|"video", fichier, duree, debut}`. Chaque plan est recadré en remplissage, jamais
+    déformé. **Piège corrigé** : une vidéo de téléphone arrive couchée (3840 × 2160) avec sa rotation
+    en métadonnées ; CIImage ayant son origine en bas à gauche, il faut tourner de l'angle **inverse**
+    puis ramener l'extent à zéro, sinon le plan sort couché ou noir.
+  - Pour extraire une image d'une vidéo, un script Swift AVAssetImageGenerator fait le travail ;
+    `sips` suffit pour recadrer en 1080×1350 ou 1080×1080.
 
