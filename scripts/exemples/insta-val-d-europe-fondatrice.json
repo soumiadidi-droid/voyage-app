@@ -1,0 +1,22 @@
+{
+  "destination": "Val d'Europe",
+  "envie": "Bouger",
+  "tuiles": [
+    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/1-vingt-ans", "surtitre": "La fondatrice",
+      "lignes": ["Tout a commencé", "à 20 ans."],
+      "cta": "L'excitation du départ, les découvertes qu'on n'avait pas prévues, et des émotions qui restent longtemps après le retour." },
+    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/2-une-sensation", "surtitre": "Ce que je cherche",
+      "lignes": ["Je ne pars pas pour un endroit.", "Je pars pour ce que je vais ressentir en arrivant."],
+      "cta": "Certaines villes me laissent indifférente. D'autres me retournent." },
+    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/3-biarritz", "surtitre": "Biarritz",
+      "lignes": ["Une bouffée", "d'air frais."],
+      "cta": "Sa beauté, son atmosphère détendue, ses tables. Tout m'a conquise. Depuis, j'y retourne deux fois par an, à la même période." },
+    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/4-ma-liste", "surtitre": "Ma liste",
+      "lignes": ["Alors j'ai fait", "ma liste."],
+      "cta": "Je repère, je teste, et je ne garde que ce qui m'a fait quelque chose. C'est devenu Le Voyage des Émotions." },
+    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/5-sans-aller-loin", "surtitre": "Hors-série",
+      "lignes": ["Et si cette sensation,", "on pouvait la retrouver", "sans aller loin ?"],
+      "cta": "Cette fois, je ne prends pas l'avion. Je reste au Val&nbsp;d'Europe, et je le regarde comme si j'étais de passage.",
+      "url": "levoyagedesemotions.fr" }
+  ]
+}
