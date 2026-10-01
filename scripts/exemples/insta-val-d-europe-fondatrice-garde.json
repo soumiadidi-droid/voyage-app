@@ -1,7 +1,7 @@
 {
   "destination": "Pourquoi je&nbsp;voyage",
   "villes": "Et comment est né Le Voyage des Émotions",
-  "promesse": "Hors-série · Épisode 1 sur 6",
+  "promesse": "Épisode 1 sur 6",
   "envie": "Bouger",
-  "tuiles": [ { "type": "garde", "fichier": "post-1-fondatrice/0-page-de-garde", "surtitre": "La fondatrice" } ]
+  "tuiles": [ { "type": "garde", "fichier": "post-1-fondatrice/0-page-de-garde", "surtitre": "Hors-série · La fondatrice" } ]
 }
