@@ -2,7 +2,7 @@
   "destination": "Fondatrice",
   "envie": "Bouger",
   "tuiles": [
-    { "type": "story", "fichier": "fondatrice/pourquoi-je-voyage/story-ce-soir", "fond": "sable",
+    { "type": "story", "fichier": "fondatrice/comment-est-ne-le-voyage-des-emotions/story-ce-soir", "fond": "sable",
       "surtitre": "Ce soir · 18 h 30",
       "lignes": ["Comment est né", "Le Voyage", "des Émotions."],
       "texte": "Mon histoire, du premier départ à aujourd'hui." }

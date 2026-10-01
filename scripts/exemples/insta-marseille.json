@@ -2,7 +2,7 @@
   "destination": "Marseille",
   "envie": "Déguster",
   "villes": "Une journée, quatre adresses",
-  "promesse": "9 adresses testées",
+  "promesse": "10 adresses testées",
   "tuiles": [
     {
       "type": "mot",
@@ -39,8 +39,7 @@
     {
       "type": "garde",
       "fichier": "post-4-carnet/1-page-de-garde",
-      "surtitre": "Carnet d'adresses",
-      "centree": true
+      "surtitre": "Carnet d'adresses"
     },
     {
       "type": "adresses",
@@ -95,10 +94,10 @@
       "fichier": "post-4-carnet/6-fin-de-carnet",
       "lignes": [
         "Une journée à Marseille,",
-        "de Carry-le-Rouet",
-        "au port des Goudes."
+        "du brunch qui traîne",
+        "au poisson du soir."
       ],
-      "cta": "Ici, quatre adresses. Sur le site, dix-sept, et Travel Match te trouve ta prochaine destination en 8 questions.",
+      "cta": "Ici, quatre adresses. Sur le site, dix, et Travel Match te trouve ta prochaine destination en 8 questions.",
       "promesse": "Sans inscription · Sans e-mail · Résultat immédiat",
       "url": "levoyagedesemotions.fr · lien en bio"
     },
