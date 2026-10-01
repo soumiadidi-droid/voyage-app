@@ -14,9 +14,9 @@
     { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/4-ma-liste", "surtitre": "Ma liste",
       "lignes": ["Alors j'ai fait", "ma liste."],
       "cta": "Je repère, je teste, et je ne garde que ce qui m'a fait quelque chose. C'est devenu Le Voyage des Émotions." },
-    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/5-sans-aller-loin", "surtitre": "Hors-série",
+    { "type": "fin", "fond": "ivoire", "fichier": "post-1-fondatrice/5-sans-aller-loin", "surtitre": "Et maintenant",
       "lignes": ["Et si cette sensation,", "on pouvait la retrouver", "sans aller loin ?"],
-      "cta": "Cette fois, pas de valise. Je reste dans ma ville, et je la regarde avec des yeux de voyageuse.",
+      "cta": "Cette fois, pas de valise. Je reste dans ma ville, et je la regarde avec des yeux de voyageuse. Mon hors-série commence bientôt.",
       "url": "levoyagedesemotions.fr" }
   ]
 }
