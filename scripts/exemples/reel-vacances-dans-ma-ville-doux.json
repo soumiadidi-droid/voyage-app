@@ -1,0 +1,24 @@
+{ "fps": 30, "cps": 8, "fondu": 1.4, "vitesse": 0.8, "sequences": [
+  { "surtitre": "Hors-série", "grand": true, "lignes": ["Comment être", "en vacances", "dans sa ville."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_090723.mp4", "debut": 0.3, "duree": 6.0},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_091016.mp4", "debut": 0.8, "duree": 5.5} ]},
+  { "surtitre": "Le matin", "lignes": ["Réveil matinal,", "balade au lac."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_092711.mp4", "debut": 0.3, "duree": 5.5},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_090822.mp4", "debut": 0.8, "duree": 5.5} ]},
+  { "surtitre": "La séance", "lignes": ["Séance de", "Pilates Reformer."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260925_132904.mp4", "debut": 3.0, "duree": 7.0} ]},
+  { "surtitre": "La pause", "lignes": ["Petit café chez Momus,", "et petit matcha."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_124104.mp4", "debut": 3.0, "duree": 5.5},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_124209.mp4", "debut": 0.0, "duree": 5.5} ]},
+  { "surtitre": "Le marché", "lignes": ["Balade au marché."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_091609.mp4", "debut": 0.5, "duree": 5.5},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260927_091833.mp4", "debut": 2.0, "duree": 5.5} ]},
+  { "surtitre": "Le brunch", "lignes": ["Brunch chez Yelloco."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260926_115613.mp4", "debut": 0.3, "duree": 5.5},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260926_120554.mp4", "debut": 1.5, "duree": 5.5} ]},
+  { "surtitre": "Le soir", "lignes": ["Et dîner", "chez Poolette."], "plans": [
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260928_221853.mp4", "debut": 0.0, "duree": 3.5},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260928_210855.mp4", "debut": 1.0, "duree": 5.5},
+    {"fichier": "/Users/soumiadidi/Downloads/VID_20260928_221155.mp4", "debut": 0.5, "duree": 5.5} ]},
+  { "carton": "sable", "surtitre": "Hors-série", "grand": true, "lignes": ["Des vacances,", "sans partir."], "duree": 7.5 }
+]}
