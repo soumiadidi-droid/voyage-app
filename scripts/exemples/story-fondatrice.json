@@ -1,0 +1,10 @@
+{
+  "destination": "Fondatrice",
+  "envie": "Bouger",
+  "tuiles": [
+    { "type": "story", "fichier": "fondatrice/pourquoi-je-voyage/story-ce-soir", "fond": "sable",
+      "surtitre": "Ce soir · 18 h 30",
+      "lignes": ["Pourquoi", "je voyage."],
+      "texte": "Mon histoire, et ce qui m'a donné envie de créer Le Voyage des Émotions." }
+  ]
+}
