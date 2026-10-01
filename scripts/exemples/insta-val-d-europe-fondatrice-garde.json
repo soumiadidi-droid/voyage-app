@@ -3,5 +3,5 @@
   "villes": "Et comment est né Le Voyage des Émotions",
   "promesse": "Mon histoire",
   "envie": "Bouger",
-  "tuiles": [ { "type": "garde", "fichier": "post-1-fondatrice/0-page-de-garde", "surtitre": "La fondatrice" } ]
+  "tuiles": [ { "type": "garde", "fichier": "fondatrice/pourquoi-je-voyage/0-page-de-garde", "surtitre": "La fondatrice" } ]
 }
