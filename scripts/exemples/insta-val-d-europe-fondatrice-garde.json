@@ -1,7 +1,7 @@
 {
-  "destination": "Pourquoi je&nbsp;voyage",
-  "villes": "Et comment est né Le Voyage des Émotions",
-  "promesse": "Mon histoire",
+  "destination": "Comment est né Le&nbsp;Voyage des&nbsp;Émotions",
+  "villes": "Mon histoire",
+  "promesse": "",
   "envie": "Bouger",
   "tuiles": [ { "type": "garde", "fichier": "fondatrice/pourquoi-je-voyage/0-page-de-garde", "surtitre": "La fondatrice" } ]
 }
