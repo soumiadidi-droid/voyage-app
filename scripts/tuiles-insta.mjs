@@ -148,6 +148,27 @@ function htmlBrut(tuile, spec) {
     };
   }
 
+  if (tuile.type === "saison") {
+    // Récap de saison (01/10/2026) : une tuile par chapitre, dans la couleur de son envie (ou
+    // terracotta pour un hors-série). L'émotion en grand, la destination en dessous, une phrase.
+    const bg = tuile.envie === "terracotta" ? COULEURS.terracotta : ENVIES[tuile.envie] ?? fond;
+    return {
+      h: 1350,
+      corps: `<div class="col" style="background:${bg}">
+        ${surtitre(tuile.surtitre ?? "", COULEURS.sable, COULEURS.ivoire + "bf")}
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <p class="titre" style="font-size:58px;line-height:1.02;color:${COULEURS.ivoire}">${tuile.titre ?? tuile.envie}</p>
+          <p class="titre" style="font-size:30px;line-height:1.15;color:${COULEURS.sable}">→ ${tuile.destination ?? ""}</p>
+          ${tuile.ligne ? `<p class="corps" style="margin-top:18px;font-size:15px;line-height:1.45;color:${COULEURS.ivoire}d9">${tuile.ligne}</p>` : ""}
+        </div>
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <span class="filet" style="background:${COULEURS.ivoire}33"></span>
+          ${signature(COULEURS.ivoire + "99")}
+        </div>
+      </div>`,
+    };
+  }
+
   if (tuile.type === "definition") {
     // Dernière ligne en corps de texte : elle sert de respiration sous les phrases en Cormorant.
     const lignes = (tuile.lignes ?? []).map((l, i, all) =>

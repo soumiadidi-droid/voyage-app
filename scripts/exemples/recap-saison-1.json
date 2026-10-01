@@ -1,0 +1,25 @@
+{
+  "destination": "Première saison",
+  "villes": "Quatre émotions, quatre destinations, en France",
+  "promesse": "Le récap",
+  "envie": "Bouger",
+  "tuiles": [
+    { "type": "garde", "fichier": "recap-saison-1/0-page-de-garde", "surtitre": "Le Voyage des Émotions" },
+    { "type": "saison", "fichier": "recap-saison-1/1-bouger-biarritz", "envie": "Bouger", "surtitre": "Saison 1 · 1",
+      "destination": "Biarritz", "ligne": "Enfiler une combinaison à sept heures du matin, et ne plus penser à rien." },
+    { "type": "saison", "fichier": "recap-saison-1/2-deguster-marseille", "envie": "Déguster", "surtitre": "Saison 1 · 2",
+      "destination": "Marseille", "ligne": "Choisir sa journée d'après ses tables." },
+    { "type": "saison", "fichier": "recap-saison-1/3-flaner-reims", "envie": "Flâner", "surtitre": "Saison 1 · 3",
+      "destination": "Reims", "ligne": "[À ÉCRIRE APRÈS LE VOYAGE]" },
+    { "type": "saison", "fichier": "recap-saison-1/4-respirer-hossegor", "envie": "Respirer", "surtitre": "Saison 1 · 4",
+      "destination": "Hossegor · Capbreton", "ligne": "[À ÉCRIRE APRÈS LE VOYAGE]" },
+    { "type": "saison", "fichier": "recap-saison-1/5-hors-serie-val-d-europe", "envie": "terracotta", "surtitre": "Hors-série",
+      "titre": "Des vacances chez moi", "destination": "Val d'Europe", "ligne": "Pas de valise. Ma ville, regardée avec des yeux de voyageuse." },
+    { "type": "fin", "fond": "ivoire", "fichier": "recap-saison-1/6-et-toi", "surtitre": "Et toi ?",
+      "lignes": ["Quelle émotion", "te ressemble ?"],
+      "cta": "Travel Match te trouve ta prochaine destination en 8 questions.", "url": "levoyagedesemotions.fr" },
+    { "type": "fin", "fond": "sable", "fichier": "recap-saison-1/7-saison-2-paris", "surtitre": "Bientôt · Saison 2",
+      "lignes": ["Paris.", "Deux émotions, une façon de vivre la ville."],
+      "cta": "Une adresse n'appartient pas à un arrondissement. Elle appartient à une expérience." }
+  ]
+}
