@@ -18,8 +18,8 @@
     { "type": "fin", "fond": "ivoire", "fichier": "recap-saison-1/6-et-toi", "surtitre": "Et toi ?",
       "lignes": ["Quelle émotion", "te ressemble ?"],
       "cta": "Travel Match te trouve ta prochaine destination en 8 questions.", "url": "levoyagedesemotions.fr" },
-    { "type": "fin", "fond": "sable", "fichier": "recap-saison-1/7-saison-2-paris", "surtitre": "Bientôt · Saison 2",
-      "lignes": ["Paris.", "Deux émotions, une façon de vivre la ville."],
-      "cta": "Une adresse n'appartient pas à un arrondissement. Elle appartient à une expérience." }
+    { "type": "fin", "fond": "sable", "fichier": "recap-saison-1/7-saison-2", "surtitre": "Bientôt · Saison 2",
+      "lignes": ["Une seule ville.", "Deux émotions à la fois."],
+      "cta": "Devine laquelle." }
   ]
 }
