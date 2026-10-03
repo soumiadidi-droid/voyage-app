@@ -1,0 +1,16 @@
+{
+  "destination": "Val d'Europe",
+  "envie": "Bouger",
+  "tuiles": [
+    { "type": "fin", "fond": "sable", "fichier": "post-2-vacances-chez-soi/0-page-de-garde", "surtitre": "Hors-série",
+      "lignes": ["Et si on inventait", "les vacances", "chez soi ?"], "cta": "Fais défiler →" },
+    { "type": "fin", "fond": "ivoire", "fichier": "post-2-vacances-chez-soi/2-un-rythme", "surtitre": "Les vacances",
+      "lignes": ["Ce n'est pas un endroit.", "C'est un rythme."],
+      "cta": "Pas de réveil. Du temps devant soi. Un endroit qu'on regarde vraiment." },
+    { "type": "fin", "fond": "ivoire", "fichier": "post-2-vacances-chez-soi/3-ma-regle", "surtitre": "Ma règle",
+      "lignes": ["Une journée entière,", "comme si j'étais", "de passage."],
+      "cta": "Pas de courses, pas de lessive, pas de « je ferai ça plus tard ». Demain, je te la montre." },
+    { "type": "story", "fichier": "post-2-vacances-chez-soi/story-demain", "fond": "sable", "surtitre": "Demain · 18 h 30",
+      "lignes": ["Demain, je pars", "en vacances.", "Sans valise."] }
+  ]
+}
