@@ -38,7 +38,7 @@ struct Sequence: Decodable {
     let duree: Double?
     let plans: [Plan]?
 }
-struct Spec: Decodable { let fps: Int?; let cps: Double?; let fondu: Double?; let vitesse: Double?; let debit: Double?; let sequences: [Sequence] }
+struct Spec: Decodable { let fps: Int?; let cps: Double?; let fondu: Double?; let vitesse: Double?; let debit: Double?; let frappe: Bool?; let sequences: [Sequence] }
 
 let L = 1080, H = 1920
 let COULEURS: [String: (CGFloat, CGFloat, CGFloat)] = [
@@ -257,6 +257,9 @@ func imageClip(_ k: Int, _ local: Double) -> CIImage? {
 func etat(_ s: Int, _ T: Double) -> (Int, Bool) {
     let seq = spec.sequences[s]
     let nbCar = seq.lignes.joined(separator: "\n").count
+    // "frappe": false (03/10/2026, Soumia : « sans la machine à écrire ») : texte entier d'emblée,
+    // sans curseur ; il apparaît en fondu (voir texte()).
+    if spec.frappe == false { return (nbCar, false) }
     let t = T - debutSeq[s]!
     let attente = s == 0 ? 0.4 : fondu + 0.15  // la frappe commence une fois le fondu terminé
     let n = max(0, min(nbCar, Int(((t - attente) * cps).rounded(.down))))
@@ -264,7 +267,11 @@ func etat(_ s: Int, _ T: Double) -> (Int, Bool) {
 }
 func texte(_ ctx: CGContext, _ s: Int, _ T: Double, alpha: CGFloat) {
     let seq = spec.sequences[s]
+    // Séquence sans texte : rien, pas même le dégradé.
+    if seq.lignes.isEmpty && seq.carton == nil { return }
     let (n, cur) = etat(s, T)
+    var alpha = alpha
+    if spec.frappe == false { alpha *= CGFloat(min(1, max(0, (T - debutSeq[s]! - 0.3) / 0.8))) }
     ctx.saveGState(); ctx.setAlpha(alpha)
     dessinerTexte(ctx, seq: seq, n: n, curseur: cur, surCarton: seq.carton != nil)
     if seq.carton != nil {
