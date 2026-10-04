@@ -1,0 +1,3 @@
+{ "destination": "Val d'Europe", "envie": "Bouger", "tuiles": [
+  { "type": "story", "fichier": "post-5-carnet/story-annonce", "fond": "sable", "surtitre": "Mardi · 18 h 30",
+    "lignes": ["Le lac, le marché,", "un flan, un dîner à deux.", "Mardi, mon carnet."] } ] }
