@@ -1,0 +1,179 @@
+{
+ "destination": "Val d'Europe",
+ "envie": "Bouger",
+ "villes": "Serris · Chessy · Montévrain",
+ "promesse": "20 adresses testées",
+ "tuiles": [
+  {
+   "type": "garde",
+   "fichier": "post-5-carnet/00-page-de-garde",
+   "surtitre": "Hors-série · Le carnet"
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/01-le-matin",
+   "surtitre": "Le matin",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/slow-studio-4x5.jpg",
+   "adresses": [
+    [
+     "Slow Studio",
+     "Du Pilates Reformer chez Margot, dans un petit studio"
+    ],
+    [
+     "Balade aux lacs de Serris",
+     "Une balade tranquille au bord de l'eau, à deux pas du centre"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/02-le-brunch",
+   "surtitre": "Le brunch",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/brunch-yelloco-4x5.jpg",
+   "adresses": [
+    [
+     "Yelloco Coffee",
+     "Du brunch au goûter, avec des pâtisseries maison"
+    ],
+    [
+     "Domaine des Macarons de Réau",
+     "Une petite ferme, un brunch le dimanche, et des macarons excellents"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/03-la-balade",
+   "surtitre": "La balade",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/marche-framboises-4x5.jpg",
+   "adresses": [
+    [
+     "Marché de Serris",
+     "Les crêpes farcies au fromage du stand libanais, et un primeur qui a tout"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/04-le-shopping",
+   "surtitre": "Le shopping",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/vallee-village-arche-4x5.jpg",
+   "adresses": [
+    [
+     "La Vallée Village",
+     "Le shopping, version outlet"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/05-la-pause",
+   "surtitre": "La pause",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/momus-matcha-4x5.jpg",
+   "adresses": [
+    [
+     "Momus",
+     "Un bon matcha"
+    ],
+    [
+     "Mucette",
+     "Un flan à tomber, et une salle de jeux pour les enfants"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/06-le-dejeuner",
+   "surtitre": "Le déjeuner",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/dejeuner-zaza-b-4x5.jpg",
+   "adresses": [
+    [
+     "Zaza",
+     "Une italienne au service irréprochable, où les enfants sont les bienvenus"
+    ],
+    [
+     "Bistrot 51",
+     "Une carte courte, renouvelée souvent"
+    ],
+    [
+     "Nomad",
+     "Un tour du monde en trois escales, de la Méditerranée à l'Asie"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/07-l-apres-midi",
+   "surtitre": "L'après-midi",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/oies-lever-du-jour.jpg",
+   "adresses": [
+    [
+     "Loc'Adventure",
+     "Crécy-la-Chapelle depuis l'eau, en paddle ou en kayak"
+    ],
+    [
+     "Disneyland Paris",
+     "L'incontournable"
+    ],
+    [
+     "Golf Paris Val d'Europe",
+     "Sur mon radar : l'ancien Golf Disneyland"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/08-le-diner",
+   "surtitre": "Le dîner",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/poolette-dessert-4x5.jpg",
+   "adresses": [
+    [
+     "Poolette",
+     "Une cuisine fusion asiatique, pour un dîner à deux"
+    ],
+    [
+     "Sidi Bou Saïd",
+     "Un accueil superbe, des grillades de poisson et des spécialités tunisiennes"
+    ],
+    [
+     "Beef Club",
+     "Le steakhouse de l'hôtel Dali, et le stand-up juste à côté"
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "post-5-carnet/09-ou-dormir",
+   "surtitre": "Où dormir",
+   "adresses": [
+    [
+     "Ki Space Hotel & Spa",
+     "Familial, avec un restaurant qui vaut le séjour. Voiture nécessaire"
+    ],
+    [
+     "All Suites Appart Hôtel",
+     "En plein cœur de Serris, tout se fait à pied"
+    ],
+    [
+     "Hôtel Dali",
+     "Une jolie piscine, mais la voiture est indispensable"
+    ],
+    [
+     "Moxy Paris Val d'Europe",
+     "Bien situé, avec le Bistrot 51"
+    ]
+   ]
+  },
+  {
+   "type": "fin",
+   "fichier": "post-5-carnet/10-fin-de-carnet",
+   "surtitre": "Fin du carnet",
+   "lignes": [
+    "Une journée au Val d'Europe,",
+    "du lac au dîner."
+   ],
+   "cta": "Retrouve le carnet sur le site, et fais le test Travel Match en 8 questions.",
+   "url": "levoyagedesemotions.fr"
+  }
+ ]
+}

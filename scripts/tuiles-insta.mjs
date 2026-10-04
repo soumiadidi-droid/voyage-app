@@ -113,6 +113,9 @@ const surtitre = (texte, couleurFilet, couleurTexte) =>
   `<div class="rang"><span class="filet" style="width:32px;background:${couleurFilet}"></span>
    <span class="mono" style="font-size:10px;text-transform:uppercase;letter-spacing:.28em;color:${couleurTexte}">${texte}</span></div>`;
 
+// Cormorant dessine ses chiffres à l'ancienne : « 51 » se lit « 5I ». Chiffres en Source Serif.
+const chiffres = (texte) => String(texte).replace(/(\d+)/g, '<span style="font-family:\'Source Serif 4\',serif;font-size:.86em">$1</span>');
+
 const signature = (couleur) =>
   `<p class="titre" style="font-size:10px;text-transform:uppercase;letter-spacing:.3em;color:${couleur}">${HANDLE}</p>`;
 
@@ -258,11 +261,33 @@ function htmlBrut(tuile, spec) {
     const liste = (tuile.adresses ?? [])
       .map(
         ([nom, detail]) => `<div style="display:flex;flex-direction:column;gap:${seule ? 8 : 4}px">
-          <p class="titre" style="font-size:${tailleNom}px;line-height:1.15;color:${COULEURS.ivoire}">${nom}</p>
+          <p class="titre" style="font-size:${tailleNom}px;line-height:1.15;color:${COULEURS.ivoire}">${chiffres(nom)}</p>
           ${detail ? `<p class="corps" style="font-size:${tailleDetail}px;line-height:1.35;color:${COULEURS.ivoire}bf">${detail}</p>` : ""}
         </div>`
       )
       .join("");
+    // Sans photo (04/10/2026, « Où dormir » : aucune photo d'hôtel ne doit faire croire qu'elle montre le
+    // lieu) : fond sable, texte foncé, même mise en page que la tuile « fin ».
+    if (!tuile.photo) {
+      const listeSable = (tuile.adresses ?? [])
+        .map(([nom, detail]) => `<div style="display:flex;flex-direction:column;gap:4px">
+          <p class="titre" style="font-size:${tailleNom}px;line-height:1.15;color:${COULEURS.charcoal}">${chiffres(nom)}</p>
+          ${detail ? `<p class="corps" style="font-size:${tailleDetail}px;line-height:1.35;color:${COULEURS.charcoal}bf">${detail}</p>` : ""}
+        </div>`)
+        .join("");
+      return {
+        h: 1350,
+        corps: `<div class="col" style="background:${COULEURS.sable}">
+          ${surtitre(tuile.surtitre ?? "", COULEURS.ink, COULEURS.ink)}
+          <div style="display:flex;flex-direction:column;gap:${serre ? 14 : 18}px">${listeSable}</div>
+          <div style="display:flex;flex-direction:column;gap:16px">
+            <span class="filet" style="background:${COULEURS.charcoal}26"></span>
+            ${tuile.cta ? `<p class="corps" style="font-size:14px;line-height:1.4;color:${COULEURS.charcoal}bf">${tuile.cta}</p>` : ""}
+            ${signature(COULEURS.charcoal + "99")}
+          </div>
+        </div>`,
+      };
+    }
     return {
       h: 1350,
       corps: `<div style="position:relative;width:100%;height:100%;background:${COULEURS.obsidienne}">
@@ -270,7 +295,11 @@ function htmlBrut(tuile, spec) {
              filtre bizarre, on ne voit plus la mer") : ni étalonnage Sable, ni voile crème. Seul le
              bas de l'image s'assombrit, juste ce qu'il faut sous le texte. -->
         <img src="file://${tuile.photo}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover">
-        <div style="position:absolute;inset:0;background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.45) 26%, rgba(0,0,0,0) 48%)"></div>
+        <!-- Deux adresses et plus (04/10/2026) : le texte monte plus haut, l'assombrissement aussi —
+             toujours seulement sous le texte, le haut de la photo reste intact. -->
+        <div style="position:absolute;inset:0;background:${nombre >= 2
+          ? "linear-gradient(to top, rgba(0,0,0,.8) 0%, rgba(0,0,0,.6) 38%, rgba(0,0,0,0) 66%)"
+          : "linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.45) 26%, rgba(0,0,0,0) 48%)"}"></div>
         <div style="position:absolute;left:40px;right:40px;bottom:40px;display:flex;flex-direction:column;gap:${serre ? 16 : 20}px;text-shadow:0 1px 2px rgba(0,0,0,.55),0 2px 14px rgba(0,0,0,.45)">
           ${surtitre(tuile.surtitre ?? "", COULEURS.terracotta, COULEURS.ivoire)}
           <div style="display:flex;flex-direction:column;gap:${serre ? 12 : 16}px">${liste}</div>
