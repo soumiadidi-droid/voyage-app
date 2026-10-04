@@ -90,11 +90,22 @@ const PICTOS = {
 const AMBIANCE_SABLE = "saturate(0.88) contrast(0.95) sepia(0.08) brightness(1.02)";
 const CAPTURE = resolve(process.argv[1], "../../.claude/relecteur/capture.mjs");
 
+// LVE_HORS_LIGNE=1 (04/10/2026, Mac sans internet : la feuille Google Fonts bloquait la capture jusqu'au
+// délai de 60 s) : polices locales de scripts/polices. Source Serif n'y est pas, le corps de texte
+// retombe alors sur Georgia — à réserver aux tuiles sans corps de texte, ou à refaire une fois en ligne.
+const HORS_LIGNE = process.env.LVE_HORS_LIGNE === "1";
+const DOSSIER_POLICES = resolve(process.argv[1], "../polices");
+const POLICES_LOCALES = `<style>
+  @font-face { font-family:"Cormorant Garamond"; src:url("file://${DOSSIER_POLICES}/CormorantGaramond.ttf"); font-weight:300 700 }
+  @font-face { font-family:"IBM Plex Mono"; src:url("file://${DOSSIER_POLICES}/IBMPlexMono-Medium.ttf") }
+  @font-face { font-family:"Source Serif 4"; src:local("Georgia") }
+</style>`;
+
 function page({ h, corps }) {
   const echelle = 1080 / 420;
   return `<!doctype html><html lang="fr"><head><meta charset="utf-8">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+${HORS_LIGNE ? POLICES_LOCALES : `<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Serif+4:ital,wght@0,400;1,400&display=swap" rel="stylesheet">`}
 <style>
   * { box-sizing:border-box; margin:0; padding:0 }
   body { width:1080px; height:${h}px; overflow:hidden; background:#fff }
