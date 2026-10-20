@@ -5,6 +5,8 @@ import { DestinationCard } from "./DestinationCard";
 import { matchTravel, dedupeComboBadges } from "@/lib/travel-match/engine";
 import { getDestinations, getUniversParDestination, getUniversAvecAdresses } from "@/lib/travel-match/data";
 import { choisirUnivers } from "@/lib/travel-match/univers";
+import { enregistrerReponse } from "@/lib/travel-match/responses";
+import { after } from "next/server";
 import {
   SCORE_KEYS,
   FAMILY_PROFILE_OPTIONS,
@@ -121,6 +123,12 @@ export default async function ResultatPage({
   const destinations = await getDestinations();
   const { fallback, results } = matchTravel(answers, destinations);
   const top = dedupeComboBadges(results.slice(0, 3), destinations);
+  // Comptage des questionnaires terminés (20/10/2026), après l'envoi de la page pour ne pas la
+  // ralentir. Voir lib/travel-match/responses.ts.
+  if (top[0]) {
+    const premiere = top[0].destination.content_slug;
+    after(() => enregistrerReponse(answers, getArchetypeTitle(answers), premiere));
+  }
   // Univers (14/09/2026) : pour une grande destination découpée (Paris), la façon de la vivre qui
   // correspond aux envies choisies. Le pourcentage reste celui de la destination.
   const [universParDestination, universAvecAdresses] = await Promise.all([getUniversParDestination(), getUniversAvecAdresses()]);

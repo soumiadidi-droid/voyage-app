@@ -63,6 +63,7 @@ const SECTIONS = [
     title: "Cookies et contenus extérieurs",
     body: [
       "Ce site ne dépose aucun cookie, ni publicitaire ni autre. La fréquentation des pages est mesurée par Vercel Web Analytics, un outil qui compte les visites sans cookie, sans identifiant de navigateur et sans conserver la moindre donnée permettant de vous reconnaître : je vois combien de personnes ont ouvert une page, jamais qui.",
+      "Quand vous terminez le questionnaire Travel Match, vos réponses, le profil obtenu et la première destination proposée sont enregistrés, sans adresse email, sans adresse IP ni aucun identifiant : je sais combien de recommandations le site a produites et lesquelles, jamais pour qui.",
       "Les destinations que vous mettez en favoris sont enregistrées dans la mémoire de votre navigateur, sur votre appareil. Elles ne sont jamais transmises au site, et disparaissent si vous videz les données de votre navigateur.",
       "Les publications Instagram affichées sur les fiches destination sont chargées depuis les serveurs de Meta, qui peut à cette occasion déposer ses propres traceurs. Cet affichage n'est pas de mon fait technique et obéit à la politique de confidentialité de Meta.",
     ],
