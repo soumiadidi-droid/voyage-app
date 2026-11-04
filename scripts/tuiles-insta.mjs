@@ -239,14 +239,19 @@ function htmlBrut(tuile, spec) {
   }
 
   if (tuile.type === "garde") {
+    // `fond: "ivoire"` + `titreEnHaut` (06/10/2026) : couverture de hors-série. Le sable reste réservé
+    // aux carnets d'adresses ; le titre remonte sous le surtitre au lieu d'être centré.
     return {
       h: 1350,
-      corps: `<div class="col" style="background:${COULEURS.sable}">
+      corps: `<div class="col" style="background:${COULEURS[tuile.fond ?? "sable"]}">
+        <div style="display:flex;flex-direction:column;gap:${tuile.titreEnHaut ? 40 : 0}px">
         ${surtitre(tuile.surtitre ?? "Nouveau carnet", COULEURS.ink, COULEURS.ink)}
+        ${tuile.titreEnHaut ? "" : "</div>"}
         <div style="display:flex;flex-direction:column;gap:12px">
           <p class="titre" style="font-size:48px;line-height:1.05;color:${COULEURS.charcoal}">${spec.destination}</p>
           <p class="corps" style="font-size:14px;color:${COULEURS.charcoal}b3">${spec.villes ?? ""}</p>
         </div>
+        ${tuile.titreEnHaut ? "</div>" : ""}
         <div style="display:flex;flex-direction:column;gap:16px">
           <span class="filet" style="background:${COULEURS.charcoal}26"></span>
           <div class="bas">
@@ -404,14 +409,16 @@ function htmlBrut(tuile, spec) {
     // Photo du post Sans filtre avec sa légende (13/09/2026, demande de Soumia : sur Instagram la
     // légende du post ne se voit qu'une fois). Façon tirage : la photo en haut, intacte — aucun
     // filtre, aucun texte posé dessus — et la légende dans la bande crème en dessous.
-    return {
-      h: 1350,
-      corps: `<div style="width:100%;height:100%;background:${COULEURS.ivoire};display:flex;flex-direction:column;padding:22px 22px 0">
-        <div style="flex:1;min-height:0;background:#ddd url('file://${tuile.photo}') center/cover no-repeat"></div>
-        <div style="height:118px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 6px">
+    // `titreEnHaut` (06/10/2026, couverture du hors-série) : la bande de texte passe au-dessus de la photo.
+    const bande = `<div style="height:118px;display:flex;flex-direction:column;justify-content:center;gap:6px;padding:0 6px">
           <p class="mono" style="font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:${COULEURS.ink}">${tuile.numero ?? ""}</p>
           <p class="titre" style="font-size:21px;line-height:1.2;color:${COULEURS.charcoal}">${tuile.legende ?? ""}</p>
-        </div>
+        </div>`;
+    const image = `<div style="flex:1;min-height:0;background:#ddd url('file://${tuile.photo}') center/cover no-repeat"></div>`;
+    return {
+      h: 1350,
+      corps: `<div style="width:100%;height:100%;background:${COULEURS.ivoire};display:flex;flex-direction:column;padding:${tuile.titreEnHaut ? "0 22px 22px" : "22px 22px 0"}">
+        ${tuile.titreEnHaut ? bande + image : image + bande}
       </div>`,
     };
   }

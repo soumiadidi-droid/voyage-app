@@ -1,0 +1,74 @@
+{
+ "destination": "Val d'Europe",
+ "envie": "Bouger",
+ "tuiles": [
+  {
+   "type": "sans-filtre",
+   "fichier": "post-6-sans-filtre/01-page-de-garde",
+   "surtitre": "Hors-série · Val d'Europe"
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/02-photo",
+   "photo": "/Users/soumiadidi/voyage-app/public/images/voyages/val-d-europe/oies-serris.jpg",
+   "numero": "01 · Val d'Europe",
+   "legende": "Les oies, au-dessus de la rue, presque tous les matins."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/03-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/post-6-sans-filtre/photos/lac-marches.jpg",
+   "numero": "02 · Val d'Europe",
+   "legende": "Le lac, à quelques minutes de chez moi."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/04-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/post-6-sans-filtre/photos/allee.jpg",
+   "numero": "03 · Val d'Europe",
+   "legende": "L'allée, un mardi midi, sans personne."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/05-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/post-6-sans-filtre/photos/arche.jpg",
+   "numero": "04 · Val d'Europe",
+   "legende": "Une arche, et derrière, l'automne qui commence."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/06-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/post-6-sans-filtre/photos/erable.jpg",
+   "numero": "05 · Val d'Europe",
+   "legende": "L'érable qui commence à jaunir."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/07-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/hires-marche-serris.jpg",
+   "numero": "06 · Val d'Europe",
+   "legende": "Le marché de Serris, carottes et radis en vrac."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/08-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/post-6-sans-filtre/photos/fraises.jpg",
+   "numero": "07 · Val d'Europe",
+   "legende": "Les fraises et les myrtilles, posées sur du faux gazon."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/09-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/hires-yelloco-latte-main.jpg",
+   "numero": "08 · Val d'Europe",
+   "legende": "Le latte de Yelloco, et sa couleur improbable."
+  },
+  {
+   "type": "photo-legendee",
+   "fichier": "post-6-sans-filtre/10-photo",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-cafe-flan-mucette.jpg",
+   "numero": "09 · Val d'Europe",
+   "legende": "Le flan de Mucette, avant la première bouchée."
+  }
+ ]
+}

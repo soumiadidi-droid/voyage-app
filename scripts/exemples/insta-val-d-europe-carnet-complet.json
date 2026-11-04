@@ -1,22 +1,22 @@
 {
  "destination": "Val d'Europe",
  "envie": "Bouger",
- "villes": "Serris · Chessy · Montévrain",
- "promesse": "10 adresses testées",
+ "villes": "Une journée, neuf adresses",
+ "promesse": "19 adresses testées",
  "tuiles": [
   {
    "type": "garde",
    "fichier": "post-5-carnet/00-page-de-garde",
-   "surtitre": "Hors-série · Le carnet"
+   "surtitre": "Carnet d'adresses"
   },
   {
    "type": "adresses",
    "fichier": "post-5-carnet/01-le-lac",
    "surtitre": "Au réveil",
-   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/oies-lever-du-jour.jpg",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/oies-ciel-haut-4x5.jpg",
    "adresses": [
     [
-     "Balade aux lacs de Serris",
+     "Balade au lac de Serris",
      "Une balade tranquille au bord de l'eau, à deux pas du centre. Au lever du jour, les oies passent au-dessus."
     ]
    ]
@@ -85,11 +85,11 @@
    "type": "adresses",
    "fichier": "post-5-carnet/07-le-dejeuner",
    "surtitre": "Le déjeuner",
-   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/dejeuner-zaza-b-4x5.jpg",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/dejeuner-zaza-large-4x5.jpg",
    "adresses": [
     [
      "Zaza",
-     "Une italienne au service irréprochable, où les enfants sont vraiment les bienvenus."
+     "La milanaise, la pizza, un service irréprochable, et des enfants vraiment bienvenus."
     ]
    ]
   },
@@ -109,7 +109,7 @@
    "type": "adresses",
    "fichier": "post-5-carnet/09-le-diner",
    "surtitre": "Le dîner à deux",
-   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/poolette-dessert-4x5.jpg",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/poolette-fondant-entier-4x5.jpg",
    "adresses": [
     [
      "Poolette",
@@ -118,26 +118,14 @@
    ]
   },
   {
-   "type": "adresses",
-   "fichier": "post-5-carnet/10-un-autre-soir",
-   "surtitre": "Un autre soir",
-   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/diner-sidi-bou-said-4x5.jpg",
-   "adresses": [
-    [
-     "Sidi Bou Saïd",
-     "Un accueil superbe, des grillades de poisson et des spécialités tunisiennes."
-    ]
-   ]
-  },
-  {
    "type": "fin",
-   "fichier": "post-5-carnet/11-fin-de-carnet",
+   "fichier": "post-5-carnet/10-fin-de-carnet",
    "surtitre": "Fin du carnet",
    "lignes": [
     "Une journée au Val d'Europe,",
     "du lac au dîner."
    ],
-   "cta": "Ici, dix adresses. Sur le site, dix-neuf, et Travel Match te trouve ta prochaine destination en 8 questions.",
+   "cta": "Ici, neuf adresses. Sur le site, dix-neuf, et Travel Match te trouve ta prochaine destination en 8 questions.",
    "url": "levoyagedesemotions.fr"
   }
  ]

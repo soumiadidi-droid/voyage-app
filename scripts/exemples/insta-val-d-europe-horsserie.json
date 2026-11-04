@@ -1,0 +1,78 @@
+{
+  "destination": "Val d'Europe",
+  "envie": "Bouger",
+  "villes": "Serris · Chessy · Montévrain",
+  "promesse": "20 adresses testées",
+  "tuiles": [
+    {
+      "type": "garde",
+      "fichier": "post-4-carnet/1-page-de-garde",
+      "surtitre": "Hors-série",
+      "centree": true
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/2-le-matin",
+      "surtitre": "Le matin",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/slow-studio-4x5.jpg",
+      "adresses": [
+        ["Slow Studio", "Un cours de Pilates Reformer chez Margot, dans un petit studio"]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/3-le-petit-dejeuner",
+      "surtitre": "Le petit-déjeuner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/petit-dej-yelloco-4x5.jpg",
+      "adresses": [
+        ["Yelloco Coffee", "Un café récemment ouvert : boissons et pâtisseries maison"]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/4-la-balade",
+      "surtitre": "La balade",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/marche-serris-4x5.jpg",
+      "adresses": [
+        ["Marché de Serris", "Les crêpes farcies au fromage du stand libanais, et un primeur qui a tout"]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/5-le-dejeuner",
+      "surtitre": "Le déjeuner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/dejeuner-zaza-b-4x5.jpg",
+      "adresses": [
+        ["Zaza", "Une italienne au service irréprochable, où les enfants sont vraiment les bienvenus"]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/6-le-gouter",
+      "surtitre": "Le goûter",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/le-cafe-flan-mucette.jpg",
+      "adresses": [
+        ["Mucette", "Un flan à tomber, et une salle de jeux pour les enfants"]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/7-le-diner",
+      "surtitre": "Le dîner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/diner-sidi-bou-said-4x5.jpg",
+      "adresses": [
+        ["Sidi Bou Saïd", "Un accueil superbe, des grillades de poisson et des spécialités tunisiennes"]
+      ]
+    },
+    {
+      "type": "fin",
+      "fichier": "post-4-carnet/8-fin-de-carnet",
+      "surtitre": "Fin du carnet",
+      "lignes": [
+        "Une journée au Val d'Europe, du studio au dîner tunisien.",
+        "Ici six adresses, sur le site vingt."
+      ],
+      "cta": "Huit questions, et le site te dit où aller."
+    }
+  ]
+}

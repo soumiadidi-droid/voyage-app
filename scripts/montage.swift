@@ -12,6 +12,7 @@
 //   "segments": [
 //     { "type": "image", "fichier": "/chemin/carton-7h10.png", "duree": 1.6 },
 //     { "type": "video", "fichier": "/chemin/VID_xxx.mp4", "debut": 2.0, "duree": 4.0 }
+//     ("miroir": true remet à l'endroit un plan selfie filmé en miroir)
 //   ]
 // }
 //
@@ -25,6 +26,7 @@ struct Segment: Decodable {
     let fichier: String
     let duree: Double
     let debut: Double?
+    let miroir: Bool?
 }
 struct Spec: Decodable {
     let fps: Int?
@@ -121,6 +123,11 @@ for (i, seg) in spec.segments.enumerated() {
                 // on ramène l'image à l'origine — sinon l'extent part en négatif et le plan sort noir.
                 let angle = atan2(transform.b, transform.a)
                 ci = ci.transformed(by: CGAffineTransform(rotationAngle: -angle))
+                ci = ci.transformed(by: CGAffineTransform(translationX: -ci.extent.origin.x, y: -ci.extent.origin.y))
+            }
+            if seg.miroir == true {
+                // Plan filmé à la caméra selfie avec l'effet miroir : on le remet à l'endroit.
+                ci = ci.transformed(by: CGAffineTransform(scaleX: -1, y: 1))
                 ci = ci.transformed(by: CGAffineTransform(translationX: -ci.extent.origin.x, y: -ci.extent.origin.y))
             }
             let contexte = CIContext()

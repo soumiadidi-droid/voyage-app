@@ -1068,17 +1068,33 @@ Ce qui manque encore, par ordre d'importance :
 - **Stories : neuf par cycle** depuis le 19/09, avec un **teaser de l'envie le matin du post 1**.
 - Photos du cycle Paris-Opéra prêtes dans `insta-paris-opera/photos-source/` (avenue de l'Opéra,
   Kitsuné, Clasico, Popolare extrait d'une vidéo, Repetto, coupole des Galeries Lafayette, Trinité).
-  Val d'Europe : Yelloco et Sidi Bou Saïd recadrées ; manquent le déjeuner, Slow Studio et
-  La Vallée Village, que Soumia photographiera.
+  Val d'Europe : Yelloco, Sidi Bou Saïd, Slow Studio, le marché de Serris et le déjeuner chez Zaza
+  sont recadrés (Zaza photographié le 21/09) ; il ne manque que La Vallée Village.
+- **Le carnet hors-série passe à six adresses (22/09/2026)** : Zaza entre au déjeuner, le marché de
+  Serris devient la balade du matin (surtitre « La balade », entre le petit-déjeuner et le déjeuner).
+  Les huit tuiles du `post-4-carnet` sont renumérotées et refaites depuis
+  `scripts/exemples/insta-val-d-europe-horsserie.json` — c'est désormais la spec de référence du
+  hors-série, l'ancienne `insta-val-d-europe.json` décrit le cycle à cinq posts abandonné.
+  Le marché de Serris n'a pas de lien Instagram : il est dans le carnet Instagram mais **masqué sur
+  le site**.
 - **Pas de ffmpeg ni Homebrew sur le Mac** (installer Homebrew demande le mot de passe admin de
   Soumia). Tout le traitement vidéo passe donc par AVFoundation :
   - **`scripts/montage.swift`** (20/09/2026) monte un reel vertical 1080 × 1920 **sans son** à partir
     d'images et d'extraits vidéo : `swiftc -O scripts/montage.swift -o scripts/montage`, puis
     `scripts/montage <spec.json> <sortie.mp4>`. La spec liste des segments
-    `{type: "image"|"video", fichier, duree, debut}`. Chaque plan est recadré en remplissage, jamais
+    `{type: "image"|"video", fichier, duree, debut}`. Option `miroir: true` (09/10/2026) pour remettre à
+    l'endroit un plan selfie filmé en miroir (Xiaomi 14T de Soumia). Chaque plan est recadré en remplissage, jamais
     déformé. **Piège corrigé** : une vidéo de téléphone arrive couchée (3840 × 2160) avec sa rotation
     en métadonnées ; CIImage ayant son origine en bas à gauche, il faut tourner de l'angle **inverse**
     puis ramener l'extent à zéro, sinon le plan sort couché ou noir.
+  - **`scripts/reel-machine.swift`** (28/09/2026) : texte machine à écrire tapé PAR-DESSUS les
+    vidéos (Cormorant + Plex Mono chargées depuis `scripts/polices`), une séquence = un texte +
+    plusieurs plans, cartons unis possibles. Spec de référence :
+    `scripts/exemples/reel-vacances-dans-ma-ville.json` (hors-série « Comment être en vacances dans
+    sa ville », 49 s). Manque une vidéo de balade du soir, séquence sautée.
+    Version douce (28/09/2026, « transitions plus douces, moins accéléré ») :
+    `exemples/reel-vacances-dans-ma-ville-doux.json` — fondus de 1,4 s, plans de ~5,5 s, frappe à 8
+    lettres/s et nouvelle option `vitesse` (0.8 = plans ralentis de 20 %), 65 s.
   - Pour extraire une image d'une vidéo, un script Swift AVAssetImageGenerator fait le travail ;
     `sips` suffit pour recadrer en 1080×1350 ou 1080×1080.
 

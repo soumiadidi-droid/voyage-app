@@ -1,5 +1,5 @@
-import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
+import Mesure from "./components/Mesure";
 import {
   Bricolage_Grotesque,
   Source_Serif_4,
@@ -64,6 +64,7 @@ export const metadata: Metadata = {
 // publicité : sans chiffres, impossible de savoir si un euro dépensé ramène quelqu'un.
 // Vercel Web Analytics : pas de cookie, pas de donnée personnelle, chiffres agrégés. La page
 // Confidentialité a été corrigée en conséquence le même jour (elle affirmait le contraire).
+// Depuis le 22/09/2026, le comptage passe par `components/Mesure` qui écarte les robots.
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -73,7 +74,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
         <Nav />
         <main className="flex-1">{children}</main>
-        <Analytics />
+        <Mesure />
         <Footer />
       </body>
     </html>

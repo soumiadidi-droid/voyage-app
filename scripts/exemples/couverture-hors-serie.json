@@ -1,20 +1,15 @@
 {
- "destination": "Des vacances chez moi",
+ "destination": "L'ailleurs, ici.",
  "villes": "Val d'Europe · Serris, Chessy, Montévrain",
  "promesse": "",
  "envie": "Bouger",
  "tuiles": [
   {
    "type": "garde",
-   "fichier": "couverture-hors-serie/A-sable",
-   "surtitre": "Hors-série"
-  },
-  {
-   "type": "photo-legendee",
-   "fichier": "couverture-hors-serie/B-tirage",
-   "numero": "Hors-série · Val d'Europe",
-   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-val-d-europe/photos-source/oies-lever-du-jour.jpg",
-   "legende": "Des vacances chez moi."
+   "fichier": "couverture-hors-serie/E-ailleurs-ici",
+   "surtitre": "Hors-série",
+   "fond": "ivoire",
+   "titreEnHaut": true
   }
  ]
 }
