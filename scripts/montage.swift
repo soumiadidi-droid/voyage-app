@@ -25,12 +25,20 @@ import CoreText
 // Légende posée sur le plan en cours (04/11/2026) : petite, blanche, minuscule, centrée, façon
 // « journée de » (@mademoisellesoph). Une ombre douce sur les lettres, jamais de voile sur l'image.
 var legendeCourante: String? = nil
+// Police des légendes : Cormorant Garamond italique (celle du site), chargée depuis scripts/polices.
+// Avenir essayé en premier, jugé pas joli par Soumia le 04/11/2026.
+let dossierPolices = URL(fileURLWithPath: CommandLine.arguments[0]).deletingLastPathComponent().appendingPathComponent("polices")
+for f in ["CormorantGaramond-Italic.ttf", "CormorantGaramond.ttf"] {
+    CTFontManagerRegisterFontsForURL(dossierPolices.appendingPathComponent(f) as CFURL, .process, nil)
+}
+var policeLegende = "CormorantGaramond-MediumItalic"
+var tailleLegende = 72.0
 func dessinerLegende(_ texte: String, ctx: CGContext) {
-    let police = CTFontCreateWithName("AvenirNext-Medium" as CFString, 46, nil)
+    let police = CTFontCreateWithName(policeLegende as CFString, tailleLegende, nil)
     let attrs: [NSAttributedString.Key: Any] = [
         NSAttributedString.Key(kCTFontAttributeName as String): police,
         NSAttributedString.Key(kCTForegroundColorAttributeName as String): CGColor(red: 1, green: 1, blue: 1, alpha: 1),
-        NSAttributedString.Key(kCTKernAttributeName as String): 0.5,
+        NSAttributedString.Key(kCTKernAttributeName as String): 0.3,
     ]
     let ligne = CTLineCreateWithAttributedString(NSAttributedString(string: texte, attributes: attrs))
     let largeur = CTLineGetTypographicBounds(ligne, nil, nil, nil)
@@ -51,6 +59,8 @@ struct Segment: Decodable {
 }
 struct Spec: Decodable {
     let fps: Int?
+    let policeLegende: String?
+    let tailleLegende: Double?
     let segments: [Segment]
 }
 
@@ -81,6 +91,8 @@ let args = CommandLine.arguments
 guard args.count >= 3 else { print("usage: montage <spec.json> <sortie.mp4>"); exit(1) }
 let spec = try JSONDecoder().decode(Spec.self, from: Data(contentsOf: URL(fileURLWithPath: args[1])))
 let fps = spec.fps ?? 30
+if let p = spec.policeLegende { policeLegende = p }
+if let t = spec.tailleLegende { tailleLegende = t }
 let sortie = URL(fileURLWithPath: args[2])
 try? FileManager.default.removeItem(at: sortie)
 
