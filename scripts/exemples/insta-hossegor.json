@@ -1,0 +1,21 @@
+{
+  "destination": "Hossegor",
+  "envie": "Respirer",
+  "tuiles": [
+    {
+      "type": "mot",
+      "fichier": "post-1-emotion/1-tuile-respirer",
+      "portrait": true
+    },
+    {
+      "type": "definition",
+      "fichier": "post-1-emotion/2-definition-respirer",
+      "lignes": [
+        "Ce n'est pas ne rien faire.",
+        "C'est marcher jusqu'à ce que le bruit dans la tête s'éteigne.",
+        "Du vent dans les pins, une eau qui ne bouge pas, et l'océan qui couvre tout le reste."
+      ],
+      "portrait": true
+    }
+  ]
+}

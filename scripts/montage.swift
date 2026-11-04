@@ -113,8 +113,21 @@ for (i, seg) in spec.segments.enumerated() {
         let transform = piste.preferredTransform
         var comptees = 0
         let cible = Int((seg.duree * Double(fps)).rounded())
+        // Calage sur le temps réel du plan (04/11/2026) : les vidéos 4K du Xiaomi sont à ~24 i/s.
+        // Écrire une image de sortie par image source les passait en accéléré (×1,25) et rognait la
+        // durée. Chaque image source couvre désormais toutes les images de sortie jusqu'à la
+        // suivante, et la dernière est tenue jusqu'à la durée demandée.
+        var precedente: CGImage? = nil
+        func tenir(jusqua t: Double) {
+            guard let cg = precedente else { return }
+            while comptees < cible && Double(comptees) / Double(fps) < t {
+                ecrire(cg, frames: 1); comptees += 1
+            }
+        }
         while comptees < cible, let echantillon = sortiePiste.copyNextSampleBuffer() {
             guard let px = CMSampleBufferGetImageBuffer(echantillon) else { continue }
+            let t = CMTimeGetSeconds(CMSampleBufferGetPresentationTimeStamp(echantillon)) - (seg.debut ?? 0)
+            tenir(jusqua: t)
             var ci = CIImage(cvPixelBuffer: px)
             if !transform.isIdentity {
                 // Une vidéo de téléphone est enregistrée couchée (3840 × 2160 ici), avec la rotation
@@ -132,9 +145,9 @@ for (i, seg) in spec.segments.enumerated() {
             }
             let contexte = CIContext()
             guard let cg = contexte.createCGImage(ci, from: ci.extent) else { continue }
-            ecrire(cg, frames: 1)
-            comptees += 1
+            precedente = cg
         }
+        tenir(jusqua: seg.duree)
         print("\(i + 1). vidéo \(url.lastPathComponent) — \(Double(comptees) / Double(fps)) s retenues")
     }
 }
