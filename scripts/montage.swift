@@ -20,6 +20,26 @@
 // Instagram. Chaque plan est recadré en remplissage (aspect fill) sur 1080 × 1920, jamais déformé.
 import AVFoundation
 import AppKit
+import CoreText
+
+// Légende posée sur le plan en cours (04/11/2026) : petite, blanche, minuscule, centrée, façon
+// « journée de » (@mademoisellesoph). Une ombre douce sur les lettres, jamais de voile sur l'image.
+var legendeCourante: String? = nil
+func dessinerLegende(_ texte: String, ctx: CGContext) {
+    let police = CTFontCreateWithName("AvenirNext-Medium" as CFString, 46, nil)
+    let attrs: [NSAttributedString.Key: Any] = [
+        NSAttributedString.Key(kCTFontAttributeName as String): police,
+        NSAttributedString.Key(kCTForegroundColorAttributeName as String): CGColor(red: 1, green: 1, blue: 1, alpha: 1),
+        NSAttributedString.Key(kCTKernAttributeName as String): 0.5,
+    ]
+    let ligne = CTLineCreateWithAttributedString(NSAttributedString(string: texte, attributes: attrs))
+    let largeur = CTLineGetTypographicBounds(ligne, nil, nil, nil)
+    ctx.saveGState()
+    ctx.setShadow(offset: CGSize(width: 0, height: -2), blur: 10, color: CGColor(red: 0, green: 0, blue: 0, alpha: 0.55))
+    ctx.textPosition = CGPoint(x: (Double(LARGEUR) - largeur) / 2, y: Double(HAUTEUR) * 0.47)
+    CTLineDraw(ligne, ctx)
+    ctx.restoreGState()
+}
 
 struct Segment: Decodable {
     let type: String
@@ -27,6 +47,7 @@ struct Segment: Decodable {
     let duree: Double
     let debut: Double?
     let miroir: Bool?
+    let legende: String?   // petite légende minuscule centrée (04/11/2026, vlog du vendredi)
 }
 struct Spec: Decodable {
     let fps: Int?
@@ -52,6 +73,7 @@ func pixelBuffer(_ image: CGImage, pool: CVPixelBufferPool) -> CVPixelBuffer? {
     let echelle = max(Double(LARGEUR) / Double(image.width), Double(HAUTEUR) / Double(image.height))
     let l = Double(image.width) * echelle, h = Double(image.height) * echelle
     ctx.draw(image, in: CGRect(x: (Double(LARGEUR) - l) / 2, y: (Double(HAUTEUR) - h) / 2, width: l, height: h))
+    if let t = legendeCourante, !t.isEmpty { dessinerLegende(t, ctx: ctx) }
     return buffer
 }
 
@@ -94,6 +116,7 @@ func ecrire(_ cg: CGImage, frames: Int) {
 
 for (i, seg) in spec.segments.enumerated() {
     let url = URL(fileURLWithPath: seg.fichier)
+    legendeCourante = seg.legende
     if seg.type == "image" {
         guard let src = NSImage(contentsOf: url), let cg = src.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
             print("image illisible : \(seg.fichier)"); continue
