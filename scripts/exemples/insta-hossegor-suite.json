@@ -1,0 +1,110 @@
+{
+ "destination": "Hossegor",
+ "envie": "Respirer",
+ "tuiles": [
+  {
+   "type": "rebus",
+   "fichier": "post-3-destination/1-enigme",
+   "pictos": [
+    "lac",
+    "pin",
+    "vague",
+    "planche"
+   ],
+   "portrait": true
+  },
+  {
+   "type": "terracotta",
+   "fichier": "post-3-destination/2-tuile-hossegor",
+   "detail": "Capbreton · Seignosse · les Landes",
+   "portrait": true
+  },
+  {
+   "type": "reel-titre",
+   "fichier": "reel-sans-filtre/images/00-ouverture",
+   "surtitre": "Hossegor",
+   "titre": "Sans <em style='font-style:italic;color:#B55F42'>filtre</em>",
+   "grand": true,
+   "texte": "Mes photos telles que je les ai prises."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/01",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/01.jpg",
+   "numero": "01 / 10",
+   "legende": "Le port de Capbreton, l'eau en miroir."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/02",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/02.jpg",
+   "numero": "02 / 10",
+   "legende": "Le sable au milieu du village."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/03",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/03.jpg",
+   "numero": "03 / 10",
+   "legende": "La plage d'Hossegor, sous un ciel tout gris."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/04",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/04.jpg",
+   "numero": "04 / 10",
+   "legende": "Le lac, à travers les branches."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/05",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/05.jpg",
+   "numero": "05 / 10",
+   "legende": "Le sous-bois de pins, devant une villa."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/06",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/06.jpg",
+   "numero": "06 / 10",
+   "legende": "Le soleil sur le lac."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/07",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/07.jpg",
+   "numero": "07 / 10",
+   "legende": "Le chat de Lourvine, à son poste."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/08",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/08.jpg",
+   "numero": "08 / 10",
+   "legende": "La plage de Capbreton, à perte de vue."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/09",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/09.jpg",
+   "numero": "09 / 10",
+   "legende": "Le soleil derrière l'estacade."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-sans-filtre/images/10",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/reel-sans-filtre/recadrees/10.jpg",
+   "numero": "10 / 10",
+   "legende": "Les ganivelles, et la dune derrière."
+  },
+  {
+   "type": "reel-titre",
+   "fichier": "reel-sans-filtre/images/11-fin",
+   "surtitre": "Sans filtre",
+   "titre": "Les Landes,<br>telles que je les ai vues.",
+   "texte": "Toutes mes adresses et le test Travel Match sur le site.",
+   "url": "levoyagedesemotions.fr · lien en bio",
+   "promesse": "Sans inscription · Sans e-mail · Résultat immédiat"
+  }
+ ]
+}

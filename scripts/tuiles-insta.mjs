@@ -84,6 +84,8 @@ const PICTOS = {
   // Val d'Europe (13/09/2026) : le château de conte, le lac, le sac de shopping, le paddle.
   chateau: `<path d="M6 42h36"/><path d="M17 42V22h14v20"/><path d="M16 22l8-11 8 11"/><path d="M24 11V5l4 1.5-4 1.5"/><path d="M8 42V27h6v15M7 27l4-8 4 8"/><path d="M34 42V27h6v15M33 27l4-8 4 8"/><path d="M21 42v-5a3 3 0 0 1 6 0v5"/><path d="M24 26v3"/>`,
   lac: `<path d="M15 26a9 9 0 0 1 18 0"/><path d="M24 11V8M14 15l-2-2M34 15l2-2"/><path d="M5 26h38"/><path d="M11 32h26"/><path d="M16 37h16"/><path d="M21 42h6"/>`,
+  // Landes (04/11/2026) : le pin, haut tronc et couronne en parasol.
+  pin: `<path d="M24 43c-1.5-7 1-14-1-23"/><path d="M7 19c1-5 8-8 17-8s16 3 17 8c-4 2.5-11 2.5-17 1.5-6 1-13 1-17-1.5Z"/><path d="M23.4 25l-6-4.5M23.6 22.5l6.5-3"/><path d="M14 43h20"/>`,
   sac: `<path d="M10 19h28l-2.5 23h-23Z"/><path d="M18 23v-7a6 6 0 0 1 12 0v7"/>`,
   paddle: `<path d="M4 34c0-1.6 2.5-2.6 6-2.6h17c3.5 0 6 1 6 2.6s-2.5 2.6-6 2.6H10c-3.5 0-6-1-6-2.6Z"/><path d="M40 6v28"/><path d="M37 6h6"/><path d="M38 34h4l-.5 6h-3Z"/><path d="M2 45c3.5 0 3.5-2 7-2s3.5 2 7 2 3.5-2 7-2 3.5 2 7 2 3.5-2 7-2 3.5 2 7 2"/>`,
 };
