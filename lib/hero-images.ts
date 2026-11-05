@@ -87,7 +87,7 @@ export const DESTINATION_HERO_IMAGE: Partial<Record<string, string>> = {
   // les résidences et le lac de Serris par un matin de ciel bleu. lac-serris.jpg (Wikimedia, crédit
   // obligatoire) reste dans le dossier. Métadonnées GPS retirées.
   "val-d-europe": "/images/voyages/val-d-europe/serris-soumia.jpg",
-  // Lac d'Hossegor, photo de Soumia (28/10/2026), métadonnées retirées.
+  // Villa à colombages bleus au bord du lac d'Hossegor, photo de Soumia (25/10/2026), métadonnées retirées. La photo du lac seul, essayée d'abord, ne ressortait pas assez.
   hossegor: "/images/voyages/hossegor/lac-hossegor.jpg",
   // Façade avant du Palais Garnier et ses statues dorées — Francesco Zivoli,
   // https://unsplash.com/photos/OYSKRsmgpmg (14/09/2026). Remplace la vue depuis le toit des Galeries
