@@ -10,6 +10,8 @@ export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Ma philosophie — Le Voyage des Émotions",
+  description:
+    "Pourquoi je raconte mes voyages adresse par adresse : ce que j'ai testé, ce que j'ai repéré, et ma liste ouverte à tous.",
   alternates: { canonical: "/philosophie" },
 };
 

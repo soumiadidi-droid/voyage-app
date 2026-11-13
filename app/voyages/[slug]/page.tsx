@@ -16,6 +16,7 @@ import { UniversTabs } from "@/app/components/UniversTabs";
 const BROUILLONS_VISIBLES = process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV === "development";
 import { withVisibleAddresses } from "@/lib/visible-addresses";
 import { estVecue } from "@/lib/carnets";
+import { titreSeo, ficheJsonLd } from "@/lib/seo";
 import { getCombosFor } from "@/lib/travel-match/combos";
 import {
   FAMILY_PROFILE_OPTIONS,
@@ -73,7 +74,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const metaDescription = withTravel.length <= 160 ? withTravel : essential;
 
   return {
-    title: `${voyage.hero.title} — Le Voyage des Émotions`,
+    // Titre de recherche (13/11/2026) : ce que les gens tapent, pas le seul nom de ville (lib/seo.ts).
+    title: `${titreSeo(voyage)} — Le Voyage des Émotions`,
     description: metaDescription,
     keywords: voyage.hero.tags,
     // Canonique explicite (03/09/2026) : la page accepte des searchParams (durée, profil famille
@@ -233,8 +235,18 @@ export default async function VoyagePage({
     ({ combo }) => userDurationRank >= DURATION_ORDER[combo.min_duration_required]
   );
 
+  // Étiquettes Google (13/11/2026) : mêmes adresses que la page affiche, même description que
+  // l'extrait de recherche.
+  const jsonLd = ficheJsonLd(visible, voyage.hero.tagline, DESTINATION_HERO_IMAGE[slug]);
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        // JSON.stringify n'échappe pas « < » : on le neutralise pour qu'un nom d'adresse ne puisse
+        // jamais fermer la balise script.
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       {/* Plus de carrousel (décidé le 26/08/2026) : fond noir semi-transparent, avec une image en
           plus destination par destination si renseignée dans DESTINATION_HERO_IMAGE. */}
       <DestinationHero

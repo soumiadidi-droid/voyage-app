@@ -9,7 +9,7 @@ import {
 } from "next/font/google";
 import "./globals.css";
 import { Nav, Footer } from "./components/NavFooter";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, SITE_DESCRIPTION } from "@/lib/site";
 
 const bricolage = Bricolage_Grotesque({
   variable: "--font-bricolage",
@@ -54,10 +54,12 @@ const cormorant = Cormorant_Garamond({
 // Pas de `alternates.canonical` ici : les métadonnées Next sont héritées par les pages enfant
 // qui ne redéfinissent pas le champ, donc une canonique posée sur le layout racine déclarerait
 // l'accueil comme URL canonique de TOUTES les pages. Chaque page pose la sienne.
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Le Voyage des Émotions",
-  description: "Un pays, une histoire, une photo à la fois.",
+  // Description par défaut (13/11/2026) : la baseline seule ne disait pas à Google de quoi parle le site.
+  description: SITE_DESCRIPTION,
 };
 
 // Mesure d'audience (11/09/2026) — installée au moment où Soumia envisage d'acheter de la

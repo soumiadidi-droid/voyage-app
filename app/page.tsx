@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { SITE_DESCRIPTION } from "@/lib/site";
 import { PromesseTravelMatch } from "@/app/components/PromesseTravelMatch";
 import { HeroLandingPage, type DemoItem } from "./components/HeroLandingPage";
 import { TRAVEL_MATCH_QUESTIONS } from "@/lib/travel-match/questionnaire";
@@ -12,6 +13,9 @@ export const dynamic = "force-dynamic";
 // Canonique de l'accueil (03/09/2026) — posée page par page et pas sur le layout racine, où elle
 // serait héritée par toutes les pages enfant qui ne la redéfinissent pas.
 export const metadata = {
+  // Titre et description de recherche (13/11/2026).
+  title: "Le Voyage des Émotions : carnets de voyage et adresses testées",
+  description: SITE_DESCRIPTION,
   alternates: { canonical: "/" },
 };
 

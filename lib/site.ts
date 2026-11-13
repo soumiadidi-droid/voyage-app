@@ -3,3 +3,7 @@
 // globals.css) juste pour lire une URL. next.config.ts garde sa propre copie : il est chargé hors
 // du graphe de l'app et ne peut pas importer ce module.
 export const SITE_URL = "https://levoyagedesemotions.fr";
+
+// Accueil : dit à Google ce qu'est le site, au lieu de la seule baseline.
+export const SITE_DESCRIPTION =
+  "Des carnets de voyage vécus et des adresses testées une par une, en France et ailleurs. Et Travel Match, pour trouver ta prochaine destination en 8 questions.";
