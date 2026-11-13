@@ -1,0 +1,85 @@
+{
+  "destination": "Hossegor",
+  "envie": "Respirer",
+  "villes": "Une journée, quatre adresses",
+  "promesse": "5 adresses testées",
+  "tuiles": [
+    {
+      "type": "garde",
+      "fichier": "post-4-carnet/1-page-de-garde",
+      "surtitre": "Carnet d'adresses"
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/2-ou-dormir",
+      "surtitre": "Où dormir",
+      "adresses": [
+        [
+          "Les Hortensias du Lac",
+          "Face au lac, au milieu des pins. Celui-là, je le garde pour la prochaine fois."
+        ]
+      ],
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/post-4-carnet/photos-source/lac.jpg"
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/3-le-matin",
+      "surtitre": "Le matin",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/post-4-carnet/photos-source/pain.jpg",
+      "adresses": [
+        [
+          "La Mitchuterie",
+          "Le pain de mie à l'huile d'olive. Une merveille."
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/4-le-cafe",
+      "surtitre": "Le café",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/post-4-carnet/photos-source/louvine.jpg",
+      "adresses": [
+        [
+          "Louvine",
+          "Un chai, le gâteau à la coco, et le petit chat qui t'attend à l'entrée"
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/5-le-dejeuner",
+      "surtitre": "Le déjeuner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/post-4-carnet/photos-source/sous-les-pins.jpg",
+      "adresses": [
+        [
+          "Sous les Pins",
+          "Très bon, souvent plein : réserve. Et ça marche aussi le soir."
+        ]
+      ]
+    },
+    {
+      "type": "adresses",
+      "fichier": "post-4-carnet/6-le-diner",
+      "surtitre": "Le dîner",
+      "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-hossegor/post-4-carnet/photos-source/mouette.jpg",
+      "adresses": [
+        [
+          "Monsieur Mouette",
+          "Sur le port de Capbreton. Cuisine de bistro, service impeccable, et les enfants sont ravis"
+        ]
+      ]
+    },
+    {
+      "type": "fin",
+      "fichier": "post-4-carnet/7-fin-de-carnet",
+      "lignes": [
+        "Une journée dans les Landes,",
+        "entre le lac",
+        "et l'océan."
+      ],
+      "cta": "Ici, quatre adresses. Sur le site, huit, et Travel Match te trouve ta prochaine destination en 8 questions.",
+      "promesse": "Sans inscription · Sans e-mail · Résultat immédiat",
+      "url": "levoyagedesemotions.fr · lien en bio"
+    }
+  ]
+}

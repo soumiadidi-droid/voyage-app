@@ -1,0 +1,144 @@
+{
+ "destination": "Paris",
+ "envie": "Vibrer",
+ "villes": "Quartier Opéra · Une journée",
+ "promesse": "4 adresses testées",
+ "tuiles": [
+  {
+   "type": "reel-titre",
+   "fichier": "reel-une-journee/images/00-ouverture",
+   "surtitre": "Paris · quartier Opéra",
+   "titre": "Une journée à l'<em style='font-style:italic;color:#B55F42'>Opéra</em>",
+   "grand": true,
+   "texte": "Mes adresses testées, du café au dîner."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/01",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/01.jpg",
+   "numero": "01 / 07",
+   "legende": "Le matin, l'avenue de l'Opéra encore calme.",
+   "voile": 0.62
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/02",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/02.jpg",
+   "numero": "02 / 07",
+   "legende": "Le café : Café Kitsuné, et des pâtisseries à la hauteur du décor.",
+   "voile": 0.62
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/03",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/03.jpg",
+   "numero": "03 / 07",
+   "legende": "Le midi : les empanadas de Clasico Argentino. Mention spéciale au dulce de leche.",
+   "voile": 0.62
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/04",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/04.jpg",
+   "numero": "04 / 07",
+   "legende": "L'après-midi, sous la coupole des Galeries Lafayette."
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/05",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/05.jpg",
+   "numero": "05 / 07",
+   "legende": "Les tutus en vitrine chez Repetto.",
+   "voile": 0.62
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/06",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/06.jpg",
+   "numero": "06 / 07",
+   "legende": "La Trinité, sur le chemin du retour.",
+   "voile": 0.62
+  },
+  {
+   "type": "reel-photo",
+   "fichier": "reel-une-journee/images/07",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/reel-une-journee/recadrees/07.jpg",
+   "numero": "07 / 07",
+   "legende": "Le dîner : Pizzeria Popolare. Ambiance, accueil, et un rapport qualité-prix imbattable."
+  },
+  {
+   "type": "reel-titre",
+   "fichier": "reel-une-journee/images/08-fin",
+   "surtitre": "Paris · quartier Opéra",
+   "titre": "Le carnet complet,<br>avec 70 adresses.",
+   "texte": "Toutes mes adresses de Paris, par ambiance, et le test Travel Match sur le site.",
+   "url": "levoyagedesemotions.fr · lien en bio",
+   "promesse": "Sans inscription · Sans e-mail · Résultat immédiat"
+  },
+  {
+   "type": "garde",
+   "fichier": "carrousel-carnet/1-page-de-garde",
+   "surtitre": "Carnet d'adresses"
+  },
+  {
+   "type": "adresses",
+   "fichier": "carrousel-carnet/2-le-cafe",
+   "surtitre": "Le café",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/photos-source/gouter-kitsune-4x5.jpg",
+   "adresses": [
+    [
+     "Café Kitsuné",
+     "Un café super bien décoré, et des pâtisseries à la hauteur : elles sont très bonnes."
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "carrousel-carnet/3-le-midi",
+   "surtitre": "Le midi",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/photos-source/midi-clasico-4x5.jpg",
+   "adresses": [
+    [
+     "Clasico Argentino",
+     "Des empanadas de qualité, et des gens super gentils. Mention spéciale à l'épinard et au dulce de leche."
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "carrousel-carnet/4-l-apres-midi",
+   "surtitre": "L'après-midi",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/photos-source/galeries-coupole-4x5.jpg",
+   "adresses": [
+    [
+     "Galeries Lafayette, puis le Balcon",
+     "Le shopping sous la coupole. Et une fois les sacs pleins, monte au Balcon, sur le toit : la vue sur Paris."
+    ]
+   ]
+  },
+  {
+   "type": "adresses",
+   "fichier": "carrousel-carnet/5-le-diner",
+   "surtitre": "Le dîner",
+   "photo": "/Users/soumiadidi/Documents/Le Voyage des Émotions/Posts Insta/insta-paris-opera/photos-source/diner-popolare-4x5.jpg",
+   "adresses": [
+    [
+     "Pizzeria Popolare",
+     "Très bonne ambiance, très bon accueil, et une cuisine italienne vraiment très bonne, pour un rapport qualité-prix hyper bon."
+    ]
+   ]
+  },
+  {
+   "type": "fin",
+   "fichier": "carrousel-carnet/6-fin-de-carnet",
+   "lignes": [
+    "Une journée à l'Opéra,",
+    "du café",
+    "au dîner."
+   ],
+   "cta": "Ici, quatre adresses. Sur le site, soixante-dix dans Paris, rangées par ambiance.",
+   "promesse": "Sans inscription · Sans e-mail · Résultat immédiat",
+   "url": "levoyagedesemotions.fr · lien en bio"
+  }
+ ]
+}
