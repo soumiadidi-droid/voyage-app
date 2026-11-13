@@ -1098,3 +1098,21 @@ Ce qui manque encore, par ordre d'importance :
   - Pour extraire une image d'une vidéo, un script Swift AVAssetImageGenerator fait le travail ;
     `sips` suffit pour recadrer en 1080×1350 ou 1080×1080.
 
+
+## Référencement (13/11/2026)
+
+**Décision de Soumia (option « a ») : les fiches sont la porte d'entrée depuis Google.** Travel
+Match se découvre ensuite (bloc QuizCta en fin de fiche). Ne pas les sortir de l'index.
+
+- **Google Search Console** : propriété `https://levoyagedesemotions.fr/` validée le 13/11/2026 sur
+  le compte Google de Soumia, par le fichier `public/google46f1e5c278cf1d06.html` — **ne jamais le
+  supprimer**, la validation tomberait. Sitemap envoyé le même jour. Chiffres disponibles sous 2-3 jours.
+- **Titres de recherche par carnet** : `lib/seo.ts` (`TITRES_SEO`), écrits à la main, validés par
+  Soumia. Un nouveau carnet doit y recevoir son titre ; sans entrée, il garde son nom tout court.
+  Règle : jamais « testées » sur un carnet seulement repéré (Chine = « mes repérages »).
+- **Données structurées** sur chaque fiche (`ficheJsonLd`) : article signé, destination, lieux
+  visibles typés hôtel / restaurant / activité. Aucune note.
+- **Image de partage par défaut** : `app/opengraph-image.jpg` (carte ivoire, Cormorant), pour toutes
+  les pages sans image propre. Les fiches gardent leur couverture.
+- Descriptions propres pour l'accueil (`SITE_DESCRIPTION`, `lib/site.ts`), Travel Match et Ma
+  philosophie.
